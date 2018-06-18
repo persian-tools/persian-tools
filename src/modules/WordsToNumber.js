@@ -70,11 +70,13 @@ class WordsToNumber {
 	/**
 	 * Convert to numbers
 	 * @method convert
-	 * @param  {String} words         [String of words - like this: سی صد پنجاه هزار]
+	 * @param  {String} words         [String of words - like: سی صد پنجاه هزار]
 	 * @param  {String} [digits='en'] [convert number digits to en or fa]
-	 * @return {Number}               [Result - like this: 350000]
+	 * @return {Number}               [Result - like: 350000]
 	 */
 	convert(words, { digits = "en", addCommas = false } = {}) {
+		if (!words) return;
+
 		let numbersConverted = this.compute(this.tokenize(words));
 
 		numbersConverted = addCommas

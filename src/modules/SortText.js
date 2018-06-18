@@ -6,6 +6,8 @@
  *
  */
 function SortText(str) {
+	if (!str) return;
+
 	const sortPreparation = instr => {
 		// solve persian problem on sorting by replace characters in strings
 		return instr

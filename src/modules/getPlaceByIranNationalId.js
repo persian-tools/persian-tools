@@ -8,7 +8,9 @@ import ProvincesJSON from "../dummy/provincesCodes.json";
  * @return {Object}                             [If nationalId is valid, function returning an object of details, but nationalId is invalid, return error message]
  */
 function getPlaceByIranNationalId(nationalId) {
-	if (nationalId && nationalId.length === 9) {
+	if (!nationalId) return;
+
+	if (nationalId && nationalId.length === 10) {
 		let code = nationalId.toString().substring(0, 3);
 		let find = NationalIdJSON.filter(row => row.code.indexOf(code) !== -1);
 

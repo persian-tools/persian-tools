@@ -1,4 +1,6 @@
 function verifyCardNumber(digits) {
+	if (!digits) return;
+
 	digits = digits.toString();
 
 	const length = digits.length;

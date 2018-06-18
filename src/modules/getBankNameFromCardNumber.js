@@ -1,7 +1,9 @@
 import banksCode from "../dummy/banksCode.json";
 
 function getBankNameFromCardNumber(digits) {
-	if (digits && digits.length === 6) {
+	if (!digits) return;
+
+	if (digits && digits.toString().length === 16) {
 		let code = digits.toString().substr(0, 6);
 		let findBank = banksCode.find(bank => bank.code === code);
 

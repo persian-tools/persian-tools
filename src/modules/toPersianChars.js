@@ -8,6 +8,8 @@
  *
  */
 function toPersianChars(str) {
+	if (!str) return;
+
 	let old = "";
 
 	// Do not touch the text inside links, images, categories

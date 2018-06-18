@@ -73,6 +73,8 @@ const toWords = number => {
 };
 
 const NumberToWords = number => {
+	if (!number) return;
+
 	if (number === "") {
 		return "";
 	}
