@@ -31,7 +31,7 @@ export default (async load => {
 					format: "umd",
 					name: pathName,
 					extend: true,
-					file: path.resolve(`${dist}/modules`, pathName + "min.js")
+					file: path.resolve(`${dist}/modules`, pathName + ".min.js")
 				},
 				plugins: [minify()]
 			})

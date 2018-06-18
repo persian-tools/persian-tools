@@ -5,25 +5,28 @@
  * @return {Boolean}                    [valid or no]
  */
 function verifyIranianNationalId(nationalId) {
-    if (nationalId) {
-        let code = nationalId.toString() || null;
+	if (nationalId) {
+		let code = nationalId.toString() || null;
 
-        if (!code.match(/^\d{10}$/)) return false;
-        code = ('0000' + code).substr(code.length + 4 - 10);
+		if (!code.match(/^\d{10}$/)) return false;
+		code = ("0000" + code).substr(code.length + 4 - 10);
 
-        if (parseInt(code.substr(3, 6), 10) === 0) return false;
+		if (parseInt(code.substr(3, 6), 10) === 0) return false;
 
-        let lastNumber = parseInt(code.substr(9, 1), 10);
-        let sum = 0;
+		let lastNumber = parseInt(code.substr(9, 1), 10);
+		let sum = 0;
 
-        for (let i = 0; i < 9; i++) {
-            sum += parseInt(code.substr(i, 1), 10) * (10 - i);
-        }
+		for (let i = 0; i < 9; i++) {
+			sum += parseInt(code.substr(i, 1), 10) * (10 - i);
+		}
 
-        sum = sum % 11;
+		sum = sum % 11;
 
-        return (sum < 2 && lastNumber === sum) || (sum >= 2 && lastNumber === 11 - sum);
-    }
+		return (
+			(sum < 2 && lastNumber === sum) ||
+			(sum >= 2 && lastNumber === 11 - sum)
+		);
+	}
 }
 
 export default verifyIranianNationalId;

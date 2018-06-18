@@ -1,5 +1,5 @@
-const faNums = '۰۱۲۳۴۵۶۷۸۹';
-const arNums = '٠١٢٣٤٥٦٧٨٩';
+const faNums = "۰۱۲۳۴۵۶۷۸۹";
+const arNums = "٠١٢٣٤٥٦٧٨٩";
 
 /** digitsEnToFa
  *
@@ -9,15 +9,15 @@ const arNums = '٠١٢٣٤٥٦٧٨٩';
  *
  */
 export function digitsEnToFa(str) {
-    if (!str) return;
+	if (!str) return;
 
-    str = str.toString();
-    for (let i = 0; i < 10; i++) {
-        let replaceEntoFa = new RegExp('' + i, 'g');
-        str = str.toString().replace(replaceEntoFa, faNums[i]);
-    }
+	str = str.toString();
+	for (let i = 0; i < 10; i++) {
+		let replaceEntoFa = new RegExp("" + i, "g");
+		str = str.toString().replace(replaceEntoFa, faNums[i]);
+	}
 
-    return str;
+	return str;
 }
 
 /** digitsFaToEn
@@ -28,15 +28,15 @@ export function digitsEnToFa(str) {
  *
  */
 export function digitsFaToEn(str) {
-    if (!str) return;
+	if (!str) return;
 
-    str = str.toString();
-    for (let i = 0; i < 10; i++) {
-        let replaceFaToEn = new RegExp(faNums[i], 'g');
-        str = str.replace(replaceFaToEn, i);
-    }
+	str = str.toString();
+	for (let i = 0; i < 10; i++) {
+		let replaceFaToEn = new RegExp(faNums[i], "g");
+		str = str.replace(replaceFaToEn, i);
+	}
 
-    return str;
+	return str;
 }
 
 /** digitsArToFa
@@ -47,15 +47,15 @@ export function digitsFaToEn(str) {
  *
  */
 export function digitsArToFa(str) {
-    if (!str) return;
+	if (!str) return;
 
-    str = str.toString();
-    for (let i = 0; i < 10; i++) {
-        let replaceArabicToPersian = new RegExp(arNums[i], 'g');
-        str = str.replace(replaceArabicToPersian, faNums[i]);
-    }
+	str = str.toString();
+	for (let i = 0; i < 10; i++) {
+		let replaceArabicToPersian = new RegExp(arNums[i], "g");
+		str = str.replace(replaceArabicToPersian, faNums[i]);
+	}
 
-    return str;
+	return str;
 }
 
 /** digitsArToEn
@@ -66,13 +66,13 @@ export function digitsArToFa(str) {
  *
  */
 export function digitsArToEn(str) {
-    if (!str) return;
+	if (!str) return;
 
-    str = str.toString();
-    for (let i = 0; i < 10; i++) {
-        let replaceArabicToEnglish = new RegExp(arNums[i], 'g');
-        str = str.replace(replaceArabicToEnglish, i);
-    }
+	str = str.toString();
+	for (let i = 0; i < 10; i++) {
+		let replaceArabicToEnglish = new RegExp(arNums[i], "g");
+		str = str.replace(replaceArabicToEnglish, i);
+	}
 
-    return str;
+	return str;
 }
