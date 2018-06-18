@@ -32,7 +32,8 @@
 				"commentPattern": "^no default$"
 			}
 		],
-        "quotes": ["error", "double"],
+		"keyword-spacing": ["warn", { "before": true, "after": true }],
+		"quotes": ["error", "double"],
 		"no-tabs": 0,
 		"space-before-function-paren": 0,
 		"indent": [0, "tab"],

@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/ali-master/persian-tools.svg?branch=master)](https://travis-ci.org/ali-master/persian-tools)
-
 <h2 align="center">Persian tools</h2>
+
+[![Build Status](https://travis-ci.org/ali-master/persian-tools.svg?branch=master)](https://travis-ci.org/ali-master/persian-tools)
 
 Persian-tools.JS is a standalone, library-agnostic JavaScript that enables some of the Persian features for using.
 
@@ -132,7 +132,10 @@ describe("Convert numbers", () => {
 ### Validation of Iranian National Number(code-e Melli) and get the city and province name by that.
 
 ```js
-import { verifyIranianNationalId, getPlaceByIranNationalId } from "persian-tools";
+import {
+	verifyIranianNationalId,
+	getPlaceByIranNationalId
+} from "persian-tools";
 
 describe("National id", () => {
 	it("Validate", () => {
@@ -149,44 +152,58 @@ describe("National id", () => {
 	});
 
 	it("City and province name", () => {
-        expect(getPlaceByIranNationalId("0499370899").city).toEqual("شهرری");
-        expect(getPlaceByIranNationalId("0790419904").city).toEqual("سبزوار");
-        expect(getPlaceByIranNationalId("0084575948").city).toEqual("تهران مرکزی");
-        expect(getPlaceByIranNationalId("0060495219").city).toEqual("تهران مرکزی");
-        expect(getPlaceByIranNationalId("0671658506").city).toEqual("بجنورد");
-        expect(getPlaceByIranNationalId("0671658506").city).toEqual("بجنورد");
-        expect(getPlaceByIranNationalId("0643005846").city).toEqual("بیرجند");
-        expect(getPlaceByIranNationalId("0906582709").city).toEqual("کاشمر");
-        expect(getPlaceByIranNationalId("0451727304").city).toEqual("شمیران");
-        expect(getPlaceByIranNationalId("0371359058").city).toEqual("قم");
+		expect(getPlaceByIranNationalId("0499370899").city).toEqual("شهرری");
+		expect(getPlaceByIranNationalId("0790419904").city).toEqual("سبزوار");
+		expect(getPlaceByIranNationalId("0084575948").city).toEqual(
+			"تهران مرکزی"
+		);
+		expect(getPlaceByIranNationalId("0060495219").city).toEqual(
+			"تهران مرکزی"
+		);
+		expect(getPlaceByIranNationalId("0671658506").city).toEqual("بجنورد");
+		expect(getPlaceByIranNationalId("0671658506").city).toEqual("بجنورد");
+		expect(getPlaceByIranNationalId("0643005846").city).toEqual("بیرجند");
+		expect(getPlaceByIranNationalId("0906582709").city).toEqual("کاشمر");
+		expect(getPlaceByIranNationalId("0451727304").city).toEqual("شمیران");
+		expect(getPlaceByIranNationalId("0371359058").city).toEqual("قم");
 
-        expect(getPlaceByIranNationalId("0084545943").city).toEqual("تهران مرکزی");
+		expect(getPlaceByIranNationalId("0084545943").city).toEqual(
+			"تهران مرکزی"
+		);
 
-        expect(getPlaceByIranNationalId()).toBeUndefined();
-    });
+		expect(getPlaceByIranNationalId()).toBeUndefined();
+	});
 });
 ```
-
 
 ### Bank number validation and get the name of the bank by bank account number
 
 ```js
-import { verifyIranianNationalId, getPlaceByIranNationalId } from "persian-tools";
+import {
+	verifyIranianNationalId,
+	getPlaceByIranNationalId
+} from "persian-tools";
 
 describe("National id", () => {
-	it('Validation', () => {
-        expect(verifyCardNumber(6037701689095443)).not.toBeFalsy();
-        expect(verifyCardNumber(6219861034529007)).not.toBeFalsy();
-        expect(verifyCardNumber(6219861034529008)).toBeFalsy();
-    });
+	it("Validation", () => {
+		expect(verifyCardNumber(6037701689095443)).not.toBeFalsy();
+		expect(verifyCardNumber(6219861034529007)).not.toBeFalsy();
+		expect(verifyCardNumber(6219861034529008)).toBeFalsy();
+	});
 
-    it("Name of the bank", () => {
-        expect(getBankNameFromCardNumber(6037701689095443)).toEqual("بانک کشاورزی");
-        expect(getBankNameFromCardNumber(6219861034529007)).toEqual("بانک سامان");
-        expect(getBankNameFromCardNumber("6219861034529007")).toEqual("بانک سامان");
+	it("Name of the bank", () => {
+		expect(getBankNameFromCardNumber(6037701689095443)).toEqual(
+			"بانک کشاورزی"
+		);
+		expect(getBankNameFromCardNumber(6219861034529007)).toEqual(
+			"بانک سامان"
+		);
+		expect(getBankNameFromCardNumber("6219861034529007")).toEqual(
+			"بانک سامان"
+		);
 
-        expect(getBankNameFromCardNumber()).toBeUndefined();
-    });
+		expect(getBankNameFromCardNumber()).toBeUndefined();
+	});
 });
 ```
 
@@ -196,18 +213,18 @@ describe("National id", () => {
 import { isPersian, toPersianChars } from "persian-tools";
 
 describe("National id", () => {
-	it('isPersian', () => {
-        expect(isPersian("این یک متن فارسی است؟")).not.toBeFalsy();
-        expect(isPersian("Lorem Ipsum Test")).toBeFalsy();
+	it("isPersian", () => {
+		expect(isPersian("این یک متن فارسی است؟")).not.toBeFalsy();
+		expect(isPersian("Lorem Ipsum Test")).toBeFalsy();
 
-        expect(isPersian()).toBeUndefined();
-    });
+		expect(isPersian()).toBeUndefined();
+	});
 
-    it('toPersianChars', () => {
-        expect(toPersianChars("علي")).toEqual("علی");
+	it("toPersianChars", () => {
+		expect(toPersianChars("علي")).toEqual("علی");
 
-        expect(toPersianChars()).toBeUndefined();
-    });
+		expect(toPersianChars()).toBeUndefined();
+	});
 });
 ```
 
@@ -217,11 +234,19 @@ describe("National id", () => {
 import { isPersian, toPersianChars } from "persian-tools";
 
 describe("Persian characters", () => {
-	it('URLfix', () => {
-        expect(URLfix("https://fa.wikipedia.org/wiki/%D9%85%D8%AF%DB%8C%D8%A7%D9%88%DB%8C%DA%A9%DB%8C:Gadget-Extra-Editbuttons-botworks.js")).toEqual("https://fa.wikipedia.org/wiki/مدیاویکی:Gadget-Extra-Editbuttons-botworks.js");
-        expect(URLfix("https://en.wikipedia.org/wiki/Persian_alphabet")).toEqual("https://en.wikipedia.org/wiki/Persian_alphabet");
-        expect(URLfix("Sample Text")).toEqual("Sample Text");
+	it("URLfix", () => {
+		expect(
+			URLfix(
+				"https://fa.wikipedia.org/wiki/%D9%85%D8%AF%DB%8C%D8%A7%D9%88%DB%8C%DA%A9%DB%8C:Gadget-Extra-Editbuttons-botworks.js"
+			)
+		).toEqual(
+			"https://fa.wikipedia.org/wiki/مدیاویکی:Gadget-Extra-Editbuttons-botworks.js"
+		);
+		expect(
+			URLfix("https://en.wikipedia.org/wiki/Persian_alphabet")
+		).toEqual("https://en.wikipedia.org/wiki/Persian_alphabet");
+		expect(URLfix("Sample Text")).toEqual("Sample Text");
 		expect(URLfix()).toBeUndefined();
-    });
+	});
 });
 ```
