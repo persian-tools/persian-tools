@@ -6,8 +6,7 @@ PersianTools.js is a standalone, library-agnostic JavaScript that enables some o
 
 ## Features
 
-### Convert Persian words to the number and vice versa.
-
+-   🔥 Convert Persian words to the number and vice versa.
 -   🔥 Add and remove commas to numbers.
 -   🔥 Convert Persian numbers to Arabic or English numbers and vice versa.
 -   🔥 Validation of Iranian National Number(code-e Melli).
