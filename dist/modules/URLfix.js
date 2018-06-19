@@ -6,7 +6,7 @@
 }(this, (function () { 'use strict';
 
 	/**
-	 * Used for fix Persian Charachters in URL
+	 * Used for fix Persian characters in URL
 	 *
 	 * @method URLfix
 	 * @param {String} value

@@ -10,6 +10,8 @@
 	 * @return {boolean}
 	 */
 	var isPersian = function isPersian(str) {
+		if (!str) return;
+
 		var letters = [];
 		for (var i = 0; i <= str.length; i++) {
 			letters[i] = str.substring(i - 1, i);
@@ -48,10 +50,12 @@
 	 * @return  {String}  		 [Returned String, like: 30,000]
 	 */
 	var addCommas = function addCommas(number) {
+	  if (!number) return;
+
 	  number = "" + number;
 	  number = isPersian(number) ? digitsFaToEn(number) : number;
 
-	  return number && number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+	  return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 	};
 
 	return addCommas;

@@ -15,6 +15,8 @@
 	 *
 	 */
 	function toPersianChars(str) {
+		if (!str) return;
+
 		var old = "";
 
 		// Do not touch the text inside links, images, categories

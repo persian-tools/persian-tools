@@ -13,6 +13,8 @@
 	 *
 	 */
 	function SortText(str) {
+		if (!str) return;
+
 		var sortPreparation = function sortPreparation(instr) {
 			// solve persian problem on sorting by replace characters in strings
 			return instr.replace(/ی/g, "ي").replace(/ک/g, "ك").replace(/ھ/g, "ه").replace(/پ/g, "بی").replace(/چ/g, "جی").replace(/ڕ/g, "ری").replace(/ژ/g, "زی").replace(/ڤ/g, "فی").replace(/ڵ/g, "لی").replace(/گ/g, "كی").replace(/ۆ/g, "وی").replace(/ە/g, "هی").replace(/ێ/g, "يي");

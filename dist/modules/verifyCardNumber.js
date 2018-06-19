@@ -6,6 +6,8 @@
 }(this, (function () { 'use strict';
 
 	function verifyCardNumber(digits) {
+		if (!digits) return;
+
 		digits = digits.toString();
 
 		var length = digits.length;

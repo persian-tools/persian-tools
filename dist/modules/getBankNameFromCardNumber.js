@@ -80,7 +80,9 @@
 	}];
 
 	function getBankNameFromCardNumber(digits) {
-		if (digits && digits.length === 6) {
+		if (!digits) return;
+
+		if (digits && digits.toString().length === 16) {
 			var code = digits.toString().substr(0, 6);
 			var findBank = banksCode.find(function (bank) {
 				return bank.code === code;

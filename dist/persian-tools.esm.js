@@ -83,6 +83,8 @@ function digitsArToEn(str) {
  * @return {boolean}
  */
 var isPersian = function isPersian(str) {
+	if (!str) return;
+
 	var letters = [];
 	for (var i = 0; i <= str.length; i++) {
 		letters[i] = str.substring(i - 1, i);
@@ -103,6 +105,8 @@ var isPersian = function isPersian(str) {
  *
  */
 function toPersianChars(str) {
+	if (!str) return;
+
 	var old = "";
 
 	// Do not touch the text inside links, images, categories
@@ -177,16 +181,20 @@ var replaceArray = function replaceArray(string, find) {
 };
 
 /**
- * Remove all commas in String``
+ * Remove all commas in String
  * @param  {[number]} number
  * @return {[string]}
  */
 var removeCommas = function removeCommas(number) {
-  if (number.toString(16).indexOf(",") !== -1) {
-    number = number.replace(/,\s?/g, "");
-  }
+	if (!number) {
+		return;
+	}
 
-  return number;
+	if (number.toString(16).indexOf(",") !== -1) {
+		number = number.replace(/,\s?/g, "");
+	}
+
+	return typeof number === "number" ? number : parseInt(number, 10);
 };
 
 // <Refrence path="https://fa.wikipedia.org/wiki/۱۰۰۰۰۰۰۰۰۰_(عدد)" />
@@ -260,6 +268,8 @@ var toWords = function toWords(number) {
 };
 
 var NumberToWords = function NumberToWords(number) {
+	if (!number) return;
+
 	if (number === "") {
 		return "";
 	}
@@ -306,10 +316,12 @@ var NumberToWords = function NumberToWords(number) {
  * @return  {String}  		 [Returned String, like: 30,000]
  */
 var addCommas = function addCommas(number) {
+  if (!number) return;
+
   number = "" + number;
   number = isPersian(number) ? digitsFaToEn(number) : number;
 
-  return number && number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 };
 
 var classCallCheck = function (instance, Constructor) {
@@ -406,9 +418,9 @@ var WordsToNumber = function () {
 	/**
   * Convert to numbers
   * @method convert
-  * @param  {String} words         [String of words - like this: سی صد پنجاه هزار]
+  * @param  {String} words         [String of words - like: سی صد پنجاه هزار]
   * @param  {String} [digits='en'] [convert number digits to en or fa]
-  * @return {Number}               [Result - like this: 350000]
+  * @return {Number}               [Result - like: 350000]
   */
 
 
@@ -420,6 +432,8 @@ var WordsToNumber = function () {
 			    digits = _ref$digits === undefined ? "en" : _ref$digits,
 			    _ref$addCommas = _ref.addCommas,
 			    addCommas$$1 = _ref$addCommas === undefined ? false : _ref$addCommas;
+
+			if (!words) return;
 
 			var numbersConverted = this.compute(this.tokenize(words));
 
@@ -478,6 +492,8 @@ var WordsToNumber = function () {
  * @return {Boolean}                    [valid or no]
  */
 function verifyIranianNationalId(nationalId) {
+	if (!nationalId) return;
+
 	if (nationalId) {
 		var code = nationalId.toString() || null;
 
@@ -2508,7 +2524,9 @@ var ProvincesJSON = [{
  * @return {Object}                             [If nationalId is valid, function returning an object of details, but nationalId is invalid, return error message]
  */
 function getPlaceByIranNationalId(nationalId) {
-	if (nationalId && nationalId.length === 9) {
+	if (!nationalId) return;
+
+	if (nationalId && nationalId.length === 10) {
 		var code = nationalId.toString().substring(0, 3);
 		var find = NationalIdJSON.filter(function (row) {
 			return row.code.indexOf(code) !== -1;
@@ -2533,6 +2551,8 @@ function getPlaceByIranNationalId(nationalId) {
 }
 
 function verifyCardNumber(digits) {
+	if (!digits) return;
+
 	digits = digits.toString();
 
 	var length = digits.length;
@@ -2626,7 +2646,9 @@ var banksCode = [{
 }];
 
 function getBankNameFromCardNumber(digits) {
-	if (digits && digits.length === 6) {
+	if (!digits) return;
+
+	if (digits && digits.toString().length === 16) {
 		var code = digits.toString().substr(0, 6);
 		var findBank = banksCode.find(function (bank) {
 			return bank.code === code;
@@ -2643,7 +2665,7 @@ function getBankNameFromCardNumber(digits) {
 }
 
 /**
- * Used for fix Persian Charachters in URL
+ * Used for fix Persian characters in URL
  *
  * @method URLfix
  * @param {String} value
@@ -2682,6 +2704,8 @@ var URLfix = (function (value) {
  *
  */
 function SortText(str) {
+	if (!str) return;
+
 	var sortPreparation = function sortPreparation(instr) {
 		// solve persian problem on sorting by replace characters in strings
 		return instr.replace(/ی/g, "ي").replace(/ک/g, "ك").replace(/ھ/g, "ه").replace(/پ/g, "بی").replace(/چ/g, "جی").replace(/ڕ/g, "ری").replace(/ژ/g, "زی").replace(/ڤ/g, "فی").replace(/ڵ/g, "لی").replace(/گ/g, "كی").replace(/ۆ/g, "وی").replace(/ە/g, "هی").replace(/ێ/g, "يي");

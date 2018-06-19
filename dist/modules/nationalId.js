@@ -12,6 +12,8 @@
 	 * @return {Boolean}                    [valid or no]
 	 */
 	function verifyIranianNationalId(nationalId) {
+		if (!nationalId) return;
+
 		if (nationalId) {
 			var code = nationalId.toString() || null;
 
