@@ -2728,4 +2728,4 @@ function SortText(str) {
 // Digits Converter
 
 export { NumberToWords, WordsToNumber, isPersian, toPersianChars, addCommas, removeCommas, digitsEnToFa, digitsFaToEn, digitsArToFa, digitsArToEn, verifyIranianNationalId, getPlaceByIranNationalId, verifyCardNumber, getBankNameFromCardNumber, URLfix, SortText };
-//# sourceMappingURL=persian-tools.esm.js.map
+//# sourceMappingURL=index.esm.js.map

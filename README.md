@@ -2,11 +2,12 @@
 
 [![Build Status](https://travis-ci.org/ali-master/persian-tools.svg?branch=master)](https://travis-ci.org/ali-master/persian-tools)
 
-Persian-tools.JS is a standalone, library-agnostic JavaScript that enables some of the Persian features for using.
+PersianTools.js is a standalone, library-agnostic JavaScript that enables some of the Persian features for using in the JavaScript.
 
 ## Features
 
--   🔥 Convert Persian words to the number and vice versa.
+### Convert Persian words to the number and vice versa.
+
 -   🔥 Add and remove commas to numbers.
 -   🔥 Convert Persian numbers to Arabic or English numbers and vice versa.
 -   🔥 Validation of Iranian National Number(code-e Melli).
@@ -16,11 +17,62 @@ Persian-tools.JS is a standalone, library-agnostic JavaScript that enables some 
 -   🔥 Validation of the correctness of the text of the Persian language and clear the Arabic letters in the Persian text.
 -   🔥 Fix Persian characters in URL.
 
+## Getting started
+
+There are two main ways to get PersianTools.js in your JavaScript project:
+via <a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_JavaScript_within_a_webpage" target="_blank">script tags</a> <strong>or</strong> by installing it from <a href="https://www.npmjs.com/" target="_blank">NPM</a>
+and using a build tool like <a href="https://parceljs.org/" target="_blank">Parcel</a>,
+<a href="https://webpack.js.org/" target="_blank">WebPack</a>, or <a href="https://rollupjs.org/guide/en" target="_blank">Rollup</a>.
+
+### via Script Tag
+
+Add the following code to an HTML file:
+
+```html
+<html>
+  <head>
+    <!-- Load PersianTools.js -->
+    <script src="https://cdn.jsdelivr.net/npm/persian-tools"> </script>
+
+    <!-- Place your code in the script tag below. You can also use an external .js file -->
+    <script type="text/javascript">
+      // Notice there is no 'import' statement. 'all persian-tools functions like digitsEnToFa, etc...' is available on the index-page
+      // because of the script tag above.
+
+      // Takes a string made of English digits only, and returns a string that represents the same number but with Persian digits
+      var convertToFa = digitsEnToFa(1234567);
+
+      // etc...
+    </script>
+  </head>
+
+  <body>
+  </body>
+</html>
+```
+
+Open up that html file in your browser and the code should run!
+
+### via NPM
+
+Add PersianTools.js to your project using <a href="https://yarnpkg.com/en/" target="_blank">yarn</a> <em>or</em> <a href="https://docs.npmjs.com/cli/npm" target="_blank">npm</a>. <b>Note:</b> Because
+we use ES2017 syntax (such as `import`), this workflow assumes you are using a modern browser or a bundler/transpiler
+to convert your code to something older browsers understand.
+
+```js
+import * as persianTools from "persian-tools";
+// or
+import { digitsEnToFa } from "persian-tools";
+
+// Takes a string made of English digits only, and returns a string that represents the same number but with Persian digits
+var convertToFa = persianTools.digitsEnToFa(1234567);
+```
+
 ## Usage
 
 Let's take a look at what an example test case would look like using Persian-tools.
 
-### Convert Persian words to number and versa
+### Convert Persian words to the number and vice versa
 
 ```js
 import { NumberToWords, WordsToNumber } from "persian-tools";
