@@ -49,8 +49,13 @@ describe('Persian Tools', () => {
         expect(wordFn.convert('منفی سه هزارمین')).not.toEqual("-3000");
         expect(String(wordFn.convert('منفی سه هزارمین'))).toHaveLength(5);
 
-        expect(wordFn.convert('دوازده هزار بیست دو')).toEqual(12022)
-        expect(wordFn.convert('دوازده هزار بیست دو', {addCommas: true})).toEqual("12,022")
+        expect(wordFn.convert('دوازده هزار بیست دو')).toEqual(12022);
+        expect(wordFn.convert('دوازده هزار بیست دو', {addCommas: true})).toEqual("12,022");
+	    
+        expect(wordFn.convert('یکصد و بیست و دو')).toEqual(122);
+        expect(wordFn.convert('صد و بیست و دو')).toEqual(122);
+        expect(wordFn.convert('صدوبیست و دو')).toEqual(122);
+        expect(wordFn.convert('یك')).toEqual(1);
     });
 
     it('NumberToWords', () => {
