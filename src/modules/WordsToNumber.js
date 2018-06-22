@@ -41,6 +41,7 @@ class WordsToNumber {
 
 		this.adjective = {
 			صد: 100,
+			یکصد: 100,
 			دویست: 200,
 			سیصد: 300,
 			چهارصد: 400,
@@ -79,11 +80,8 @@ class WordsToNumber {
 
 		let numbersConverted = this.compute(this.tokenize(words));
 
-		numbersConverted = addCommas
-			? addCommasFn(numbersConverted)
-			: numbersConverted;
-		numbersConverted =
-			digits === "fa" ? digitsEnToFa(numbersConverted) : numbersConverted;
+		numbersConverted = addCommas ? addCommasFn(numbersConverted) : numbersConverted;
+		numbersConverted = digits === "fa" ? digitsEnToFa(numbersConverted) : numbersConverted;
 
 		return numbersConverted;
 	}
@@ -93,16 +91,7 @@ class WordsToNumber {
 
 		let result = [];
 
-		words
-			.split(" ")
-			.forEach(
-				word =>
-					word === "و"
-						? ""
-						: !isNaN(+word)
-							? result.push(+word)
-							: result.push(word)
-			);
+		words.split(" ").forEach(word => (word === "و" ? "" : !isNaN(+word) ? result.push(+word) : result.push(word)));
 
 		return result;
 	}

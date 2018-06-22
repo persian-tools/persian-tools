@@ -250,9 +250,9 @@
 	numberToWord[900] = "نه صد";
 
 	/**
-	 * [toWords, Convert Numbers to Persian Text]
-	 * @param  {[type]} number
-	 * @return {[type]}
+	 * toWords, Convert Numbers to Persian Text
+	 * @param  {String} number
+	 * @return {Number|String}
 	 */
 	var toWords = function toWords(number) {
 		var unit = 100;
@@ -395,6 +395,7 @@
 
 			this.adjective = {
 				صد: 100,
+				یکصد: 100,
 				دویست: 200,
 				سیصد: 300,
 				چهارصد: 400,
@@ -2753,4 +2754,4 @@
 	Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=persian-tools.umd.js.map

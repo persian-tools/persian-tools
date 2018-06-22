@@ -48,9 +48,9 @@ numberToWord[800] = "هشت صد";
 numberToWord[900] = "نه صد";
 
 /**
- * [toWords, Convert Numbers to Persian Text]
- * @param  {[type]} number
- * @return {[type]}
+ * toWords, Convert Numbers to Persian Text
+ * @param  {String} number
+ * @return {Number|String}
  */
 const toWords = number => {
 	let unit = 100;
@@ -62,8 +62,7 @@ const toWords = number => {
 				result += numberToWord[number];
 				break;
 			} else {
-				result +=
-					numberToWord[Math.floor(number / unit) * unit] + " و ";
+				result += numberToWord[Math.floor(number / unit) * unit] + " و ";
 				number %= unit;
 			}
 		}

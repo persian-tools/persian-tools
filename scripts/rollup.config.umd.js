@@ -1,5 +1,5 @@
 import path from "path";
-import config, { dist, minify } from "./rollup.config";
+import config, { dist, name, minify } from "./rollup.config";
 
 export default [
 	config({
@@ -8,7 +8,7 @@ export default [
 			extend: true,
 			sourcemap: true,
 			name: "persian-tools",
-			file: path.resolve(dist, "index.js")
+			file: path.resolve(dist, name + ".umd.js")
 		}
 	}),
 	config({
@@ -16,7 +16,7 @@ export default [
 		output: {
 			format: "umd",
 			name: "persian-tools-min",
-			file: path.resolve(dist, "index.min.js")
+			file: path.resolve(dist, name + ".umd.min.js")
 		}
 	})
 ];

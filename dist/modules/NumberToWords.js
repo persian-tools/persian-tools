@@ -73,9 +73,9 @@
 	numberToWord[900] = "نه صد";
 
 	/**
-	 * [toWords, Convert Numbers to Persian Text]
-	 * @param  {[type]} number
-	 * @return {[type]}
+	 * toWords, Convert Numbers to Persian Text
+	 * @param  {String} number
+	 * @return {Number|String}
 	 */
 	var toWords = function toWords(number) {
 		var unit = 100;

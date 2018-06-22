@@ -1,10 +1,5 @@
 // Digits Converter
-import {
-	digitsEnToFa,
-	digitsFaToEn,
-	digitsArToFa,
-	digitsArToEn
-} from "./modules/digits";
+import { digitsEnToFa, digitsFaToEn, digitsArToFa, digitsArToEn } from "./modules/digits";
 // check and convert persian string
 import isPersian from "./modules/isPersian";
 import toPersianChars from "./modules/toPersianChars";
