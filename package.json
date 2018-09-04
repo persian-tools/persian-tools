@@ -1,6 +1,6 @@
 {
   "name": "persian-tools",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "An anthology of a variety of tools for Persian language in javascript",
   "main": "dist/persian-tools.umd.min.js",
   "scripts": {
