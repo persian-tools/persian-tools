@@ -2728,5 +2728,22 @@ function SortText(str) {
 
 // Digits Converter
 
+window.NumberToWords = NumberToWords;
+window.WordsToNumber = WordsToNumber;
+window.isPersian = isPersian;
+window.toPersianChars = toPersianChars;
+window.addCommas = addCommas;
+window.removeCommas = removeCommas;
+window.digitsEnToFa = digitsEnToFa;
+window.digitsFaToEn = digitsFaToEn;
+window.digitsArToFa = digitsArToFa;
+window.digitsArToEn = digitsArToEn;
+window.verifyIranianNationalId = verifyIranianNationalId;
+window.getPlaceByIranNationalId = getPlaceByIranNationalId;
+window.verifyCardNumber = verifyCardNumber;
+window.getBankNameFromCardNumber = getBankNameFromCardNumber;
+window.URLfix = URLfix;
+window.SortTex = SortText;
+
 export { NumberToWords, WordsToNumber, isPersian, toPersianChars, addCommas, removeCommas, digitsEnToFa, digitsFaToEn, digitsArToFa, digitsArToEn, verifyIranianNationalId, getPlaceByIranNationalId, verifyCardNumber, getBankNameFromCardNumber, URLfix, SortText };
 //# sourceMappingURL=persian-tools.esm.js.map
