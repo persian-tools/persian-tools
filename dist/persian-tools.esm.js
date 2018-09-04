@@ -1,4 +1,4 @@
-// Persian-tools.js Copyright 2018 Ali.Torki
+// Persian-tools.js v0.0.4 Copyright 2018 Ali.Torki
 var faNums = "۰۱۲۳۴۵۶۷۸۹";
 var arNums = "٠١٢٣٤٥٦٧٨٩";
 

@@ -1,4 +1,4 @@
-// Persian-tools.js Copyright 2018 Ali.Torki
+// Persian-tools.js v0.0.4 Copyright 2018 Ali.Torki
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
