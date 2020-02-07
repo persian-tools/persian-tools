@@ -27,7 +27,8 @@
 		"import/no-webpack-loader-syntax": "error",
 		"@typescript-eslint/interface-name-prefix": "off",
 		"@typescript-eslint/camelcase": "off",
-		"@typescript-eslint/ban-ts-ignore": "off"
+		"@typescript-eslint/ban-ts-ignore": "off",
+		"@typescript-eslint/no-var-requires": "off"
 	},
 	"ecmaFeatures": {
 		"modules": true

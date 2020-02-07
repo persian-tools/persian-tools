@@ -1,5 +1,5 @@
-import NationalIdJSON from "../dummy/nationalId.json";
-import ProvincesJSON from "../dummy/provincesCodes.json";
+const NationalIdJSON = require("../dummy/nationalId.json");
+const ProvincesJSON = require("../dummy/provincesCodes.json");
 
 interface IProvince {
 	code: number | string;

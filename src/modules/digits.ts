@@ -27,15 +27,16 @@ export function digitsEnToFa(str?: number | string): string | undefined {
  *  Persian digits
  *
  */
-export function digitsFaToEn(str?: string | string): number | undefined {
+export function digitsFaToEn(str?: string | string): string | undefined {
 	if (!str) return;
 
 	for (let i = 0; i < 10; i++) {
 		const replaceFaToEn = new RegExp(faNums[i], "g");
-		str = str.replace(replaceFaToEn, "" + i);
+		// @ts-ignore
+		str = str.replace(replaceFaToEn, i);
 	}
 
-	return Number(str);
+	return str;
 }
 
 /** digitsArToFa
@@ -64,14 +65,15 @@ export function digitsArToFa(str?: string | number): string | undefined {
  *  digits
  *
  */
-export function digitsArToEn(str?: string | number): number | undefined {
+export function digitsArToEn(str?: string): string | undefined {
 	if (!str) return;
 
-	let result = "" + str;
+	let result = str;
 	for (let i = 0; i < 10; i++) {
 		const replaceArabicToEnglish = new RegExp(arNums[i], "g");
-		result = result.replace(replaceArabicToEnglish, "" + i);
+		// @ts-ignore
+		result = String(result).replace(replaceArabicToEnglish, i);
 	}
 
-	return Number(result);
+	return result;
 }

@@ -1,6 +1,6 @@
 import addCommasFn from "./addCommas";
 import { replaceArray } from "../helpers";
-import { digitsEnToFa } from "./digits";
+import { digitsEnToFa, digitsFaToEn } from "./digits";
 
 // <Refrence path='https://fa.wikipedia.org/wiki/الگو:عدد_به_حروف/توضیحات' />
 // https://fa.wikipedia.org/wiki/۱۰۰۰۰۰۰۰۰۰_(عدد)
@@ -107,9 +107,11 @@ class WordsToNumber {
 		replacedWords = replacedWords.replace(new RegExp("(مین|م)$", "ig"), "");
 
 		const result: number[] = [];
-		replacedWords
-			.split(" ")
-			.forEach(word => (word === "و" ? "" : !isNaN(+word) ? result.push(+word) : result.push(Number(word))));
+		const splittedWords: string[] = replacedWords.split(" ");
+		splittedWords.forEach((word: string) =>
+			// @ts-ignore
+			word === "و" ? "" : !isNaN(+word) ? result.push(+word) : result.push(word),
+		);
 
 		return result;
 	}
@@ -119,6 +121,9 @@ class WordsToNumber {
 		let isNegative = false;
 
 		tokens.forEach((token: string) => {
+			// @ts-ignore
+			token = digitsFaToEn(token);
+
 			if (token === "منفی") {
 				isNegative = true;
 			} else if (this.units[token] != null) {
