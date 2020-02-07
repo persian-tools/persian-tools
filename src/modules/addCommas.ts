@@ -7,7 +7,7 @@ import { digitsFaToEn } from "./digits";
  * @param   {number}  number Number, like: 300000
  * @return  {string}  		 Returned String, like: 30,000
  */
-const addCommas = (No: number): string | undefined => {
+const addCommas = (No?: number): string | undefined => {
 	if (!No) return;
 
 	const newNo = isPersian("" + No) ? digitsFaToEn("" + No) : No;

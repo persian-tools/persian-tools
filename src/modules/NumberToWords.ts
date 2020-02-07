@@ -76,7 +76,7 @@ class NumberToWords {
 		return result;
 	};
 
-	public convert(number: number): string | undefined {
+	public convert(number: bigint | number | string): string | undefined {
 		if (!number) return;
 
 		if (number === 0) {
@@ -87,14 +87,14 @@ class NumberToWords {
 		const result: string[] = [];
 
 		// @ts-ignore
-		number = removeCommas(number as string);
+		number = removeCommas(number);
 
 		const isNegative: boolean = number < 0;
-		number = isNegative ? number * -1 : number;
+		number = isNegative ? (number as number) * -1 : number;
 
 		while (number > 0) {
-			result.push(this.toWords(number % base));
-			number = Math.floor(number / base);
+			result.push(this.toWords((number as number) % base));
+			number = Math.floor((number as number) / base);
 		}
 		if (result.length > 4) {
 			return "";
@@ -116,4 +116,6 @@ class NumberToWords {
 	}
 }
 
-export default NumberToWords;
+const NumberToWordsInstance = new NumberToWords();
+
+export default NumberToWordsInstance;

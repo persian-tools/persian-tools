@@ -10,8 +10,8 @@ interface IUnit<T = number> {
 }
 
 interface IOption {
-	digits: string;
-	addCommas: boolean;
+	digits?: string;
+	addCommas?: boolean;
 }
 
 class WordsToNumber {
@@ -89,7 +89,7 @@ class WordsToNumber {
 	 * @param  {String} [digits='en'] [convert number digits to en or fa]
 	 * @return {Number}               [Result - like: 350000]
 	 */
-	public convert(words: string, { digits = "en", addCommas = false }: IOption): number | string | undefined {
+	public convert(words: string, { digits = "en", addCommas = false }: IOption = {}): number | string | undefined {
 		if (!words) return;
 
 		// @ts-ignore

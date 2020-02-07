@@ -4,7 +4,7 @@
  * @param  {String?}          nationalId [String of national id - like this: 1111111111]
  * @return {Boolean}                    [valid or no]
  */
-function verifyIranianNationalId(nationalId: number): boolean | null | undefined {
+function verifyIranianNationalId(nationalId?: string | number): boolean | null | undefined {
 	if (!nationalId) return;
 
 	if (nationalId) {

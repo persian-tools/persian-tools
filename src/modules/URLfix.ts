@@ -5,7 +5,7 @@
  * @param {String} value
  * @return {String} Fixed String
  */
-export default (value: string): string | undefined => {
+export default (value?: string): string | undefined => {
 	if (!value) {
 		return;
 	}
