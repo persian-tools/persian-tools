@@ -64,6 +64,7 @@
 		"rollup-plugin-progress": "^1.1.1",
 		"rollup-plugin-terser": "^5.2.0",
 		"rollup-plugin-typescript2": "^0.25.3",
+		"rollup-plugin-uglify": "^6.0.4",
 		"standard-version": "^7.1.0",
 		"ts-jest": "^25.2.0",
 		"typescript": "^3.7.5",
