@@ -16,6 +16,7 @@ describe("Digits", () => {
 	it("digitsArToEn", () => {
 		expect(digitsArToEn("٠١٢٣٤٥٦٧٨٩")).toEqual("0123456789");
 		expect(digitsArToEn("٨٩123٤٥")).toEqual("8912345");
+		// @ts-ignore
 		expect(digitsArToEn(456128)).toEqual("456128");
 
 		expect(digitsArToEn()).toBeUndefined();

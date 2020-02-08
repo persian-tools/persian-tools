@@ -5,6 +5,8 @@ import node from "rollup-plugin-node-resolve";
 import progress from "rollup-plugin-progress";
 import { terser } from "rollup-plugin-terser";
 import typescript from "rollup-plugin-typescript2";
+import resolve from "@rollup/plugin-node-resolve";
+import commonjs from "@rollup/plugin-commonjs";
 import pkg from "./package.json";
 
 const copyright = `// Persian-tools.js v${pkg.version} Copyright ${new Date().getFullYear()} Ali.Torki`;
@@ -32,17 +34,19 @@ module.exports = {
 		},
 		{
 			file: pkg.browser,
-			format: "iife",
-			name: "TextSelect",
+			format: "umd",
+			name: "PersianTools",
 		},
 	],
 	plugins: [
-		json(),
-		node(),
-		progress(),
 		typescript({
 			typescript: require("typescript"),
 		}),
+		json(),
+		resolve({ browser: true, preferBuiltins: true }),
+		commonjs(),
+		node(),
+		progress(),
 		terser(),
 	],
 	external: [...Object.keys(pkg.dependencies || {})],

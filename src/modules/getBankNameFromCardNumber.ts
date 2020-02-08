@@ -1,4 +1,4 @@
-const banksCode = require("../dummy/banksCode.json");
+import banksCode from "../dummy/banksCode";
 
 interface IBank {
 	code: string;

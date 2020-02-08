@@ -6,7 +6,8 @@
 		"experimentalDecorators": true,
 		"importHelpers": false,
 		"inlineSourceMap": true,
-		"lib": ["es2015"],
+		"target": "es5",
+		"lib": ["es5", "es6", "dom"],
 		"module": "ES2015",
 		"moduleResolution": "node",
 		"noEmitOnError": true,
@@ -21,7 +22,6 @@
 		"skipLibCheck": true,
 		"sourceMap": false,
 		"strict": true,
-		"target": "es5",
 		"types": ["jest", "node"]
 	},
 	"include": ["src", "tests"],
