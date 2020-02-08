@@ -6,15 +6,15 @@ PersianTools.js is a standalone, library-agnostic JavaScript that enables some o
 
 ## Features
 
--   🔥 Convert Persian words to the number and vice versa.
--   🔥 Add and remove commas to numbers.
--   🔥 Convert Persian numbers to Arabic or English numbers and vice versa.
--   🔥 Validation of Iranian National Number(code-e Melli).
--   🔥 Get the city and province name by national code.
--   🔥 Bank number validation.
--   🔥 Get the name of the bank by bank account number.
--   🔥 Validation of the correctness of the text of the Persian language and clear the Arabic letters in the Persian text.
--   🔥 Fix Persian characters in URL.
+-   Convert Persian words to the number and vice versa.
+-   Add and remove commas to numbers.
+-   Convert Persian numbers to Arabic or English numbers and vice versa.
+-   Validation of Iranian National Number(code-e Melli).
+-   Get the city and province name by national code.
+-   Bank number validation.
+-   Get the name of the bank by bank account number.
+-   Validation of the correctness of the text of the Persian language and clear the Arabic letters in the Persian text.
+-   Fix Persian characters in URL.
 
 ## Getting started
 
@@ -29,24 +29,23 @@ Add the following code to an HTML file:
 
 ```html
 <html>
-  <head>
-    <!-- Load PersianTools.js -->
-    <script src="https://cdn.jsdelivr.net/npm/persian-tools"> </script>
+	<head>
+		<!-- Load PersianTools.js -->
+		<script src="https://cdn.jsdelivr.net/npm/persian-tools2"></script>
 
-    <!-- Place your code in the script tag below. You can also use an external .js file -->
-    <script type="text/javascript">
-      // Notice there is no 'import' statement. 'all persian-tools functions like digitsEnToFa, etc...' is available on the index-page
-      // because of the script tag above.
+		<!-- Place your code in the script tag below. You can also use an external .js file -->
+		<script type="text/javascript">
+			// Notice there is no 'import' statement. 'all persian-tools functions like digitsEnToFa, etc...' is available on the index-page
+			// because of the script tag above.
 
-      // Takes a string made of English digits only, and returns a string that represents the same number but with Persian digits
-      var convertToFa = digitsEnToFa(1234567);
+			// Takes a string made of English digits only, and returns a string that represents the same number but with Persian digits
+			var convertToFa = digitsEnToFa(1234567);
 
-      // etc...
-    </script>
-  </head>
+			// etc...
+		</script>
+	</head>
 
-  <body>
-  </body>
+	<body></body>
 </html>
 ```
 
@@ -80,12 +79,8 @@ describe("Words and numbers", () => {
 	it("WordsToNumber", () => {
 		let wordFn = new WordsToNumber();
 
-		expect(
-			wordFn.convert("منفی سه هزارمین", { digits: "fa", addCommas: true })
-		).toEqual("-۳,۰۰۰");
-		expect(wordFn.convert("منفی سه هزارمین", { digits: "fa" })).toEqual(
-			"-۳۰۰۰"
-		);
+		expect(wordFn.convert("منفی سه هزارمین", { digits: "fa", addCommas: true })).toEqual("-۳,۰۰۰");
+		expect(wordFn.convert("منفی سه هزارمین", { digits: "fa" })).toEqual("-۳۰۰۰");
 		expect(wordFn.convert("منفی سه هزارمین")).toEqual(-3000);
 		expect(wordFn.convert("منفی سه هزارم")).toEqual(-3000);
 		expect(wordFn.convert("منفی سه هزار")).toEqual(-3000);
@@ -94,18 +89,12 @@ describe("Words and numbers", () => {
 		expect(String(wordFn.convert("منفی سه هزارمین"))).toHaveLength(5);
 
 		expect(wordFn.convert("دوازده هزار بیست دو")).toEqual(12022);
-		expect(
-			wordFn.convert("دوازده هزار بیست دو", { addCommas: true })
-		).toEqual("12,022");
+		expect(wordFn.convert("دوازده هزار بیست دو", { addCommas: true })).toEqual("12,022");
 	});
 
 	it("NumberToWords", () => {
-		expect(NumberToWords(500443)).toEqual(
-			"پانصد هزار و چهار صد و چهل و سه"
-		);
-		expect(NumberToWords("500,443")).toEqual(
-			"پانصد هزار و چهار صد و چهل و سه"
-		);
+		expect(NumberToWords(500443)).toEqual("پانصد هزار و چهار صد و چهل و سه");
+		expect(NumberToWords("500,443")).toEqual("پانصد هزار و چهار صد و چهل و سه");
 		expect(NumberToWords(500)).toHaveLength(5);
 		expect(NumberToWords(30000000000)).toEqual("سی میلیارد");
 	});
@@ -134,12 +123,7 @@ it("Add and remove commas", () => {
 ### Convert Persian numbers to Arabic or English numbers and vice versa
 
 ```js
-import {
-	digitsArToFa,
-	digitsArToEn,
-	digitsEnToFa,
-	digitsFaToEn
-} from "persian-tools";
+import { digitsArToFa, digitsArToEn, digitsEnToFa, digitsFaToEn } from "persian-tools";
 
 describe("Convert numbers", () => {
 	it("digitsArToFa", () => {
@@ -183,10 +167,7 @@ describe("Convert numbers", () => {
 ### Validation of Iranian National Number(code-e Melli) and get the city and province name by that.
 
 ```js
-import {
-	verifyIranianNationalId,
-	getPlaceByIranNationalId
-} from "persian-tools";
+import { verifyIranianNationalId, getPlaceByIranNationalId } from "persian-tools";
 
 describe("National id", () => {
 	it("Validate", () => {
@@ -205,12 +186,8 @@ describe("National id", () => {
 	it("City and province name", () => {
 		expect(getPlaceByIranNationalId("0499370899").city).toEqual("شهرری");
 		expect(getPlaceByIranNationalId("0790419904").city).toEqual("سبزوار");
-		expect(getPlaceByIranNationalId("0084575948").city).toEqual(
-			"تهران مرکزی"
-		);
-		expect(getPlaceByIranNationalId("0060495219").city).toEqual(
-			"تهران مرکزی"
-		);
+		expect(getPlaceByIranNationalId("0084575948").city).toEqual("تهران مرکزی");
+		expect(getPlaceByIranNationalId("0060495219").city).toEqual("تهران مرکزی");
 		expect(getPlaceByIranNationalId("0671658506").city).toEqual("بجنورد");
 		expect(getPlaceByIranNationalId("0671658506").city).toEqual("بجنورد");
 		expect(getPlaceByIranNationalId("0643005846").city).toEqual("بیرجند");
@@ -218,9 +195,7 @@ describe("National id", () => {
 		expect(getPlaceByIranNationalId("0451727304").city).toEqual("شمیران");
 		expect(getPlaceByIranNationalId("0371359058").city).toEqual("قم");
 
-		expect(getPlaceByIranNationalId("0084545943").city).toEqual(
-			"تهران مرکزی"
-		);
+		expect(getPlaceByIranNationalId("0084545943").city).toEqual("تهران مرکزی");
 
 		expect(getPlaceByIranNationalId()).toBeUndefined();
 	});
@@ -230,10 +205,7 @@ describe("National id", () => {
 ### Bank number validation and get the name of the bank by bank account number
 
 ```js
-import {
-	verifyIranianNationalId,
-	getPlaceByIranNationalId
-} from "persian-tools";
+import { verifyIranianNationalId, getPlaceByIranNationalId } from "persian-tools";
 
 describe("National id", () => {
 	it("Validation", () => {
@@ -243,15 +215,9 @@ describe("National id", () => {
 	});
 
 	it("Name of the bank", () => {
-		expect(getBankNameFromCardNumber(6037701689095443)).toEqual(
-			"بانک کشاورزی"
-		);
-		expect(getBankNameFromCardNumber(6219861034529007)).toEqual(
-			"بانک سامان"
-		);
-		expect(getBankNameFromCardNumber("6219861034529007")).toEqual(
-			"بانک سامان"
-		);
+		expect(getBankNameFromCardNumber(6037701689095443)).toEqual("بانک کشاورزی");
+		expect(getBankNameFromCardNumber(6219861034529007)).toEqual("بانک سامان");
+		expect(getBankNameFromCardNumber("6219861034529007")).toEqual("بانک سامان");
 
 		expect(getBankNameFromCardNumber()).toBeUndefined();
 	});
@@ -288,14 +254,12 @@ describe("Persian characters", () => {
 	it("URLfix", () => {
 		expect(
 			URLfix(
-				"https://fa.wikipedia.org/wiki/%D9%85%D8%AF%DB%8C%D8%A7%D9%88%DB%8C%DA%A9%DB%8C:Gadget-Extra-Editbuttons-botworks.js"
-			)
-		).toEqual(
-			"https://fa.wikipedia.org/wiki/مدیاویکی:Gadget-Extra-Editbuttons-botworks.js"
+				"https://fa.wikipedia.org/wiki/%D9%85%D8%AF%DB%8C%D8%A7%D9%88%DB%8C%DA%A9%DB%8C:Gadget-Extra-Editbuttons-botworks.js",
+			),
+		).toEqual("https://fa.wikipedia.org/wiki/مدیاویکی:Gadget-Extra-Editbuttons-botworks.js");
+		expect(URLfix("https://en.wikipedia.org/wiki/Persian_alphabet")).toEqual(
+			"https://en.wikipedia.org/wiki/Persian_alphabet",
 		);
-		expect(
-			URLfix("https://en.wikipedia.org/wiki/Persian_alphabet")
-		).toEqual("https://en.wikipedia.org/wiki/Persian_alphabet");
 		expect(URLfix("Sample Text")).toEqual("Sample Text");
 		expect(URLfix()).toBeUndefined();
 	});
