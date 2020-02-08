@@ -7,15 +7,15 @@
 	"browser": "dist/index.bowser.js",
 	"scripts": {
 		"test": "jest",
-		"lint": "eslint src test scripts",
+		"lint": "eslint \"src/**/*.{ts,json}\" --max-warnings=0",
 		"lint:fix": "npm run lint -- --fix",
 		"watch": "rollup --watch -c rollup.config.js",
 		"build": "rollup -c --environment INCLUDE_DEPS,BUILD:production",
 		"prerelease": "npm run test",
 		"release": "npm run build",
 		"postrelease": "standard-version",
-		"prettier": "prettier --write 'src/**/*.{ts,tsx,json}' --config .prettierrc.js",
-		"prettier:ci": "prettier --list-different 'src/**/*.{ts,tsx,json}' --config .prettierrc.js"
+		"prettier": "prettier --write 'src/**/*.{ts,json}' --config .prettierrc.js",
+		"prettier:ci": "prettier --list-different 'src/**/*.{ts,json}' --config .prettierrc.js"
 	},
 	"repository": {
 		"type": "git",

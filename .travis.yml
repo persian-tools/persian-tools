@@ -2,7 +2,7 @@ sudo: false
 language: node_js
 node_js:
     - "stable"
-    
+
 cache:
     directories:
         - node_modules
@@ -17,4 +17,5 @@ script:
 
 after_script:
     - npm run lint:fix
+    - npm run prettier:ci
     - npm run build
