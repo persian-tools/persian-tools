@@ -160,7 +160,7 @@ getPlaceByIranNationalId("0371359058").city; // "قم"
 ### Bank number validation and get the name of the bank by bank account number
 
 ```js
-import { verifyIranianNationalId, getPlaceByIranNationalId } from "persian-tools2";
+import { verifyCardNumber, getBankNameFromCardNumber } from "persian-tools2";
 
 verifyCardNumber(6037701689095443); // true
 verifyCardNumber(6219861034529007); // true
