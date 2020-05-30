@@ -23,3 +23,7 @@ it("Add and remove commas", () => {
 	expect(addCommas(3000)).toBeType("string");
 	expect(addCommas()).toBeUndefined();
 });
+
+it("Add falsy value", () => {
+	expect(addCommas(0)).toEqual("0");
+});
