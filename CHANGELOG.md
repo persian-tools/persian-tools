@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.2](https://github.com/ali-master/persian-tools/compare/v1.2.1...v1.2.2) (2020-05-30)
+
+
+### Bug Fixes
+
+* falsy value in addCommas function ([b1cfd35](https://github.com/ali-master/persian-tools/commit/b1cfd35ffeea9795c54a39e58728401f5f756b7e))
+
 ## [1.2.0](https://github.com/ali-master/persian-tools/compare/v0.0.2...v1.2.0) (2020-02-08)
 
 
