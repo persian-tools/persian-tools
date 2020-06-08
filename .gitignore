@@ -11,3 +11,5 @@ jspm_packages
 package-lock.json
 
 dist
+
+coverage
