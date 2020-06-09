@@ -2,7 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### [1.2.3](https://github.com/ali-master/persian-tools/compare/v1.4.0...v1.2.3) (2020-06-09)
+## [1.2.3](https://github.com/ali-master/persian-tools/compare/v1.2.2...v1.2.3) (2020-06-09)
+
+### Features
+
+-   exported national id interfaces ([2f40256](https://github.com/ali-master/persian-tools/commit/2f402569a495a3452639b2f40c07fbd6cee74a69))
 
 ### [1.2.2](https://github.com/ali-master/persian-tools/compare/v1.2.1...v1.2.2) (2020-05-30)
 
