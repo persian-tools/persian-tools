@@ -11,7 +11,7 @@ export { default as addCommas } from "./modules/addCommas";
 export { default as removeCommas } from "./modules/removeCommas";
 // Iran National-ID
 export { default as verifyIranianNationalId } from "./modules/nationalId";
-export { default as getPlaceByIranNationalId } from "./modules/getPlaceByIranNationalId";
+export * as getPlaceByIranNationalId from "./modules/getPlaceByIranNationalId";
 // Verify Card Number and Get Bank Name from Card-Number
 export { default as verifyCardNumber } from "./modules/verifyCardNumber";
 export { default as getBankNameFromCardNumber } from "./modules/getBankNameFromCardNumber";

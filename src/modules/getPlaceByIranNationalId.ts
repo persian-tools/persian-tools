@@ -1,16 +1,16 @@
 import NationalIdJSON from "../dummy/nationalId";
 import ProvincesJSON from "../dummy/provincesCodes";
 
-interface IProvince {
+export interface IProvince {
 	code: number | string;
 	city: string;
 }
 
-interface INationalId extends IProvince {
+export interface INationalId extends IProvince {
 	parentCode: number;
 }
 
-interface IGetPlaceByNationalIId {
+export interface IPlaceByNationalIId {
 	codes: number[] | string[];
 	city: string;
 	province: string;
@@ -22,7 +22,7 @@ interface IGetPlaceByNationalIId {
  * @param  {String?}                 nationalId [String of national id - like this: 1111111111]
  * @return {Object}                             [If nationalId is valid, function returning an object of details, but nationalId is invalid, return error message]
  */
-function getPlaceByIranNationalId(nationalId?: string): IGetPlaceByNationalIId | null | undefined {
+function getPlaceByIranNationalId(nationalId?: string): IPlaceByNationalIId | null | undefined {
 	if (!nationalId) return;
 
 	if (nationalId && nationalId.length === 10) {
