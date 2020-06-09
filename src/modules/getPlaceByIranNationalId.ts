@@ -37,7 +37,7 @@ function getPlaceByIranNationalId(nationalId?: string): IGetPlaceByNationalIId |
 
 			return {
 				city: find[0].city,
-				province: findProvinces.length ? findProvinces[0].city : "unkown",
+				province: findProvinces.length ? findProvinces[0].city : "unknown",
 				codes: code.includes("-") ? code.split("-") : [code],
 			};
 		} else {
