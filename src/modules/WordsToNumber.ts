@@ -1,6 +1,7 @@
 import addCommasFn from "./addCommas";
 import { replaceArray } from "../helpers";
 import { digitsEnToFa, digitsFaToEn } from "./digits";
+import removeOrdinalSuffix from "./removeOrdinalSuffix";
 
 // <Refrence path='https://fa.wikipedia.org/wiki/الگو:عدد_به_حروف/توضیحات' />
 // https://fa.wikipedia.org/wiki/۱۰۰۰۰۰۰۰۰۰_(عدد)
@@ -104,7 +105,8 @@ class WordsToNumber {
 	}
 	private tokenize(words: string): number[] {
 		let replacedWords = replaceArray(words, this.otherAdjective);
-		replacedWords = replacedWords.replace(new RegExp("(مین|م)$", "ig"), "");
+		replacedWords = replacedWords.replace(new RegExp("مین$", "ig"), "");
+		replacedWords = removeOrdinalSuffix(replacedWords)!;
 
 		const result: number[] = [];
 		const splittedWords: string[] = replacedWords.split(" ");
