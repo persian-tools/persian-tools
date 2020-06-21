@@ -1,7 +1,12 @@
 import { trim } from "../helpers";
 import removeCommas from "./removeCommas";
+import addOrdinalSuffix from "./addOrdinalSuffix";
 
 // <Refrence path="https://fa.wikipedia.org/wiki/۱۰۰۰۰۰۰۰۰۰_(عدد)" />
+
+interface IOption {
+	ordinal?: boolean;
+}
 
 interface INumberToWord {
 	[key: string]: string;
@@ -76,7 +81,8 @@ class NumberToWords {
 		return result;
 	};
 
-	public convert(number: bigint | number | string): string | undefined {
+
+	public convert(number: bigint | number | string, { ordinal = false }: IOption = {}): string | undefined {
 		if (!number) return;
 
 		if (number === 0) {
@@ -112,7 +118,12 @@ class NumberToWords {
 			words = words.slice(0, -3);
 		}
 
-		return trim(isNegative ? `منفی ${words}` : words);
+		words = trim(isNegative ? `منفی ${words}` : words);
+
+		if(ordinal)
+			words = addOrdinalSuffix(words)!; 
+		
+		return words;
 	}
 }
 

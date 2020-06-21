@@ -88,6 +88,7 @@ WordsToNumber.convert("دوازده هزار بیست دو", { addCommas: true }
 
 NumberToWords.convert(500443) // "پانصد هزار و چهار صد و چهل و سه"
 NumberToWords.convert("500,443") // "پانصد هزار و چهار صد و چهل و سه"
+NumberToWords.convert("500,443", { ordinal: true }) // "پانصد هزار و چهار صد و چهل و سوم"
 NumberToWords.convert(30000000000) // "سی میلیارد"
 });
 ```
