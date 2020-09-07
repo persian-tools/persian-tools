@@ -81,7 +81,6 @@ class NumberToWords {
 		return result;
 	};
 
-
 	public convert(number: bigint | number | string, { ordinal = false }: IOption = {}): string | undefined {
 		if (!number) return;
 
@@ -120,9 +119,8 @@ class NumberToWords {
 
 		words = trim(isNegative ? `منفی ${words}` : words);
 
-		if(ordinal)
-			words = addOrdinalSuffix(words)!; 
-		
+		if (ordinal) words = addOrdinalSuffix(words)!;
+
 		return words;
 	}
 }

@@ -105,22 +105,22 @@ class Bill {
 		}
 	}
 	private verificationBillPayment(): IValidation {
-		let base = 2;
-		const mergeIdAndPaymentId = `${this.billId}${this.billPayment}`;
-		const total = mergeIdAndPaymentId
-			.split("")
-			.reverse()
-			.join("")
-			.split("")
-			.map(n => Number(n))
-			.reduce((acc, curr) => {
-				acc += base * curr;
-				base = base >= 7 ? 2 : base + 1;
+		//let base = 2;
+		//const mergeIdAndPaymentId = `${this.billId}${this.billPayment}`;
+		// const total = mergeIdAndPaymentId
+		// 	.split("")
+		// 	.reverse()
+		// 	.join("")
+		// 	.split("")
+		// 	.map(n => Number(n))
+		// 	.reduce((acc, curr) => {
+		// 		acc += base * curr;
+		// 		base = base >= 7 ? 2 : base + 1;
 
-				return acc;
-			}, 0);
-		const sumMod = total % 11;
-		const returnValue = sumMod === 0 ? 0 : 11 - sumMod;
+		// 		return acc;
+		// 	}, 0);
+		//const sumMod = total % 11;
+		//const returnValue = sumMod === 0 ? 0 : 11 - sumMod;
 
 		return this.verification(this.billPayment.slice(0, -2), Number(this.billPayment.substr(-2, 1)));
 	}

@@ -8,11 +8,13 @@ import { digitsFaToEn } from "./digits";
  * @return  {string}  		 Return a string of commas separated, eg: 30,000
  */
 const addCommas = (number?: number | string): string | undefined => {
-	if(typeof number === "undefined") return;
+	if (typeof number === "undefined") return;
 
 	const convertedToString = number.toString();
 
-	const tokenizedToEnglish = isPersian(convertedToString) ? digitsFaToEn(convertedToString) as string : convertedToString;
+	const tokenizedToEnglish = isPersian(convertedToString)
+		? (digitsFaToEn(convertedToString) as string)
+		: convertedToString;
 
 	return tokenizedToEnglish.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 };
