@@ -50,9 +50,9 @@ jobs:
       run: npm run build
 
     - name: Archive production
-        uses: actions/upload-artifact@v2
-        with:
-          name: dist
-          path: |
-            dist
-            !dist/**/*.md
+      uses: actions/upload-artifact@v2
+      with:
+        name: dist
+        path: |
+          dist
+          !dist/**/*.md
