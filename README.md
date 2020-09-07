@@ -1,6 +1,11 @@
-<h2 align="center">Persian tools</h2>
+<h1 align="center">Persian tools</h1>
 
-[![Build Status](https://travis-ci.org/ali-master/persian-tools.svg?branch=master)](https://travis-ci.org/ali-master/persian-tools)
+
+![CI/CD](https://github.com/ali-master/persian-tools/workflows/Continuous%20Integration/badge.svg)
+[![codecov](https://codecov.io/gh/ali-master/persian-tools/branch/master/graph/badge.svg)](https://codecov.io/gh/ali-master/persian-tools)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ali-master/persian-tools/blob/master/LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange.svg)](https://github.com/ali-master/persian-tools/compare) 
+
 
 PersianTools.js is a standalone, library-agnostic JavaScript that enables some of the Persian features for using in the JavaScript.
 
@@ -192,3 +197,12 @@ URLfix(
 URLfix("https://en.wikipedia.org/wiki/Persian_alphabet"); // "https://en.wikipedia.org/wiki/Persian_alphabet",
 URLfix("Sample Text"); // "Sample Text"
 ```
+
+## Contributing
+
+Thank you for your interest in contributing! Please feel free to put up a PR for any issue or feature request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/ali-master/persian-tools/blob/master/LICENSE) file for details
+
