@@ -6,7 +6,8 @@ type BillFaType =
 	| "تلفن همراه"
 	| "عوارض شهرداری"
 	| "سازمان مالیات"
-	| "جرایم راهنمایی و رانندگی";
+	| "جرایم راهنمایی و رانندگی"
+	| "-";
 type Currency = "toman" | "rial";
 
 interface IBillTypes {
@@ -84,7 +85,7 @@ class Bill {
 
 	public getBillType(): BillFaType {
 		// @ts-ignore
-		return this.billTypes[String(this.billId)?.slice(-2, -1)];
+		return this.billTypes[String(this.billId)?.slice(-2, -1)] ?? "-";
 	}
 
 	public getBarcode(): string {
@@ -121,12 +122,51 @@ class Bill {
 			}, 0);
 		const sumMod = total % 11;
 		const returnValue = sumMod === 0 ? 0 : 11 - sumMod;
+		console.log("DEBUG: Bill -> verificationBillPayment -> returnValue", returnValue);
 
 		return this.verification(this.billPayment.slice(0, -2), Number(this.billPayment.substr(-2, 1)));
 	}
 	private verificationBillId(): IValidation {
-		return this.verification(this.billId, Number(this.billId.slice(-1)));
+		// 11485696018
+		let newBillId = parseInt(this.billId, 10).toString();
+
+		let result = false;
+		if (!newBillId || newBillId.length < 6) {
+			return {
+				status: 0,
+				isValid: false,
+			};
+		}
+		const controlBit = newBillId.substr(newBillId.length - 1);
+		newBillId = newBillId.substr(0, newBillId.length - 1);
+		const tempResult = this.CalTheBit(newBillId);
+		result = tempResult === Number(controlBit);
+		const billType = this.getBillType();
+		return {
+			status: result && billType !== "-" ? 1 : 0,
+			isValid: result && billType !== "-",
+		};
+
+		// return this.verification(this.billId, Number(this.billId.slice(-1)));
 	}
+
+	private CalTheBit(num: string): number {
+		let sum = 0;
+		let Base = 2;
+		for (let i = 0; i < num.length; i++) {
+			if (Base === 8) {
+				Base = 2;
+			}
+			const subString = num.substring(num.length - 1 - i, num.length - i);
+			sum += Number(subString) * Base;
+			Base++;
+		}
+		sum %= 11;
+		if (sum < 2) sum = 0;
+		else sum = 11 - sum;
+		return sum;
+	}
+
 	private verificationBill(): boolean {
 		return this.verificationBillPayment().isValid && this.verificationBillId().isValid;
 	}
