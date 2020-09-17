@@ -2,17 +2,21 @@ import isPersian from "./isPersian";
 import { digitsFaToEn } from "./digits";
 
 /**
- * Add Commas into number
+ * Add Commas to numbers
  * @method addCommas
- * @param   {number}  number Number, like: 300000
- * @return  {string}  		 Returned String, like: 30,000
+ * @param   {number}  number Number, eg: 300000
+ * @return  {string}  		 Return a string of commas separated, eg: 30,000
  */
-const addCommas = (No?: number): string | undefined => {
-	if (!No) return;
+const addCommas = (number?: number | string): string | undefined => {
+	if (typeof number === "undefined") return;
 
-	const newNo = isPersian("" + No) ? digitsFaToEn("" + No) : No;
+	const convertedToString = number.toString();
 
-	return (newNo || "").toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+	const tokenizedToEnglish = isPersian(convertedToString)
+		? (digitsFaToEn(convertedToString) as string)
+		: convertedToString;
+
+	return tokenizedToEnglish.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 };
 
 export default addCommas;

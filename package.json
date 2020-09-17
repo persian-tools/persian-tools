@@ -1,6 +1,6 @@
 {
 	"name": "persian-tools2",
-	"version": "1.2.1",
+	"version": "1.2.3",
 	"description": "An anthology of a variety of tools for Persian language in javascript",
 	"main": "dist/index.js",
 	"module": "dist/index.es.js",

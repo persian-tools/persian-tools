@@ -98,6 +98,7 @@ class Bill {
 		}
 	}
 	private verificationBillPayment(): IValidation {
+
 		let payId = parseInt(this.billPayment, 10).toString();
 		const billId = parseInt(this.billId, 10).toString();
 		let result = false;
