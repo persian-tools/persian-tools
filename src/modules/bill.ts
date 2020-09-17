@@ -15,7 +15,7 @@ interface IBillTypes {
 }
 
 interface IValidation {
-	status: number;
+	status?: number;
 	isValid: boolean;
 }
 
@@ -106,25 +106,19 @@ class Bill {
 		}
 	}
 	private verificationBillPayment(): IValidation {
-		let base = 2;
-		const mergeIdAndPaymentId = `${this.billId}${this.billPayment}`;
-		const total = mergeIdAndPaymentId
-			.split("")
-			.reverse()
-			.join("")
-			.split("")
-			.map(n => Number(n))
-			.reduce((acc, curr) => {
-				acc += base * curr;
-				base = base >= 7 ? 2 : base + 1;
-
-				return acc;
-			}, 0);
-		const sumMod = total % 11;
-		const returnValue = sumMod === 0 ? 0 : 11 - sumMod;
-		console.log("DEBUG: Bill -> verificationBillPayment -> returnValue", returnValue);
-
-		return this.verification(this.billPayment.slice(0, -2), Number(this.billPayment.substr(-2, 1)));
+		let payId = parseInt(this.billPayment, 10).toString();
+		const billId = parseInt(this.billId, 10).toString();
+		let result = false;
+		if (!payId || payId.length < 6) {
+			return { isValid: result };
+		}
+		const firstControllBit = payId.charAt(payId.length - 2) + "";
+		const secondControlBit = payId.charAt(payId.length - 1) + "";
+		payId = payId.substr(0, payId.length - 2);
+		result =
+			this.CalTheBit(payId) === Number(firstControllBit) &&
+			this.CalTheBit(billId + payId + firstControllBit) === Number(secondControlBit);
+		return { isValid: result };
 	}
 	private verificationBillId(): IValidation {
 		// 11485696018
@@ -133,7 +127,6 @@ class Bill {
 		let result = false;
 		if (!newBillId || newBillId.length < 6) {
 			return {
-				status: 0,
 				isValid: false,
 			};
 		}
@@ -143,7 +136,6 @@ class Bill {
 		result = tempResult === Number(controlBit);
 		const billType = this.getBillType();
 		return {
-			status: result && billType !== "-" ? 1 : 0,
 			isValid: result && billType !== "-",
 		};
 
@@ -171,26 +163,27 @@ class Bill {
 		return this.verificationBillPayment().isValid && this.verificationBillId().isValid;
 	}
 
-	private verification(sum: string, checkId: number): IValidation {
-		console.log("Debug: Bill -> checkId", checkId);
-		let base = 2;
-		const totalSum = sum
-			.split("")
-			.reverse()
-			.join("")
-			.split("")
-			.map(n => Number(n))
-			.reduce((acc, current) => {
-				acc += base * current;
-				base = base >= 7 ? 2 : base + 1;
+	// private verification(sum: string, checkId: number): IValidation {
+	// 	console.log("Debug: Bill -> checkId", checkId);
+	// 	let base = 2;
+	// 	const totalSum = sum
+	// 	.split("")
+	// 	.reverse()
+	// 	.join("")
+	// 	.split("")
+	// 	.map(n => Number(n))
+	// 	.reduce((acc, current) => {
+	// 		acc += base * current;
+	// 		base = base >= 7 ? 2 : base + 1;
 
-				return acc;
-			}, 0);
-		const modify = totalSum % 11;
-		const status = modify < 2 ? 0 : 11 - modify;
+	// 		return acc;
+	// 	}, 0);
+	// 	const modify = totalSum % 11;
+	// 	const status = modify < 2 ? 0 : 11 - modify;
 
-		return { status, isValid: status === checkId };
-	}
+	// 	return { status, isValid: status === checkId };
+	// 	console.log("DEBUG: Bill -> verification -> verification", verification)
+	// }
 
 	public getData(): IBillData {
 		return {

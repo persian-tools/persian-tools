@@ -9,15 +9,24 @@ describe("bill", () => {
 		expect(new Bill(5573391300141, 1770165, "rial").getData().amount).toEqual(17000);
 		expect(new Bill(5573391300141, 1770165).getData().amount).toEqual(1700);
 	});
+
 	it("billType", () => {
 		expect(new Bill(7748317800142, 1770160, "rial").getData().type).toEqual("تلفن ثابت");
 		expect(new Bill(9174639504124, 12908197, "rial").getData().type).toEqual("برق");
 		expect(new Bill(2050327604613, 1070189, "rial").getData().type).toEqual("آب");
 		expect(new Bill(9100074409151, 12908190, "rial").getData().type).toEqual("تلفن همراه");
 	});
+
+	it("verificationBillId", () => {
+		expect(new Bill(7748317800142, 1770160, "rial").getData().isValidBillId.isValid).toEqual(true);
+		expect(new Bill(9174639504124, 12908197, "rial").getData().isValidBillId.isValid).toEqual(true);
+		expect(new Bill(2050327604613, 1070189, "rial").getData().isValidBillId.isValid).toEqual(true);
+		expect(new Bill(2234322344613, 1070189, "rial").getData().isValidBillId.isValid).toEqual(false);
+	});
+
 	it("verificationBill", () => {
 		expect(new Bill(7748317800142, 1770160, "rial").getData().isValid).toEqual(true);
-		expect(new Bill(9174639504124, 12908197, "rial").getData().isValid).toEqual(true);
+		expect(new Bill(9174639504124, 12908197, "rial").getData().isValid).toEqual(false);
 		expect(new Bill(2050327604613, 1070189, "rial").getData().isValid).toEqual(true);
 		expect(new Bill(2234322344613, 1070189, "rial").getData().isValid).toEqual(false);
 	});
