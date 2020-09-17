@@ -24,6 +24,13 @@ describe("bill", () => {
 		expect(new Bill(2234322344613, 1070189, "rial").getData().isValidBillId.isValid).toEqual(false);
 	});
 
+	it("verificationBIllPayment", () => {
+		expect(new Bill(7748317800142, 1770160, "rial").getData().isValidBillPayment.isValid).toEqual(true);
+		expect(new Bill(9174639504124, 12908197, "rial").getData().isValidBillPayment.isValid).toEqual(false);
+		expect(new Bill(2050327604613, 1070189, "rial").getData().isValidBillPayment.isValid).toEqual(true);
+		expect(new Bill(2234322344613, 1070189, "rial").getData().isValidBillPayment.isValid).toEqual(false);
+	});
+
 	it("verificationBill", () => {
 		expect(new Bill(7748317800142, 1770160, "rial").getData().isValid).toEqual(true);
 		expect(new Bill(9174639504124, 12908197, "rial").getData().isValid).toEqual(false);

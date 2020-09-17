@@ -121,7 +121,6 @@ class Bill {
 		return { isValid: result };
 	}
 	private verificationBillId(): IValidation {
-		// 11485696018
 		let newBillId = parseInt(this.billId, 10).toString();
 
 		let result = false;
@@ -138,8 +137,6 @@ class Bill {
 		return {
 			isValid: result && billType !== "-",
 		};
-
-		// return this.verification(this.billId, Number(this.billId.slice(-1)));
 	}
 
 	private CalTheBit(num: string): number {
@@ -164,7 +161,6 @@ class Bill {
 	}
 
 	// private verification(sum: string, checkId: number): IValidation {
-	// 	console.log("Debug: Bill -> checkId", checkId);
 	// 	let base = 2;
 	// 	const totalSum = sum
 	// 	.split("")
@@ -182,7 +178,6 @@ class Bill {
 	// 	const status = modify < 2 ? 0 : 11 - modify;
 
 	// 	return { status, isValid: status === checkId };
-	// 	console.log("DEBUG: Bill -> verification -> verification", verification)
 	// }
 
 	public getData(): IBillData {
