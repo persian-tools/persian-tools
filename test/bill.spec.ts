@@ -37,4 +37,11 @@ describe("bill", () => {
 		expect(new Bill(2050327604613, 1070189, "rial").getData().isValid).toEqual(true);
 		expect(new Bill(2234322344613, 1070189, "rial").getData().isValid).toEqual(false);
 	});
+
+	it("getBarcode", () => {
+		expect(new Bill(7748317800142, 1770160, "rial").getData().barcode).toEqual("77483178001420001770160");
+		expect(new Bill(9174639504124, 12908197, "rial").getData().barcode).toEqual("917463950412400012908197");
+		expect(new Bill(2050327604613, 1070189, "rial").getData().barcode).toEqual("20503276046130001070189");
+		expect(new Bill(2234322344613, 1070189, "rial").getData().barcode).toEqual("22343223446130001070189");
+	});
 });

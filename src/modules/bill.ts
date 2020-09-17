@@ -46,7 +46,7 @@ class Bill {
 	billId: string;
 	billPayment: string;
 
-	constructor(billId: number, paymentId: number, currency?: Currency) {
+	constructor(billId: number | string, paymentId: number | string, currency?: Currency) {
 		this.barcode = null;
 		this.currency = currency || "toman";
 		this.billId = "";
@@ -89,15 +89,7 @@ class Bill {
 	}
 
 	public getBarcode(): string {
-		const width = 13;
-		const padding = "0";
-
-		const billPayment = String(this.billId);
-		let lpadBillPayment = billPayment.slice();
-
-		if (billPayment.length < width) lpadBillPayment = padding.repeat(width - billPayment.length) + billPayment;
-
-		return this.billId + "" + lpadBillPayment;
+		return this.billId + "000" + this.billPayment;
 	}
 	public findByBarcode(): void {
 		if (this.barcode) {
