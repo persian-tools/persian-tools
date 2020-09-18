@@ -90,8 +90,7 @@ class Bill {
 	}
 
 	public getBillType(): BillFaType {
-		// @ts-ignore
-		return this.billTypes[String(this.billId)?.slice(-2, -1)] ?? "other";
+		return this.billTypes[Number(String(this.billId)?.slice(-2, -1))] ?? "other";
 	}
 
 	public getBarcode(): string {
