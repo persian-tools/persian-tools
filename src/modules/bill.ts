@@ -7,16 +7,11 @@ type BillFaType =
 	| "عوارض شهرداری"
 	| "سازمان مالیات"
 	| "جرایم راهنمایی و رانندگی"
-	| "-";
+	| "other";
 type Currency = "toman" | "rial";
 
 interface IBillTypes {
 	[key: number]: BillFaType;
-}
-
-interface IValidation {
-	status?: number;
-	isValid: boolean;
 }
 
 interface IBillData {
@@ -33,10 +28,16 @@ interface IBillData {
 	isValid: boolean;
 
 	// is valid bill id that should be true if bill id and true
-	isValidBillId: IValidation;
+	isValidBillId: boolean;
 
 	// id valid bill payment code
-	isValidBillPayment: IValidation;
+	isValidBillPayment: boolean;
+}
+
+interface Params {
+	billId: number | string;
+	paymentId: number | string;
+	currency?: Currency;
 }
 
 class Bill {
@@ -46,7 +47,7 @@ class Bill {
 	billId: string;
 	billPayment: string;
 
-	constructor(billId: number | string, paymentId: number | string, currency?: Currency) {
+	constructor({ billId, paymentId, currency }: Params) {
 		this.barcode = null;
 		this.currency = currency || "toman";
 		this.billId = "";
@@ -67,15 +68,19 @@ class Bill {
 			this.setPeymentId(String(paymentId));
 		}
 	}
+
 	private setId(billId: string): void {
 		this.billId = billId;
 	}
+
 	private setPeymentId(billPayment: string): void {
 		this.billPayment = billPayment;
 	}
+
 	public setBarcode(barcode: string): void {
 		this.barcode = barcode;
 	}
+
 	public getBillAmount(): number {
 		const currency = this.currency == "rial" ? 1000 : 100;
 		const amount = parseInt(String(this.billPayment).slice(0, -5)) * currency;
@@ -85,7 +90,7 @@ class Bill {
 
 	public getBillType(): BillFaType {
 		// @ts-ignore
-		return this.billTypes[String(this.billId)?.slice(-2, -1)] ?? "-";
+		return this.billTypes[String(this.billId)?.slice(-2, -1)] ?? "other";
 	}
 
 	public getBarcode(): string {
@@ -97,12 +102,13 @@ class Bill {
 			this.billPayment = this.barcode.split(this.billId)[1];
 		}
 	}
-	private verificationBillPayment(): IValidation {
+
+	private verificationBillPayment(): boolean {
 		let payId = parseInt(this.billPayment, 10).toString();
 		const billId = parseInt(this.billId, 10).toString();
 		let result = false;
 		if (!payId || payId.length < 6) {
-			return { isValid: result };
+			return result;
 		}
 		const firstControllBit = payId.charAt(payId.length - 2) + "";
 		const secondControlBit = payId.charAt(payId.length - 1) + "";
@@ -110,25 +116,22 @@ class Bill {
 		result =
 			this.CalTheBit(payId) === Number(firstControllBit) &&
 			this.CalTheBit(billId + payId + firstControllBit) === Number(secondControlBit);
-		return { isValid: result };
+		return result;
 	}
-	private verificationBillId(): IValidation {
+
+	private verificationBillId(): boolean {
 		let newBillId = parseInt(this.billId, 10).toString();
 
 		let result = false;
 		if (!newBillId || newBillId.length < 6) {
-			return {
-				isValid: false,
-			};
+			return false;
 		}
 		const controlBit = newBillId.substr(newBillId.length - 1);
 		newBillId = newBillId.substr(0, newBillId.length - 1);
 		const tempResult = this.CalTheBit(newBillId);
 		result = tempResult === Number(controlBit);
 		const billType = this.getBillType();
-		return {
-			isValid: result && billType !== "-",
-		};
+		return result && billType !== "other";
 	}
 
 	private CalTheBit(num: string): number {
@@ -149,28 +152,8 @@ class Bill {
 	}
 
 	private verificationBill(): boolean {
-		return this.verificationBillPayment().isValid && this.verificationBillId().isValid;
+		return this.verificationBillPayment() && this.verificationBillId();
 	}
-
-	// private verification(sum: string, checkId: number): IValidation {
-	// 	let base = 2;
-	// 	const totalSum = sum
-	// 	.split("")
-	// 	.reverse()
-	// 	.join("")
-	// 	.split("")
-	// 	.map(n => Number(n))
-	// 	.reduce((acc, current) => {
-	// 		acc += base * current;
-	// 		base = base >= 7 ? 2 : base + 1;
-
-	// 		return acc;
-	// 	}, 0);
-	// 	const modify = totalSum % 11;
-	// 	const status = modify < 2 ? 0 : 11 - modify;
-
-	// 	return { status, isValid: status === checkId };
-	// }
 
 	public getData(): IBillData {
 		return {
@@ -194,7 +177,5 @@ class Bill {
 		};
 	}
 }
-
-// new Bill(772263113142, 2510006).getData();
 
 export default Bill;
