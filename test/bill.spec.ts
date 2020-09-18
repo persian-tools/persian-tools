@@ -46,6 +46,7 @@ describe("bill", () => {
 		expect(
 			new Bill({ billId: 7748317800142, paymentId: 1770160, currency: "rial" }).getData().isValidBillPayment,
 		).toEqual(true);
+		expect(new Bill({ billId: 7748317800142, currency: "rial" }).getData().isValidBillPayment).toEqual(false);
 		expect(
 			new Bill({ billId: 9174639504124, paymentId: 12908197, currency: "rial" }).getData().isValidBillPayment,
 		).toEqual(false);
@@ -85,5 +86,18 @@ describe("bill", () => {
 		expect(new Bill({ billId: 2234322344613, paymentId: 1070189, currency: "rial" }).getData().barcode).toEqual(
 			"22343223446130001070189",
 		);
+	});
+
+	it("getBarcode", () => {
+		const newBill = new Bill({});
+		newBill.setBarcode("22343223446130001070189");
+		expect(newBill.barcode).toEqual("22343223446130001070189");
+	});
+
+	it("findByBarcode", () => {
+		const newBill = new Bill({ barcode: "22343223446130001070189" });
+		newBill.findByBarcode();
+		expect(newBill.billId).toEqual("2234322344613");
+		expect(newBill.billPayment).toEqual("1070189");
 	});
 });

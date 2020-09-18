@@ -35,9 +35,10 @@ interface IBillData {
 }
 
 interface Params {
-	billId: number | string;
-	paymentId: number | string;
+	billId?: number | string;
+	paymentId?: number | string;
 	currency?: Currency;
+	barcode?: string;
 }
 
 class Bill {
@@ -47,8 +48,8 @@ class Bill {
 	billId: string;
 	billPayment: string;
 
-	constructor({ billId, paymentId, currency }: Params) {
-		this.barcode = null;
+	constructor({ billId, paymentId, currency, barcode }: Params) {
+		this.barcode = barcode || null;
 		this.currency = currency || "toman";
 		this.billId = "";
 		this.billPayment = "";
@@ -99,7 +100,7 @@ class Bill {
 	public findByBarcode(): void {
 		if (this.barcode) {
 			this.billId = this.barcode.substr(0, 13);
-			this.billPayment = this.barcode.split(this.billId)[1];
+			this.billPayment = this.barcode.substr(16, 10);
 		}
 	}
 
