@@ -95,7 +95,6 @@ NumberToWords.convert(500443) // "پانصد هزار و چهار صد و چهل
 NumberToWords.convert("500,443") // "پانصد هزار و چهار صد و چهل و سه"
 NumberToWords.convert("500,443", { ordinal: true }) // "پانصد هزار و چهار صد و چهل و سوم"
 NumberToWords.convert(30000000000) // "سی میلیارد"
-});
 ```
 
 ### Add and remove commas
@@ -109,7 +108,6 @@ addCommas(300) // "300"
 removeCommas("30,000,000") // 30000000
 removeCommas(300) // 300
 removeCommas("300") // 300
-});
 ```
 
 ### Convert Persian numbers to Arabic or English numbers and vice versa
