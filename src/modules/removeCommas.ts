@@ -11,7 +11,7 @@ const removeCommas = (number?: string | number): number | undefined => {
 		result = result.replace(/,\s?/g, "");
 	}
 
-	return typeof result === "number" ? result : parseInt(result, 10);
+	return parseInt(result, 10);
 };
 
 export default removeCommas;

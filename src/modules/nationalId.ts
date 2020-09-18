@@ -6,9 +6,8 @@
  */
 function verifyIranianNationalId(nationalId?: string | number): boolean | null | undefined {
 	if (!nationalId) return;
-
-	if (nationalId) {
-		let code = nationalId.toString() || "";
+	else {
+		let code = nationalId.toString();
 
 		if (!code.match(/^\d{10}$/)) return false;
 		code = ("0000" + code).substr(code.length + 4 - 10);
@@ -25,8 +24,6 @@ function verifyIranianNationalId(nationalId?: string | number): boolean | null |
 		sum = sum % 11;
 
 		return (sum < 2 && lastNumber === sum) || (sum >= 2 && lastNumber === 11 - sum);
-	} else {
-		return null;
 	}
 }
 
