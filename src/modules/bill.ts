@@ -7,7 +7,7 @@ type BillFaType =
 	| "عوارض شهرداری"
 	| "سازمان مالیات"
 	| "جرایم راهنمایی و رانندگی"
-	| "other";
+	| "unknown";
 type Currency = "toman" | "rial";
 
 interface IBillTypes {
@@ -90,7 +90,7 @@ class Bill {
 	}
 
 	public getBillType(): BillFaType {
-		return this.billTypes[Number(String(this.billId)?.slice(-2, -1))] ?? "other";
+		return this.billTypes[Number(String(this.billId)?.slice(-2, -1))] ?? "unknown";
 	}
 
 	public getBarcode(): string {
@@ -131,7 +131,7 @@ class Bill {
 		const tempResult = this.CalTheBit(newBillId);
 		result = tempResult === Number(controlBit);
 		const billType = this.getBillType();
-		return result && billType !== "other";
+		return result && billType !== "unknown";
 	}
 
 	private CalTheBit(num: string): number {
