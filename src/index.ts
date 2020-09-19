@@ -18,6 +18,8 @@ export { default as getBankNameFromCardNumber } from "./modules/getBankNameFromC
 // Fix and sort persian string
 export { default as URLfix } from "./modules/URLfix";
 export { default as SortText } from "./modules/SortText";
+// Bill info
+export { default as BillInfo } from "./modules/Bill";
 
 export {
 	// Digits

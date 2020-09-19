@@ -16,7 +16,7 @@ interface IBillTypes {
 
 interface FindByBarcode {
 	billId: string;
-	payId: string;
+	paymentId: string;
 }
 
 interface IBillData {
@@ -108,29 +108,29 @@ class Bill {
 		if (this.barcode) {
 			return {
 				billId: this.barcode.substr(0, 13),
-				payId: this.barcode.substr(16, 10),
+				paymentId: this.barcode.substr(16, 10),
 			};
 		} else {
 			return {
 				billId: "",
-				payId: "",
+				paymentId: "",
 			};
 		}
 	}
 
 	private verificationBillPayment(): boolean {
-		let payId = parseInt(this.billPayment, 10).toString();
+		let paymentId = parseInt(this.billPayment, 10).toString();
 		const billId = parseInt(this.billId, 10).toString();
 		let result = false;
-		if (!payId || payId.length < 6) {
+		if (!paymentId || paymentId.length < 6) {
 			return result;
 		}
-		const firstControllBit = payId.charAt(payId.length - 2) + "";
-		const secondControlBit = payId.charAt(payId.length - 1) + "";
-		payId = payId.substr(0, payId.length - 2);
+		const firstControllBit = paymentId.charAt(paymentId.length - 2) + "";
+		const secondControlBit = paymentId.charAt(paymentId.length - 1) + "";
+		paymentId = paymentId.substr(0, paymentId.length - 2);
 		result =
-			this.CalTheBit(payId) === Number(firstControllBit) &&
-			this.CalTheBit(billId + payId + firstControllBit) === Number(secondControlBit);
+			this.CalTheBit(paymentId) === Number(firstControllBit) &&
+			this.CalTheBit(billId + paymentId + firstControllBit) === Number(secondControlBit);
 		return result;
 	}
 
@@ -196,4 +196,6 @@ class Bill {
 	}
 }
 
-export default Bill;
+const BillInstance = (data: Params): Bill => new Bill(data);
+
+export default BillInstance;

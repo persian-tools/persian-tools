@@ -1,11 +1,9 @@
 <h1 align="center">Persian tools</h1>
 
-
 ![CI/CD](https://github.com/ali-master/persian-tools/workflows/Continuous%20Integration/badge.svg)
 [![codecov](https://codecov.io/gh/ali-master/persian-tools/branch/master/graph/badge.svg)](https://codecov.io/gh/ali-master/persian-tools)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ali-master/persian-tools/blob/master/LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange.svg)](https://github.com/ali-master/persian-tools/compare) 
-
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange.svg)](https://github.com/ali-master/persian-tools/compare)
 
 PersianTools.js is a standalone, library-agnostic JavaScript that enables some of the Persian features for using in the JavaScript.
 
@@ -198,6 +196,42 @@ URLfix("https://en.wikipedia.org/wiki/Persian_alphabet"); // "https://en.wikiped
 URLfix("Sample Text"); // "Sample Text"
 ```
 
+### Get Bill information
+
+```js
+import { BillInfo } from "persian-tools2";
+
+// bill amount
+Bill({ billId: 1117753200140, paymentId: 12070160, currency: "rial" }).getData().amount; // 120000
+Bill({ billId: 1117753200140, paymentId: 12070160 }).getData().amount; // 12000
+
+// bill type
+Bill({ billId: 7748317800142, paymentId: 1770160, currency: "rial" }).getData().type; // تلفن ثابت
+Bill({ billId: 9174639504124, paymentId: 12908197, currency: "rial" }).getData().type; // برق
+Bill({ billId: 2050327604613, paymentId: 1070189, currency: "rial" }).getData().type; // آب
+Bill({ billId: 9100074409151, paymentId: 12908190, currency: "rial" }).getData().type; // تلفن همراه
+Bill({ billId: 7748317800105, paymentId: 1770160, currency: "rial" }).getData().type; // unknown
+
+// bill id validation
+Bill({ billId: 7748317800142, paymentId: 1770160, currency: "rial" }).getData().isValidBillId; // true
+Bill({ billId: 2234322344613, paymentId: 1070189, currency: "rial" }).getData().isValidBillId; // false
+
+// bill payment id validation
+Bill({ billId: 7748317800142, paymentId: 1770160, currency: "rial" }).getData().isValidBillPayment; // true
+Bill({ billId: 9174639504124, paymentId: 12908197, currency: "rial" }).getData().isValidBillPayment; // false
+
+// bill validation
+Bill({ billId: 7748317800142, paymentId: 1770160, currency: "rial" }).getData().isValid; // true
+Bill({ billId: 2234322344613, paymentId: 1070189, currency: "rial" }).getData().isValid; // false
+
+// get barcode from billId and paymentId
+Bill({ billId: 7748317800142, paymentId: 1770160, currency: "rial" }).getData().barcode; // 77483178001420001770160
+Bill({ billId: 9174639504124, paymentId: 12908197, currency: "rial" }).getData().barcode; // 917463950412400012908197
+
+// get billId and paymentId from barcode
+Bill({ barcode: "22343223446130001070189" }).findByBarcode(); // { billId: 2234322344613 , paymentId: 1070189 }
+```
+
 ## Contributing
 
 Thank you for your interest in contributing! Please feel free to put up a PR for any issue or feature request.
@@ -205,4 +239,3 @@ Thank you for your interest in contributing! Please feel free to put up a PR for
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/ali-master/persian-tools/blob/master/LICENSE) file for details
-
