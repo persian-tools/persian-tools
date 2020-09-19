@@ -14,6 +14,11 @@ interface IBillTypes {
 	[key: number]: BillFaType;
 }
 
+interface FindByBarcode {
+	billId: string;
+	payId: string;
+}
+
 interface IBillData {
 	// bill amount
 	amount: number;
@@ -32,6 +37,9 @@ interface IBillData {
 
 	// id valid bill payment code
 	isValidBillPayment: boolean;
+
+	// find billId and billPayment by barcode
+	findByBarcode: FindByBarcode;
 }
 
 interface Params {
@@ -96,10 +104,17 @@ class Bill {
 	public getBarcode(): string {
 		return this.billId + "000" + this.billPayment;
 	}
-	public findByBarcode(): void {
+	public findByBarcode(): FindByBarcode {
 		if (this.barcode) {
-			this.billId = this.barcode.substr(0, 13);
-			this.billPayment = this.barcode.substr(16, 10);
+			return {
+				billId: this.barcode.substr(0, 13),
+				payId: this.barcode.substr(16, 10),
+			};
+		} else {
+			return {
+				billId: "",
+				payId: "",
+			};
 		}
 	}
 
@@ -174,6 +189,9 @@ class Bill {
 
 			// id valid bill payment code
 			isValidBillPayment: this.verificationBillPayment(),
+
+			// find billId and billPayment by barcode
+			findByBarcode: this.findByBarcode(),
 		};
 	}
 }

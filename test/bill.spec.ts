@@ -97,7 +97,7 @@ describe("bill", () => {
 	it("findByBarcode", () => {
 		const newBill = new Bill({ barcode: "22343223446130001070189" });
 		newBill.findByBarcode();
-		expect(newBill.billId).toEqual("2234322344613");
-		expect(newBill.billPayment).toEqual("1070189");
+		expect(newBill.findByBarcode().billId).toEqual("2234322344613");
+		expect(newBill.findByBarcode().payId).toEqual("1070189");
 	});
 });
