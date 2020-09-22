@@ -1,5 +1,9 @@
-<h1 align="center">Persian tools</h1>
-
+<div align="center">
+	<p align="center">
+		<img src="./images/logo.png" width="200" />
+	</p>
+	<h1 align="center">Persian tools</h1>
+	<p align="center">PersianTools.js is a standalone, library-agnostic JavaScript that enables some of the Persian features for using in the JavaScript.</p>
 
 ![CI/CD](https://github.com/ali-master/persian-tools/workflows/Continuous%20Integration/badge.svg)
 [![codecov](https://codecov.io/gh/ali-master/persian-tools/branch/master/graph/badge.svg)](https://codecov.io/gh/ali-master/persian-tools)
@@ -7,7 +11,9 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange.svg)](https://github.com/ali-master/persian-tools/compare) 
 [![CodeFactor](https://www.codefactor.io/repository/github/ali-master/persian-tools/badge)](https://www.codefactor.io/repository/github/ali-master/persian-tools)
 
-PersianTools.js is a standalone, library-agnostic JavaScript that enables some of the Persian features for using in the JavaScript.
+</div>
+<hr />
+
 
 ## Features
 
@@ -95,6 +101,7 @@ NumberToWords.convert(500443) // "پانصد هزار و چهار صد و چهل
 NumberToWords.convert("500,443") // "پانصد هزار و چهار صد و چهل و سه"
 NumberToWords.convert("500,443", { ordinal: true }) // "پانصد هزار و چهار صد و چهل و سوم"
 NumberToWords.convert(30000000000) // "سی میلیارد"
+});
 ```
 
 ### Add and remove commas
@@ -108,6 +115,7 @@ addCommas(300) // "300"
 removeCommas("30,000,000") // 30000000
 removeCommas(300) // 300
 removeCommas("300") // 300
+});
 ```
 
 ### Convert Persian numbers to Arabic or English numbers and vice versa
