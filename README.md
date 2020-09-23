@@ -1,5 +1,9 @@
-<h1 align="center">Persian tools</h1>
-
+<div align="center">
+	<p align="center">
+		<img src="./images/logo.png" width="200" />
+	</p>
+	<h1 align="center">Persian tools</h1>
+	<p align="center">PersianTools.js is a standalone, library-agnostic JavaScript that enables some of the Persian features for using in the JavaScript.</p>
 
 ![CI/CD](https://github.com/ali-master/persian-tools/workflows/Continuous%20Integration/badge.svg)
 [![codecov](https://codecov.io/gh/ali-master/persian-tools/branch/master/graph/badge.svg)](https://codecov.io/gh/ali-master/persian-tools)
@@ -7,7 +11,8 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange.svg)](https://github.com/ali-master/persian-tools/compare) 
 [![CodeFactor](https://www.codefactor.io/repository/github/ali-master/persian-tools/badge)](https://www.codefactor.io/repository/github/ali-master/persian-tools)
 
-PersianTools.js is a standalone, library-agnostic JavaScript that enables some of the Persian features for using in the JavaScript.
+</div>
+<hr />
 
 ## Features
 
@@ -203,4 +208,3 @@ Thank you for your interest in contributing! Please feel free to put up a PR for
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/ali-master/persian-tools/blob/master/LICENSE) file for details
-
