@@ -201,6 +201,14 @@ URLfix("https://en.wikipedia.org/wiki/Persian_alphabet"); // "https://en.wikiped
 URLfix("Sample Text"); // "Sample Text"
 ```
 
+### Fix Zero-width non-joiner (half-space) 
+
+```js
+import { zwnj } from "persian-tools2";
+
+zwnj("نمی ‌خواهی درخت ها را ببینیم؟") // "نمی‌خواهی درخت‌ها را ببینیم؟"
+```
+
 ## Contributing
 
 Thank you for your interest in contributing! Please feel free to put up a PR for any issue or feature request.
