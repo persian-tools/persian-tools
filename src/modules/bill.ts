@@ -1,4 +1,4 @@
-type BillFaType =
+export type BillTypes =
 	| "آب"
 	| "برق"
 	| "گاز"
@@ -8,134 +8,120 @@ type BillFaType =
 	| "سازمان مالیات"
 	| "جرایم راهنمایی و رانندگی"
 	| "unknown";
-type Currency = "toman" | "rial";
-
-interface IBillTypes {
-	[key: number]: BillFaType;
+interface BillTypesModel {
+	[key: number]: BillTypes;
 }
 
-interface FindByBarcode {
-	billId: string;
-	paymentId: string;
+const billTypes: BillTypesModel = {
+	1: "آب",
+	2: "برق",
+	3: "گاز",
+	4: "تلفن ثابت",
+	5: "تلفن همراه",
+	6: "عوارض شهرداری",
+	8: "سازمان مالیات",
+	9: "جرایم راهنمایی و رانندگی",
+};
+
+export type Currency = "toman" | "rial";
+interface BillBarcodeModel {
+	billId: number;
+	paymentId: number;
 }
 
-interface IBillData {
+interface BillResult {
 	// bill amount
 	amount: number;
-
 	// bill type
 	type: string;
-
 	// bill barcode
 	barcode: string;
-
 	// bill validation
 	isValid: boolean;
-
-	// is valid bill id that should be true if bill id and true
+	// Bill id validation
 	isValidBillId: boolean;
-
-	// id valid bill payment code
+	// payment id validation
 	isValidBillPayment: boolean;
-
-	// find billId and billPayment by barcode
-	findByBarcode: FindByBarcode;
 }
 
-interface Params {
-	billId?: number | string;
-	paymentId?: number | string;
+interface BillParams {
+	billId?: number;
+	paymentId?: number;
 	currency?: Currency;
 	barcode?: string;
 }
 
 class Bill {
-	barcode: string | null;
-	currency: Currency;
-	billTypes: IBillTypes;
-	billId: string;
-	billPayment: string;
+	private readonly barcode: string | null;
+	private readonly currency: Currency;
+	private readonly billTypes: BillTypesModel;
+	private billId: number | null;
+	private billPayment: number | null;
 
-	constructor({ billId, paymentId, currency, barcode }: Params) {
+	constructor({ billId, paymentId, currency, barcode }: BillParams) {
 		this.barcode = barcode || null;
 		this.currency = currency || "toman";
-		this.billId = "";
-		this.billPayment = "";
-		this.billTypes = {
-			1: "آب",
-			2: "برق",
-			3: "گاز",
-			4: "تلفن ثابت",
-			5: "تلفن همراه",
-			6: "عوارض شهرداری",
-			8: "سازمان مالیات",
-			9: "جرایم راهنمایی و رانندگی",
-		};
+		this.billId = null;
+		this.billPayment = null;
+		this.billTypes = billTypes;
 
 		if (billId && paymentId) {
-			this.setId(String(billId));
-			this.setPeymentId(String(paymentId));
+			this.setId(billId);
+			this.setPaymentId(paymentId);
 		}
 	}
 
-	private setId(billId: string): void {
+	private setId(billId: number): void {
 		this.billId = billId;
 	}
 
-	private setPeymentId(billPayment: string): void {
+	private setPaymentId(billPayment: number): void {
 		this.billPayment = billPayment;
 	}
 
-	public setBarcode(barcode: string): void {
-		this.barcode = barcode;
-	}
-
-	public getBillAmount(): number {
+	public getAmount(): number {
 		const currency = this.currency == "rial" ? 1000 : 100;
 		const amount = parseInt(String(this.billPayment).slice(0, -5)) * currency;
 
 		return amount;
 	}
 
-	public getBillType(): BillFaType {
+	public getBillType(): BillTypes {
 		return this.billTypes[Number(String(this.billId)?.slice(-2, -1))] ?? "unknown";
 	}
 
 	public getBarcode(): string {
 		return this.billId + "000" + this.billPayment;
 	}
-	public findByBarcode(): FindByBarcode {
-		if (this.barcode) {
-			return {
-				billId: this.barcode.substr(0, 13),
-				paymentId: this.barcode.substr(16, 10),
-			};
-		} else {
-			return {
-				billId: "",
-				paymentId: "",
-			};
-		}
+	public findByBarcode(barcode?: string): BillBarcodeModel {
+		const $barcode = (barcode || this.barcode) as string;
+
+		return {
+			billId: Number($barcode.substr(0, 13)),
+			paymentId: Number($barcode.substr(16, 10)),
+		};
 	}
 
-	private verificationBillPayment(): boolean {
-		let paymentId = parseInt(this.billPayment, 10).toString();
-		const billId = parseInt(this.billId, 10).toString();
+	public verificationBillPayment(): boolean {
+		const billId = `${this.billId}`;
+		let paymentId = `${this.billPayment}`;
+
 		let result = false;
 		if (!paymentId || paymentId.length < 6) {
 			return result;
 		}
-		const firstControllBit = paymentId.charAt(paymentId.length - 2) + "";
+		const firstControlBit = paymentId.charAt(paymentId.length - 2) + "";
 		const secondControlBit = paymentId.charAt(paymentId.length - 1) + "";
 		paymentId = paymentId.substr(0, paymentId.length - 2);
 		result =
-			this.CalTheBit(paymentId) === Number(firstControllBit) &&
-			this.CalTheBit(billId + paymentId + firstControllBit) === Number(secondControlBit);
+			this.CalTheBit(paymentId) === Number(firstControlBit) &&
+			this.CalTheBit(billId + paymentId + firstControlBit) === Number(secondControlBit);
+
 		return result;
 	}
 
-	private verificationBillId(): boolean {
-		let newBillId = parseInt(this.billId, 10).toString();
+	public verificationBillId(): boolean {
+		let newBillId = `${this.billId}`;
 
 		let result = false;
 		if (!newBillId || newBillId.length < 6) {
@@ -143,9 +129,12 @@ class Bill {
 		}
 		const controlBit = newBillId.substr(newBillId.length - 1);
 		newBillId = newBillId.substr(0, newBillId.length - 1);
-		const tempResult = this.CalTheBit(newBillId);
-		result = tempResult === Number(controlBit);
+
+		const $result = this.CalTheBit(newBillId);
+		result = $result === Number(controlBit);
+
 		const billType = this.getBillType();
+
 		return result && billType !== "unknown";
 	}
 
@@ -166,14 +155,14 @@ class Bill {
 		return sum;
 	}
 
-	private verificationBill(): boolean {
+	public verificationBill(): boolean {
 		return this.verificationBillPayment() && this.verificationBillId();
 	}
 
-	public getData(): IBillData {
+	public getResult(): BillResult {
 		return {
 			// bill amount
-			amount: this.getBillAmount(),
+			amount: this.getAmount(),
 
 			// bill type
 			type: this.getBillType(),
@@ -189,13 +178,8 @@ class Bill {
 
 			// id valid bill payment code
 			isValidBillPayment: this.verificationBillPayment(),
-
-			// find billId and billPayment by barcode
-			findByBarcode: this.findByBarcode(),
 		};
 	}
 }
 
-const BillInstance = (data: Params): Bill => new Bill(data);
-
-export default BillInstance;
+export default Bill;

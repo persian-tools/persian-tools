@@ -20,7 +20,7 @@ export { default as URLfix } from "./modules/URLfix";
 export { default as SortText } from "./modules/SortText";
 export { default as halfSpace } from "./modules/halfSpace";
 // Bill info
-export { default as BillInfo } from "./modules/Bill";
+export { default as Bill } from "./modules/bill";
 
 export {
 	// Digits

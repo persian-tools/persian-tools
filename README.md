@@ -205,42 +205,49 @@ URLfix("https://en.wikipedia.org/wiki/Persian_alphabet"); // "https://en.wikiped
 URLfix("Sample Text"); // "Sample Text"
 ```
 ### Bill calculator
-
+| Method                  | Description                             | Return type
+|---                	  |---	                                    |---
+| getResult               | Result of bill calculated information	| BillResult
+| getAmount  	          | Calculate Bill amount by payment id and bill id which entered by the Bill constructor | number
+| getBillType        	  | Get Bill provider type name         	| BillTypes
+| getBarcode              | Calculate and get Bill's barcode        | string         
+| verificationBill        | Validate entered both Bill id and payment id, and return true if bill id and payment id relation was true | boolean         
+| verificationBillId      | Validate entered Bill id                | boolean         
+| verificationBillPayment | Validate entered Bill payment id        | boolean         
 ```js
-import { BillInfo } from "persian-tools2";
+import { Bill } from "persian-tools2";
 
 // Calculate bill amount by bill id and payment id
-
 // Convert to Iranian Rials
-BillInfo({ billId: 1117753200140, paymentId: 12070160, currency: "rial" }).getData().amount; // 120000
-// Return bill amount by Iranian Toman by default
-BillInfo({ billId: 1117753200140, paymentId: 12070160 }).getData().amount; // 12000
+new Bill({ billId: 1117753200140, paymentId: 12070160, currency: "rial" }).getResult().amount; // 120000
+// Return bill amount by Toman(Iranian currency type) by default
+new Bill({ billId: 1117753200140, paymentId: 12070160 }).getResult().amount; // 12000
 
 // Find Bill's type by bill id and payment id
-BillInfo({ billId: 7748317800142, paymentId: 1770160 }).getData().type; // تلفن ثابت
-BillInfo({ billId: 9174639504124, paymentId: 12908197 }).getData().type; // برق
-BillInfo({ billId: 2050327604613, paymentId: 1070189 }).getData().type; // آب
-BillInfo({ billId: 9100074409151, paymentId: 12908190 }).getData().type; // تلفن همراه
-BillInfo({ billId: 7748317800105, paymentId: 1770160 }).getData().type; // unknown
+new Bill({ billId: 7748317800142, paymentId: 1770160 }).getResult().type; // تلفن ثابت
+new Bill({ billId: 9174639504124, paymentId: 12908197 }).getResult().type; // برق
+new Bill({ billId: 2050327604613, paymentId: 1070189 }).getResult().type; // آب
+new Bill({ billId: 9100074409151, paymentId: 12908190 }).getResult().type; // تلفن همراه
+new Bill({ billId: 7748317800105, paymentId: 1770160 }).getResult().type; // unknown
 
 // Check Bill id validation
-BillInfo({ billId: 7748317800142, paymentId: 1770160 }).getData().isValidBillId; // true
-BillInfo({ billId: 2234322344613, paymentId: 1070189 }).getData().isValidBillId; // false
+new Bill({ billId: 7748317800142, paymentId: 1770160 }).getResult().isValidBillId; // true
+new Bill({ billId: 2234322344613, paymentId: 1070189 }).getResult().isValidBillId; // false
 
 // Check Bill's payment id validation
-BillInfo({ billId: 7748317800142, paymentId: 1770160 }).getData().isValidBillPayment; // true
-BillInfo({ billId: 9174639504124, paymentId: 12908197 }).getData().isValidBillPayment; // false
+new Bill({ billId: 7748317800142, paymentId: 1770160 }).getResult().isValidBillPayment; // true
+new Bill({ billId: 9174639504124, paymentId: 12908197 }).getResult().isValidBillPayment; // false
 
 // Check Bill id and payment id relations which is valid or not
-BillInfo({ billId: 7748317800142, paymentId: 1770160 }).getData().isValid; // true
-BillInfo({ billId: 2234322344613, paymentId: 1070189 }).getData().isValid; // false
+new Bill({ billId: 7748317800142, paymentId: 1770160 }).getResult().isValid; // true
+new Bill({ billId: 2234322344613, paymentId: 1070189 }).getResult().isValid; // false
 
 // Get barcode from billId and paymentId
-BillInfo({ billId: 7748317800142, paymentId: 1770160 }).getData().barcode; // 77483178001420001770160
-BillInfo({ billId: 9174639504124, paymentId: 12908197 }).getData().barcode; // 917463950412400012908197
+new Bill({ billId: 7748317800142, paymentId: 1770160 }).getResult().barcode; // 77483178001420001770160
+new Bill({ billId: 9174639504124, paymentId: 12908197 }).getResult().barcode; // 917463950412400012908197
 
 // Get bill bill id and payment id by bill's barcode
-BillInfo({ barcode: "22343223446130001070189" }).findByBarcode(); // { billId: 2234322344613 , paymentId: 1070189 }
+new Bill({ barcode: "22343223446130001070189" }).findByBarcode(); // { billId: 2234322344613 , paymentId: 1070189 }
 ```
 
 ### Fix Persian zero-width non-joiner(Replace spaces by half-space) 
@@ -250,6 +257,12 @@ import { halfSpace } from "persian-tools2";
 
 halfSpace("نمی ‌خواهی درخت ها را ببینیم؟") // "نمی‌خواهی درخت‌ها را ببینیم؟"
 ```
+
+### Todo
+- [ ] Write typescript document
+- [ ] Complete Bill methods documents one by one
+- [ ] Check Iranian iban number validation
+- [ ] Find Bank's name by Iban number
 
 ## Contributing
 
