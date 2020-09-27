@@ -10,28 +10,30 @@ export interface INationalId extends IProvince {
 	parentCode: number;
 }
 
-export interface IPlaceByNationalIId {
+export interface IPlaceByNationalId {
 	codes: number[] | string[];
 	city: string;
 	province: string;
 }
 
 /**
- * Get Place by Iranian National-Id
+ * Get Province and City name by Iranian National-Id
+ *
+ * @public
  * @method getPlaceByIranNationalId
- * @param  {String?}                 nationalId [String of national id - like this: 1111111111]
- * @return {Object}                             [If nationalId is valid, function returning an object of details, but nationalId is invalid, return error message]
+ * @param  {string | undefined} nationalId - string of national id - like this: 1111111111
+ * @return {object} If nationalId is valid, function returns an object of details, but if nationalId is invalid, return an error message
  */
-function getPlaceByIranNationalId(nationalId?: string): IPlaceByNationalIId | null | undefined {
+function getPlaceByIranNationalId(nationalId?: string): IPlaceByNationalId | null | undefined {
 	if (!nationalId) return;
 
 	if (nationalId && nationalId.length === 10) {
 		const code = nationalId.toString().substring(0, 3);
-		const find = (NationalIdJSON as INationalId[]).filter(row => row.code.toString().includes(code));
+		const find = (NationalIdJSON as INationalId[]).filter((row) => row.code.toString().includes(code));
 
 		if (find.length) {
 			const findProvinces = (ProvincesJSON as IProvince[]).filter(
-				province => province.code === find[0].parentCode,
+				(province) => province.code === find[0].parentCode,
 			);
 			const code = find[0].code.toString();
 
