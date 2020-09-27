@@ -30,8 +30,6 @@
 		"@typescript-eslint/ban-ts-ignore": "off",
 		"@typescript-eslint/no-var-requires": "off",
 		"@typescript-eslint/no-non-null-assertion": "off",
-	},
-	"ecmaFeatures": {
-		"modules": true
+		"@typescript-eslint/ban-ts-comment": "off"
 	}
 }
