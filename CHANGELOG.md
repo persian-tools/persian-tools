@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/ali-master/persian-tools/compare/v1.2.4...v1.3.0) (2020-09-27)
+
+
+### Features
+
+* add getBarcode test case ([9a5a830](https://github.com/ali-master/persian-tools/commit/9a5a830e440199b6f6d26da011f126c35b6b6bfd))
+* add isValidPayment test case ([709b83c](https://github.com/ali-master/persian-tools/commit/709b83ce10f5b6c8abc27adef25100a62acc92e7))
+* add test case for bill amount and type ([5a0c29d](https://github.com/ali-master/persian-tools/commit/5a0c29dcd81d01cb66caa7319dfaaadef81c5d22))
+* add test for uncovered lines ([70f0577](https://github.com/ali-master/persian-tools/commit/70f057758ad1ec6580e9086813a74df7412dc22f))
+* add verificationBillId test case ([9ce0c16](https://github.com/ali-master/persian-tools/commit/9ce0c161e0e05a63ab277f8b958b14ecfe848bb7))
+* added Bill calculator ([6c6b945](https://github.com/ali-master/persian-tools/commit/6c6b945991a39c59ffd279fc471160a334f69e2f))
+* create doc for billInfo ([317b473](https://github.com/ali-master/persian-tools/commit/317b473b1d50c437113ce68a20a83f64b4d21e1d))
+* write bill is valid test case ([379278c](https://github.com/ali-master/persian-tools/commit/379278c715fc4d1b533ca35204d0dfb36c4668f0))
+
 ### [1.2.4](https://github.com/ali-master/persian-tools/compare/v1.2.3...v1.2.4) (2020-09-27)
 
 ## [1.2.3](https://github.com/ali-master/persian-tools/compare/v1.2.2...v1.2.3) (2020-06-09)
