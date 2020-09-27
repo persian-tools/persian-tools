@@ -16,15 +16,16 @@
 
 ## Features
 
--   Convert Persian words to the number and vice versa.
+-   Convert Persian words to number and vice versa.
 -   Add and remove commas to numbers.
 -   Convert Persian numbers to Arabic or English numbers and vice versa.
--   Validation of Iranian National Number(code-e Melli).
--   Get the city and province name by national code.
--   Bank number validation.
--   Get the name of the bank by bank account number.
--   Validation of the correctness of the text of the Persian language and clear the Arabic letters in the Persian text.
+-   Validate Iranian national number(code-e Melli).
+-   Find city and province name by national code(code-e Melli).
+-   Validate Bank card number.
+-   Find Bank's name by Card number.
+-   Validate the correctness of the text of the Persian language and clear the Arabic letters in the Persian text.
 -   Fix Persian characters in URL.
+-   Fix Persian zero-width non-joiner(Replace spaces by half-space)
 
 ## Getting started
 
@@ -39,27 +40,27 @@ Add the following code to an HTML file:
 
 ```html
 <html>
-	<head>
-		<!-- Load PersianTools.js -->
-		<script src="https://cdn.jsdelivr.net/npm/persian-tools2@1.1.0/dist/index.bowser.js"></script>
+<head>
+    <!-- Load PersianTools.js -->
+    <script src="https://cdn.jsdelivr.net/npm/persian-tools2@1.2.4/dist/index.bowser.js"></script>
 
-		<!-- Place your code in the script tag below. You can also use an external .js file -->
-		<script type="text/javascript">
-			// Notice there is no 'import' statement. 'all persian-tools functions like digitsEnToFa, etc...' is available on the index-page
-			// because of the script tag above.
+    <!-- Place your code in the script tag below. You can also use an external .js file -->
+    <script type="text/javascript">
+        // Notice there is no 'import' statement. 'all persian-tools functions like digitsEnToFa, etc...' is available on the index-page
+        // because of the script tag above.
 
-			// Takes a string made of English digits only, and returns a string that represents the same number but with Persian digits
-			var convertToFa = PersianTools.digitsEnToFa(1234567);
+        // Takes a string made of English digits only, and returns a string that represents the same number but with Persian digits
+        var convertToFa = PersianTools.digitsEnToFa(1234567);
 
-			// etc...
-		</script>
-	</head>
+        // etc...
+    </script>
+</head>
 
-	<body></body>
+<body></body>
 </html>
 ```
 
-Open up that html file in your browser and the code should run!
+Open up that html file in your browser, and the code should run!
 
 ### via NPM
 
@@ -67,7 +68,7 @@ Add PersianTools.js to your project using <a href="https://yarnpkg.com/en/" targ
 we use ES2017 syntax (such as `import`), this workflow assumes you are using a modern browser or a bundler/transpiler
 to convert your code to something older browsers understand.
 
-```js
+```javascript
 import * as persianTools from "persian-tools2";
 // or
 import { digitsEnToFa } from "persian-tools2";
@@ -84,7 +85,7 @@ Let's take a look at what an example test case would look like using Persian-too
 
 ### Convert Persian words to the number and vice versa
 
-```js
+```javascript
 import { NumberToWords, WordsToNumber } from "persian-tools2";
 
 WordsToNumber.convert("منفی سه هزارمین", { digits: "fa", addCommas: true }) // "-۳,۰۰۰"
@@ -104,7 +105,7 @@ NumberToWords.convert(30000000000) // "سی میلیارد"
 
 ### Add and remove commas
 
-```js
+```javascript
 import { addCommas, removeCommas } from "persian-tools2";
 
 addCommas(30000000) // "30,000,000"
@@ -117,7 +118,7 @@ removeCommas("300") // 300
 
 ### Convert Persian numbers to Arabic or English numbers and vice versa
 
-```js
+```javascript
 import { digitsArToFa, digitsArToEn, digitsEnToFa, digitsFaToEn } from "persian-tools2";
 
 digitsArToFa("٠١٢٣٤٥٦٧٨٩"); // "۰۱۲۳۴۵۶۷۸۹"
@@ -140,9 +141,9 @@ digitsFaToEn("۸۹123۴۵"); // "8912345"
 digitsFaToEn("۰۱۲۳۴۵۶۷۸۹"); // "0123456789"
 ```
 
-### Validation of Iranian National Number(code-e Melli) and get the city and province name by that.
+### Validate Iranian national number(code-e Melli)
 
-```js
+```javascript
 import { verifyIranianNationalId, getPlaceByIranNationalId } from "persian-tools2";
 
 verifyIranianNationalId("0499370899"); // true
@@ -152,7 +153,10 @@ verifyIranianNationalId("0963695398"); // true
 verifyIranianNationalId("0684159414"); // true
 verifyIranianNationalId("0067749828"); // true
 verifyIranianNationalId("0684159415"); // false
+```
 
+### Find city and province name by national code(code-e Melli)
+```javascript
 getPlaceByIranNationalId("0499370899").city; // "شهرری"
 getPlaceByIranNationalId("0790419904").city; // "سبزوار"
 getPlaceByIranNationalId("0084575948").city; // "تهران مرکزی"
@@ -168,7 +172,7 @@ getPlaceByIranNationalId("0371359058").city; // "قم"
 
 ### Bank number validation and get the name of the bank by bank account number
 
-```js
+```javascript
 import { verifyCardNumber, getBankNameFromCardNumber } from "persian-tools2";
 
 verifyCardNumber(6037701689095443); // true
@@ -179,9 +183,9 @@ getBankNameFromCardNumber(6219861034529007); // "بانک سامان"
 getBankNameFromCardNumber("6219861034529007"); // "بانک سامان"
 ```
 
-### Validation of the correctness of the text of the Persian language and clear the Arabic letters in the Persian text.
+### Validate the correctness of the text of the Persian language and clear the Arabic letters in the Persian text.
 
-```js
+```javascript
 import { isPersian, toPersianChars } from "persian-tools2";
 
 isPersian("این یک متن فارسی است؟") // true
@@ -191,7 +195,7 @@ toPersianChars("علي")) // علی
 
 ### Fix Persian characters in URL.
 
-```js
+```javascript
 import { isPersian, toPersianChars } from "persian-tools2";
 
 URLfix(
@@ -201,9 +205,9 @@ URLfix("https://en.wikipedia.org/wiki/Persian_alphabet"); // "https://en.wikiped
 URLfix("Sample Text"); // "Sample Text"
 ```
 
-### Replace spaces by half-space 
+### Fix Persian zero-width non-joiner(Replace spaces by half-space) 
 
-```js
+```javascript
 import { halfSpace } from "persian-tools2";
 
 halfSpace("نمی ‌خواهی درخت ها را ببینیم؟") // "نمی‌خواهی درخت‌ها را ببینیم؟"
