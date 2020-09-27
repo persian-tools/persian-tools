@@ -1,6 +1,6 @@
 {
 	"name": "persian-tools2",
-	"version": "1.2.3",
+	"version": "1.2.4",
 	"description": "An anthology of a variety of tools for Persian language in javascript",
 	"main": "dist/index.js",
 	"module": "dist/index.es.js",
@@ -34,7 +34,8 @@
 		"English numbers to Persian",
 		"Persian numbers to English",
 		"verify iranian national id",
-		"verify iranian card-number"
+		"verify iranian card-number",
+		"Persian zero-width non-joiner"
 	],
 	"author": "Ali Torki <ali_4286@live.com>",
 	"license": "MIT",
