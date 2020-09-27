@@ -1,11 +1,11 @@
 /**
- * Replace ZWNJ in string
- * @method zwnj Zero-width non-joiner
+ * Replace halfSpace in string
+ * @method halfSpace Zero-width non-joiner
  * @param   {string}
  * @return  {string}
  */
 
-const zwnj = (str: string): string | undefined => {
+const halfSpace = (str: string): string | undefined => {
 	if (!str) return;
 
 	str = str.replace(/\u00ad/g, "‌");
@@ -28,4 +28,4 @@ const zwnj = (str: string): string | undefined => {
 	return str;
 };
 
-export default zwnj;
+export default halfSpace;

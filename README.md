@@ -201,12 +201,12 @@ URLfix("https://en.wikipedia.org/wiki/Persian_alphabet"); // "https://en.wikiped
 URLfix("Sample Text"); // "Sample Text"
 ```
 
-### Fix Zero-width non-joiner (half-space) 
+### Replace spaces by half-space 
 
 ```js
-import { zwnj } from "persian-tools2";
+import { halfSpace } from "persian-tools2";
 
-zwnj("نمی ‌خواهی درخت ها را ببینیم؟") // "نمی‌خواهی درخت‌ها را ببینیم؟"
+halfSpace("نمی ‌خواهی درخت ها را ببینیم؟") // "نمی‌خواهی درخت‌ها را ببینیم؟"
 ```
 
 ## Contributing
