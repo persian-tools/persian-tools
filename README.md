@@ -21,6 +21,7 @@
 -   Convert Persian numbers to Arabic or English numbers and vice versa.
 -   Validate Iranian national number(code-e Melli).
 -   Find city and province name by national code(code-e Melli).
+-   Bill calculator
 -   Validate Bank card number.
 -   Find Bank's name by Card number.
 -   Validate the correctness of the text of the Persian language and clear the Arabic letters in the Persian text.
