@@ -1,3 +1,4 @@
+<h1 align="center">Persian tools</h1>
 <div align="center">
 	<p align="center">
 		<img src="./images/logo.png" width="200" />
@@ -5,12 +6,11 @@
 	<h1 align="center">Persian tools</h1>
 	<p align="center">PersianTools.js is a standalone, library-agnostic JavaScript that enables some of the Persian features for using in the JavaScript.</p>
 
-![CI/CD](https://github.com/ali-master/persian-tools/workflows/Continuous%20Integration/badge.svg)
-[![codecov](https://codecov.io/gh/ali-master/persian-tools/branch/master/graph/badge.svg)](https://codecov.io/gh/ali-master/persian-tools)
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ali-master/persian-tools/blob/master/LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange.svg)](https://github.com/ali-master/persian-tools/compare) 
-[![CodeFactor](https://www.codefactor.io/repository/github/ali-master/persian-tools/badge)](https://www.codefactor.io/repository/github/ali-master/persian-tools)
-
+  ![CI/CD](https://github.com/ali-master/persian-tools/workflows/Continuous%20Integration/badge.svg)
+  [![codecov](https://codecov.io/gh/ali-master/persian-tools/branch/master/graph/badge.svg)](https://codecov.io/gh/ali-master/persian-tools)
+  [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ali-master/persian-tools/blob/master/LICENSE)
+  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange.svg)](https://github.com/ali-master/persian-tools/compare)
+  [![CodeFactor](https://www.codefactor.io/repository/github/ali-master/persian-tools/badge)](https://www.codefactor.io/repository/github/ali-master/persian-tools)
 </div>
 <hr />
 
@@ -201,6 +201,45 @@ URLfix("https://en.wikipedia.org/wiki/Persian_alphabet"); // "https://en.wikiped
 URLfix("Sample Text"); // "Sample Text"
 ```
 
+### Bill calculator
+
+```js
+import { BillInfo } from "persian-tools2";
+
+// Calculate bill amount by bill id and payment id
+
+// Convert to Iranian Rials
+Bill({ billId: 1117753200140, paymentId: 12070160, currency: "rial" }).getData().amount; // 120000
+// Return bill amount by Iranian Toman by default
+Bill({ billId: 1117753200140, paymentId: 12070160 }).getData().amount; // 12000
+
+// Find Bill's type by bill id and payment id
+Bill({ billId: 7748317800142, paymentId: 1770160 }).getData().type; // تلفن ثابت
+Bill({ billId: 9174639504124, paymentId: 12908197 }).getData().type; // برق
+Bill({ billId: 2050327604613, paymentId: 1070189 }).getData().type; // آب
+Bill({ billId: 9100074409151, paymentId: 12908190 }).getData().type; // تلفن همراه
+Bill({ billId: 7748317800105, paymentId: 1770160 }).getData().type; // unknown
+
+// Check Bill id validation
+Bill({ billId: 7748317800142, paymentId: 1770160 }).getData().isValidBillId; // true
+Bill({ billId: 2234322344613, paymentId: 1070189 }).getData().isValidBillId; // false
+
+// Check Bill's payment id validation
+Bill({ billId: 7748317800142, paymentId: 1770160 }).getData().isValidBillPayment; // true
+Bill({ billId: 9174639504124, paymentId: 12908197 }).getData().isValidBillPayment; // false
+
+// Check Bill id and payment id relations which is valid or not
+Bill({ billId: 7748317800142, paymentId: 1770160 }).getData().isValid; // true
+Bill({ billId: 2234322344613, paymentId: 1070189 }).getData().isValid; // false
+
+// Get barcode from billId and paymentId
+Bill({ billId: 7748317800142, paymentId: 1770160 }).getData().barcode; // 77483178001420001770160
+Bill({ billId: 9174639504124, paymentId: 12908197 }).getData().barcode; // 917463950412400012908197
+
+// Get bill bill id and payment id by bill's barcode
+Bill({ barcode: "22343223446130001070189" }).findByBarcode(); // { billId: 2234322344613 , paymentId: 1070189 }
+```
+
 ### Replace spaces by half-space 
 
 ```js
@@ -215,4 +254,4 @@ Thank you for your interest in contributing! Please feel free to put up a PR for
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/ali-master/persian-tools/blob/master/LICENSE) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/ali-master/persian-tools/blob/master/LICENSE) file for details.

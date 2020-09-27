@@ -10,8 +10,8 @@ export { default as WordsToNumber } from "./modules/WordsToNumber";
 export { default as addCommas } from "./modules/addCommas";
 export { default as removeCommas } from "./modules/removeCommas";
 // Iran National-ID
-export { default as verifyIranianNationalId } from "./modules/nationalId";
 export * from "./modules/getPlaceByIranNationalId";
+export { default as verifyIranianNationalId } from "./modules/nationalId";
 // Verify Card Number and Get Bank Name from Card-Number
 export { default as verifyCardNumber } from "./modules/verifyCardNumber";
 export { default as getBankNameFromCardNumber } from "./modules/getBankNameFromCardNumber";
@@ -19,6 +19,8 @@ export { default as getBankNameFromCardNumber } from "./modules/getBankNameFromC
 export { default as URLfix } from "./modules/URLfix";
 export { default as SortText } from "./modules/SortText";
 export { default as halfSpace } from "./modules/halfSpace";
+// Bill info
+export { default as BillInfo } from "./modules/Bill";
 
 export {
 	// Digits
