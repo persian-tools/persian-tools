@@ -204,6 +204,44 @@ URLfix(
 URLfix("https://en.wikipedia.org/wiki/Persian_alphabet"); // "https://en.wikipedia.org/wiki/Persian_alphabet",
 URLfix("Sample Text"); // "Sample Text"
 ```
+### Bill calculator
+
+```js
+import { BillInfo } from "persian-tools2";
+
+// Calculate bill amount by bill id and payment id
+
+// Convert to Iranian Rials
+BillInfo({ billId: 1117753200140, paymentId: 12070160, currency: "rial" }).getData().amount; // 120000
+// Return bill amount by Iranian Toman by default
+BillInfo({ billId: 1117753200140, paymentId: 12070160 }).getData().amount; // 12000
+
+// Find Bill's type by bill id and payment id
+BillInfo({ billId: 7748317800142, paymentId: 1770160 }).getData().type; // تلفن ثابت
+BillInfo({ billId: 9174639504124, paymentId: 12908197 }).getData().type; // برق
+BillInfo({ billId: 2050327604613, paymentId: 1070189 }).getData().type; // آب
+BillInfo({ billId: 9100074409151, paymentId: 12908190 }).getData().type; // تلفن همراه
+BillInfo({ billId: 7748317800105, paymentId: 1770160 }).getData().type; // unknown
+
+// Check Bill id validation
+BillInfo({ billId: 7748317800142, paymentId: 1770160 }).getData().isValidBillId; // true
+BillInfo({ billId: 2234322344613, paymentId: 1070189 }).getData().isValidBillId; // false
+
+// Check Bill's payment id validation
+BillInfo({ billId: 7748317800142, paymentId: 1770160 }).getData().isValidBillPayment; // true
+BillInfo({ billId: 9174639504124, paymentId: 12908197 }).getData().isValidBillPayment; // false
+
+// Check Bill id and payment id relations which is valid or not
+BillInfo({ billId: 7748317800142, paymentId: 1770160 }).getData().isValid; // true
+BillInfo({ billId: 2234322344613, paymentId: 1070189 }).getData().isValid; // false
+
+// Get barcode from billId and paymentId
+BillInfo({ billId: 7748317800142, paymentId: 1770160 }).getData().barcode; // 77483178001420001770160
+BillInfo({ billId: 9174639504124, paymentId: 12908197 }).getData().barcode; // 917463950412400012908197
+
+// Get bill bill id and payment id by bill's barcode
+BillInfo({ barcode: "22343223446130001070189" }).findByBarcode(); // { billId: 2234322344613 , paymentId: 1070189 }
+```
 
 ### Fix Persian zero-width non-joiner(Replace spaces by half-space) 
 
@@ -219,4 +257,4 @@ Thank you for your interest in contributing! Please feel free to put up a PR for
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/ali-master/persian-tools/blob/master/LICENSE) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/ali-master/persian-tools/blob/master/LICENSE) file for details.
