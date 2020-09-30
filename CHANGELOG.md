@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.2](https://github.com/ali-master/persian-tools/compare/v1.4.1...v1.4.2) (2020-09-30)
+
+
+### Bug Fixes
+
+* eslint errors in shebaCodes file ([eee8662](https://github.com/ali-master/persian-tools/commit/eee866229373ed3fcce8fb8eceb207c3aa365b58))
+
 ## [1.4.1](https://github.com/ali-master/persian-tools/compare/v1.3.0...v1.4.1) (2020-09-30)
 
 
