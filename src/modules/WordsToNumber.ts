@@ -3,7 +3,7 @@ import { replaceArray } from "../helpers";
 import { digitsEnToFa, digitsFaToEn } from "./digits";
 import removeOrdinalSuffix from "./removeOrdinalSuffix";
 
-// <Refrence path='https://fa.wikipedia.org/wiki/الگو:عدد_به_حروف/توضیحات' />
+// <Reference path='https://fa.wikipedia.org/wiki/الگو:عدد_به_حروف/توضیحات' />
 // https://fa.wikipedia.org/wiki/۱۰۰۰۰۰۰۰۰۰_(عدد)
 
 interface IUnit<T = number> {
@@ -109,8 +109,8 @@ class WordsToNumber {
 		replacedWords = removeOrdinalSuffix(replacedWords)!;
 
 		const result: number[] = [];
-		const splittedWords: string[] = replacedWords.split(" ");
-		splittedWords.forEach((word: string) =>
+		const slittedWords: string[] = replacedWords.split(" ");
+		slittedWords.forEach((word: string) =>
 			// @ts-ignore
 			word === "و" ? "" : !isNaN(+word) ? result.push(+word) : result.push(word),
 		);

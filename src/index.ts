@@ -21,6 +21,8 @@ export { default as SortText } from "./modules/SortText";
 export { default as halfSpace } from "./modules/halfSpace";
 // Bill info
 export { default as Bill } from "./modules/bill";
+// Sheba
+export { default as Sheba } from "./modules/sheba";
 
 export {
 	// Digits

@@ -82,10 +82,10 @@ class NumberToWords {
 	};
 
 	public convert(number: bigint | number | string, { ordinal = false }: IOption = {}): string | undefined {
-		if (!number) return;
+		if (typeof number === "undefined") return;
 
 		if (number === 0) {
-			return "۰";
+			return "صفر";
 		}
 
 		const base = 1000;
@@ -101,6 +101,7 @@ class NumberToWords {
 			result.push(this.toWords((number as number) % base));
 			number = Math.floor((number as number) / base);
 		}
+
 		if (result.length > 4) {
 			return "";
 		}
