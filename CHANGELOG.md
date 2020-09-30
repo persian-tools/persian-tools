@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/ali-master/persian-tools/compare/v1.3.0...v1.4.0) (2020-09-30)
+
+
+### Features
+
+* added sheba ([027c89d](https://github.com/ali-master/persian-tools/commit/027c89df1b7e233801a02346e623bbe5b9327ff0))
+
+
+### Bug Fixes
+
+* github actions lint error ([8b53e56](https://github.com/ali-master/persian-tools/commit/8b53e56cab73fe922e5bcddc0364dfd3c070774d))
+* github actions prettier error ([635939a](https://github.com/ali-master/persian-tools/commit/635939ab85d9b1facf791da5442cb5d00f52254b))
+
 ## [1.3.0](https://github.com/ali-master/persian-tools/compare/v1.2.4...v1.3.0) (2020-09-27)
 
 
