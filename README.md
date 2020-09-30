@@ -3,7 +3,7 @@
 		<img src="./images/logo.png" width="200" />
 	</p>
 	<h1 align="center">Persian tools</h1>
-	<p align="center">PersianTools.js is a standalone, library-agnostic JavaScript that enables some of the Persian features for using in the JavaScript.</p>
+	<p align="center">PersianTools.js is a standalone, library-agnostic JavaScript that enables some of the Persian features for use in the JavaScript.</p>
 
 ![CI/CD](https://github.com/ali-master/persian-tools/workflows/Continuous%20Integration/badge.svg)
 [![codecov](https://codecov.io/gh/ali-master/persian-tools/branch/master/graph/badge.svg)](https://codecov.io/gh/ali-master/persian-tools)
