@@ -133,7 +133,7 @@ export const shebaCodes: Array<ShebaResult> = [
 		persianName: "بانک پارسیان",
 		code: "054",
 		accountNumberAvailable: true,
-		process(str) {
+		process(str: string): ShebaProcess {
 			str = str.substring(14);
 			const formatted = "0" + str.substr(0, 2) + "-0" + str.substr(2, 7) + "-" + str.substr(9, 3);
 
@@ -163,7 +163,7 @@ export const shebaCodes: Array<ShebaResult> = [
 		persianName: "بانک پاسارگاد",
 		code: "057",
 		accountNumberAvailable: true,
-		process(str) {
+		process(str: string): ShebaProcess {
 			str = str.substring(7);
 			while (str[0] === "0") {
 				str = str.substring(1);
@@ -205,7 +205,7 @@ export const shebaCodes: Array<ShebaResult> = [
 		persianName: "بانک شهر",
 		code: "061",
 		accountNumberAvailable: true,
-		process(str) {
+		process(str: string): ShebaProcess {
 			str = str.substring(7);
 			while (str[0] === "0") {
 				str = str.substring(1);
