@@ -22,6 +22,7 @@
 -   Validate Iranian national number(code-e Melli).
 -   Find city and province name by national code(code-e Melli).
 -   Bill calculator
+-   Check Iranian Sheba(IBAN) validation and recognize bank information by sheba code.
 -   Validate Bank card number.
 -   Find Bank's name by Card number.
 -   Validate the correctness of the text of the Persian language and clear the Arabic letters in the Persian text.
@@ -249,6 +250,34 @@ new Bill({ billId: 9174639504124, paymentId: 12908197 }).getResult().barcode; //
 
 // Get bill bill id and payment id by bill's barcode
 new Bill({ barcode: "22343223446130001070189" }).findByBarcode(); // { billId: 2234322344613 , paymentId: 1070189 }
+```
+
+### Iranian Sheba(IBAN)
+
+- Check validation
+```javascript
+import { Sheba } from "persian-tools2";
+
+new Sheba("IR820540102680020817909002").validate(); // true
+new Sheba("IR01234567890123456789").validate() // false
+```
+
+- Recognize bank information 
+```javascript
+import { Sheba } from "persian-tools2";
+
+new Sheba("IR820540102680020817909002").recognize();
+/*
+ Result: {
+    "nickname": "parsian",
+    "name": "Parsian Bank",
+    "persianName": "بانک پارسیان",
+    "code": "054",
+    "accountNumberAvailable": true,
+    "accountNumber": "020817909002",
+    "formattedAccountNumber": "002-00817909-002"
+  }
+*/
 ```
 
 ### Fix Persian zero-width non-joiner(Replace spaces by half-space) 
