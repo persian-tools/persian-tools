@@ -1,0 +1,26 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "ali-master",
+      "name": "Ali Torki",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/9049092?v=4",
+      "profile": "https://www.linkedin.com/in/alitorki/",
+      "contributions": [
+        "infra",
+        "test",
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "persian-tools",
+  "projectOwner": "persian-tools",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
