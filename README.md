@@ -9,7 +9,7 @@
 [![codecov](https://codecov.io/gh/ali-master/persian-tools/branch/master/graph/badge.svg)](https://codecov.io/gh/ali-master/persian-tools)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ali-master/persian-tools/blob/master/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange.svg)](https://github.com/ali-master/persian-tools/compare) 
-[![CodeFactor](https://www.codefactor.io/repository/github/ali-master/persian-tools/badge)](https://www.codefactor.io/repository/github/ali-master/persian-tools)
+[![CodeFactor](https://www.codefactor.io/repository/github/persian-tools/persian-tools/badge)](https://www.codefactor.io/repository/github/persian-tools/persian-tools)
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 </div>
 <hr />
