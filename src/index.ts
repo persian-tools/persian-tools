@@ -1,5 +1,5 @@
 // Digits Converter
-import { digitsEnToFa, digitsFaToEn, digitsArToFa, digitsArToEn } from "./modules/digits";
+export * from "./modules/digits";
 // check and convert persian string
 export { default as isPersian } from "./modules/isPersian";
 export { default as toPersianChars } from "./modules/toPersianChars";
@@ -22,11 +22,3 @@ export { default as halfSpace } from "./modules/halfSpace";
 export { default as Bill } from "./modules/bill";
 // Sheba
 export { default as Sheba } from "./modules/sheba";
-
-export {
-	// Digits
-	digitsEnToFa,
-	digitsFaToEn,
-	digitsArToFa,
-	digitsArToEn,
-};
