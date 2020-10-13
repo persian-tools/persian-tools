@@ -1,4 +1,4 @@
-import WordsToNumber from "../src/modules/wordsToNumber";
+import WordsToNumber from "../../src/modules/wordsToNumber";
 
 it("WordsToNumber", () => {
 	expect(WordsToNumber.convert("منفی سه هزارمین", { digits: "fa", addCommas: true })).toEqual("-۳,۰۰۰");
