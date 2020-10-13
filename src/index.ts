@@ -18,7 +18,7 @@ export { default as getBankNameFromCardNumber } from "./modules/getBankNameFromC
 export { default as URLfix } from "./modules/URLfix";
 export { default as SortText } from "./modules/sortText";
 export { default as halfSpace } from "./modules/halfSpace";
-// Index info
+// Bill info
 export { default as Bill } from "./modules/bill";
 // Sheba
 export { default as Sheba } from "./modules/sheba";
