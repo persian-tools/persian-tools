@@ -1,8 +1,9 @@
 /**
  * Remove Ordinal suffix to numbers
+ *
  * @method removeOrdinalSuffix
- * @param   {number}  string Number, eg: "سه هزارم"
- * @return  {string}  		 Return a string of ordinal number
+ * @param eg: "سه هزارم"
+ * @return A string of ordinated number
  */
 const removeOrdinalSuffix = (number?: string): string | undefined => {
 	if (typeof number === "undefined") return;

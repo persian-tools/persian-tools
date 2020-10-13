@@ -1,10 +1,10 @@
 /**
- * Replace halfSpace in string
- * @method halfSpace Zero-width non-joiner
- * @param   {string}
- * @return  {string}
+ * Replace halfSpace in string(Zero-width non-joiner)
+ *
+ * @method halfSpace
+ * @param persian string
+ * @return clean entered persian string
  */
-
 const halfSpace = (str: string): string | undefined => {
 	if (!str) return;
 

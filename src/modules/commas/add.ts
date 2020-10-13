@@ -1,18 +1,19 @@
-import isPersian from "./isPersian";
-import { digitsFaToEn } from "./digits";
+import index from "../isPersian";
+import { digitsFaToEn } from "../digits";
 
 /**
  * Add Commas to numbers
+ *
  * @method addCommas
- * @param   {number}  number Number, eg: 300000
- * @return  {string}  		 Return a string of commas separated, eg: 30,000
+ * @param  eg: 300000
+ * @return A string of separated numbers by commas, eg: 30,000
  */
 const addCommas = (number?: number | string): string | undefined => {
 	if (typeof number === "undefined") return;
 
 	const convertedToString = number.toString();
 
-	const tokenizedToEnglish = isPersian(convertedToString)
+	const tokenizedToEnglish = index(convertedToString)
 		? (digitsFaToEn(convertedToString) as string)
 		: convertedToString;
 

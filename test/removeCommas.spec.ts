@@ -1,4 +1,4 @@
-import removeCommas from "../src/modules/removeCommas";
+import { removeCommas } from "../src";
 
 it("Remove commas", () => {
 	expect(removeCommas("30,000,000")).toEqual(30000000);

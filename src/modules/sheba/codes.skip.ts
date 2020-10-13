@@ -14,7 +14,7 @@ export interface ShebaResult {
 	process?: (str: string) => ShebaProcess;
 }
 
-export const shebaCodes: Array<ShebaResult> = [
+export const codesSkip: Array<ShebaResult> = [
 	{
 		nickname: "central-bank",
 		name: "Central Bank of Iran",
@@ -322,8 +322,8 @@ export interface ShebaHashTable {
 }
 
 const shebaHashTable: ShebaHashTable = {};
-for (let i = 0; i < shebaCodes.length; i++) {
-	const bank = shebaCodes[i];
+for (let i = 0; i < codesSkip.length; i++) {
+	const bank = codesSkip[i];
 	shebaHashTable[bank.code] = bank;
 }
 

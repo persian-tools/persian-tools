@@ -1,4 +1,4 @@
-import addCommas from "../src/modules/addCommas";
+import { addCommas } from "../src/";
 
 it("Add and remove commas", () => {
 	expect(addCommas(30000000)).toEqual("30,000,000");

@@ -1,7 +1,7 @@
-import SortText from "../src/modules/SortText";
+import sortText from "../src/modules/sortText";
 
-it("SortText", () => {
-	expect(SortText("سلام علی ترکی")).toEqual(["ترکی", "سلام", "علی"]);
-	expect(SortText("سلام علی ترکی سلام")).toEqual(["ترکی", "سلام", "سلام", "علی"]);
-	expect(SortText("")).toBeFalsy();
+it("Sort Persian text", () => {
+	expect(sortText("سلام علی ترکی")).toEqual(["ترکی", "سلام", "علی"]);
+	expect(sortText("سلام علی ترکی سلام")).toEqual(["ترکی", "سلام", "سلام", "علی"]);
+	expect(sortText("")).toBeFalsy();
 });

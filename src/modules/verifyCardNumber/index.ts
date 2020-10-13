@@ -1,3 +1,11 @@
+/**
+ * Verify Iranian Bank's card number which is valid or not
+ *
+ * @public
+ * @method verifyCardNumber
+ * @param digits
+ * @return boolean
+ */
 function verifyCardNumber(digits: number): boolean | undefined {
 	if (!digits) return;
 

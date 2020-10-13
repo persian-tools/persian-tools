@@ -1,11 +1,15 @@
 /* eslint-disable */
 
-/** toPersianChars
+/**
+ * toPersianChars
  *
- *  Description: Replaces all instances of ي and ك withی and ک,
- *  respectively. It should not make any ch anges to Arabic text
- *  surrounded by appropriate templates.
+ * Description: Replaces all instances of ي and ك withی and ک,
+ * respectively. It should not make any ch anges to Arabic text
+ * surrounded by appropriate templates.
  *
+ * @method toPersianChars
+ * @param arabic characters
+ * @return cleaned characters of arabic characters
  */
 function toPersianChars(str: string): string | undefined {
 	if (!str) return;

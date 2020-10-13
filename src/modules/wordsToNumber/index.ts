@@ -1,7 +1,7 @@
-import addCommasFn from "./addCommas";
-import { replaceArray } from "../helpers";
-import { digitsEnToFa, digitsFaToEn } from "./digits";
-import removeOrdinalSuffix from "./removeOrdinalSuffix";
+import { addCommas } from "../commas";
+import { replaceArray } from "../../helpers";
+import { digitsEnToFa, digitsFaToEn } from "../digits";
+import removeOrdinalSuffix from "../removeOrdinalSuffix";
 
 // <Reference path='https://fa.wikipedia.org/wiki/الگو:عدد_به_حروف/توضیحات' />
 // https://fa.wikipedia.org/wiki/۱۰۰۰۰۰۰۰۰۰_(عدد)
@@ -90,14 +90,16 @@ class WordsToNumber {
 	 * @param  {String} [digits='en'] [convert number digits to en or fa]
 	 * @return {Number}               [Result - like: 350000]
 	 */
-	public convert(words: string, { digits = "en", addCommas = false }: IOption = {}): number | string | undefined {
+	public convert(words: string, options: IOption = {}): number | string | undefined {
 		if (!words) return;
 
+		const digits = options.digits ?? "en";
+		const shouldAddCommas = options.addCommas ?? false;
 		// @ts-ignore
 		let numbersConverted = this.compute(this.tokenize(words));
 
 		// @ts-ignore
-		numbersConverted = addCommas ? (addCommasFn(numbersConverted) as string) : (numbersConverted as number);
+		numbersConverted = shouldAddCommas ? (addCommas(numbersConverted) as string) : (numbersConverted as number);
 		// @ts-ignore
 		numbersConverted = digits === "fa" ? (digitsEnToFa(numbersConverted as number) as string) : numbersConverted;
 

@@ -1,4 +1,4 @@
-import banksCode from "../dummy/banksCode";
+import banksCode from "../../dummy/banksCode";
 
 export interface IBank {
 	code: string;
@@ -8,8 +8,9 @@ export interface IBank {
 /**
  * Find Bank's name by card number
  *
- * @param {number | string} digits - Card number
- * @return {string | null | undefined}
+ * @method getBankNameFromCardNumber
+ * @param digits - Card number
+ * @return string | null | undefined
  */
 function getBankNameFromCardNumber(digits?: number | string): string | null | undefined {
 	if (!digits) return;

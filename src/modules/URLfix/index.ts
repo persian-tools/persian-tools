@@ -2,10 +2,10 @@
  * Used for fix Persian characters in URL
  *
  * @method URLfix
- * @param {String} value
- * @return {String} Fixed String
+ * @param URL string
+ * @return A string of fixed URL
  */
-export default (value?: string): string | undefined => {
+const URLfix = (value?: string): string | undefined => {
 	if (!value) {
 		return;
 	}
@@ -27,3 +27,5 @@ export default (value?: string): string | undefined => {
 
 	return value;
 };
+
+export default URLfix;

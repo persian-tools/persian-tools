@@ -1,8 +1,8 @@
 /**
  * Add Ordinal suffix to numbers
  * @method addOrdinalSuffix
- * @param   {number}  string Number, eg: "300000"
- * @return  {string}  		 Return a string of ordinal number
+ * @param number - Number, eg: "300000"
+ * @return A string of ordinated number
  */
 const addOrdinalSuffix = (number?: string): string | undefined => {
 	if (typeof number === "undefined") return;

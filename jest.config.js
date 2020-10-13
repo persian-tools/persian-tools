@@ -5,5 +5,12 @@ module.exports = {
 	moduleFileExtensions: ["js", "ts", "json"],
 	testPathIgnorePatterns: ["/node_modules/"],
 	setupFilesAfterEnv: ["<rootDir>/src/setupTests.js"],
-	collectCoverageFrom: ["!**/*.d.ts", "!**/node_modules/**", "src/**/*.ts", "!src/dummy/*.ts", "!src/setupTests.js"],
+	collectCoverageFrom: [
+		"!**/*.d.ts",
+		"!**/node_modules/**",
+		"src/**/*.ts",
+		"!src/dummy/*.ts",
+		"!src/modules/**/*.skip.ts",
+		"!src/setupTests.js",
+	],
 };

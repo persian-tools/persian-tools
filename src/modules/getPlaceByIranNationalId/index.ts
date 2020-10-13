@@ -1,5 +1,5 @@
-import NationalIdJSON from "../dummy/nationalId";
-import ProvincesJSON from "../dummy/provincesCodes";
+import NationalIdJSON from "../../dummy/nationalId";
+import ProvincesJSON from "../../dummy/provincesCodes";
 
 export interface IProvince {
 	code: number | string;
@@ -21,8 +21,8 @@ export interface IPlaceByNationalId {
  *
  * @public
  * @method getPlaceByIranNationalId
- * @param  {string | undefined} nationalId - string of national id - like this: 1111111111
- * @return {object} If nationalId is valid, function returns an object of details, but if nationalId is invalid, return an error message
+ * @param nationalId - string of national id - like this: 1111111111
+ * @return If nationalId is valid, function returns an object of details, but if nationalId is invalid, return an error message
  */
 function getPlaceByIranNationalId(nationalId?: string): IPlaceByNationalId | null | undefined {
 	if (!nationalId) return;

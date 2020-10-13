@@ -1,4 +1,4 @@
-import NumberToWords from "../src/modules/NumberToWords";
+import NumberToWords from "../src/modules/numberToWords";
 
 it("NumberToWords", () => {
 	expect(NumberToWords.convert(500443)).toEqual("پانصد هزار و چهار صد و چهل و سه");

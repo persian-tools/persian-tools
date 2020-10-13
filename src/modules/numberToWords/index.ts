@@ -1,8 +1,8 @@
-import { trim } from "../helpers";
-import removeCommas from "./removeCommas";
-import addOrdinalSuffix from "./addOrdinalSuffix";
+import { trim } from "../../helpers";
+import { removeCommas } from "../commas";
+import addOrdinalSuffix from "../addOrdinalSuffix/addOrdinalSuffix";
 
-// <Refrence path="https://fa.wikipedia.org/wiki/۱۰۰۰۰۰۰۰۰۰_(عدد)" />
+// <Reference path="https://fa.wikipedia.org/wiki/۱۰۰۰۰۰۰۰۰۰_(عدد)" />
 
 interface IOption {
 	ordinal?: boolean;

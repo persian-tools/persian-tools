@@ -1,7 +1,8 @@
 /**
- * Remove all commas in String
- * @param  {number | string} number
- * @return {string | undefined}
+ * Remove all commas in string
+ *
+ * @param string which separated by commas
+ * @return A number which includes any commas
  */
 const removeCommas = (number?: string | number): number | undefined => {
 	if (!number) return;

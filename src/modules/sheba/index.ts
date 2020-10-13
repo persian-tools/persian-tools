@@ -1,4 +1,4 @@
-import { shebaHashTable, ShebaResult } from "../dummy/shebaCodes";
+import { shebaHashTable, ShebaResult } from "./codes.skip";
 
 class Sheba {
 	// Local variables
@@ -77,4 +77,4 @@ class Sheba {
 }
 
 export default Sheba;
-export * from "../dummy/shebaCodes";
+export * from "./codes.skip";
