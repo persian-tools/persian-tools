@@ -17,8 +17,8 @@ publish-docs: build-docs
 	cp -r ./docs /tmp/persian-tools-docs
 	cd /tmp/persian-tools-docs && \
 	git clone --single-branch --branch gh-pages git@github.com:persian-tools/persian-tools.git && \
-	cd /tmp/persian-tools-docs && \
-	ls -la
+	cp -r /tmp/persian-tools-docs/docs/* /tmp/persian-tools-docs/persian-tools/ && \
+	cd /tmp/persian-tools-docs/persian-tools && \
 	git add --all && \
 	git commit -m "meta: Update docs" && \
 	git push origin gh-pages

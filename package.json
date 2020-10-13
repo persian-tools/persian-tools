@@ -13,7 +13,7 @@
 		"build": "rollup -c --environment INCLUDE_DEPS,BUILD:production",
 		"prerelease": "npm run test",
 		"release": "npm run build",
-		"postrelease": "standard-version",
+		"postrelease": "standard-version && npm run generate:docs",
 		"prettier": "prettier --write 'src/**/*.{ts,json}' --config .prettierrc.js",
 		"prettier:ci": "prettier --list-different 'src/**/*.{ts,json}' --config .prettierrc.js",
 		"generate:docs": "rimraf ./docs && typedoc --options ./typedoc.js"
