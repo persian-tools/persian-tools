@@ -1,5 +1,5 @@
-import NationalIdJSON from "../../dummy/nationalId";
-import ProvincesJSON from "../../dummy/provincesCodes";
+import NationalIdJSON from "./nationalId.skip";
+import ProvincesJSON from "./provincesCodes.skip";
 
 export interface IProvince {
 	code: number | string;
