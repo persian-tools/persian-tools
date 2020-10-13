@@ -14,7 +14,6 @@ it("Get the city and province name by national code", () => {
 	expect(getPlaceByIranNationalId("5049478618")?.city).toEqual("پارس آباد");
 	expect(getPlaceByIranNationalId("2110990147")?.city).toEqual("گرگان");
 
-
 	expect(getPlaceByIranNationalId("0084545943")?.city).toEqual("تهران مرکزی");
 
 	expect(getPlaceByIranNationalId()).toBeUndefined();

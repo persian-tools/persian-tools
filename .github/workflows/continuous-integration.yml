@@ -1,58 +1,57 @@
 name: Continuous Integration
 
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    push:
+        branches: [master]
+    pull_request:
+        branches: [master]
 
 jobs:
-  build:
+    build:
+        runs-on: ubuntu-latest
 
-    runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: [12.x]
 
-    strategy:
-      matrix:
-        node-version: [12.x]
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v2
 
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+            - name: Set up Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v1
+              with:
+                  node-version: ${{ matrix.node-version }}
 
-    - name: Set up Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
+            - name: Cache dependencies
+              uses: actions/cache@v2
+              with:
+                  path: |
+                      **/node_modules
+                  key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
-    - name: Cache dependencies
-      uses: actions/cache@v2
-      with:
-        path: |
-          **/node_modules
-        key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+            - name: Install dependencies
+              run: npm install
 
-    - name: Install dependencies
-      run: npm install
+            - name: Run the lints
+              run: npm run lint
 
-    - name: Run the lints
-      run: npm run lint
+            - name: Run Prettier
+              run: npm run prettier:ci
 
-    - name: Run Prettier
-      run: npm run prettier:ci
+            - name: Run the tests
+              run: npm run test
 
-    - name: Run the tests
-      run: npm run test
+            - name: Upload coverage to Codecov
+              uses: codecov/codecov-action@v1
 
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v1
+            - name: Build
+              run: npm run build
 
-    - name: Build
-      run: npm run build
-
-    - name: Archive production
-      uses: actions/upload-artifact@v2
-      with:
-        name: dist
-        path: |
-          dist
-          !dist/**/*.md
+            - name: Archive production
+              uses: actions/upload-artifact@v2
+              with:
+                  name: dist
+                  path: |
+                      dist
+                      !dist/**/*.md

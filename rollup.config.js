@@ -50,7 +50,7 @@ module.exports = {
 		terser(),
 	],
 	external: [...Object.keys(pkg.dependencies || {})],
-	onwarn: warning => {
+	onwarn: (warning) => {
 		const { code } = warning;
 		if (code === "CIRCULAR_DEPENDENCY" || code === "CIRCULAR" || code === "THIS_IS_UNDEFINED") {
 			return;
