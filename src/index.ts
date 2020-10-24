@@ -22,3 +22,5 @@ export { default as halfSpace } from "./modules/halfSpace";
 export { default as Bill } from "./modules/bill";
 // Sheba
 export { default as Sheba } from "./modules/sheba";
+// Phone number utilities
+export * from "./modules/phoneNumber";
