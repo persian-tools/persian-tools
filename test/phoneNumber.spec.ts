@@ -1,5 +1,5 @@
-import {phoneNumberDetail, phoneNumberValidator} from "../src";
-import {getPhonePrefix} from "../src/modules/phoneNumber/utils";
+import { phoneNumberDetail, phoneNumberValidator } from "../src";
+import { getPhonePrefix } from "../src/modules/phoneNumber/utils";
 
 describe("Iranian Phone Number Utilities", () => {
 	describe("Find details", () => {
