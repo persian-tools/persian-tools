@@ -11,8 +11,9 @@ export * from "./modules/commas";
 // Iran National-ID
 export * from "./modules/getPlaceByIranNationalId";
 export { default as verifyIranianNationalId } from "./modules/nationalId";
-// Verify Card Number and Get Bank Name from Card-Number
+// Card-Number utilities
 export { default as verifyCardNumber } from "./modules/verifyCardNumber";
+export { default as extractCardNumber } from "./modules/extractCardNumbers";
 export { default as getBankNameFromCardNumber } from "./modules/getBankNameFromCardNumber";
 // Fix and sort persian string
 export { default as URLfix } from "./modules/URLfix";
