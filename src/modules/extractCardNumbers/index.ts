@@ -55,18 +55,22 @@ function extractCardNumber(
 	 * 6. ۵۰۲۲_۲۹۱۰_۷۰۸۷_۳۴۶۶
 	 * 7. ۵۰۲۲*۲۹۱۰*۷۰۸۷*۳۴۶۶
 	 *
+	 * @constant
+	 * @type regex
+	 */
+	const cardNumberRegex = /([\u06F0-\u06F90-9-_.\*]{16,20})/gm;
+	/**
 	 * Acceptable keywords between numbers are:
 	 * 1. Start -> *
 	 * 2. Underscore -> _
 	 * 3. Dash -> -
 	 * 4. Dot -> .
+	 *
 	 * @example:
 	 * 5022*2910_7087-3466
-	 *
 	 * @constant
-	 * @type regex
-	 */
-	const cardNumberRegex = /([\u06F0-\u06F90-9-_.\*]{16,20})/gm;
+	*/
+	const acceptableKeywords = /[-_.\*]/g;
 	/**
 	 * Returns a Boolean value that indicates whether or not a pattern exists in a searched string.
 	 *
@@ -82,8 +86,8 @@ function extractCardNumber(
 		const matches = str.match(cardNumberRegex);
 
 		let serialize = matches?.map<ExtractCardNumber>((matchedCardNumber, index) => {
-			let cardNumber = /[-_]/g.test(matchedCardNumber)
-				? matchedCardNumber.replace(/[-_]/g, "")
+			let cardNumber = acceptableKeywords.test(matchedCardNumber)
+				? matchedCardNumber.replace(acceptableKeywords, "")
 				: matchedCardNumber;
 			/**
 			 * If Card-Number includes Persian digits, we should convert all Persian digits to English.
@@ -108,7 +112,7 @@ function extractCardNumber(
 				const bankName = getBankNameFromCardNumber(cardNumber);
 
 				if (bankName || bankName === null) {
-					result.bankName = bankName as string;
+					result.bankName = bankName as string | null;
 				}
 			}
 
