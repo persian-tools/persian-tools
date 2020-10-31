@@ -51,11 +51,22 @@ function extractCardNumber(
 	 * 2. 5022291070873466
 	 * 3. ۵۰۲۲۲۹۱۰۸۱۸۷۳۴۶۶
 	 * 4. ۵۰۲۲-۲۹۱۰-۷۰۸۷-۳۴۶۶
+	 * 5. ۵۰۲۲.۲۹۱۰.۷۰۸۷.۳۴۶۶
+	 * 6. ۵۰۲۲_۲۹۱۰_۷۰۸۷_۳۴۶۶
+	 * 7. ۵۰۲۲*۲۹۱۰*۷۰۸۷*۳۴۶۶
+	 *
+	 * Acceptable keywords between numbers are:
+	 * 1. Start -> *
+	 * 2. Underscore -> _
+	 * 3. Dash -> -
+	 * 4. Dot -> .
+	 * @example:
+	 * 5022*2910_7087-3466
 	 *
 	 * @constant
 	 * @type regex
 	 */
-	const cardNumberRegex = /([\u06F0-\u06F90-9-]{16,20})/gm;
+	const cardNumberRegex = /([\u06F0-\u06F90-9-_.\*]{16,20})/gm;
 	/**
 	 * Returns a Boolean value that indicates whether or not a pattern exists in a searched string.
 	 *
