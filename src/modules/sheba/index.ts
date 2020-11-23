@@ -4,7 +4,7 @@ class Sheba {
 	// Local variables
 	private readonly shebaCode: string;
 	private readonly pattern = /IR[0-9]{24}/;
-	private readonly pattern_code = /IR[0-9]{2}([0-9]{3})[0-9]{19}/;
+	public readonly pattern_code = /IR[0-9]{2}([0-9]{3})[0-9]{19}/;
 
 	constructor(shebaCode: string) {
 		this.shebaCode = shebaCode;
