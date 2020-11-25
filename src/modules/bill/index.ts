@@ -81,7 +81,7 @@ class Bill {
 
 	public getAmount(): number {
 		const currency = this.currency == "rial" ? 1000 : 100;
-		const amount = parseInt(String(this.billPayment).slice(0, -5)) * currency;
+		const amount = parseInt(`${this.billPayment}`.slice(0, -5)) * currency;
 
 		return amount;
 	}
@@ -163,19 +163,14 @@ class Bill {
 		return {
 			// bill amount
 			amount: this.getAmount(),
-
 			// bill type
 			type: this.getBillType(),
-
 			// bill barcode
 			barcode: this.getBarcode(),
-
 			// bill validation
 			isValid: this.verificationBill(),
-
 			// is valid bill id that should be true if bill id and true
 			isValidBillId: this.verificationBillId(),
-
 			// id valid bill payment code
 			isValidBillPayment: this.verificationBillPayment(),
 		};

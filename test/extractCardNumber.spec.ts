@@ -16,18 +16,24 @@ describe("ExtractCardNumber", () => {
 			{ pure: "5022291070873466", base: "۵۰۲۲-۲۹۱۰-۷۰۸۷-۳۴۶۶", index: 4 },
 		];
 
-		expect(extractCardNumber(mockString)).toEqual(result);
-		expect(extractCardNumber(mockString)).toBeDefined();
-		expect(extractCardNumber(mockString)).toHaveLength(4);
+		const list = extractCardNumber(mockString, {
+			checkValidation: false,
+		});
+		expect(list).toEqual(result);
+		expect(list).toBeDefined();
+		expect(list).toHaveLength(4);
 	});
 
 	it("Should find and format the Card-Number into Text that includes Persian & English digits", () => {
 		const mockString = `شماره کارتم رو برات نوشتم: ۵۰۲۲-2910-7۰۸۷-۳۴۶۶`;
 		const result = [{ pure: "5022291070873466", base: "۵۰۲۲-2910-7۰۸۷-۳۴۶۶", index: 1 }];
 
-		expect(extractCardNumber(mockString)).toEqual(result);
-		expect(extractCardNumber(mockString)).toBeDefined();
-		expect(extractCardNumber(mockString)).toHaveLength(1);
+		const list = extractCardNumber(mockString, {
+			checkValidation: false,
+		});
+		expect(list).toEqual(result);
+		expect(list).toBeDefined();
+		expect(list).toHaveLength(1);
 	});
 
 	it("Should validate extract card-numbers", () => {
@@ -37,9 +43,9 @@ describe("ExtractCardNumber", () => {
 			{ pure: "5022291081873466", base: "۵۰۲۲۲۹۱۰۸۱۸۷۳۴۶۶", index: 3, isValid: false },
 			{ pure: "5022291070873466", base: "۵۰۲۲-۲۹۱۰-۷۰۸۷-۳۴۶۶", index: 4, isValid: true },
 		];
-		expect(extractCardNumber(mockString)).toEqual(result);
+		expect(extractCardNumber(mockString, { checkValidation: true, filterValidCardNumbers: false })).toEqual(result);
 		expect(extractCardNumber(mockString)).toBeDefined();
-		expect(extractCardNumber(mockString)).toHaveLength(4);
+		expect(extractCardNumber(mockString, { checkValidation: true, filterValidCardNumbers: false })).toHaveLength(4);
 	});
 
 	it("Should return only valid card-numbers", () => {
