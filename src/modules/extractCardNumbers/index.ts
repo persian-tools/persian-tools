@@ -33,8 +33,9 @@ export interface ExtractCardNumberOptions {
  * Extract Iranian Bank's numbers into a string
  *
  * @public
- * @param string
  * @return ExtractCardNumber[]
+ * @param str
+ * @param options
  */
 function extractCardNumber(
 	str: string,
@@ -56,9 +57,8 @@ function extractCardNumber(
 	 * 7. ۵۰۲۲*۲۹۱۰*۷۰۸۷*۳۴۶۶
 	 *
 	 * @constant
-	 * @type regex
 	 */
-	const cardNumberRegex = /([\u06F0-\u06F90-9-_.\*]{16,20})/gm;
+	const cardNumberRegex = /([\u06F0-\u06F90-9-_.*]{16,20})/gm;
 	/**
 	 * Acceptable keywords between numbers are:
 	 * 1. Start -> *
@@ -69,8 +69,8 @@ function extractCardNumber(
 	 * @example:
 	 * 5022*2910_7087-3466
 	 * @constant
-	*/
-	const acceptableKeywords = /[-_.\*]/g;
+	 */
+	const acceptableKeywords = /[-_.*]/g;
 	/**
 	 * Returns a Boolean value that indicates whether or not a pattern exists in a searched string.
 	 *
@@ -103,9 +103,7 @@ function extractCardNumber(
 			};
 
 			if (options.checkValidation) {
-				const isValid = verifyCardNumber(Number(cardNumber));
-
-				result.isValid = isValid;
+				result.isValid = verifyCardNumber(Number(cardNumber));
 			}
 
 			if (options.detectBankNumber) {
