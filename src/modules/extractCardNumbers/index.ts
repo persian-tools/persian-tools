@@ -69,7 +69,7 @@ function extractCardNumber(
 	 * @example:
 	 * 5022*2910_7087-3466
 	 * @constant
-	*/
+	 */
 	const acceptableKeywords = /[-_.\*]/g;
 	/**
 	 * Returns a Boolean value that indicates whether or not a pattern exists in a searched string.
