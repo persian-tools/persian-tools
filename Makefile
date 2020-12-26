@@ -20,6 +20,6 @@ publish-docs: build-docs
 	cp -r /tmp/persian-tools-docs/docs/* /tmp/persian-tools-docs/persian-tools/ && \
 	cd /tmp/persian-tools-docs/persian-tools && \
 	git add --all && \
-	git commit -m "meta: Update docs" && \
+	git commit -m "doc: Update docs" && \
 	git push origin gh-pages
 .PHONY: publish-docs
