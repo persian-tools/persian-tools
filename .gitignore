@@ -8,8 +8,6 @@ npm-debug.log*
 node_modules
 jspm_packages
 
-package-lock.json
-
 dist
 
 coverage

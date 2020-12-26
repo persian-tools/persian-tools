@@ -1,9 +1,11 @@
 import fs from "fs";
 import path from "path";
 import json from "rollup-plugin-json";
+import replace from "rollup-plugin-replace";
 import node from "rollup-plugin-node-resolve";
 import progress from "rollup-plugin-progress";
 import { terser } from "rollup-plugin-terser";
+import sourceMaps from "rollup-plugin-sourcemaps";
 import typescript from "rollup-plugin-typescript2";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
@@ -31,23 +33,42 @@ module.exports = {
 		{
 			file: pkg.module,
 			format: "es",
+			sourcemap: true,
 		},
 		{
 			file: pkg.browser,
 			format: "umd",
 			name: "PersianTools",
+			sourcemap: true,
 		},
 	],
+	watch: {
+		include: "src/**",
+	},
 	plugins: [
 		typescript({
-			typescript: require("typescript"),
+			useTsconfigDeclarationDir: true,
 		}),
 		json(),
-		resolve({ browser: true, preferBuiltins: true }),
+		resolve({ jsnext: true, main: true, browser: true, preferBuiltins: false }),
 		commonjs(),
 		node(),
 		progress(),
-		terser(),
+		terser({
+			compress: {
+				unused: false,
+				collapse_vars: false,
+			},
+			output: {
+				comments: false,
+			},
+		}),
+		// Resolve source maps to the original source
+		sourceMaps(),
+		replace({
+			exclude: "node_modules/**",
+			ENV: JSON.stringify(process.env.NODE_ENV || "development"),
+		}),
 	],
 	external: [...Object.keys(pkg.dependencies || {})],
 	onwarn: (warning) => {
