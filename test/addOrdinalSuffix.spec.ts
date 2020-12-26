@@ -1,4 +1,4 @@
-import addOrdinalSuffix from "../src/modules/addOrdinalSuffix/addOrdinalSuffix";
+import { addOrdinalSuffix } from "../src";
 
 describe("Ordinal suffix", () => {
 	it("Add", () => {

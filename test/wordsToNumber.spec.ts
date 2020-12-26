@@ -1,4 +1,4 @@
-import WordsToNumber from "../src/modules/wordsToNumber";
+import { WordsToNumber } from "../src";
 
 describe("WordsToNumber", () => {
 	it("Should works as well", () => {
@@ -10,6 +10,8 @@ describe("WordsToNumber", () => {
 	});
 
 	it("Ordinal words", () => {
+		expect(WordsToNumber.convert("منفی ۳ هزار", { digits: "fa", addCommas: true })).toEqual("-۳,۰۰۰");
+		expect(WordsToNumber.convert("منفی 3 هزار و 200", { digits: "fa", addCommas: true })).toEqual("-۳,۲۰۰");
 		expect(WordsToNumber.convert("منفی سه هزارمین", { digits: "fa", addCommas: true })).toEqual("-۳,۰۰۰");
 		expect(WordsToNumber.convert("منفی سه هزارمین", { digits: "fa" })).toEqual("-۳۰۰۰");
 		expect(WordsToNumber.convert("منفی سه هزارمین")).toEqual(-3000);
@@ -17,7 +19,7 @@ describe("WordsToNumber", () => {
 		expect(WordsToNumber.convert("منفی سه هزارمین")).not.toEqual("-3000");
 		expect(String(WordsToNumber.convert("منفی سه هزارمین"))).toHaveLength(5);
 		expect(WordsToNumber.convert("منفی سی اُم")).toEqual(-30);
-		expect(WordsToNumber.convert("سی و سوم")).toEqual(33);
+		expect(WordsToNumber.convert("سی و سوم", { fuzzy: true })).toEqual(33);
 	});
 
 	it("Should return undefined", () => {

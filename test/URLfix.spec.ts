@@ -1,4 +1,4 @@
-import URLfix from "../src/modules/URLfix";
+import { URLfix } from "../src";
 
 it("URLfix", () => {
 	expect(

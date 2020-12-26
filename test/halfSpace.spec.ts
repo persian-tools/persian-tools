@@ -1,4 +1,4 @@
-import halfSpace from "../src/modules/halfSpace";
+import { halfSpace } from "../src";
 
 it("halfSpace", () => {
 	expect("این یک متن فارسی می‌باشد؟").toEqual(halfSpace("این یک متن فارسی می باشد؟"));

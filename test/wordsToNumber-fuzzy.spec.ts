@@ -10,6 +10,8 @@ describe("WordsToNumber - Fuzzy humanizer", () => {
 		expect(fuzzy("دویشت ر بیشت هزار")).toEqual("دویست و بیست هزار");
 		expect(fuzzy("یگصد و بنجاه هزار")).toEqual("یکصد و پنجاه هزار");
 		expect(fuzzy("ضد و بنچاه و دو")).toEqual("صد و پنجاه و دو");
+		expect(fuzzy("منقی ضد")).toEqual("منفی صد");
+		expect(fuzzy("مثبت دبیشت")).toEqual("مثبت بیست");
 	});
 
 	it("Should works with single words", () => {
@@ -31,5 +33,6 @@ describe("WordsToNumber - Fuzzy humanizer", () => {
 		expect(fuzzy("یک")).toEqual("یک");
 		expect(fuzzy("یکصد")).toEqual("یکصد");
 		expect(fuzzy("صد و پنجاه")).toEqual("صد و پنجاه");
+		expect(fuzzy("منفی سه هزار")).toEqual("منفی سه هزار");
 	});
 });

@@ -1,4 +1,4 @@
-import getBankNameFromCardNumber from "../src/modules/getBankNameFromCardNumber";
+import { getBankNameFromCardNumber } from "../src";
 
 it("Get the name of the bank by bank account number", () => {
 	expect(getBankNameFromCardNumber(6037701689095443)).toEqual("بانک کشاورزی");

@@ -1,4 +1,4 @@
-import { Bill } from "../src/";
+import { Bill } from "../src";
 
 describe("Bill Calculator", () => {
 	it("Calculate bill amount", () => {

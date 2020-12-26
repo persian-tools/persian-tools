@@ -70,7 +70,7 @@ export const MAGNITUDE_KEYS = Object.keys(MAGNITUDE);
 export const NUMBER_WORDS = [...UNIT_KEYS, ...TEN_KEYS, ...MAGNITUDE_KEYS];
 
 export const JOINERS = ["و", " و "];
-export const DECIMALS = [",", ".", "point", "dot"];
+export const PREFIXES = ["منفی", "مثبت"];
 export const TOKEN_TYPE = {
 	UNIT: 0,
 	TEN: 1,
@@ -79,4 +79,4 @@ export const TOKEN_TYPE = {
 	HUNDRED: 4,
 };
 
-export const ALL_WORDS = [...NUMBER_WORDS, ...JOINERS];
+export const ALL_WORDS = [...NUMBER_WORDS, ...JOINERS, ...PREFIXES];

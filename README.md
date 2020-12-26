@@ -20,8 +20,8 @@
 -   [Convert Persian words to number and vice versa](#convert-persian-words-to-the-number-and-vice-versa).
 -   [Add and remove commas to numbers](#add-and-remove-commas).
 -   [Convert Persian numbers to Arabic or English numbers and vice versa](#convert-persian-numbers-to-arabic-or-english-numbers-and-vice-versa).
--   [Validate Iranian national number(code-e Melli)](#validate-iranian-national-numbercode-e-melli).
--   [Find city and province name by national code(code-e Melli)](#find-city-and-province-name-by-national-codecode-e-melli).
+-   [Validate Iranian national number(code-e Melli)](#validate-iranian-national-number-id-e-melli).
+-   [Find city and province name by national code(code-e Melli)](#find-city-and-province-name-by-national-code-e-melli).
 -   [Bill calculator](#bill-calculator).
 -   [Check Iranian Sheba(IBAN) validation and recognize bank information by sheba code](#iranian-shebaiban).
 -   [Validate Bank card number](#bank-number-validation-and-get-the-name-of-the-bank-by-bank-account-number).
@@ -158,7 +158,7 @@ verifyIranianNationalId("0067749828"); // true
 verifyIranianNationalId("0684159415"); // false
 ```
 
-### Find city and province name by national code(code-e Melli)
+### Find city and province name by national-id(code-e Melli)
 ```javascript
 getPlaceByIranNationalId("0499370899").city; // "شهرری"
 getPlaceByIranNationalId("0790419904").city; // "سبزوار"

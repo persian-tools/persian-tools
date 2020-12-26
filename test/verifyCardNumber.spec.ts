@@ -1,4 +1,4 @@
-import verifyCardNumber from "../src/modules/verifyCardNumber";
+import { verifyCardNumber } from "../src";
 
 it("Bank number validation", () => {
 	expect(verifyCardNumber(6037701689095443)).not.toBeFalsy();

@@ -5,7 +5,7 @@ import { addCommas } from "../commas";
 import { replaceArray } from "../../helpers";
 import { digitsEnToFa, digitsFaToEn } from "../digits";
 import removeOrdinalSuffix from "../removeOrdinalSuffix";
-import { UNITS, TEN, MAGNITUDE, TYPO_LIST } from "./constants";
+import { UNITS, TEN, MAGNITUDE, TYPO_LIST, JOINERS, PREFIXES } from "./constants";
 import { fuzzy } from "./fuzzy";
 
 interface WordsToNumberOptions {
@@ -22,33 +22,30 @@ class WordsToNumber {
 	 * @param  options
 	 * @return Converted words to number. e.g: 350000
 	 */
-	public convert(
+	convert(
 		words: string,
 		{ digits = "en", addCommas: shouldAddCommas = false, fuzzy: isEnabledFuzzy = false }: WordsToNumberOptions = {},
 	): number | string | undefined {
 		if (!words) return;
 
+		words = words.replace(new RegExp("مین$", "ig"), "");
+		words = removeOrdinalSuffix(words)!;
 		const classified = isEnabledFuzzy ? fuzzy(words) : words;
-		// @ts-ignore
-		const computeNumbers = this.compute(this.tokenize(classified));
+		const computeNumbers = this.compute(this.tokenize(classified!));
 		const addCommasIfNeeded: string | number = shouldAddCommas
 			? (addCommas(computeNumbers) as string)
 			: (computeNumbers as number);
 
 		return digits === "fa" ? (digitsEnToFa(addCommasIfNeeded as number) as string) : addCommasIfNeeded;
 	}
-	private tokenize(words: string): number[] {
-		let replacedWords = replaceArray(words, TYPO_LIST);
-		// TODO: OrdinalSuffix remover should be before the Fuzzy typo fixer.
-		replacedWords = replacedWords.replace(new RegExp("مین$", "ig"), "");
-		replacedWords = removeOrdinalSuffix(replacedWords)!;
+	private tokenize(words: string): string[] {
+		words = replaceArray(words, TYPO_LIST);
 
-		const result: number[] = [];
-		const slittedWords: string[] = replacedWords.split(" ");
-		slittedWords.forEach((word) =>
-			// @ts-ignore
-			word === "و" ? "" : !isNaN(+word) ? result.push(+word) : result.push(word),
-		);
+		const result: string[] = [];
+		const slittedWords: string[] = words.split(" ");
+		slittedWords.forEach((word) => {
+			return word === JOINERS[0] ? "" : result.push(word);
+		});
 
 		return result;
 	}
@@ -58,17 +55,15 @@ class WordsToNumber {
 		let isNegative = false;
 
 		tokens.forEach((token) => {
-			// @ts-ignore
-			token = digitsFaToEn(token);
+			token = digitsFaToEn(token)!;
 
-			if (token === "منفی") {
+			if (token === PREFIXES[0]) {
 				isNegative = true;
 			} else if (UNITS[token] != null) {
 				sum += UNITS[token];
 			} else if (TEN[token] != null) {
 				sum += TEN[token];
-				// @ts-ignore
-			} else if (!isNaN(token)) {
+			} else if (!isNaN(Number(token))) {
 				sum += parseInt(token, 10);
 			} else {
 				sum *= MAGNITUDE[token];

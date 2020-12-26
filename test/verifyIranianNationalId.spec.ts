@@ -1,4 +1,4 @@
-import verifyIranianNationalId from "../src/modules/nationalId";
+import { verifyIranianNationalId } from "../src";
 
 it("Validation of Iranian National Number(code-e Melli)", () => {
 	expect(verifyIranianNationalId(123000000)).toBeFalsy();

@@ -1,4 +1,4 @@
-import isPersian from "../src/modules/isPersian";
+import { isPersian } from "../src";
 
 it("isPersian", () => {
 	expect(isPersian("این یک متن فارسی است؟")).not.toBeFalsy();

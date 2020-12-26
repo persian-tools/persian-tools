@@ -1,7 +1,4 @@
-import { digitsEnToFa } from "../src/modules/digits";
-import { digitsFaToEn } from "../src/modules/digits";
-import { digitsArToFa } from "../src/modules/digits";
-import { digitsArToEn } from "../src/modules/digits";
+import { digitsEnToFa, digitsFaToEn, digitsArToFa, digitsArToEn } from "../src";
 
 describe("Digits", () => {
 	it("digitsArToFa", () => {

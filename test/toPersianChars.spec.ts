@@ -1,4 +1,4 @@
-import toPersianChars from "../src/modules/toPersianChars";
+import { toPersianChars } from "../src";
 
 it("toPersianChars", () => {
 	expect(toPersianChars("علي")).toEqual("علی");

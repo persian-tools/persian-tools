@@ -1,13 +1,10 @@
 export const trim = (str: string): string => str.replace(/^\s+|\s+$/g, "");
 
-interface IFind {
+interface ReplaceArrayDictionary {
 	[key: string]: string;
 }
-export const replaceArray = (string: string, find: IFind): string => {
+export const replaceArray = (string: string, find: ReplaceArrayDictionary): string => {
 	const pattern = new RegExp(Object.keys(find).join("|"), "gi");
-	string = string.replace(pattern, (matched) => {
-		return find[matched] as string;
-	});
 
-	return string;
+	return string.replace(pattern, (matched) => find[matched] as string);
 };
