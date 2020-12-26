@@ -17,18 +17,18 @@
 
 ## Features
 
--   Convert Persian words to number and vice versa.
--   Add and remove commas to numbers.
--   Convert Persian numbers to Arabic or English numbers and vice versa.
--   Validate Iranian national number(code-e Melli).
--   Find city and province name by national code(code-e Melli).
--   Bill calculator
--   Check Iranian Sheba(IBAN) validation and recognize bank information by sheba code.
--   Validate Bank card number.
--   Find Bank's name by Card number.
--   Validate the correctness of the text of the Persian language and clear the Arabic letters in the Persian text.
--   Fix Persian characters in URL.
--   Fix Persian zero-width non-joiner(Replace spaces by half-space)
+-   [Convert Persian words to number and vice versa](#convert-persian-words-to-the-number-and-vice-versa).
+-   [Add and remove commas to numbers](#add-and-remove-commas).
+-   [Convert Persian numbers to Arabic or English numbers and vice versa](#convert-persian-numbers-to-arabic-or-english-numbers-and-vice-versa).
+-   [Validate Iranian national number(code-e Melli)](#validate-iranian-national-numbercode-e-melli).
+-   [Find city and province name by national code(code-e Melli)](#find-city-and-province-name-by-national-codecode-e-melli).
+-   [Bill calculator](#bill-calculator).
+-   [Check Iranian Sheba(IBAN) validation and recognize bank information by sheba code](#iranian-shebaiban).
+-   [Validate Bank card number](#bank-number-validation-and-get-the-name-of-the-bank-by-bank-account-number).
+-   [Find Bank's name by Card number]((#bank-number-validation-and-get-the-name-of-the-bank-by-bank-account-number)).
+-   [Validate the correctness of the text of the Persian language and clear the Arabic letters in the Persian text](#validate-the-correctness-of-the-text-of-the-persian-language-and-clear-the-arabic-letters-in-the-persian-text).
+-   [Fix Persian characters in URL](#fix-persian-characters-in-url).
+-   [Fix Persian zero-width non-joiner(Replace spaces by half-space)](#fix-persian-zero-width-non-joinerreplace-spaces-by-half-space)
 
 ## Getting started
 
@@ -210,13 +210,13 @@ URLfix("Sample Text"); // "Sample Text"
 ### Bill calculator
 | Method                  | Description                             | Return type
 |---                	  |---	                                    |---
-| getResult               | Result of bill calculated information	| BillResult
-| getAmount  	          | Calculate Bill amount by payment id and bill id which entered by the Bill constructor | number
-| getBillType        	  | Get Bill provider type name         	| BillTypes
-| getBarcode              | Calculate and get Bill's barcode        | string         
-| verificationBill        | Validate entered both Bill id and payment id, and return true if bill id and payment id relation was true | boolean         
-| verificationBillId      | Validate entered Bill id                | boolean         
-| verificationBillPayment | Validate entered Bill payment id        | boolean         
+| `getResult`               | Result of bill calculated information	| BillResult
+| `getAmount`  	          | Calculate Bill amount by payment id and bill id which entered by the Bill constructor | number
+| `getBillType`        	  | Get Bill provider type name         	| BillTypes
+| `getBarcode`              | Calculate and get Bill's barcode        | `string`         
+| `verificationBill`        | Validate entered both Bill id and payment id, and return true if bill id and payment id relation was true | boolean         
+| `verificationBillId`      | Validate entered Bill id                | `boolean`         
+| `verificationBillPayment` | Validate entered Bill payment id        | `boolean`         
 ```js
 import { Bill } from "persian-tools2";
 

@@ -2,7 +2,7 @@ import { ALL_WORDS } from "./constants";
 
 const Fuse = require("fuse.js");
 
-interface FuzzyOptions {
+export interface FuzzyOptions {
 	dataset?: string[];
 	threshold?: number;
 }

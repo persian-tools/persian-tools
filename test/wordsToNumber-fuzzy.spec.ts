@@ -1,5 +1,5 @@
-import { fuzzy } from "../../src/modules/wordsToNumber/fuzzy";
-import { ALL_WORDS } from "../../src/modules/wordsToNumber/constants";
+import { fuzzy } from "../src/modules/wordsToNumber/fuzzy";
+import { ALL_WORDS } from "../src/modules/wordsToNumber/constants";
 
 describe("WordsToNumber - Fuzzy humanizer", () => {
 	it("Should clean the Texts and the result should be human-readable", () => {

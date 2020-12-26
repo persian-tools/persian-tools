@@ -73,6 +73,7 @@
 		"rollup-plugin-uglify": "^6.0.4",
 		"standard-version": "^9.0.0",
 		"ts-jest": "^26.4.0",
+		"ts-node": "^9.0.0",
 		"typedoc": "^0.19.2",
 		"typescript": "^4.0.3",
 		"uglify-es": "^3.3.9"

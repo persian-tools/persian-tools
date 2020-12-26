@@ -3,6 +3,7 @@ import { replaceArray } from "../../helpers";
 import { digitsEnToFa, digitsFaToEn } from "../digits";
 import removeOrdinalSuffix from "../removeOrdinalSuffix";
 import { UNITS, TEN, MAGNITUDE, TYPO_LIST } from "./constants";
+import { fuzzy, FuzzyOptions } from "./fuzzy";
 
 // <Reference path='https://fa.wikipedia.org/wiki/الگو:عدد_به_حروف/توضیحات' />
 // https://fa.wikipedia.org/wiki/۱۰۰۰۰۰۰۰۰۰_(عدد)
@@ -10,6 +11,8 @@ import { UNITS, TEN, MAGNITUDE, TYPO_LIST } from "./constants";
 interface IOption {
 	digits?: string;
 	addCommas?: boolean;
+	fuzzy?: boolean;
+	fuzzyOptions?: FuzzyOptions;
 }
 
 class WordsToNumber {
@@ -20,20 +23,28 @@ class WordsToNumber {
 	 * @param  options
 	 * @return Converted words to number. e.g: 350000
 	 */
-	public convert(words: string, options: IOption = {}): number | string | undefined {
+	public convert(
+		words: string,
+		{
+			digits = "en",
+			addCommas: shouldAddCommas = false,
+			fuzzy: fuzzyCleaner = false,
+			fuzzyOptions = {},
+		}: IOption = {},
+	): number | string | undefined {
 		if (!words) return;
 
-		const digits = options.digits ?? "en";
-		const shouldAddCommas = options.addCommas ?? false;
+		const prettify = fuzzyCleaner ? fuzzy(words, fuzzyOptions) : words;
+		if (fuzzyCleaner) {
+			console.log("prettify", prettify);
+		}
 		// @ts-ignore
-		let numbersConverted = this.compute(this.tokenize(words));
+		const computeNumbers = this.compute(this.tokenize(prettify));
+		const addCommasIfNeeded: string | number = shouldAddCommas
+			? (addCommas(computeNumbers) as string)
+			: (computeNumbers as number);
 
-		// @ts-ignore
-		numbersConverted = shouldAddCommas ? (addCommas(numbersConverted) as string) : (numbersConverted as number);
-		// @ts-ignore
-		numbersConverted = digits === "fa" ? (digitsEnToFa(numbersConverted as number) as string) : numbersConverted;
-
-		return numbersConverted;
+		return digits === "fa" ? (digitsEnToFa(addCommasIfNeeded as number) as string) : addCommasIfNeeded;
 	}
 	private tokenize(words: string): number[] {
 		let replacedWords = replaceArray(words, TYPO_LIST);
@@ -42,7 +53,7 @@ class WordsToNumber {
 
 		const result: number[] = [];
 		const slittedWords: string[] = replacedWords.split(" ");
-		slittedWords.forEach((word: string) =>
+		slittedWords.forEach((word) =>
 			// @ts-ignore
 			word === "و" ? "" : !isNaN(+word) ? result.push(+word) : result.push(word),
 		);
@@ -54,7 +65,7 @@ class WordsToNumber {
 		let sum = 0;
 		let isNegative = false;
 
-		tokens.forEach((token: string) => {
+		tokens.forEach((token) => {
 			// @ts-ignore
 			token = digitsFaToEn(token);
 
