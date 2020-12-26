@@ -9,6 +9,7 @@ describe("WordsToNumber - Fuzzy humanizer", () => {
 		expect(fuzzy("دویشت هزار")).toEqual("دویست هزار");
 		expect(fuzzy("دویشت ر بیشت هزار")).toEqual("دویست و بیست هزار");
 		expect(fuzzy("یگصد و بنجاه هزار")).toEqual("یکصد و پنجاه هزار");
+		expect(fuzzy("ضد و بنچاه و دو")).toEqual("صد و پنجاه و دو");
 	});
 
 	it("Should works with single words", () => {
@@ -16,17 +17,8 @@ describe("WordsToNumber - Fuzzy humanizer", () => {
 		expect(fuzzy("ر")).toEqual("و");
 	});
 
-	it("Should return the string without any changes", () => {
-		expect(fuzzy("متن نامشخص")).toEqual("متن نامشخص");
-		expect(fuzzy("هیچ متن عددی ای برای تبدیل وجود ندارد")).toEqual("هیچ متن عددی ای برای تبدیل وجود ندارد");
-	});
-
 	it("Should works if we apply our custom dataset", () => {
-		expect(
-			fuzzy("دویشت ر بیشت هزار", {
-				dataset: ALL_WORDS,
-			}),
-		).toEqual("دویست و بیست هزار");
+		expect(fuzzy("دویشت ر بیشت هزار", ALL_WORDS)).toEqual("دویست و بیست هزار");
 	});
 
 	it("Should be falsy", () => {

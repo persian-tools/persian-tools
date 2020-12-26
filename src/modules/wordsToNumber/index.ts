@@ -1,18 +1,17 @@
+// <Reference path='https://fa.wikipedia.org/wiki/الگو:عدد_به_حروف/توضیحات' />
+// https://fa.wikipedia.org/wiki/۱۰۰۰۰۰۰۰۰۰_(عدد)
+
 import { addCommas } from "../commas";
 import { replaceArray } from "../../helpers";
 import { digitsEnToFa, digitsFaToEn } from "../digits";
 import removeOrdinalSuffix from "../removeOrdinalSuffix";
 import { UNITS, TEN, MAGNITUDE, TYPO_LIST } from "./constants";
-import { fuzzy, FuzzyOptions } from "./fuzzy";
+import { fuzzy } from "./fuzzy";
 
-// <Reference path='https://fa.wikipedia.org/wiki/الگو:عدد_به_حروف/توضیحات' />
-// https://fa.wikipedia.org/wiki/۱۰۰۰۰۰۰۰۰۰_(عدد)
-
-interface IOption {
-	digits?: string;
+interface WordsToNumberOptions {
+	digits?: "en" | "fa";
 	addCommas?: boolean;
 	fuzzy?: boolean;
-	fuzzyOptions?: FuzzyOptions;
 }
 
 class WordsToNumber {
@@ -25,21 +24,13 @@ class WordsToNumber {
 	 */
 	public convert(
 		words: string,
-		{
-			digits = "en",
-			addCommas: shouldAddCommas = false,
-			fuzzy: fuzzyCleaner = false,
-			fuzzyOptions = {},
-		}: IOption = {},
+		{ digits = "en", addCommas: shouldAddCommas = false, fuzzy: isEnabledFuzzy = false }: WordsToNumberOptions = {},
 	): number | string | undefined {
 		if (!words) return;
 
-		const prettify = fuzzyCleaner ? fuzzy(words, fuzzyOptions) : words;
-		if (fuzzyCleaner) {
-			console.log("prettify", prettify);
-		}
+		const classified = isEnabledFuzzy ? fuzzy(words) : words;
 		// @ts-ignore
-		const computeNumbers = this.compute(this.tokenize(prettify));
+		const computeNumbers = this.compute(this.tokenize(classified));
 		const addCommasIfNeeded: string | number = shouldAddCommas
 			? (addCommas(computeNumbers) as string)
 			: (computeNumbers as number);
