@@ -39,6 +39,7 @@ class WordsToNumber {
 	}
 	private tokenize(words: string): number[] {
 		let replacedWords = replaceArray(words, TYPO_LIST);
+		// TODO: OrdinalSuffix remover should be before the Fuzzy typo fixer.
 		replacedWords = replacedWords.replace(new RegExp("مین$", "ig"), "");
 		replacedWords = removeOrdinalSuffix(replacedWords)!;
 
