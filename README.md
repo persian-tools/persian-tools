@@ -299,10 +299,7 @@ halfSpace("نمی ‌خواهی درخت ها را ببینیم؟") // "نمی�
 ```
 
 ### Todo
-- [ ] Write typescript document
-- [ ] Complete Bill methods documents one by one
-- [ ] Check Iranian iban number validation
-- [ ] Find Bank's name by Iban number
+- [ ] Write Jalaali and Gregorian functions to convert Date together.
 
 ## Contributing
 
