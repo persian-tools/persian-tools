@@ -17,7 +17,8 @@
 
 ## Features
 
--   [Convert Persian words to number and vice versa](#convert-persian-words-to-the-number-and-vice-versa).
+-   [Convert Persian words to the number](#convert-persian-words-to-the-number).
+-   [Convert Numbers to Persian words](#convert-numbers-to-persian-words).
 -   [Add and remove commas to numbers](#add-and-remove-commas).
 -   [Convert Persian numbers to Arabic or English numbers and vice versa](#convert-persian-numbers-to-arabic-or-english-numbers-and-vice-versa).
 -   [Validate Iranian national number(code-e Melli)](#validate-iranian-national-number-id-e-melli).
@@ -68,7 +69,7 @@ Open up that html file in your browser, and the code should run!
 ### via NPM
 
 Add PersianTools.js to your project using <a href="https://yarnpkg.com/en/" target="_blank">yarn</a> <em>or</em> <a href="https://docs.npmjs.com/cli/npm" target="_blank">npm</a>. <b>Note:</b> Because
-we use ES2017 syntax (such as `import`), this workflow assumes you are using a modern browser or a bundler/transpiler
+we use ES2017 syntax (such as `import`), this workflow assumes you are using a modern browser, or a bundler/transpiler
 to convert your code to something older browsers understand.
 
 ```javascript
@@ -86,10 +87,14 @@ const convertToFa = digitsEnToFa(1234567);
 
 Let's take a look at what an example test case would look like using Persian-tools.
 
-### Convert Persian words to the number and vice versa
-
+### Convert Persian words to the number
+| Options                   | Description                                                   | Default
+|---                	    |---                                                            |--- 
+| `fuzzy`**(Beta)**         | Typo in words will be fixed by using [`levenshtein`](https://en.wikipedia.org/wiki/Levenshtein_distance) algorithm  | `false`
+| `digits`                  | Result will be converted to the English or Persian digits     | `en`
+| `addCommas`               | Commas will be added to the Result                            | `false`
 ```javascript
-import { NumberToWords, WordsToNumber } from "persian-tools2";
+import { WordsToNumber } from "persian-tools2";
 
 WordsToNumber.convert("منفی سه هزارمین", { digits: "fa", addCommas: true }) // "-۳,۰۰۰"
 WordsToNumber.convert("منفی سه هزارمین", { digits: "fa" }) // "-۳۰۰۰"
@@ -99,6 +104,11 @@ WordsToNumber.convert("منفی سه هزار") // -3000
 WordsToNumber.convert("سه هزار دویست و دوازده") // 3212
 WordsToNumber.convert("دوازده هزار بیست دو") // 12022
 WordsToNumber.convert("دوازده هزار بیست دو", { addCommas: true }) // "12,022"
+```
+
+### Convert Numbers to Persian words
+```javascript
+import { NumberToWords } from "persian-tools2";
 
 NumberToWords.convert(500443) // "پانصد هزار و چهار صد و چهل و سه"
 NumberToWords.convert("500,443") // "پانصد هزار و چهار صد و چهل و سه"
@@ -107,7 +117,6 @@ NumberToWords.convert(30000000000) // "سی میلیارد"
 ```
 
 ### Add and remove commas
-
 ```javascript
 import { addCommas, removeCommas } from "persian-tools2";
 
