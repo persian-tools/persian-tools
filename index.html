@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Persian Tools - v1.4.2</title>
-	<meta name="description" content="Documentation for Persian Tools - v1.4.2">
+	<title>Persian Tools - v1.5.0</title>
+	<meta name="description" content="Documentation for Persian Tools - v1.5.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
 </head>
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">Persian Tools - v1.4.2</a>
+					<a href="index.html" class="title">Persian Tools - v1.5.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -52,7 +52,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1>Persian Tools - v1.4.2</h1>
+			<h1>Persian Tools - v1.5.0</h1>
 		</div>
 	</div>
 </header>
@@ -71,25 +71,27 @@
 						<a href="https://github.com/persian-tools/persian-tools/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="GitHub license"></a>
 						<a href="https://github.com/persian-tools/persian-tools/compare"><img src="https://img.shields.io/badge/PRs-welcome-orange.svg" alt="PRs Welcome"></a>
 						<a href="https://www.codefactor.io/repository/github/persian-tools/persian-tools"><img src="https://www.codefactor.io/repository/github/persian-tools/persian-tools/badge" alt="CodeFactor"></a>
-					<a href="#contributors-"><img src="https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square" alt="All Contributors"></a></p>
+						<a href="#contributors-"><img src="https://img.shields.io/badge/all_contributors-3-orange.svg" alt="All Contributors"></a>
+					<a href="https://wallabyjs.com/oss/"><img src="https://img.shields.io/badge/wallaby.js-powered-blue.svg?style=flat&logo=github" alt="Wallaby.js"></a></p>
 				</div>
 				<hr />
 				<a href="#features" id="features" style="color: inherit; text-decoration: none;">
 					<h2>Features</h2>
 				</a>
 				<ul>
-					<li>Convert Persian words to number and vice versa.</li>
-					<li>Add and remove commas to numbers.</li>
-					<li>Convert Persian numbers to Arabic or English numbers and vice versa.</li>
-					<li>Validate Iranian national number(code-e Melli).</li>
-					<li>Find city and province name by national code(code-e Melli).</li>
-					<li>Bill calculator</li>
-					<li>Check Iranian Sheba(IBAN) validation and recognize bank information by sheba code.</li>
-					<li>Validate Bank card number.</li>
-					<li>Find Bank&#39;s name by Card number.</li>
-					<li>Validate the correctness of the text of the Persian language and clear the Arabic letters in the Persian text.</li>
-					<li>Fix Persian characters in URL.</li>
-					<li>Fix Persian zero-width non-joiner(Replace spaces by half-space)</li>
+					<li><a href="#convert-persian-words-to-the-number">Convert Persian words to the number</a>.</li>
+					<li><a href="#convert-numbers-to-persian-words">Convert Numbers to Persian words</a>.</li>
+					<li><a href="#add-and-remove-commas">Add and remove commas to numbers</a>.</li>
+					<li><a href="#convert-persian-numbers-to-arabic-or-english-numbers-and-vice-versa">Convert Persian numbers to Arabic or English numbers and vice versa</a>.</li>
+					<li><a href="#validate-iranian-national-number-id-e-melli">Validate Iranian national number(code-e Melli)</a>.</li>
+					<li><a href="#find-city-and-province-name-by-national-code-e-melli">Find city and province name by national code(code-e Melli)</a>.</li>
+					<li><a href="#bill-calculator">Bill calculator</a>.</li>
+					<li><a href="#iranian-shebaiban">Check Iranian Sheba(IBAN) validation and recognize bank information by sheba code</a>.</li>
+					<li><a href="#bank-number-validation-and-get-the-name-of-the-bank-by-bank-account-number">Validate Bank card number</a>.</li>
+					<li><a href="(#bank-number-validation-and-get-the-name-of-the-bank-by-bank-account-number)">Find Bank&#39;s name by Card number</a>.</li>
+					<li><a href="#validate-the-correctness-of-the-text-of-the-persian-language-and-clear-the-arabic-letters-in-the-persian-text">Validate the correctness of the text of the Persian language and clear the Arabic letters in the Persian text</a>.</li>
+					<li><a href="#fix-persian-characters-in-url">Fix Persian characters in URL</a>.</li>
+					<li><a href="#fix-persian-zero-width-non-joinerreplace-spaces-by-half-space">Fix Persian zero-width non-joiner(Replace spaces by half-space)</a></li>
 				</ul>
 				<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
 					<h2>Getting started</h2>
@@ -126,7 +128,7 @@
 					<h3>via NPM</h3>
 				</a>
 				<p>Add PersianTools.js to your project using <a href="https://yarnpkg.com/en/" target="_blank">yarn</a> <em>or</em> <a href="https://docs.npmjs.com/cli/npm" target="_blank">npm</a>. <b>Note:</b> Because
-					we use ES2017 syntax (such as <code>import</code>), this workflow assumes you are using a modern browser or a bundler/transpiler
+					we use ES2017 syntax (such as <code>import</code>), this workflow assumes you are using a modern browser, or a bundler/transpiler
 				to convert your code to something older browsers understand.</p>
 				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> persianTools <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;persian-tools2&quot;</span>;
 <span class="hljs-comment">// or</span>
@@ -140,24 +142,65 @@
 					<h2>Usage</h2>
 				</a>
 				<p>Let&#39;s take a look at what an example test case would look like using Persian-tools.</p>
-				<a href="#convert-persian-words-to-the-number-and-vice-versa" id="convert-persian-words-to-the-number-and-vice-versa" style="color: inherit; text-decoration: none;">
-					<h3>Convert Persian words to the number and vice versa</h3>
+				<a href="#convert-persian-words-to-the-number" id="convert-persian-words-to-the-number" style="color: inherit; text-decoration: none;">
+					<h3>Convert Persian words to the number</h3>
 				</a>
-				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { NumberToWords, WordsToNumber } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;persian-tools2&quot;</span>;
+				<table>
+					<thead>
+						<tr>
+							<th>Options</th>
+							<th>Description</th>
+							<th>Default</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><code>fuzzy</code><strong>(Beta)</strong></td>
+							<td>Fix typo in the Persian words by using <a href="https://en.wikipedia.org/wiki/Levenshtein_distance"><code>levenshtein</code></a> algorithm</td>
+							<td><code>false</code></td>
+						</tr>
+						<tr>
+							<td><code>digits</code></td>
+							<td>Result will be converted to the English or Persian digits</td>
+							<td><code>en</code></td>
+						</tr>
+						<tr>
+							<td><code>addCommas</code></td>
+							<td>Commas will be added to the Result</td>
+							<td><code>false</code></td>
+						</tr>
+				</tbody></table>
+				<ul>
+					<li>Convert with no option<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { WordsToNumber } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;persian-tools2&quot;</span>;
+</code></pre>
+					</li>
+				</ul>
+				<p>WordsToNumber.convert(&quot;منفی سه هزارمین&quot;) // -3000
+					WordsToNumber.convert(&quot;منفی سه هزارم&quot;) // -3000
+					WordsToNumber.convert(&quot;منفی سه هزار&quot;) // -3000
+					WordsToNumber.convert(&quot;سه هزار دویست و دوازده&quot;) // 3212
+				WordsToNumber.convert(&quot;دوازده هزار بیست دو&quot;) // 12022</p>
+				<pre><code>- Digits converter
+```js
+<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">WordsToNumber</span>.</span></span>convert(<span class="hljs-string">&quot;منفی سه هزارمین&quot;</span>, { digits: <span class="hljs-string">&quot;fa&quot;</span> }) <span class="hljs-comment">// &quot;-۳۰۰۰&quot;</span>
+<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">WordsToNumber</span>.</span></span>convert(<span class="hljs-string">&quot;دوازده هزار بیست دو&quot;</span>, { digits: <span class="hljs-string">&quot;fa&quot;</span> }) <span class="hljs-comment">// ۱۲۰۲۲</span></code></pre>
+				<ul>
+					<li>Add commas<pre><code class="language-js">WordsToNumber.convert(<span class="hljs-string">&quot;منفی سه هزارمین&quot;</span>, { <span class="hljs-attr">addCommas</span>: <span class="hljs-literal">true</span> }) <span class="hljs-comment">// &quot;-3,000&quot;</span>
+WordsToNumber.convert(<span class="hljs-string">&quot;دوازده هزار بیست دو&quot;</span>, { <span class="hljs-attr">addCommas</span>: <span class="hljs-literal">true</span> }) <span class="hljs-comment">// &quot;12,022&quot;</span></code></pre>
+					</li>
+					<li>Fuzzy typo fixer(<code>v1.5.0</code>):<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { WordsToNumber } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;persian-tools2&quot;</span>;
+</code></pre>
+					</li>
+				</ul>
+				<p>WordsToNumber.convert(&quot;یگصد و بنجاه هزار&quot;, { fuzzy: true }) // &quot;150000&quot;<br>WordsToNumber.convert(&quot;دویشت ر بیشت هزار&quot;, { fuzzy: true }) // &quot;220000&quot;<br>WordsToNumber.convert(&quot;منقی ضد&quot;, { fuzzy: true }) // &quot;-100&quot;  </p>
+				<pre><code>
+### Convert Numbers <span class="hljs-keyword">to</span> Persian words
+```javascript
+import { NumberToWords } from <span class="hljs-string">&quot;persian-tools2&quot;</span>;
 
-WordsToNumber.convert(<span class="hljs-string">&quot;منفی سه هزارمین&quot;</span>, { <span class="hljs-attr">digits</span>: <span class="hljs-string">&quot;fa&quot;</span>, <span class="hljs-attr">addCommas</span>: <span class="hljs-literal">true</span> }) <span class="hljs-comment">// &quot;-۳,۰۰۰&quot;</span>
-WordsToNumber.convert(<span class="hljs-string">&quot;منفی سه هزارمین&quot;</span>, { <span class="hljs-attr">digits</span>: <span class="hljs-string">&quot;fa&quot;</span> }) <span class="hljs-comment">// &quot;-۳۰۰۰&quot;</span>
-WordsToNumber.convert(<span class="hljs-string">&quot;منفی سه هزارمین&quot;</span>) <span class="hljs-comment">// -3000</span>
-WordsToNumber.convert(<span class="hljs-string">&quot;منفی سه هزارم&quot;</span>) <span class="hljs-comment">// -3000</span>
-WordsToNumber.convert(<span class="hljs-string">&quot;منفی سه هزار&quot;</span>) <span class="hljs-comment">// -3000</span>
-WordsToNumber.convert(<span class="hljs-string">&quot;سه هزار دویست و دوازده&quot;</span>) <span class="hljs-comment">// 3212</span>
-WordsToNumber.convert(<span class="hljs-string">&quot;دوازده هزار بیست دو&quot;</span>) <span class="hljs-comment">// 12022</span>
-WordsToNumber.convert(<span class="hljs-string">&quot;دوازده هزار بیست دو&quot;</span>, { <span class="hljs-attr">addCommas</span>: <span class="hljs-literal">true</span> }) <span class="hljs-comment">// &quot;12,022&quot;</span>
-
-NumberToWords.convert(<span class="hljs-number">500443</span>) <span class="hljs-comment">// &quot;پانصد هزار و چهار صد و چهل و سه&quot;</span>
-NumberToWords.convert(<span class="hljs-string">&quot;500,443&quot;</span>) <span class="hljs-comment">// &quot;پانصد هزار و چهار صد و چهل و سه&quot;</span>
-NumberToWords.convert(<span class="hljs-string">&quot;500,443&quot;</span>, { <span class="hljs-attr">ordinal</span>: <span class="hljs-literal">true</span> }) <span class="hljs-comment">// &quot;پانصد هزار و چهار صد و چهل و سوم&quot;</span>
-NumberToWords.convert(<span class="hljs-number">30000000000</span>) <span class="hljs-comment">// &quot;سی میلیارد&quot;</span></code></pre>
+<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">NumberToWords</span>.</span></span>convert(<span class="hljs-number">500443</span>) <span class="hljs-comment">// &quot;پانصد هزار و چهار صد و چهل و سه&quot;</span>
+<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">NumberToWords</span>.</span></span>convert(<span class="hljs-string">&quot;500,443&quot;</span>) <span class="hljs-comment">// &quot;پانصد هزار و چهار صد و چهل و سه&quot;</span>
+<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">NumberToWords</span>.</span></span>convert(<span class="hljs-string">&quot;500,443&quot;</span>, { ordinal: <span class="hljs-literal">true</span> }) <span class="hljs-comment">// &quot;پانصد هزار و چهار صد و چهل و سوم&quot;</span>
+<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">NumberToWords</span>.</span></span>convert(<span class="hljs-number">30000000000</span>) <span class="hljs-comment">// &quot;سی میلیارد&quot;</span></code></pre>
 				<a href="#add-and-remove-commas" id="add-and-remove-commas" style="color: inherit; text-decoration: none;">
 					<h3>Add and remove commas</h3>
 				</a>
@@ -204,8 +247,8 @@ verifyIranianNationalId(<span class="hljs-string">&quot;0963695398&quot;</span>)
 verifyIranianNationalId(<span class="hljs-string">&quot;0684159414&quot;</span>); <span class="hljs-comment">// true</span>
 verifyIranianNationalId(<span class="hljs-string">&quot;0067749828&quot;</span>); <span class="hljs-comment">// true</span>
 verifyIranianNationalId(<span class="hljs-string">&quot;0684159415&quot;</span>); <span class="hljs-comment">// false</span></code></pre>
-				<a href="#find-city-and-province-name-by-national-codecode-e-melli" id="find-city-and-province-name-by-national-codecode-e-melli" style="color: inherit; text-decoration: none;">
-					<h3>Find city and province name by national code(code-e Melli)</h3>
+				<a href="#find-city-and-province-name-by-national-idcode-e-melli" id="find-city-and-province-name-by-national-idcode-e-melli" style="color: inherit; text-decoration: none;">
+					<h3>Find city and province name by national-id(code-e Melli)</h3>
 				</a>
 				<pre><code class="language-javascript">getPlaceByIranNationalId(<span class="hljs-string">&quot;0499370899&quot;</span>).city; <span class="hljs-comment">// &quot;شهرری&quot;</span>
 getPlaceByIranNationalId(<span class="hljs-string">&quot;0790419904&quot;</span>).city; <span class="hljs-comment">// &quot;سبزوار&quot;</span>
@@ -259,39 +302,39 @@ URLfix(<span class="hljs-string">&quot;Sample Text&quot;</span>); <span class="h
 						</tr>
 					</thead>
 					<tbody><tr>
-							<td>getResult</td>
+							<td><code>getResult</code></td>
 							<td>Result of bill calculated information</td>
 							<td>BillResult</td>
 						</tr>
 						<tr>
-							<td>getAmount</td>
+							<td><code>getAmount</code></td>
 							<td>Calculate Bill amount by payment id and bill id which entered by the Bill constructor</td>
 							<td>number</td>
 						</tr>
 						<tr>
-							<td>getBillType</td>
+							<td><code>getBillType</code></td>
 							<td>Get Bill provider type name</td>
 							<td>BillTypes</td>
 						</tr>
 						<tr>
-							<td>getBarcode</td>
+							<td><code>getBarcode</code></td>
 							<td>Calculate and get Bill&#39;s barcode</td>
-							<td>string</td>
+							<td><code>string</code></td>
 						</tr>
 						<tr>
-							<td>verificationBill</td>
+							<td><code>verificationBill</code></td>
 							<td>Validate entered both Bill id and payment id, and return true if bill id and payment id relation was true</td>
 							<td>boolean</td>
 						</tr>
 						<tr>
-							<td>verificationBillId</td>
+							<td><code>verificationBillId</code></td>
 							<td>Validate entered Bill id</td>
-							<td>boolean</td>
+							<td><code>boolean</code></td>
 						</tr>
 						<tr>
-							<td>verificationBillPayment</td>
+							<td><code>verificationBillPayment</code></td>
 							<td>Validate entered Bill payment id</td>
-							<td>boolean</td>
+							<td><code>boolean</code></td>
 						</tr>
 				</tbody></table>
 				<pre><code class="language-js"><span class="hljs-keyword">import</span> { Bill } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;persian-tools2&quot;</span>;
@@ -364,10 +407,7 @@ halfSpace(<span class="hljs-string">&quot;نمی ‌خواهی درخت ها ر�
 					<h3>Todo</h3>
 				</a>
 				<ul>
-					<li><input disabled="" type="checkbox"> Write typescript document</li>
-					<li><input disabled="" type="checkbox"> Complete Bill methods documents one by one</li>
-					<li><input disabled="" type="checkbox"> Check Iranian iban number validation</li>
-					<li><input disabled="" type="checkbox"> Find Bank&#39;s name by Iban number</li>
+					<li><input disabled="" type="checkbox"> Write Jalaali and Gregorian functions to convert Date together.</li>
 				</ul>
 				<a href="#contributing" id="contributing" style="color: inherit; text-decoration: none;">
 					<h2>Contributing</h2>
@@ -387,14 +427,24 @@ halfSpace(<span class="hljs-string">&quot;نمی ‌خواهی درخت ها ر�
 				<table>
 					<tr>
 						<td align="center"><a href="https://www.linkedin.com/in/alitorki/"><img src="https://avatars1.githubusercontent.com/u/9049092?v=4" width="100px;" alt=""/><br /><sub><b>Ali Torki</b></sub></a><br /><a href="#infra-ali-master" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=ali-master" title="Tests">⚠️</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=ali-master" title="Code">💻</a></td>
-						<td align="center"><a href="https://github.com/moh3n9595"><img src="https://avatars1.githubusercontent.com/u/20948388?v=4" width="100px;" alt=""/><br /><sub><b>Mohsen</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=moh3n9595" title="Tests">⚠️</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=moh3n9595" title="Code">💻</a></td>
 						<td align="center"><a href="https://github.com/mssoheil"><img src="https://avatars3.githubusercontent.com/u/16543635?v=4" width="100px;" alt=""/><br /><sub><b>mssoheil</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=mssoheil" title="Tests">⚠️</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=mssoheil" title="Code">💻</a></td>
+						<td align="center"><a href="https://github.com/moh3n9595"><img src="https://avatars1.githubusercontent.com/u/20948388?v=4" width="100px;" alt=""/><br /><sub><b>Mohsen</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=moh3n9595" title="Tests">⚠️</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=moh3n9595" title="Code">💻</a></td>
+						<td align="center"><a href="http://titles.ir"><img src="https://avatars1.githubusercontent.com/u/1300289?v=4" width="100px;" alt=""/><br /><sub><b>Hesam pourghazian</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=Hesamp" title="Code">💻</a></td>
+						<td align="center"><a href="https://github.com/amirqasemi74"><img src="https://avatars3.githubusercontent.com/u/20992734?v=4" width="100px;" alt=""/><br /><sub><b>Amir Hossien Qasemi Moqaddam</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=amirqasemi74" title="Code">💻</a></td>
 					</tr>
 				</table>
 				<!-- markdownlint-enable -->
 				<!-- prettier-ignore-end -->
 				<!-- ALL-CONTRIBUTORS-LIST:END -->
 				<p>This project follows the <a href="https://github.com/all-contributors/all-contributors">all-contributors</a> specification. Contributions of any kind welcome!</p>
+				<a href="#wallabyjs" id="wallabyjs" style="color: inherit; text-decoration: none;">
+					<h2>Wallaby.js</h2>
+				</a>
+				<p><a href="https://wallabyjs.com/oss/"><img src="https://img.shields.io/badge/wallaby.js-powered-blue.svg?style=for-the-badge&logo=github" alt="Wallaby.js"></a></p>
+				<p>This repository contributors are welcome to use
+					<a href="https://wallabyjs.com/oss/">Wallaby.js OSS License</a> to get
+					test results immediately as you type, and see the results in
+				your editor right next to your code.</p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -432,10 +482,13 @@ halfSpace(<span class="hljs-string">&quot;نمی ‌خواهی درخت ها ر�
 						<a href="interfaces/billtypesmodel.html" class="tsd-kind-icon">Bill<wbr>Types<wbr>Model</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/ibank.html" class="tsd-kind-icon">IBank</a>
+						<a href="interfaces/extractcardnumber.html" class="tsd-kind-icon">Extract<wbr>Card<wbr>Number</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/ifind.html" class="tsd-kind-icon">IFind</a>
+						<a href="interfaces/extractcardnumberoptions.html" class="tsd-kind-icon">Extract<wbr>Card<wbr>Number<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ibank.html" class="tsd-kind-icon">IBank</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/inationalid.html" class="tsd-kind-icon">INational<wbr>Id</a>
@@ -456,6 +509,12 @@ halfSpace(<span class="hljs-string">&quot;نمی ‌خواهی درخت ها ر�
 						<a href="interfaces/iunit.html" class="tsd-kind-icon">IUnit</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/operatormodel.html" class="tsd-kind-icon">Operator<wbr>Model</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/replacearraydictionary.html" class="tsd-kind-icon">Replace<wbr>Array<wbr>Dictionary</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/shebahashtable.html" class="tsd-kind-icon">Sheba<wbr>Hash<wbr>Table</a>
 					</li>
 					<li class=" tsd-kind-interface">
@@ -464,6 +523,9 @@ halfSpace(<span class="hljs-string">&quot;نمی ‌خواهی درخت ها ر�
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/shebaresult.html" class="tsd-kind-icon">Sheba<wbr>Result</a>
 					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/wordstonumberoptions.html" class="tsd-kind-icon">Words<wbr>ToNumber<wbr>Options</a>
+					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#billtypes" class="tsd-kind-icon">Bill<wbr>Types</a>
 					</li>
@@ -471,7 +533,28 @@ halfSpace(<span class="hljs-string">&quot;نمی ‌خواهی درخت ها ر�
 						<a href="globals.html#currency" class="tsd-kind-icon">Currency</a>
 					</li>
 					<li class=" tsd-kind-variable">
+						<a href="globals.html#all_words" class="tsd-kind-icon">ALL_<wbr>WORDS</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#joiners" class="tsd-kind-icon">JOINERS</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#magnitude_keys" class="tsd-kind-icon">MAGNITUDE_<wbr>KEYS</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#number_words" class="tsd-kind-icon">NUMBER_<wbr>WORDS</a>
+					</li>
+					<li class=" tsd-kind-variable">
 						<a href="globals.html#numbertowordsinstance" class="tsd-kind-icon">Number<wbr>ToWords<wbr>Instance</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#prefixes" class="tsd-kind-icon">PREFIXES</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#ten_keys" class="tsd-kind-icon">TEN_<wbr>KEYS</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#unit_keys" class="tsd-kind-icon">UNIT_<wbr>KEYS</a>
 					</li>
 					<li class=" tsd-kind-variable">
 						<a href="globals.html#wordstonumberinstance" class="tsd-kind-icon">Words<wbr>ToNumber<wbr>Instance</a>
@@ -486,10 +569,19 @@ halfSpace(<span class="hljs-string">&quot;نمی ‌خواهی درخت ها ر�
 						<a href="globals.html#fanums" class="tsd-kind-icon">fa<wbr>Nums</a>
 					</li>
 					<li class=" tsd-kind-variable">
+						<a href="globals.html#mobileregex" class="tsd-kind-icon">mobile<wbr>Regex</a>
+					</li>
+					<li class=" tsd-kind-variable">
 						<a href="globals.html#numbertoword" class="tsd-kind-icon">number<wbr>ToWord</a>
 					</li>
 					<li class=" tsd-kind-variable">
+						<a href="globals.html#prefixes" class="tsd-kind-icon">prefixes</a>
+					</li>
+					<li class=" tsd-kind-variable">
 						<a href="globals.html#shebahashtable" class="tsd-kind-icon">sheba<wbr>Hash<wbr>Table</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#phonenumbervalidator" class="tsd-kind-icon">Phone<wbr>Number<wbr>Validator</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#sorttext" class="tsd-kind-icon">Sort<wbr>Text</a>
@@ -516,7 +608,16 @@ halfSpace(<span class="hljs-string">&quot;نمی ‌خواهی درخت ها ر�
 						<a href="globals.html#digitsfatoen" class="tsd-kind-icon">digits<wbr>FaTo<wbr>En</a>
 					</li>
 					<li class=" tsd-kind-function">
+						<a href="globals.html#extractcardnumber" class="tsd-kind-icon">extract<wbr>Card<wbr>Number</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#fuzzy" class="tsd-kind-icon">fuzzy</a>
+					</li>
+					<li class=" tsd-kind-function">
 						<a href="globals.html#getbanknamefromcardnumber" class="tsd-kind-icon">get<wbr>Bank<wbr>Name<wbr>From<wbr>Card<wbr>Number</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getphoneprefix" class="tsd-kind-icon">get<wbr>Phone<wbr>Prefix</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#getplacebyirannationalid" class="tsd-kind-icon">get<wbr>Place<wbr>ByIran<wbr>National<wbr>Id</a>
@@ -526,6 +627,9 @@ halfSpace(<span class="hljs-string">&quot;نمی ‌خواهی درخت ها ر�
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#ispersian" class="tsd-kind-icon">is<wbr>Persian</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#phonenumberdetail" class="tsd-kind-icon">phone<wbr>Number<wbr>Detail</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#removecommas" class="tsd-kind-icon">remove<wbr>Commas</a>
@@ -549,10 +653,49 @@ halfSpace(<span class="hljs-string">&quot;نمی ‌خواهی درخت ها ر�
 						<a href="globals.html#verifyiraniannationalid" class="tsd-kind-icon">verify<wbr>Iranian<wbr>National<wbr>Id</a>
 					</li>
 					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#irancell" class="tsd-kind-icon">Irancell</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#irancellmodel" class="tsd-kind-icon">Irancell<wbr>Model</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#magnitude" class="tsd-kind-icon">MAGNITUDE</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#mci" class="tsd-kind-icon">MCI</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#righttel" class="tsd-kind-icon">Right<wbr>Tel</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#shatelmobile" class="tsd-kind-icon">Shatel<wbr>Mobile</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#ten" class="tsd-kind-icon">TEN</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#token_type" class="tsd-kind-icon">TOKEN_<wbr>TYPE</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#typo_list" class="tsd-kind-icon">TYPO_<wbr>LIST</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#taliya" class="tsd-kind-icon">Taliya</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#units" class="tsd-kind-icon">UNITS</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
 						<a href="globals.html#billtypes" class="tsd-kind-icon">bill<wbr>Types</a>
 					</li>
 					<li class=" tsd-kind-object-literal">
 						<a href="globals.html#config" class="tsd-kind-icon">config</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#operators" class="tsd-kind-icon">operators</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#operatorsmap" class="tsd-kind-icon">operators<wbr>Map</a>
 					</li>
 				</ul>
 			</nav>

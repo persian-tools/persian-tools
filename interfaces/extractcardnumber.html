@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>BillParams | Persian Tools - v1.5.0</title>
+	<title>ExtractCardNumber | Persian Tools - v1.5.0</title>
 	<meta name="description" content="Documentation for Persian Tools - v1.5.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -52,10 +52,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="billparams.html">BillParams</a>
+					<a href="extractcardnumber.html">ExtractCardNumber</a>
 				</li>
 			</ul>
-			<h1>Interface BillParams</h1>
+			<h1>Interface ExtractCardNumber</h1>
 		</div>
 	</div>
 </header>
@@ -66,7 +66,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">BillParams</span>
+						<span class="target">ExtractCardNumber</span>
 					</li>
 				</ul>
 			</section>
@@ -77,10 +77,11 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="billparams.html#barcode" class="tsd-kind-icon">barcode</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="billparams.html#billid" class="tsd-kind-icon">bill<wbr>Id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="billparams.html#currency" class="tsd-kind-icon">currency</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="billparams.html#paymentid" class="tsd-kind-icon">payment<wbr>Id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="extractcardnumber.html#bankname" class="tsd-kind-icon">bank<wbr>Name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="extractcardnumber.html#base" class="tsd-kind-icon">base</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="extractcardnumber.html#index" class="tsd-kind-icon">index</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="extractcardnumber.html#isvalid" class="tsd-kind-icon">is<wbr>Valid</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="extractcardnumber.html#pure" class="tsd-kind-icon">pure</a></li>
 							</ul>
 						</section>
 					</div>
@@ -89,42 +90,52 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="barcode" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> barcode</h3>
-					<div class="tsd-signature tsd-kind-icon">barcode<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<a name="bankname" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> bank<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">bank<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/4032ae0/src/modules/bill/index.ts#L51">modules/bill/index.ts:51</a></li>
+							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/4032ae0/src/modules/extractCardNumbers/index.ts#L8">modules/extractCardNumbers/index.ts:8</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="billid" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> bill<wbr>Id</h3>
-					<div class="tsd-signature tsd-kind-icon">bill<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+					<a name="base" class="tsd-anchor"></a>
+					<h3>base</h3>
+					<div class="tsd-signature tsd-kind-icon">base<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/4032ae0/src/modules/bill/index.ts#L48">modules/bill/index.ts:48</a></li>
+							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/4032ae0/src/modules/extractCardNumbers/index.ts#L4">modules/extractCardNumbers/index.ts:4</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="currency" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> currency</h3>
-					<div class="tsd-signature tsd-kind-icon">currency<span class="tsd-signature-symbol">:</span> <a href="../globals.html#currency" class="tsd-signature-type">Currency</a></div>
+					<a name="index" class="tsd-anchor"></a>
+					<h3>index</h3>
+					<div class="tsd-signature tsd-kind-icon">index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/4032ae0/src/modules/bill/index.ts#L50">modules/bill/index.ts:50</a></li>
+							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/4032ae0/src/modules/extractCardNumbers/index.ts#L6">modules/extractCardNumbers/index.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="paymentid" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> payment<wbr>Id</h3>
-					<div class="tsd-signature tsd-kind-icon">payment<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+					<a name="isvalid" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> is<wbr>Valid</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Valid<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/4032ae0/src/modules/bill/index.ts#L49">modules/bill/index.ts:49</a></li>
+							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/4032ae0/src/modules/extractCardNumbers/index.ts#L7">modules/extractCardNumbers/index.ts:7</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="pure" class="tsd-anchor"></a>
+					<h3>pure</h3>
+					<div class="tsd-signature tsd-kind-icon">pure<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/4032ae0/src/modules/extractCardNumbers/index.ts#L5">modules/extractCardNumbers/index.ts:5</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -143,19 +154,22 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="billparams.html" class="tsd-kind-icon">Bill<wbr>Params</a>
+						<a href="extractcardnumber.html" class="tsd-kind-icon">Extract<wbr>Card<wbr>Number</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="billparams.html#barcode" class="tsd-kind-icon">barcode</a>
+								<a href="extractcardnumber.html#bankname" class="tsd-kind-icon">bank<wbr>Name</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="billparams.html#billid" class="tsd-kind-icon">bill<wbr>Id</a>
+								<a href="extractcardnumber.html#base" class="tsd-kind-icon">base</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="billparams.html#currency" class="tsd-kind-icon">currency</a>
+								<a href="extractcardnumber.html#index" class="tsd-kind-icon">index</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="billparams.html#paymentid" class="tsd-kind-icon">payment<wbr>Id</a>
+								<a href="extractcardnumber.html#isvalid" class="tsd-kind-icon">is<wbr>Valid</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="extractcardnumber.html#pure" class="tsd-kind-icon">pure</a>
 							</li>
 						</ul>
 					</li>

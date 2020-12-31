@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>BillParams | Persian Tools - v1.5.0</title>
+	<title>OperatorModel | Persian Tools - v1.5.0</title>
 	<meta name="description" content="Documentation for Persian Tools - v1.5.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -52,21 +52,32 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="billparams.html">BillParams</a>
+					<a href="operatormodel.html">OperatorModel</a>
 				</li>
 			</ul>
-			<h1>Interface BillParams</h1>
+			<h1>Interface OperatorModel</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Operators model such as province, base city, model, type(permanent or credit or both)</p>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt>interface</dt>
+						<dd></dd>
+					</dl>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">BillParams</span>
+						<span class="target">OperatorModel</span>
 					</li>
 				</ul>
 			</section>
@@ -77,10 +88,10 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="billparams.html#barcode" class="tsd-kind-icon">barcode</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="billparams.html#billid" class="tsd-kind-icon">bill<wbr>Id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="billparams.html#currency" class="tsd-kind-icon">currency</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="billparams.html#paymentid" class="tsd-kind-icon">payment<wbr>Id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="operatormodel.html#base" class="tsd-kind-icon">base</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="operatormodel.html#model" class="tsd-kind-icon">model</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="operatormodel.html#province" class="tsd-kind-icon">province</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="operatormodel.html#type" class="tsd-kind-icon">type</a></li>
 							</ul>
 						</section>
 					</div>
@@ -89,42 +100,42 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="barcode" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> barcode</h3>
-					<div class="tsd-signature tsd-kind-icon">barcode<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<a name="base" class="tsd-anchor"></a>
+					<h3>base</h3>
+					<div class="tsd-signature tsd-kind-icon">base<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/4032ae0/src/modules/bill/index.ts#L51">modules/bill/index.ts:51</a></li>
+							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/4032ae0/src/modules/phoneNumber/utils.ts#L8">modules/phoneNumber/utils.ts:8</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="billid" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> bill<wbr>Id</h3>
-					<div class="tsd-signature tsd-kind-icon">bill<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+					<a name="model" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> model</h3>
+					<div class="tsd-signature tsd-kind-icon">model<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/4032ae0/src/modules/bill/index.ts#L48">modules/bill/index.ts:48</a></li>
+							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/4032ae0/src/modules/phoneNumber/utils.ts#L9">modules/phoneNumber/utils.ts:9</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="currency" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> currency</h3>
-					<div class="tsd-signature tsd-kind-icon">currency<span class="tsd-signature-symbol">:</span> <a href="../globals.html#currency" class="tsd-signature-type">Currency</a></div>
+					<a name="province" class="tsd-anchor"></a>
+					<h3>province</h3>
+					<div class="tsd-signature tsd-kind-icon">province<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/4032ae0/src/modules/bill/index.ts#L50">modules/bill/index.ts:50</a></li>
+							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/4032ae0/src/modules/phoneNumber/utils.ts#L7">modules/phoneNumber/utils.ts:7</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="paymentid" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> payment<wbr>Id</h3>
-					<div class="tsd-signature tsd-kind-icon">payment<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+					<a name="type" class="tsd-anchor"></a>
+					<h3>type</h3>
+					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/4032ae0/src/modules/bill/index.ts#L49">modules/bill/index.ts:49</a></li>
+							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/4032ae0/src/modules/phoneNumber/utils.ts#L10">modules/phoneNumber/utils.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -143,19 +154,19 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="billparams.html" class="tsd-kind-icon">Bill<wbr>Params</a>
+						<a href="operatormodel.html" class="tsd-kind-icon">Operator<wbr>Model</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="billparams.html#barcode" class="tsd-kind-icon">barcode</a>
+								<a href="operatormodel.html#base" class="tsd-kind-icon">base</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="billparams.html#billid" class="tsd-kind-icon">bill<wbr>Id</a>
+								<a href="operatormodel.html#model" class="tsd-kind-icon">model</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="billparams.html#currency" class="tsd-kind-icon">currency</a>
+								<a href="operatormodel.html#province" class="tsd-kind-icon">province</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="billparams.html#paymentid" class="tsd-kind-icon">payment<wbr>Id</a>
+								<a href="operatormodel.html#type" class="tsd-kind-icon">type</a>
 							</li>
 						</ul>
 					</li>
