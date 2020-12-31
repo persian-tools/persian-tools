@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/ali-master/persian-tools/compare/v1.4.2...v1.5.0) (2020-12-31)
+
+
+### Features
+
+* Upgraded rollup and packages version ([a5a4c9b](https://github.com/ali-master/persian-tools/commit/a5a4c9bf748fc29659837023100bdb5c266f3c52))
+* **extractCardNumber:** added 3 more acceptable keywords in regex ([9e34d78](https://github.com/ali-master/persian-tools/commit/9e34d7831ec5b09717a1fdffe21a2d9e01d9d740))
+* **Wallaby:** Added Wallaby and fixed tests errors ([cfe7d20](https://github.com/ali-master/persian-tools/commit/cfe7d20cbd8b79a641ff6f7b36e80ce4181b6193))
+* **WordsToNumber:** Added fuzzy to fix wrong words ([13282a9](https://github.com/ali-master/persian-tools/commit/13282a90368d79527b89656bec16d68600d8e88c))
+* added card-number extractor into text ([4f33602](https://github.com/ali-master/persian-tools/commit/4f33602bded4669b4b9f80aed2095a39fee36ea1))
+* added github-pages and typedoc ([3d8af7e](https://github.com/ali-master/persian-tools/commit/3d8af7ec569d2c2e500b6bb56f94a91aa49d5b53))
+* added humanizing words by fuzzy in words to number ([49d6491](https://github.com/ali-master/persian-tools/commit/49d649138cea8285adae12f1f44b5b257e7c14ee))
+* added iranian banks card numbers regex ([e65be1e](https://github.com/ali-master/persian-tools/commit/e65be1ea7ff6030bda3464ea5ed318754131b62d))
+* added iranian phone number validator and details ([224f8e8](https://github.com/ali-master/persian-tools/commit/224f8e8c1285a1f3f80c0468cfe426f8e8fc2be5))
+* updated project folders structure ([cc4e6c1](https://github.com/ali-master/persian-tools/commit/cc4e6c1bea0176c4517ac6a5b6752169bcc923e4))
+
+
+### Bug Fixes
+
+* **extractCardNumber:** replaced acceptableKeywords with empty string ([23330a4](https://github.com/ali-master/persian-tools/commit/23330a45e019f32072ab5386aae3879ec2cc9d38))
+* **Fuzzy:** Removed fuse.js and used fastest-levenshtein to find the closest word ([65f70df](https://github.com/ali-master/persian-tools/commit/65f70dfb9f5567e90ee75f30d50977730f4481e0))
+* automatic update docs on github pages ([ebe2c79](https://github.com/ali-master/persian-tools/commit/ebe2c7995cc146dea867b72bc179209761f51ad7))
+* automatic update docs on github pages ([2cbcfee](https://github.com/ali-master/persian-tools/commit/2cbcfee6be84cc2d29ab1601fa5d8335e73df7d1))
+* updated typedoc mode value to file ([4161b89](https://github.com/ali-master/persian-tools/commit/4161b89268a99a89d1e3fd75ec40862e1c5dce64))
+
 ### [1.4.2](https://github.com/ali-master/persian-tools/compare/v1.4.1...v1.4.2) (2020-09-30)
 
 
