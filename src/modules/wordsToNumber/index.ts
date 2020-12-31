@@ -11,6 +11,11 @@ import { fuzzy } from "./fuzzy";
 interface WordsToNumberOptions {
 	digits?: "en" | "fa";
 	addCommas?: boolean;
+	/**
+	 * @description Fuzzy persian typo fixer
+	 * @since v1.5.0
+	 * @type boolean
+	 */
 	fuzzy?: boolean;
 }
 
@@ -28,8 +33,10 @@ class WordsToNumber {
 	): number | string | undefined {
 		if (!words) return;
 
+		// Remove ordinal suffixes
 		words = words.replace(new RegExp("مین$", "ig"), "");
 		words = removeOrdinalSuffix(words)!;
+		// Fix typo's if enabled
 		const classified = isEnabledFuzzy ? fuzzy(words) : words;
 		const computeNumbers = this.compute(this.tokenize(classified!));
 		const addCommasIfNeeded: string | number = shouldAddCommas

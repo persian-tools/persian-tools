@@ -3,7 +3,15 @@ import { shebaHashTable, ShebaResult } from "./codes.skip";
 class Sheba {
 	// Local variables
 	private readonly shebaCode: string;
-	private readonly pattern = /IR[0-9]{24}/;
+	/**
+	 * @public
+	 * @since v1.4.2
+	 */
+	public readonly pattern = /IR[0-9]{24}/;
+	/**
+	 * @public
+	 * @since v1.4.2
+	 */
 	public readonly pattern_code = /IR[0-9]{2}([0-9]{3})[0-9]{19}/;
 
 	constructor(shebaCode: string) {
