@@ -90,20 +90,36 @@ Let's take a look at what an example test case would look like using Persian-too
 ### Convert Persian words to the number
 | Options                   | Description                                                   | Default
 |---                	    |---                                                            |--- 
-| `fuzzy`**(Beta)**         | Typo in words will be fixed by using [`levenshtein`](https://en.wikipedia.org/wiki/Levenshtein_distance) algorithm  | `false`
+| `fuzzy`**(Beta)**       | Fix typo in the Persian words by using [`levenshtein`](https://en.wikipedia.org/wiki/Levenshtein_distance) algorithm  | `false`
 | `digits`                  | Result will be converted to the English or Persian digits     | `en`
 | `addCommas`               | Commas will be added to the Result                            | `false`
+- Convert with no option
 ```javascript
 import { WordsToNumber } from "persian-tools2";
 
-WordsToNumber.convert("منفی سه هزارمین", { digits: "fa", addCommas: true }) // "-۳,۰۰۰"
-WordsToNumber.convert("منفی سه هزارمین", { digits: "fa" }) // "-۳۰۰۰"
 WordsToNumber.convert("منفی سه هزارمین") // -3000
 WordsToNumber.convert("منفی سه هزارم") // -3000
 WordsToNumber.convert("منفی سه هزار") // -3000
 WordsToNumber.convert("سه هزار دویست و دوازده") // 3212
 WordsToNumber.convert("دوازده هزار بیست دو") // 12022
+```
+- Digits converter
+```js
+WordsToNumber.convert("منفی سه هزارمین", { digits: "fa" }) // "-۳۰۰۰"
+WordsToNumber.convert("دوازده هزار بیست دو", { digits: "fa" }) // ۱۲۰۲۲
+```
+- Add commas
+```js
+WordsToNumber.convert("منفی سه هزارمین", { addCommas: true }) // "-3,000"
 WordsToNumber.convert("دوازده هزار بیست دو", { addCommas: true }) // "12,022"
+```  
+- Fuzzy typo fixer(`v1.5.0`):
+```javascript
+import { WordsToNumber } from "persian-tools2";
+
+WordsToNumber.convert("یگصد و بنجاه هزار", { fuzzy: true }) // "150000"  
+WordsToNumber.convert("دویشت ر بیشت هزار", { fuzzy: true }) // "220000"  
+WordsToNumber.convert("منقی ضد", { fuzzy: true }) // "-100"  
 ```
 
 ### Convert Numbers to Persian words
