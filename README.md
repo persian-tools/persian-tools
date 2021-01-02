@@ -46,7 +46,7 @@ Add the following code to an HTML file:
 <html>
 <head>
     <!-- Load PersianTools.js -->
-    <script src="https://cdn.jsdelivr.net/npm/persian-tools2@1.3.0/dist/index.bowser.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/persian-tools2@1.5.0/dist/index.bowser.js"></script>
 
     <!-- Place your code in the script tag below. You can also use an external .js file -->
     <script type="text/javascript">
