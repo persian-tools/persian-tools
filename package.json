@@ -20,7 +20,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/ali-master/persian-tools.git"
+		"url": "git+https://github.com/persian-tools/persian-tools.git"
 	},
 	"files": [
 		"src",
@@ -41,9 +41,9 @@
 	"author": "Ali Torki <ali_4286@live.com>",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/ali-master/persian-tools/issues"
+		"url": "https://github.com/persian-tools/persian-tools/issues"
 	},
-	"homepage": "https://github.com/ali-master/persian-tools#readme",
+	"homepage": "https://persian-tools.github.io/persian-tools",
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "^17.0.0",
 		"@rollup/plugin-node-resolve": "^11.0.1",
