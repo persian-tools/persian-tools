@@ -10,7 +10,6 @@ function verifyIranianNationalId(nationalId?: string | number): boolean | null |
 		let code = nationalId.toString();
 
 		if (!code.match(/^\d{10}$/)) return false;
-		code = ("0000" + code).substr(code.length + 4 - 10);
 
 		if (parseInt(code.substr(3, 6), 10) === 0) return false;
 
