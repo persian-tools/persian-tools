@@ -1,23 +1,23 @@
 /**
- * Check if string included of just persian characters
+ * Check if string is persian
  *
  * @public
  * @method isPersian
- * @param characters string
+ * @param str string
+ * @param trimPattern regExp
+ * @return Return true for perisan strings
+ */
+export const isPersian = (str: string, trimPattern = /[-+()\s.]/g): boolean =>
+	/^[\u0600-\u06FF\s]+$/.test(str.replace(trimPattern, ""));
+
+/**
+ * Check if string includes persian alphabet.
+ *
+ * @public
+ * @method hasPersian
+ * @param str string
  * @return Return true if the entered string includes persian characters
  */
-const isPersian = (characters: string): boolean | undefined => {
-	if (!characters) return;
-
-	const letters: string[] = [];
-	for (let i = 0; i <= characters.length; i++) {
-		letters[i] = characters.substring(i - 1, i);
-		if (letters[i].charCodeAt(0) > 255) {
-			return true;
-		}
-	}
-
-	return false;
-};
+export const hasPersian = (str: string): boolean => /[\u0600-\u06FF]/.test(str);
 
 export default isPersian;
