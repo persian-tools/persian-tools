@@ -1,4 +1,4 @@
-import { digitsFaToEn, getBankNameFromCardNumber, isPersian, verifyCardNumber } from "../../";
+import { digitsFaToEn, getBankNameFromCardNumber, hasPersian, verifyCardNumber } from "../../";
 
 interface ExtractCardNumber {
 	base: string;
@@ -94,7 +94,7 @@ function extractCardNumber(
 			 *
 			 * @type string
 			 */
-			cardNumber = (isPersian(cardNumber) as boolean) ? (digitsFaToEn(cardNumber) as string) : cardNumber;
+			cardNumber = (hasPersian(cardNumber) as boolean) ? (digitsFaToEn(cardNumber) as string) : cardNumber;
 
 			const result: ExtractCardNumber = {
 				index: index + 1,

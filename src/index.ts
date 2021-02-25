@@ -1,7 +1,7 @@
 // Digits Converter
 export * from "./modules/digits";
 // check and convert persian string
-export { default as isPersian } from "./modules/isPersian";
+export { isPersian, hasPersian } from "./modules/isPersian";
 export { default as toPersianChars } from "./modules/toPersianChars";
 // String and Number Converter and their utilities
 export { default as NumberToWords } from "./modules/numberToWords";
