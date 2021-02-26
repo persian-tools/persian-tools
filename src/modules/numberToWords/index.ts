@@ -4,7 +4,7 @@ import addOrdinalSuffix from "../addOrdinalSuffix/addOrdinalSuffix";
 
 // <Reference path="https://fa.wikipedia.org/wiki/۱۰۰۰۰۰۰۰۰۰_(عدد)" />
 
-interface IOption {
+export interface NumberToWordsOptions {
 	ordinal?: boolean;
 }
 
@@ -81,7 +81,10 @@ class NumberToWords {
 		return result;
 	};
 
-	public convert(number: bigint | number | string, { ordinal = false }: IOption = {}): string | undefined {
+	public convert(
+		number: bigint | number | string,
+		{ ordinal = false }: NumberToWordsOptions = {},
+	): string | undefined {
 		if (typeof number === "undefined") return;
 
 		if (number === 0) {
