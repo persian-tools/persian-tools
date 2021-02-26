@@ -47,7 +47,6 @@ module.exports = {
 	},
 	plugins: [
 		typescript({
-			useTsconfigDeclarationDir: true,
 			rollupCommonJSResolveHack: false,
 			clean: true,
 		}),
