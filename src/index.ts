@@ -4,8 +4,8 @@ export * from "./modules/digits";
 export { isPersian, hasPersian } from "./modules/isPersian";
 export { default as toPersianChars } from "./modules/toPersianChars";
 // String and Number Converter and their utilities
-export { default as NumberToWords } from "./modules/numberToWords";
-export { default as WordsToNumber } from "./modules/wordsToNumber";
+export { default as NumberToWords, NumberToWordsOptions } from "./modules/numberToWords";
+export { default as WordsToNumber, WordsToNumberOptions } from "./modules/wordsToNumber";
 export { default as removeOrdinalSuffix } from "./modules/removeOrdinalSuffix";
 export { default as addOrdinalSuffix } from "./modules/addOrdinalSuffix/addOrdinalSuffix";
 // Add and Remove Commas
