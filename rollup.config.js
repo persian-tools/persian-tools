@@ -48,6 +48,8 @@ module.exports = {
 	plugins: [
 		typescript({
 			useTsconfigDeclarationDir: true,
+			rollupCommonJSResolveHack: false,
+			clean: true,
 		}),
 		json(),
 		resolve({ jsnext: true, main: true, browser: true, preferBuiltins: false }),
