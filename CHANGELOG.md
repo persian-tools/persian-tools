@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0-beta.1](https://github.com/persian-tools/persian-tools/compare/v1.6.0-beta.0...v1.6.0-beta.1) (2021-02-27)
+
+
+### Bug Fixes
+
+* typedoc build ([bbc558f](https://github.com/persian-tools/persian-tools/commit/bbc558f3b4da07444ce05820a87e150483e08ca8))
+
 ## [1.6.0-beta.0](https://github.com/persian-tools/persian-tools/compare/v1.5.0...v1.6.0-beta.0) (2021-02-27)
 
 
