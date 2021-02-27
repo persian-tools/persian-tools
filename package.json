@@ -12,7 +12,6 @@
 	"sideEffect": false,
 	"scripts": {
 		"micro:build": "microbundle src/index.ts --compress --name persian-tools",
-		"postmicro:build": "npm run size",
 		"micro:dev": "microbundle watch",
 		"test": "jest",
 		"lint": "eslint \"src/**/*.{ts,json}\" --max-warnings=0",
