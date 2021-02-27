@@ -1,4 +1,4 @@
-import { extractCardNumber } from "../src";
+import extractCardNumber from "../src/modules/extractCardNumbers";
 
 const mockString = `شماره کارتم رو برات نوشتم:
 6219-8610-3452-9007
