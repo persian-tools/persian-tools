@@ -22,4 +22,5 @@ publish-docs: build-docs
 	git add --all && \
 	git commit -m "doc: Update docs" && \
 	git push origin gh-pages
+	rm -rf ./docs
 .PHONY: publish-docs
