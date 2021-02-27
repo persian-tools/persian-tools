@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0-beta.4](https://github.com/persian-tools/persian-tools/compare/v1.6.0-beta.3...v1.6.0-beta.4) (2021-02-27)
+
+
+### Bug Fixes
+
+* **CI:** Continuous Integration build command ([03aaf6f](https://github.com/persian-tools/persian-tools/commit/03aaf6f57cff985583374e2183874443c17b0895))
+
 ## [1.6.0-beta.3](https://github.com/persian-tools/persian-tools/compare/v1.6.0-beta.2...v1.6.0-beta.3) (2021-02-27)
 
 

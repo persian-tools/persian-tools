@@ -1,6 +1,6 @@
 {
 	"name": "@persian-tools/persian-tools",
-	"version": "1.6.0-beta.3",
+	"version": "1.6.0-beta.4",
 	"description": "An anthology of a variety of tools for Persian language in javascript",
 	"main": "build/persian-tools.js",
 	"umd:main": "build/persian-tools.umd.js",
@@ -12,6 +12,7 @@
 	"sideEffect": false,
 	"scripts": {
 		"micro:build": "microbundle src/index.ts --compress --name persian-tools",
+		"postmicro:build": "mv ./build/index.d.ts ./build/persian-tools.d.ts && rm -rf ./build/setupTests.d.ts",
 		"micro:dev": "microbundle watch",
 		"test": "jest",
 		"lint": "eslint \"src/**/*.{ts,json}\" --max-warnings=0",
