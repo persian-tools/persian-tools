@@ -1,6 +1,10 @@
-import { digitsFaToEn, getBankNameFromCardNumber, hasPersian, verifyCardNumber } from "../../";
+import { hasPersian } from "../isPersian";
+import { digitsFaToEn } from "../digits";
+import verifyCardNumber from "../verifyCardNumber";
+import { acceptableKeywords, cardNumberRegex } from "./utils";
+import getBankNameFromCardNumber from "../getBankNameFromCardNumber";
 
-interface ExtractCardNumber {
+export interface ExtractCardNumber {
 	base: string;
 	pure: string;
 	index: number;
@@ -45,32 +49,6 @@ function extractCardNumber(
 		filterValidCardNumbers: true,
 	},
 ): ExtractCardNumber[] {
-	/**
-	 * This Regex can find all kind of Iranian Banks card numbers into a text such as these models:
-	 * @example
-	 * 1. 6219-8610-3452-9007
-	 * 2. 5022291070873466
-	 * 3. ۵۰۲۲۲۹۱۰۸۱۸۷۳۴۶۶
-	 * 4. ۵۰۲۲-۲۹۱۰-۷۰۸۷-۳۴۶۶
-	 * 5. ۵۰۲۲.۲۹۱۰.۷۰۸۷.۳۴۶۶
-	 * 6. ۵۰۲۲_۲۹۱۰_۷۰۸۷_۳۴۶۶
-	 * 7. ۵۰۲۲*۲۹۱۰*۷۰۸۷*۳۴۶۶
-	 *
-	 * @constant
-	 */
-	const cardNumberRegex = /([\u06F0-\u06F90-9-_.*]{16,20})/gm;
-	/**
-	 * Acceptable keywords between numbers are:
-	 * 1. Start -> *
-	 * 2. Underscore -> _
-	 * 3. Dash -> -
-	 * 4. Dot -> .
-	 *
-	 * @example:
-	 * 5022*2910_7087-3466
-	 * @constant
-	 */
-	const acceptableKeywords = /[-_.*]/g;
 	/**
 	 * Returns a Boolean value that indicates whether or not a pattern exists in a searched string.
 	 *
@@ -121,10 +99,11 @@ function extractCardNumber(
 			serialize = serialize?.filter((item) => item.isValid);
 		}
 
-		return serialize as ExtractCardNumber[];
+		return serialize!;
 	}
 
 	return [];
 }
 
+export * from "./utils";
 export default extractCardNumber;
