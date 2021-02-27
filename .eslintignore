@@ -1,4 +1,8 @@
-dist/**
-test/**
-node_modules/**
-!src
+test
+node_modules
+build
+dist
+coverage
+.github
+.idea
+.vscode

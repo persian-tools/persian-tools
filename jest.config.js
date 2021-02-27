@@ -14,5 +14,6 @@ module.exports = {
 		"!src/dummy/*.ts",
 		"!src/modules/**/*.skip.ts",
 		"!src/setupTests.js",
+		"!src/index.ts",
 	],
 };

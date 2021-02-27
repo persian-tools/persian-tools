@@ -9,7 +9,9 @@ node_modules
 jspm_packages
 
 dist
+build
 
 coverage
 
 .idea
+.vscode
