@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0-beta.3](https://github.com/persian-tools/persian-tools/compare/v1.6.0-beta.2...v1.6.0-beta.3) (2021-02-27)
+
+
+### Bug Fixes
+
+* **CI:** npm ignore build folder files ([c3992aa](https://github.com/persian-tools/persian-tools/commit/c3992aa97ca4288a873f115d013b12abb766dc4f))
+
 ## [1.6.0-beta.2](https://github.com/persian-tools/persian-tools/compare/v1.6.0-beta.1...v1.6.0-beta.2) (2021-02-27)
 
 
