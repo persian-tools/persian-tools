@@ -46,12 +46,12 @@ jobs:
               uses: codecov/codecov-action@v1
 
             - name: Build
-              run: npm run build
+              run: npm run micro:build
 
             - name: Archive production
               uses: actions/upload-artifact@v2
               with:
-                  name: dist
+                  name: build
                   path: |
-                      dist
-                      !dist/**/*.md
+                      build
+                      !build/**/*.md
