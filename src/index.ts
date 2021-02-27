@@ -1,7 +1,9 @@
 // Digits Converter
 export * from "./modules/digits";
-// check and convert persian string
+// check Persian or Arabic string
+export { isArabic, hasArabic } from "./modules/isArabic";
 export { isPersian, hasPersian } from "./modules/isPersian";
+// Convert Arabic Chars to Persian
 export { default as toPersianChars } from "./modules/toPersianChars";
 // String and Number Converter and their utilities
 export { default as NumberToWords, NumberToWordsOptions } from "./modules/numberToWords";
@@ -15,6 +17,7 @@ export { default as verifyIranianNationalId } from "./modules/nationalId";
 export { default as getPlaceByIranNationalId } from "./modules/getPlaceByIranNationalId";
 // Card-Number utilities
 export { default as verifyCardNumber } from "./modules/verifyCardNumber";
+export * from "./modules/extractCardNumbers/utils";
 export { default as extractCardNumber } from "./modules/extractCardNumbers";
 export { default as getBankNameFromCardNumber } from "./modules/getBankNameFromCardNumber";
 // Fix and sort persian string
