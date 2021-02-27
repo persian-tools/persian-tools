@@ -8,7 +8,7 @@ prepare-release:
 
 build-docs:
 	npx rimraf ./docs
-	npx typedoc --options ./typedoc.js
+	npx typedoc --options ./typedoc.js  --media ./images
 .PHONY: build-docs
 
 publish-docs: build-docs
