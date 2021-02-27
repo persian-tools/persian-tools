@@ -34,8 +34,7 @@
 		"url": "git+https://github.com/persian-tools/persian-tools.git"
 	},
 	"files": [
-		"src",
-		"dist"
+		"build"
 	],
 	"keywords": [
 		"persian tools",
