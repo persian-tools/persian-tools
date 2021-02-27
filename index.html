@@ -3,10 +3,11 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Persian Tools - v1.5.0</title>
-	<meta name="description" content="Documentation for Persian Tools - v1.5.0">
+	<title>Persian Tools - v1.6.0-beta.1</title>
+	<meta name="description" content="Documentation for Persian Tools - v1.6.0-beta.1">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
 </head>
 <body>
 <header>
@@ -22,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">Persian Tools - v1.5.0</a>
+					<a href="index.html" class="title">Persian Tools - v1.6.0-beta.1</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -47,12 +48,7 @@
 	</div>
 	<div class="tsd-page-title">
 		<div class="container">
-			<ul class="tsd-breadcrumb">
-				<li>
-					<a href="globals.html">Globals</a>
-				</li>
-			</ul>
-			<h1>Persian Tools - v1.5.0</h1>
+			<h1>Persian Tools - v1.6.0-beta.1</h1>
 		</div>
 	</div>
 </header>
@@ -71,7 +67,7 @@
 						<a href="https://github.com/persian-tools/persian-tools/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="GitHub license"></a>
 						<a href="https://github.com/persian-tools/persian-tools/compare"><img src="https://img.shields.io/badge/PRs-welcome-orange.svg" alt="PRs Welcome"></a>
 						<a href="https://www.codefactor.io/repository/github/persian-tools/persian-tools"><img src="https://www.codefactor.io/repository/github/persian-tools/persian-tools/badge" alt="CodeFactor"></a>
-						<a href="#contributors-"><img src="https://img.shields.io/badge/all_contributors-3-orange.svg" alt="All Contributors"></a>
+						<a href="#contributors-"><img src="https://img.shields.io/badge/all_contributors-5-orange.svg" alt="All Contributors"></a>
 					<a href="https://wallabyjs.com/oss/"><img src="https://img.shields.io/badge/wallaby.js-powered-blue.svg?style=flat&logo=github" alt="Wallaby.js"></a></p>
 				</div>
 				<hr />
@@ -79,19 +75,19 @@
 					<h2>Features</h2>
 				</a>
 				<ul>
-					<li><a href="#convert-persian-words-to-the-number">Convert Persian words to the number</a>.</li>
-					<li><a href="#convert-numbers-to-persian-words">Convert Numbers to Persian words</a>.</li>
-					<li><a href="#add-and-remove-commas">Add and remove commas to numbers</a>.</li>
-					<li><a href="#convert-persian-numbers-to-arabic-or-english-numbers-and-vice-versa">Convert Persian numbers to Arabic or English numbers and vice versa</a>.</li>
-					<li><a href="#validate-iranian-national-number-id-e-melli">Validate Iranian national number(code-e Melli)</a>.</li>
-					<li><a href="#find-city-and-province-name-by-national-code-e-melli">Find city and province name by national code(code-e Melli)</a>.</li>
-					<li><a href="#bill-calculator">Bill calculator</a>.</li>
-					<li><a href="#iranian-shebaiban">Check Iranian Sheba(IBAN) validation and recognize bank information by sheba code</a>.</li>
-					<li><a href="#bank-number-validation-and-get-the-name-of-the-bank-by-bank-account-number">Validate Bank card number</a>.</li>
-					<li><a href="(#bank-number-validation-and-get-the-name-of-the-bank-by-bank-account-number)">Find Bank&#39;s name by Card number</a>.</li>
-					<li><a href="#validate-the-correctness-of-the-text-of-the-persian-language-and-clear-the-arabic-letters-in-the-persian-text">Validate the correctness of the text of the Persian language and clear the Arabic letters in the Persian text</a>.</li>
-					<li><a href="#fix-persian-characters-in-url">Fix Persian characters in URL</a>.</li>
-					<li><a href="#fix-persian-zero-width-non-joinerreplace-spaces-by-half-space">Fix Persian zero-width non-joiner(Replace spaces by half-space)</a></li>
+					<li>  <a href="#convert-persian-words-to-the-number">Convert Persian words to the number</a>.</li>
+					<li>  <a href="#convert-numbers-to-persian-words">Convert Numbers to Persian words</a>.</li>
+					<li>  <a href="#add-and-remove-commas">Add and remove commas to numbers</a>.</li>
+					<li>  <a href="#convert-persian-numbers-to-arabic-or-english-numbers-and-vice-versa">Convert Persian numbers to Arabic or English numbers and vice versa</a>.</li>
+					<li>  <a href="#validate-iranian-national-numbercode-e-melli">Validate Iranian national number(code-e Melli)</a>.</li>
+					<li>  <a href="#find-city-and-province-name-by-national-idcode-e-melli">Find city and province name by national code(code-e Melli)</a>.</li>
+					<li>  <a href="#bill-calculator">Bill calculator</a>.</li>
+					<li>  <a href="#iranian-shebaiban">Check Iranian Sheba(IBAN) validation and recognize bank information by sheba code</a>.</li>
+					<li>  <a href="#bank-number-validation-and-get-the-name-of-the-bank-by-bank-account-number">Validate Bank card number</a>.</li>
+					<li>  <a href="#bank-number-validation-and-get-the-name-of-the-bank-by-bank-account-number">Find Bank&#39;s name by Card number</a>.</li>
+					<li>  <a href="#validate-the-correctness-of-the-text-of-the-persian-language-and-clear-the-arabic-letters-in-the-persian-text">Validate the correctness of the text of the Persian language and clear the Arabic letters in the Persian text</a>.</li>
+					<li>  <a href="#fix-persian-characters-in-url">Fix Persian characters in URL</a>.</li>
+					<li>  <a href="#fix-persian-zero-width-non-joinerreplace-spaces-by-half-space">Fix Persian zero-width non-joiner(Replace spaces by half-space)</a></li>
 				</ul>
 				<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
 					<h2>Getting started</h2>
@@ -104,25 +100,26 @@
 					<h3>via Script Tag</h3>
 				</a>
 				<p>Add the following code to an HTML file:</p>
-				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
-    <span class="hljs-comment">&lt;!-- Load PersianTools.js --&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://cdn.jsdelivr.net/npm/persian-tools2@1.3.0/dist/index.bowser.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+				<pre><code class="language-html"><span style="color: #800000">&lt;html&gt;</span>
+<span style="color: #800000">&lt;head&gt;</span>
+<span style="color: #000000">    </span><span style="color: #008000">&lt;!-- Load PersianTools.js --&gt;</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;https://cdn.jsdelivr.net/npm/persian-tools2@1.5.0/dist/index.bowser.js&quot;</span><span style="color: #800000">&gt;&lt;/script&gt;</span>
 
-    <span class="hljs-comment">&lt;!-- Place your code in the script tag below. You can also use an external .js file --&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text/javascript&quot;</span>&gt;</span><span class="javascript">
-        <span class="hljs-comment">// Notice there is no &#x27;import&#x27; statement. &#x27;all persian-tools functions like digitsEnToFa, etc...&#x27; is available on the index-page</span>
-        <span class="hljs-comment">// because of the script tag above.</span>
+<span style="color: #000000">    </span><span style="color: #008000">&lt;!-- Place your code in the script tag below. You can also use an external .js file --&gt;</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">type</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;text/javascript&quot;</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000FF">        </span><span style="color: #008000">// Notice there is no &#039;import&#039; statement. &#039;all persian-tools functions like digitsEnToFa, etc...&#039; is available on the index-page</span>
+<span style="color: #000000FF">        </span><span style="color: #008000">// because of the script tag above.</span>
 
-        <span class="hljs-comment">// Takes a string made of English digits only, and returns a string that represents the same number but with Persian digits</span>
-        <span class="hljs-keyword">var</span> convertToFa = PersianTools.digitsEnToFa(<span class="hljs-number">1234567</span>);
+<span style="color: #000000FF">        </span><span style="color: #008000">// Takes a string made of English digits only, and returns a string that represents the same number but with Persian digits</span>
+<span style="color: #000000FF">        </span><span style="color: #0000FF">var</span><span style="color: #000000FF"> </span><span style="color: #001080">convertToFa</span><span style="color: #000000FF"> </span><span style="color: #000000">=</span><span style="color: #000000FF"> </span><span style="color: #001080">PersianTools</span><span style="color: #000000FF">.</span><span style="color: #795E26">digitsEnToFa</span><span style="color: #000000FF">(</span><span style="color: #098658">1234567</span><span style="color: #000000FF">);</span>
 
-        <span class="hljs-comment">// etc...</span>
-    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span style="color: #000000FF">        </span><span style="color: #008000">// etc...</span>
+<span style="color: #000000FF">    </span><span style="color: #800000">&lt;/script&gt;</span>
+<span style="color: #800000">&lt;/head&gt;</span>
 
-<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre>
+<span style="color: #800000">&lt;body&gt;&lt;/body&gt;</span>
+<span style="color: #800000">&lt;/html&gt;</span>
+</code></pre>
 				<p>Open up that html file in your browser, and the code should run!</p>
 				<a href="#via-npm" id="via-npm" style="color: inherit; text-decoration: none;">
 					<h3>via NPM</h3>
@@ -130,14 +127,15 @@
 				<p>Add PersianTools.js to your project using <a href="https://yarnpkg.com/en/" target="_blank">yarn</a> <em>or</em> <a href="https://docs.npmjs.com/cli/npm" target="_blank">npm</a>. <b>Note:</b> Because
 					we use ES2017 syntax (such as <code>import</code>), this workflow assumes you are using a modern browser, or a bundler/transpiler
 				to convert your code to something older browsers understand.</p>
-				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> persianTools <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;persian-tools2&quot;</span>;
-<span class="hljs-comment">// or</span>
-<span class="hljs-keyword">import</span> { digitsEnToFa } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;persian-tools2&quot;</span>;
+				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #0000FF">*</span><span style="color: #000000"> </span><span style="color: #AF00DB">as</span><span style="color: #000000"> </span><span style="color: #001080">persianTools</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;persian-tools2&quot;</span><span style="color: #000000">;</span>
+<span style="color: #008000">// or</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">digitsEnToFa</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;persian-tools2&quot;</span><span style="color: #000000">;</span>
 
-<span class="hljs-comment">// Takes a string made of English digits only, and returns a string that represents the same number but with Persian digits</span>
-<span class="hljs-keyword">const</span> convertToFa = persianTools.digitsEnToFa(<span class="hljs-number">1234567</span>);
-<span class="hljs-comment">// or</span>
-<span class="hljs-keyword">const</span> convertToFa = digitsEnToFa(<span class="hljs-number">1234567</span>);</code></pre>
+<span style="color: #008000">// Takes a string made of English digits only, and returns a string that represents the same number but with Persian digits</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">convertToFa</span><span style="color: #000000"> = </span><span style="color: #001080">persianTools</span><span style="color: #000000">.</span><span style="color: #795E26">digitsEnToFa</span><span style="color: #000000">(</span><span style="color: #098658">1234567</span><span style="color: #000000">);</span>
+<span style="color: #008000">// or</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">convertToFa</span><span style="color: #000000"> = </span><span style="color: #795E26">digitsEnToFa</span><span style="color: #000000">(</span><span style="color: #098658">1234567</span><span style="color: #000000">);</span>
+</code></pre>
 				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
 					<h2>Usage</h2>
 				</a>
@@ -170,7 +168,8 @@
 						</tr>
 				</tbody></table>
 				<ul>
-					<li>Convert with no option<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { WordsToNumber } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;persian-tools2&quot;</span>;
+					<li>Convert with no option<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">WordsToNumber</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;persian-tools2&quot;</span><span style="color: #000000">;</span>
+
 </code></pre>
 					</li>
 				</ul>
@@ -179,117 +178,128 @@
 					WordsToNumber.convert(&quot;منفی سه هزار&quot;) // -3000
 					WordsToNumber.convert(&quot;سه هزار دویست و دوازده&quot;) // 3212
 				WordsToNumber.convert(&quot;دوازده هزار بیست دو&quot;) // 12022</p>
-				<pre><code>- Digits converter
-```js
-<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">WordsToNumber</span>.</span></span>convert(<span class="hljs-string">&quot;منفی سه هزارمین&quot;</span>, { digits: <span class="hljs-string">&quot;fa&quot;</span> }) <span class="hljs-comment">// &quot;-۳۰۰۰&quot;</span>
-<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">WordsToNumber</span>.</span></span>convert(<span class="hljs-string">&quot;دوازده هزار بیست دو&quot;</span>, { digits: <span class="hljs-string">&quot;fa&quot;</span> }) <span class="hljs-comment">// ۱۲۰۲۲</span></code></pre>
+				<pre><code><span style="color: #000000">- </span><span style="color: #001080">Digits</span><span style="color: #000000"> </span><span style="color: #001080">converter</span>
+<span style="color: #A31515">```js</span>
+<span style="color: #A31515">WordsToNumber.convert(&quot;منفی سه هزارمین&quot;, { digits: &quot;fa&quot; }) // &quot;-۳۰۰۰&quot;</span>
+<span style="color: #A31515">WordsToNumber.convert(&quot;دوازده هزار بیست دو&quot;, { digits: &quot;fa&quot; }) // ۱۲۰۲۲</span>
+</code></pre>
 				<ul>
-					<li>Add commas<pre><code class="language-js">WordsToNumber.convert(<span class="hljs-string">&quot;منفی سه هزارمین&quot;</span>, { <span class="hljs-attr">addCommas</span>: <span class="hljs-literal">true</span> }) <span class="hljs-comment">// &quot;-3,000&quot;</span>
-WordsToNumber.convert(<span class="hljs-string">&quot;دوازده هزار بیست دو&quot;</span>, { <span class="hljs-attr">addCommas</span>: <span class="hljs-literal">true</span> }) <span class="hljs-comment">// &quot;12,022&quot;</span></code></pre>
+					<li>Add commas<pre><code class="language-js"><span style="color: #001080">WordsToNumber</span><span style="color: #000000">.</span><span style="color: #795E26">convert</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;منفی سه هزارمین&quot;</span><span style="color: #000000">, { </span><span style="color: #001080">addCommas:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000"> }) </span><span style="color: #008000">// &quot;-3,000&quot;</span>
+<span style="color: #001080">WordsToNumber</span><span style="color: #000000">.</span><span style="color: #795E26">convert</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;دوازده هزار بیست دو&quot;</span><span style="color: #000000">, { </span><span style="color: #001080">addCommas:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000"> }) </span><span style="color: #008000">// &quot;12,022&quot;</span>
+</code></pre>
 					</li>
-					<li>Fuzzy typo fixer(<code>v1.5.0</code>):<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { WordsToNumber } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;persian-tools2&quot;</span>;
+					<li>Fuzzy typo fixer(<code>v1.5.0</code>):<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">WordsToNumber</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;persian-tools2&quot;</span><span style="color: #000000">;</span>
+
 </code></pre>
 					</li>
 				</ul>
 				<p>WordsToNumber.convert(&quot;یگصد و بنجاه هزار&quot;, { fuzzy: true }) // &quot;150000&quot;<br>WordsToNumber.convert(&quot;دویشت ر بیشت هزار&quot;, { fuzzy: true }) // &quot;220000&quot;<br>WordsToNumber.convert(&quot;منقی ضد&quot;, { fuzzy: true }) // &quot;-100&quot;  </p>
 				<pre><code>
-### Convert Numbers <span class="hljs-keyword">to</span> Persian words
-```javascript
-import { NumberToWords } from <span class="hljs-string">&quot;persian-tools2&quot;</span>;
+<span style="color: #000000">### </span><span style="color: #001080">Convert</span><span style="color: #000000"> </span><span style="color: #001080">Numbers</span><span style="color: #000000"> </span><span style="color: #001080">to</span><span style="color: #000000"> </span><span style="color: #001080">Persian</span><span style="color: #000000"> </span><span style="color: #001080">words</span>
+<span style="color: #A31515">```javascript</span>
+<span style="color: #A31515">import { NumberToWords } from &quot;persian-tools2&quot;;</span>
 
-<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">NumberToWords</span>.</span></span>convert(<span class="hljs-number">500443</span>) <span class="hljs-comment">// &quot;پانصد هزار و چهار صد و چهل و سه&quot;</span>
-<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">NumberToWords</span>.</span></span>convert(<span class="hljs-string">&quot;500,443&quot;</span>) <span class="hljs-comment">// &quot;پانصد هزار و چهار صد و چهل و سه&quot;</span>
-<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">NumberToWords</span>.</span></span>convert(<span class="hljs-string">&quot;500,443&quot;</span>, { ordinal: <span class="hljs-literal">true</span> }) <span class="hljs-comment">// &quot;پانصد هزار و چهار صد و چهل و سوم&quot;</span>
-<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">NumberToWords</span>.</span></span>convert(<span class="hljs-number">30000000000</span>) <span class="hljs-comment">// &quot;سی میلیارد&quot;</span></code></pre>
+<span style="color: #A31515">NumberToWords.convert(500443) // &quot;پانصد هزار و چهار صد و چهل و سه&quot;</span>
+<span style="color: #A31515">NumberToWords.convert(&quot;500,443&quot;) // &quot;پانصد هزار و چهار صد و چهل و سه&quot;</span>
+<span style="color: #A31515">NumberToWords.convert(&quot;500,443&quot;, { ordinal: true }) // &quot;پانصد هزار و چهار صد و چهل و سوم&quot;</span>
+<span style="color: #A31515">NumberToWords.convert(30000000000) // &quot;سی میلیارد&quot;</span>
+</code></pre>
 				<a href="#add-and-remove-commas" id="add-and-remove-commas" style="color: inherit; text-decoration: none;">
 					<h3>Add and remove commas</h3>
 				</a>
-				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { addCommas, removeCommas } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;persian-tools2&quot;</span>;
+				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">addCommas</span><span style="color: #000000">, </span><span style="color: #001080">removeCommas</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;persian-tools2&quot;</span><span style="color: #000000">;</span>
 
-addCommas(<span class="hljs-number">30000000</span>) <span class="hljs-comment">// &quot;30,000,000&quot;</span>
-addCommas(<span class="hljs-number">300</span>) <span class="hljs-comment">// &quot;300&quot;</span>
+<span style="color: #795E26">addCommas</span><span style="color: #000000">(</span><span style="color: #098658">30000000</span><span style="color: #000000">) </span><span style="color: #008000">// &quot;30,000,000&quot;</span>
+<span style="color: #795E26">addCommas</span><span style="color: #000000">(</span><span style="color: #098658">300</span><span style="color: #000000">) </span><span style="color: #008000">// &quot;300&quot;</span>
 
-removeCommas(<span class="hljs-string">&quot;30,000,000&quot;</span>) <span class="hljs-comment">// 30000000</span>
-removeCommas(<span class="hljs-number">300</span>) <span class="hljs-comment">// 300</span>
-removeCommas(<span class="hljs-string">&quot;300&quot;</span>) <span class="hljs-comment">// 300</span></code></pre>
+<span style="color: #795E26">removeCommas</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;30,000,000&quot;</span><span style="color: #000000">) </span><span style="color: #008000">// 30000000</span>
+<span style="color: #795E26">removeCommas</span><span style="color: #000000">(</span><span style="color: #098658">300</span><span style="color: #000000">) </span><span style="color: #008000">// 300</span>
+<span style="color: #795E26">removeCommas</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;300&quot;</span><span style="color: #000000">) </span><span style="color: #008000">// 300</span>
+</code></pre>
 				<a href="#convert-persian-numbers-to-arabic-or-english-numbers-and-vice-versa" id="convert-persian-numbers-to-arabic-or-english-numbers-and-vice-versa" style="color: inherit; text-decoration: none;">
 					<h3>Convert Persian numbers to Arabic or English numbers and vice versa</h3>
 				</a>
-				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { digitsArToFa, digitsArToEn, digitsEnToFa, digitsFaToEn } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;persian-tools2&quot;</span>;
+				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">digitsArToFa</span><span style="color: #000000">, </span><span style="color: #001080">digitsArToEn</span><span style="color: #000000">, </span><span style="color: #001080">digitsEnToFa</span><span style="color: #000000">, </span><span style="color: #001080">digitsFaToEn</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;persian-tools2&quot;</span><span style="color: #000000">;</span>
 
-digitsArToFa(<span class="hljs-string">&quot;٠١٢٣٤٥٦٧٨٩&quot;</span>); <span class="hljs-comment">// &quot;۰۱۲۳۴۵۶۷۸۹&quot;</span>
-digitsArToFa(<span class="hljs-string">&quot;۸۹123۴۵&quot;</span>); <span class="hljs-comment">// &quot;۸۹123۴۵&quot;</span>
-digitsArToFa(<span class="hljs-number">456128</span>); <span class="hljs-comment">// &quot;456128&quot;</span>
-digitsArToFa(<span class="hljs-string">&quot;Text ٠١٢٣٤٥٦٧٨٩&quot;</span>); <span class="hljs-comment">// &quot;Text ۰۱۲۳۴۵۶۷۸۹&quot;</span>
+<span style="color: #795E26">digitsArToFa</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;٠١٢٣٤٥٦٧٨٩&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;۰۱۲۳۴۵۶۷۸۹&quot;</span>
+<span style="color: #795E26">digitsArToFa</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;۸۹123۴۵&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;۸۹123۴۵&quot;</span>
+<span style="color: #795E26">digitsArToFa</span><span style="color: #000000">(</span><span style="color: #098658">456128</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;456128&quot;</span>
+<span style="color: #795E26">digitsArToFa</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Text ٠١٢٣٤٥٦٧٨٩&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;Text ۰۱۲۳۴۵۶۷۸۹&quot;</span>
 
-digitsArToEn(<span class="hljs-string">&quot;٠١٢٣٤٥٦٧٨٩&quot;</span>); <span class="hljs-comment">// &quot;0123456789&quot;</span>
-digitsArToEn(<span class="hljs-string">&quot;٨٩123٤٥&quot;</span>); <span class="hljs-comment">// &quot;8912345&quot;</span>
-digitsArToEn(<span class="hljs-number">456128</span>); <span class="hljs-comment">// &quot;456128&quot;</span>
+<span style="color: #795E26">digitsArToEn</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;٠١٢٣٤٥٦٧٨٩&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;0123456789&quot;</span>
+<span style="color: #795E26">digitsArToEn</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;٨٩123٤٥&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;8912345&quot;</span>
+<span style="color: #795E26">digitsArToEn</span><span style="color: #000000">(</span><span style="color: #098658">456128</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;456128&quot;</span>
 
-digitsArToEn(<span class="hljs-string">&quot;Text ٠١٢٣٤٥٦٧٨٩&quot;</span>); <span class="hljs-comment">// &quot;Text 0123456789&quot;</span>
+<span style="color: #795E26">digitsArToEn</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Text ٠١٢٣٤٥٦٧٨٩&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;Text 0123456789&quot;</span>
 
-digitsEnToFa(<span class="hljs-string">&quot;123۴۵۶&quot;</span>); <span class="hljs-comment">// &quot;۱۲۳۴۵۶&quot;</span>
-digitsEnToFa(<span class="hljs-string">&quot;٤٥٦&quot;</span>); <span class="hljs-comment">// &quot;٤٥٦&quot;</span>
-digitsEnToFa(<span class="hljs-string">&quot;123۴۵۶&quot;</span>); <span class="hljs-comment">// &quot;۱۲۳۴۵۶&quot;</span>
+<span style="color: #795E26">digitsEnToFa</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;123۴۵۶&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;۱۲۳۴۵۶&quot;</span>
+<span style="color: #795E26">digitsEnToFa</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;٤٥٦&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;٤٥٦&quot;</span>
+<span style="color: #795E26">digitsEnToFa</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;123۴۵۶&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;۱۲۳۴۵۶&quot;</span>
 
-digitsFaToEn(<span class="hljs-string">&quot;123۴۵۶&quot;</span>); <span class="hljs-comment">// &quot;123456&quot;</span>
-digitsFaToEn(<span class="hljs-string">&quot;۸۹123۴۵&quot;</span>); <span class="hljs-comment">// &quot;8912345&quot;</span>
-digitsFaToEn(<span class="hljs-string">&quot;۰۱۲۳۴۵۶۷۸۹&quot;</span>); <span class="hljs-comment">// &quot;0123456789&quot;</span></code></pre>
+<span style="color: #795E26">digitsFaToEn</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;123۴۵۶&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;123456&quot;</span>
+<span style="color: #795E26">digitsFaToEn</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;۸۹123۴۵&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;8912345&quot;</span>
+<span style="color: #795E26">digitsFaToEn</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;۰۱۲۳۴۵۶۷۸۹&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;0123456789&quot;</span>
+</code></pre>
 				<a href="#validate-iranian-national-numbercode-e-melli" id="validate-iranian-national-numbercode-e-melli" style="color: inherit; text-decoration: none;">
 					<h3>Validate Iranian national number(code-e Melli)</h3>
 				</a>
-				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { verifyIranianNationalId, getPlaceByIranNationalId } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;persian-tools2&quot;</span>;
+				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">verifyIranianNationalId</span><span style="color: #000000">, </span><span style="color: #001080">getPlaceByIranNationalId</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;persian-tools2&quot;</span><span style="color: #000000">;</span>
 
-verifyIranianNationalId(<span class="hljs-string">&quot;0499370899&quot;</span>); <span class="hljs-comment">// true</span>
-verifyIranianNationalId(<span class="hljs-string">&quot;0790419904&quot;</span>); <span class="hljs-comment">// true</span>
-verifyIranianNationalId(<span class="hljs-string">&quot;0084575948&quot;</span>); <span class="hljs-comment">// true</span>
-verifyIranianNationalId(<span class="hljs-string">&quot;0963695398&quot;</span>); <span class="hljs-comment">// true</span>
-verifyIranianNationalId(<span class="hljs-string">&quot;0684159414&quot;</span>); <span class="hljs-comment">// true</span>
-verifyIranianNationalId(<span class="hljs-string">&quot;0067749828&quot;</span>); <span class="hljs-comment">// true</span>
-verifyIranianNationalId(<span class="hljs-string">&quot;0684159415&quot;</span>); <span class="hljs-comment">// false</span></code></pre>
+<span style="color: #795E26">verifyIranianNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0499370899&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// true</span>
+<span style="color: #795E26">verifyIranianNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0790419904&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// true</span>
+<span style="color: #795E26">verifyIranianNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0084575948&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// true</span>
+<span style="color: #795E26">verifyIranianNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0963695398&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// true</span>
+<span style="color: #795E26">verifyIranianNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0684159414&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// true</span>
+<span style="color: #795E26">verifyIranianNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0067749828&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// true</span>
+<span style="color: #795E26">verifyIranianNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0684159415&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// false</span>
+</code></pre>
 				<a href="#find-city-and-province-name-by-national-idcode-e-melli" id="find-city-and-province-name-by-national-idcode-e-melli" style="color: inherit; text-decoration: none;">
 					<h3>Find city and province name by national-id(code-e Melli)</h3>
 				</a>
-				<pre><code class="language-javascript">getPlaceByIranNationalId(<span class="hljs-string">&quot;0499370899&quot;</span>).city; <span class="hljs-comment">// &quot;شهرری&quot;</span>
-getPlaceByIranNationalId(<span class="hljs-string">&quot;0790419904&quot;</span>).city; <span class="hljs-comment">// &quot;سبزوار&quot;</span>
-getPlaceByIranNationalId(<span class="hljs-string">&quot;0084575948&quot;</span>).city; <span class="hljs-comment">// &quot;تهران مرکزی&quot;</span>
-getPlaceByIranNationalId(<span class="hljs-string">&quot;0060495219&quot;</span>).city; <span class="hljs-comment">// &quot;تهران مرکزی&quot;</span>
-getPlaceByIranNationalId(<span class="hljs-string">&quot;0084545943&quot;</span>).city; <span class="hljs-comment">// &quot;تهران مرکزی&quot;</span>
-getPlaceByIranNationalId(<span class="hljs-string">&quot;0671658506&quot;</span>).city; <span class="hljs-comment">// &quot;بجنورد&quot;</span>
-getPlaceByIranNationalId(<span class="hljs-string">&quot;0671658506&quot;</span>).city; <span class="hljs-comment">// &quot;بجنورد&quot;</span>
-getPlaceByIranNationalId(<span class="hljs-string">&quot;0643005846&quot;</span>).city; <span class="hljs-comment">// &quot;بیرجند&quot;</span>
-getPlaceByIranNationalId(<span class="hljs-string">&quot;0906582709&quot;</span>).city; <span class="hljs-comment">// &quot;کاشمر&quot;</span>
-getPlaceByIranNationalId(<span class="hljs-string">&quot;0451727304&quot;</span>).city; <span class="hljs-comment">// &quot;شمیران&quot;</span>
-getPlaceByIranNationalId(<span class="hljs-string">&quot;0371359058&quot;</span>).city; <span class="hljs-comment">// &quot;قم&quot;</span></code></pre>
+				<pre><code class="language-javascript"><span style="color: #795E26">getPlaceByIranNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0499370899&quot;</span><span style="color: #000000">).</span><span style="color: #001080">city</span><span style="color: #000000">; </span><span style="color: #008000">// &quot;شهرری&quot;</span>
+<span style="color: #795E26">getPlaceByIranNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0790419904&quot;</span><span style="color: #000000">).</span><span style="color: #001080">city</span><span style="color: #000000">; </span><span style="color: #008000">// &quot;سبزوار&quot;</span>
+<span style="color: #795E26">getPlaceByIranNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0084575948&quot;</span><span style="color: #000000">).</span><span style="color: #001080">city</span><span style="color: #000000">; </span><span style="color: #008000">// &quot;تهران مرکزی&quot;</span>
+<span style="color: #795E26">getPlaceByIranNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0060495219&quot;</span><span style="color: #000000">).</span><span style="color: #001080">city</span><span style="color: #000000">; </span><span style="color: #008000">// &quot;تهران مرکزی&quot;</span>
+<span style="color: #795E26">getPlaceByIranNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0084545943&quot;</span><span style="color: #000000">).</span><span style="color: #001080">city</span><span style="color: #000000">; </span><span style="color: #008000">// &quot;تهران مرکزی&quot;</span>
+<span style="color: #795E26">getPlaceByIranNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0671658506&quot;</span><span style="color: #000000">).</span><span style="color: #001080">city</span><span style="color: #000000">; </span><span style="color: #008000">// &quot;بجنورد&quot;</span>
+<span style="color: #795E26">getPlaceByIranNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0671658506&quot;</span><span style="color: #000000">).</span><span style="color: #001080">city</span><span style="color: #000000">; </span><span style="color: #008000">// &quot;بجنورد&quot;</span>
+<span style="color: #795E26">getPlaceByIranNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0643005846&quot;</span><span style="color: #000000">).</span><span style="color: #001080">city</span><span style="color: #000000">; </span><span style="color: #008000">// &quot;بیرجند&quot;</span>
+<span style="color: #795E26">getPlaceByIranNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0906582709&quot;</span><span style="color: #000000">).</span><span style="color: #001080">city</span><span style="color: #000000">; </span><span style="color: #008000">// &quot;کاشمر&quot;</span>
+<span style="color: #795E26">getPlaceByIranNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0451727304&quot;</span><span style="color: #000000">).</span><span style="color: #001080">city</span><span style="color: #000000">; </span><span style="color: #008000">// &quot;شمیران&quot;</span>
+<span style="color: #795E26">getPlaceByIranNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0371359058&quot;</span><span style="color: #000000">).</span><span style="color: #001080">city</span><span style="color: #000000">; </span><span style="color: #008000">// &quot;قم&quot;</span>
+</code></pre>
 				<a href="#bank-number-validation-and-get-the-name-of-the-bank-by-bank-account-number" id="bank-number-validation-and-get-the-name-of-the-bank-by-bank-account-number" style="color: inherit; text-decoration: none;">
 					<h3>Bank number validation and get the name of the bank by bank account number</h3>
 				</a>
-				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { verifyCardNumber, getBankNameFromCardNumber } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;persian-tools2&quot;</span>;
+				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">verifyCardNumber</span><span style="color: #000000">, </span><span style="color: #001080">getBankNameFromCardNumber</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;persian-tools2&quot;</span><span style="color: #000000">;</span>
 
-verifyCardNumber(<span class="hljs-number">6037701689095443</span>); <span class="hljs-comment">// true</span>
-verifyCardNumber(<span class="hljs-number">6219861034529007</span>); <span class="hljs-comment">// true</span>
-verifyCardNumber(<span class="hljs-number">6219861034529008</span>); <span class="hljs-comment">// false</span>
-getBankNameFromCardNumber(<span class="hljs-number">6037701689095443</span>); <span class="hljs-comment">// &quot;بانک کشاورزی&quot;</span>
-getBankNameFromCardNumber(<span class="hljs-number">6219861034529007</span>); <span class="hljs-comment">// &quot;بانک سامان&quot;</span>
-getBankNameFromCardNumber(<span class="hljs-string">&quot;6219861034529007&quot;</span>); <span class="hljs-comment">// &quot;بانک سامان&quot;</span></code></pre>
+<span style="color: #795E26">verifyCardNumber</span><span style="color: #000000">(</span><span style="color: #098658">6037701689095443</span><span style="color: #000000">); </span><span style="color: #008000">// true</span>
+<span style="color: #795E26">verifyCardNumber</span><span style="color: #000000">(</span><span style="color: #098658">6219861034529007</span><span style="color: #000000">); </span><span style="color: #008000">// true</span>
+<span style="color: #795E26">verifyCardNumber</span><span style="color: #000000">(</span><span style="color: #098658">6219861034529008</span><span style="color: #000000">); </span><span style="color: #008000">// false</span>
+<span style="color: #795E26">getBankNameFromCardNumber</span><span style="color: #000000">(</span><span style="color: #098658">6037701689095443</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;بانک کشاورزی&quot;</span>
+<span style="color: #795E26">getBankNameFromCardNumber</span><span style="color: #000000">(</span><span style="color: #098658">6219861034529007</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;بانک سامان&quot;</span>
+<span style="color: #795E26">getBankNameFromCardNumber</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;6219861034529007&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;بانک سامان&quot;</span>
+</code></pre>
 				<a href="#validate-the-correctness-of-the-text-of-the-persian-language-and-clear-the-arabic-letters-in-the-persian-text" id="validate-the-correctness-of-the-text-of-the-persian-language-and-clear-the-arabic-letters-in-the-persian-text" style="color: inherit; text-decoration: none;">
 					<h3>Validate the correctness of the text of the Persian language and clear the Arabic letters in the Persian text.</h3>
 				</a>
-				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { isPersian, toPersianChars } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;persian-tools2&quot;</span>;
+				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">isPersian</span><span style="color: #000000">, </span><span style="color: #001080">toPersianChars</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;persian-tools2&quot;</span><span style="color: #000000">;</span>
 
-isPersian(<span class="hljs-string">&quot;این یک متن فارسی است؟&quot;</span>) <span class="hljs-comment">// true</span>
-isPersian(<span class="hljs-string">&quot;Lorem Ipsum Test&quot;</span>) <span class="hljs-comment">// false</span>
-toPersianChars(<span class="hljs-string">&quot;علي&quot;</span>)) <span class="hljs-comment">// علی</span></code></pre>
+<span style="color: #795E26">isPersian</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;این یک متن فارسی است؟&quot;</span><span style="color: #000000">) </span><span style="color: #008000">// true</span>
+<span style="color: #795E26">isPersian</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Lorem Ipsum Test&quot;</span><span style="color: #000000">) </span><span style="color: #008000">// false</span>
+<span style="color: #795E26">toPersianChars</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;علي&quot;</span><span style="color: #000000">)) </span><span style="color: #008000">// علی</span>
+</code></pre>
 				<a href="#fix-persian-characters-in-url" id="fix-persian-characters-in-url" style="color: inherit; text-decoration: none;">
 					<h3>Fix Persian characters in URL.</h3>
 				</a>
-				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { isPersian, toPersianChars } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;persian-tools2&quot;</span>;
+				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">isPersian</span><span style="color: #000000">, </span><span style="color: #001080">toPersianChars</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;persian-tools2&quot;</span><span style="color: #000000">;</span>
 
-URLfix(
-    <span class="hljs-string">&quot;https://fa.wikipedia.org/wiki/%D9%85%D8%AF%DB%8C%D8%A7%D9%88%DB%8C%DA%A9%DB%8C:Gadget-Extra-Editbuttons-botworks.js&quot;</span>,
-); <span class="hljs-comment">// &quot;https://fa.wikipedia.org/wiki/مدیاویکی:Gadget-Extra-Editbuttons-botworks.js&quot;</span>
-URLfix(<span class="hljs-string">&quot;https://en.wikipedia.org/wiki/Persian_alphabet&quot;</span>); <span class="hljs-comment">// &quot;https://en.wikipedia.org/wiki/Persian_alphabet&quot;,</span>
-URLfix(<span class="hljs-string">&quot;Sample Text&quot;</span>); <span class="hljs-comment">// &quot;Sample Text&quot;</span></code></pre>
+<span style="color: #795E26">URLfix</span><span style="color: #000000">(</span>
+<span style="color: #000000">    </span><span style="color: #A31515">&quot;https://fa.wikipedia.org/wiki/%D9%85%D8%AF%DB%8C%D8%A7%D9%88%DB%8C%DA%A9%DB%8C:Gadget-Extra-Editbuttons-botworks.js&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">); </span><span style="color: #008000">// &quot;https://fa.wikipedia.org/wiki/مدیاویکی:Gadget-Extra-Editbuttons-botworks.js&quot;</span>
+<span style="color: #795E26">URLfix</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;https://en.wikipedia.org/wiki/Persian_alphabet&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;https://en.wikipedia.org/wiki/Persian_alphabet&quot;,</span>
+<span style="color: #795E26">URLfix</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Sample Text&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;Sample Text&quot;</span>
+</code></pre>
 				<a href="#bill-calculator" id="bill-calculator" style="color: inherit; text-decoration: none;">
 					<h3>Bill calculator</h3>
 				</a>
@@ -337,72 +347,76 @@ URLfix(<span class="hljs-string">&quot;Sample Text&quot;</span>); <span class="h
 							<td><code>boolean</code></td>
 						</tr>
 				</tbody></table>
-				<pre><code class="language-js"><span class="hljs-keyword">import</span> { Bill } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;persian-tools2&quot;</span>;
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Bill</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;persian-tools2&quot;</span><span style="color: #000000">;</span>
 
-<span class="hljs-comment">// Calculate bill amount by bill id and payment id</span>
-<span class="hljs-comment">// Convert to Iranian Rials</span>
-<span class="hljs-keyword">new</span> Bill({ <span class="hljs-attr">billId</span>: <span class="hljs-number">1117753200140</span>, <span class="hljs-attr">paymentId</span>: <span class="hljs-number">12070160</span>, <span class="hljs-attr">currency</span>: <span class="hljs-string">&quot;rial&quot;</span> }).getResult().amount; <span class="hljs-comment">// 120000</span>
-<span class="hljs-comment">// Return bill amount by Toman(Iranian currency type) by default</span>
-<span class="hljs-keyword">new</span> Bill({ <span class="hljs-attr">billId</span>: <span class="hljs-number">1117753200140</span>, <span class="hljs-attr">paymentId</span>: <span class="hljs-number">12070160</span> }).getResult().amount; <span class="hljs-comment">// 12000</span>
+<span style="color: #008000">// Calculate bill amount by bill id and payment id</span>
+<span style="color: #008000">// Convert to Iranian Rials</span>
+<span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Bill</span><span style="color: #000000">({ </span><span style="color: #001080">billId:</span><span style="color: #000000"> </span><span style="color: #098658">1117753200140</span><span style="color: #000000">, </span><span style="color: #001080">paymentId:</span><span style="color: #000000"> </span><span style="color: #098658">12070160</span><span style="color: #000000">, </span><span style="color: #001080">currency:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;rial&quot;</span><span style="color: #000000"> }).</span><span style="color: #795E26">getResult</span><span style="color: #000000">().</span><span style="color: #001080">amount</span><span style="color: #000000">; </span><span style="color: #008000">// 120000</span>
+<span style="color: #008000">// Return bill amount by Toman(Iranian currency type) by default</span>
+<span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Bill</span><span style="color: #000000">({ </span><span style="color: #001080">billId:</span><span style="color: #000000"> </span><span style="color: #098658">1117753200140</span><span style="color: #000000">, </span><span style="color: #001080">paymentId:</span><span style="color: #000000"> </span><span style="color: #098658">12070160</span><span style="color: #000000"> }).</span><span style="color: #795E26">getResult</span><span style="color: #000000">().</span><span style="color: #001080">amount</span><span style="color: #000000">; </span><span style="color: #008000">// 12000</span>
 
-<span class="hljs-comment">// Find Bill&#x27;s type by bill id and payment id</span>
-<span class="hljs-keyword">new</span> Bill({ <span class="hljs-attr">billId</span>: <span class="hljs-number">7748317800142</span>, <span class="hljs-attr">paymentId</span>: <span class="hljs-number">1770160</span> }).getResult().type; <span class="hljs-comment">// تلفن ثابت</span>
-<span class="hljs-keyword">new</span> Bill({ <span class="hljs-attr">billId</span>: <span class="hljs-number">9174639504124</span>, <span class="hljs-attr">paymentId</span>: <span class="hljs-number">12908197</span> }).getResult().type; <span class="hljs-comment">// برق</span>
-<span class="hljs-keyword">new</span> Bill({ <span class="hljs-attr">billId</span>: <span class="hljs-number">2050327604613</span>, <span class="hljs-attr">paymentId</span>: <span class="hljs-number">1070189</span> }).getResult().type; <span class="hljs-comment">// آب</span>
-<span class="hljs-keyword">new</span> Bill({ <span class="hljs-attr">billId</span>: <span class="hljs-number">9100074409151</span>, <span class="hljs-attr">paymentId</span>: <span class="hljs-number">12908190</span> }).getResult().type; <span class="hljs-comment">// تلفن همراه</span>
-<span class="hljs-keyword">new</span> Bill({ <span class="hljs-attr">billId</span>: <span class="hljs-number">7748317800105</span>, <span class="hljs-attr">paymentId</span>: <span class="hljs-number">1770160</span> }).getResult().type; <span class="hljs-comment">// unknown</span>
+<span style="color: #008000">// Find Bill&#039;s type by bill id and payment id</span>
+<span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Bill</span><span style="color: #000000">({ </span><span style="color: #001080">billId:</span><span style="color: #000000"> </span><span style="color: #098658">7748317800142</span><span style="color: #000000">, </span><span style="color: #001080">paymentId:</span><span style="color: #000000"> </span><span style="color: #098658">1770160</span><span style="color: #000000"> }).</span><span style="color: #795E26">getResult</span><span style="color: #000000">().</span><span style="color: #001080">type</span><span style="color: #000000">; </span><span style="color: #008000">// تلفن ثابت</span>
+<span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Bill</span><span style="color: #000000">({ </span><span style="color: #001080">billId:</span><span style="color: #000000"> </span><span style="color: #098658">9174639504124</span><span style="color: #000000">, </span><span style="color: #001080">paymentId:</span><span style="color: #000000"> </span><span style="color: #098658">12908197</span><span style="color: #000000"> }).</span><span style="color: #795E26">getResult</span><span style="color: #000000">().</span><span style="color: #001080">type</span><span style="color: #000000">; </span><span style="color: #008000">// برق</span>
+<span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Bill</span><span style="color: #000000">({ </span><span style="color: #001080">billId:</span><span style="color: #000000"> </span><span style="color: #098658">2050327604613</span><span style="color: #000000">, </span><span style="color: #001080">paymentId:</span><span style="color: #000000"> </span><span style="color: #098658">1070189</span><span style="color: #000000"> }).</span><span style="color: #795E26">getResult</span><span style="color: #000000">().</span><span style="color: #001080">type</span><span style="color: #000000">; </span><span style="color: #008000">// آب</span>
+<span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Bill</span><span style="color: #000000">({ </span><span style="color: #001080">billId:</span><span style="color: #000000"> </span><span style="color: #098658">9100074409151</span><span style="color: #000000">, </span><span style="color: #001080">paymentId:</span><span style="color: #000000"> </span><span style="color: #098658">12908190</span><span style="color: #000000"> }).</span><span style="color: #795E26">getResult</span><span style="color: #000000">().</span><span style="color: #001080">type</span><span style="color: #000000">; </span><span style="color: #008000">// تلفن همراه</span>
+<span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Bill</span><span style="color: #000000">({ </span><span style="color: #001080">billId:</span><span style="color: #000000"> </span><span style="color: #098658">7748317800105</span><span style="color: #000000">, </span><span style="color: #001080">paymentId:</span><span style="color: #000000"> </span><span style="color: #098658">1770160</span><span style="color: #000000"> }).</span><span style="color: #795E26">getResult</span><span style="color: #000000">().</span><span style="color: #001080">type</span><span style="color: #000000">; </span><span style="color: #008000">// unknown</span>
 
-<span class="hljs-comment">// Check Bill id validation</span>
-<span class="hljs-keyword">new</span> Bill({ <span class="hljs-attr">billId</span>: <span class="hljs-number">7748317800142</span>, <span class="hljs-attr">paymentId</span>: <span class="hljs-number">1770160</span> }).getResult().isValidBillId; <span class="hljs-comment">// true</span>
-<span class="hljs-keyword">new</span> Bill({ <span class="hljs-attr">billId</span>: <span class="hljs-number">2234322344613</span>, <span class="hljs-attr">paymentId</span>: <span class="hljs-number">1070189</span> }).getResult().isValidBillId; <span class="hljs-comment">// false</span>
+<span style="color: #008000">// Check Bill id validation</span>
+<span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Bill</span><span style="color: #000000">({ </span><span style="color: #001080">billId:</span><span style="color: #000000"> </span><span style="color: #098658">7748317800142</span><span style="color: #000000">, </span><span style="color: #001080">paymentId:</span><span style="color: #000000"> </span><span style="color: #098658">1770160</span><span style="color: #000000"> }).</span><span style="color: #795E26">getResult</span><span style="color: #000000">().</span><span style="color: #001080">isValidBillId</span><span style="color: #000000">; </span><span style="color: #008000">// true</span>
+<span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Bill</span><span style="color: #000000">({ </span><span style="color: #001080">billId:</span><span style="color: #000000"> </span><span style="color: #098658">2234322344613</span><span style="color: #000000">, </span><span style="color: #001080">paymentId:</span><span style="color: #000000"> </span><span style="color: #098658">1070189</span><span style="color: #000000"> }).</span><span style="color: #795E26">getResult</span><span style="color: #000000">().</span><span style="color: #001080">isValidBillId</span><span style="color: #000000">; </span><span style="color: #008000">// false</span>
 
-<span class="hljs-comment">// Check Bill&#x27;s payment id validation</span>
-<span class="hljs-keyword">new</span> Bill({ <span class="hljs-attr">billId</span>: <span class="hljs-number">7748317800142</span>, <span class="hljs-attr">paymentId</span>: <span class="hljs-number">1770160</span> }).getResult().isValidBillPayment; <span class="hljs-comment">// true</span>
-<span class="hljs-keyword">new</span> Bill({ <span class="hljs-attr">billId</span>: <span class="hljs-number">9174639504124</span>, <span class="hljs-attr">paymentId</span>: <span class="hljs-number">12908197</span> }).getResult().isValidBillPayment; <span class="hljs-comment">// false</span>
+<span style="color: #008000">// Check Bill&#039;s payment id validation</span>
+<span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Bill</span><span style="color: #000000">({ </span><span style="color: #001080">billId:</span><span style="color: #000000"> </span><span style="color: #098658">7748317800142</span><span style="color: #000000">, </span><span style="color: #001080">paymentId:</span><span style="color: #000000"> </span><span style="color: #098658">1770160</span><span style="color: #000000"> }).</span><span style="color: #795E26">getResult</span><span style="color: #000000">().</span><span style="color: #001080">isValidBillPayment</span><span style="color: #000000">; </span><span style="color: #008000">// true</span>
+<span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Bill</span><span style="color: #000000">({ </span><span style="color: #001080">billId:</span><span style="color: #000000"> </span><span style="color: #098658">9174639504124</span><span style="color: #000000">, </span><span style="color: #001080">paymentId:</span><span style="color: #000000"> </span><span style="color: #098658">12908197</span><span style="color: #000000"> }).</span><span style="color: #795E26">getResult</span><span style="color: #000000">().</span><span style="color: #001080">isValidBillPayment</span><span style="color: #000000">; </span><span style="color: #008000">// false</span>
 
-<span class="hljs-comment">// Check Bill id and payment id relations which is valid or not</span>
-<span class="hljs-keyword">new</span> Bill({ <span class="hljs-attr">billId</span>: <span class="hljs-number">7748317800142</span>, <span class="hljs-attr">paymentId</span>: <span class="hljs-number">1770160</span> }).getResult().isValid; <span class="hljs-comment">// true</span>
-<span class="hljs-keyword">new</span> Bill({ <span class="hljs-attr">billId</span>: <span class="hljs-number">2234322344613</span>, <span class="hljs-attr">paymentId</span>: <span class="hljs-number">1070189</span> }).getResult().isValid; <span class="hljs-comment">// false</span>
+<span style="color: #008000">// Check Bill id and payment id relations which is valid or not</span>
+<span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Bill</span><span style="color: #000000">({ </span><span style="color: #001080">billId:</span><span style="color: #000000"> </span><span style="color: #098658">7748317800142</span><span style="color: #000000">, </span><span style="color: #001080">paymentId:</span><span style="color: #000000"> </span><span style="color: #098658">1770160</span><span style="color: #000000"> }).</span><span style="color: #795E26">getResult</span><span style="color: #000000">().</span><span style="color: #001080">isValid</span><span style="color: #000000">; </span><span style="color: #008000">// true</span>
+<span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Bill</span><span style="color: #000000">({ </span><span style="color: #001080">billId:</span><span style="color: #000000"> </span><span style="color: #098658">2234322344613</span><span style="color: #000000">, </span><span style="color: #001080">paymentId:</span><span style="color: #000000"> </span><span style="color: #098658">1070189</span><span style="color: #000000"> }).</span><span style="color: #795E26">getResult</span><span style="color: #000000">().</span><span style="color: #001080">isValid</span><span style="color: #000000">; </span><span style="color: #008000">// false</span>
 
-<span class="hljs-comment">// Get barcode from billId and paymentId</span>
-<span class="hljs-keyword">new</span> Bill({ <span class="hljs-attr">billId</span>: <span class="hljs-number">7748317800142</span>, <span class="hljs-attr">paymentId</span>: <span class="hljs-number">1770160</span> }).getResult().barcode; <span class="hljs-comment">// 77483178001420001770160</span>
-<span class="hljs-keyword">new</span> Bill({ <span class="hljs-attr">billId</span>: <span class="hljs-number">9174639504124</span>, <span class="hljs-attr">paymentId</span>: <span class="hljs-number">12908197</span> }).getResult().barcode; <span class="hljs-comment">// 917463950412400012908197</span>
+<span style="color: #008000">// Get barcode from billId and paymentId</span>
+<span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Bill</span><span style="color: #000000">({ </span><span style="color: #001080">billId:</span><span style="color: #000000"> </span><span style="color: #098658">7748317800142</span><span style="color: #000000">, </span><span style="color: #001080">paymentId:</span><span style="color: #000000"> </span><span style="color: #098658">1770160</span><span style="color: #000000"> }).</span><span style="color: #795E26">getResult</span><span style="color: #000000">().</span><span style="color: #001080">barcode</span><span style="color: #000000">; </span><span style="color: #008000">// 77483178001420001770160</span>
+<span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Bill</span><span style="color: #000000">({ </span><span style="color: #001080">billId:</span><span style="color: #000000"> </span><span style="color: #098658">9174639504124</span><span style="color: #000000">, </span><span style="color: #001080">paymentId:</span><span style="color: #000000"> </span><span style="color: #098658">12908197</span><span style="color: #000000"> }).</span><span style="color: #795E26">getResult</span><span style="color: #000000">().</span><span style="color: #001080">barcode</span><span style="color: #000000">; </span><span style="color: #008000">// 917463950412400012908197</span>
 
-<span class="hljs-comment">// Get bill bill id and payment id by bill&#x27;s barcode</span>
-<span class="hljs-keyword">new</span> Bill({ <span class="hljs-attr">barcode</span>: <span class="hljs-string">&quot;22343223446130001070189&quot;</span> }).findByBarcode(); <span class="hljs-comment">// { billId: 2234322344613 , paymentId: 1070189 }</span></code></pre>
+<span style="color: #008000">// Get bill bill id and payment id by bill&#039;s barcode</span>
+<span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Bill</span><span style="color: #000000">({ </span><span style="color: #001080">barcode:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;22343223446130001070189&quot;</span><span style="color: #000000"> }).</span><span style="color: #795E26">findByBarcode</span><span style="color: #000000">(); </span><span style="color: #008000">// { billId: 2234322344613 , paymentId: 1070189 }</span>
+</code></pre>
 				<a href="#iranian-shebaiban" id="iranian-shebaiban" style="color: inherit; text-decoration: none;">
 					<h3>Iranian Sheba(IBAN)</h3>
 				</a>
 				<ul>
-					<li>Check validation<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { Sheba } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;persian-tools2&quot;</span>;
+					<li>Check validation<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Sheba</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;persian-tools2&quot;</span><span style="color: #000000">;</span>
+
 </code></pre>
 					</li>
 				</ul>
 				<p>new Sheba(&quot;IR820540102680020817909002&quot;).validate(); // true
 				new Sheba(&quot;IR01234567890123456789&quot;).validate() // false</p>
 				<pre><code>
-- Recognize bank information 
-```javascript
-<span class="hljs-keyword">import</span> { Sheba } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;persian-tools2&quot;</span>;
+<span style="color: #000000">- </span><span style="color: #001080">Recognize</span><span style="color: #000000"> </span><span style="color: #001080">bank</span><span style="color: #000000"> </span><span style="color: #001080">information</span><span style="color: #000000"> </span>
+<span style="color: #A31515">```javascript</span>
+<span style="color: #A31515">import { Sheba } from &quot;persian-tools2&quot;;</span>
 
-new Sheba(<span class="hljs-string">&quot;IR820540102680020817909002&quot;</span>).recognize();
-/*
- Result: {
-    <span class="hljs-string">&quot;nickname&quot;</span>: <span class="hljs-string">&quot;parsian&quot;</span>,
-    <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Parsian Bank&quot;</span>,
-    <span class="hljs-string">&quot;persianName&quot;</span>: <span class="hljs-string">&quot;بانک پارسیان&quot;</span>,
-    <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-string">&quot;054&quot;</span>,
-    <span class="hljs-string">&quot;accountNumberAvailable&quot;</span>: <span class="hljs-literal">true</span>,
-    <span class="hljs-string">&quot;accountNumber&quot;</span>: <span class="hljs-string">&quot;020817909002&quot;</span>,
-    <span class="hljs-string">&quot;formattedAccountNumber&quot;</span>: <span class="hljs-string">&quot;002-00817909-002&quot;</span>
-  }
-*/</code></pre>
+<span style="color: #A31515">new Sheba(&quot;IR820540102680020817909002&quot;).recognize();</span>
+<span style="color: #A31515">/*</span>
+<span style="color: #A31515"> Result: {</span>
+<span style="color: #A31515">    &quot;nickname&quot;: &quot;parsian&quot;,</span>
+<span style="color: #A31515">    &quot;name&quot;: &quot;Parsian Bank&quot;,</span>
+<span style="color: #A31515">    &quot;persianName&quot;: &quot;بانک پارسیان&quot;,</span>
+<span style="color: #A31515">    &quot;code&quot;: &quot;054&quot;,</span>
+<span style="color: #A31515">    &quot;accountNumberAvailable&quot;: true,</span>
+<span style="color: #A31515">    &quot;accountNumber&quot;: &quot;020817909002&quot;,</span>
+<span style="color: #A31515">    &quot;formattedAccountNumber&quot;: &quot;002-00817909-002&quot;</span>
+<span style="color: #A31515">  }</span>
+<span style="color: #A31515">*/</span>
+</code></pre>
 				<a href="#fix-persian-zero-width-non-joinerreplace-spaces-by-half-space" id="fix-persian-zero-width-non-joinerreplace-spaces-by-half-space" style="color: inherit; text-decoration: none;">
 					<h3>Fix Persian zero-width non-joiner(Replace spaces by half-space)</h3>
 				</a>
-				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> { halfSpace } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;persian-tools2&quot;</span>;
+				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">halfSpace</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;persian-tools2&quot;</span><span style="color: #000000">;</span>
 
-halfSpace(<span class="hljs-string">&quot;نمی ‌خواهی درخت ها را ببینیم؟&quot;</span>) <span class="hljs-comment">// &quot;نمی‌خواهی درخت‌ها را ببینیم؟&quot;</span></code></pre>
+<span style="color: #795E26">halfSpace</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;نمی ‌خواهی درخت ها را ببینیم؟&quot;</span><span style="color: #000000">) </span><span style="color: #008000">// &quot;نمی‌خواهی درخت‌ها را ببینیم؟&quot;</span>
+</code></pre>
 				<a href="#todo" id="todo" style="color: inherit; text-decoration: none;">
 					<h3>Todo</h3>
 				</a>
@@ -426,14 +440,15 @@ halfSpace(<span class="hljs-string">&quot;نمی ‌خواهی درخت ها ر�
 				<!-- markdownlint-disable -->
 				<table>
 					<tr>
-						<td align="center"><a href="https://www.linkedin.com/in/alitorki/"><img src="https://avatars1.githubusercontent.com/u/9049092?v=4" width="100px;" alt=""/><br /><sub><b>Ali Torki</b></sub></a><br /><a href="#infra-ali-master" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=ali-master" title="Tests">⚠️</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=ali-master" title="Code">💻</a></td>
-						<td align="center"><a href="https://github.com/mssoheil"><img src="https://avatars3.githubusercontent.com/u/16543635?v=4" width="100px;" alt=""/><br /><sub><b>mssoheil</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=mssoheil" title="Tests">⚠️</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=mssoheil" title="Code">💻</a></td>
-						<td align="center"><a href="https://github.com/moh3n9595"><img src="https://avatars1.githubusercontent.com/u/20948388?v=4" width="100px;" alt=""/><br /><sub><b>Mohsen</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=moh3n9595" title="Tests">⚠️</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=moh3n9595" title="Code">💻</a></td>
-						<td align="center"><a href="http://titles.ir"><img src="https://avatars1.githubusercontent.com/u/1300289?v=4" width="100px;" alt=""/><br /><sub><b>Hesam pourghazian</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=Hesamp" title="Code">💻</a></td>
-						<td align="center"><a href="https://github.com/amirqasemi74"><img src="https://avatars3.githubusercontent.com/u/20992734?v=4" width="100px;" alt=""/><br /><sub><b>Amir Hossien Qasemi Moqaddam</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=amirqasemi74" title="Code">💻</a></td>
+						<td align="center"><a href="https://www.linkedin.com/in/alitorki/"><img src="https://avatars1.githubusercontent.com/u/9049092?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ali Torki</b></sub></a><br /><a href="#infra-ali-master" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=ali-master" title="Tests">⚠️</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=ali-master" title="Code">💻</a></td>
+						<td align="center"><a href="https://github.com/mssoheil"><img src="https://avatars3.githubusercontent.com/u/16543635?v=4?s=100" width="100px;" alt=""/><br /><sub><b>mssoheil</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=mssoheil" title="Tests">⚠️</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=mssoheil" title="Code">💻</a></td>
+						<td align="center"><a href="https://github.com/moh3n9595"><img src="https://avatars1.githubusercontent.com/u/20948388?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mohsen</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=moh3n9595" title="Tests">⚠️</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=moh3n9595" title="Code">💻</a></td>
+						<td align="center"><a href="http://titles.ir"><img src="https://avatars1.githubusercontent.com/u/1300289?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Hesam pourghazian</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=Hesamp" title="Code">💻</a></td>
+						<td align="center"><a href="https://github.com/amirqasemi74"><img src="https://avatars3.githubusercontent.com/u/20992734?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Amir Hossien Qasemi Moqaddam</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=amirqasemi74" title="Code">💻</a></td>
+						<td align="center"><a href="https://github.com/SeyyedKhandon"><img src="https://avatars.githubusercontent.com/u/59599950?v=4?s=100" width="100px;" alt=""/><br /><sub><b>SeyyedKhandon</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=SeyyedKhandon" title="Code">💻</a></td>
 					</tr>
 				</table>
-				<!-- markdownlint-enable -->
+				<!-- markdownlint-restore -->
 				<!-- prettier-ignore-end -->
 				<!-- ALL-CONTRIBUTORS-LIST:END -->
 				<p>This project follows the <a href="https://github.com/all-contributors/all-contributors">all-contributors</a> specification. Contributions of any kind welcome!</p>
@@ -450,8 +465,8 @@ halfSpace(<span class="hljs-string">&quot;نمی ‌خواهی درخت ها ر�
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class="globals  ">
-						<a href="globals.html"><em>Globals</em></a>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
 					</li>
 				</ul>
 			</nav>
@@ -461,241 +476,94 @@ halfSpace(<span class="hljs-string">&quot;نمی ‌خواهی درخت ها ر�
 						<a href="classes/bill.html" class="tsd-kind-icon">Bill</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/numbertowords.html" class="tsd-kind-icon">Number<wbr>ToWords</a>
-					</li>
-					<li class=" tsd-kind-class">
 						<a href="classes/sheba.html" class="tsd-kind-icon">Sheba</a>
 					</li>
-					<li class=" tsd-kind-class">
-						<a href="classes/wordstonumber.html" class="tsd-kind-icon">Words<wbr>ToNumber</a>
-					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/billbarcodemodel.html" class="tsd-kind-icon">Bill<wbr>Barcode<wbr>Model</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/billparams.html" class="tsd-kind-icon">Bill<wbr>Params</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/billresult.html" class="tsd-kind-icon">Bill<wbr>Result</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/billtypesmodel.html" class="tsd-kind-icon">Bill<wbr>Types<wbr>Model</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/extractcardnumber.html" class="tsd-kind-icon">Extract<wbr>Card<wbr>Number</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/extractcardnumberoptions.html" class="tsd-kind-icon">Extract<wbr>Card<wbr>Number<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/ibank.html" class="tsd-kind-icon">IBank</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/inationalid.html" class="tsd-kind-icon">INational<wbr>Id</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/inumbertoword.html" class="tsd-kind-icon">INumber<wbr>ToWord</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/ioption.html" class="tsd-kind-icon">IOption</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/iplacebynationalid.html" class="tsd-kind-icon">IPlace<wbr>ByNational<wbr>Id</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/iprovince.html" class="tsd-kind-icon">IProvince</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-has-type-parameter">
-						<a href="interfaces/iunit.html" class="tsd-kind-icon">IUnit</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/operatormodel.html" class="tsd-kind-icon">Operator<wbr>Model</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/replacearraydictionary.html" class="tsd-kind-icon">Replace<wbr>Array<wbr>Dictionary</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/shebahashtable.html" class="tsd-kind-icon">Sheba<wbr>Hash<wbr>Table</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/shebaprocess.html" class="tsd-kind-icon">Sheba<wbr>Process</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/shebaresult.html" class="tsd-kind-icon">Sheba<wbr>Result</a>
+						<a href="interfaces/numbertowordsoptions.html" class="tsd-kind-icon">Number<wbr>ToWords<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/wordstonumberoptions.html" class="tsd-kind-icon">Words<wbr>ToNumber<wbr>Options</a>
 					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#billtypes" class="tsd-kind-icon">Bill<wbr>Types</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#currency" class="tsd-kind-icon">Currency</a>
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#numbertowords" class="tsd-kind-icon">Number<wbr>ToWords</a>
 					</li>
 					<li class=" tsd-kind-variable">
-						<a href="globals.html#all_words" class="tsd-kind-icon">ALL_<wbr>WORDS</a>
+						<a href="modules.html#wordstonumber" class="tsd-kind-icon">Words<wbr>ToNumber</a>
 					</li>
 					<li class=" tsd-kind-variable">
-						<a href="globals.html#joiners" class="tsd-kind-icon">JOINERS</a>
+						<a href="modules.html#acceptablekeywords" class="tsd-kind-icon">acceptable<wbr>Keywords</a>
 					</li>
 					<li class=" tsd-kind-variable">
-						<a href="globals.html#magnitude_keys" class="tsd-kind-icon">MAGNITUDE_<wbr>KEYS</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#number_words" class="tsd-kind-icon">NUMBER_<wbr>WORDS</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#numbertowordsinstance" class="tsd-kind-icon">Number<wbr>ToWords<wbr>Instance</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#prefixes" class="tsd-kind-icon">PREFIXES</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#ten_keys" class="tsd-kind-icon">TEN_<wbr>KEYS</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#unit_keys" class="tsd-kind-icon">UNIT_<wbr>KEYS</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#wordstonumberinstance" class="tsd-kind-icon">Words<wbr>ToNumber<wbr>Instance</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#arnums" class="tsd-kind-icon">ar<wbr>Nums</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#codesskip" class="tsd-kind-icon">codes<wbr>Skip</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#fanums" class="tsd-kind-icon">fa<wbr>Nums</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#mobileregex" class="tsd-kind-icon">mobile<wbr>Regex</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#numbertoword" class="tsd-kind-icon">number<wbr>ToWord</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#prefixes" class="tsd-kind-icon">prefixes</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#shebahashtable" class="tsd-kind-icon">sheba<wbr>Hash<wbr>Table</a>
+						<a href="modules.html#cardnumberregex" class="tsd-kind-icon">card<wbr>Number<wbr>Regex</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#phonenumbervalidator" class="tsd-kind-icon">Phone<wbr>Number<wbr>Validator</a>
+						<a href="modules.html#sorttext" class="tsd-kind-icon">Sort<wbr>Text</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#sorttext" class="tsd-kind-icon">Sort<wbr>Text</a>
+						<a href="modules.html#urlfix" class="tsd-kind-icon">URLfix</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#urlfix" class="tsd-kind-icon">URLfix</a>
+						<a href="modules.html#addcommas" class="tsd-kind-icon">add<wbr>Commas</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#addcommas" class="tsd-kind-icon">add<wbr>Commas</a>
+						<a href="modules.html#addordinalsuffix" class="tsd-kind-icon">add<wbr>Ordinal<wbr>Suffix</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#addordinalsuffix" class="tsd-kind-icon">add<wbr>Ordinal<wbr>Suffix</a>
+						<a href="modules.html#digitsartoen" class="tsd-kind-icon">digits<wbr>ArTo<wbr>En</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#digitsartoen" class="tsd-kind-icon">digits<wbr>ArTo<wbr>En</a>
+						<a href="modules.html#digitsartofa" class="tsd-kind-icon">digits<wbr>ArTo<wbr>Fa</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#digitsartofa" class="tsd-kind-icon">digits<wbr>ArTo<wbr>Fa</a>
+						<a href="modules.html#digitsentofa" class="tsd-kind-icon">digits<wbr>EnTo<wbr>Fa</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#digitsentofa" class="tsd-kind-icon">digits<wbr>EnTo<wbr>Fa</a>
+						<a href="modules.html#digitsfatoen" class="tsd-kind-icon">digits<wbr>FaTo<wbr>En</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#digitsfatoen" class="tsd-kind-icon">digits<wbr>FaTo<wbr>En</a>
+						<a href="modules.html#extractcardnumber" class="tsd-kind-icon">extract<wbr>Card<wbr>Number</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#extractcardnumber" class="tsd-kind-icon">extract<wbr>Card<wbr>Number</a>
+						<a href="modules.html#getbanknamefromcardnumber" class="tsd-kind-icon">get<wbr>Bank<wbr>Name<wbr>From<wbr>Card<wbr>Number</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#fuzzy" class="tsd-kind-icon">fuzzy</a>
+						<a href="modules.html#getplacebyirannationalid" class="tsd-kind-icon">get<wbr>Place<wbr>ByIran<wbr>National<wbr>Id</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#getbanknamefromcardnumber" class="tsd-kind-icon">get<wbr>Bank<wbr>Name<wbr>From<wbr>Card<wbr>Number</a>
+						<a href="modules.html#halfspace" class="tsd-kind-icon">half<wbr>Space</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#getphoneprefix" class="tsd-kind-icon">get<wbr>Phone<wbr>Prefix</a>
+						<a href="modules.html#hasarabic" class="tsd-kind-icon">has<wbr>Arabic</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#getplacebyirannationalid" class="tsd-kind-icon">get<wbr>Place<wbr>ByIran<wbr>National<wbr>Id</a>
+						<a href="modules.html#haspersian" class="tsd-kind-icon">has<wbr>Persian</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#halfspace" class="tsd-kind-icon">half<wbr>Space</a>
+						<a href="modules.html#isarabic" class="tsd-kind-icon">is<wbr>Arabic</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#ispersian" class="tsd-kind-icon">is<wbr>Persian</a>
+						<a href="modules.html#ispersian" class="tsd-kind-icon">is<wbr>Persian</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#phonenumberdetail" class="tsd-kind-icon">phone<wbr>Number<wbr>Detail</a>
+						<a href="modules.html#phonenumberdetail" class="tsd-kind-icon">phone<wbr>Number<wbr>Detail</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#removecommas" class="tsd-kind-icon">remove<wbr>Commas</a>
+						<a href="modules.html#phonenumbervalidator" class="tsd-kind-icon">phone<wbr>Number<wbr>Validator</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#removeordinalsuffix" class="tsd-kind-icon">remove<wbr>Ordinal<wbr>Suffix</a>
+						<a href="modules.html#removecommas" class="tsd-kind-icon">remove<wbr>Commas</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#replacearray" class="tsd-kind-icon">replace<wbr>Array</a>
+						<a href="modules.html#removeordinalsuffix" class="tsd-kind-icon">remove<wbr>Ordinal<wbr>Suffix</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#topersianchars" class="tsd-kind-icon">to<wbr>Persian<wbr>Chars</a>
+						<a href="modules.html#topersianchars" class="tsd-kind-icon">to<wbr>Persian<wbr>Chars</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#trim" class="tsd-kind-icon">trim</a>
+						<a href="modules.html#verifycardnumber" class="tsd-kind-icon">verify<wbr>Card<wbr>Number</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#verifycardnumber" class="tsd-kind-icon">verify<wbr>Card<wbr>Number</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#verifyiraniannationalid" class="tsd-kind-icon">verify<wbr>Iranian<wbr>National<wbr>Id</a>
-					</li>
-					<li class=" tsd-kind-object-literal">
-						<a href="globals.html#irancell" class="tsd-kind-icon">Irancell</a>
-					</li>
-					<li class=" tsd-kind-object-literal">
-						<a href="globals.html#irancellmodel" class="tsd-kind-icon">Irancell<wbr>Model</a>
-					</li>
-					<li class=" tsd-kind-object-literal">
-						<a href="globals.html#magnitude" class="tsd-kind-icon">MAGNITUDE</a>
-					</li>
-					<li class=" tsd-kind-object-literal">
-						<a href="globals.html#mci" class="tsd-kind-icon">MCI</a>
-					</li>
-					<li class=" tsd-kind-object-literal">
-						<a href="globals.html#righttel" class="tsd-kind-icon">Right<wbr>Tel</a>
-					</li>
-					<li class=" tsd-kind-object-literal">
-						<a href="globals.html#shatelmobile" class="tsd-kind-icon">Shatel<wbr>Mobile</a>
-					</li>
-					<li class=" tsd-kind-object-literal">
-						<a href="globals.html#ten" class="tsd-kind-icon">TEN</a>
-					</li>
-					<li class=" tsd-kind-object-literal">
-						<a href="globals.html#token_type" class="tsd-kind-icon">TOKEN_<wbr>TYPE</a>
-					</li>
-					<li class=" tsd-kind-object-literal">
-						<a href="globals.html#typo_list" class="tsd-kind-icon">TYPO_<wbr>LIST</a>
-					</li>
-					<li class=" tsd-kind-object-literal">
-						<a href="globals.html#taliya" class="tsd-kind-icon">Taliya</a>
-					</li>
-					<li class=" tsd-kind-object-literal">
-						<a href="globals.html#units" class="tsd-kind-icon">UNITS</a>
-					</li>
-					<li class=" tsd-kind-object-literal">
-						<a href="globals.html#billtypes" class="tsd-kind-icon">bill<wbr>Types</a>
-					</li>
-					<li class=" tsd-kind-object-literal">
-						<a href="globals.html#config" class="tsd-kind-icon">config</a>
-					</li>
-					<li class=" tsd-kind-object-literal">
-						<a href="globals.html#operators" class="tsd-kind-icon">operators</a>
-					</li>
-					<li class=" tsd-kind-object-literal">
-						<a href="globals.html#operatorsmap" class="tsd-kind-icon">operators<wbr>Map</a>
+						<a href="modules.html#verifyiraniannationalid" class="tsd-kind-icon">verify<wbr>Iranian<wbr>National<wbr>Id</a>
 					</li>
 				</ul>
 			</nav>
@@ -717,9 +585,6 @@ halfSpace(<span class="hljs-string">&quot;نمی ‌خواهی درخت ها ر�
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
 			</ul>
 		</div>
 	</div>
