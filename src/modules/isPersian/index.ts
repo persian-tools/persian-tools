@@ -1,3 +1,5 @@
+import { ArabicContextualForms } from "../../helpers";
+
 /**
  * Check if string is persian
  *
@@ -5,8 +7,11 @@
  * @param {object} trimPattern Pattern of characters which you want to trim from the string e.g. "-+. ()"
  * @return {boolean} Return true if the entered string does not include other-language characters.
  */
-export const isPersian = (str: string, trimPattern = /[-+()\s.]/g): boolean =>
-	/^[\u0600-\u06FF\s]+$/.test(str.replace(trimPattern, ""));
+export const isPersian = (str: string, trimPattern = /["'-+()\s.]/g): boolean => {
+	const text = str.replace(trimPattern, "");
+
+	return /^[\u0600-\u06FF\s]+$/.test(text) && !ArabicContextualForms.test(text);
+};
 
 /**
  * Check if string includes persian alphabet.
@@ -14,6 +19,6 @@ export const isPersian = (str: string, trimPattern = /[-+()\s.]/g): boolean =>
  * @param {string} str
  * @return {boolean} Return true if the entered string includes persian characters
  */
-export const hasPersian = (str: string): boolean => /[\u0600-\u06FF]/.test(str);
+export const hasPersian = (str: string): boolean => /[\u0600-\u06FF]/.test(str) && !ArabicContextualForms.test(str);
 
 export default isPersian;

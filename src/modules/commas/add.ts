@@ -1,5 +1,5 @@
-import index from "../isPersian";
 import { digitsFaToEn } from "../digits";
+import { isPersian } from "../isPersian";
 
 /**
  * Add Commas to numbers
@@ -13,7 +13,7 @@ const addCommas = (number?: number | string): string | undefined => {
 
 	const convertedToString = number.toString();
 
-	const tokenizedToEnglish = index(convertedToString)
+	const tokenizedToEnglish = isPersian(convertedToString)
 		? (digitsFaToEn(convertedToString) as string)
 		: convertedToString;
 
