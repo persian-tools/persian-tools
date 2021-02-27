@@ -1,5 +1,5 @@
 {
-	"name": "persian-tools2",
+	"name": "@persian-tools/persian-tools",
 	"version": "1.5.0",
 	"description": "An anthology of a variety of tools for Persian language in javascript",
 	"main": "build/persian-tools.js",
