@@ -22,6 +22,8 @@
 		"prerelease": "npm run test",
 		"release": "npm run build",
 		"postrelease": "standard-version && npm run generate:docs",
+		"release:beta": "npm run build",
+		"postrelease:beta": "standard-version --prerelease beta && npm run generate:docs",
 		"prettier": "prettier --write 'src/**/*.{ts,json}' --config .prettierrc.js",
 		"prettier:ci": "prettier --list-different 'src/**/*.{ts,json}' --config .prettierrc.js",
 		"generate:docs": "make publish-docs",
