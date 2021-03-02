@@ -216,5 +216,5 @@ export const mobileRegex = /^(?:[+|0{2}]?98)?(?:0)?(\d{3})+(\d{3})+(\d{4})$/;
 export function getPhonePrefix(mobile: string): string {
 	const prefix = `${mobile}`.match(mobileRegex)?.[1] as string;
 
-	return prefix ?? "";
+	return prefix || "";
 }
