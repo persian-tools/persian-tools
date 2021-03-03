@@ -1,7 +1,6 @@
 import phoneNumberValidator from "./validator";
 import { getPhonePrefix, operators } from "./utils";
-// Types
-import type { OperatorModel } from "./utils";
+import { OperatorModel } from "./utils";
 
 /**
  * Find information such as Province, type and model of mobile number.
