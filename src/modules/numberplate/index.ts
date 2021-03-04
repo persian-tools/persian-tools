@@ -3,7 +3,6 @@ import carProvinceCodesJSON from "./carProvinceCodes.skip";
 import plateTypeJSON from "./plateType.skip";
 
 export interface PlateConstructor {
-	[index: string]: any;
 	number: string;
 	char?: string;
 }
