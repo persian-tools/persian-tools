@@ -4,16 +4,20 @@
  * @param number - Number, eg: "300000"
  * @return A string of ordinated number
  */
-const addOrdinalSuffix = (number?: string): string | undefined => {
-	if (typeof number === "undefined") return;
+const addOrdinalSuffix = (number?: string): string => {
+    if (typeof number !== 'string') {
+        throw new TypeError("input must be string")
+    }
 
-	if (number.endsWith("ی")) {
-		number += " اُم";
-	} else if (number.endsWith("سه")) {
-		number = number.slice(0, -2) + "سوم";
-	} else number += "م";
+    if (number.endsWith("ی")) {
+        return number + " اُم"
+    }
 
-	return number;
+    if (number.endsWith("سه")) {
+        return number.slice(0, -2) + "سوم";
+    }
+
+    return number + "م"
 };
 
 export default addOrdinalSuffix;
