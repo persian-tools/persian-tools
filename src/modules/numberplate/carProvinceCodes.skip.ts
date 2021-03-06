@@ -1,15 +1,18 @@
-export default [
+import { createProvinceHashTable } from "./helpers";
+import { ProvinceDataset } from "./types.skip";
+
+export const carProvinceDataset: ProvinceDataset = [
 	{
 		province: "تهران",
-		codes: [11, 22, 33, 44, 55, 66, 77, 88, 99, 10, 20, 30, 40, 21, 38, 78],
+		codes: [11, 22, 33, 44, 55, 66, 77, 88, 99, 10, 20, 40],
 	},
 	{
 		province: "البرز",
-		codes: [21, 30, 38, 68, 78],
+		codes: [68],
 	},
 	{
-		province: "خراسان رضوی",
-		codes: [12, 32, 42, 36, 74],
+		province: "تهران - البرز",
+		codes: [21, 38, 30, 78],
 	},
 	{
 		province: "اصفحان",
@@ -117,10 +120,22 @@ export default [
 	},
 	{
 		province: "خراسان شمالی",
-		codes: [26, 32],
+		codes: [26],
 	},
 	{
 		province: "خراسان جنوبی",
-		codes: [32, 52],
+		codes: [52],
+	},
+	{
+		province: "خراسان رضوی",
+		codes: [12, 42, 36, 74],
+	},
+	{
+		province: "خراسان شمالی - خراسان جنوبی - خراسان رضوی",
+		codes: [32],
 	},
 ];
+
+const carHashTable = createProvinceHashTable(carProvinceDataset);
+
+export { carHashTable };

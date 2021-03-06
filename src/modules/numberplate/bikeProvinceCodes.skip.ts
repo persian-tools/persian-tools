@@ -1,4 +1,7 @@
-export default [
+import { createProvinceHashTable } from "./helpers";
+import { ProvinceDataset } from "./types.skip";
+
+export const bikeProvinceDataset: ProvinceDataset = [
 	{
 		province: "آذربایجان شرقی",
 		codes: [397, 396, 395, 394, 393, 392, 391],
@@ -149,3 +152,7 @@ export default [
 		codes: [637, 638, 639, 641, 642, 643],
 	},
 ];
+
+const bikeHashTable = createProvinceHashTable(bikeProvinceDataset);
+
+export { bikeHashTable };

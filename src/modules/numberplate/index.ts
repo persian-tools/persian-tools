@@ -1,150 +1,88 @@
-import bikeProvinceCodesJSON from "./bikeProvinceCodes.skip";
-import carProvinceCodesJSON from "./carProvinceCodes.skip";
-import plateTypeJSON from "./plateType.skip";
+import { carHashTable } from "./carProvinceCodes.skip";
+import { categoryHashTable } from "./plateCategory.skip";
+import { bikeHashTable } from "./bikeProvinceCodes.skip";
+import { isPlateNumberValid, normalizePlate } from "./helpers";
+import { NormilizedPlate, PlateOptions, PlateResultApi, PlateResultApiTypeString } from "./types.skip";
 
-export interface PlateConstructor {
-	number: string;
-	char?: string;
+const plate = function (plate: PlateOptions): { info: PlateResultApi; isValid: boolean } {
+	const normalizedPlate = normalizePlate(plate);
+	const info = getPlateInfo(normalizedPlate);
+	const isValid = isPlateValid(info, normalizedPlate.numbers);
+
+	return {
+		info,
+		isValid,
+	};
+};
+
+export function getPlateInfo(plate: NormilizedPlate): PlateResultApi {
+	const getInfo = getPlateHandler(plate);
+	return getInfo(plate);
 }
 
-export type PlateOptions = string | PlateConstructor;
-export type ProvinceObject = Array<{ province: string; codes: Array<number> }>;
-export type plateType = "خودرو" | "موتور سیکلت";
+export function isPlateValid(plateInfo: PlateResultApi, plateNumber: string): boolean {
+	// 1. no zeros and chars, [1-9] allowed
+	if (!isPlateNumberValid(plateNumber)) {
+		return false;
+	}
 
-export interface NormilizedPlate {
-	numbers: string;
-	char: string | undefined;
+	// 2. if type Car => category should exist
+	if (plateInfo.type === "Car" && !plateInfo?.category) {
+		return false;
+	}
+
+	// 3. province exist
+	if (!plateInfo?.province) {
+		return false;
+	}
+
+	return true;
 }
 
-export interface PlateInfoReturnType {
-	template: string;
-	province: Array<string>;
-	type: plateType;
-	category: string | undefined;
+export function getPlateHandler(plate: NormilizedPlate): (plate: NormilizedPlate) => PlateResultApi {
+	let handler;
+	if (plate.numbers?.length === 7) {
+		handler = carHandler;
+	} else if (plate.numbers?.length === 8) {
+		handler = bikeHandler;
+	} else {
+		throw new Error("a Plate must be 7 or 8 digits long");
+	}
+
+	return handler;
 }
 
-class Plate {
-	private plate: NormilizedPlate;
-	private provinceCode!: number;
-	private plateTemplate!: string;
-	private plateType!: plateType;
-	private plateInfo: PlateInfoReturnType;
+export function carHandler(plate: NormilizedPlate): PlateResultApi {
+	const provinceCode = +plate.numbers.slice(5, 7);
+	const type: PlateResultApiTypeString = "Car";
+	const template = `${plate.numbers.slice(0, 2)}${plate.char ? plate.char : null}${plate.numbers.slice(
+		2,
+		5,
+	)}ایران${provinceCode}`;
 
-	constructor(options: PlateOptions) {
-		this.plate = this.normalizePlate(options);
-		this.plateInfo = this.init();
-	}
+	const province = carHashTable[provinceCode];
+	const category = plate.char ? categoryHashTable[plate.char]?.description : undefined;
 
-	private init(): PlateInfoReturnType | never {
-		let plateResult;
-		if (this.plate.numbers?.length === 7) {
-			plateResult = this.initCar();
-		} else if (this.plate.numbers?.length === 8) {
-			plateResult = this.initBike();
-		} else {
-			throw new Error("a Plate must be 7 or 8 digits long");
-		}
+	return {
+		type,
+		template,
+		province,
+		category,
+	};
+}
+export function bikeHandler(plate: NormilizedPlate): PlateResultApi {
+	const provinceCode = +plate.numbers.slice(0, 3);
+	const type: PlateResultApiTypeString = "Motorcycle";
+	const template = `${provinceCode}-${plate.numbers.slice(3)}`;
 
-		return plateResult;
-	}
+	const province = bikeHashTable[provinceCode];
 
-	private initCar(): PlateInfoReturnType {
-		this.plateType = "خودرو";
-		this.provinceCode = +this.plate.numbers.slice(5, 7);
-
-		// {first two digits} {plate character} {next three digits} ایران {province code}
-		this.plateTemplate = `${this.plate.numbers.slice(0, 2)}${this.plate.char}${this.plate.numbers.slice(
-			2,
-			5,
-		)}ایران${this.provinceCode}`;
-		const plateCategory = plateTypeJSON.find((t) => t.label === this.plate.char)?.description;
-		const provinces = this.getProvince(carProvinceCodesJSON, this.provinceCode);
-
-		return {
-			category: plateCategory,
-			province: provinces,
-			template: this.plateTemplate,
-			type: this.plateType,
-		};
-	}
-	private initBike(): PlateInfoReturnType {
-		this.plateType = "موتور سیکلت";
-		this.provinceCode = +this.plate.numbers.slice(0, 3);
-
-		// {province code} - {next five digits}
-		this.plateTemplate = `${this.provinceCode}-${this.plate.numbers.slice(3)}`;
-		const provinces = this.getProvince(bikeProvinceCodesJSON, this.provinceCode);
-
-		return {
-			category: undefined, // there is no category on bike plates
-			province: provinces || [],
-			template: this.plateTemplate,
-			type: this.plateType,
-		};
-	}
-
-	private normalizePlate(rawPlate: PlateOptions): NormilizedPlate {
-		let char;
-		let plateNumbers;
-
-		const nonDigitRegex = /\D/g;
-
-		if (typeof rawPlate === "string") {
-			char = rawPlate.match(nonDigitRegex)?.join("");
-			plateNumbers = rawPlate.replace(nonDigitRegex, "");
-		} else {
-			char = rawPlate?.char;
-			plateNumbers = rawPlate.number.replace(nonDigitRegex, "");
-		}
-
-		return {
-			char,
-			numbers: plateNumbers,
-		};
-	}
-
-	private getProvince(Data: ProvinceObject, provinceCode: number) {
-		const provinces = Data.filter((province) => province.codes.find((code) => code === provinceCode));
-		return this.normalizeProvince(provinces);
-	}
-
-	private normalizeProvince(provinces: ProvinceObject) {
-		const provinceNames: Array<string> = [];
-		provinces.forEach((p) => provinceNames.push(p.province));
-		return provinceNames;
-	}
-
-	private isPlateNumberValid(numbers: string): boolean {
-		if (isNaN(+numbers)) {
-			return false;
-		}
-		// we don't care about last number it can be any number
-		const arr = numbers.split("").slice(0, -1);
-		return arr.every((num) => +num !== 0);
-	}
-
-	public info(): PlateInfoReturnType {
-		return this.plateInfo;
-	}
-
-	public isValid(): boolean {
-		// 1. no zeros and charas [1-9] allowed
-		if (!this.isPlateNumberValid(this.plate.numbers)) {
-			return false;
-		}
-
-		// 2. if type car => category should exist
-		if (this.plateType === "خودرو" && !this.plateInfo?.category) {
-			return false;
-		}
-
-		// 3. province exist
-		if (this.plateInfo.province.length === 0) {
-			return false;
-		}
-
-		return true;
-	}
+	return {
+		type,
+		template,
+		province,
+		category: undefined,
+	};
 }
 
-export default Plate;
+export default plate;
