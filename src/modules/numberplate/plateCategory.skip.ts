@@ -1,4 +1,9 @@
-export default [
+export interface CategoryResult {
+	label: string;
+	description: string;
+}
+
+const categories: Array<CategoryResult> = [
 	{
 		label: "D",
 		description: "دیپلمات",
@@ -104,3 +109,15 @@ export default [
 		description: "شخصی",
 	},
 ];
+
+export interface CategoryHashTable {
+	[index: string]: CategoryResult;
+}
+
+const categoryHashTable: CategoryHashTable = {};
+for (let i = 0; i < categories.length; i++) {
+	const _category = categories[i];
+	categoryHashTable[_category.label] = _category;
+}
+
+export { categoryHashTable };
