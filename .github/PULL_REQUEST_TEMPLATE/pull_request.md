@@ -35,7 +35,7 @@ merge of your pull request!
 <!-- to check an item, place an "x" in the box like so: "- [x] Documentation" -->
 
 - [ ] Tests
-- [ ] Ready to be merged
-      <!-- In your opinion, is this ready to be merged as soon as it's reviewed? -->
+- [ ] Ready to be merged <!-- In your opinion, is this ready to be merged as soon as it's reviewed? -->
+- [ ] Accepted [Conventional commits messaging rules](https://www.conventionalcommits.org/en/v1.0.0-beta.4/).
 
 <!-- feel free to add additional comments -->
