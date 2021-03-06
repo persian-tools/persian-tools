@@ -1,174 +1,317 @@
-import { Plate } from "../src";
+import { createProvinceHashTable, isPlateNumberValid, normalizePlate } from "../src/modules/numberplate/helpers";
+import { PlateResultApi, ProvinceDataset } from "../src/modules/numberplate/types.skip";
 
-describe("Plate class", () => {
-	// const normilizerSpy = jest.spyOn(Plate.prototype as any, "normalizePlate"); // convert to any, allow private method
+import plate, { getPlateHandler, carHandler, bikeHandler, isPlateValid, getPlateInfo } from "../src/modules/numberplate/index";
 
-	it("plate instances should not be same", () => {
-		const vehc1 = new Plate("1234567");
-		const vehc2 = new Plate("1234567");
-		expect(vehc1 === vehc2).toBe(false);
+describe("number plate module", () => {
+	it("getPlateHandler should set handler to carHandler if plate length is 7", () => {
+		const normalizedPlate = {
+			numbers: "1214547",
+			char: "ب",
+		};
+		const handlerFn = getPlateHandler(normalizedPlate);
+		expect(handlerFn).toEqual(carHandler);
 	});
 
-	it("should throw an error if plate length is not 7 or 8", () => {
-		expect(() => {
-			new Plate("123");
-		}).toThrow();
-	});
-
-	it("should normalize plate", () => {
-		const vehicle1 = new Plate("1234567گ");
-		expect(Reflect.get(vehicle1, "plate")).toEqual({
-			char: "گ",
-			numbers: "1234567",
-		});
-
-		const vehicle2 = new Plate({
-			number: "1234567",
-			char: "الف",
-		});
-		expect(Reflect.get(vehicle2, "plate")).toEqual({
-			char: "الف",
-			numbers: "1234567",
-		});
-
-		const vehicle3 = new Plate({
-			number: "1234567",
-		});
-		expect(Reflect.get(vehicle3, "plate")).toEqual({
+	it("getPlateHandler should set handler to bikeHandler if plate length is 8", () => {
+		const normalizedPlate = {
+			numbers: "12145478",
 			char: undefined,
-			numbers: "1234567",
-		});
-	});
-	it("calling info() should call initCar if given plate has 7 digits", () => {
-		const initCarSpy = jest.spyOn(Plate.prototype as any, "initCar");
-
-		new Plate("1234567").info();
-		expect(initCarSpy).toHaveBeenCalled();
+		};
+		const handlerFn = getPlateHandler(normalizedPlate);
+		expect(handlerFn).toEqual(bikeHandler);
 	});
 
-	it("calling info() should call initBike if given plate has 8 digits", () => {
-		const initBikeSpy = jest.spyOn(Plate.prototype as any, "initBike");
-
-		new Plate("12345678").info();
-		expect(initBikeSpy).toHaveBeenCalled();
+	it("getPlateHandler should throw an error if plate length is not 7 or 8", () => {
+		const normalizedPlate = {
+			numbers: "121454789",
+			char: undefined,
+		};
+		expect(() => getPlateHandler(normalizedPlate)).toThrow();
 	});
 
-	it("initCar should set plateType to خودرو", () => {
-		const vehicle = new Plate("1234567");
-		vehicle.info();
-		expect(Reflect.get(vehicle, "plateType")).toBe("خودرو");
-	});
+	it("carHandler should return plate info from carProvinceCode and plateCategory", () => {
+		const normalizedPlate1 = {
+			numbers: "1214547",
+			char: "ب",
+		};
+		const info1 = carHandler(normalizedPlate1);
 
-	it("initBike should set plateType to موتور سیکلت", () => {
-		const vehicle = new Plate("12345678");
-		vehicle.info();
-		expect(Reflect.get(vehicle, "plateType")).toBe("موتور سیکلت");
-	});
+		const _iran = "ایران";
+		const _char = "ب";
+		const template1 = `12${_char}145${_iran}47`;
 
-	it("should set province code for car plate", () => {
-		const vehicle = new Plate("1234567");
-		vehicle.info();
-
-		// last 2 digits
-		expect(Reflect.get(vehicle, "provinceCode")).toBe(67);
-	});
-	it("should set province code for bike plate", () => {
-		const vehicle = new Plate("12345678");
-		vehicle.info();
-
-		// first 3 digits
-		expect(Reflect.get(vehicle, "provinceCode")).toBe(123);
-	});
-
-	it("calling info() should return proper info", () => {
-		// car plate
-		const vehicle1 = new Plate("1234547ص");
-		const data1 = vehicle1.info();
-
-		const _provinceCode = "ص";
-		const _iranText = "ایران";
-		let fakeTemplate = `12${_provinceCode}345${_iranText}47`;
-
-		expect(data1).toEqual({
+		expect(info1).toEqual({
+			type: "Car",
+			template: template1,
+			province: "مرکزی",
 			category: "شخصی",
-			province: ["مرکزی"],
-			template: fakeTemplate,
-			type: "خودرو",
 		});
 
-		// bike plate
-		const vehicle2 = new Plate("11145678");
-		const data2 = vehicle2.info();
-		fakeTemplate = `111-45678`;
+		// undefiend values
+		const normalizedPlate2 = {
+			numbers: "1214501", // fake province code (01)
+			char: undefined, // falsy char
+		};
+		const info2 = carHandler(normalizedPlate2);
+		const template2 = `12null145${_iran}1`;
 
-		expect(data2).toEqual({
+		expect(info2).toEqual({
+			type: "Car",
+			template: template2,
+			province: undefined,
 			category: undefined,
-			province: ["مرکز تهران"],
-			template: fakeTemplate,
-			type: "موتور سیکلت",
 		});
 	});
 
-	it("isPlateNumberValid should return false if plate is not an Integer or has zeros in it (expect the last number)", () => {
-		const vehicle1 = new Plate("1234560"); // initialize to access isPlateNumberValid method
-		const isPlateNumberValid = Reflect.get(vehicle1, "isPlateNumberValid");
+	it("bikeHandler should return plate info from bikeProvinceCode", () => {
+		const normalizedPlate1 = {
+			numbers: "12145478",
+			char: undefined,
+		};
+		const info1 = bikeHandler(normalizedPlate1);
 
-		expect(isPlateNumberValid("1034567")).toBe(false);
-		expect(isPlateNumberValid("123456گ")).toBe(false);
+		const template1 = `121-45478`;
 
-		// extra
-		expect(isPlateNumberValid("00000000")).toBe(false);
-		expect(isPlateNumberValid("ضصثقفغع")).toBe(false);
+		expect(info1).toEqual({
+			type: "Motorcycle",
+			template: template1,
+			province: "مرکز تهران",
+			category: undefined,
+		});
+
+		// undefiend values
+		const normalizedPlate2 = {
+			numbers: "10045118", // fake province code (100)
+			char: undefined, // there is no char when using motorcycle plate
+		};
+		const info2 = bikeHandler(normalizedPlate2);
+		const template2 = `100-45118`;
+
+		expect(info2).toEqual({
+			type: "Motorcycle",
+			template: template2,
+			province: undefined,
+			category: undefined,
+		});
 	});
 
-	it("isPlateNumberValid should return true if plate is an Integer without zeros (expect the last number)", () => {
-		const vehicle1 = new Plate("1234560"); // initialize to access isPlateNumberValid method
-		const isPlateNumberValid = Reflect.get(vehicle1, "isPlateNumberValid");
+	describe("isPlateValid truthy tests", () => {
+		it("isPlateValid should validate plate info for type car", () => {
+			const _iran = "ایران";
+			const _char = "ب";
+			const template1 = `12${_char}145${_iran}47`;
 
-		expect(isPlateNumberValid("1234569")).toBe(true);
-		expect(isPlateNumberValid("12345691")).toBe(true);
-		expect(isPlateNumberValid("1234560")).toBe(true);
+			const normalizedPlate1 = {
+				numbers: "1214547",
+				char: "ب",
+			};
+			const plate1Info: PlateResultApi = {
+				type: "Car",
+				template: template1,
+				province: "مرکزی",
+				category: "شخصی",
+			};
+			expect(isPlateValid(plate1Info, normalizedPlate1.numbers));
+		});
 
-		// extra
-		expect(isPlateNumberValid("11111111")).toBe(true);
-		expect(isPlateNumberValid("2222222")).toBe(true);
+		it("isPlateValid should validate plate info type motorcycle", () => {
+			const normalizedPlate1 = {
+				numbers: "12145478",
+				char: undefined,
+			};
+			const info: PlateResultApi = {
+				type: "Motorcycle",
+				template: "121-45478",
+				province: "مرکز تهران",
+				category: undefined,
+			};
+
+			expect(isPlateValid(info, normalizedPlate1.numbers)).toBe(true);
+		});
 	});
 
-	it("isValid should return false if provinceCode does not exist in the collection", () => {
-		const vehicle1 = new Plate("12گ45350");
-		// province code 50 does not exist
-		expect(vehicle1.isValid()).toBe(false);
+	describe("isPlateValid falsy tests", () => {
+		it("isPlateValid should validate plate info for type car", () => {
+			const _iran = "ایران";
+			const template1 = `12${"null"}145${_iran}47`;
 
-		// bike plate
-		// province code 100 does not exist
-		const vehicle2 = new Plate("10045678");
-		expect(vehicle2.isValid()).toBe(false);
-	});
+			const normalizedPlate1 = {
+				numbers: "1214501", // fake province code (01)
+				char: undefined, // falsy char
+			};
+			const plate1Info: PlateResultApi = {
+				type: "Car",
+				template: template1,
+				province: undefined,
+				category: undefined,
+			};
+			expect(isPlateValid(plate1Info, normalizedPlate1.numbers)).toBe(false);
+		});
 
-	it("isValid should return false if type is خودرو and plateInfo does not contain category", () => {
-		const vehicle1 = new Plate("1234547"); // no char provided for category  -> category should be undefiend
-		expect(vehicle1.isValid()).toBe(false);
+		it("isPlateValid should validate plate info type motorcycle", () => {
+			const normalizedPlate1 = {
+				numbers: "10045118", // fake province code (100)
+				char: undefined, // there is no char when using motorcycle plate
+			};
+			const template2 = `100-45118`;
+			const info1: PlateResultApi = {
+				type: "Motorcycle",
+				template: template2,
+				province: undefined,
+				category: undefined,
+			};
 
-		const vehicle2 = new Plate({
-			number: "1234567"
+			expect(isPlateValid(info1, normalizedPlate1.numbers)).toBe(false);
+		});
+
+		it("should return false if category does not exist on type Car", () => {
+			const normalizedPlate1 = {
+				numbers: "1245147",
+				char: "g" // undefined char (category)
+			}
+
+			const info: PlateResultApi = {
+				type: "Car",
+				template: `12${"g"}451${"ایران"}47`,
+				province: "مرکزی",
+				category: undefined,
+			}
+
+			expect(isPlateValid(info, normalizedPlate1.numbers)).toBe(false);
 		})
-		expect(vehicle2.isValid()).toBe(false);
+
+		it("should return false if province does not exist on both types car & bike", () => {
+			// car type
+			const normalizedPlate1 = {
+				numbers: "1245150",
+				char: "الف",
+			};
+
+			const info1: PlateResultApi = {
+				type: "Car",
+				template: `12${"g"}451${"ایران"}50`, // province 50 does not exist
+				category: "دولتی",
+				province: undefined,
+			};
+
+			expect(isPlateValid(info1, normalizedPlate1.numbers)).toBe(false);
+
+			const normalizedPlate2 = {
+				numbers: "10045678",
+				char: undefined,
+			};
+
+			const info2: PlateResultApi = {
+				type: "Motorcycle",
+				template: `100-45678`, // province 100 does not exist
+				category: undefined,
+				province: undefined,
+			};
+
+			expect(isPlateValid(info2, normalizedPlate2.numbers)).toBe(false);
+		})
 	});
 
-	it("isValid should return false if province code is undefiend", () => {
-		const vehicle1 = new Plate("1234550");
-		expect(vehicle1.isValid()).toBe(false);
+	it("getPlateInfo should return plate info based on plate type", () => {
+		// car type plate
+		const normalizedPlate1 = {
+			numbers: "1214547",
+			char: "ب",
+		};
+		const info1 = getPlateInfo(normalizedPlate1);
+		expect(info1).toEqual({
+			type: "Car",
+			template: `12${"ب"}145${"ایران"}47`,
+			province: "مرکزی",
+			category: "شخصی",
+		});
 
-		const vehicle2 = new Plate("10045678");
-		expect(vehicle2.isValid()).toBe(false);
+		// bike type
+		const normalizedPlate2 = {
+			numbers: "12145478",
+			char: undefined,
+		};
+		const info2 = getPlateInfo(normalizedPlate2);
+		expect(info2).toEqual({
+			type: "Motorcycle",
+			template: "121-45478",
+			province: "مرکز تهران",
+			category: undefined,
+		});
 	});
 
+	it("plate should expose info & isValid to the user", () => {
+		const vehicle = plate("12ب45147");
 
-	it("isValid should return true if plate is Valid", () => {
-		const car = new Plate("12گ45647");
-		expect(car.isValid()).toBe(true);
+		expect(vehicle.info).toBeTruthy();
+		expect(vehicle.isValid).toBeDefined();
+	});
+});
 
-		const bike = new Plate("76145678");
-		expect(bike.isValid()).toBe(true);
-	})
+describe("number plate helpers", () => {
+	it("normalizePlate should normalize plate value to a Object", () => {
+		const norm1 = normalizePlate("1234567الف");
+		expect(norm1).toEqual({
+			numbers: "1234567",
+			char: "الف",
+		});
+
+		const norm2 = normalizePlate({
+			number: "1234567",
+			char: "ب",
+		});
+		expect(norm2).toEqual({
+			numbers: "1234567",
+			char: "ب",
+		});
+
+		// without char
+		const norm3 = normalizePlate("1234567");
+		expect(norm3).toEqual({
+			numbers: "1234567",
+			char: undefined,
+		});
+
+		const norm4 = normalizePlate({
+			number: "12345678",
+		});
+		expect(norm4).toEqual({
+			numbers: "12345678",
+			char: undefined,
+		});
+	});
+	it("isPlateNumberValid should validate plateNumber", () => {
+		expect(isPlateNumberValid("1234560")).toBe(true); // Car plate
+		expect(isPlateNumberValid("12345678")).toBe(true); // Motorcycle plate
+		expect(isPlateNumberValid("12345670")).toBe(true);
+
+		expect(isPlateNumberValid("1230567")).toBe(false);
+		expect(isPlateNumberValid("12305678")).toBe(false);
+		expect(isPlateNumberValid("1ی23456")).toBe(false);
+		expect(isPlateNumberValid("1234f560")).toBe(false);
+		expect(isPlateNumberValid("123450d0")).toBe(false);
+	});
+	it("createProvinceHashTable should create hash table for given dataset", () => {
+		const randomDataset: ProvinceDataset = [
+			{
+				codes: [1, 2, 3, 4],
+				province: "random",
+			},
+		];
+
+		const table = createProvinceHashTable(randomDataset);
+
+		expect(table[1]).toBe("random");
+		expect(table[2]).toBe("random");
+		expect(table[3]).toBe("random");
+		expect(table[4]).toBe("random");
+
+		expect(table).toEqual({
+			1: "random",
+			2: "random",
+			3: "random",
+			4: "random",
+		});
+	});
 });
