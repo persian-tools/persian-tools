@@ -61,12 +61,12 @@ export function carHandler(plate: NormilizedPlate): PlateResultApi {
 	)}ایران${provinceCode}`;
 
 	const province = carHashTable[provinceCode];
-	const category = plate.char ? categoryHashTable[plate.char]?.description : undefined;
+	const category = plate.char ? categoryHashTable[plate.char]?.description : null;
 
 	return {
 		type,
 		template,
-		province,
+		province: province || null,
 		category,
 	};
 }
@@ -80,8 +80,8 @@ export function bikeHandler(plate: NormilizedPlate): PlateResultApi {
 	return {
 		type,
 		template,
-		province,
-		category: undefined,
+		province: province || null,
+		category: null,
 	};
 }
 

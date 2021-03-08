@@ -12,9 +12,9 @@ export type PlateResultApiTypeString = keyof typeof PlateTypes;
 
 export interface PlateResultApi {
 	template: string;
-	province: string | undefined;
+	province: string | null;
 	type: PlateResultApiTypeString;
-	category: string | undefined;
+	category: string | null;
 }
 
 export type PlateOptions = string | PlateApi;
