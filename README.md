@@ -334,7 +334,7 @@ plate({
 })
 ```
 
-**Getting info about plate**
+- Getting info about plate
 ```js
 import { plate } from "persian-tools2";
 
@@ -355,7 +355,7 @@ plate(12345678).info;
     template: 123-45678,
     province: مرکز تهران,
     type: Motorcyle,
-    category: undefined
+    category: null
   }
 */
 ```
@@ -364,7 +364,7 @@ Plates that have farsi digits in them(like: الف، ب، ص) will be returend i
   ${first_two_digits}${plate_character}${next_three_digits}ایران${province_code}
 ```
 
-**Checking if plate is valid**
+- Checking if plate is valid
 ```js
 import { plate } from "persian-tools2";
 
