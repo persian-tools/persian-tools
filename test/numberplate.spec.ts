@@ -59,8 +59,8 @@ describe("number plate module", () => {
 		expect(info2).toEqual({
 			type: "Car",
 			template: template2,
-			province: undefined,
-			category: undefined,
+			province: null,
+			category: null,
 		});
 	});
 
@@ -77,7 +77,7 @@ describe("number plate module", () => {
 			type: "Motorcycle",
 			template: template1,
 			province: "مرکز تهران",
-			category: undefined,
+			category: null,
 		});
 
 		// undefiend values
@@ -91,8 +91,8 @@ describe("number plate module", () => {
 		expect(info2).toEqual({
 			type: "Motorcycle",
 			template: template2,
-			province: undefined,
-			category: undefined,
+			province: null,
+			category: null,
 		});
 	});
 
@@ -124,7 +124,7 @@ describe("number plate module", () => {
 				type: "Motorcycle",
 				template: "121-45478",
 				province: "مرکز تهران",
-				category: undefined,
+				category: null,
 			};
 
 			expect(isPlateValid(info, normalizedPlate1.numbers)).toBe(true);
@@ -143,8 +143,8 @@ describe("number plate module", () => {
 			const plate1Info: PlateResultApi = {
 				type: "Car",
 				template: template1,
-				province: undefined,
-				category: undefined,
+				province: null,
+				category: null,
 			};
 			expect(isPlateValid(plate1Info, normalizedPlate1.numbers)).toBe(false);
 		});
@@ -158,8 +158,8 @@ describe("number plate module", () => {
 			const info1: PlateResultApi = {
 				type: "Motorcycle",
 				template: template2,
-				province: undefined,
-				category: undefined,
+				province: null,
+				category: null,
 			};
 
 			expect(isPlateValid(info1, normalizedPlate1.numbers)).toBe(false);
@@ -175,7 +175,7 @@ describe("number plate module", () => {
 				type: "Car",
 				template: `12${"g"}451${"ایران"}47`,
 				province: "مرکزی",
-				category: undefined,
+				category: null,
 			}
 
 			expect(isPlateValid(info, normalizedPlate1.numbers)).toBe(false);
@@ -192,7 +192,7 @@ describe("number plate module", () => {
 				type: "Car",
 				template: `12${"g"}451${"ایران"}50`, // province 50 does not exist
 				category: "دولتی",
-				province: undefined,
+				province: null,
 			};
 
 			expect(isPlateValid(info1, normalizedPlate1.numbers)).toBe(false);
@@ -205,8 +205,8 @@ describe("number plate module", () => {
 			const info2: PlateResultApi = {
 				type: "Motorcycle",
 				template: `100-45678`, // province 100 does not exist
-				category: undefined,
-				province: undefined,
+				category: null,
+				province: null,
 			};
 
 			expect(isPlateValid(info2, normalizedPlate2.numbers)).toBe(false);
@@ -237,7 +237,7 @@ describe("number plate module", () => {
 			type: "Motorcycle",
 			template: "121-45478",
 			province: "مرکز تهران",
-			category: undefined,
+			category: null,
 		});
 	});
 
