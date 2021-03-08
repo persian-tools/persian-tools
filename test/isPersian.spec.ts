@@ -1,8 +1,8 @@
 import { isPersian } from "../src/modules/isPersian";
 
 it("isPersian", () => {
-	expect(isPersian("این یک متن فارسی است؟")).not.toBeFalsy();
-	expect(isPersian("آیا سیستم میتواند گزینه های دیگری را به اشتباه به عنوان متن فارسی تشخیص دهد؟")).not.toBeFalsy();
+	expect(isPersian("این یک متن فارسی است؟")).toBeTruthy();
+	expect(isPersian("آیا سیستم میتواند گزینه های دیگری را به اشتباه به عنوان متن فارسی تشخیص دهد؟")).toBeTruthy();
 	expect(isPersian("Lorem Ipsum Test")).toBeFalsy();
 	expect(isPersian("これはペルシア語のテキストですか")).toBeFalsy();
 	expect(isPersian("Это персидский текст?")).toBeFalsy();

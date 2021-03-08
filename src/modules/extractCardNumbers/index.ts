@@ -72,7 +72,7 @@ function extractCardNumber(
 			 *
 			 * @type string
 			 */
-			cardNumber = (hasPersian(cardNumber) as boolean) ? (digitsFaToEn(cardNumber) as string) : cardNumber;
+			cardNumber = hasPersian(cardNumber) ? (digitsFaToEn(cardNumber) as string) : cardNumber;
 
 			const result: ExtractCardNumber = {
 				index: index + 1,
