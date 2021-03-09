@@ -7,9 +7,9 @@ export interface CategoryDataset {
 export type MotorcycleDataset = CarDataset;
 
 export interface PlateDataset {
-    Car: CarDataset,
-    Motorcycle: MotorcycleDataset,
-    Category: CategoryDataset
+	Car: CarDataset;
+	Motorcycle: MotorcycleDataset;
+	Category: CategoryDataset;
 }
 
 export const plateDataset: PlateDataset = {
