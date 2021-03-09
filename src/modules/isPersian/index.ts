@@ -1,7 +1,7 @@
 import { faText, faComplexText } from "./farsiChars";
 
 /**
- * Check if string is persian
+ * Check if string is in persian.
  *
  * @param {string} str
  * @param {boolean} isComplex in complex mode, we accept some specific characters which are common in Farsi text.

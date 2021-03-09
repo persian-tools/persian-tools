@@ -214,12 +214,21 @@ getBankNameFromCardNumber("6219861034529007"); // "بانک سامان"
 ### Validate the correctness of the text of the Persian language and clear the Arabic letters in the Persian text.
 
 ```javascript
-import { isPersian, toPersianChars } from "persian-tools2";
+import { isPersian, hasPersian, toPersianChars } from "persian-tools2";
 
 isPersian("این یک متن فارسی است؟") // true
 isPersian("Lorem Ipsum Test") // false
+isPersian("هل هذا نص فارسي؟")// false
+
+hasPersian("This text includes فارسی") // true
+
 toPersianChars("علي")) // علی
 ```
+
+**Note**: You can pass `2` more options to `isPersian` to customize it as your needs:
+
+-   `isComplex`: If you pass `true`, Then it accepts some of regular arabic characters which are commons in persian texts.(default is `false`)
+-   `trimPattern`: By default the function skips some of characters e.g. `"'-+()؟.` and `whitespaces`. You can pass your own customized `regex` as you need.
 
 ### Fix Persian characters in URL.
 
