@@ -24,5 +24,3 @@ export interface NormilizedPlate {
 	numbers: string;
 	char: string | undefined;
 }
-
-export type ProvinceDataset = Array<{ province: string; codes: Array<number> }>;

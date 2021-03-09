@@ -1,4 +1,4 @@
-import { NormilizedPlate, PlateOptions, ProvinceDataset } from "./types.skip";
+import { NormilizedPlate, PlateOptions } from "./types.skip";
 
 export const normalizePlate = (plate: PlateOptions): NormilizedPlate => {
 	let char;

@@ -1,6 +1,4 @@
-import { carHashTable } from "./carProvinceCodes.skip";
-import { categoryHashTable } from "./plateCategory.skip";
-import { bikeHashTable } from "./bikeProvinceCodes.skip";
+import { plateDataset } from "./codes.skip";
 import { isPlateNumberValid, normalizePlate } from "./helpers";
 import { NormilizedPlate, PlateOptions, PlateResultApi, PlateResultApiTypeString } from "./types.skip";
 
@@ -44,7 +42,7 @@ export function getPlateHandler(plate: NormilizedPlate): (plate: NormilizedPlate
 	if (plate.numbers?.length === 7) {
 		handler = carHandler;
 	} else if (plate.numbers?.length === 8) {
-		handler = bikeHandler;
+		handler = motorcycleHandler;
 	} else {
 		throw new Error("a Plate must be 7 or 8 digits long");
 	}
@@ -60,8 +58,8 @@ export function carHandler(plate: NormilizedPlate): PlateResultApi {
 		5,
 	)}ایران${provinceCode}`;
 
-	const province = carHashTable[provinceCode];
-	const category = plate.char ? categoryHashTable[plate.char]?.description : null;
+	const province = plateDataset.Car[provinceCode];
+	const category = plate.char ? plateDataset.Category[plate.char] : null;
 
 	return {
 		type,
@@ -70,12 +68,12 @@ export function carHandler(plate: NormilizedPlate): PlateResultApi {
 		category,
 	};
 }
-export function bikeHandler(plate: NormilizedPlate): PlateResultApi {
+export function motorcycleHandler(plate: NormilizedPlate): PlateResultApi {
 	const provinceCode = +plate.numbers.slice(0, 3);
 	const type: PlateResultApiTypeString = "Motorcycle";
 	const template = `${provinceCode}-${plate.numbers.slice(3)}`;
 
-	const province = bikeHashTable[provinceCode];
+	const province = plateDataset.Motorcycle[provinceCode];
 
 	return {
 		type,
