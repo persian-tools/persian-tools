@@ -1,7 +1,7 @@
 import { isPlateNumberValid, normalizePlate } from "../src/modules/numberplate/helpers";
 import { PlateResultApi } from "../src/modules/numberplate/types.skip";
 
-import plate, { getPlateHandler, carHandler, bikeHandler, isPlateValid, getPlateInfo } from "../src/modules/numberplate/index";
+import plate, { getPlateHandler, carHandler, motorcycleHandler, isPlateValid, getPlateInfo } from "../src/modules/numberplate/index";
 
 describe("number plate module", () => {
 	it("getPlateHandler should set handler to carHandler if plate length is 7", () => {
@@ -19,7 +19,7 @@ describe("number plate module", () => {
 			char: undefined,
 		};
 		const handlerFn = getPlateHandler(normalizedPlate);
-		expect(handlerFn).toEqual(bikeHandler);
+		expect(handlerFn).toEqual(motorcycleHandler);
 	});
 
 	it("getPlateHandler should throw an error if plate length is not 7 or 8", () => {
@@ -69,7 +69,7 @@ describe("number plate module", () => {
 			numbers: "12145478",
 			char: undefined,
 		};
-		const info1 = bikeHandler(normalizedPlate1);
+		const info1 = motorcycleHandler(normalizedPlate1);
 
 		const template1 = `121-45478`;
 
@@ -85,7 +85,7 @@ describe("number plate module", () => {
 			numbers: "10045118", // fake province code (100)
 			char: undefined, // there is no char when using motorcycle plate
 		};
-		const info2 = bikeHandler(normalizedPlate2);
+		const info2 = motorcycleHandler(normalizedPlate2);
 		const template2 = `100-45118`;
 
 		expect(info2).toEqual({
