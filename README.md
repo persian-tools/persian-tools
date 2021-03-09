@@ -323,6 +323,81 @@ import { halfSpace } from "persian-tools2";
 halfSpace("نمی ‌خواهی درخت ها را ببینیم؟") // "نمی‌خواهی درخت‌ها را ببینیم؟"
 ```
 
+
+### Get information(province, category, type) about vehicles plate  
+| Properties                  | Description                             | Return type
+|---                	  |---	                                    |---
+| `info`               | provide info about plate	| PlateResultApi
+| `isValid`  	          | checks if plate is valid or not  | boolean   
+
+**Usage**
+```js
+import { plate } from "persian-tools2";
+
+plate("12D45147"); // passing string argument
+
+// or passing in object style
+plate({
+  number: "1245147",
+  char: "الف"
+})
+```
+
+- Getting info about plate
+```js
+import { plate } from "persian-tools2";
+
+plate("12D45147").info;
+/*
+  {
+    template: 12 D 451 ایران  47
+	  province: مرکزی ,
+	  type: Car,
+	  category: دیپلمات,    
+  }
+*/
+
+// handle motorcyles plate
+plate(12345678).info;
+/*
+  {
+    template: 123-45678,
+    province: مرکز تهران,
+    type: Motorcyle,
+    category: null
+  }
+*/
+```
+Plates that have farsi digits in them(like: الف، ب، ص) will be returend in this template
+```
+  ${first_two_digits}${plate_character}${next_three_digits}ایران${province_code}
+```
+
+- Checking if plate is valid
+```js
+import { plate } from "persian-tools2";
+
+plate("12D45147").isValid;
+/*
+  true
+*/
+
+plate(12345678).info;
+/*
+  true
+*/
+
+plate(1234567).isValid
+/*
+  will return false - plate character is not provided
+*/
+
+plate(1204567).isValid
+/*
+  will return false - plate can't have 0 in its digits (except last digit)
+*/
+```
+
 ### Todo
 - [ ] Write Jalaali and Gregorian functions to convert Date together.
 
