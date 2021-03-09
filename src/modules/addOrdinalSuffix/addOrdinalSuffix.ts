@@ -5,19 +5,19 @@
  * @return A string of ordinated number
  */
 const addOrdinalSuffix = (number?: string): string => {
-    if (typeof number !== 'string') {
-        throw new TypeError("input must be string")
-    }
+	if (typeof number !== "string") {
+		throw new TypeError("input must be string");
+	}
 
-    if (number.endsWith("ی")) {
-        return number + " اُم"
-    }
+	if (number.endsWith("ی")) {
+		return number + " اُم";
+	}
 
-    if (number.endsWith("سه")) {
-        return number.slice(0, -2) + "سوم";
-    }
+	if (number.endsWith("سه")) {
+		return number.slice(0, -2) + "سوم";
+	}
 
-    return number + "م"
+	return number + "م";
 };
 
 export default addOrdinalSuffix;
