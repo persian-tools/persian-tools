@@ -1,5 +1,5 @@
-import { createProvinceHashTable, isPlateNumberValid, normalizePlate } from "../src/modules/numberplate/helpers";
-import { PlateResultApi, ProvinceDataset } from "../src/modules/numberplate/types.skip";
+import { isPlateNumberValid, normalizePlate } from "../src/modules/numberplate/helpers";
+import { PlateResultApi } from "../src/modules/numberplate/types.skip";
 
 import plate, { getPlateHandler, carHandler, bikeHandler, isPlateValid, getPlateInfo } from "../src/modules/numberplate/index";
 
@@ -291,27 +291,5 @@ describe("number plate helpers", () => {
 		expect(isPlateNumberValid("1ی23456")).toBe(false);
 		expect(isPlateNumberValid("1234f560")).toBe(false);
 		expect(isPlateNumberValid("123450d0")).toBe(false);
-	});
-	it("createProvinceHashTable should create hash table for given dataset", () => {
-		const randomDataset: ProvinceDataset = [
-			{
-				codes: [1, 2, 3, 4],
-				province: "random",
-			},
-		];
-
-		const table = createProvinceHashTable(randomDataset);
-
-		expect(table[1]).toBe("random");
-		expect(table[2]).toBe("random");
-		expect(table[3]).toBe("random");
-		expect(table[4]).toBe("random");
-
-		expect(table).toEqual({
-			1: "random",
-			2: "random",
-			3: "random",
-			4: "random",
-		});
 	});
 });
