@@ -27,8 +27,10 @@ export function digitsEnToFa(str?: number | string): string | undefined {
  *  Persian digits
  *
  */
-export function digitsFaToEn(str?: string | string): string | undefined {
-	if (!str) return;
+export function digitsFaToEn(str: string): string {
+	if (typeof str !== "string") {
+		throw new Error("the input must be string");
+	}
 
 	for (let i = 0; i < 10; i++) {
 		const replaceFaToEn = new RegExp(faNums[i], "g");

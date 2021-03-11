@@ -34,7 +34,25 @@ describe("Digits", () => {
 		expect(digitsFaToEn("123۴۵۶")).toEqual("123456");
 		expect(digitsFaToEn("۸۹123۴۵")).toEqual("8912345");
 		expect(digitsFaToEn("۰۱۲۳۴۵۶۷۸۹")).toEqual("0123456789");
-		expect(digitsFaToEn()).toBeUndefined();
-		expect(digitsFaToEn("")).toBeUndefined();
+		try {
+			//@ts-ignore
+			digitsFaToEn(undefined)
+		} catch (e) {
+			expect(e.message).toEqual('the input must be string')
+		}
+		try {
+			//@ts-ignore
+			digitsFaToEn()
+		} catch (e) {
+			expect(e.message).toEqual('the input must be string')
+		}
+
+		try {
+			//@ts-ignore
+			digitsFaToEn({})
+		} catch (e) {
+			expect(e.message).toEqual('the input must be string')
+		}
+
 	});
 });
