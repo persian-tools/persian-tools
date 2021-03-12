@@ -29,6 +29,6 @@ export { default as Bill } from "./modules/bill";
 // Sheba
 export { default as Sheba } from "./modules/sheba";
 // Number plate
-export { default as plate } from "./modules/numberplate";
+export { default as Plate } from "./modules/numberplate";
 // Phone number utilities
 export * from "./modules/phoneNumber";
