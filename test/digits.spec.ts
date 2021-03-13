@@ -26,8 +26,19 @@ describe("Digits", () => {
 		expect(digitsEnToFa("123۴۵۶")).toEqual("۱۲۳۴۵۶");
 		expect(digitsEnToFa("٤٥٦")).toEqual("٤٥٦");
 		expect(digitsEnToFa("123۴۵۶")).toEqual("۱۲۳۴۵۶");
-		expect(digitsEnToFa()).toBeUndefined();
-		expect(digitsEnToFa("")).toBeUndefined();
+		try {
+			//@ts-ignore
+			digitsEnToFa()
+		}catch (e) {
+		    expect(e.message).toEqual('the input must be string or number')
+		}
+
+		try {
+		    //@ts-ignore
+		    digitsEnToFa(undefined)
+		}catch (e) {
+			expect(e.message).toEqual('the input must be string or number')
+		}
 	});
 
 	it("digitsFaToEn", () => {
