@@ -332,12 +332,12 @@ halfSpace("نمی ‌خواهی درخت ها را ببینیم؟") // "نمی�
 
 **Usage**
 ```js
-import { plate } from "persian-tools2";
+import { Plate } from "persian-tools2";
 
 plate("12D45147"); // passing string argument
 
 // or passing in object style
-plate({
+Plate({
   number: "1245147",
   char: "الف"
 })
@@ -347,7 +347,7 @@ plate({
 ```js
 import { plate } from "persian-tools2";
 
-plate("12D45147").info;
+Plate("12D45147").info;
 /*
   {
     template: 12 D 451 ایران  47
@@ -358,7 +358,7 @@ plate("12D45147").info;
 */
 
 // handle motorcyles plate
-plate(12345678).info;
+Plate(12345678).info;
 /*
   {
     template: 123-45678,
@@ -375,24 +375,24 @@ Plates that have farsi digits in them(like: الف، ب، ص) will be returend i
 
 - Checking if plate is valid
 ```js
-import { plate } from "persian-tools2";
+import { Plate } from "persian-tools2";
 
-plate("12D45147").isValid;
+Plate("12D45147").isValid;
 /*
   true
 */
 
-plate(12345678).info;
+Plate(12345678).info;
 /*
   true
 */
 
-plate(1234567).isValid
+Plate(1234567).isValid
 /*
   will return false - plate character is not provided
 */
 
-plate(1204567).isValid
+Plate(1204567).isValid
 /*
   will return false - plate can't have 0 in its digits (except last digit)
 */
