@@ -8,16 +8,19 @@ const arNums = "٠١٢٣٤٥٦٧٨٩";
  *  Persian digits
  *
  */
-export function digitsEnToFa(str?: number | string): string | undefined {
-	if (!str) return;
-
-	let result = "" + str;
-	for (let i = 0; i < 10; i++) {
-		const replaceEntoFa = new RegExp("" + i, "g");
-		result = result.replace(replaceEntoFa, faNums[i]);
+export function digitsEnToFa(value?: number | string): string {
+	if (typeof value !== "number" && typeof value !== "string") {
+		throw new TypeError("the input must be string or number");
 	}
 
-	return result;
+	let string = typeof value === "number" ? String(value) : value;
+
+	for (let i = 0; i < 10; i++) {
+		const replaceEntoFa = new RegExp("" + i, "g");
+		string = string.replace(replaceEntoFa, faNums[i]);
+	}
+
+	return string;
 }
 
 /** digitsFaToEn
