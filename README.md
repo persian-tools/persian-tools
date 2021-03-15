@@ -117,7 +117,7 @@ WordsToNumber.convert("دوازده هزار بیست دو", { addCommas: true }
 ```javascript
 import { WordsToNumber } from "persian-tools2";
 
-WordsToNumber.convert("یگصد و بنجاه هزار", { fuzzy: true }) // "150000"  
+WordsToNumber.convert("یکصد و بنجاه هزار", { fuzzy: true }) // "150000"  
 WordsToNumber.convert("دویشت ر بیشت هزار", { fuzzy: true }) // "220000"  
 WordsToNumber.convert("منقی ضد", { fuzzy: true }) // "-100"  
 ```
