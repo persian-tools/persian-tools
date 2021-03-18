@@ -10,6 +10,7 @@ it("Add and remove commas", () => {
 	expect(addCommas("30,000,000.02")).toEqual("30,000,000.02");
 	expect(addCommas("12500.9")).toEqual("12,500.9");
 	expect(addCommas(12500.9)).toEqual("12,500.9");
+	expect(addCommas("51000.123456789")).toEqual("51,000.123456789");
 
 	expect(addCommas(300)).toEqual("300");
 	// @ts-ignore
