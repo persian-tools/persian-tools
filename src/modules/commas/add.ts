@@ -17,7 +17,7 @@ const addCommas = (number?: number | string): string | undefined => {
 		? (digitsFaToEn(convertedToString) as string)
 		: convertedToString;
 
-	return tokenizedToEnglish.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+	return tokenizedToEnglish.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 };
 
 export default addCommas;
