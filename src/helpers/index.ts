@@ -3,6 +3,7 @@ export const trim = (str: string): string => str.replace(/^\s+|\s+$/g, "");
 interface ReplaceArrayDictionary {
 	[key: string]: string;
 }
+
 export const replaceArray = (string: string, find: ReplaceArrayDictionary): string => {
 	const pattern = new RegExp(Object.keys(find).join("|"), "gi");
 
@@ -15,3 +16,11 @@ export const replaceArray = (string: string, find: ReplaceArrayDictionary): stri
  * @type regex
  */
 export const ArabicContextualForms = /[ي|ﻱ|ﻲ|ﻚ|ك|ﻚ|ﺔ|ﺓ|ة]/g;
+
+export function isString(value: string): boolean {
+	return {}.toString.call(value) === "[object String]";
+}
+
+export function isNumber(value: number): boolean {
+	return {}.toString.call(value) === "[object Number]";
+}

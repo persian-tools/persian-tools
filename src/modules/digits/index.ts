@@ -1,3 +1,5 @@
+import { isNumber, isString } from "../../helpers";
+
 const faNums = "۰۱۲۳۴۵۶۷۸۹";
 const arNums = "٠١٢٣٤٥٦٧٨٩";
 
@@ -8,19 +10,21 @@ const arNums = "٠١٢٣٤٥٦٧٨٩";
  *  Persian digits
  *
  */
-export function digitsEnToFa(value?: number | string): string {
-	if (typeof value !== "number" && typeof value !== "string") {
+export function digitsEnToFa(digits?: number | string): string | never {
+	if (!(isNumber(digits) || isString(digits))) {
 		throw new TypeError("the input must be string or number");
 	}
 
-	let string = typeof value === "number" ? String(value) : value;
+	let digitsString = isNumber(digits) ? String(digits) : digits;
 
 	for (let i = 0; i < 10; i++) {
 		const replaceEntoFa = new RegExp("" + i, "g");
-		string = string.replace(replaceEntoFa, faNums[i]);
+		// @ts-ignore
+		digitsString = digitsString.replace(replaceEntoFa, faNums[i]);
 	}
 
-	return string;
+	// @ts-ignore
+	return digitsString;
 }
 
 /** digitsFaToEn
@@ -30,18 +34,18 @@ export function digitsEnToFa(value?: number | string): string {
  *  Persian digits
  *
  */
-export function digitsFaToEn(str: string): string {
-	if (typeof str !== "string") {
-		throw new Error("the input must be string");
+export function digitsFaToEn(digits: string): string | never {
+	if (!isString(digits)) {
+		throw new TypeError("the input must be string");
 	}
 
 	for (let i = 0; i < 10; i++) {
 		const replaceFaToEn = new RegExp(faNums[i], "g");
 		// @ts-ignore
-		str = str.replace(replaceFaToEn, i);
+		digits = digits.replace(replaceFaToEn, i);
 	}
 
-	return str;
+	return digits;
 }
 
 /** digitsArToFa
@@ -51,16 +55,19 @@ export function digitsFaToEn(str: string): string {
  *  digits
  *
  */
-export function digitsArToFa(str?: string | number): string | undefined {
-	if (!str) return;
-
-	let result = "" + str;
-	for (let i = 0; i < 10; i++) {
-		const replaceArabicToPersian = new RegExp(arNums[i], "g");
-		result = result.replace(replaceArabicToPersian, faNums[i]);
+export function digitsArToFa(digits?: string | number): string | never {
+	if (!isString(digits)) {
+		throw new TypeError("the input must be string");
 	}
 
-	return result;
+	for (let i = 0; i < 10; i++) {
+		const replaceArabicToPersian = new RegExp(arNums[i], "g");
+		//@ts-ignore
+		digits = digits.replace(replaceArabicToPersian, faNums[i]);
+	}
+
+	//@ts-ignore
+	return digits;
 }
 
 /** digitsArToEn
@@ -70,15 +77,17 @@ export function digitsArToFa(str?: string | number): string | undefined {
  *  digits
  *
  */
-export function digitsArToEn(str?: string): string | undefined {
-	if (!str) return;
+export function digitsArToEn(digits?: string): string | never {
+	if (!isString(digits)) {
+		throw new TypeError("the input must be string");
+	}
 
-	let result = str;
 	for (let i = 0; i < 10; i++) {
 		const replaceArabicToEnglish = new RegExp(arNums[i], "g");
 		// @ts-ignore
-		result = String(result).replace(replaceArabicToEnglish, i);
+		digits = digits.replace(replaceArabicToEnglish, i);
 	}
 
-	return result;
+	//@ts-ignore
+	return digits;
 }
