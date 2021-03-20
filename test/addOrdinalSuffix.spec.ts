@@ -8,10 +8,10 @@ describe("Ordinal suffix", () => {
 	});
 
 	it("Should throw an undefined error", () => {
-	    try{
-	        addOrdinalSuffix()
-		}catch (e) {
-			expect(e.message).toBe('input must be string');
+		try {
+			addOrdinalSuffix();
+		} catch (e) {
+			expect(e.message).toBe("input must be string");
 		}
 	});
 });

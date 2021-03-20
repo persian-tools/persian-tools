@@ -6,7 +6,7 @@ expect.extend({
 
 		return {
 			message: () => `expected ${received} to be type ${argument}`,
-			pass: isPassed
-		}
-	}
+			pass: isPassed,
+		};
+	},
 });

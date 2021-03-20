@@ -14,5 +14,5 @@ describe("halfSpace", () => {
 			// @ts-ignore
 			halfSpace();
 		}).toThrow();
-	})
-})
+	});
+});

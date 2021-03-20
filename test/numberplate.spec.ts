@@ -1,7 +1,13 @@
 import { isPlateNumberValid, normalizePlate } from "../src/modules/numberplate/helpers";
 import { PlateResultApi } from "../src/modules/numberplate/types.skip";
 
-import plate, { getPlateHandler, carHandler, motorcycleHandler, isPlateValid, getPlateInfo } from "../src/modules/numberplate/index";
+import plate, {
+	getPlateHandler,
+	carHandler,
+	motorcycleHandler,
+	isPlateValid,
+	getPlateInfo,
+} from "../src/modules/numberplate/index";
 
 describe("number plate module", () => {
 	it("getPlateHandler should set handler to carHandler if plate length is 7", () => {
@@ -168,18 +174,18 @@ describe("number plate module", () => {
 		it("should return false if category does not exist on type Car", () => {
 			const normalizedPlate1 = {
 				numbers: "1245147",
-				char: "g" // undefined char (category)
-			}
+				char: "g", // undefined char (category)
+			};
 
 			const info: PlateResultApi = {
 				type: "Car",
 				template: `12${"g"}451${"ایران"}47`,
 				province: "مرکزی",
 				category: null,
-			}
+			};
 
 			expect(isPlateValid(info, normalizedPlate1.numbers)).toBe(false);
-		})
+		});
 
 		it("should return false if province does not exist on both types car & bike", () => {
 			// car type
@@ -210,7 +216,7 @@ describe("number plate module", () => {
 			};
 
 			expect(isPlateValid(info2, normalizedPlate2.numbers)).toBe(false);
-		})
+		});
 	});
 
 	it("getPlateInfo should return plate info based on plate type", () => {

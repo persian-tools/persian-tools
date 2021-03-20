@@ -28,16 +28,16 @@ describe("Digits", () => {
 		expect(digitsEnToFa("123۴۵۶")).toEqual("۱۲۳۴۵۶");
 		try {
 			//@ts-ignore
-			digitsEnToFa()
-		}catch (e) {
-		    expect(e.message).toEqual('the input must be string or number')
+			digitsEnToFa();
+		} catch (e) {
+			expect(e.message).toEqual("the input must be string or number");
 		}
 
 		try {
-		    //@ts-ignore
-		    digitsEnToFa(undefined)
-		}catch (e) {
-			expect(e.message).toEqual('the input must be string or number')
+			//@ts-ignore
+			digitsEnToFa(undefined);
+		} catch (e) {
+			expect(e.message).toEqual("the input must be string or number");
 		}
 	});
 
@@ -47,23 +47,22 @@ describe("Digits", () => {
 		expect(digitsFaToEn("۰۱۲۳۴۵۶۷۸۹")).toEqual("0123456789");
 		try {
 			//@ts-ignore
-			digitsFaToEn(undefined)
+			digitsFaToEn(undefined);
 		} catch (e) {
-			expect(e.message).toEqual('the input must be string')
+			expect(e.message).toEqual("the input must be string");
 		}
 		try {
 			//@ts-ignore
-			digitsFaToEn()
+			digitsFaToEn();
 		} catch (e) {
-			expect(e.message).toEqual('the input must be string')
+			expect(e.message).toEqual("the input must be string");
 		}
 
 		try {
 			//@ts-ignore
-			digitsFaToEn({})
+			digitsFaToEn({});
 		} catch (e) {
-			expect(e.message).toEqual('the input must be string')
+			expect(e.message).toEqual("the input must be string");
 		}
-
 	});
 });
