@@ -368,7 +368,7 @@ Plate(12345678).info;
   }
 */
 ```
-Plates that have farsi digits in them(like: الف، ب، ص) will be returend in this template
+Plates that have farsi digits in them(like: الف، ب، ص) will be returned in this template
 ```
   ${first_two_digits}${plate_character}${next_three_digits}ایران${province_code}
 ```
