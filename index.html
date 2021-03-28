@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Persian Tools - v1.6.0-beta.4</title>
-	<meta name="description" content="Documentation for Persian Tools - v1.6.0-beta.4">
+	<title>Persian Tools - v1.6.0-beta.5</title>
+	<meta name="description" content="Documentation for Persian Tools - v1.6.0-beta.5">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
 	<script async src="assets/js/search.js" id="search-script"></script>
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">Persian Tools - v1.6.0-beta.4</a>
+					<a href="index.html" class="title">Persian Tools - v1.6.0-beta.5</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -48,7 +48,7 @@
 	</div>
 	<div class="tsd-page-title">
 		<div class="container">
-			<h1>Persian Tools - v1.6.0-beta.4</h1>
+			<h1>Persian Tools - v1.6.0-beta.5</h1>
 		</div>
 	</div>
 </header>
@@ -283,12 +283,21 @@
 				<a href="#validate-the-correctness-of-the-text-of-the-persian-language-and-clear-the-arabic-letters-in-the-persian-text" id="validate-the-correctness-of-the-text-of-the-persian-language-and-clear-the-arabic-letters-in-the-persian-text" style="color: inherit; text-decoration: none;">
 					<h3>Validate the correctness of the text of the Persian language and clear the Arabic letters in the Persian text.</h3>
 				</a>
-				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">isPersian</span><span style="color: #000000">, </span><span style="color: #001080">toPersianChars</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;persian-tools2&quot;</span><span style="color: #000000">;</span>
+				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">isPersian</span><span style="color: #000000">, </span><span style="color: #001080">hasPersian</span><span style="color: #000000">, </span><span style="color: #001080">toPersianChars</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;persian-tools2&quot;</span><span style="color: #000000">;</span>
 
 <span style="color: #795E26">isPersian</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;این یک متن فارسی است؟&quot;</span><span style="color: #000000">) </span><span style="color: #008000">// true</span>
 <span style="color: #795E26">isPersian</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Lorem Ipsum Test&quot;</span><span style="color: #000000">) </span><span style="color: #008000">// false</span>
+<span style="color: #795E26">isPersian</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;هل هذا نص فارسي؟&quot;</span><span style="color: #000000">)</span><span style="color: #008000">// false</span>
+
+<span style="color: #795E26">hasPersian</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;This text includes فارسی&quot;</span><span style="color: #000000">) </span><span style="color: #008000">// true</span>
+
 <span style="color: #795E26">toPersianChars</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;علي&quot;</span><span style="color: #000000">)) </span><span style="color: #008000">// علی</span>
 </code></pre>
+				<p><strong>Note</strong>: You can pass <code>2</code> more options to <code>isPersian</code> to customize it as your needs:</p>
+				<ul>
+					<li>  <code>isComplex</code>: If you pass <code>true</code>, Then it accepts some of regular arabic characters which are commons in persian texts.(default is <code>false</code>)</li>
+					<li>  <code>trimPattern</code>: By default the function skips some of characters e.g. <code>&quot;&#39;-+()؟.</code> and <code>whitespaces</code>. You can pass your own customized <code>regex</code> as you need.</li>
+				</ul>
 				<a href="#fix-persian-characters-in-url" id="fix-persian-characters-in-url" style="color: inherit; text-decoration: none;">
 					<h3>Fix Persian characters in URL.</h3>
 				</a>
@@ -417,6 +426,91 @@
 
 <span style="color: #795E26">halfSpace</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;نمی ‌خواهی درخت ها را ببینیم؟&quot;</span><span style="color: #000000">) </span><span style="color: #008000">// &quot;نمی‌خواهی درخت‌ها را ببینیم؟&quot;</span>
 </code></pre>
+				<a href="#get-informationprovince-category-type-about-vehicles-plate" id="get-informationprovince-category-type-about-vehicles-plate" style="color: inherit; text-decoration: none;">
+					<h3>Get information(province, category, type) about vehicles plate</h3>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>Properties</th>
+							<th>Description</th>
+							<th>Return type</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><code>info</code></td>
+							<td>provide info about plate</td>
+							<td>PlateResultApi</td>
+						</tr>
+						<tr>
+							<td><code>isValid</code></td>
+							<td>checks if plate is valid or not</td>
+							<td>boolean</td>
+						</tr>
+				</tbody></table>
+				<p><strong>Usage</strong></p>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Plate</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;persian-tools2&quot;</span><span style="color: #000000">;</span>
+
+<span style="color: #795E26">plate</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;12D45147&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// passing string argument</span>
+
+<span style="color: #008000">// or passing in object style</span>
+<span style="color: #795E26">Plate</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">number:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;1245147&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">char:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;الف&quot;</span>
+<span style="color: #000000">})</span>
+</code></pre>
+				<ul>
+					<li>Getting info about plate<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">plate</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;persian-tools2&quot;</span><span style="color: #000000">;</span>
+
+</code></pre>
+					</li>
+				</ul>
+				<p>Plate(&quot;12D45147&quot;).info;
+					/*
+					{
+					template: 12 D 451 ایران  47
+					province: مرکزی ,
+					type: Car,
+					category: دیپلمات,<br>  }
+				*/</p>
+				<p>// handle motorcyles plate
+					Plate(12345678).info;
+					/*
+					{
+					template: 123-45678,
+					province: مرکز تهران,
+					type: Motorcyle,
+					category: null
+					}
+				*/</p>
+				<pre><code><span style="color: #001080">Plates</span><span style="color: #000000"> </span><span style="color: #001080">that</span><span style="color: #000000"> </span><span style="color: #001080">have</span><span style="color: #000000"> </span><span style="color: #001080">farsi</span><span style="color: #000000"> </span><span style="color: #001080">digits</span><span style="color: #000000"> </span><span style="color: #0000FF">in</span><span style="color: #000000"> </span><span style="color: #795E26">them</span><span style="color: #000000">(</span><span style="color: #001080">like</span><span style="color: #000000">: </span><span style="color: #001080">الف</span><span style="color: #000000">، </span><span style="color: #001080">ب</span><span style="color: #000000">، </span><span style="color: #001080">ص</span><span style="color: #000000">) </span><span style="color: #001080">will</span><span style="color: #000000"> </span><span style="color: #001080">be</span><span style="color: #000000"> </span><span style="color: #001080">returned</span><span style="color: #000000"> </span><span style="color: #0000FF">in</span><span style="color: #000000"> </span><span style="color: #0000FF">this</span><span style="color: #000000"> </span><span style="color: #001080">template</span>
+</code></pre>
+				<p>  ${first_two_digits}${plate_character}${next_three_digits}ایران${province_code}</p>
+				<pre><code>
+<span style="color: #000000">- </span><span style="color: #001080">Checking</span><span style="color: #000000"> </span><span style="color: #AF00DB">if</span><span style="color: #000000"> </span><span style="color: #001080">plate</span><span style="color: #000000"> </span><span style="color: #001080">is</span><span style="color: #000000"> </span><span style="color: #001080">valid</span>
+<span style="color: #A31515">```js</span>
+<span style="color: #A31515">import { Plate } from &quot;persian-tools2&quot;;</span>
+
+<span style="color: #A31515">Plate(&quot;12D45147&quot;).isValid;</span>
+<span style="color: #A31515">/*</span>
+<span style="color: #A31515">  true</span>
+<span style="color: #A31515">*/</span>
+
+<span style="color: #A31515">Plate(12345678).info;</span>
+<span style="color: #A31515">/*</span>
+<span style="color: #A31515">  true</span>
+<span style="color: #A31515">*/</span>
+
+<span style="color: #A31515">Plate(1234567).isValid</span>
+<span style="color: #A31515">/*</span>
+<span style="color: #A31515">  will return false - plate character is not provided</span>
+<span style="color: #A31515">*/</span>
+
+<span style="color: #A31515">Plate(1204567).isValid</span>
+<span style="color: #A31515">/*</span>
+<span style="color: #A31515">  will return false - plate can&#039;t have 0 in its digits (except last digit)</span>
+<span style="color: #A31515">*/</span>
+</code></pre>
 				<a href="#todo" id="todo" style="color: inherit; text-decoration: none;">
 					<h3>Todo</h3>
 				</a>
@@ -446,6 +540,7 @@
 						<td align="center"><a href="http://titles.ir"><img src="https://avatars1.githubusercontent.com/u/1300289?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Hesam pourghazian</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=Hesamp" title="Code">💻</a></td>
 						<td align="center"><a href="https://github.com/amirqasemi74"><img src="https://avatars3.githubusercontent.com/u/20992734?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Amir Hossien Qasemi Moqaddam</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=amirqasemi74" title="Code">💻</a></td>
 						<td align="center"><a href="https://github.com/SeyyedKhandon"><img src="https://avatars.githubusercontent.com/u/59599950?v=4?s=100" width="100px;" alt=""/><br /><sub><b>SeyyedKhandon</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=SeyyedKhandon" title="Code">💻</a></td>
+						<td align="center"><a href="https://github.com/masoudDaliriyan"><img src="https://avatars.githubusercontent.com/u/25932831?v=4?s=100" width="100px;" alt=""/><br /><sub><b>msdDaliriyan</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=masoudDaliriyan" title="Code">💻</a></td>
 					</tr>
 				</table>
 				<!-- markdownlint-restore -->
@@ -495,6 +590,9 @@
 					</li>
 					<li class=" tsd-kind-variable">
 						<a href="modules.html#cardnumberregex" class="tsd-kind-icon">card<wbr>Number<wbr>Regex</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#plate" class="tsd-kind-icon">Plate</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#sorttext" class="tsd-kind-icon">Sort<wbr>Text</a>
