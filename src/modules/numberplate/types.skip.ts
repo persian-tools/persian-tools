@@ -1,3 +1,8 @@
+export interface PlateResult {
+	info: PlateResultApi;
+	isValid: boolean;
+}
+
 export interface PlateApi {
 	number: string;
 	char?: string;

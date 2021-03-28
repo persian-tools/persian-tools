@@ -1,8 +1,15 @@
 import { plateDataset } from "./codes.skip";
 import { isPlateNumberValid, normalizePlate } from "./helpers";
-import { NormilizedPlate, PlateOptions, PlateResultApi, PlateResultApiTypeString } from "./types.skip";
+// Types
+import type {
+	NormilizedPlate,
+	PlateOptions,
+	PlateResult,
+	PlateResultApi,
+	PlateResultApiTypeString,
+} from "./types.skip";
 
-const plate = function (plate: PlateOptions): { info: PlateResultApi; isValid: boolean } {
+export default function plate(plate: PlateOptions): PlateResult {
 	const normalizedPlate = normalizePlate(plate);
 	const info = getPlateInfo(normalizedPlate);
 	const isValid = isPlateValid(info, normalizedPlate.numbers);
@@ -11,7 +18,7 @@ const plate = function (plate: PlateOptions): { info: PlateResultApi; isValid: b
 		info,
 		isValid,
 	};
-};
+}
 
 export function getPlateInfo(plate: NormilizedPlate): PlateResultApi {
 	const getInfo = getPlateHandler(plate);
@@ -82,5 +89,3 @@ export function motorcycleHandler(plate: NormilizedPlate): PlateResultApi {
 		category: null,
 	};
 }
-
-export default plate;
