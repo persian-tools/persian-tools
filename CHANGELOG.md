@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0-beta.5](https://github.com/persian-tools/persian-tools/compare/v1.6.0-beta.4...v1.6.0-beta.5) (2021-03-28)
+
+
+### Features
+
+* **digitsEnToFa:** add error handling and clean up ([8a23631](https://github.com/persian-tools/persian-tools/commit/8a236317a2f45c7a393171d623f923ed4c0a4399))
+* **digitsFaToEn:** add error handling ([ad2ebbf](https://github.com/persian-tools/persian-tools/commit/ad2ebbf23a92089b388df240d73b9c15ef1d3725))
+* **halfSpace:** clean up and add error handling ([d305b96](https://github.com/persian-tools/persian-tools/commit/d305b96319a1ea3e5310cb385e1dfff74de92c2f))
+* add Code of Conduct doc ([8c57c26](https://github.com/persian-tools/persian-tools/commit/8c57c26afc964f595f205cc746ad834e1deba1c4))
+* Add numberplate module ([db1207e](https://github.com/persian-tools/persian-tools/commit/db1207e7f5abf5e19de85b2f24f79983bbdb7d38))
+* add types for numberplate module ([9e73e7b](https://github.com/persian-tools/persian-tools/commit/9e73e7b5c9de6b40c75a475f4a4ab3ab703cd353))
+
+
+### Bug Fixes
+
+* **addCommas:** remove commas from decimal places ([9c360c3](https://github.com/persian-tools/persian-tools/commit/9c360c3cf4f2ac1b756ab1bbf17d4b4bb34a90e1))
+* **addOrdinalSuffix:** add test ([e8f3b4e](https://github.com/persian-tools/persian-tools/commit/e8f3b4ebe9781eb08577bd137adbaf75aea3a112))
+* **bundle:** modules exports for using in vite ([ec4e1d9](https://github.com/persian-tools/persian-tools/commit/ec4e1d91fa15063e157f009450ade73051347ec2))
+* fix typescript issue and make more in  readable phoneNumber utils ([5fcde62](https://github.com/persian-tools/persian-tools/commit/5fcde624a2f49ed4d472a900771ed8982426b506))
+* isPersian ([8341017](https://github.com/persian-tools/persian-tools/commit/83410178e5d9d245ebbb77d483727147a0df9f22))
+* remove unnecessary import in phoneNumber details ([f34655b](https://github.com/persian-tools/persian-tools/commit/f34655bd8c3b5de87d2efaf043edaac04d86a6d8))
+* update isPersian and hasPersian info in readme.md ([c4ee0a9](https://github.com/persian-tools/persian-tools/commit/c4ee0a93764e55a69176bc07ed9a2bd1ba0a5bf6))
+
 ## [1.6.0-beta.4](https://github.com/persian-tools/persian-tools/compare/v1.6.0-beta.3...v1.6.0-beta.4) (2021-02-27)
 
 
