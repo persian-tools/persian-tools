@@ -2,16 +2,13 @@
 	"name": "@persian-tools/persian-tools",
 	"version": "1.6.0-beta.4",
 	"description": "An anthology of a variety of tools for Persian language in javascript",
-	"main": "build/persian-tools.js",
-	"umd:main": "build/persian-tools.umd.js",
-	"exports": "build/persian-tools.modern.js",
-	"esmodule": "build/persian-tools.esm.js",
-	"module": "build/persian-tools.module.js",
-	"unpkg": "build/persian-tools.umd.js",
-	"types": "build/persian-tools.d.ts",
+	"main": "./build/persian-tools.cjs.js",
+	"esmodule": "./build/persian-tools.esm.js",
+	"module": "./build/persian-tools.esm.js",
+	"types": "./build/persian-tools.d.ts",
 	"sideEffect": false,
 	"scripts": {
-		"micro:build": "microbundle src/index.ts --compress --name persian-tools",
+		"micro:build": "microbundle src/index.ts --compress --name persian-tools --strict",
 		"postmicro:build": "mv ./build/index.d.ts ./build/persian-tools.d.ts && rm -rf ./build/setupTests.d.ts",
 		"micro:dev": "microbundle watch",
 		"test": "jest",
@@ -29,6 +26,9 @@
 		"generate:docs": "make publish-docs",
 		"size": "size-limit",
 		"analyze": "size-limit --why"
+	},
+	"directories": {
+		"test": "tests"
 	},
 	"repository": {
 		"type": "git",
