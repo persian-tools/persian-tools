@@ -1,10 +1,10 @@
-/** SortText * *
+/** SortText **
  * @description Takes a piece of text in Persian which contains
  * several lines (separated by the newline character), and sorts
  * the lines alphabetically, with respect to their first character.
  * @param {string} str - text for sorting
  * @return { string[] | undefined}
- * */
+ */
 
 function SortText(str: string | string[]): string[] | undefined {
 	if (!str) return;
