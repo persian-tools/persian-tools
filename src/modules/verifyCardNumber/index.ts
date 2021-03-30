@@ -3,14 +3,15 @@
  *
  * @public
  * @method verifyCardNumber
- * @param {Number} digits - card number
- * @return {Boolean}
+ * @param {number} digits - card number
+ * @return {boolean}
  */
 function verifyCardNumber(digits: number): boolean | undefined {
 	if (!digits) return;
 	const digitsResult = String(digits);
 
 	const length = digitsResult.length;
+
 	if (
 		length < 16 ||
 		parseInt(digitsResult.substr(1, 10), 10) === 0 ||
@@ -19,13 +20,14 @@ function verifyCardNumber(digits: number): boolean | undefined {
 		return false;
 	}
 
-	let oddOrEven,
+	let radix,
 		subDigit,
 		sum = 0;
 
 	for (let i = 0; i < 16; i++) {
-		oddOrEven = i % 2 === 0 ? 2 : 1;
-		subDigit = parseInt(digitsResult.substr(i, 1), 10) * oddOrEven;
+		radix = i % 2 === 0 ? 2 : 1;
+
+		subDigit = parseInt(digitsResult.substr(i, 1), 10) * radix;
 		sum += subDigit > 9 ? subDigit - 9 : subDigit;
 	}
 	return sum % 10 === 0;
