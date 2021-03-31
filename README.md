@@ -5,6 +5,7 @@
 	<h1 align="center">Persian tools</h1>
 	<p align="center">PersianTools.js is a standalone, library-agnostic JavaScript that enables some of the Persian features for use in the JavaScript.</p>
 
+[![Rate on Openbase](https://badges.openbase.com/js/rating/persian-tools2.svg)](https://openbase.com/js/persian-tools2?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge)
 ![CI/CD](https://github.com/persian-tools/persian-tools/workflows/Continuous%20Integration/badge.svg)
 [![codecov](https://codecov.io/gh/persian-tools/persian-tools/branch/master/graph/badge.svg)](https://codecov.io/gh/persian-tools/persian-tools)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/persian-tools/persian-tools/blob/master/LICENSE)
