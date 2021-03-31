@@ -71,6 +71,17 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "mahdi-momeni",
+      "name": "Mahdi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32864532?v=4",
+      "profile": "https://mahdi-momeni.github.io/",
+      "contributions": [
+        "code",
+        "test",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
