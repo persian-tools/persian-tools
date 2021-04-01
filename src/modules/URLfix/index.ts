@@ -1,31 +1,13 @@
 /**
- * Used for fix Persian characters in URL
- *
  * @method URLfix
- * @param URL string
- * @return A string of fixed URL
+ * @description Used for fix Persian characters in URL
+ * @param {string} url
+ * @return a string of fixed URL
  */
-const URLfix = (value?: string): string | undefined => {
-	if (!value) {
-		return;
-	}
+function URLfix(url?: string): string | undefined {
+    if (!url) return;
 
-	// Replace every %20 with _ to protect them from decodeURI
-	let old = "";
-	while (old !== value) {
-		old = value;
-		value = value.replace(/(http\S+?)%20/g, "$1\u200c\u200c\u200c_\u200c\u200c\u200c");
-	}
-
-	// Decode URIs
-	// NOTE: This would convert all %20's to _'s which could break some links
-	// but we will undo that later on
-	value = value.replace(/(http\S+)/g, (_, p) => decodeURI(p));
-
-	// Revive all instances of %20 to make sure no links is broken
-	value = value.replace(/\u200c\u200c\u200c_\u200c\u200c\u200c/g, "%20");
-
-	return value;
-};
+    return decodeURIComponent(url);
+}
 
 export default URLfix;
