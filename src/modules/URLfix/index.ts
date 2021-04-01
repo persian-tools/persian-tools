@@ -5,9 +5,9 @@
  * @return a string of fixed URL
  */
 function URLfix(url?: string): string | undefined {
-    if (!url) return;
+	if (!url) return;
 
-    return decodeURIComponent(url);
+	return decodeURIComponent(url);
 }
 
 export default URLfix;
