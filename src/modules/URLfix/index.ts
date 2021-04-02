@@ -18,4 +18,4 @@ function URLfix(url?: string, separator?: string): string | undefined {
 	return url;
 }
 
-export default URLfix
+export default URLfix;
