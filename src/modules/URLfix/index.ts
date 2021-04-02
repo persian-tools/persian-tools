@@ -9,14 +9,14 @@
  * @return a string of fixed URL
  */
 function URLfix(url?: string, separator?: string): string | undefined {
-    if (!url) return;
-    url = decodeURIComponent(url)
+	if (!url) return;
+	url = decodeURIComponent(url);
 
-    if (separator) {
-        url = url.replace(" ", separator)
-    }
+	if (separator) {
+		url = url.replace(" ", separator);
+	}
 
-    return url;
+	return url;
 }
 
 export default URLfix;
