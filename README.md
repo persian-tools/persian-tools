@@ -5,11 +5,11 @@
 	<h1 align="center">Persian tools</h1>
 	<p align="center">PersianTools.js is a standalone, library-agnostic JavaScript that enables some of the Persian features for use in the JavaScript.</p>
 
-[![Rate on Openbase](https://badges.openbase.com/js/rating/persian-tools2.svg)](https://openbase.com/js/persian-tools2?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge)
+[![Rate on Openbase](https://badges.openbase.com/js/rating/@persian-tools/persian-tools.svg)](https://openbase.com/js/@persian-tools/persian-tools?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge)
 ![CI/CD](https://github.com/persian-tools/persian-tools/workflows/Continuous%20Integration/badge.svg)
 [![codecov](https://codecov.io/gh/persian-tools/persian-tools/branch/master/graph/badge.svg)](https://codecov.io/gh/persian-tools/persian-tools)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/persian-tools/persian-tools/blob/master/LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange.svg)](https://github.com/persian-tools/persian-tools/compare) 
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange.svg)](https://github.com/persian-tools/persian-tools/compare)
 [![CodeFactor](https://www.codefactor.io/repository/github/persian-tools/persian-tools/badge)](https://www.codefactor.io/repository/github/persian-tools/persian-tools)
 [![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg)](#contributors-)
 [![Wallaby.js](https://img.shields.io/badge/wallaby.js-powered-blue.svg?style=flat&logo=github)](https://wallabyjs.com/oss/)
@@ -47,7 +47,7 @@ Add the following code to an HTML file:
 <html>
 <head>
     <!-- Load PersianTools.js -->
-    <script src="https://cdn.jsdelivr.net/npm/persian-tools2@1.5.0/dist/index.bowser.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@persian-tools/persian-tools/build/persian-tools.umd.js"></script>
 
     <!-- Place your code in the script tag below. You can also use an external .js file -->
     <script type="text/javascript">
@@ -74,9 +74,9 @@ we use ES2017 syntax (such as `import`), this workflow assumes you are using a m
 to convert your code to something older browsers understand.
 
 ```javascript
-import * as persianTools from "persian-tools2";
+import * as persianTools from "@persian-tools/persian-tools";
 // or
-import { digitsEnToFa } from "persian-tools2";
+import { digitsEnToFa } from "@persian-tools/persian-tools";
 
 // Takes a string made of English digits only, and returns a string that represents the same number but with Persian digits
 const convertToFa = persianTools.digitsEnToFa(1234567);
@@ -96,7 +96,7 @@ Let's take a look at what an example test case would look like using Persian-too
 | `addCommas`               | Commas will be added to the Result                            | `false`
 - Convert with no option
 ```javascript
-import { WordsToNumber } from "persian-tools2";
+import { WordsToNumber } from "@persian-tools/persian-tools";
 
 WordsToNumber.convert("منفی سه هزارمین") // -3000
 WordsToNumber.convert("منفی سه هزارم") // -3000
@@ -116,7 +116,7 @@ WordsToNumber.convert("دوازده هزار بیست دو", { addCommas: true }
 ```  
 - Fuzzy typo fixer(`v1.5.0`):
 ```javascript
-import { WordsToNumber } from "persian-tools2";
+import { WordsToNumber } from "@persian-tools/persian-tools";
 
 WordsToNumber.convert("یگصد و بنجاه هزار", { fuzzy: true }) // "150000"  
 WordsToNumber.convert("دویشت ر بیشت هزار", { fuzzy: true }) // "220000"  
@@ -125,7 +125,7 @@ WordsToNumber.convert("منقی ضد", { fuzzy: true }) // "-100"
 
 ### Convert Numbers to Persian words
 ```javascript
-import { NumberToWords } from "persian-tools2";
+import { NumberToWords } from "@persian-tools/persian-tools";
 
 NumberToWords.convert(500443) // "پانصد هزار و چهار صد و چهل و سه"
 NumberToWords.convert("500,443") // "پانصد هزار و چهار صد و چهل و سه"
@@ -135,7 +135,7 @@ NumberToWords.convert(30000000000) // "سی میلیارد"
 
 ### Add and remove commas
 ```javascript
-import { addCommas, removeCommas } from "persian-tools2";
+import { addCommas, removeCommas } from "@persian-tools/persian-tools";
 
 addCommas(30000000) // "30,000,000"
 addCommas(300) // "300"
@@ -148,7 +148,7 @@ removeCommas("300") // 300
 ### Convert Persian numbers to Arabic or English numbers and vice versa
 
 ```javascript
-import { digitsArToFa, digitsArToEn, digitsEnToFa, digitsFaToEn } from "persian-tools2";
+import { digitsArToFa, digitsArToEn, digitsEnToFa, digitsFaToEn } from "@persian-tools/persian-tools";
 
 digitsArToFa("٠١٢٣٤٥٦٧٨٩"); // "۰۱۲۳۴۵۶۷۸۹"
 digitsArToFa("۸۹123۴۵"); // "۸۹123۴۵"
@@ -173,7 +173,7 @@ digitsFaToEn("۰۱۲۳۴۵۶۷۸۹"); // "0123456789"
 ### Validate Iranian national number(code-e Melli)
 
 ```javascript
-import { verifyIranianNationalId, getPlaceByIranNationalId } from "persian-tools2";
+import { verifyIranianNationalId, getPlaceByIranNationalId } from "@persian-tools/persian-tools";
 
 verifyIranianNationalId("0499370899"); // true
 verifyIranianNationalId("0790419904"); // true
@@ -202,7 +202,7 @@ getPlaceByIranNationalId("0371359058").city; // "قم"
 ### Bank number validation and get the name of the bank by bank account number
 
 ```javascript
-import { verifyCardNumber, getBankNameFromCardNumber } from "persian-tools2";
+import { verifyCardNumber, getBankNameFromCardNumber } from "@persian-tools/persian-tools";
 
 verifyCardNumber(6037701689095443); // true
 verifyCardNumber(6219861034529007); // true
@@ -215,7 +215,7 @@ getBankNameFromCardNumber("6219861034529007"); // "بانک سامان"
 ### Validate the correctness of the text of the Persian language and clear the Arabic letters in the Persian text.
 
 ```javascript
-import { isPersian, hasPersian, toPersianChars } from "persian-tools2";
+import { isPersian, hasPersian, toPersianChars } from "@persian-tools/persian-tools";
 
 isPersian("این یک متن فارسی است؟") // true
 isPersian("Lorem Ipsum Test") // false
@@ -234,7 +234,7 @@ toPersianChars("علي")) // علی
 ### Fix Persian characters in URL.
 
 ```javascript
-import { isPersian, toPersianChars } from "persian-tools2";
+import { isPersian, toPersianChars } from "@persian-tools/persian-tools";
 
 URLfix(
 	"https://fa.wikipedia.org/wiki/%D9%85%D8%AF%DB%8C%D8%A7%D9%88%DB%8C%DA%A9%DB%8C:Gadget-Extra-Editbuttons-botworks.js",
@@ -248,12 +248,12 @@ URLfix("Sample Text"); // "Sample Text"
 | `getResult`               | Result of bill calculated information	| BillResult
 | `getAmount`  	          | Calculate Bill amount by payment id and bill id which entered by the Bill constructor | number
 | `getBillType`        	  | Get Bill provider type name         	| BillTypes
-| `getBarcode`              | Calculate and get Bill's barcode        | `string`         
-| `verificationBill`        | Validate entered both Bill id and payment id, and return true if bill id and payment id relation was true | boolean         
-| `verificationBillId`      | Validate entered Bill id                | `boolean`         
-| `verificationBillPayment` | Validate entered Bill payment id        | `boolean`         
+| `getBarcode`              | Calculate and get Bill's barcode        | `string`
+| `verificationBill`        | Validate entered both Bill id and payment id, and return true if bill id and payment id relation was true | boolean
+| `verificationBillId`      | Validate entered Bill id                | `boolean`
+| `verificationBillPayment` | Validate entered Bill payment id        | `boolean`
 ```js
-import { Bill } from "persian-tools2";
+import { Bill } from "@persian-tools/persian-tools";
 
 // Calculate bill amount by bill id and payment id
 // Convert to Iranian Rials
@@ -292,15 +292,15 @@ new Bill({ barcode: "22343223446130001070189" }).findByBarcode(); // { billId: 2
 
 - Check validation
 ```javascript
-import { Sheba } from "persian-tools2";
+import { Sheba } from "@persian-tools/persian-tools";
 
 new Sheba("IR820540102680020817909002").validate(); // true
 new Sheba("IR01234567890123456789").validate() // false
 ```
 
-- Recognize bank information 
+- Recognize bank information
 ```javascript
-import { Sheba } from "persian-tools2";
+import { Sheba } from "@persian-tools/persian-tools";
 
 new Sheba("IR820540102680020817909002").recognize();
 /*
@@ -316,24 +316,24 @@ new Sheba("IR820540102680020817909002").recognize();
 */
 ```
 
-### Fix Persian zero-width non-joiner(Replace spaces by half-space) 
+### Fix Persian zero-width non-joiner(Replace spaces by half-space)
 
 ```javascript
-import { halfSpace } from "persian-tools2";
+import { halfSpace } from "@persian-tools/persian-tools";
 
 halfSpace("نمی ‌خواهی درخت ها را ببینیم؟") // "نمی‌خواهی درخت‌ها را ببینیم؟"
 ```
 
 
-### Get information(province, category, type) about vehicles plate  
+### Get information(province, category, type) about vehicles plate
 | Properties                  | Description                             | Return type
 |---                	  |---	                                    |---
 | `info`               | provide info about plate	| PlateResultApi
-| `isValid`  	          | checks if plate is valid or not  | boolean   
+| `isValid`  	          | checks if plate is valid or not  | boolean
 
 **Usage**
 ```js
-import { Plate } from "persian-tools2";
+import { Plate } from "@persian-tools/persian-tools";
 
 plate("12D45147"); // passing string argument
 
@@ -346,7 +346,7 @@ Plate({
 
 - Getting info about plate
 ```js
-import { plate } from "persian-tools2";
+import { plate } from "@persian-tools/persian-tools";
 
 Plate("12D45147").info;
 /*
@@ -376,7 +376,7 @@ Plates that have farsi digits in them(like: الف، ب، ص) will be returned i
 
 - Checking if plate is valid
 ```js
-import { Plate } from "persian-tools2";
+import { Plate } from "@persian-tools/persian-tools";
 
 Plate("12D45147").isValid;
 /*
