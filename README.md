@@ -67,12 +67,19 @@ Add the following code to an HTML file:
 
 Open up that html file in your browser, and the code should run!
 
-### via NPM
-
-Add PersianTools.js to your project using <a href="https://yarnpkg.com/en/" target="_blank">yarn</a> <em>or</em> <a href="https://docs.npmjs.com/cli/npm" target="_blank">npm</a>. <b>Note:</b> Because
+### Install
+Install the PersianTools to your project using <a href="https://yarnpkg.com/en/" target="_blank">yarn</a> <em>or</em> <a href="https://docs.npmjs.com/cli/npm" target="_blank">npm</a>. <b>Note:</b> Because
 we use ES2017 syntax (such as `import`), this workflow assumes you are using a modern browser, or a bundler/transpiler
 to convert your code to something older browsers understand.
+```bash
+$ npm install --save @persian-tools/persian-tools
+```
+or
+```bash
+$ yarn add @persian-tools/persian-tools
+```
 
+### Simple usage
 ```javascript
 import * as persianTools from "@persian-tools/persian-tools";
 // or
