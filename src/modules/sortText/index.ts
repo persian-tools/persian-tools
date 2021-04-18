@@ -4,6 +4,8 @@
  * the lines alphabetically, with respect to their first character.
  * @param {string} str - text for sorting
  * @return { string[] | undefined}
+ *
+ * @deprecated This function will be removed in the next release and please don't use this function.
  */
 
 function SortText(str: string | string[]): string[] | undefined {

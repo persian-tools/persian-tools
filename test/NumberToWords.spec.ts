@@ -12,6 +12,6 @@ it("NumberToWords", () => {
 	expect(NumberToWords.convert(45, { ordinal: true })).toEqual("چهل و پنجم");
 	expect(NumberToWords.convert(0)).toEqual("صفر");
 	// @ts-ignore
-	expect(NumberToWords.convert()).toBeUndefined();
+	expect(NumberToWords.convert()).toEqual("");
 	expect(NumberToWords.convert(502375902532527)).toEqual("");
 });

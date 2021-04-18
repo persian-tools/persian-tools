@@ -4,15 +4,17 @@
  * @param string which separated by commas
  * @return A number which includes any commas
  */
-const removeCommas = (number?: string | number): number | undefined => {
-	if (!number) return;
+function removeCommas(str: string): number {
+	if (typeof str !== "string") {
+		throw new TypeError("PersianTools: removeCommas - The input must be string");
+	}
 
-	let result = "" + number;
+	let result = "" + str;
 	if (result.indexOf(",") !== -1) {
 		result = result.replace(/,\s?/g, "");
 	}
 
-	return parseInt(result, 10);
-};
+	return Number(result);
+}
 
 export default removeCommas;

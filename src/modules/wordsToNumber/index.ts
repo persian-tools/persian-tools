@@ -9,7 +9,11 @@ import { UNITS, TEN, MAGNITUDE, TYPO_LIST, JOINERS, PREFIXES } from "./constants
 import { fuzzy } from "./fuzzy";
 
 export interface WordsToNumberOptions {
+	/**
+	 * @deprecated use convertToFaDigits option
+	 */
 	digits?: "en" | "fa";
+	convertToFaDigits?: boolean;
 	addCommas?: boolean;
 	/**
 	 * @description Fuzzy persian typo fixer
@@ -22,28 +26,38 @@ export interface WordsToNumberOptions {
 class WordsToNumber {
 	/**
 	 * Convert to numbers
-	 * @method convert
-	 * @param  words
-	 * @param  options
+	 *
+	 * @method WordsToNumber
+	 * @param {string} words
+	 * @param {WordsToNumberOptions} options
 	 * @return Converted words to number. e.g: 350000
 	 */
-	convert(
+	convert<TResult extends string | number>(
 		words: string,
-		{ digits = "en", addCommas: shouldAddCommas = false, fuzzy: isEnabledFuzzy = false }: WordsToNumberOptions = {},
-	): number | string | undefined {
-		if (!words) return;
+		{
+			digits,
+			convertToFaDigits = false,
+			addCommas: shouldAddCommas = false,
+			fuzzy: isEnabledFuzzy = false,
+		}: WordsToNumberOptions = {},
+	): TResult {
+		if (!words) return "" as TResult;
+
+		if (digits) {
+			console.warn("PersianTools: digits option has been deprecated and use convertToFaDigits instead.");
+		}
 
 		// Remove ordinal suffixes
 		words = words.replace(new RegExp("مین$", "ig"), "");
 		words = removeOrdinalSuffix(words)!;
-		// Fix typo's if enabled
+		// Fix Persian typo's if enabled if this option is enabled
 		const classified = isEnabledFuzzy ? fuzzy(words) : words;
 		const computeNumbers = this.compute(this.tokenize(classified!));
 		const addCommasIfNeeded: string | number = shouldAddCommas
-			? (addCommas(computeNumbers) as string)
+			? addCommas(computeNumbers)
 			: (computeNumbers as number);
 
-		return digits === "fa" ? (digitsEnToFa(addCommasIfNeeded as number) as string) : addCommasIfNeeded;
+		return (digits === "fa" || convertToFaDigits ? digitsEnToFa(addCommasIfNeeded) : addCommasIfNeeded) as TResult;
 	}
 	private tokenize(words: string): string[] {
 		words = replaceArray(words, TYPO_LIST);

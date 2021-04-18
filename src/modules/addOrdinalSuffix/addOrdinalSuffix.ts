@@ -6,7 +6,7 @@
  */
 const addOrdinalSuffix = (number?: string): string => {
 	if (typeof number !== "string") {
-		throw new TypeError("input must be string");
+		throw new TypeError("PersianTools: addOrdinalSuffix - The input must be string");
 	}
 
 	if (number.endsWith("ی")) {

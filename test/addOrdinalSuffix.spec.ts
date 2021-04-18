@@ -7,11 +7,11 @@ describe("Ordinal suffix", () => {
 		expect(addOrdinalSuffix("سی")).toEqual("سی اُم");
 	});
 
-	it("Should throw an undefined error", () => {
+	it("Should throw TypedError", () => {
 		try {
 			addOrdinalSuffix();
 		} catch (e) {
-			expect(e.message).toBe("input must be string");
+			expect(e.message).toBe("PersianTools: addOrdinalSuffix - The input must be string");
 		}
 	});
 });

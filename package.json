@@ -21,9 +21,7 @@
 		"postrelease:beta": "standard-version --prerelease beta && npm run generate:docs",
 		"prettier": "prettier --write 'src/**/*.{ts,json}' --config .prettierrc.js",
 		"prettier:ci": "prettier --list-different 'src/**/*.{ts,json}' --config .prettierrc.js",
-		"generate:docs": "make publish-docs",
-		"size": "size-limit",
-		"analyze": "size-limit --why"
+		"generate:docs": "make publish-docs"
 	},
 	"directories": {
 		"test": "tests"
@@ -84,27 +82,5 @@
 	"browserslist": [
 		"defaults",
 		"not IE 10"
-	],
-	"size-limit": [
-		{
-			"path": "./build/persian-tools.js",
-			"limit": "13 KB"
-		},
-		{
-			"path": "./build/persian-tools.modern.js",
-			"limit": "13 KB"
-		},
-		{
-			"path": "./build/persian-tools.esm.js",
-			"limit": "13 KB"
-		},
-		{
-			"path": "./build/persian-tools.module.js",
-			"limit": "13 KB"
-		},
-		{
-			"path": "./build/persian-tools.umd.js",
-			"limit": "13 KB"
-		}
 	]
 }

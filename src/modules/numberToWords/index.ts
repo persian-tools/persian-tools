@@ -84,8 +84,8 @@ class NumberToWords {
 	public convert(
 		number: bigint | number | string,
 		{ ordinal = false }: NumberToWordsOptions = {},
-	): string | undefined {
-		if (typeof number === "undefined") return;
+	): string {
+		if (typeof number === "undefined") return "";
 
 		if (number === 0) {
 			return "صفر";
@@ -94,8 +94,7 @@ class NumberToWords {
 		const base = 1000;
 		const result: string[] = [];
 
-		// @ts-ignore
-		number = removeCommas(number);
+		number = removeCommas(`${number}`);
 
 		const isNegative: boolean = number < 0;
 		number = isNegative ? (number as number) * -1 : number;
