@@ -1,12 +1,13 @@
 const faNums = "۰۱۲۳۴۵۶۷۸۹";
-const arNums = "٠١٢٣٤٥٦٧٨٩";
+const arNums = "۰۱۲۳٤٥٦۷۸۹";
 
-/** digitsEnToFa
+/**
+ * digitsEnToFa
  *
- *  Description: Takes a string made of English digits only, and
- *  returns a string that represents the same number but with
- *  Persian digits
- *
+ * @category digits
+ * @description Takes a string made of English digits only, and
+ * returns a string that represents the same number but with
+ * Persian digits
  */
 export function digitsEnToFa(value?: number | string): string {
 	const isString = typeof value === "string";
@@ -23,12 +24,35 @@ export function digitsEnToFa(value?: number | string): string {
 	return str;
 }
 
-/** digitsFaToEn
+/**
+ * digitsEnToAr
  *
- *  Description: Takes a string made of English digits only, and
- *  returns a string that represents the same number but with
- *  Persian digits
+ * @category digits
+ * @description Takes a string made of English digits only, and
+ * returns a string that represents the same number but with
+ * Arabic digits
+ */
+export function digitsEnToAr(value?: number | string): string {
+	if (typeof value !== "number" && typeof value !== "string") {
+		throw new TypeError("PersianTools: digitsEnToAr - The input must be number or string");
+	}
+
+	let str = `${value}`;
+	for (let i = 0; i < 10; i++) {
+		const replaceEnToAr = new RegExp(`${i}`, "g");
+		str = str.replace(replaceEnToAr, arNums[i]);
+	}
+
+	return str;
+}
+
+/**
+ * digitsFaToEn
  *
+ * @category digits
+ * @description Takes a string made of English digits only, and
+ * returns a string that represents the same number but with
+ * Persian digits
  */
 export function digitsFaToEn(str: string): string {
 	if (typeof str !== "string") {
@@ -43,12 +67,13 @@ export function digitsFaToEn(str: string): string {
 	return str;
 }
 
-/** digitsArToFa
+/**
+ * digitsArToFa
  *
- *  Description: Takes a string that contains digits, and
- *  replaces all Arabic digits with the corresponding Persian
- *  digits
- *
+ * @category digits
+ * @description Takes a string that contains digits, and
+ * replaces all Arabic digits with the corresponding Persian
+ * digits
  */
 export function digitsArToFa(str: string): string {
 	if (typeof str !== "string") {
@@ -65,12 +90,13 @@ export function digitsArToFa(str: string): string {
 	return result;
 }
 
-/** digitsArToEn
+/**
+ * digitsArToEn
  *
- *  Description: Takes a string that contains digits, and
- *  replaces all Arabic digits with the corresponding English
- *  digits
- *
+ * @category digits
+ * @description Takes a string that contains digits, and
+ * replaces all Arabic digits with the corresponding English
+ * digits
  */
 export function digitsArToEn(str: string): string {
 	if (typeof str !== "string") {

@@ -1,8 +1,8 @@
-import { digitsEnToFa, digitsFaToEn, digitsArToFa, digitsArToEn } from "../src";
+import { digitsEnToFa, digitsFaToEn, digitsArToFa, digitsArToEn, digitsEnToAr } from "../src";
 
 describe("Digits converter", () => {
 	it("digitsArToFa", () => {
-		expect(digitsArToFa("٠١٢٣٤٥٦٧٨٩")).toEqual("۰۱۲۳۴۵۶۷۸۹");
+		expect(digitsArToFa("٠١٢٣٤٥٦٧٨٩")).toEqual("٠١٢٣۴۵۶٧٨٩");
 		expect(digitsArToFa("۸۹123۴۵")).toEqual("۸۹123۴۵");
 		try {
 			//@ts-ignore
@@ -11,12 +11,12 @@ describe("Digits converter", () => {
 			expect(e.message).toEqual("PersianTools: digitsArToFa - The input must be string");
 		}
 		expect(digitsArToFa("")).toEqual("");
-		expect(digitsArToFa("Text ٠١٢٣٤٥٦٧٨٩")).toEqual("Text ۰۱۲۳۴۵۶۷۸۹");
+		expect(digitsArToFa("Text ٠١٢٣٤٥٦٧٨٩")).toEqual("Text ٠١٢٣۴۵۶٧٨٩");
 	});
 
 	it("digitsArToEn", () => {
-		expect(digitsArToEn("٠١٢٣٤٥٦٧٨٩")).toEqual("0123456789");
-		expect(digitsArToEn("٨٩123٤٥")).toEqual("8912345");
+		expect(digitsArToEn("۰۱۲۳٤٥٦۷۸۹")).toEqual("0123456789");
+		expect(digitsArToEn("89۱۲۳4٥")).toEqual("8912345");
 
 		try {
 			//@ts-ignore
@@ -25,7 +25,7 @@ describe("Digits converter", () => {
 			expect(e.message).toEqual("PersianTools: digitsArToEn - The input must be string");
 		}
 
-		expect(digitsArToEn("Text ٠١٢٣٤٥٦٧٨٩")).toEqual("Text 0123456789");
+		expect(digitsArToEn("Text ۰۱۲۳٤٥٦۷۸۹")).toEqual("Text 0123456789");
 	});
 
 	it("digitsEnToFa", () => {
@@ -47,6 +47,26 @@ describe("Digits converter", () => {
 			digitsEnToFa(undefined);
 		} catch (e) {
 			expect(e.message).toEqual("PersianTools: digitsEnToFa - The input must be string or number");
+		}
+	});
+
+	it("digitsEnToAr", () => {
+		expect(digitsEnToAr(123456)).toEqual("۱۲۳٤٥٦");
+		expect(digitsEnToAr(1234567891)).toEqual("۱۲۳٤٥٦۷۸۹۱");
+		expect(digitsEnToAr(0)).toEqual("۰");
+		expect(digitsEnToAr("123٤٥٦")).toEqual("۱۲۳٤٥٦");
+		try {
+			//@ts-ignore
+			digitsEnToAr();
+		} catch (e) {
+			expect(e.message).toEqual("PersianTools: digitsEnToAr - The input must be number or string");
+		}
+
+		try {
+			//@ts-ignore
+			digitsEnToAr(undefined);
+		} catch (e) {
+			expect(e.message).toEqual("PersianTools: digitsEnToAr - The input must be number or string");
 		}
 	});
 
