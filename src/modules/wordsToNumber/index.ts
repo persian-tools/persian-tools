@@ -3,17 +3,13 @@
 
 import { addCommas } from "../commas";
 import { replaceArray } from "../../helpers";
-import { digitsEnToFa, digitsFaToEn } from "../digits";
+import { digitsEnToAr, digitsEnToFa, digitsFaToEn } from "../digits";
 import removeOrdinalSuffix from "../removeOrdinalSuffix";
 import { UNITS, TEN, MAGNITUDE, TYPO_LIST, JOINERS, PREFIXES } from "./constants";
 import { fuzzy } from "./fuzzy";
 
 export interface WordsToNumberOptions {
-	/**
-	 * @deprecated use convertToFaDigits option
-	 */
-	digits?: "en" | "fa";
-	convertToFaDigits?: boolean;
+	digits?: "en" | "fa" | "ar";
 	addCommas?: boolean;
 	/**
 	 * @description Fuzzy persian typo fixer
@@ -34,18 +30,9 @@ class WordsToNumber {
 	 */
 	convert<TResult extends string | number>(
 		words: string,
-		{
-			digits,
-			convertToFaDigits = false,
-			addCommas: shouldAddCommas = false,
-			fuzzy: isEnabledFuzzy = false,
-		}: WordsToNumberOptions = {},
+		{ digits = "en", addCommas: shouldAddCommas = false, fuzzy: isEnabledFuzzy = false }: WordsToNumberOptions = {},
 	): TResult {
 		if (!words) return "" as TResult;
-
-		if (digits) {
-			console.warn("PersianTools: digits option has been deprecated and use convertToFaDigits instead.");
-		}
 
 		// Remove ordinal suffixes
 		words = words.replace(new RegExp("مین$", "ig"), "");
@@ -57,7 +44,15 @@ class WordsToNumber {
 			? addCommas(computeNumbers)
 			: (computeNumbers as number);
 
-		return (digits === "fa" || convertToFaDigits ? digitsEnToFa(addCommasIfNeeded) : addCommasIfNeeded) as TResult;
+		if (digits === "fa") {
+			return digitsEnToFa(addCommasIfNeeded) as TResult;
+		} else if (digits === "ar") {
+			return digitsEnToAr(addCommasIfNeeded) as TResult;
+		} else {
+			return addCommasIfNeeded as TResult;
+		}
+
+		return (digits === "fa" ? digitsEnToFa(addCommasIfNeeded) : addCommasIfNeeded) as TResult;
 	}
 	private tokenize(words: string): string[] {
 		words = replaceArray(words, TYPO_LIST);
