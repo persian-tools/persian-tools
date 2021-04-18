@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0-beta.7](https://github.com/persian-tools/persian-tools/compare/v1.6.0-beta.6...v1.6.0-beta.7) (2021-04-18)
+
+
+### Features
+
+* **digits:** add digitsEnToAr to convert English digits to Arabic ([ad95755](https://github.com/persian-tools/persian-tools/commit/ad9575552922fbce7aa518b720ce3aa93c2a990e))
+* **wordsToNumber:** supports Arabic digits converter in result ([69b1cae](https://github.com/persian-tools/persian-tools/commit/69b1caea3c4e829ed7add13272315f09f3032b08))
+
 ## [1.6.0-beta.6](https://github.com/persian-tools/persian-tools/compare/v1.6.0-beta.4...v1.6.0-beta.6) (2021-04-18)
 
 
