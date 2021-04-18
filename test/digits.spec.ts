@@ -1,43 +1,52 @@
 import { digitsEnToFa, digitsFaToEn, digitsArToFa, digitsArToEn } from "../src";
 
-describe("Digits", () => {
+describe("Digits converter", () => {
 	it("digitsArToFa", () => {
 		expect(digitsArToFa("٠١٢٣٤٥٦٧٨٩")).toEqual("۰۱۲۳۴۵۶۷۸۹");
 		expect(digitsArToFa("۸۹123۴۵")).toEqual("۸۹123۴۵");
-		expect(digitsArToFa(456128)).toEqual("456128");
-		expect(digitsArToFa()).toBeUndefined();
-		expect(digitsArToFa("")).toBeUndefined();
+		try {
+			//@ts-ignore
+			digitsArToFa();
+		} catch (e) {
+			expect(e.message).toEqual("PersianTools: digitsArToFa - The input must be string");
+		}
+		expect(digitsArToFa("")).toEqual("");
 		expect(digitsArToFa("Text ٠١٢٣٤٥٦٧٨٩")).toEqual("Text ۰۱۲۳۴۵۶۷۸۹");
 	});
 
 	it("digitsArToEn", () => {
 		expect(digitsArToEn("٠١٢٣٤٥٦٧٨٩")).toEqual("0123456789");
 		expect(digitsArToEn("٨٩123٤٥")).toEqual("8912345");
-		// @ts-ignore
-		expect(digitsArToEn(456128)).toEqual("456128");
 
-		expect(digitsArToEn()).toBeUndefined();
-		expect(digitsArToEn("")).toBeUndefined();
+		try {
+			//@ts-ignore
+			digitsArToEn();
+		} catch (e) {
+			expect(e.message).toEqual("PersianTools: digitsArToEn - The input must be string");
+		}
 
 		expect(digitsArToEn("Text ٠١٢٣٤٥٦٧٨٩")).toEqual("Text 0123456789");
 	});
 
 	it("digitsEnToFa", () => {
 		expect(digitsEnToFa("123۴۵۶")).toEqual("۱۲۳۴۵۶");
+		expect(digitsEnToFa(123)).toEqual("۱۲۳");
+		expect(digitsEnToFa(1234567891)).toEqual("۱۲۳۴۵۶۷۸۹۱");
+		expect(digitsEnToFa(0)).toEqual("۰");
 		expect(digitsEnToFa("٤٥٦")).toEqual("٤٥٦");
 		expect(digitsEnToFa("123۴۵۶")).toEqual("۱۲۳۴۵۶");
 		try {
 			//@ts-ignore
 			digitsEnToFa();
 		} catch (e) {
-			expect(e.message).toEqual("the input must be string or number");
+			expect(e.message).toEqual("PersianTools: digitsEnToFa - The input must be string or number");
 		}
 
 		try {
 			//@ts-ignore
 			digitsEnToFa(undefined);
 		} catch (e) {
-			expect(e.message).toEqual("the input must be string or number");
+			expect(e.message).toEqual("PersianTools: digitsEnToFa - The input must be string or number");
 		}
 	});
 
@@ -47,22 +56,9 @@ describe("Digits", () => {
 		expect(digitsFaToEn("۰۱۲۳۴۵۶۷۸۹")).toEqual("0123456789");
 		try {
 			//@ts-ignore
-			digitsFaToEn(undefined);
-		} catch (e) {
-			expect(e.message).toEqual("the input must be string");
-		}
-		try {
-			//@ts-ignore
 			digitsFaToEn();
 		} catch (e) {
-			expect(e.message).toEqual("the input must be string");
-		}
-
-		try {
-			//@ts-ignore
-			digitsFaToEn({});
-		} catch (e) {
-			expect(e.message).toEqual("the input must be string");
+			expect(e.message).toEqual("PersianTools: digitsFaToEn - The input must be string");
 		}
 	});
 });

@@ -9,18 +9,18 @@ const arNums = "٠١٢٣٤٥٦٧٨٩";
  *
  */
 export function digitsEnToFa(value?: number | string): string {
-	if (typeof value !== "number" && typeof value !== "string") {
-		throw new TypeError("the input must be string or number");
+	const isString = typeof value === "string";
+	if (typeof value !== "number" && !isString) {
+		throw new TypeError("PersianTools: digitsEnToFa - The input must be string or number");
 	}
 
-	let string = typeof value === "number" ? String(value) : value;
-
+	let str = (!isString ? `${value}` : value) as string;
 	for (let i = 0; i < 10; i++) {
-		const replaceEntoFa = new RegExp("" + i, "g");
-		string = string.replace(replaceEntoFa, faNums[i]);
+		const replaceEnToFa = new RegExp(`${i}`, "g");
+		str = str.replace(replaceEnToFa, faNums[i]);
 	}
 
-	return string;
+	return str;
 }
 
 /** digitsFaToEn
@@ -32,13 +32,12 @@ export function digitsEnToFa(value?: number | string): string {
  */
 export function digitsFaToEn(str: string): string {
 	if (typeof str !== "string") {
-		throw new Error("the input must be string");
+		throw new Error("PersianTools: digitsFaToEn - The input must be string");
 	}
 
 	for (let i = 0; i < 10; i++) {
 		const replaceFaToEn = new RegExp(faNums[i], "g");
-		// @ts-ignore
-		str = str.replace(replaceFaToEn, i);
+		str = str.replace(replaceFaToEn, `${i}`);
 	}
 
 	return str;
@@ -51,12 +50,15 @@ export function digitsFaToEn(str: string): string {
  *  digits
  *
  */
-export function digitsArToFa(str?: string | number): string | undefined {
-	if (!str) return;
+export function digitsArToFa(str: string): string {
+	if (typeof str !== "string") {
+		throw new TypeError("PersianTools: digitsArToFa - The input must be string");
+	}
 
-	let result = "" + str;
+	let result = `${str}`;
 	for (let i = 0; i < 10; i++) {
 		const replaceArabicToPersian = new RegExp(arNums[i], "g");
+
 		result = result.replace(replaceArabicToPersian, faNums[i]);
 	}
 
@@ -70,14 +72,15 @@ export function digitsArToFa(str?: string | number): string | undefined {
  *  digits
  *
  */
-export function digitsArToEn(str?: string): string | undefined {
-	if (!str) return;
+export function digitsArToEn(str: string): string {
+	if (typeof str !== "string") {
+		throw new TypeError("PersianTools: digitsArToEn - The input must be string");
+	}
 
 	let result = str;
 	for (let i = 0; i < 10; i++) {
 		const replaceArabicToEnglish = new RegExp(arNums[i], "g");
-		// @ts-ignore
-		result = String(result).replace(replaceArabicToEnglish, i);
+		result = String(result).replace(replaceArabicToEnglish, `${i}`);
 	}
 
 	return result;
