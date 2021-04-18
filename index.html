@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Persian Tools - v1.6.0-beta.5</title>
-	<meta name="description" content="Documentation for Persian Tools - v1.6.0-beta.5">
+	<title>Persian Tools - v1.6.0-beta.6</title>
+	<meta name="description" content="Documentation for Persian Tools - v1.6.0-beta.6">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
 	<script async src="assets/js/search.js" id="search-script"></script>
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">Persian Tools - v1.6.0-beta.5</a>
+					<a href="index.html" class="title">Persian Tools - v1.6.0-beta.6</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -48,7 +48,7 @@
 	</div>
 	<div class="tsd-page-title">
 		<div class="container">
-			<h1>Persian Tools - v1.6.0-beta.5</h1>
+			<h1>Persian Tools - v1.6.0-beta.6</h1>
 		</div>
 	</div>
 </header>
@@ -61,8 +61,9 @@
 						<img src="./images/logo.png" width="200" />
 					</p>
 					<h1 align="center">Persian tools</h1>
-					<p align="center">PersianTools.js is a standalone, library-agnostic JavaScript that enables some of the Persian features for use in the JavaScript.</p>
-					<p><img src="https://github.com/persian-tools/persian-tools/workflows/Continuous%20Integration/badge.svg" alt="CI/CD">
+					<p align="center">PersianTools is a standalone, library-agnostic JavaScript that enables some of the Persian features for use in the JavaScript.</p>
+					<p><a href="https://openbase.com/js/@persian-tools/persian-tools?utm_source=embedded&amp;utm_medium=badge&amp;utm_campaign=rate-badge"><img src="https://badges.openbase.com/js/rating/@persian-tools/persian-tools.svg" alt="Rate on Openbase"></a>
+						<img src="https://github.com/persian-tools/persian-tools/workflows/Continuous%20Integration/badge.svg" alt="CI/CD">
 						<a href="https://codecov.io/gh/persian-tools/persian-tools"><img src="https://codecov.io/gh/persian-tools/persian-tools/branch/master/graph/badge.svg" alt="codecov"></a>
 						<a href="https://github.com/persian-tools/persian-tools/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="GitHub license"></a>
 						<a href="https://github.com/persian-tools/persian-tools/compare"><img src="https://img.shields.io/badge/PRs-welcome-orange.svg" alt="PRs Welcome"></a>
@@ -103,7 +104,7 @@
 				<pre><code class="language-html"><span style="color: #800000">&lt;html&gt;</span>
 <span style="color: #800000">&lt;head&gt;</span>
 <span style="color: #000000">    </span><span style="color: #008000">&lt;!-- Load PersianTools.js --&gt;</span>
-<span style="color: #000000">    </span><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;https://cdn.jsdelivr.net/npm/persian-tools2@1.5.0/dist/index.bowser.js&quot;</span><span style="color: #800000">&gt;&lt;/script&gt;</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;https://cdn.jsdelivr.net/npm/@persian-tools/persian-tools/build/persian-tools.umd.js&quot;</span><span style="color: #800000">&gt;&lt;/script&gt;</span>
 
 <span style="color: #000000">    </span><span style="color: #008000">&lt;!-- Place your code in the script tag below. You can also use an external .js file --&gt;</span>
 <span style="color: #000000">    </span><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">type</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;text/javascript&quot;</span><span style="color: #800000">&gt;</span>
@@ -121,15 +122,23 @@
 <span style="color: #800000">&lt;/html&gt;</span>
 </code></pre>
 				<p>Open up that html file in your browser, and the code should run!</p>
-				<a href="#via-npm" id="via-npm" style="color: inherit; text-decoration: none;">
-					<h3>via NPM</h3>
+				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
+					<h3>Install</h3>
 				</a>
-				<p>Add PersianTools.js to your project using <a href="https://yarnpkg.com/en/" target="_blank">yarn</a> <em>or</em> <a href="https://docs.npmjs.com/cli/npm" target="_blank">npm</a>. <b>Note:</b> Because
+				<p>Install the PersianTools to your project using <a href="https://yarnpkg.com/en/" target="_blank">yarn</a> <em>or</em> <a href="https://docs.npmjs.com/cli/npm" target="_blank">npm</a>. <b>Note:</b> Because
 					we use ES2017 syntax (such as <code>import</code>), this workflow assumes you are using a modern browser, or a bundler/transpiler
 				to convert your code to something older browsers understand.</p>
-				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #0000FF">*</span><span style="color: #000000"> </span><span style="color: #AF00DB">as</span><span style="color: #000000"> </span><span style="color: #001080">persianTools</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;persian-tools2&quot;</span><span style="color: #000000">;</span>
+				<pre><code class="language-bash"><span style="color: #000000">$ npm install --save @persian-tools/persian-tools</span>
+</code></pre>
+				<p>or</p>
+				<pre><code class="language-bash"><span style="color: #000000">$ yarn add @persian-tools/persian-tools</span>
+</code></pre>
+				<a href="#simple-usage" id="simple-usage" style="color: inherit; text-decoration: none;">
+					<h3>Simple usage</h3>
+				</a>
+				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #0000FF">*</span><span style="color: #000000"> </span><span style="color: #AF00DB">as</span><span style="color: #000000"> </span><span style="color: #001080">persianTools</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
 <span style="color: #008000">// or</span>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">digitsEnToFa</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;persian-tools2&quot;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">digitsEnToFa</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
 
 <span style="color: #008000">// Takes a string made of English digits only, and returns a string that represents the same number but with Persian digits</span>
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">convertToFa</span><span style="color: #000000"> = </span><span style="color: #001080">persianTools</span><span style="color: #000000">.</span><span style="color: #795E26">digitsEnToFa</span><span style="color: #000000">(</span><span style="color: #098658">1234567</span><span style="color: #000000">);</span>
@@ -168,7 +177,7 @@
 						</tr>
 				</tbody></table>
 				<ul>
-					<li>Convert with no option<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">WordsToNumber</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;persian-tools2&quot;</span><span style="color: #000000">;</span>
+					<li>Convert with no option<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">WordsToNumber</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
 
 </code></pre>
 					</li>
@@ -188,7 +197,7 @@
 <span style="color: #001080">WordsToNumber</span><span style="color: #000000">.</span><span style="color: #795E26">convert</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;دوازده هزار بیست دو&quot;</span><span style="color: #000000">, { </span><span style="color: #001080">addCommas:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000"> }) </span><span style="color: #008000">// &quot;12,022&quot;</span>
 </code></pre>
 					</li>
-					<li>Fuzzy typo fixer(<code>v1.5.0</code>):<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">WordsToNumber</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;persian-tools2&quot;</span><span style="color: #000000">;</span>
+					<li>Fuzzy typo fixer(<code>v1.5.0</code>):<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">WordsToNumber</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
 
 </code></pre>
 					</li>
@@ -197,7 +206,7 @@
 				<pre><code>
 <span style="color: #000000">### </span><span style="color: #001080">Convert</span><span style="color: #000000"> </span><span style="color: #001080">Numbers</span><span style="color: #000000"> </span><span style="color: #001080">to</span><span style="color: #000000"> </span><span style="color: #001080">Persian</span><span style="color: #000000"> </span><span style="color: #001080">words</span>
 <span style="color: #A31515">```javascript</span>
-<span style="color: #A31515">import { NumberToWords } from &quot;persian-tools2&quot;;</span>
+<span style="color: #A31515">import { NumberToWords } from &quot;@persian-tools/persian-tools&quot;;</span>
 
 <span style="color: #A31515">NumberToWords.convert(500443) // &quot;پانصد هزار و چهار صد و چهل و سه&quot;</span>
 <span style="color: #A31515">NumberToWords.convert(&quot;500,443&quot;) // &quot;پانصد هزار و چهار صد و چهل و سه&quot;</span>
@@ -207,7 +216,7 @@
 				<a href="#add-and-remove-commas" id="add-and-remove-commas" style="color: inherit; text-decoration: none;">
 					<h3>Add and remove commas</h3>
 				</a>
-				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">addCommas</span><span style="color: #000000">, </span><span style="color: #001080">removeCommas</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;persian-tools2&quot;</span><span style="color: #000000">;</span>
+				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">addCommas</span><span style="color: #000000">, </span><span style="color: #001080">removeCommas</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
 
 <span style="color: #795E26">addCommas</span><span style="color: #000000">(</span><span style="color: #098658">30000000</span><span style="color: #000000">) </span><span style="color: #008000">// &quot;30,000,000&quot;</span>
 <span style="color: #795E26">addCommas</span><span style="color: #000000">(</span><span style="color: #098658">300</span><span style="color: #000000">) </span><span style="color: #008000">// &quot;300&quot;</span>
@@ -219,7 +228,7 @@
 				<a href="#convert-persian-numbers-to-arabic-or-english-numbers-and-vice-versa" id="convert-persian-numbers-to-arabic-or-english-numbers-and-vice-versa" style="color: inherit; text-decoration: none;">
 					<h3>Convert Persian numbers to Arabic or English numbers and vice versa</h3>
 				</a>
-				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">digitsArToFa</span><span style="color: #000000">, </span><span style="color: #001080">digitsArToEn</span><span style="color: #000000">, </span><span style="color: #001080">digitsEnToFa</span><span style="color: #000000">, </span><span style="color: #001080">digitsFaToEn</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;persian-tools2&quot;</span><span style="color: #000000">;</span>
+				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">digitsArToFa</span><span style="color: #000000">, </span><span style="color: #001080">digitsArToEn</span><span style="color: #000000">, </span><span style="color: #001080">digitsEnToFa</span><span style="color: #000000">, </span><span style="color: #001080">digitsFaToEn</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
 
 <span style="color: #795E26">digitsArToFa</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;٠١٢٣٤٥٦٧٨٩&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;۰۱۲۳۴۵۶۷۸۹&quot;</span>
 <span style="color: #795E26">digitsArToFa</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;۸۹123۴۵&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;۸۹123۴۵&quot;</span>
@@ -243,7 +252,7 @@
 				<a href="#validate-iranian-national-numbercode-e-melli" id="validate-iranian-national-numbercode-e-melli" style="color: inherit; text-decoration: none;">
 					<h3>Validate Iranian national number(code-e Melli)</h3>
 				</a>
-				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">verifyIranianNationalId</span><span style="color: #000000">, </span><span style="color: #001080">getPlaceByIranNationalId</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;persian-tools2&quot;</span><span style="color: #000000">;</span>
+				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">verifyIranianNationalId</span><span style="color: #000000">, </span><span style="color: #001080">getPlaceByIranNationalId</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
 
 <span style="color: #795E26">verifyIranianNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0499370899&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// true</span>
 <span style="color: #795E26">verifyIranianNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0790419904&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// true</span>
@@ -271,7 +280,7 @@
 				<a href="#bank-number-validation-and-get-the-name-of-the-bank-by-bank-account-number" id="bank-number-validation-and-get-the-name-of-the-bank-by-bank-account-number" style="color: inherit; text-decoration: none;">
 					<h3>Bank number validation and get the name of the bank by bank account number</h3>
 				</a>
-				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">verifyCardNumber</span><span style="color: #000000">, </span><span style="color: #001080">getBankNameFromCardNumber</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;persian-tools2&quot;</span><span style="color: #000000">;</span>
+				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">verifyCardNumber</span><span style="color: #000000">, </span><span style="color: #001080">getBankNameFromCardNumber</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
 
 <span style="color: #795E26">verifyCardNumber</span><span style="color: #000000">(</span><span style="color: #098658">6037701689095443</span><span style="color: #000000">); </span><span style="color: #008000">// true</span>
 <span style="color: #795E26">verifyCardNumber</span><span style="color: #000000">(</span><span style="color: #098658">6219861034529007</span><span style="color: #000000">); </span><span style="color: #008000">// true</span>
@@ -283,7 +292,7 @@
 				<a href="#validate-the-correctness-of-the-text-of-the-persian-language-and-clear-the-arabic-letters-in-the-persian-text" id="validate-the-correctness-of-the-text-of-the-persian-language-and-clear-the-arabic-letters-in-the-persian-text" style="color: inherit; text-decoration: none;">
 					<h3>Validate the correctness of the text of the Persian language and clear the Arabic letters in the Persian text.</h3>
 				</a>
-				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">isPersian</span><span style="color: #000000">, </span><span style="color: #001080">hasPersian</span><span style="color: #000000">, </span><span style="color: #001080">toPersianChars</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;persian-tools2&quot;</span><span style="color: #000000">;</span>
+				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">isPersian</span><span style="color: #000000">, </span><span style="color: #001080">hasPersian</span><span style="color: #000000">, </span><span style="color: #001080">toPersianChars</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
 
 <span style="color: #795E26">isPersian</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;این یک متن فارسی است؟&quot;</span><span style="color: #000000">) </span><span style="color: #008000">// true</span>
 <span style="color: #795E26">isPersian</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Lorem Ipsum Test&quot;</span><span style="color: #000000">) </span><span style="color: #008000">// false</span>
@@ -301,7 +310,7 @@
 				<a href="#fix-persian-characters-in-url" id="fix-persian-characters-in-url" style="color: inherit; text-decoration: none;">
 					<h3>Fix Persian characters in URL.</h3>
 				</a>
-				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">isPersian</span><span style="color: #000000">, </span><span style="color: #001080">toPersianChars</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;persian-tools2&quot;</span><span style="color: #000000">;</span>
+				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">isPersian</span><span style="color: #000000">, </span><span style="color: #001080">toPersianChars</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
 
 <span style="color: #795E26">URLfix</span><span style="color: #000000">(</span>
 <span style="color: #000000">    </span><span style="color: #A31515">&quot;https://fa.wikipedia.org/wiki/%D9%85%D8%AF%DB%8C%D8%A7%D9%88%DB%8C%DA%A9%DB%8C:Gadget-Extra-Editbuttons-botworks.js&quot;</span><span style="color: #000000">,</span>
@@ -356,7 +365,7 @@
 							<td><code>boolean</code></td>
 						</tr>
 				</tbody></table>
-				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Bill</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;persian-tools2&quot;</span><span style="color: #000000">;</span>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Bill</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
 
 <span style="color: #008000">// Calculate bill amount by bill id and payment id</span>
 <span style="color: #008000">// Convert to Iranian Rials</span>
@@ -394,7 +403,7 @@
 					<h3>Iranian Sheba(IBAN)</h3>
 				</a>
 				<ul>
-					<li>Check validation<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Sheba</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;persian-tools2&quot;</span><span style="color: #000000">;</span>
+					<li>Check validation<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Sheba</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
 
 </code></pre>
 					</li>
@@ -402,9 +411,9 @@
 				<p>new Sheba(&quot;IR820540102680020817909002&quot;).validate(); // true
 				new Sheba(&quot;IR01234567890123456789&quot;).validate() // false</p>
 				<pre><code>
-<span style="color: #000000">- </span><span style="color: #001080">Recognize</span><span style="color: #000000"> </span><span style="color: #001080">bank</span><span style="color: #000000"> </span><span style="color: #001080">information</span><span style="color: #000000"> </span>
+<span style="color: #000000">- </span><span style="color: #001080">Recognize</span><span style="color: #000000"> </span><span style="color: #001080">bank</span><span style="color: #000000"> </span><span style="color: #001080">information</span>
 <span style="color: #A31515">```javascript</span>
-<span style="color: #A31515">import { Sheba } from &quot;persian-tools2&quot;;</span>
+<span style="color: #A31515">import { Sheba } from &quot;@persian-tools/persian-tools&quot;;</span>
 
 <span style="color: #A31515">new Sheba(&quot;IR820540102680020817909002&quot;).recognize();</span>
 <span style="color: #A31515">/*</span>
@@ -422,7 +431,7 @@
 				<a href="#fix-persian-zero-width-non-joinerreplace-spaces-by-half-space" id="fix-persian-zero-width-non-joinerreplace-spaces-by-half-space" style="color: inherit; text-decoration: none;">
 					<h3>Fix Persian zero-width non-joiner(Replace spaces by half-space)</h3>
 				</a>
-				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">halfSpace</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;persian-tools2&quot;</span><span style="color: #000000">;</span>
+				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">halfSpace</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
 
 <span style="color: #795E26">halfSpace</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;نمی ‌خواهی درخت ها را ببینیم؟&quot;</span><span style="color: #000000">) </span><span style="color: #008000">// &quot;نمی‌خواهی درخت‌ها را ببینیم؟&quot;</span>
 </code></pre>
@@ -449,7 +458,7 @@
 						</tr>
 				</tbody></table>
 				<p><strong>Usage</strong></p>
-				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Plate</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;persian-tools2&quot;</span><span style="color: #000000">;</span>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Plate</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
 
 <span style="color: #795E26">plate</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;12D45147&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// passing string argument</span>
 
@@ -460,7 +469,7 @@
 <span style="color: #000000">})</span>
 </code></pre>
 				<ul>
-					<li>Getting info about plate<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">plate</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;persian-tools2&quot;</span><span style="color: #000000">;</span>
+					<li>Getting info about plate<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">plate</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
 
 </code></pre>
 					</li>
@@ -489,7 +498,7 @@
 				<pre><code>
 <span style="color: #000000">- </span><span style="color: #001080">Checking</span><span style="color: #000000"> </span><span style="color: #AF00DB">if</span><span style="color: #000000"> </span><span style="color: #001080">plate</span><span style="color: #000000"> </span><span style="color: #001080">is</span><span style="color: #000000"> </span><span style="color: #001080">valid</span>
 <span style="color: #A31515">```js</span>
-<span style="color: #A31515">import { Plate } from &quot;persian-tools2&quot;;</span>
+<span style="color: #A31515">import { Plate } from &quot;@persian-tools/persian-tools&quot;;</span>
 
 <span style="color: #A31515">Plate(&quot;12D45147&quot;).isValid;</span>
 <span style="color: #A31515">/*</span>
@@ -541,6 +550,9 @@
 						<td align="center"><a href="https://github.com/amirqasemi74"><img src="https://avatars3.githubusercontent.com/u/20992734?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Amir Hossien Qasemi Moqaddam</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=amirqasemi74" title="Code">💻</a></td>
 						<td align="center"><a href="https://github.com/SeyyedKhandon"><img src="https://avatars.githubusercontent.com/u/59599950?v=4?s=100" width="100px;" alt=""/><br /><sub><b>SeyyedKhandon</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=SeyyedKhandon" title="Code">💻</a></td>
 						<td align="center"><a href="https://github.com/masoudDaliriyan"><img src="https://avatars.githubusercontent.com/u/25932831?v=4?s=100" width="100px;" alt=""/><br /><sub><b>msdDaliriyan</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=masoudDaliriyan" title="Code">💻</a></td>
+					</tr>
+					<tr>
+						<td align="center"><a href="https://mahdi-momeni.github.io/"><img src="https://avatars.githubusercontent.com/u/32864532?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mahdi</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=mahdi-momeni" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=mahdi-momeni" title="Tests">⚠️</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=mahdi-momeni" title="Documentation">📖</a></td>
 					</tr>
 				</table>
 				<!-- markdownlint-restore -->
