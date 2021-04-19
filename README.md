@@ -341,7 +341,7 @@ halfSpace("نمی ‌خواهی درخت ها را ببینیم؟") // "نمی�
 ```js
 import { Plate } from "@persian-tools/persian-tools";
 
-plate("12D45147"); // passing string argument
+Plate("12D45147"); // passing string argument
 
 // or passing in object style
 Plate({
@@ -352,7 +352,7 @@ Plate({
 
 - Getting info about plate
 ```js
-import { plate } from "@persian-tools/persian-tools";
+import { Plate } from "@persian-tools/persian-tools";
 
 Plate("12D45147").info;
 /*
