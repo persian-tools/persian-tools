@@ -11,6 +11,7 @@
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/persian-tools/persian-tools/blob/master/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange.svg)](https://github.com/persian-tools/persian-tools/compare)
 [![CodeFactor](https://www.codefactor.io/repository/github/persian-tools/persian-tools/badge)](https://www.codefactor.io/repository/github/persian-tools/persian-tools)
+[![GitHub contributors](https://img.shields.io/github/contributors/persian-tools/persian-tools.svg)](https://GitHub.com/persian-tools/persian-tools/contributors/)
 [![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg)](#contributors-)
 [![Wallaby.js](https://img.shields.io/badge/wallaby.js-powered-blue.svg?style=flat&logo=github)](https://wallabyjs.com/oss/)
 </div>
