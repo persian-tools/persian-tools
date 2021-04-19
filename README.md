@@ -155,7 +155,7 @@ removeCommas("300") // 300
 ### Convert Persian numbers to Arabic or English numbers and vice versa
 
 ```javascript
-import { digitsArToFa, digitsArToEn, digitsEnToFa, digitsFaToEn } from "@persian-tools/persian-tools";
+import { digitsArToFa, digitsArToEn, digitsEnToFa, digitsFaToEn , digitsEnToAr } from "@persian-tools/persian-tools";
 
 digitsArToFa("٠١٢٣٤٥٦٧٨٩"); // "۰۱۲۳۴۵۶۷۸۹"
 digitsArToFa("۸۹123۴۵"); // "۸۹123۴۵"
@@ -172,9 +172,8 @@ digitsEnToFa("123۴۵۶"); // "۱۲۳۴۵۶"
 digitsEnToFa("٤٥٦"); // "٤٥٦"
 digitsEnToFa("123۴۵۶"); // "۱۲۳۴۵۶"
 
-digitsFaToEn("123۴۵۶"); // "123456"
-digitsFaToEn("۸۹123۴۵"); // "8912345"
-digitsFaToEn("۰۱۲۳۴۵۶۷۸۹"); // "0123456789"
+digitsEnToAr(1234567891); // "۱۲۳٤٥٦۷۸۹۱"
+digitsEnToAr("123٤٥٦"); // "۱۲۳٤٥٦"
 ```
 
 ### Validate Iranian national number(code-e Melli)
