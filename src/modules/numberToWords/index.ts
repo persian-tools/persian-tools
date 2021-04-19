@@ -81,10 +81,7 @@ class NumberToWords {
 		return result;
 	};
 
-	public convert(
-		number: bigint | number | string,
-		{ ordinal = false }: NumberToWordsOptions = {},
-	): string {
+	public convert(number: bigint | number | string, { ordinal = false }: NumberToWordsOptions = {}): string {
 		if (typeof number === "undefined") return "";
 
 		if (number === 0) {
