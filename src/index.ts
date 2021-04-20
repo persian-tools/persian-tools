@@ -18,7 +18,11 @@ export { default as getPlaceByIranNationalId, IPlaceByNationalId } from "./modul
 // Card-Number utilities
 export { default as verifyCardNumber } from "./modules/verifyCardNumber";
 export * from "./modules/extractCardNumbers/utils";
-export { default as extractCardNumber, ExtractCardNumber, ExtractCardNumberOptions } from "./modules/extractCardNumbers";
+export {
+	default as extractCardNumber,
+	ExtractCardNumber,
+	ExtractCardNumberOptions,
+} from "./modules/extractCardNumbers";
 export { default as getBankNameFromCardNumber } from "./modules/getBankNameFromCardNumber";
 // Fix and sort persian string
 export { default as URLfix } from "./modules/URLfix";
@@ -29,6 +33,14 @@ export { default as Bill } from "./modules/bill";
 // Sheba
 export { default as Sheba } from "./modules/sheba";
 // Number plate
-export { default as Plate, PlateOptions, PlateResult, PlateApi, PlateResultApi, PlateResultApiTypeString, PlateTypes } from "./modules/numberplate";
+export {
+	default as Plate,
+	PlateOptions,
+	PlateResult,
+	PlateApi,
+	PlateResultApi,
+	PlateResultApiTypeString,
+	PlateTypes,
+} from "./modules/numberplate";
 // Phone number utilities
 export * from "./modules/phoneNumber";
