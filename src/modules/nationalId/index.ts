@@ -1,5 +1,6 @@
 /**
  * Check National-id validation
+ * @category National id
  * @method verifyIranianNationalId
  * @param  {String?}          nationalId [String of national id - like this: 1111111111]
  * @return {Boolean}                    [valid or no]

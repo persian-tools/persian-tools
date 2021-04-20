@@ -4,6 +4,10 @@ import verifyCardNumber from "../verifyCardNumber";
 import { acceptableKeywords, cardNumberRegex } from "./utils";
 import getBankNameFromCardNumber from "../getBankNameFromCardNumber";
 
+/**
+ *
+ * @category Bank account
+ */
 export interface ExtractCardNumber {
 	base: string;
 	pure: string;
@@ -12,6 +16,10 @@ export interface ExtractCardNumber {
 	bankName?: string | null;
 }
 
+/**
+ *
+ * @category Bank account
+ */
 export interface ExtractCardNumberOptions {
 	/**
 	 * Check if every card-numbers is valid or not
@@ -36,6 +44,7 @@ export interface ExtractCardNumberOptions {
 /**
  * Extract Iranian Bank's numbers into a string
  *
+ * @category Bank account
  * @public
  * @return ExtractCardNumber[]
  * @param str

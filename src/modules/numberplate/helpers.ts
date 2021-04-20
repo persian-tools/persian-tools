@@ -1,6 +1,6 @@
-import { NormilizedPlate, PlateOptions } from "./types.skip";
+import { NormalizedPlate, PlateOptions } from "./types.skip";
 
-export const normalizePlate = (plate: PlateOptions): NormilizedPlate => {
+export const normalizePlate = (plate: PlateOptions): NormalizedPlate => {
 	let char;
 	let plateNumbers;
 

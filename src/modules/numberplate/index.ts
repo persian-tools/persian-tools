@@ -2,13 +2,21 @@ import { plateDataset } from "./codes.skip";
 import { isPlateNumberValid, normalizePlate } from "./helpers";
 // Types
 import type {
-	NormilizedPlate,
+	NormalizedPlate,
 	PlateOptions,
 	PlateResult,
+	PlateApi,
 	PlateResultApi,
 	PlateResultApiTypeString,
+	PlateTypes,
 } from "./types.skip";
 
+/**
+ * Get plate info and validation
+ *
+ * @param plate  An object containing the number and char value or a string.
+ * @return  An object containing plate and validation info.
+ */
 export default function plate(plate: PlateOptions): PlateResult {
 	const normalizedPlate = normalizePlate(plate);
 	const info = getPlateInfo(normalizedPlate);
@@ -20,7 +28,7 @@ export default function plate(plate: PlateOptions): PlateResult {
 	};
 }
 
-export function getPlateInfo(plate: NormilizedPlate): PlateResultApi {
+export function getPlateInfo(plate: NormalizedPlate): PlateResultApi {
 	const getInfo = getPlateHandler(plate);
 	return getInfo(plate);
 }
@@ -44,7 +52,7 @@ export function isPlateValid(plateInfo: PlateResultApi, plateNumber: string): bo
 	return true;
 }
 
-export function getPlateHandler(plate: NormilizedPlate): (plate: NormilizedPlate) => PlateResultApi {
+export function getPlateHandler(plate: NormalizedPlate): (plate: NormalizedPlate) => PlateResultApi {
 	let handler;
 	if (plate.numbers?.length === 7) {
 		handler = carHandler;
@@ -57,7 +65,7 @@ export function getPlateHandler(plate: NormilizedPlate): (plate: NormilizedPlate
 	return handler;
 }
 
-export function carHandler(plate: NormilizedPlate): PlateResultApi {
+export function carHandler(plate: NormalizedPlate): PlateResultApi {
 	const provinceCode = +plate.numbers.slice(5, 7);
 	const type: PlateResultApiTypeString = "Car";
 	const template = `${plate.numbers.slice(0, 2)}${plate.char ? plate.char : null}${plate.numbers.slice(
@@ -75,7 +83,7 @@ export function carHandler(plate: NormilizedPlate): PlateResultApi {
 		category,
 	};
 }
-export function motorcycleHandler(plate: NormilizedPlate): PlateResultApi {
+export function motorcycleHandler(plate: NormalizedPlate): PlateResultApi {
 	const provinceCode = +plate.numbers.slice(0, 3);
 	const type: PlateResultApiTypeString = "Motorcycle";
 	const template = `${provinceCode}-${plate.numbers.slice(3)}`;
@@ -89,3 +97,5 @@ export function motorcycleHandler(plate: NormilizedPlate): PlateResultApi {
 		category: null,
 	};
 }
+
+export { PlateOptions, PlateResult, PlateApi, PlateResultApi, PlateResultApiTypeString, PlateTypes };

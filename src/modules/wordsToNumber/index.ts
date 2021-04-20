@@ -8,6 +8,10 @@ import removeOrdinalSuffix from "../removeOrdinalSuffix";
 import { UNITS, TEN, MAGNITUDE, TYPO_LIST, JOINERS, PREFIXES } from "./constants";
 import { fuzzy } from "./fuzzy";
 
+/**
+ *
+ * @category Number conversion
+ */
 export interface WordsToNumberOptions {
 	digits?: "en" | "fa" | "ar";
 	addCommas?: boolean;

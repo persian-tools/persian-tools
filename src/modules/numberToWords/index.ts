@@ -4,6 +4,10 @@ import addOrdinalSuffix from "../addOrdinalSuffix/addOrdinalSuffix";
 
 // <Reference path="https://fa.wikipedia.org/wiki/۱۰۰۰۰۰۰۰۰۰_(عدد)" />
 
+/**
+ *
+ * @category Number conversion
+ */
 export interface NumberToWordsOptions {
 	ordinal?: boolean;
 }

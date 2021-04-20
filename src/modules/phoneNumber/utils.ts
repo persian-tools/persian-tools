@@ -2,6 +2,7 @@
  * Operators model such as province, base city, model, type(permanent or credit or both)
  *
  * @interface
+ * @category Phone number
  */
 export interface OperatorModel {
 	province: string[];

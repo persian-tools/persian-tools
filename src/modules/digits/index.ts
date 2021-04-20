@@ -4,7 +4,7 @@ const arNums = "۰۱۲۳٤٥٦۷۸۹";
 /**
  * digitsEnToFa
  *
- * @category digits
+ * @category Digits
  * @description Takes a string made of English digits only, and
  * returns a string that represents the same number but with
  * Persian digits
@@ -27,7 +27,7 @@ export function digitsEnToFa(value?: number | string): string {
 /**
  * digitsEnToAr
  *
- * @category digits
+ * @category Digits
  * @description Takes a string made of English digits only, and
  * returns a string that represents the same number but with
  * Arabic digits
@@ -49,7 +49,7 @@ export function digitsEnToAr(value?: number | string): string {
 /**
  * digitsFaToEn
  *
- * @category digits
+ * @category Digits
  * @description Takes a string made of English digits only, and
  * returns a string that represents the same number but with
  * Persian digits
@@ -70,7 +70,7 @@ export function digitsFaToEn(str: string): string {
 /**
  * digitsArToFa
  *
- * @category digits
+ * @category Digits
  * @description Takes a string that contains digits, and
  * replaces all Arabic digits with the corresponding Persian
  * digits
@@ -93,7 +93,7 @@ export function digitsArToFa(str: string): string {
 /**
  * digitsArToEn
  *
- * @category digits
+ * @category Digits
  * @description Takes a string that contains digits, and
  * replaces all Arabic digits with the corresponding English
  * digits

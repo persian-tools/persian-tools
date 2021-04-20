@@ -1,6 +1,7 @@
 /**
  * @description Verify Iranian Bank's card number which is valid or not
  *
+ * @category Bank account
  * @public
  * @method verifyCardNumber
  * @param {number} digits - card number

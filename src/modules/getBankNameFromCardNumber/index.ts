@@ -7,7 +7,7 @@ export interface IBank {
 
 /**
  * Find Bank's name by card number
- *
+ * @category Bank account
  * @method getBankNameFromCardNumber
  * @param digits - Card number
  * @return string | null | undefined

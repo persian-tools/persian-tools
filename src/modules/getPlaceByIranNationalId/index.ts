@@ -10,6 +10,10 @@ export interface INationalId extends IProvince {
 	parentCode: number;
 }
 
+/**
+ *
+ * @category National id
+ */
 export interface IPlaceByNationalId {
 	codes: number[] | string[];
 	city: string;
@@ -19,6 +23,7 @@ export interface IPlaceByNationalId {
 /**
  * Get Province and City name by Iranian National-Id
  *
+ * @category National id
  * @public
  * @method getPlaceByIranNationalId
  * @param nationalId - string of national id - like this: 1111111111

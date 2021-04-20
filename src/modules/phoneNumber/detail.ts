@@ -8,6 +8,7 @@ import { OperatorModel } from "./utils";
  * If the Mobile number was valid, then the {@link OperatorModel} will be resolved if it was existed.
  * To get more information about phone numbers operators' details, referer to {@link https://fa.wikipedia.org/wiki/شماره‌های_تلفن_در_ایران|Wikipedia}
  *
+ * @category Phone number
  * @public
  * @constructor
  * @param mobile
