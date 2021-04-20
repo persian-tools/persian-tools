@@ -1,6 +1,6 @@
 {
 	"name": "@persian-tools/persian-tools",
-	"version": "1.6.0-beta.7",
+	"version": "1.6.0",
 	"description": "An anthology of a variety of tools for Persian language in javascript",
 	"main": "./build/persian-tools.cjs.js",
 	"esmodule": "./build/persian-tools.esm.js",
@@ -15,7 +15,7 @@
 		"lint": "eslint \"src/**/*.{ts,json}\" --max-warnings=0",
 		"lint:fix": "npm run lint -- --fix",
 		"prerelease": "npm run test",
-		"release": "npm run build",
+		"release": "npm run micro:build",
 		"postrelease": "standard-version && npm run generate:docs",
 		"release:beta": "npm run micro:build",
 		"postrelease:beta": "standard-version --prerelease beta && npm run generate:docs",
