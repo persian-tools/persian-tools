@@ -2,49 +2,6 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [1.6.0-beta.8](https://github.com/persian-tools/persian-tools/compare/v1.6.0...v1.6.0-beta.8) (2021-04-20)
-
-## [1.6.0](https://github.com/persian-tools/persian-tools/compare/v1.5.0...v1.6.0) (2021-04-20)
-
-
-### Features
-
-* **CI:** add prerelease command ([1270719](https://github.com/persian-tools/persian-tools/commit/127071960d57192b2692ca92053519be4596d324))
-* **digits:** add digitsEnToAr to convert English digits to Arabic ([ad95755](https://github.com/persian-tools/persian-tools/commit/ad9575552922fbce7aa518b720ce3aa93c2a990e))
-* **digitsEnToFa:** add error handling and clean up ([8a23631](https://github.com/persian-tools/persian-tools/commit/8a236317a2f45c7a393171d623f923ed4c0a4399))
-* **digitsFaToEn:** add error handling ([ad2ebbf](https://github.com/persian-tools/persian-tools/commit/ad2ebbf23a92089b388df240d73b9c15ef1d3725))
-* **halfSpace:** clean up and add error handling ([d305b96](https://github.com/persian-tools/persian-tools/commit/d305b96319a1ea3e5310cb385e1dfff74de92c2f))
-* **wordsToNumber:** supports Arabic digits converter in result ([69b1cae](https://github.com/persian-tools/persian-tools/commit/69b1caea3c4e829ed7add13272315f09f3032b08))
-* add Code of Conduct doc ([8c57c26](https://github.com/persian-tools/persian-tools/commit/8c57c26afc964f595f205cc746ad834e1deba1c4))
-* add isArabic module ([eb0e7e9](https://github.com/persian-tools/persian-tools/commit/eb0e7e9c414726280d1ddee873fd35e0bd973050))
-* add microbundle for managing the build process ([bb38caf](https://github.com/persian-tools/persian-tools/commit/bb38caf91612f2aad68eec5d19707a4c92a62d39))
-* Add numberplate module ([db1207e](https://github.com/persian-tools/persian-tools/commit/db1207e7f5abf5e19de85b2f24f79983bbdb7d38))
-* add types for numberplate module ([9e73e7b](https://github.com/persian-tools/persian-tools/commit/9e73e7b5c9de6b40c75a475f4a4ab3ab703cd353))
-
-
-### Bug Fixes
-
-* **#70:** converting 0 to Persian digit returns undefined ([a21c69e](https://github.com/persian-tools/persian-tools/commit/a21c69eb6c1daca5ef840a9642149e8b9d5f3f84)), closes [#70](https://github.com/persian-tools/persian-tools/issues/70)
-* **addCommas:** remove commas from decimal places ([9c360c3](https://github.com/persian-tools/persian-tools/commit/9c360c3cf4f2ac1b756ab1bbf17d4b4bb34a90e1))
-* **addOrdinalSuffix:** add test ([e8f3b4e](https://github.com/persian-tools/persian-tools/commit/e8f3b4ebe9781eb08577bd137adbaf75aea3a112))
-* **bundle:** modules exports for using in vite ([ec4e1d9](https://github.com/persian-tools/persian-tools/commit/ec4e1d91fa15063e157f009450ade73051347ec2))
-* fix typescript issue and make more in  readable phoneNumber utils ([5fcde62](https://github.com/persian-tools/persian-tools/commit/5fcde624a2f49ed4d472a900771ed8982426b506))
-* isPersian ([8341017](https://github.com/persian-tools/persian-tools/commit/83410178e5d9d245ebbb77d483727147a0df9f22))
-* remove unnecessary import in phoneNumber details ([f34655b](https://github.com/persian-tools/persian-tools/commit/f34655bd8c3b5de87d2efaf043edaac04d86a6d8))
-* update isPersian and hasPersian info in readme.md ([c4ee0a9](https://github.com/persian-tools/persian-tools/commit/c4ee0a93764e55a69176bc07ed9a2bd1ba0a5bf6))
-* **CI:** Continuous Integration build command ([03aaf6f](https://github.com/persian-tools/persian-tools/commit/03aaf6f57cff985583374e2183874443c17b0895))
-* **CI:** npm ignore build folder files ([c3992aa](https://github.com/persian-tools/persian-tools/commit/c3992aa97ca4288a873f115d013b12abb766dc4f))
-* **CI:** npm ignore file ([c73163f](https://github.com/persian-tools/persian-tools/commit/c73163fd1c238965535544e79c7347db486a98c0))
-* typedoc build ([bbc558f](https://github.com/persian-tools/persian-tools/commit/bbc558f3b4da07444ce05820a87e150483e08ca8))
-* **CI:** npm install issue ([414c348](https://github.com/persian-tools/persian-tools/commit/414c34851c864ba003597a9ff673e5bda8d05b9c))
-* **CI:** npm install issue ([2e531a3](https://github.com/persian-tools/persian-tools/commit/2e531a3aab6c1c5faf00505a100fb75e8ed32698))
-* **CI:** remove size-limit hook after micro:build command ([e9ffc7c](https://github.com/persian-tools/persian-tools/commit/e9ffc7caec86f479d7af4e00e8e6c947ae94083b))
-* **CI:** typescript version issue ([d4249e9](https://github.com/persian-tools/persian-tools/commit/d4249e9cc71e38144e93140ba54a7d437a3fb284))
-* extractCardNumber issues ([a004717](https://github.com/persian-tools/persian-tools/commit/a004717b5f3da3b15012190c1a35b57db02830c7))
-* extractCardNumber issues ([0ed553e](https://github.com/persian-tools/persian-tools/commit/0ed553eac77401f4e360c732eb94d59de75813db))
-* isPersian (only Persian chars) ([0679af1](https://github.com/persian-tools/persian-tools/commit/0679af1857e6e60d430f8783a329e0c351ccef9e))
-* isPersian module issues ([5ce89dd](https://github.com/persian-tools/persian-tools/commit/5ce89ddb60d9102f686b82d9f374c82f0dc2f413))
-* jsdoc for isPersian ([2832574](https://github.com/persian-tools/persian-tools/commit/28325748aa27acd934012c1d5364e85f08b7a75e))
 
 ## [1.6.0-beta.7](https://github.com/persian-tools/persian-tools/compare/v1.6.0-beta.6...v1.6.0-beta.7) (2021-04-18)
 
