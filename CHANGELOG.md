@@ -2,6 +2,7 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/persian-tools/persian-tools/compare/v1.6.0-beta.7...v1.6.0) (2021-04-22)
 
 ## [1.6.0-beta.7](https://github.com/persian-tools/persian-tools/compare/v1.6.0-beta.6...v1.6.0-beta.7) (2021-04-18)
 

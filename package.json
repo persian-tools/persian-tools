@@ -1,6 +1,6 @@
 {
 	"name": "@persian-tools/persian-tools",
-	"version": "1.6.0-beta.7",
+	"version": "1.6.0",
 	"description": "An anthology of a variety of tools for Persian language in javascript",
 	"main": "./build/persian-tools.cjs.js",
 	"esmodule": "./build/persian-tools.esm.js",
