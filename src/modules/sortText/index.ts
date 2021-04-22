@@ -1,17 +1,23 @@
-/** SortText **
+/**
+ * SortText
+ *
  * @description Takes a piece of text in Persian which contains
  * several lines (separated by the newline character), and sorts
  * the lines alphabetically, with respect to their first character.
- * @param {string} str - text for sorting
- * @return { string[] | undefined}
  *
  * @deprecated This function will be removed in the next release and please don't use this function.
+ *
+ * @param {string | string[]} str - a String or a list of strings
+ * @return {string[]}
  */
+function SortText<T extends string>(str: T | T[]): T[] {
+	if (typeof str !== "string" && !Array.isArray(str)) {
+		throw new TypeError("PersianTools: SortText - The input must be string or an array of strings");
+	}
 
-function SortText(str: string | string[]): string[] | undefined {
-	if (!str) return;
-	const stringResult = typeof str === "string" ? str.split(" ") : str;
+	const stringResult = (typeof str === "string" ? str.split(" ") : str) as T[];
 	stringResult.sort((a, b) => a.localeCompare(b, "fa", { ignorePunctuation: true }));
+
 	return stringResult;
 }
 
