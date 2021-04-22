@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ExtractCardNumberOptions | Persian Tools - v1.6.0</title>
+	<title>PlateResultApi | Persian Tools - v1.6.0</title>
 	<meta name="description" content="Documentation for Persian Tools - v1.6.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -53,10 +53,10 @@
 					<a href="../modules.html">Persian Tools - v1.6.0</a>
 				</li>
 				<li>
-					<a href="extractcardnumberoptions.html">ExtractCardNumberOptions</a>
+					<a href="plateresultapi.html">PlateResultApi</a>
 				</li>
 			</ul>
-			<h1>Interface ExtractCardNumberOptions</h1>
+			<h1>Interface PlateResultApi</h1>
 		</div>
 	</div>
 </header>
@@ -67,7 +67,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ExtractCardNumberOptions</span>
+						<span class="target">PlateResultApi</span>
 					</li>
 				</ul>
 			</section>
@@ -78,9 +78,10 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="extractcardnumberoptions.html#checkvalidation" class="tsd-kind-icon">check<wbr>Validation</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="extractcardnumberoptions.html#detectbanknumber" class="tsd-kind-icon">detect<wbr>Bank<wbr>Number</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="extractcardnumberoptions.html#filtervalidcardnumbers" class="tsd-kind-icon">filter<wbr>Valid<wbr>Card<wbr>Numbers</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="plateresultapi.html#category" class="tsd-kind-icon">category</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="plateresultapi.html#province" class="tsd-kind-icon">province</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="plateresultapi.html#template" class="tsd-kind-icon">template</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="plateresultapi.html#type" class="tsd-kind-icon">type</a></li>
 							</ul>
 						</section>
 					</div>
@@ -89,49 +90,44 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="checkvalidation" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> check<wbr>Validation</h3>
-					<div class="tsd-signature tsd-kind-icon">check<wbr>Validation<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></div>
+					<a name="category" class="tsd-anchor"></a>
+					<h3>category</h3>
+					<div class="tsd-signature tsd-kind-icon">category<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/c582d09/src/modules/extractCardNumbers/index.ts#L29">modules/extractCardNumbers/index.ts:29</a></li>
+							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/c582d09/src/modules/numberplate/types.skip.ts#L42">modules/numberplate/types.skip.ts:42</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Check if every card-numbers is valid or not</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="detectbanknumber" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> detect<wbr>Bank<wbr>Number</h3>
-					<div class="tsd-signature tsd-kind-icon">detect<wbr>Bank<wbr>Number<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></div>
+					<a name="province" class="tsd-anchor"></a>
+					<h3>province</h3>
+					<div class="tsd-signature tsd-kind-icon">province<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/c582d09/src/modules/extractCardNumbers/index.ts#L35">modules/extractCardNumbers/index.ts:35</a></li>
+							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/c582d09/src/modules/numberplate/types.skip.ts#L40">modules/numberplate/types.skip.ts:40</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Detect Bank&#39;s name by extracted card-number</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="filtervalidcardnumbers" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> filter<wbr>Valid<wbr>Card<wbr>Numbers</h3>
-					<div class="tsd-signature tsd-kind-icon">filter<wbr>Valid<wbr>Card<wbr>Numbers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></div>
+					<a name="template" class="tsd-anchor"></a>
+					<h3>template</h3>
+					<div class="tsd-signature tsd-kind-icon">template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/c582d09/src/modules/extractCardNumbers/index.ts#L41">modules/extractCardNumbers/index.ts:41</a></li>
+							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/c582d09/src/modules/numberplate/types.skip.ts#L39">modules/numberplate/types.skip.ts:39</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Return list of valid card-numbers</p>
-						</div>
-					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="type" class="tsd-anchor"></a>
+					<h3>type</h3>
+					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;Car&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;Motorcycle&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/c582d09/src/modules/numberplate/types.skip.ts#L41">modules/numberplate/types.skip.ts:41</a></li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 		</div>
@@ -148,16 +144,19 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="extractcardnumberoptions.html" class="tsd-kind-icon">Extract<wbr>Card<wbr>Number<wbr>Options</a>
+						<a href="plateresultapi.html" class="tsd-kind-icon">Plate<wbr>Result<wbr>Api</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="extractcardnumberoptions.html#checkvalidation" class="tsd-kind-icon">check<wbr>Validation</a>
+								<a href="plateresultapi.html#category" class="tsd-kind-icon">category</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="extractcardnumberoptions.html#detectbanknumber" class="tsd-kind-icon">detect<wbr>Bank<wbr>Number</a>
+								<a href="plateresultapi.html#province" class="tsd-kind-icon">province</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="extractcardnumberoptions.html#filtervalidcardnumbers" class="tsd-kind-icon">filter<wbr>Valid<wbr>Card<wbr>Numbers</a>
+								<a href="plateresultapi.html#template" class="tsd-kind-icon">template</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="plateresultapi.html#type" class="tsd-kind-icon">type</a>
 							</li>
 						</ul>
 					</li>

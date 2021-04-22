@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Persian Tools - v1.6.0-beta.8</title>
-	<meta name="description" content="Documentation for Persian Tools - v1.6.0-beta.8">
+	<title>Persian Tools - v1.6.0</title>
+	<meta name="description" content="Documentation for Persian Tools - v1.6.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
 	<script async src="assets/js/search.js" id="search-script"></script>
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">Persian Tools - v1.6.0-beta.8</a>
+					<a href="index.html" class="title">Persian Tools - v1.6.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -48,7 +48,7 @@
 	</div>
 	<div class="tsd-page-title">
 		<div class="container">
-			<h1>Persian Tools - v1.6.0-beta.8</h1>
+			<h1>Persian Tools - v1.6.0</h1>
 		</div>
 	</div>
 </header>
@@ -68,7 +68,7 @@
 						<a href="https://github.com/persian-tools/persian-tools/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="GitHub license"></a>
 						<a href="https://github.com/persian-tools/persian-tools/compare"><img src="https://img.shields.io/badge/PRs-welcome-orange.svg" alt="PRs Welcome"></a>
 						<a href="https://www.codefactor.io/repository/github/persian-tools/persian-tools"><img src="https://www.codefactor.io/repository/github/persian-tools/persian-tools/badge" alt="CodeFactor"></a>
-						<a href="#contributors-"><img src="https://img.shields.io/badge/all_contributors-5-orange.svg" alt="All Contributors"></a>
+						<a href="https://GitHub.com/persian-tools/persian-tools/contributors/"><img src="https://img.shields.io/github/contributors/persian-tools/persian-tools.svg" alt="GitHub contributors"></a>
 					<a href="https://wallabyjs.com/oss/"><img src="https://img.shields.io/badge/wallaby.js-powered-blue.svg?style=flat&logo=github" alt="Wallaby.js"></a></p>
 				</div>
 				<hr />
@@ -459,7 +459,7 @@
 				<p><strong>Usage</strong></p>
 				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Plate</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
 
-<span style="color: #795E26">plate</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;12D45147&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// passing string argument</span>
+<span style="color: #795E26">Plate</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;12D45147&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// passing string argument</span>
 
 <span style="color: #008000">// or passing in object style</span>
 <span style="color: #795E26">Plate</span><span style="color: #000000">({</span>
@@ -468,7 +468,7 @@
 <span style="color: #000000">})</span>
 </code></pre>
 				<ul>
-					<li>Getting info about plate<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">plate</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
+					<li>Getting info about plate<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Plate</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
 
 </code></pre>
 					</li>
@@ -594,6 +594,9 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="enums/platetypes.html" class="tsd-kind-icon">Plate<wbr>Types</a>
+					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/bill.html" class="tsd-kind-icon">Bill</a>
 					</li>
@@ -601,16 +604,37 @@
 						<a href="classes/sheba.html" class="tsd-kind-icon">Sheba</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/extractcardnumber.html" class="tsd-kind-icon">Extract<wbr>Card<wbr>Number</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/extractcardnumberoptions.html" class="tsd-kind-icon">Extract<wbr>Card<wbr>Number<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/iplacebynationalid.html" class="tsd-kind-icon">IPlace<wbr>ByNational<wbr>Id</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/numbertowordsoptions.html" class="tsd-kind-icon">Number<wbr>ToWords<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/operatormodel.html" class="tsd-kind-icon">Operator<wbr>Model</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/plateapi.html" class="tsd-kind-icon">Plate<wbr>Api</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/plateresult.html" class="tsd-kind-icon">Plate<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/plateresultapi.html" class="tsd-kind-icon">Plate<wbr>Result<wbr>Api</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/wordstonumberoptions.html" class="tsd-kind-icon">Words<wbr>ToNumber<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="modules.html#plateoptions" class="tsd-kind-icon">Plate<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#plateresultapitypestring" class="tsd-kind-icon">Plate<wbr>Result<wbr>Api<wbr>Type<wbr>String</a>
 					</li>
 					<li class=" tsd-kind-variable">
 						<a href="modules.html#numbertowords" class="tsd-kind-icon">Number<wbr>ToWords</a>
@@ -627,7 +651,7 @@
 					<li class=" tsd-kind-function">
 						<a href="modules.html#plate" class="tsd-kind-icon">Plate</a>
 					</li>
-					<li class=" tsd-kind-function">
+					<li class=" tsd-kind-function tsd-has-type-parameter">
 						<a href="modules.html#sorttext" class="tsd-kind-icon">Sort<wbr>Text</a>
 					</li>
 					<li class=" tsd-kind-function">
