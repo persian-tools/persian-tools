@@ -6,7 +6,7 @@ export { isPersian, hasPersian } from "./modules/isPersian";
 // Convert Arabic Chars to Persian
 export { default as toPersianChars } from "./modules/toPersianChars";
 // String and Number Converter and their utilities
-export { default as NumberToWords, NumberToWordsOptions } from "./modules/numberToWords";
+export { default as numberToWords, NumberToWordsOptions } from "./modules/numberToWords";
 export { default as wordsToNumber, WordsToNumberOptions } from "./modules/wordsToNumber";
 export { default as removeOrdinalSuffix } from "./modules/removeOrdinalSuffix";
 export { default as addOrdinalSuffix } from "./modules/addOrdinalSuffix/addOrdinalSuffix";
