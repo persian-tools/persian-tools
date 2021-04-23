@@ -23,76 +23,66 @@ export interface WordsToNumberOptions {
 	fuzzy?: boolean;
 }
 
-class WordsToNumber {
-	/**
-	 * Convert to numbers
-	 *
-	 * @method WordsToNumber
-	 * @param {string} words
-	 * @param {WordsToNumberOptions} options
-	 * @return Converted words to number. e.g: 350000
-	 */
-	convert<TResult extends string | number>(
-		words: string,
-		{ digits = "en", addCommas: shouldAddCommas = false, fuzzy: isEnabledFuzzy = false }: WordsToNumberOptions = {},
-	): TResult {
-		if (!words) return "" as TResult;
+function compute(tokens: string[]): number {
+	let sum = 0;
+	let isNegative = false;
 
-		// Remove ordinal suffixes
-		words = words.replace(new RegExp("مین$", "ig"), "");
-		words = removeOrdinalSuffix(words)!;
-		// Fix Persian typo's if enabled if this option is enabled
-		const classified = isEnabledFuzzy ? fuzzy(words) : words;
-		const computeNumbers = this.compute(this.tokenize(classified!));
-		const addCommasIfNeeded: string | number = shouldAddCommas
-			? addCommas(computeNumbers)
-			: (computeNumbers as number);
+	tokens.forEach((token) => {
+		token = digitsFaToEn(token)!;
 
-		if (digits === "fa") {
-			return digitsEnToFa(addCommasIfNeeded) as TResult;
-		} else if (digits === "ar") {
-			return digitsEnToAr(addCommasIfNeeded) as TResult;
+		if (token === PREFIXES[0]) {
+			isNegative = true;
+		} else if (UNITS[token] != null) {
+			sum += UNITS[token];
+		} else if (TEN[token] != null) {
+			sum += TEN[token];
+		} else if (!isNaN(Number(token))) {
+			sum += parseInt(token, 10);
 		} else {
-			return addCommasIfNeeded as TResult;
+			sum *= MAGNITUDE[token];
 		}
-
-		return (digits === "fa" ? digitsEnToFa(addCommasIfNeeded) : addCommasIfNeeded) as TResult;
-	}
-	private tokenize(words: string): string[] {
-		words = replaceArray(words, TYPO_LIST);
-
-		const result: string[] = [];
-		const slittedWords: string[] = words.split(" ");
-		slittedWords.forEach((word) => {
-			return word === JOINERS[0] ? "" : result.push(word);
-		});
-
-		return result;
-	}
-
-	private compute(tokens: string[]): number {
-		let sum = 0;
-		let isNegative = false;
-
-		tokens.forEach((token) => {
-			token = digitsFaToEn(token)!;
-
-			if (token === PREFIXES[0]) {
-				isNegative = true;
-			} else if (UNITS[token] != null) {
-				sum += UNITS[token];
-			} else if (TEN[token] != null) {
-				sum += TEN[token];
-			} else if (!isNaN(Number(token))) {
-				sum += parseInt(token, 10);
-			} else {
-				sum *= MAGNITUDE[token];
-			}
-		});
-		return isNegative ? sum * -1 : sum;
-	}
+	});
+	return isNegative ? sum * -1 : sum;
 }
 
-const WordsToNumberInstance = new WordsToNumber();
+function tokenize(words: string): string[] {
+	words = replaceArray(words, TYPO_LIST);
 
-export default WordsToNumberInstance;
+	const result: string[] = [];
+	const slittedWords: string[] = words.split(" ");
+	slittedWords.forEach((word) => {
+		return word === JOINERS[0] ? "" : result.push(word);
+	});
+
+	return result;
+}
+
+/**
+ *
+ * Convert to numbers
+ *
+ * @category Number conversion
+ * @return Converted words to number. e.g: 350000
+ */
+export default function wordsToNumber<TResult extends string | number>(
+	words: string,
+	{ digits = "en", addCommas: shouldAddCommas = false, fuzzy: isEnabledFuzzy = false }: WordsToNumberOptions = {},
+): TResult {
+	if (!words) return "" as TResult;
+
+	// Remove ordinal suffixes
+	words = words.replace(new RegExp("مین$", "ig"), "");
+	words = removeOrdinalSuffix(words)!;
+	// Fix Persian typo's if enabled if this option is enabled
+	const classified = isEnabledFuzzy ? fuzzy(words) : words;
+	const computeNumbers = compute(tokenize(classified!));
+	const addCommasIfNeeded: string | number = shouldAddCommas ? addCommas(computeNumbers) : (computeNumbers as number);
+
+	if (digits === "fa") {
+		return digitsEnToFa(addCommasIfNeeded) as TResult;
+	} else if (digits === "ar") {
+		return digitsEnToAr(addCommasIfNeeded) as TResult;
+	} else {
+		return addCommasIfNeeded as TResult;
+	}
+}
