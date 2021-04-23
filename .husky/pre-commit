@@ -1,6 +1,6 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npm prettier
-npm lint
+npm run prettier
+npm run lint
 # npm test
