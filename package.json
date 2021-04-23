@@ -21,7 +21,8 @@
 		"postrelease:beta": "standard-version --prerelease beta",
 		"prettier": "prettier --write 'src/**/*.{ts,json}' --config .prettierrc.js",
 		"prettier:ci": "prettier --list-different 'src/**/*.{ts,json}' --config .prettierrc.js",
-		"generate:docs": "make publish-docs"
+		"generate:docs": "make publish-docs",
+		"prepare": "husky install"
 	},
 	"directories": {
 		"test": "tests"
@@ -52,6 +53,8 @@
 	},
 	"homepage": "https://persian-tools.github.io/persian-tools",
 	"devDependencies": {
+		"@commitlint/cli": "^12.1.1",
+		"@commitlint/config-conventional": "^12.1.1",
 		"@types/jest": "^26.0.20",
 		"@typescript-eslint/eslint-plugin": "^4.15.2",
 		"@typescript-eslint/parser": "^4.15.2",
@@ -64,6 +67,7 @@
 		"eslint-plugin-promise": "^4.3.1",
 		"eslint-plugin-security": "^1.4.0",
 		"eslint-plugin-standard": "^4.1.0",
+		"husky": "^6.0.0",
 		"jest": "^26.6.3",
 		"jest-cli": "^26.6.3",
 		"microbundle": "^0.13.0",
