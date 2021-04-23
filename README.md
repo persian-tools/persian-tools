@@ -103,31 +103,31 @@ Let's take a look at what an example test case would look like using Persian-too
 | `addCommas`               | Commas will be added to the Result                            | `false`
 - Convert with no option
 ```javascript
-import { wordsToNumber } from "@persian-tools/persian-tools";
+import { WordsToNumber } from "@persian-tools/persian-tools";
 
-wordsToNumber("منفی سه هزارمین") // -3000
-wordsToNumber("منفی سه هزارم") // -3000
-wordsToNumber("منفی سه هزار") // -3000
-wordsToNumber("سه هزار دویست و دوازده") // 3212
-wordsToNumber("دوازده هزار بیست دو") // 12022
+WordsToNumber.convert("منفی سه هزارمین") // -3000
+WordsToNumber.convert("منفی سه هزارم") // -3000
+WordsToNumber.convert("منفی سه هزار") // -3000
+WordsToNumber.convert("سه هزار دویست و دوازده") // 3212
+WordsToNumber.convert("دوازده هزار بیست دو") // 12022
 ```
 - Digits converter
 ```js
-wordsToNumber("منفی سه هزارمین", { digits: "fa" }) // "-۳۰۰۰"
-wordsToNumber("دوازده هزار بیست دو", { digits: "fa" }) // ۱۲۰۲۲
+WordsToNumber.convert("منفی سه هزارمین", { digits: "fa" }) // "-۳۰۰۰"
+WordsToNumber.convert("دوازده هزار بیست دو", { digits: "fa" }) // ۱۲۰۲۲
 ```
 - Add commas
 ```js
-wordsToNumber("منفی سه هزارمین", { addCommas: true }) // "-3,000"
-wordsToNumber("دوازده هزار بیست دو", { addCommas: true }) // "12,022"
+WordsToNumber.convert("منفی سه هزارمین", { addCommas: true }) // "-3,000"
+WordsToNumber.convert("دوازده هزار بیست دو", { addCommas: true }) // "12,022"
 ```  
 - Fuzzy typo fixer(`v1.5.0`):
 ```javascript
 import { WordsToNumber } from "@persian-tools/persian-tools";
 
-wordsToNumber("یگصد و بنجاه هزار", { fuzzy: true }) // "150000"  
-wordsToNumber("دویشت ر بیشت هزار", { fuzzy: true }) // "220000"  
-wordsToNumber("منقی ضد", { fuzzy: true }) // "-100"  
+WordsToNumber.convert("یگصد و بنجاه هزار", { fuzzy: true }) // "150000"  
+WordsToNumber.convert("دویشت ر بیشت هزار", { fuzzy: true }) // "220000"  
+WordsToNumber.convert("منقی ضد", { fuzzy: true }) // "-100"  
 ```
 
 ### Convert Numbers to Persian words
