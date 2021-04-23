@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.1](https://github.com/persian-tools/persian-tools/compare/v1.6.0-beta.7...v1.6.1) (2021-04-23)
+
+
+### Bug Fixes
+
+* husky issues ([8bcaebe](https://github.com/persian-tools/persian-tools/commit/8bcaebee66b8390cfb05bc7e946adcbacfe7015c))
+* **#75:** package json cjs bundle file type ([3104abb](https://github.com/persian-tools/persian-tools/commit/3104abbb9426c0cef1ef6e954b106a209d25af7a)), closes [#75](https://github.com/persian-tools/persian-tools/issues/75)
+* **numberToWords:** make it functional ([ce59bf4](https://github.com/persian-tools/persian-tools/commit/ce59bf4001411425a6b6f402ccefd4447995b75f))
+* **wordsToNumber:** make it functional ([82b1b03](https://github.com/persian-tools/persian-tools/commit/82b1b03dec10dd96bd925f08cd8d306ac1014f4d))
+* :bug: Correct Typo in pre-commit file ([2275d00](https://github.com/persian-tools/persian-tools/commit/2275d008416a76439f454eb390cf1cd28070250c))
+
 ## [1.6.0](https://github.com/persian-tools/persian-tools/compare/v1.6.0-beta.7...v1.6.0) (2021-04-22)
 
 ## [1.6.0-beta.7](https://github.com/persian-tools/persian-tools/compare/v1.6.0-beta.6...v1.6.0-beta.7) (2021-04-18)
