@@ -132,12 +132,12 @@ WordsToNumber.convert("منقی ضد", { fuzzy: true }) // "-100"
 
 ### Convert Numbers to Persian words
 ```javascript
-import { numberToWords } from "@persian-tools/persian-tools";
+import { NumberToWords } from "@persian-tools/persian-tools";
 
-numberToWords(500443) // "پانصد هزار و چهار صد و چهل و سه"
-numberToWords("500,443") // "پانصد هزار و چهار صد و چهل و سه"
-numberToWords("500,443", { ordinal: true }) // "پانصد هزار و چهار صد و چهل و سوم"
-numberToWords(30000000000) // "سی میلیارد"
+NumberToWords.convert(500443) // "پانصد هزار و چهار صد و چهل و سه"
+NumberToWords.convert("500,443") // "پانصد هزار و چهار صد و چهل و سه"
+NumberToWords.convert("500,443", { ordinal: true }) // "پانصد هزار و چهار صد و چهل و سوم"
+NumberToWords.convert(30000000000) // "سی میلیارد"
 ```
 
 ### Add and remove commas
