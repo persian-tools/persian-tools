@@ -202,17 +202,16 @@ export const operators: Record<string, OperatorModel> = {
 };
 
 /**
- * Iranian Mobile Number regex
- * This regex support these models:
+ * * Iranian Mobile Number regex
+ *
+ * Supports these matches:
  * 1. 00989123456789
  * 2. +989123456789
  * 3. 989123456789
  * 4. 09123456789
  * 4. 9123456789
- *
- * @author Ali.Torki
  */
-export const mobileRegex = /^(?:[+|0{2}]?98)?(?:0)?(\d{3})+(\d{3})+(\d{4})$/;
+export const mobileRegex = /(\+98|0|98|0098)?([ ]|-|[()]){0,2}9[0-9]([ ]|-|[()]){0,2}(?:[0-9]([ ]|-|[()]){0,2}){8}/;
 
 export function getPhonePrefix(mobile: string): string {
 	const prefix = `${mobile}`.match(mobileRegex)?.[1] as string;
