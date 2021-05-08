@@ -79,7 +79,7 @@ export function carHandler(plate: NormalizedPlate): PlateResultApi {
 	const category = plate.char ? plateDataset.Category[plate.char] : null;
 	const details: PlateResultApiCarDetailsObject = {
 		first_two_digits: plate.numbers.slice(0, 2),
-		plate_character: plate.char ? plate.char : null,
+		plate_character: plate.char ?? : null,
 		next_three_digits: plate.numbers.slice(2, 5),
 		province_code: provinceCode,
 	};
