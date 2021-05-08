@@ -8,8 +8,8 @@ import type {
 	PlateApi,
 	PlateResultApi,
 	PlateResultApiTypeString,
-	PlateResultApiCarDetailsObject,
-	PlateResultApiMotorcycleDetailsObject,
+	PlateResultDetailModel,
+	PlateResultMotorcycleDetailModel,
 	PlateTypes,
 } from "./types.skip";
 
@@ -77,11 +77,11 @@ export function carHandler(plate: NormalizedPlate): PlateResultApi {
 
 	const province = plateDataset.Car[provinceCode];
 	const category = plate.char ? plateDataset.Category[plate.char] : null;
-	const details: PlateResultApiCarDetailsObject = {
-		first_two_digits: plate.numbers.slice(0, 2),
-		plate_character: plate.char ?? : null,
-		next_three_digits: plate.numbers.slice(2, 5),
-		province_code: provinceCode,
+	const details: PlateResultDetailModel = {
+		firstTwoDigits: plate.numbers.slice(0, 2),
+		plateCharacter: plate.char ?? : null,
+		nextThreeDigits: plate.numbers.slice(2, 5),
+		provinceCode: provinceCode,
 	};
 
 	return {
@@ -98,9 +98,9 @@ export function motorcycleHandler(plate: NormalizedPlate): PlateResultApi {
 	const template = `${provinceCode}-${plate.numbers.slice(3)}`;
 
 	const province = plateDataset.Motorcycle[provinceCode];
-	const details: PlateResultApiMotorcycleDetailsObject = {
+	const details: PlateResultMotorcycleDetailModel = {
 		digits: plate.numbers.slice(3),
-		province_code: provinceCode,
+		provinceCode: provinceCode,
 	};
 
 	return {
