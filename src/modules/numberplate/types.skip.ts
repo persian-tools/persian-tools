@@ -35,20 +35,20 @@ export type PlateResultApiTypeString = keyof typeof PlateTypes;
  *
  * @category Plate
  */
-export interface PlateResultApiCarDetailsObject {
-	first_two_digits: string;
-	plate_character: string;
-	next_three_digits: string;
-	province_code: string;
+export interface PlateResultDetailModel {
+	firstTwoDigits: string;
+	plateCharacter: string;
+	nextThreeDigits: string;
+	provinceCode: string;
 }
 
 /**
  *
  * @category Plate
  */
-export interface PlateResultApiMotorcycleDetailsObject {
+export interface PlateResultMotorcycleDetailModel {
 	digits: string;
-	province_code: string;
+	provinceCode: string;
 }
 
 /**
@@ -59,7 +59,7 @@ export interface PlateResultApi {
 	template: string;
 	province: string | null;
 	type: PlateResultApiTypeString;
-	details: PlateResultApiCarDetailsObject | PlateResultApiMotorcycleDetailsObject;
+	details: PlateResultDetailModel | PlateResultMotorcycleDetailModel;
 	category: string | null;
 }
 
