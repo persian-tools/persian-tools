@@ -79,7 +79,7 @@ export function carHandler(plate: NormalizedPlate): PlateResultApi {
 	const typeDetails = {
 		first_two_digits: plate.numbers.slice(0, 2),
 		plate_character: plate.char ? plate.char : null,
-		next_three_digits: plate.numbers.slice(2,5,),
+		next_three_digits: plate.numbers.slice(2, 5),
 		province_code: provinceCode,
 	};
 
