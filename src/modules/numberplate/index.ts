@@ -97,11 +97,16 @@ export function motorcycleHandler(plate: NormalizedPlate): PlateResultApi {
 	const template = `${provinceCode}-${plate.numbers.slice(3)}`;
 
 	const province = plateDataset.Motorcycle[provinceCode];
+	const typeDetails = {
+		digits: plate.numbers.slice(3),
+		province_code: provinceCode,
+	};
 
 	return {
 		type,
 		template,
 		province: province || null,
+		typeDetails,
 		category: null,
 	};
 }
