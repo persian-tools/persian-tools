@@ -8,6 +8,7 @@ import type {
 	PlateApi,
 	PlateResultApi,
 	PlateResultApiTypeString,
+	PlateResultApiTypeDetailsObject,
 	PlateTypes,
 } from "./types.skip";
 
@@ -75,10 +76,17 @@ export function carHandler(plate: NormalizedPlate): PlateResultApi {
 
 	const province = plateDataset.Car[provinceCode];
 	const category = plate.char ? plateDataset.Category[plate.char] : null;
+	const typeDetails = {
+		first_two_digits: plate.numbers.slice(0, 2),
+		plate_character: plate.char ? plate.char : null,
+		next_three_digits: plate.numbers.slice(2,5,),
+		province_code: provinceCode,
+	};
 
 	return {
 		type,
 		template,
+		typeDetails,
 		province: province || null,
 		category,
 	};
