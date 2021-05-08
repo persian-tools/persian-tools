@@ -32,7 +32,7 @@ export enum PlateTypes {
 export type PlateResultApiTypeString = keyof typeof PlateTypes;
 
 
-export interface PlateResultApiTypeObject {
+export interface PlateResultApiTypeDetailsObject {
 	first_two_digits: string;
 	plate_character: string;
 	next_three_digits: string;
@@ -46,7 +46,7 @@ export interface PlateResultApi {
 	template: string;
 	province: string | null;
 	type: PlateResultApiTypeString;
-	typeDetails: PlateResultApiTypeObject;
+	typeDetails: PlateResultApiTypeDetailsObject;
 	category: string | null;
 }
 
