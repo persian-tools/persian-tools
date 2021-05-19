@@ -389,7 +389,7 @@ Plate("12D45147").isValid;
   true
 */
 
-Plate(12345678).info;
+Plate(12345678).isValid;
 /*
   true
 */
