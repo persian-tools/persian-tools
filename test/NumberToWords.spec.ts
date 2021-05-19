@@ -1,17 +1,17 @@
-import { NumberToWords } from "../src";
+import { numberToWords } from "../src";
 
-it("NumberToWords", () => {
-	expect(NumberToWords.convert(500443)).toEqual("پانصد هزار و چهار صد و چهل و سه");
-	expect(NumberToWords.convert("500,443")).toEqual("پانصد هزار و چهار صد و چهل و سه");
-	expect(NumberToWords.convert(500)).toHaveLength(5);
-	expect(NumberToWords.convert(30000000000)).toEqual("سی میلیارد");
+it("numberToWords", () => {
+	expect(numberToWords(500443)).toEqual("پانصد هزار و چهار صد و چهل و سه");
+	expect(numberToWords("500,443")).toEqual("پانصد هزار و چهار صد و چهل و سه");
+	expect(numberToWords(500)).toHaveLength(5);
+	expect(numberToWords(30000000000)).toEqual("سی میلیارد");
 
-	expect(NumberToWords.convert("500,443", { ordinal: true })).toEqual("پانصد هزار و چهار صد و چهل و سوم");
-	expect(NumberToWords.convert(-30, { ordinal: true })).toEqual("منفی سی اُم");
-	expect(NumberToWords.convert(33, { ordinal: true })).toEqual("سی و سوم");
-	expect(NumberToWords.convert(45, { ordinal: true })).toEqual("چهل و پنجم");
-	expect(NumberToWords.convert(0)).toEqual("صفر");
+	expect(numberToWords("500,443", { ordinal: true })).toEqual("پانصد هزار و چهار صد و چهل و سوم");
+	expect(numberToWords(-30, { ordinal: true })).toEqual("منفی سی اُم");
+	expect(numberToWords(33, { ordinal: true })).toEqual("سی و سوم");
+	expect(numberToWords(45, { ordinal: true })).toEqual("چهل و پنجم");
+	expect(numberToWords(0)).toEqual("صفر");
 	// @ts-ignore
-	expect(NumberToWords.convert()).toEqual("");
-	expect(NumberToWords.convert(502375902532527)).toEqual("");
+	expect(numberToWords()).toEqual("");
+	expect(numberToWords(502375902532527)).toEqual("");
 });
