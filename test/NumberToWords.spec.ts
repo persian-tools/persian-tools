@@ -12,6 +12,8 @@ it("numberToWords", () => {
 	expect(numberToWords(45, { ordinal: true })).toEqual("چهل و پنجم");
 	expect(numberToWords(0)).toEqual("صفر");
 	// @ts-ignore
-	expect(numberToWords()).toEqual("");
-	expect(numberToWords(502375902532527)).toEqual("");
+	expect(numberToWords()).toBeInstanceOf(TypeError);
+	expect(numberToWords(9006199254740992)).toEqual(
+		"نه کوآدریلیون و شش تریلیون و صد و نود و نه میلیارد و دویست و پنجاه و چهار میلیون و هفت صد و چهل هزار و نه صد و نود و دو",
+	);
 });
