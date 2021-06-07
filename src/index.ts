@@ -44,3 +44,6 @@ export {
 } from "./modules/numberplate";
 // Phone number utilities
 export * from "./modules/phoneNumber";
+
+// TimeAgo
+export { default as TimeAgo } from "./modules/timeAgo";
