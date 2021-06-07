@@ -20,8 +20,7 @@ function getTime(second:number) {
 }
 
 describe("TimeAgo", () => {
-    it("Convert to previous", () => {
-        expect(TimeAgo(getTime( 0))).toEqual("اکنون");
+    it("Previous", () => {
         expect(TimeAgo(getTime(-10*1000 ))).toEqual("10 ثانیه قبل");
         expect(TimeAgo(getTime( -3*60*1000))).toEqual("3 دقیقه قبل");
         expect(TimeAgo(getTime( -18*60*60*1000))).toEqual("18 ساعت قبل");
@@ -30,7 +29,11 @@ describe("TimeAgo", () => {
         expect(TimeAgo(getTime( -14*30*24*60*60*1000))).toEqual("حدود 1 سال قبل");
     });
 
-    it("Convert to Next", () => {
+    it("Now", () => {
+        expect(TimeAgo(getTime( 0))).toEqual("اکنون");
+    });
+
+    it("Next", () => {
         expect(TimeAgo(getTime(10*1000 ))).toEqual("10 ثانیه بعد");
         expect(TimeAgo(getTime( 3*60*1000))).toEqual("3 دقیقه بعد");
         expect(TimeAgo(getTime( 18*60*60*1000))).toEqual("18 ساعت بعد");
