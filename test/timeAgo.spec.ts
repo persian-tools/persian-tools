@@ -25,7 +25,8 @@ describe('timeAgo', () => {
 		expect(timeAgo(getTime(-10 * 1000))).toEqual('10 ثانیه قبل');
 		expect(timeAgo(getTime(-3 * 60 * 1000))).toEqual('3 دقیقه قبل');
 		expect(timeAgo(getTime(-18 * 60 * 60 * 1000))).toEqual('18 ساعت قبل');
-		expect(timeAgo(getTime(-7 * 24 * 60 * 60 * 1000))).toEqual('حدود 7 روز قبل');
+		expect(timeAgo(getTime(-5 * 24 * 60 * 60 * 1000))).toEqual('حدود 5 روز قبل');
+		expect(timeAgo(getTime(-7 * 24 * 60 * 60 * 1000))).toEqual('حدود 1 هفته قبل');
 		expect(timeAgo(getTime(-7 * 30 * 24 * 60 * 60 * 1000))).toEqual('حدود 7 ماه قبل');
 		expect(timeAgo(getTime(-14 * 30 * 24 * 60 * 60 * 1000))).toEqual('حدود 1 سال قبل');
 	});
@@ -38,7 +39,8 @@ describe('timeAgo', () => {
 		expect(timeAgo(getTime(10 * 1000))).toEqual('10 ثانیه بعد');
 		expect(timeAgo(getTime(3 * 60 * 1000))).toEqual('3 دقیقه بعد');
 		expect(timeAgo(getTime(18 * 60 * 60 * 1000))).toEqual('18 ساعت بعد');
-		expect(timeAgo(getTime(7 * 24 * 60 * 60 * 1000))).toEqual('حدود 7 روز بعد');
+		expect(timeAgo(getTime(5 * 24 * 60 * 60 * 1000))).toEqual('حدود 5 روز بعد');
+		expect(timeAgo(getTime(7 * 24 * 60 * 60 * 1000))).toEqual('حدود 1 هفته بعد');
 		expect(timeAgo(getTime(7 * 30 * 24 * 60 * 60 * 1000))).toEqual('حدود 7 ماه بعد');
 		expect(timeAgo(getTime(14 * 30 * 24 * 60 * 60 * 1000))).toEqual('حدود 1 سال بعد');
 	});

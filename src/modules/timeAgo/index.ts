@@ -75,6 +75,7 @@ export default function timeAgo(datetime = ""): string {
 	const minute: number = 60 * 1000,
 		hour: number = minute * 60,
 		day: number = hour * 24,
+		week: number = day * 7,
 		month: number = day * 30,
 		year: number = day * 365;
 
@@ -92,8 +93,10 @@ export default function timeAgo(datetime = ""): string {
 		return Math.round(elapsed / minute) + " دقیقه " + prevOrNext;
 	} else if (elapsed < day) {
 		return Math.round(elapsed / hour) + " ساعت " + prevOrNext;
-	} else if (elapsed < month) {
+	} else if (elapsed < week) {
 		return "حدود " + Math.round(elapsed / day) + " روز " + prevOrNext;
+	} else if (elapsed < month) {
+		return "حدود " + Math.round(elapsed / week) + " هفته " + prevOrNext;
 	} else if (elapsed < year) {
 		return "حدود " + Math.round(elapsed / month) + " ماه " + prevOrNext;
 	} else {
