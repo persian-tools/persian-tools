@@ -230,7 +230,7 @@ isPersian("هل هذا نص فارسي؟")// false
 
 hasPersian("This text includes فارسی") // true
 
-toPersianChars("علي")) // علی
+toPersianChars("علي") // علی
 ```
 
 **Note**: You can pass `2` more options to `isPersian` to customize it as your needs:
@@ -409,31 +409,31 @@ Plate(1204567).isValid
 
 **Usage**
 
->Suppose the current time is equal to `1400-03-17 18:00:00`
+>Suppose the current time is equal to `1400/03/17 18:00:00`
 
 ```js
 import { timeAgo } from "@persian-tools/persian-tools";
 
 // Previous
-timeAgo('1400-03-17 17:59:59') // 1 ثانیه قبل
-timeAgo('1400-03-17 17:55:00') // 5 دقیقه قبل
-timeAgo('1400-03-17 17:00:00') // 1 ساعت قبل
-timeAgo('1400-03-16 18:00:00') // 1 روز  قبل
-timeAgo('1400-02-02 18:00:00') // حدود 3 هفته  قبل
-timeAgo('1400-02-17 18:00:00') // حدود 1 ماه  قبل
-timeAgo('1399-03-17 18:00:00') // حدود 1 سال  قبل
+timeAgo('1400/03/17 17:59:59') // 1 ثانیه قبل
+timeAgo('1400/03/17 17:55:00') // 5 دقیقه قبل
+timeAgo('1400/03/17 17:00:00') // 1 ساعت قبل
+timeAgo('1400/03/16 18:00:00') // 1 روز  قبل
+timeAgo('1400/02/02 18:00:00') // حدود 3 هفته  قبل
+timeAgo('1400/02/17 18:00:00') // حدود 1 ماه  قبل
+timeAgo('1399/03/17 18:00:00') // حدود 1 سال  قبل
 
 // Now
-timeAgo('1400-03-17 18:00:00') // اکنون
+timeAgo('1400/03/17 18:00:00') // اکنون
 
 // Next
-timeAgo('1400-03-17 18:00:01') // 1 ثانیه بعد
-timeAgo('1400-03-17 18:05:00') // 5 دقیقه بعد
-timeAgo('1400-03-17 19:00:00') // 1 ساعت بعد
-timeAgo('1400-03-18 18:00:00') // 1 روز  بعد
-timeAgo('1400-04-07 18:00:00') // حدود 3 هفته  بعد
-timeAgo('1400-04-17 18:00:00') // حدود 1 ماه  بعد
-timeAgo('1401-03-17 18:00:00') // حدود 1 سال  بعد
+timeAgo('1400/03/17 18:00:01') // 1 ثانیه بعد
+timeAgo('1400/03/17 18:05:00') // 5 دقیقه بعد
+timeAgo('1400/03/17 19:00:00') // 1 ساعت بعد
+timeAgo('1400/03/18 18:00:00') // 1 روز  بعد
+timeAgo('1400/04/07 18:00:00') // حدود 3 هفته  بعد
+timeAgo('1400/04/17 18:00:00') // حدود 1 ماه  بعد
+timeAgo('1401/03/17 18:00:00') // حدود 1 سال  بعد
 ```
 ### Todo
 - [ ] Write Jalaali and Gregorian functions to convert Date together.
