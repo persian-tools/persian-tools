@@ -1,7 +1,13 @@
 import { digitsFaToEn } from "../digits";
 
+/**
+ * Convert a date-time value to timestamp.
+ *
+ * @param {string} datetime Format must be yyyy/mm/dd hh:mm:ss.
+ * @returns {number} Calculates the timestamp of the input.
+ */
 export function convertToTimeStamp(datetime: string): number {
-	const patternDateTime = /(\d+)-(\d+)-(\d+) (\d+):(\d+):(\d+)/;
+	const patternDateTime = /(\d+)\/(\d+)\/(\d+) (\d+):(\d+):(\d+)/;
 	const dateTime = datetime.match(patternDateTime);
 	if (dateTime) {
 		const date: Date = new Date(
@@ -12,54 +18,53 @@ export function convertToTimeStamp(datetime: string): number {
 			Number(dateTime[5]),
 			Number(dateTime[6]),
 		);
-		return date.getTime(); // 1623036870000
-	} else throw new TypeError("PersianTools: timeAgo - The input format must be yyyy-mm-dd hh:mm:ss");
+		return date.getTime();
+	} else throw new TypeError("PersianTools: convertToTimeStamp - The input format must be yyyy/mm/dd hh:mm:ss");
 }
 
 /**
- * Get current timestamp of Now datetime
+ * Get current timestamp of current date-time.
+ *
+ * @returns {number} Calculates the timestamp of current date-time.
  */
 export function getTimeNow(): number {
-	const date: string[] = new Date(Date.now())
-		.toLocaleDateString("fa-IR", {
+	const currentDateTime: string = new Date(Date.now())
+		.toLocaleString("fa-IR", {
 			year: "numeric",
 			month: "2-digit",
 			day: "2-digit",
-		})
-		.split("/");
-
-	const time: string[] = new Date(Date.now())
-		.toLocaleTimeString("fa-IR", {
 			hour: "2-digit",
 			minute: "2-digit",
 			second: "2-digit",
 		})
-		.split(":");
+		.replace(/‏|،/g, "");
 
-	return convertToTimeStamp(
-		digitsFaToEn(date[0] + "-" + date[1] + "-" + date[2] + " " + time[0] + ":" + time[1] + ":" + time[2]),
-	);
+	return convertToTimeStamp(digitsFaToEn(currentDateTime));
 }
 
 /**
- * Input format must be yyyy-mm-dd hh:mm:ss
- * @param datetime
+ * Check format of Input.
+ *
+ * @param {string} datetime Format must be yyyy/mm/dd hh:mm:ss.
+ * @returns {boolean} If format of datetime is ok, return true.
  */
 export function checkFormatDateTime(datetime: string): boolean {
-	return Boolean(datetime.match(/^\d{4}-\d{1,2}-\d{1,2} \d{1,2}:\d{1,2}:\d{1,2}$/));
+	return Boolean(datetime.match(/^\d{4}\/\d{1,2}\/\d{1,2} \d{1,2}:\d{1,2}:\d{1,2}$/));
 }
 
 /**
- * TimeAgo
+ * Converting Jalali date-time into a time ago.
  *
  * @category timeAgo
- * @description Converting a Jalali datetime into a time ago
+ *
+ * @param {string} datetime Format must be yyyy/mm/dd hh:mm:ss. If no value is entered for input, the current time is considered.
+ * @returns {string} Return time ago value. Eg: حدود 1 سال قبل
  */
 export default function timeAgo(datetime = ""): string {
 	if (typeof datetime !== "string") throw new TypeError("PersianTools: timeAgo - The input must be string");
 
 	if (!checkFormatDateTime(datetime) && datetime !== "")
-		throw new TypeError("PersianTools: timeAgo - The input format must be yyyy-mm-dd hh:mm:ss");
+		throw new TypeError("PersianTools: timeAgo - The input format must be yyyy/mm/dd hh:mm:ss");
 
 	// Timestamp DateTime
 	let tsDateTime: number;
