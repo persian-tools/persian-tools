@@ -126,7 +126,7 @@ import { WordsToNumber } from "@persian-tools/persian-tools";
 
 WordsToNumber.convert("یگصد و بنجاه هزار", { fuzzy: true }) // "150000"  
 WordsToNumber.convert("دویشت ر بیشت هزار", { fuzzy: true }) // "220000"  
-WordsToNumber.convert("منقی صد", { fuzzy: true }) // "-100"  
+WordsToNumber.convert("منقی ضد", { fuzzy: true }) // "-100"  
 ```
 
 ### Convert Numbers to Persian words
