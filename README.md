@@ -86,9 +86,9 @@ import * as persianTools from "@persian-tools/persian-tools";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 
 // Takes a string made of English digits only, and returns a string that represents the same number but with Persian digits
-const convertToFa = persianTools.digitsEnToFa(1234567);
+const convertedToFa = persianTools.digitsEnToFa(1234567);
 // or
-const convertToFa = digitsEnToFa(1234567);
+const convertedToFa = digitsEnToFa(1234567);
 ```
 
 ## Usage
@@ -109,7 +109,6 @@ WordsToNumber.convert("منفی سه هزارمین") // -3000
 WordsToNumber.convert("منفی سه هزارم") // -3000
 WordsToNumber.convert("منفی سه هزار") // -3000
 WordsToNumber.convert("سه هزار دویست و دوازده") // 3212
-WordsToNumber.convert("دوازده هزار بیست دو") // 12022
 ```
 - Digits converter
 ```js
@@ -145,11 +144,8 @@ NumberToWords.convert(30000000000) // "سی میلیارد"
 import { addCommas, removeCommas } from "@persian-tools/persian-tools";
 
 addCommas(30000000) // "30,000,000"
-addCommas(300) // "300"
 
 removeCommas("30,000,000") // 30000000
-removeCommas(300) // 300
-removeCommas("300") // 300
 ```
 
 ### Convert Persian numbers to Arabic or English numbers and vice versa
@@ -157,22 +153,12 @@ removeCommas("300") // 300
 ```javascript
 import { digitsArToFa, digitsArToEn, digitsEnToFa, digitsFaToEn , digitsEnToAr } from "@persian-tools/persian-tools";
 
-digitsArToFa("٠١٢٣٤٥٦٧٨٩"); // "۰۱۲۳۴۵۶۷۸۹"
 digitsArToFa("۸۹123۴۵"); // "۸۹123۴۵"
-digitsArToFa(456128); // "456128"
-digitsArToFa("Text ٠١٢٣٤٥٦٧٨٩"); // "Text ۰۱۲۳۴۵۶۷۸۹"
 
-digitsArToEn("٠١٢٣٤٥٦٧٨٩"); // "0123456789"
 digitsArToEn("٨٩123٤٥"); // "8912345"
-digitsArToEn(456128); // "456128"
-
-digitsArToEn("Text ٠١٢٣٤٥٦٧٨٩"); // "Text 0123456789"
 
 digitsEnToFa("123۴۵۶"); // "۱۲۳۴۵۶"
-digitsEnToFa("٤٥٦"); // "٤٥٦"
-digitsEnToFa("123۴۵۶"); // "۱۲۳۴۵۶"
 
-digitsEnToAr(1234567891); // "۱۲۳٤٥٦۷۸۹۱"
 digitsEnToAr("123٤٥٦"); // "۱۲۳٤٥٦"
 ```
 
@@ -182,27 +168,12 @@ digitsEnToAr("123٤٥٦"); // "۱۲۳٤٥٦"
 import { verifyIranianNationalId, getPlaceByIranNationalId } from "@persian-tools/persian-tools";
 
 verifyIranianNationalId("0499370899"); // true
-verifyIranianNationalId("0790419904"); // true
-verifyIranianNationalId("0084575948"); // true
-verifyIranianNationalId("0963695398"); // true
-verifyIranianNationalId("0684159414"); // true
-verifyIranianNationalId("0067749828"); // true
 verifyIranianNationalId("0684159415"); // false
 ```
 
 ### Find city and province name by national-id(code-e Melli)
 ```javascript
-getPlaceByIranNationalId("0499370899").city; // "شهرری"
-getPlaceByIranNationalId("0790419904").city; // "سبزوار"
 getPlaceByIranNationalId("0084575948").city; // "تهران مرکزی"
-getPlaceByIranNationalId("0060495219").city; // "تهران مرکزی"
-getPlaceByIranNationalId("0084545943").city; // "تهران مرکزی"
-getPlaceByIranNationalId("0671658506").city; // "بجنورد"
-getPlaceByIranNationalId("0671658506").city; // "بجنورد"
-getPlaceByIranNationalId("0643005846").city; // "بیرجند"
-getPlaceByIranNationalId("0906582709").city; // "کاشمر"
-getPlaceByIranNationalId("0451727304").city; // "شمیران"
-getPlaceByIranNationalId("0371359058").city; // "قم"
 ```
 
 ### Bank number validation and get the name of the bank by bank account number
@@ -211,10 +182,7 @@ getPlaceByIranNationalId("0371359058").city; // "قم"
 import { verifyCardNumber, getBankNameFromCardNumber } from "@persian-tools/persian-tools";
 
 verifyCardNumber(6037701689095443); // true
-verifyCardNumber(6219861034529007); // true
-verifyCardNumber(6219861034529008); // false
-getBankNameFromCardNumber(6037701689095443); // "بانک کشاورزی"
-getBankNameFromCardNumber(6219861034529007); // "بانک سامان"
+
 getBankNameFromCardNumber("6219861034529007"); // "بانک سامان"
 ```
 
@@ -263,9 +231,8 @@ import { Bill } from "@persian-tools/persian-tools";
 
 // Calculate bill amount by bill id and payment id
 // Convert to Iranian Rials
-new Bill({ billId: 1117753200140, paymentId: 12070160, currency: "rial" }).getResult().amount; // 120000
 // Return bill amount by Toman(Iranian currency type) by default
-new Bill({ billId: 1117753200140, paymentId: 12070160 }).getResult().amount; // 12000
+new Bill({ billId: 1117753200140, paymentId: 12070160, currency: "rial" }).getResult().amount; // 120000
 
 // Find Bill's type by bill id and payment id
 new Bill({ billId: 7748317800142, paymentId: 1770160 }).getResult().type; // تلفن ثابت
