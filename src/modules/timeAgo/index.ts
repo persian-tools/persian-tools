@@ -74,17 +74,17 @@ export default function timeAgo(datetime = ""): string {
 	else tsDateTime = convertToTimeStamp(datetime);
 
 	// TimeNow
-	const tsTimeNow: number = getTimeNow();
+	const tsTimeNow = getTimeNow();
 
 	// TimeAgo
-	const minute: number = 60 * 1000,
-		hour: number = minute * 60,
-		day: number = hour * 24,
-		week: number = day * 7,
-		month: number = day * 30,
-		year: number = day * 365;
+	const minute = 60 * 1000,
+		hour = minute * 60,
+		day = hour * 24,
+		week = day * 7,
+		month = day * 30,
+		year = day * 365;
 
-	let elapsed: number = tsTimeNow - tsDateTime;
+	let elapsed = tsTimeNow - tsDateTime;
 
 	if (elapsed === 0) return "اکنون";
 
