@@ -104,41 +104,41 @@ Let's take a look at what an example test case would look like using Persian-too
 | `addCommas`               | Commas will be added to the Result                            | `false`
 - Convert with no option
 ```javascript
-import { WordsToNumber } from "@persian-tools/persian-tools";
+import { wordsToNumber } from "@persian-tools/persian-tools";
 
-WordsToNumber.convert("منفی سه هزارمین") // -3000
-WordsToNumber.convert("منفی سه هزارم") // -3000
-WordsToNumber.convert("منفی سه هزار") // -3000
-WordsToNumber.convert("سه هزار دویست و دوازده") // 3212
-WordsToNumber.convert("دوازده هزار بیست دو") // 12022
+wordsToNumber("منفی سه هزارمین") // -3000
+wordsToNumber("منفی سه هزارم") // -3000
+wordsToNumber("منفی سه هزار") // -3000
+wordsToNumber("سه هزار دویست و دوازده") // 3212
+wordsToNumber("دوازده هزار بیست دو") // 12022
 ```
 - Digits converter
 ```js
-WordsToNumber.convert("منفی سه هزارمین", { digits: "fa" }) // "-۳۰۰۰"
-WordsToNumber.convert("دوازده هزار بیست دو", { digits: "fa" }) // ۱۲۰۲۲
+wordsToNumber("منفی سه هزارمین", { digits: "fa" }) // "-۳۰۰۰"
+wordsToNumber("دوازده هزار بیست دو", { digits: "fa" }) // ۱۲۰۲۲
 ```
 - Add commas
 ```js
-WordsToNumber.convert("منفی سه هزارمین", { addCommas: true }) // "-3,000"
-WordsToNumber.convert("دوازده هزار بیست دو", { addCommas: true }) // "12,022"
+wordsToNumber("منفی سه هزارمین", { addCommas: true }) // "-3,000"
+wordsToNumber("دوازده هزار بیست دو", { addCommas: true }) // "12,022"
 ```  
 - Fuzzy typo fixer(`v1.5.0`):
 ```javascript
 import { WordsToNumber } from "@persian-tools/persian-tools";
 
-WordsToNumber.convert("یگصد و بنجاه هزار", { fuzzy: true }) // "150000"  
-WordsToNumber.convert("دویشت ر بیشت هزار", { fuzzy: true }) // "220000"  
-WordsToNumber.convert("منقی ضد", { fuzzy: true }) // "-100"  
+wordsToNumber("یگصد و بنجاه هزار", { fuzzy: true }) // "150000"  
+wordsToNumber("دویشت ر بیشت هزار", { fuzzy: true }) // "220000"  
+wordsToNumber("منقی ضد", { fuzzy: true }) // "-100"  
 ```
 
 ### Convert Numbers to Persian words
 ```javascript
-import { NumberToWords } from "@persian-tools/persian-tools";
+import { numberToWords } from "@persian-tools/persian-tools";
 
-NumberToWords.convert(500443) // "پانصد هزار و چهار صد و چهل و سه"
-NumberToWords.convert("500,443") // "پانصد هزار و چهار صد و چهل و سه"
-NumberToWords.convert("500,443", { ordinal: true }) // "پانصد هزار و چهار صد و چهل و سوم"
-NumberToWords.convert(30000000000) // "سی میلیارد"
+numberToWords(500443) // "پانصد هزار و چهار صد و چهل و سه"
+numberToWords("500,443") // "پانصد هزار و چهار صد و چهل و سه"
+numberToWords("500,443", { ordinal: true }) // "پانصد هزار و چهار صد و چهل و سوم"
+numberToWords(30000000000) // "سی میلیارد"
 ```
 
 ### Add and remove commas
@@ -390,7 +390,7 @@ Plate("12D45147").isValid;
   true
 */
 
-Plate(12345678).info;
+Plate(12345678).isValid;
 /*
   true
 */

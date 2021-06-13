@@ -60,75 +60,73 @@ numberToWord[700] = "هفت صد";
 numberToWord[800] = "هشت صد";
 numberToWord[900] = "نه صد";
 
-class NumberToWords {
-	/**
-	 * toWords, Convert Numbers to Persian Text
-	 * @param  {String} number
-	 * @return {Number|String}
-	 */
-	protected toWords = (number: number): string => {
-		let unit = 100;
-		let result = "";
+const toWords = (number: number): string => {
+	let unit = 100;
+	let result = "";
 
-		while (unit > 0) {
-			if (Math.floor(number / unit) * unit !== 0) {
-				if (number in numberToWord) {
-					result += numberToWord[number];
-					break;
-				} else {
-					result += numberToWord[Math.floor(number / unit) * unit] + " و ";
-					number %= unit;
-				}
-			}
-			unit = Math.floor(unit / 10);
-		}
-		return result;
-	};
-
-	public convert(number: bigint | number | string, { ordinal = false }: NumberToWordsOptions = {}): string {
-		if (typeof number === "undefined") return "";
-
-		if (number === 0) {
-			return "صفر";
-		}
-
-		const base = 1000;
-		const result: string[] = [];
-
-		number = removeCommas(`${number}`);
-
-		const isNegative: boolean = number < 0;
-		number = isNegative ? (number as number) * -1 : number;
-
-		while (number > 0) {
-			result.push(this.toWords((number as number) % base));
-			number = Math.floor((number as number) / base);
-		}
-
-		if (result.length > 4) {
-			return "";
-		}
-
-		for (let i = 0; i < result.length; i++) {
-			if (result[i] !== "") {
-				result[i] += " " + config.scale[i] + " و ";
+	while (unit > 0) {
+		if (Math.floor(number / unit) * unit !== 0) {
+			if (number in numberToWord) {
+				result += numberToWord[number];
+				break;
+			} else {
+				result += numberToWord[Math.floor(number / unit) * unit] + " و ";
+				number %= unit;
 			}
 		}
-		result.reverse();
-
-		let words = result.join("");
-		while (words.endsWith(" و ")) {
-			words = words.slice(0, -3);
-		}
-
-		words = trim(isNegative ? `منفی ${words}` : words);
-
-		if (ordinal) words = addOrdinalSuffix(words)!;
-
-		return words;
+		unit = Math.floor(unit / 10);
 	}
+	return result;
+};
+
+/**
+ *
+ * Convert to words
+ *
+ * @category Number conversion
+ * @return Converted numbers to words. e.g: صد و بیست و یک
+ */
+function numberToWords(number: bigint | number | string, { ordinal = false }: NumberToWordsOptions = {}): string {
+	if (typeof number === "undefined") return "";
+
+	if (number === 0) {
+		return "صفر";
+	}
+
+	const base = 1000;
+	const result: string[] = [];
+
+	number = removeCommas(`${number}`);
+
+	const isNegative: boolean = number < 0;
+	number = isNegative ? (number as number) * -1 : number;
+
+	while (number > 0) {
+		result.push(toWords((number as number) % base));
+		number = Math.floor((number as number) / base);
+	}
+
+	if (result.length > 4) {
+		return "";
+	}
+
+	for (let i = 0; i < result.length; i++) {
+		if (result[i] !== "") {
+			result[i] += " " + config.scale[i] + " و ";
+		}
+	}
+	result.reverse();
+
+	let words = result.join("");
+	while (words.endsWith(" و ")) {
+		words = words.slice(0, -3);
+	}
+
+	words = trim(isNegative ? `منفی ${words}` : words);
+
+	if (ordinal) words = addOrdinalSuffix(words)!;
+
+	return words;
 }
 
-const NumberToWordsInstance = new NumberToWords();
-
-export default NumberToWordsInstance;
+export default numberToWords;
