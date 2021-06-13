@@ -31,6 +31,7 @@
 -   [Validate the correctness of the text of the Persian language and clear the Arabic letters in the Persian text](#validate-the-correctness-of-the-text-of-the-persian-language-and-clear-the-arabic-letters-in-the-persian-text).
 -   [Fix Persian characters in URL](#fix-persian-characters-in-url).
 -   [Fix Persian zero-width non-joiner(Replace spaces by half-space)](#fix-persian-zero-width-non-joinerreplace-spaces-by-half-space)
+-   [Convert Jalaali date-time into a time ago](#convert-jalaali-date-time-into-a-time-ago)
 
 ## Getting started
 
@@ -229,7 +230,7 @@ isPersian("هل هذا نص فارسي؟")// false
 
 hasPersian("This text includes فارسی") // true
 
-toPersianChars("علي")) // علی
+toPersianChars("علي") // علی
 ```
 
 **Note**: You can pass `2` more options to `isPersian` to customize it as your needs:
@@ -404,7 +405,23 @@ Plate(1204567).isValid
   will return false - plate can't have 0 in its digits (except last digit)
 */
 ```
+### Convert Jalaali date-time into a time ago
 
+**Usage**
+
+>Suppose the current time is equal to `1400/03/17 18:00:00`
+
+```js
+import { timeAgo } from "@persian-tools/persian-tools";
+
+// Previous
+timeAgo('1400/03/17 17:55:00') // 5 دقیقه قبل
+timeAgo('1400/02/17 18:00:00') // حدود 1 ماه  قبل
+
+// Next
+timeAgo('1400/04/07 18:00:00') // حدود 3 هفته  بعد
+timeAgo('1401/03/17 18:00:00') // حدود 1 سال  بعد
+```
 ### Todo
 - [ ] Write Jalaali and Gregorian functions to convert Date together.
 
