@@ -18,7 +18,7 @@ const numberToWords: NumberToWordsType = (inputNumber, options) => {
 	const number = Number(typeof inputNumber === "number" ? inputNumber : removeCommas(inputNumber));
 	const isOrdinal = options?.ordinal || false;
 
-	const getWord = (n: number) => numbersWordList.get(n) ?? "";
+	const getWord = (n: number) => numbersWordList[n] ?? "";
 	const addNegativeSuffix = (str: string) => "منفی" + " " + str;
 
 	function transformeToWord(num: number): string {
@@ -34,7 +34,7 @@ const numberToWords: NumberToWordsType = (inputNumber, options) => {
 		if (num <= 999) return transformeToWord(num);
 
 		const getUnitName = (numberOfZeros: number) =>
-			numberOfZeros === 0 ? "" : numbersWordList.get(Number.parseInt(`1${"0".repeat(numberOfZeros)}`));
+			numberOfZeros === 0 ? "" : numbersWordList[Number.parseInt(`1${"0".repeat(numberOfZeros)}`)];
 
 		const seperated = Number(num).toLocaleString().split(",");
 
