@@ -6,16 +6,16 @@ export interface NumberToWordsOptions {
 	ordinal?: boolean;
 }
 
-type NumberToWordsType = (inputNumber: number | string, options?: NumberToWordsOptions) => string | TypeError;
+type NumberToWordsType = (numberValue: number | string, options?: NumberToWordsOptions) => string | TypeError;
 
-const numberToWords: NumberToWordsType = (inputNumber, options) => {
+const numberToWords: NumberToWordsType = (numberValue, options) => {
 	const isNumberValid = (n: number) => typeof n === "number" && Number.isSafeInteger(n) && n !== 0;
 	const isNegative = (n: number) => n < 0;
 	const numberIsNotValidError = () =>
 		TypeError("PersianTools: numberToWords - the number must be a safe integer value");
 
-	if (typeof inputNumber !== "string" && !Number.isSafeInteger(inputNumber)) return numberIsNotValidError();
-	const number = Number(typeof inputNumber === "number" ? inputNumber : removeCommas(inputNumber));
+	if (typeof numberValue !== "string" && !Number.isSafeInteger(numberValue)) return numberIsNotValidError();
+	const number = Number(typeof numberValue === "number" ? numberValue : removeCommas(numberValue));
 	const isOrdinal = options?.ordinal || false;
 
 	const getWord = (n: number) => numbersWordList[n] ?? "";
@@ -30,7 +30,13 @@ const numberToWords: NumberToWordsType = (inputNumber, options) => {
 		return residual === 0 ? getWord(num) : `${getWord(num - residual)} و ${transformeToWord(residual)}`;
 	}
 
-	function performer(num: number) {
+	/**
+	 *
+	 * @param {number} num - a positive number
+	 * @returns {number} number word
+	 */
+
+	function performer(num: number): string {
 		if (num <= 999) return transformeToWord(num);
 
 		const getUnitName = (numberOfZeros: number) =>
@@ -54,7 +60,7 @@ const numberToWords: NumberToWordsType = (inputNumber, options) => {
 
 	const positiveNumber = Math.abs(number);
 	const handleResult = () => {
-		if (Number(inputNumber) === 0) return "صفر";
+		if (Number(numberValue) === 0) return "صفر";
 		if (isNumberValid(number)) {
 			const tmpResult = isNegative(number)
 				? addNegativeSuffix(performer(positiveNumber))
