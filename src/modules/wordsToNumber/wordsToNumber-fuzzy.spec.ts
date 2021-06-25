@@ -1,5 +1,5 @@
-import { fuzzy } from "../src/modules/wordsToNumber/fuzzy";
-import { ALL_WORDS } from "../src/modules/wordsToNumber/constants";
+import { fuzzy } from "./fuzzy";
+import { ALL_WORDS } from "./constants";
 
 describe("wordsToNumber - Fuzzy humanizer", () => {
 	it("Should clean the Texts and the result should be human-readable", () => {
@@ -20,7 +20,9 @@ describe("wordsToNumber - Fuzzy humanizer", () => {
 	});
 
 	it("Should works if we apply our custom dataset", () => {
-		expect(fuzzy("دویشت ر بیشت هزار", ALL_WORDS)).toEqual("دویست و بیست هزار");
+		expect(fuzzy("دویشت ر بیشت هزار", ALL_WORDS)).toEqual(
+			"دویست و بیست هزار",
+		);
 	});
 
 	it("Should be falsy", () => {

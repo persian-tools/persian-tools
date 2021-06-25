@@ -1,4 +1,4 @@
-import { wordsToNumber } from "../src";
+import wordsToNumber from "./index";
 
 describe("WordsToNumber", () => {
 	it("Should convert truly", () => {
@@ -9,7 +9,9 @@ describe("WordsToNumber", () => {
 			wordsToNumber<string>("دوازده هزار بیست دو", { addCommas: true }),
 		).toEqual("12,022");
 		expect(
-			wordsToNumber<string>("دوازده هزار و بیست و دو", { addCommas: true }),
+			wordsToNumber<string>("دوازده هزار و بیست و دو", {
+				addCommas: true,
+			}),
 		).toEqual("12,022");
 	});
 
@@ -24,13 +26,22 @@ describe("WordsToNumber", () => {
 			wordsToNumber<string>("دوازده هزار بیست دو", { digits: "ar" }),
 		).toEqual("۱۲۰۲۲");
 		expect(
-			wordsToNumber<string>("دوازده هزار بیست دو", { digits: "ar", addCommas: true }),
+			wordsToNumber<string>("دوازده هزار بیست دو", {
+				digits: "ar",
+				addCommas: true,
+			}),
 		).toEqual("۱۲,۰۲۲");
 		expect(
-			wordsToNumber<string>("دوازده هزار و بیست و دو", { digits: "ar", addCommas: true }),
+			wordsToNumber<string>("دوازده هزار و بیست و دو", {
+				digits: "ar",
+				addCommas: true,
+			}),
 		).toEqual("۱۲,۰۲۲");
 		expect(
-			wordsToNumber<string>("چهارصد پنجاه هزار", { digits: "ar", addCommas: true }),
+			wordsToNumber<string>("چهارصد پنجاه هزار", {
+				digits: "ar",
+				addCommas: true,
+			}),
 		).toEqual("٤٥۰,۰۰۰");
 		expect(
 			wordsToNumber<string>("چهارصد پنجاه هزار", { digits: "ar" }),
@@ -39,13 +50,22 @@ describe("WordsToNumber", () => {
 
 	it("Should convert with ordinal words", () => {
 		expect(
-			wordsToNumber<string>("منفی ۳ هزار", { digits: "fa", addCommas: true }),
+			wordsToNumber<string>("منفی ۳ هزار", {
+				digits: "fa",
+				addCommas: true,
+			}),
 		).toEqual("-۳,۰۰۰");
 		expect(
-			wordsToNumber<string>("منفی 3 هزار و 200", { digits: "fa", addCommas: true }),
+			wordsToNumber<string>("منفی 3 هزار و 200", {
+				digits: "fa",
+				addCommas: true,
+			}),
 		).toEqual("-۳,۲۰۰");
 		expect(
-			wordsToNumber<string>("منفی سه هزارمین", { digits: "fa", addCommas: true }),
+			wordsToNumber<string>("منفی سه هزارمین", {
+				digits: "fa",
+				addCommas: true,
+			}),
 		).toEqual("-۳,۰۰۰");
 		expect(
 			wordsToNumber<string>("منفی سه هزارمین", { digits: "fa" }),
@@ -53,7 +73,9 @@ describe("WordsToNumber", () => {
 		expect(wordsToNumber<number>("منفی سه هزارمین")).toEqual(-3000);
 		expect(wordsToNumber<number>("منفی سه هزارم")).toEqual(-3000);
 		expect(wordsToNumber<string>("منفی سه هزارمین")).not.toEqual("-3000");
-		expect(String(wordsToNumber<number>("منفی سه هزارمین"))).toHaveLength(5);
+		expect(String(wordsToNumber<number>("منفی سه هزارمین"))).toHaveLength(
+			5,
+		);
 		expect(wordsToNumber<number>("منفی سی اُم")).toEqual(-30);
 		expect(
 			wordsToNumber<number>("سی و سوم", { fuzzy: true }),

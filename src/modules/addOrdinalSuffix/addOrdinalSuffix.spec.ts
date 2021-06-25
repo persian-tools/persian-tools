@@ -1,4 +1,4 @@
-import { addOrdinalSuffix } from "../src";
+import addOrdinalSuffix from "./addOrdinalSuffix";
 
 describe("Ordinal suffix", () => {
 	it("Add", () => {
@@ -11,7 +11,9 @@ describe("Ordinal suffix", () => {
 		try {
 			addOrdinalSuffix();
 		} catch (e) {
-			expect(e.message).toBe("PersianTools: addOrdinalSuffix - The input must be string");
+			expect(e.message).toBe(
+				"PersianTools: addOrdinalSuffix - The input must be string",
+			);
 		}
 	});
 });

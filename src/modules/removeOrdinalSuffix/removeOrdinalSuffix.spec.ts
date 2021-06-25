@@ -1,4 +1,4 @@
-import { removeOrdinalSuffix } from "../src";
+import removeOrdinalSuffix from "./index";
 
 it("Remove ordinal suffix", () => {
 	expect(removeOrdinalSuffix("چهل و سوم")).toEqual("چهل و سه");

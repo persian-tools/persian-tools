@@ -1,4 +1,4 @@
-import { Sheba } from "../src";
+import Sheba from "./index";
 
 describe("Sheba", () => {
 	it("Verify, Should be truthy", () => {
@@ -7,7 +7,9 @@ describe("Sheba", () => {
 
 	it("Verify, Should be falsy", () => {
 		expect(new Sheba("IR01234567890123456789").validate()).toBeFalsy();
-		expect(new Sheba("IR012345678901234567890123456789").validate()).toBeFalsy();
+		expect(
+			new Sheba("IR012345678901234567890123456789").validate(),
+		).toBeFalsy();
 		expect(new Sheba("IR01234567890123456789").validate()).toBeFalsy();
 		expect(new Sheba("IR012345678901234567890123").validate()).toBeFalsy();
 		expect(new Sheba("IR012345678901234567890123").validate()).toBeFalsy();

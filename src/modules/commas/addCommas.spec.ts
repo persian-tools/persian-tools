@@ -1,4 +1,4 @@
-import { addCommas } from "../src";
+import { addCommas } from "./index";
 
 describe("AddCommas", () => {
 	it("Add and remove commas", () => {

@@ -1,4 +1,4 @@
-import { verifyCardNumber } from "../src";
+import verifyCardNumber from "./index";
 
 it("Bank number validation", () => {
 	expect(verifyCardNumber(6037701689095443)).toBeTruthy();

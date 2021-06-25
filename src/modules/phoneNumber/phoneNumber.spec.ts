@@ -1,5 +1,5 @@
-import { phoneNumberDetail, phoneNumberValidator } from "../src";
-import { getPhonePrefix } from "../src/modules/phoneNumber/utils";
+import { phoneNumberDetail, phoneNumberValidator } from "./index";
+import { getPhonePrefix } from "./utils";
 
 describe("Iranian Phone Number Utilities", () => {
 	describe("Find details", () => {
@@ -25,7 +25,9 @@ describe("Iranian Phone Number Utilities", () => {
 					type: ["permanent", "credit"],
 				}),
 			);
-			expect(phoneNumberDetail("09022002580")?.province.length).toEqual(0);
+			expect(phoneNumberDetail("09022002580")?.province.length).toEqual(
+				0,
+			);
 		});
 
 		it("Should return null", () => {

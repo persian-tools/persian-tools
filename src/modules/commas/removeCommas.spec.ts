@@ -1,4 +1,4 @@
-import { removeCommas } from "../src";
+import { removeCommas } from "./index";
 
 it("Remove commas", () => {
 	expect(removeCommas("30,000,000")).toEqual(30000000);
@@ -10,12 +10,16 @@ it("Remove commas", () => {
 		//@ts-ignore
 		removeCommas(300);
 	} catch (e) {
-		expect(e.message).toEqual("PersianTools: removeCommas - The input must be string");
+		expect(e.message).toEqual(
+			"PersianTools: removeCommas - The input must be string",
+		);
 	}
 	try {
 		//@ts-ignore
 		removeCommas();
 	} catch (e) {
-		expect(e.message).toEqual("PersianTools: removeCommas - The input must be string");
+		expect(e.message).toEqual(
+			"PersianTools: removeCommas - The input must be string",
+		);
 	}
 });

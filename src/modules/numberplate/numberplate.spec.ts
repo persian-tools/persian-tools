@@ -1,5 +1,5 @@
-import { isPlateNumberValid, normalizePlate } from "../src/modules/numberplate/helpers";
-import { PlateResultApi } from "../src/modules/numberplate/types.skip";
+import { isPlateNumberValid, normalizePlate } from "./helpers";
+import { PlateResultApi } from "./types.skip";
 
 import plate, {
 	getPlateHandler,
@@ -7,7 +7,7 @@ import plate, {
 	motorcycleHandler,
 	isPlateValid,
 	getPlateInfo,
-} from "../src/modules/numberplate/index";
+} from "./index";
 
 describe("number plate module", () => {
 	it("getPlateHandler should set handler to carHandler if plate length is 7", () => {
@@ -152,7 +152,9 @@ describe("number plate module", () => {
 				province: null,
 				category: null,
 			};
-			expect(isPlateValid(plate1Info, normalizedPlate1.numbers)).toBe(false);
+			expect(isPlateValid(plate1Info, normalizedPlate1.numbers)).toBe(
+				false,
+			);
 		});
 
 		it("isPlateValid should validate plate info type motorcycle", () => {

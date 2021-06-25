@@ -1,8 +1,12 @@
-import { isArabic } from "../src/modules/isArabic";
+import { isArabic } from "./index";
 
 it("isArabic", () => {
 	expect(isArabic("این یک متن فارسی است؟")).toBeFalsy();
-	expect(isArabic("آیا سیستم میتواند گزینه های دیگری را به اشتباه به عنوان متن فارسی تشخیص دهد؟")).toBeFalsy();
+	expect(
+		isArabic(
+			"آیا سیستم میتواند گزینه های دیگری را به اشتباه به عنوان متن فارسی تشخیص دهد؟",
+		),
+	).toBeFalsy();
 	expect(isArabic("Lorem Ipsum Test")).toBeFalsy();
 	expect(isArabic("これはペルシア語のテキストですか")).toBeFalsy();
 	expect(isArabic("Это персидский текст?")).toBeFalsy();
