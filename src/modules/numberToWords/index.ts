@@ -11,9 +11,10 @@ type NumberToWordsType = (inputNumber: number | string, options?: NumberToWordsO
 const numberToWords: NumberToWordsType = (inputNumber, options) => {
 	const isNumberValid = (n: number) => typeof n === "number" && Number.isSafeInteger(n) && n !== 0;
 	const isNegative = (n: number) => n < 0;
-	const notValidNumberError = () => TypeError("the number must be a safe integer value");
+	const numberIsNotValidError = () =>
+		TypeError("PersianTools: numberToWords - the number must be a safe integer value");
 
-	if (typeof inputNumber !== "string" && !Number.isSafeInteger(inputNumber)) return notValidNumberError();
+	if (typeof inputNumber !== "string" && !Number.isSafeInteger(inputNumber)) return numberIsNotValidError();
 	const number = Number(typeof inputNumber === "number" ? inputNumber : removeCommas(inputNumber));
 	const isOrdinal = options?.ordinal || false;
 
@@ -60,7 +61,7 @@ const numberToWords: NumberToWordsType = (inputNumber, options) => {
 				: performer(positiveNumber);
 			return isOrdinal ? addOrdinalSuffix(tmpResult) : tmpResult;
 		} else {
-			return notValidNumberError();
+			return numberIsNotValidError();
 		}
 	};
 	return handleResult();
