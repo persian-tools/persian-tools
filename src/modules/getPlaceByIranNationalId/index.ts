@@ -29,12 +29,16 @@ export interface IPlaceByNationalId {
  * @param nationalId - string of national id - like this: 1111111111
  * @return If nationalId is valid, function returns an object of details, but if nationalId is invalid, return an error message
  */
-function getPlaceByIranNationalId(nationalId?: string): IPlaceByNationalId | null | undefined {
+function getPlaceByIranNationalId(
+	nationalId?: string,
+): IPlaceByNationalId | null | undefined {
 	if (!nationalId) return;
 
 	if (nationalId && nationalId.length === 10) {
 		const code = nationalId.toString().substring(0, 3);
-		const find = (NationalIdJSON as INationalId[]).filter((row) => row.code.toString().includes(code));
+		const find = (NationalIdJSON as INationalId[]).filter((row) =>
+			row.code.toString().includes(code),
+		);
 
 		if (find.length) {
 			const findProvinces = (ProvincesJSON as IProvince[]).filter(
@@ -44,7 +48,9 @@ function getPlaceByIranNationalId(nationalId?: string): IPlaceByNationalId | nul
 
 			return {
 				city: find[0].city,
-				province: findProvinces.length ? findProvinces[0].city : "unknown",
+				province: findProvinces.length
+					? findProvinces[0].city
+					: "unknown",
 				codes: code.includes("-") ? code.split("-") : [code],
 			};
 		} else {

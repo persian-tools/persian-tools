@@ -1,6 +1,6 @@
 {
 	"name": "@persian-tools/persian-tools",
-	"version": "1.6.1",
+	"version": "1.6.2",
 	"description": "An anthology of a variety of tools for Persian language in javascript",
 	"main": "./build/persian-tools.js",
 	"esmodule": "./build/persian-tools.esm.js",
@@ -19,8 +19,9 @@
 		"postrelease": "standard-version && yarn generate:docs",
 		"release:beta": "yarn micro:build",
 		"postrelease:beta": "standard-version --prerelease beta",
-		"prettier": "prettier --write 'src/**/*.{ts,json}' --config .prettierrc.js",
-		"prettier:ci": "prettier --list-different 'src/**/*.{ts,json}' --config .prettierrc.js",
+		"prettier": "prettier --ignore-path .gitignore \"./src/**/*.+(js|jsx|json|ts|tsx)\"",
+		"format": "yarn prettier --write",
+		"format-check": "yarn prettier --list-different",
 		"generate:docs": "make publish-docs",
 		"prepare": "husky install"
 	},

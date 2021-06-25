@@ -12,11 +12,17 @@
  */
 function SortText<T extends string>(str: T | T[]): T[] {
 	if (typeof str !== "string" && !Array.isArray(str)) {
-		throw new TypeError("PersianTools: SortText - The input must be string or an array of strings");
+		throw new TypeError(
+			"PersianTools: SortText - The input must be string or an array of strings",
+		);
 	}
 
-	const stringResult = (typeof str === "string" ? str.split(" ") : str) as T[];
-	stringResult.sort((a, b) => a.localeCompare(b, "fa", { ignorePunctuation: true }));
+	const stringResult = (typeof str === "string"
+		? str.split(" ")
+		: str) as T[];
+	stringResult.sort((a, b) =>
+		a.localeCompare(b, "fa", { ignorePunctuation: true }),
+	);
 
 	return stringResult;
 }

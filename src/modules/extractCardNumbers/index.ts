@@ -72,37 +72,41 @@ function extractCardNumber(
 		 */
 		const matches = str.match(cardNumberRegex);
 
-		let serialize = matches?.map<ExtractCardNumber>((matchedCardNumber, index) => {
-			let cardNumber = acceptableKeywords.test(matchedCardNumber)
-				? matchedCardNumber.replace(acceptableKeywords, "")
-				: matchedCardNumber;
-			/**
-			 * If Card-Number includes Persian digits, we should convert all Persian digits to English.
-			 *
-			 * @type string
-			 */
-			cardNumber = hasPersian(cardNumber) ? (digitsFaToEn(cardNumber) as string) : cardNumber;
+		let serialize = matches?.map<ExtractCardNumber>(
+			(matchedCardNumber, index) => {
+				let cardNumber = acceptableKeywords.test(matchedCardNumber)
+					? matchedCardNumber.replace(acceptableKeywords, "")
+					: matchedCardNumber;
+				/**
+				 * If Card-Number includes Persian digits, we should convert all Persian digits to English.
+				 *
+				 * @type string
+				 */
+				cardNumber = hasPersian(cardNumber)
+					? (digitsFaToEn(cardNumber) as string)
+					: cardNumber;
 
-			const result: ExtractCardNumber = {
-				index: index + 1,
-				base: matchedCardNumber,
-				pure: cardNumber,
-			};
+				const result: ExtractCardNumber = {
+					index: index + 1,
+					base: matchedCardNumber,
+					pure: cardNumber,
+				};
 
-			if (options.checkValidation) {
-				result.isValid = verifyCardNumber(Number(cardNumber));
-			}
-
-			if (options.detectBankNumber) {
-				const bankName = getBankNameFromCardNumber(cardNumber);
-
-				if (bankName || bankName === null) {
-					result.bankName = bankName as string | null;
+				if (options.checkValidation) {
+					result.isValid = verifyCardNumber(Number(cardNumber));
 				}
-			}
 
-			return result;
-		});
+				if (options.detectBankNumber) {
+					const bankName = getBankNameFromCardNumber(cardNumber);
+
+					if (bankName || bankName === null) {
+						result.bankName = bankName as string | null;
+					}
+				}
+
+				return result;
+			},
+		);
 
 		if (options.filterValidCardNumbers && options.checkValidation) {
 			serialize = serialize?.filter((item) => item.isValid);

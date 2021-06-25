@@ -39,7 +39,14 @@ export const MCI = {
 		operator: operatorsMap.MCI,
 	},
 	"912": {
-		province: ["البرز", "زنجان", "سمنان", "قزوین", "قم", "برخی از شهرستان های استان مرکزی"],
+		province: [
+			"البرز",
+			"زنجان",
+			"سمنان",
+			"قزوین",
+			"قم",
+			"برخی از شهرستان های استان مرکزی",
+		],
 		base: "تهران",
 		type: ["permanent"],
 		operator: operatorsMap.MCI,

@@ -1,6 +1,6 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-yarn prettier:ci
+yarn format-check
 yarn lint
 yarn test

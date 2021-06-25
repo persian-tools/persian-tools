@@ -1,7 +1,7 @@
 prepare-release:
 	yarn
 	yarn lint
-	yarn prettier:ci
+	yarn format-check
 	yarn test
 	yarn build
 .PHONY: prepare-release

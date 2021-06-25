@@ -10,7 +10,9 @@
 const removeOrdinalSuffix = (word: string): string | undefined => {
 	if (typeof word === "undefined") return;
 
-	word = word.replace(new RegExp("مین$", "ig"), "").replace(new RegExp("(ام| اُم)$", "ig"), "");
+	word = word
+		.replace(new RegExp("مین$", "ig"), "")
+		.replace(new RegExp("(ام| اُم)$", "ig"), "");
 	if (word.endsWith("سوم")) {
 		word = word.slice(0, -3) + "سه";
 	} else if (word.endsWith("م")) {

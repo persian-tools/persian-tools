@@ -6,7 +6,9 @@
  */
 function removeCommas(str: string): number {
 	if (typeof str !== "string") {
-		throw new TypeError("PersianTools: removeCommas - The input must be string");
+		throw new TypeError(
+			"PersianTools: removeCommas - The input must be string",
+		);
 	}
 
 	let result = "" + str;

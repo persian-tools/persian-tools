@@ -14,7 +14,10 @@ const URLfix = (value?: string): string | undefined => {
 	let old = "";
 	while (old !== value) {
 		old = value;
-		value = value.replace(/(http\S+?)%20/g, "$1\u200c\u200c\u200c_\u200c\u200c\u200c");
+		value = value.replace(
+			/(http\S+?)%20/g,
+			"$1\u200c\u200c\u200c_\u200c\u200c\u200c",
+		);
 	}
 
 	// Decode URIs

@@ -5,7 +5,14 @@ import { addCommas } from "../commas";
 import { replaceArray } from "../../helpers";
 import { digitsEnToAr, digitsEnToFa, digitsFaToEn } from "../digits";
 import removeOrdinalSuffix from "../removeOrdinalSuffix";
-import { UNITS, TEN, MAGNITUDE, TYPO_LIST, JOINERS, PREFIXES } from "./constants";
+import {
+	UNITS,
+	TEN,
+	MAGNITUDE,
+	TYPO_LIST,
+	JOINERS,
+	PREFIXES,
+} from "./constants";
 import { fuzzy } from "./fuzzy";
 
 /**
@@ -66,7 +73,11 @@ function tokenize(words: string): string[] {
  */
 export default function wordsToNumber<TResult extends string | number>(
 	words: string,
-	{ digits = "en", addCommas: shouldAddCommas = false, fuzzy: isEnabledFuzzy = false }: WordsToNumberOptions = {},
+	{
+		digits = "en",
+		addCommas: shouldAddCommas = false,
+		fuzzy: isEnabledFuzzy = false,
+	}: WordsToNumberOptions = {},
 ): TResult {
 	if (!words) return "" as TResult;
 
@@ -76,7 +87,9 @@ export default function wordsToNumber<TResult extends string | number>(
 	// Fix Persian typo's if enabled if this option is enabled
 	const classified = isEnabledFuzzy ? fuzzy(words) : words;
 	const computeNumbers = compute(tokenize(classified!));
-	const addCommasIfNeeded: string | number = shouldAddCommas ? addCommas(computeNumbers) : (computeNumbers as number);
+	const addCommasIfNeeded: string | number = shouldAddCommas
+		? addCommas(computeNumbers)
+		: (computeNumbers as number);
 
 	if (digits === "fa") {
 		return digitsEnToFa(addCommasIfNeeded) as TResult;

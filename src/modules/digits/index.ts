@@ -12,7 +12,9 @@ const arNums = "۰۱۲۳٤٥٦۷۸۹";
 export function digitsEnToFa(value?: number | string): string {
 	const isString = typeof value === "string";
 	if (typeof value !== "number" && !isString) {
-		throw new TypeError("PersianTools: digitsEnToFa - The input must be string or number");
+		throw new TypeError(
+			"PersianTools: digitsEnToFa - The input must be string or number",
+		);
 	}
 
 	let str = (!isString ? `${value}` : value) as string;
@@ -34,7 +36,9 @@ export function digitsEnToFa(value?: number | string): string {
  */
 export function digitsEnToAr(value?: number | string): string {
 	if (typeof value !== "number" && typeof value !== "string") {
-		throw new TypeError("PersianTools: digitsEnToAr - The input must be number or string");
+		throw new TypeError(
+			"PersianTools: digitsEnToAr - The input must be number or string",
+		);
 	}
 
 	let str = `${value}`;
@@ -56,7 +60,9 @@ export function digitsEnToAr(value?: number | string): string {
  */
 export function digitsFaToEn(str: string): string {
 	if (typeof str !== "string") {
-		throw new Error("PersianTools: digitsFaToEn - The input must be string");
+		throw new Error(
+			"PersianTools: digitsFaToEn - The input must be string",
+		);
 	}
 
 	for (let i = 0; i < 10; i++) {
@@ -77,7 +83,9 @@ export function digitsFaToEn(str: string): string {
  */
 export function digitsArToFa(str: string): string {
 	if (typeof str !== "string") {
-		throw new TypeError("PersianTools: digitsArToFa - The input must be string");
+		throw new TypeError(
+			"PersianTools: digitsArToFa - The input must be string",
+		);
 	}
 
 	let result = `${str}`;
@@ -100,7 +108,9 @@ export function digitsArToFa(str: string): string {
  */
 export function digitsArToEn(str: string): string {
 	if (typeof str !== "string") {
-		throw new TypeError("PersianTools: digitsArToEn - The input must be string");
+		throw new TypeError(
+			"PersianTools: digitsArToEn - The input must be string",
+		);
 	}
 
 	let result = str;

@@ -6,15 +6,24 @@ export { isPersian, hasPersian } from "./modules/isPersian";
 // Convert Arabic Chars to Persian
 export { default as toPersianChars } from "./modules/toPersianChars";
 // String and Number Converter and their utilities
-export { default as wordsToNumber, WordsToNumberOptions } from "./modules/wordsToNumber";
-export { default as numberToWords, NumberToWordsOptions } from "./modules/numberToWords";
+export {
+	default as wordsToNumber,
+	WordsToNumberOptions,
+} from "./modules/wordsToNumber";
+export {
+	default as numberToWords,
+	NumberToWordsOptions,
+} from "./modules/numberToWords";
 export { default as removeOrdinalSuffix } from "./modules/removeOrdinalSuffix";
 export { default as addOrdinalSuffix } from "./modules/addOrdinalSuffix/addOrdinalSuffix";
 // Add and Remove Commas
 export * from "./modules/commas";
 // Iran National-ID
 export { default as verifyIranianNationalId } from "./modules/nationalId";
-export { default as getPlaceByIranNationalId, IPlaceByNationalId } from "./modules/getPlaceByIranNationalId";
+export {
+	default as getPlaceByIranNationalId,
+	IPlaceByNationalId,
+} from "./modules/getPlaceByIranNationalId";
 // Card-Number utilities
 export { default as verifyCardNumber } from "./modules/verifyCardNumber";
 export * from "./modules/extractCardNumbers/utils";

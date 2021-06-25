@@ -87,7 +87,10 @@ class Bill {
 	}
 
 	public getBillType(): BillTypes {
-		return this.billTypes[Number(String(this.billId)?.slice(-2, -1))] ?? "unknown";
+		return (
+			this.billTypes[Number(String(this.billId)?.slice(-2, -1))] ??
+			"unknown"
+		);
 	}
 
 	public getBarcode(): string {
@@ -115,7 +118,8 @@ class Bill {
 		paymentId = paymentId.substr(0, paymentId.length - 2);
 		result =
 			this.CalTheBit(paymentId) === Number(firstControlBit) &&
-			this.CalTheBit(billId + paymentId + firstControlBit) === Number(secondControlBit);
+			this.CalTheBit(billId + paymentId + firstControlBit) ===
+				Number(secondControlBit);
 
 		return result;
 	}

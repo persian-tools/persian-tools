@@ -16,7 +16,9 @@ import { OperatorModel } from "./utils";
  * @example
  * phoneNumberDetail("9123456789")
  */
-export default function phoneNumberDetail(mobile: string): OperatorModel | null {
+export default function phoneNumberDetail(
+	mobile: string,
+): OperatorModel | null {
 	/**
 	 * @type boolean
 	 */

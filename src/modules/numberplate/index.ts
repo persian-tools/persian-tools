@@ -33,7 +33,10 @@ export function getPlateInfo(plate: NormalizedPlate): PlateResultApi {
 	return getInfo(plate);
 }
 
-export function isPlateValid(plateInfo: PlateResultApi, plateNumber: string): boolean {
+export function isPlateValid(
+	plateInfo: PlateResultApi,
+	plateNumber: string,
+): boolean {
 	// 1. no zeros and chars, [1-9] allowed
 	if (!isPlateNumberValid(plateNumber)) {
 		return false;
@@ -52,7 +55,9 @@ export function isPlateValid(plateInfo: PlateResultApi, plateNumber: string): bo
 	return true;
 }
 
-export function getPlateHandler(plate: NormalizedPlate): (plate: NormalizedPlate) => PlateResultApi {
+export function getPlateHandler(
+	plate: NormalizedPlate,
+): (plate: NormalizedPlate) => PlateResultApi {
 	let handler;
 	if (plate.numbers?.length === 7) {
 		handler = carHandler;
@@ -68,10 +73,9 @@ export function getPlateHandler(plate: NormalizedPlate): (plate: NormalizedPlate
 export function carHandler(plate: NormalizedPlate): PlateResultApi {
 	const provinceCode = +plate.numbers.slice(5, 7);
 	const type: PlateResultApiTypeString = "Car";
-	const template = `${plate.numbers.slice(0, 2)}${plate.char ? plate.char : null}${plate.numbers.slice(
-		2,
-		5,
-	)}ایران${provinceCode}`;
+	const template = `${plate.numbers.slice(0, 2)}${
+		plate.char ? plate.char : null
+	}${plate.numbers.slice(2, 5)}ایران${provinceCode}`;
 
 	const province = plateDataset.Car[provinceCode];
 	const category = plate.char ? plateDataset.Category[plate.char] : null;
@@ -98,4 +102,11 @@ export function motorcycleHandler(plate: NormalizedPlate): PlateResultApi {
 	};
 }
 
-export { PlateOptions, PlateResult, PlateApi, PlateResultApi, PlateResultApiTypeString, PlateTypes };
+export {
+	PlateOptions,
+	PlateResult,
+	PlateApi,
+	PlateResultApi,
+	PlateResultApiTypeString,
+	PlateTypes,
+};

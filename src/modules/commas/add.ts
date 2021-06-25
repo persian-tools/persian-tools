@@ -13,11 +13,14 @@ const addCommas = (number: number | string): string => {
 
 	const convertedToString = number.toString();
 	const tokenizedToEnglish = isPersian(convertedToString)
-		? (digitsFaToEn(convertedToString) as string)
+		? digitsFaToEn(convertedToString)
 		: convertedToString;
 
 	const tokenizedNumber = tokenizedToEnglish.split(".");
-	const integer = tokenizedNumber[0].replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+	const integer = tokenizedNumber[0].replace(
+		/(\d)(?=(\d{3})+(?!\d))/g,
+		"$1,",
+	);
 	const decimal = tokenizedNumber[1] ? `.${tokenizedNumber[1]}` : "";
 
 	return integer + decimal;

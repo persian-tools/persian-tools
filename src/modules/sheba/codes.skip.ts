@@ -135,7 +135,13 @@ export const codesSkip: Array<ShebaResult> = [
 		accountNumberAvailable: true,
 		process(str: string): ShebaProcess {
 			str = str.substring(14);
-			const formatted = "0" + str.substr(0, 2) + "-0" + str.substr(2, 7) + "-" + str.substr(9, 3);
+			const formatted =
+				"0" +
+				str.substr(0, 2) +
+				"-0" +
+				str.substr(2, 7) +
+				"-" +
+				str.substr(9, 3);
 
 			return {
 				normal: str,
@@ -170,7 +176,13 @@ export const codesSkip: Array<ShebaResult> = [
 			}
 			str = str.substr(0, str.length - 2);
 			const formatted =
-				str.substr(0, 3) + "-" + str.substr(3, 3) + "-" + str.substr(6, 8) + "-" + str.substr(14, 1);
+				str.substr(0, 3) +
+				"-" +
+				str.substr(3, 3) +
+				"-" +
+				str.substr(6, 8) +
+				"-" +
+				str.substr(14, 1);
 
 			return {
 				normal: str,

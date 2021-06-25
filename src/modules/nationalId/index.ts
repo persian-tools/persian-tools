@@ -5,7 +5,9 @@
  * @param  {String?}          nationalId [String of national id - like this: 1111111111]
  * @return {Boolean}                    [valid or no]
  */
-function verifyIranianNationalId(nationalId?: string | number): boolean | null | undefined {
+function verifyIranianNationalId(
+	nationalId?: string | number,
+): boolean | null | undefined {
 	if (!nationalId) return;
 	else {
 		let code = nationalId.toString();
@@ -24,7 +26,10 @@ function verifyIranianNationalId(nationalId?: string | number): boolean | null |
 
 		sum = sum % 11;
 
-		return (sum < 2 && lastNumber === sum) || (sum >= 2 && lastNumber === 11 - sum);
+		return (
+			(sum < 2 && lastNumber === sum) ||
+			(sum >= 2 && lastNumber === 11 - sum)
+		);
 	}
 }
 

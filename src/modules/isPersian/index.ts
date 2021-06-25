@@ -8,7 +8,11 @@ import { faText, faComplexText } from "./farsiChars";
  * @param {object} trimPattern Pattern of characters which you want to trim from the string e.g. "-+. ()"
  * @return {boolean} Return true if the entered string does not include other-language characters.
  */
-export const isPersian = (str: string, isComplex = false, trimPattern = /["'-+()؟\s.]/g): boolean => {
+export const isPersian = (
+	str: string,
+	isComplex = false,
+	trimPattern = /["'-+()؟\s.]/g,
+): boolean => {
 	const text = str.replace(trimPattern, "");
 	const faRegex = isComplex ? faComplexText : faText;
 	return new RegExp(`^[${faRegex}]+$`).test(text);

@@ -36,8 +36,8 @@ jobs:
             - name: Run the lints
               run: yarn lint
 
-            - name: Run Prettier
-              run: yarn prettier:ci
+            - name: Run code style check
+              run: yarn format-check
 
             - name: Run the tests
               run: yarn test

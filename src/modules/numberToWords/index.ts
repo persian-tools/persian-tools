@@ -70,7 +70,8 @@ const toWords = (number: number): string => {
 				result += numberToWord[number];
 				break;
 			} else {
-				result += numberToWord[Math.floor(number / unit) * unit] + " و ";
+				result +=
+					numberToWord[Math.floor(number / unit) * unit] + " و ";
 				number %= unit;
 			}
 		}
@@ -86,7 +87,10 @@ const toWords = (number: number): string => {
  * @category Number conversion
  * @return Converted numbers to words. e.g: صد و بیست و یک
  */
-function numberToWords(number: bigint | number | string, { ordinal = false }: NumberToWordsOptions = {}): string {
+function numberToWords(
+	number: bigint | number | string,
+	{ ordinal = false }: NumberToWordsOptions = {},
+): string {
 	if (typeof number === "undefined") return "";
 
 	if (number === 0) {

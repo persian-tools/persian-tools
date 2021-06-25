@@ -19,7 +19,10 @@ export function convertToTimeStamp(datetime: string): number {
 			Number(dateTime[6]),
 		);
 		return date.getTime();
-	} else throw new TypeError("PersianTools: convertToTimeStamp - The input format must be yyyy/mm/dd hh:mm:ss");
+	} else
+		throw new TypeError(
+			"PersianTools: convertToTimeStamp - The input format must be yyyy/mm/dd hh:mm:ss",
+		);
 }
 
 /**
@@ -49,7 +52,9 @@ export function getTimeNow(): number {
  * @returns {boolean} If format of datetime is ok, return true.
  */
 export function checkFormatDateTime(datetime: string): boolean {
-	return Boolean(datetime.match(/^\d{4}\/\d{1,2}\/\d{1,2} \d{1,2}:\d{1,2}:\d{1,2}$/));
+	return Boolean(
+		datetime.match(/^\d{4}\/\d{1,2}\/\d{1,2} \d{1,2}:\d{1,2}:\d{1,2}$/),
+	);
 }
 
 /**
@@ -61,10 +66,13 @@ export function checkFormatDateTime(datetime: string): boolean {
  * @returns {string} Return time ago value. Eg: حدود 1 سال قبل
  */
 export default function timeAgo(datetime = ""): string {
-	if (typeof datetime !== "string") throw new TypeError("PersianTools: timeAgo - The input must be string");
+	if (typeof datetime !== "string")
+		throw new TypeError("PersianTools: timeAgo - The input must be string");
 
 	if (!checkFormatDateTime(datetime) && datetime !== "")
-		throw new TypeError("PersianTools: timeAgo - The input format must be yyyy/mm/dd hh:mm:ss");
+		throw new TypeError(
+			"PersianTools: timeAgo - The input format must be yyyy/mm/dd hh:mm:ss",
+		);
 
 	// Timestamp DateTime
 	let tsDateTime: number;
