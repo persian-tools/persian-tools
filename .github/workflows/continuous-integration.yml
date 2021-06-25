@@ -34,19 +34,19 @@ jobs:
               run: npm install --legacy-peer-deps
 
             - name: Run the lints
-              run: npm run lint
+              run: yarn lint
 
             - name: Run Prettier
-              run: npm run prettier:ci
+              run: yarn prettier:ci
 
             - name: Run the tests
-              run: npm run test
+              run: yarn test
 
             - name: Upload coverage to Codecov
               uses: codecov/codecov-action@v1
 
             - name: Build
-              run: npm run micro:build
+              run: yarn micro:build
 
             - name: Archive production
               uses: actions/upload-artifact@v2

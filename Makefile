@@ -1,9 +1,9 @@
 prepare-release:
-	npm install
-	npm lint
-	npm prettier:ci
-	npm test
-	npm build
+	yarn
+	yarn lint
+	yarn prettier:ci
+	yarn test
+	yarn build
 .PHONY: prepare-release
 
 build-docs:

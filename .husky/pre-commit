@@ -1,6 +1,6 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npm run prettier:ci
-npm run lint
-npm test
+yarn prettier:ci
+yarn lint
+yarn test
