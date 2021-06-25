@@ -1,0 +1,7 @@
+{
+	"src/**/*.+(js|json|ts|tsx|jsx)": [
+		"eslint",
+		"prettier --write",
+		"jest --bail --findRelatedTests"
+	]
+}
