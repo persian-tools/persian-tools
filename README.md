@@ -140,6 +140,7 @@ numberToWords("500,443") // "پانصد هزار و چهار صد و چهل و �
 numberToWords("500,443", { ordinal: true }) // "پانصد هزار و چهار صد و چهل و سوم"
 numberToWords(30000000000) // "سی میلیارد"
 ```
+**NOTE:** This function supports the largest safe integer (9007199254740991 / 2^53 - 1)
 
 ### Add and remove commas
 ```javascript
