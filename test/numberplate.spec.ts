@@ -52,6 +52,12 @@ describe("number plate module", () => {
 			template: template1,
 			province: "مرکزی",
 			category: "شخصی",
+			details: {
+				firstTwoDigits: "12",
+				nextThreeDigits: "145",
+				provinceCode: "47",
+				plateCharacter: "ب"
+			}
 		});
 
 		// undefiend values
@@ -67,6 +73,12 @@ describe("number plate module", () => {
 			template: template2,
 			province: null,
 			category: null,
+			details: {
+				firstTwoDigits: "12",
+				nextThreeDigits: "145",
+				provinceCode: "1",
+				plateCharacter: null
+			}
 		});
 	});
 
@@ -84,6 +96,10 @@ describe("number plate module", () => {
 			template: template1,
 			province: "مرکز تهران",
 			category: null,
+			details: {
+				digits: "45478",
+				provinceCode: "121"
+			}
 		});
 
 		// undefiend values
@@ -99,6 +115,10 @@ describe("number plate module", () => {
 			template: template2,
 			province: null,
 			category: null,
+			details: {
+				digits: "45118",
+				provinceCode: "100"
+			}
 		});
 	});
 
@@ -117,6 +137,12 @@ describe("number plate module", () => {
 				template: template1,
 				province: "مرکزی",
 				category: "شخصی",
+				details: {
+					firstTwoDigits: "12",
+					nextThreeDigits: "145",
+					provinceCode: "47",
+					plateCharacter: "ب"
+				}
 			};
 			expect(isPlateValid(plate1Info, normalizedPlate1.numbers));
 		});
@@ -131,6 +157,10 @@ describe("number plate module", () => {
 				template: "121-45478",
 				province: "مرکز تهران",
 				category: null,
+				details: {
+					digits: "45478",
+					provinceCode: "121"
+				}
 			};
 
 			expect(isPlateValid(info, normalizedPlate1.numbers)).toBe(true);
@@ -151,6 +181,12 @@ describe("number plate module", () => {
 				template: template1,
 				province: null,
 				category: null,
+				details: {
+					firstTwoDigits: "12",
+					nextThreeDigits: "145",
+					provinceCode: "01",
+					plateCharacter: null
+				}
 			};
 			expect(isPlateValid(plate1Info, normalizedPlate1.numbers)).toBe(false);
 		});
@@ -166,6 +202,10 @@ describe("number plate module", () => {
 				template: template2,
 				province: null,
 				category: null,
+				details: {
+					digits: "45118",
+					provinceCode: "100"
+				}
 			};
 
 			expect(isPlateValid(info1, normalizedPlate1.numbers)).toBe(false);
@@ -182,6 +222,12 @@ describe("number plate module", () => {
 				template: `12${"g"}451${"ایران"}47`,
 				province: "مرکزی",
 				category: null,
+				details: {
+					firstTwoDigits: "12",
+					nextThreeDigits: "451",
+					provinceCode: "47",
+					plateCharacter: "g"
+				}
 			};
 
 			expect(isPlateValid(info, normalizedPlate1.numbers)).toBe(false);
@@ -199,6 +245,12 @@ describe("number plate module", () => {
 				template: `12${"g"}451${"ایران"}50`, // province 50 does not exist
 				category: "دولتی",
 				province: null,
+				details: {
+					firstTwoDigits: "12",
+					nextThreeDigits: "451",
+					provinceCode: "50",
+					plateCharacter: "الف"
+				}
 			};
 
 			expect(isPlateValid(info1, normalizedPlate1.numbers)).toBe(false);
@@ -213,6 +265,10 @@ describe("number plate module", () => {
 				template: `100-45678`, // province 100 does not exist
 				category: null,
 				province: null,
+				details: {
+					digits: "45678",
+					provinceCode: "100"
+				}
 			};
 
 			expect(isPlateValid(info2, normalizedPlate2.numbers)).toBe(false);
@@ -231,6 +287,12 @@ describe("number plate module", () => {
 			template: `12${"ب"}145${"ایران"}47`,
 			province: "مرکزی",
 			category: "شخصی",
+			details: {
+				firstTwoDigits: "12",
+				nextThreeDigits: "145",
+				provinceCode: "47",
+				plateCharacter: "ب"
+			}
 		});
 
 		// bike type
@@ -244,6 +306,10 @@ describe("number plate module", () => {
 			template: "121-45478",
 			province: "مرکز تهران",
 			category: null,
+			details: {
+				digits: "45478",
+				provinceCode: "121"
+			}
 		});
 	});
 
