@@ -357,10 +357,16 @@ import { Plate } from "@persian-tools/persian-tools";
 Plate("12D45147").info;
 /*
   {
-    template: 12 D 451 ایران  47
-	  province: مرکزی ,
-	  type: Car,
-	  category: دیپلمات,    
+  	template: 12 D 451 ایران  47
+    province: مرکزی ,
+    type: Car,
+	category: دیپلمات,   
+    details: {
+	firstTwoDigits: 12,
+	plateCharacter: D,
+	nextThreeDigits: 451,
+	provinceCode: 47
+    }
   }
 */
 
@@ -369,9 +375,13 @@ Plate(12345678).info;
 /*
   {
     template: 123-45678,
-    province: مرکز تهران,
+	province: مرکز تهران,
     type: Motorcyle,
-    category: null
+    category: null,
+    details: {
+    	digits: 45678
+	provinceCode:123
+    }
   }
 */
 ```
