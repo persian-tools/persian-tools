@@ -93,6 +93,17 @@
         "code",
         "ideas"
       ]
+    },
+    {
+      "login": "amirzenoozi",
+      "name": "Amirhossein Douzandeh Zenoozi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/16349391?v=4",
+      "profile": "http://amirduzandeh.ir/",
+      "contributions": [
+        "code",
+        "test",
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7,
