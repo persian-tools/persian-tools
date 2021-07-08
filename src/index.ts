@@ -6,8 +6,8 @@ export { isPersian, hasPersian } from "./modules/isPersian";
 // Convert Arabic Chars to Persian
 export { default as toPersianChars } from "./modules/toPersianChars";
 // String and Number Converter and their utilities
-export { default as NumberToWords, NumberToWordsOptions } from "./modules/numberToWords";
-export { default as WordsToNumber, WordsToNumberOptions } from "./modules/wordsToNumber";
+export { default as wordsToNumber, WordsToNumberOptions } from "./modules/wordsToNumber";
+export { default as numberToWords, NumberToWordsOptions } from "./modules/numberToWords";
 export { default as removeOrdinalSuffix } from "./modules/removeOrdinalSuffix";
 export { default as addOrdinalSuffix } from "./modules/addOrdinalSuffix/addOrdinalSuffix";
 // Add and Remove Commas
@@ -44,3 +44,6 @@ export {
 } from "./modules/numberplate";
 // Phone number utilities
 export * from "./modules/phoneNumber";
+
+// TimeAgo
+export { default as timeAgo } from "./modules/timeAgo";

@@ -1,7 +1,7 @@
 import { fuzzy } from "../src/modules/wordsToNumber/fuzzy";
 import { ALL_WORDS } from "../src/modules/wordsToNumber/constants";
 
-describe("WordsToNumber - Fuzzy humanizer", () => {
+describe("wordsToNumber - Fuzzy humanizer", () => {
 	it("Should clean the Texts and the result should be human-readable", () => {
 		expect(fuzzy("بیشت و هشت هزار")).toEqual("بیست و هشت هزار");
 		expect(fuzzy("بیشت و هشت هرار")).toEqual("بیست و هشت هزار");
