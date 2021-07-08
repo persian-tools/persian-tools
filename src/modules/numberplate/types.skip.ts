@@ -37,7 +37,7 @@ export type PlateResultApiTypeString = keyof typeof PlateTypes;
  */
 export interface PlateResultDetailModel {
 	firstTwoDigits: string;
-	plateCharacter: string;
+	plateCharacter: string | null;
 	nextThreeDigits: string;
 	provinceCode: string;
 }
