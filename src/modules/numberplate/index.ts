@@ -79,9 +79,9 @@ export function carHandler(plate: NormalizedPlate): PlateResultApi {
 	const category = plate.char ? plateDataset.Category[plate.char] : null;
 	const details: PlateResultDetailModel = {
 		firstTwoDigits: plate.numbers.slice(0, 2),
-		plateCharacter: plate.char ?? : null,
+		plateCharacter: plate.char || null,
 		nextThreeDigits: plate.numbers.slice(2, 5),
-		provinceCode: provinceCode,
+		provinceCode: provinceCode.toString(),
 	};
 
 	return {
@@ -100,7 +100,7 @@ export function motorcycleHandler(plate: NormalizedPlate): PlateResultApi {
 	const province = plateDataset.Motorcycle[provinceCode];
 	const details: PlateResultMotorcycleDetailModel = {
 		digits: plate.numbers.slice(3),
-		provinceCode: provinceCode,
+		provinceCode: provinceCode.toString(),
 	};
 
 	return {
