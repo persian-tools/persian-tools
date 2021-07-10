@@ -1,12 +1,23 @@
-name: Release
+name: Beta Release
 
 on:
-  push:
-    tags:
-      - 'v*.*.*'
+    push:
+        branches: [develop]
 
 jobs:
+  release-beta:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+        - name: Standard Version
+          run: |
+            npm ci
+            release:beta
+            git push --follow-tags origin develop
+
   release-tag:
+      needs: release-beta
       runs-on: ubuntu-latest
       steps:
         - name: Checkout
@@ -15,18 +26,9 @@ jobs:
           uses: softprops/action-gh-release@v1
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 14
-      - run: npm ci
-      - run: npm run micro:build
 
   publish-npm:
-    needs: build
+    needs: release-beta
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -40,7 +42,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
   publish-gpr:
-    needs: build
+    needs: release-beta
     runs-on: ubuntu-latest
     permissions:
       contents: read
