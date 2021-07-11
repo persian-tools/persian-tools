@@ -16,6 +16,7 @@ jobs:
           run: |
             npm ci
             npm run release:beta
+            git pull
             git push --follow-tags origin develop
 
   release-tag:
