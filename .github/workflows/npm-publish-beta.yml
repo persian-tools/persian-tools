@@ -31,9 +31,10 @@ jobs:
         - name: Get previous tag
           id: previoustag
           uses: "WyriHaximus/github-action-get-previous-tag@v1"
+          
         - name: Release
           run: |
-            gh release create ${{ env.VERSION }} -t "${{ env.NAME }}" -F CHANGELOG.md
+            CHANGELOG=$(sed -n "/^## \\[${{ env.VERSION }}\\]/,/^## /p" CHANGELOG.md | sed '1d;$d') && gh release create ${{ env.VERSION }} -t "${{ env.NAME }}" --notes "$CHANGELOG"
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             VERSION: ${{ steps.previoustag.outputs.tag }}
@@ -49,6 +50,7 @@ jobs:
           node-version: 14
           registry-url: https://registry.npmjs.org/
       - run: npm ci
+      - run: git pull
       - run: npm publish --access public --tag beta
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
@@ -66,6 +68,7 @@ jobs:
           node-version: 14
           registry-url: https://npm.pkg.github.com/
       - run: npm ci
+      - run: git pull
       - run: npm publish --access public --tag beta
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
