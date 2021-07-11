@@ -25,13 +25,19 @@ jobs:
       steps:
         - name: Checkout
           uses: actions/checkout@v2
+        - name: Get previous tag
+          id: previoustag
+          uses: "WyriHaximus/github-action-get-previous-tag@v1"
         - name: Release
-          uses: softprops/action-gh-release@v1
+          run: |
+            gh release create ${{ env.VERSION }} -t "${{ env.NAME }}"
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            VERSION: ${{ steps.previoustag.outputs.tag }}
+            NAME: ${{ steps.previoustag.outputs.tag }}
 
   publish-npm:
-    needs: release-beta
+    needs: release-tag
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -45,7 +51,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
   publish-gpr:
-    needs: release-beta
+    needs: release-tag
     runs-on: ubuntu-latest
     permissions:
       contents: read
