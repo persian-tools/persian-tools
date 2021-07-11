@@ -33,7 +33,7 @@ jobs:
           uses: "WyriHaximus/github-action-get-previous-tag@v1"
         - name: Release
           run: |
-            gh release create ${{ env.VERSION }} -t "${{ env.NAME }}"
+            gh release create ${{ env.VERSION }} -t "${{ env.NAME }}" -F CHANGELOG.md
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             VERSION: ${{ steps.previoustag.outputs.tag }}
@@ -49,7 +49,7 @@ jobs:
           node-version: 14
           registry-url: https://registry.npmjs.org/
       - run: npm ci
-      - run: npm publish --access public
+      - run: npm publish --access public --tag beta
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
@@ -66,6 +66,6 @@ jobs:
           node-version: 14
           registry-url: https://npm.pkg.github.com/
       - run: npm ci
-      - run: npm publish --access public
+      - run: npm publish --access public --tag beta
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
