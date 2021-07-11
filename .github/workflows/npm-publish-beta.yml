@@ -13,7 +13,7 @@ jobs:
         - name: Standard Version
           run: |
             npm ci
-            release:beta
+            npm run release:beta
             git push --follow-tags origin develop
 
   release-tag:
