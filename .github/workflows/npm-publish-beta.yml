@@ -25,6 +25,8 @@ jobs:
       steps:
         - name: Checkout
           uses: actions/checkout@v2
+          run: git fetch --prune --unshallow --tags
+
         - name: Get previous tag
           id: previoustag
           uses: "WyriHaximus/github-action-get-previous-tag@v1"
