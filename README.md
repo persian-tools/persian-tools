@@ -32,6 +32,7 @@
 -   [Fix Persian characters in URL](#fix-persian-characters-in-url).
 -   [Fix Persian zero-width non-joiner(Replace spaces by half-space)](#fix-persian-zero-width-non-joinerreplace-spaces-by-half-space)
 -   [Convert Jalaali date-time into a time ago](#convert-jalaali-date-time-into-a-time-ago)
+-   [Validate and find information of phone number](#validate-and-find-information-of-phone-number).
 
 ## Getting started
 
@@ -433,6 +434,65 @@ timeAgo('1400/02/17 18:00:00') // حدود 1 ماه  قبل
 timeAgo('1400/04/07 18:00:00') // حدود 3 هفته  بعد
 timeAgo('1401/03/17 18:00:00') // حدود 1 سال  بعد
 ```
+
+### Validate and find information of phone number
+
+**Usage**
+
+- Finding information such as province, type and model of phone number
+
+```js
+import { phoneNumberDetail } from "@persian-tools/persian-tools";
+
+phoneNumberDetail("9123456789");
+/*
+  {
+    province: ["البرز", "زنجان", "سمنان", "قزوین", "قم", "برخی از شهرستان های استان مرکزی"],
+    base: "تهران",
+    operator: "همراه اول",
+    type: ["permanent"],
+  }
+*/
+
+phoneNumberDetail("09022002580");
+/*
+  {
+    province: [],
+    base: "کشوری",
+    operator: "ایرانسل",
+    type: ["permanent", "credit"],
+  }
+*/
+
+phoneNumberDetail("09981000000");
+/*
+  {
+    province: [],
+    base: "کشوری",
+    operator: "شاتل موبایل",
+    type: ["credit"],
+  }
+*/
+```
+
+- Validating phone number
+  
+```js
+import { phoneNumberValidator } from "@persian-tools/persian-tools";
+
+phoneNumberValidator("09122002580"); // true
+phoneNumberValidator("09192002580"); // true
+
+phoneNumberValidator("+989022002580"); // true
+phoneNumberValidator("09022002580"); // true
+phoneNumberValidator("989022002580"); // true
+phoneNumberValidator("00989022002580"); // true
+phoneNumberValidator("9022002580"); // true
+
+phoneNumberValidator("09802002580"); // false
+```
+
+
 ### Todo
 - [ ] Write Jalaali and Gregorian functions to convert Date together.
 
