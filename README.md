@@ -31,6 +31,8 @@
 -   [Validate the correctness of the text of the Persian language and clear the Arabic letters in the Persian text](#validate-the-correctness-of-the-text-of-the-persian-language-and-clear-the-arabic-letters-in-the-persian-text).
 -   [Fix Persian characters in URL](#fix-persian-characters-in-url).
 -   [Fix Persian zero-width non-joiner(Replace spaces by half-space)](#fix-persian-zero-width-non-joinerreplace-spaces-by-half-space)
+-   [Convert Jalaali date-time into a time ago](#convert-jalaali-date-time-into-a-time-ago)
+-   [Validate and find information of phone number](#validate-and-find-information-of-phone-number).
 
 ## Getting started
 
@@ -103,41 +105,43 @@ Let's take a look at what an example test case would look like using Persian-too
 | `addCommas`               | Commas will be added to the Result                            | `false`
 - Convert with no option
 ```javascript
-import { WordsToNumber } from "@persian-tools/persian-tools";
+import { wordsToNumber } from "@persian-tools/persian-tools";
 
-WordsToNumber.convert("منفی سه هزارمین") // -3000
-WordsToNumber.convert("منفی سه هزارم") // -3000
-WordsToNumber.convert("منفی سه هزار") // -3000
-WordsToNumber.convert("سه هزار دویست و دوازده") // 3212
+wordsToNumber("منفی سه هزارمین") // -3000
+wordsToNumber("منفی سه هزارم") // -3000
+wordsToNumber("منفی سه هزار") // -3000
+wordsToNumber("سه هزار دویست و دوازده") // 3212
+wordsToNumber("دوازده هزار بیست دو") // 12022
 ```
 - Digits converter
 ```js
-WordsToNumber.convert("منفی سه هزارمین", { digits: "fa" }) // "-۳۰۰۰"
-WordsToNumber.convert("دوازده هزار بیست دو", { digits: "fa" }) // ۱۲۰۲۲
+wordsToNumber("منفی سه هزارمین", { digits: "fa" }) // "-۳۰۰۰"
+wordsToNumber("دوازده هزار بیست دو", { digits: "fa" }) // ۱۲۰۲۲
 ```
 - Add commas
 ```js
-WordsToNumber.convert("منفی سه هزارمین", { addCommas: true }) // "-3,000"
-WordsToNumber.convert("دوازده هزار بیست دو", { addCommas: true }) // "12,022"
+wordsToNumber("منفی سه هزارمین", { addCommas: true }) // "-3,000"
+wordsToNumber("دوازده هزار بیست دو", { addCommas: true }) // "12,022"
 ```  
 - Fuzzy typo fixer(`v1.5.0`):
 ```javascript
 import { WordsToNumber } from "@persian-tools/persian-tools";
 
-WordsToNumber.convert("یگصد و بنجاه هزار", { fuzzy: true }) // "150000"  
-WordsToNumber.convert("دویشت ر بیشت هزار", { fuzzy: true }) // "220000"  
-WordsToNumber.convert("منقی ضد", { fuzzy: true }) // "-100"  
+wordsToNumber("یگصد و بنجاه هزار", { fuzzy: true }) // "150000"  
+wordsToNumber("دویشت ر بیشت هزار", { fuzzy: true }) // "220000"  
+wordsToNumber("منقی ضد", { fuzzy: true }) // "-100"  
 ```
 
 ### Convert Numbers to Persian words
 ```javascript
-import { NumberToWords } from "@persian-tools/persian-tools";
+import { numberToWords } from "@persian-tools/persian-tools";
 
-NumberToWords.convert(500443) // "پانصد هزار و چهار صد و چهل و سه"
-NumberToWords.convert("500,443") // "پانصد هزار و چهار صد و چهل و سه"
-NumberToWords.convert("500,443", { ordinal: true }) // "پانصد هزار و چهار صد و چهل و سوم"
-NumberToWords.convert(30000000000) // "سی میلیارد"
+numberToWords(500443) // "پانصد هزار و چهار صد و چهل و سه"
+numberToWords("500,443") // "پانصد هزار و چهار صد و چهل و سه"
+numberToWords("500,443", { ordinal: true }) // "پانصد هزار و چهار صد و چهل و سوم"
+numberToWords(30000000000) // "سی میلیارد"
 ```
+**NOTE:** This function supports the largest safe integer (9007199254740991 / 2^53 - 1)
 
 ### Add and remove commas
 ```javascript
@@ -197,7 +201,7 @@ isPersian("هل هذا نص فارسي؟")// false
 
 hasPersian("This text includes فارسی") // true
 
-toPersianChars("علي")) // علی
+toPersianChars("علي") // علی
 ```
 
 **Note**: You can pass `2` more options to `isPersian` to customize it as your needs:
@@ -324,10 +328,16 @@ import { Plate } from "@persian-tools/persian-tools";
 Plate("12D45147").info;
 /*
   {
-    template: 12 D 451 ایران  47
-	  province: مرکزی ,
-	  type: Car,
-	  category: دیپلمات,    
+  	template: 12 D 451 ایران  47
+    province: مرکزی ,
+    type: Car,
+	category: دیپلمات,   
+    details: {
+	firstTwoDigits: 12,
+	plateCharacter: D,
+	nextThreeDigits: 451,
+	provinceCode: 47
+    }
   }
 */
 
@@ -336,9 +346,13 @@ Plate(12345678).info;
 /*
   {
     template: 123-45678,
-    province: مرکز تهران,
+	province: مرکز تهران,
     type: Motorcyle,
-    category: null
+    category: null,
+    details: {
+    	digits: 45678
+	provinceCode:123
+    }
   }
 */
 ```
@@ -356,7 +370,7 @@ Plate("12D45147").isValid;
   true
 */
 
-Plate(12345678).info;
+Plate(12345678).isValid;
 /*
   true
 */
@@ -371,6 +385,81 @@ Plate(1204567).isValid
   will return false - plate can't have 0 in its digits (except last digit)
 */
 ```
+### Convert Jalaali date-time into a time ago
+
+**Usage**
+
+>Suppose the current time is equal to `1400/03/17 18:00:00`
+
+```js
+import { timeAgo } from "@persian-tools/persian-tools";
+
+// Previous
+timeAgo('1400/03/17 17:55:00') // 5 دقیقه قبل
+timeAgo('1400/02/17 18:00:00') // حدود 1 ماه  قبل
+
+// Next
+timeAgo('1400/04/07 18:00:00') // حدود 3 هفته  بعد
+timeAgo('1401/03/17 18:00:00') // حدود 1 سال  بعد
+```
+
+### Validate and find information of phone number
+
+**Usage**
+
+- Finding information such as province, type and model of phone number
+
+```js
+import { phoneNumberDetail } from "@persian-tools/persian-tools";
+
+phoneNumberDetail("9123456789");
+/*
+  {
+    province: ["البرز", "زنجان", "سمنان", "قزوین", "قم", "برخی از شهرستان های استان مرکزی"],
+    base: "تهران",
+    operator: "همراه اول",
+    type: ["permanent"],
+  }
+*/
+
+phoneNumberDetail("09022002580");
+/*
+  {
+    province: [],
+    base: "کشوری",
+    operator: "ایرانسل",
+    type: ["permanent", "credit"],
+  }
+*/
+
+phoneNumberDetail("09981000000");
+/*
+  {
+    province: [],
+    base: "کشوری",
+    operator: "شاتل موبایل",
+    type: ["credit"],
+  }
+*/
+```
+
+- Validating phone number
+  
+```js
+import { phoneNumberValidator } from "@persian-tools/persian-tools";
+
+phoneNumberValidator("09122002580"); // true
+phoneNumberValidator("09192002580"); // true
+
+phoneNumberValidator("+989022002580"); // true
+phoneNumberValidator("09022002580"); // true
+phoneNumberValidator("989022002580"); // true
+phoneNumberValidator("00989022002580"); // true
+phoneNumberValidator("9022002580"); // true
+
+phoneNumberValidator("09802002580"); // false
+```
+
 
 ### Todo
 - [ ] Write Jalaali and Gregorian functions to convert Date together.
@@ -425,6 +514,8 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   </tr>
   <tr>
     <td align="center"><a href="https://mahdi-momeni.github.io/"><img src="https://avatars.githubusercontent.com/u/32864532?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mahdi</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=mahdi-momeni" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=mahdi-momeni" title="Tests">⚠️</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=mahdi-momeni" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://dev.to/psparsa"><img src="https://avatars.githubusercontent.com/u/57572461?v=4?s=100" width="100px;" alt=""/><br /><sub><b>PS-PARSA</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=psparsa" title="Tests">⚠️</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=psparsa" title="Code">💻</a> <a href="#ideas-psparsa" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="http://amirduzandeh.ir/"><img src="https://avatars.githubusercontent.com/u/16349391?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Amirhossein Douzandeh Zenoozi</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=amirzenoozi" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=amirzenoozi" title="Tests">⚠️</a> <a href="#ideas-amirzenoozi" title="Ideas, Planning, & Feedback">🤔</a></td>
   </tr>
 </table>
 

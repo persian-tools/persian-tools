@@ -35,10 +35,31 @@ export type PlateResultApiTypeString = keyof typeof PlateTypes;
  *
  * @category Plate
  */
+export interface PlateResultDetailModel {
+	firstTwoDigits: string;
+	plateCharacter: string | null;
+	nextThreeDigits: string;
+	provinceCode: string;
+}
+
+/**
+ *
+ * @category Plate
+ */
+export interface PlateResultMotorcycleDetailModel {
+	digits: string;
+	provinceCode: string;
+}
+
+/**
+ *
+ * @category Plate
+ */
 export interface PlateResultApi {
 	template: string;
 	province: string | null;
 	type: PlateResultApiTypeString;
+	details: PlateResultDetailModel | PlateResultMotorcycleDetailModel;
 	category: string | null;
 }
 
