@@ -10,6 +10,7 @@ function getTime(second: number) {
 			hour: "2-digit",
 			minute: "2-digit",
 			second: "2-digit",
+			timeZone: "Asia/Tehran",
 		})
 		.replace(/‏|،/g, "");
 	return digitsFaToEn(currentDateTime);
