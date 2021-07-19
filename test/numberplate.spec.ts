@@ -56,11 +56,11 @@ describe("number plate module", () => {
 				firstTwoDigits: "12",
 				nextThreeDigits: "145",
 				provinceCode: "47",
-				plateCharacter: "ب"
-			}
+				plateCharacter: "ب",
+			},
 		});
 
-		// undefiend values
+		// undefined values
 		const normalizedPlate2 = {
 			numbers: "1214501", // fake province code (01)
 			char: undefined, // falsy char
@@ -77,8 +77,8 @@ describe("number plate module", () => {
 				firstTwoDigits: "12",
 				nextThreeDigits: "145",
 				provinceCode: "1",
-				plateCharacter: null
-			}
+				plateCharacter: null,
+			},
 		});
 	});
 
@@ -98,8 +98,8 @@ describe("number plate module", () => {
 			category: null,
 			details: {
 				digits: "45478",
-				provinceCode: "121"
-			}
+				provinceCode: "121",
+			},
 		});
 
 		// undefiend values
@@ -117,8 +117,8 @@ describe("number plate module", () => {
 			category: null,
 			details: {
 				digits: "45118",
-				provinceCode: "100"
-			}
+				provinceCode: "100",
+			},
 		});
 	});
 
@@ -141,8 +141,8 @@ describe("number plate module", () => {
 					firstTwoDigits: "12",
 					nextThreeDigits: "145",
 					provinceCode: "47",
-					plateCharacter: "ب"
-				}
+					plateCharacter: "ب",
+				},
 			};
 			expect(isPlateValid(plate1Info, normalizedPlate1.numbers));
 		});
@@ -159,8 +159,8 @@ describe("number plate module", () => {
 				category: null,
 				details: {
 					digits: "45478",
-					provinceCode: "121"
-				}
+					provinceCode: "121",
+				},
 			};
 
 			expect(isPlateValid(info, normalizedPlate1.numbers)).toBe(true);
@@ -185,8 +185,8 @@ describe("number plate module", () => {
 					firstTwoDigits: "12",
 					nextThreeDigits: "145",
 					provinceCode: "01",
-					plateCharacter: null
-				}
+					plateCharacter: null,
+				},
 			};
 			expect(isPlateValid(plate1Info, normalizedPlate1.numbers)).toBe(false);
 		});
@@ -204,8 +204,8 @@ describe("number plate module", () => {
 				category: null,
 				details: {
 					digits: "45118",
-					provinceCode: "100"
-				}
+					provinceCode: "100",
+				},
 			};
 
 			expect(isPlateValid(info1, normalizedPlate1.numbers)).toBe(false);
@@ -226,8 +226,8 @@ describe("number plate module", () => {
 					firstTwoDigits: "12",
 					nextThreeDigits: "451",
 					provinceCode: "47",
-					plateCharacter: "g"
-				}
+					plateCharacter: "g",
+				},
 			};
 
 			expect(isPlateValid(info, normalizedPlate1.numbers)).toBe(false);
@@ -249,8 +249,8 @@ describe("number plate module", () => {
 					firstTwoDigits: "12",
 					nextThreeDigits: "451",
 					provinceCode: "50",
-					plateCharacter: "الف"
-				}
+					plateCharacter: "الف",
+				},
 			};
 
 			expect(isPlateValid(info1, normalizedPlate1.numbers)).toBe(false);
@@ -267,8 +267,8 @@ describe("number plate module", () => {
 				province: null,
 				details: {
 					digits: "45678",
-					provinceCode: "100"
-				}
+					provinceCode: "100",
+				},
 			};
 
 			expect(isPlateValid(info2, normalizedPlate2.numbers)).toBe(false);
@@ -291,8 +291,8 @@ describe("number plate module", () => {
 				firstTwoDigits: "12",
 				nextThreeDigits: "145",
 				provinceCode: "47",
-				plateCharacter: "ب"
-			}
+				plateCharacter: "ب",
+			},
 		});
 
 		// bike type
@@ -308,8 +308,8 @@ describe("number plate module", () => {
 			category: null,
 			details: {
 				digits: "45478",
-				provinceCode: "121"
-			}
+				provinceCode: "121",
+			},
 		});
 	});
 

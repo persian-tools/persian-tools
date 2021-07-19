@@ -19,7 +19,7 @@
 		"postrelease": "standard-version && npm run generate:docs",
 		"release:beta": "npm run micro:build",
 		"postrelease:beta": "standard-version --prerelease beta",
-		"prettier": "prettier --write 'src/**/*.{ts,json}' --config .prettierrc.js",
+		"prettier": "prettier --write '{src,test}/**/*.{ts,json}' --config .prettierrc.js",
 		"prettier:ci": "prettier --list-different 'src/**/*.{ts,json}' --config .prettierrc.js",
 		"generate:docs": "make publish-docs",
 		"prepare": "husky install"
@@ -84,5 +84,9 @@
 	"browserslist": [
 		"defaults",
 		"not IE 10"
-	]
+	],
+	"engines": {
+		"node": ">=12<16",
+		"npm": ">=7"
+	}
 }
