@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Persian Tools - v1.6.1</title>
-	<meta name="description" content="Documentation for Persian Tools - v1.6.1">
+	<title>Persian Tools - v1.6.2</title>
+	<meta name="description" content="Documentation for Persian Tools - v1.6.2">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
 	<script async src="assets/js/search.js" id="search-script"></script>
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">Persian Tools - v1.6.1</a>
+					<a href="index.html" class="title">Persian Tools - v1.6.2</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -48,7 +48,7 @@
 	</div>
 	<div class="tsd-page-title">
 		<div class="container">
-			<h1>Persian Tools - v1.6.1</h1>
+			<h1>Persian Tools - v1.6.2</h1>
 		</div>
 	</div>
 </header>
@@ -89,6 +89,8 @@
 					<li>  <a href="#validate-the-correctness-of-the-text-of-the-persian-language-and-clear-the-arabic-letters-in-the-persian-text">Validate the correctness of the text of the Persian language and clear the Arabic letters in the Persian text</a>.</li>
 					<li>  <a href="#fix-persian-characters-in-url">Fix Persian characters in URL</a>.</li>
 					<li>  <a href="#fix-persian-zero-width-non-joinerreplace-spaces-by-half-space">Fix Persian zero-width non-joiner(Replace spaces by half-space)</a></li>
+					<li>  <a href="#convert-jalaali-date-time-into-a-time-ago">Convert Jalaali date-time into a time ago</a></li>
+					<li>  <a href="#validate-and-find-information-of-phone-number">Validate and find information of phone number</a>.</li>
 				</ul>
 				<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
 					<h2>Getting started</h2>
@@ -141,9 +143,9 @@
 <span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">digitsEnToFa</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
 
 <span style="color: #008000">// Takes a string made of English digits only, and returns a string that represents the same number but with Persian digits</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">convertToFa</span><span style="color: #000000"> = </span><span style="color: #001080">persianTools</span><span style="color: #000000">.</span><span style="color: #795E26">digitsEnToFa</span><span style="color: #000000">(</span><span style="color: #098658">1234567</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">convertedToFa</span><span style="color: #000000"> = </span><span style="color: #001080">persianTools</span><span style="color: #000000">.</span><span style="color: #795E26">digitsEnToFa</span><span style="color: #000000">(</span><span style="color: #098658">1234567</span><span style="color: #000000">);</span>
 <span style="color: #008000">// or</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">convertToFa</span><span style="color: #000000"> = </span><span style="color: #795E26">digitsEnToFa</span><span style="color: #000000">(</span><span style="color: #098658">1234567</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">convertedToFa</span><span style="color: #000000"> = </span><span style="color: #795E26">digitsEnToFa</span><span style="color: #000000">(</span><span style="color: #098658">1234567</span><span style="color: #000000">);</span>
 </code></pre>
 				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
 					<h2>Usage</h2>
@@ -177,24 +179,24 @@
 						</tr>
 				</tbody></table>
 				<ul>
-					<li>Convert with no option<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">WordsToNumber</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
+					<li>Convert with no option<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">wordsToNumber</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
 
 </code></pre>
 					</li>
 				</ul>
-				<p>WordsToNumber.convert(&quot;منفی سه هزارمین&quot;) // -3000
-					WordsToNumber.convert(&quot;منفی سه هزارم&quot;) // -3000
-					WordsToNumber.convert(&quot;منفی سه هزار&quot;) // -3000
-					WordsToNumber.convert(&quot;سه هزار دویست و دوازده&quot;) // 3212
-				WordsToNumber.convert(&quot;دوازده هزار بیست دو&quot;) // 12022</p>
+				<p>wordsToNumber(&quot;منفی سه هزارمین&quot;) // -3000
+					wordsToNumber(&quot;منفی سه هزارم&quot;) // -3000
+					wordsToNumber(&quot;منفی سه هزار&quot;) // -3000
+					wordsToNumber(&quot;سه هزار دویست و دوازده&quot;) // 3212
+				wordsToNumber(&quot;دوازده هزار بیست دو&quot;) // 12022</p>
 				<pre><code><span style="color: #000000">- </span><span style="color: #001080">Digits</span><span style="color: #000000"> </span><span style="color: #001080">converter</span>
 <span style="color: #A31515">```js</span>
-<span style="color: #A31515">WordsToNumber.convert(&quot;منفی سه هزارمین&quot;, { digits: &quot;fa&quot; }) // &quot;-۳۰۰۰&quot;</span>
-<span style="color: #A31515">WordsToNumber.convert(&quot;دوازده هزار بیست دو&quot;, { digits: &quot;fa&quot; }) // ۱۲۰۲۲</span>
+<span style="color: #A31515">wordsToNumber(&quot;منفی سه هزارمین&quot;, { digits: &quot;fa&quot; }) // &quot;-۳۰۰۰&quot;</span>
+<span style="color: #A31515">wordsToNumber(&quot;دوازده هزار بیست دو&quot;, { digits: &quot;fa&quot; }) // ۱۲۰۲۲</span>
 </code></pre>
 				<ul>
-					<li>Add commas<pre><code class="language-js"><span style="color: #001080">WordsToNumber</span><span style="color: #000000">.</span><span style="color: #795E26">convert</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;منفی سه هزارمین&quot;</span><span style="color: #000000">, { </span><span style="color: #001080">addCommas:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000"> }) </span><span style="color: #008000">// &quot;-3,000&quot;</span>
-<span style="color: #001080">WordsToNumber</span><span style="color: #000000">.</span><span style="color: #795E26">convert</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;دوازده هزار بیست دو&quot;</span><span style="color: #000000">, { </span><span style="color: #001080">addCommas:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000"> }) </span><span style="color: #008000">// &quot;12,022&quot;</span>
+					<li>Add commas<pre><code class="language-js"><span style="color: #795E26">wordsToNumber</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;منفی سه هزارمین&quot;</span><span style="color: #000000">, { </span><span style="color: #001080">addCommas:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000"> }) </span><span style="color: #008000">// &quot;-3,000&quot;</span>
+<span style="color: #795E26">wordsToNumber</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;دوازده هزار بیست دو&quot;</span><span style="color: #000000">, { </span><span style="color: #001080">addCommas:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000"> }) </span><span style="color: #008000">// &quot;12,022&quot;</span>
 </code></pre>
 					</li>
 					<li>Fuzzy typo fixer(<code>v1.5.0</code>):<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">WordsToNumber</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
@@ -202,50 +204,38 @@
 </code></pre>
 					</li>
 				</ul>
-				<p>WordsToNumber.convert(&quot;یگصد و بنجاه هزار&quot;, { fuzzy: true }) // &quot;150000&quot;<br>WordsToNumber.convert(&quot;دویشت ر بیشت هزار&quot;, { fuzzy: true }) // &quot;220000&quot;<br>WordsToNumber.convert(&quot;منقی ضد&quot;, { fuzzy: true }) // &quot;-100&quot;  </p>
+				<p>wordsToNumber(&quot;یگصد و بنجاه هزار&quot;, { fuzzy: true }) // &quot;150000&quot;<br>wordsToNumber(&quot;دویشت ر بیشت هزار&quot;, { fuzzy: true }) // &quot;220000&quot;<br>wordsToNumber(&quot;منقی ضد&quot;, { fuzzy: true }) // &quot;-100&quot;  </p>
 				<pre><code>
 <span style="color: #000000">### </span><span style="color: #001080">Convert</span><span style="color: #000000"> </span><span style="color: #001080">Numbers</span><span style="color: #000000"> </span><span style="color: #001080">to</span><span style="color: #000000"> </span><span style="color: #001080">Persian</span><span style="color: #000000"> </span><span style="color: #001080">words</span>
 <span style="color: #A31515">```javascript</span>
-<span style="color: #A31515">import { NumberToWords } from &quot;@persian-tools/persian-tools&quot;;</span>
+<span style="color: #A31515">import { numberToWords } from &quot;@persian-tools/persian-tools&quot;;</span>
 
-<span style="color: #A31515">NumberToWords.convert(500443) // &quot;پانصد هزار و چهار صد و چهل و سه&quot;</span>
-<span style="color: #A31515">NumberToWords.convert(&quot;500,443&quot;) // &quot;پانصد هزار و چهار صد و چهل و سه&quot;</span>
-<span style="color: #A31515">NumberToWords.convert(&quot;500,443&quot;, { ordinal: true }) // &quot;پانصد هزار و چهار صد و چهل و سوم&quot;</span>
-<span style="color: #A31515">NumberToWords.convert(30000000000) // &quot;سی میلیارد&quot;</span>
+<span style="color: #A31515">numberToWords(500443) // &quot;پانصد هزار و چهار صد و چهل و سه&quot;</span>
+<span style="color: #A31515">numberToWords(&quot;500,443&quot;) // &quot;پانصد هزار و چهار صد و چهل و سه&quot;</span>
+<span style="color: #A31515">numberToWords(&quot;500,443&quot;, { ordinal: true }) // &quot;پانصد هزار و چهار صد و چهل و سوم&quot;</span>
+<span style="color: #A31515">numberToWords(30000000000) // &quot;سی میلیارد&quot;</span>
 </code></pre>
+				<p><strong>NOTE:</strong> This function supports the largest safe integer (9007199254740991 / 2^53 - 1)</p>
 				<a href="#add-and-remove-commas" id="add-and-remove-commas" style="color: inherit; text-decoration: none;">
 					<h3>Add and remove commas</h3>
 				</a>
 				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">addCommas</span><span style="color: #000000">, </span><span style="color: #001080">removeCommas</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
 
 <span style="color: #795E26">addCommas</span><span style="color: #000000">(</span><span style="color: #098658">30000000</span><span style="color: #000000">) </span><span style="color: #008000">// &quot;30,000,000&quot;</span>
-<span style="color: #795E26">addCommas</span><span style="color: #000000">(</span><span style="color: #098658">300</span><span style="color: #000000">) </span><span style="color: #008000">// &quot;300&quot;</span>
 
 <span style="color: #795E26">removeCommas</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;30,000,000&quot;</span><span style="color: #000000">) </span><span style="color: #008000">// 30000000</span>
-<span style="color: #795E26">removeCommas</span><span style="color: #000000">(</span><span style="color: #098658">300</span><span style="color: #000000">) </span><span style="color: #008000">// 300</span>
-<span style="color: #795E26">removeCommas</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;300&quot;</span><span style="color: #000000">) </span><span style="color: #008000">// 300</span>
 </code></pre>
 				<a href="#convert-persian-numbers-to-arabic-or-english-numbers-and-vice-versa" id="convert-persian-numbers-to-arabic-or-english-numbers-and-vice-versa" style="color: inherit; text-decoration: none;">
 					<h3>Convert Persian numbers to Arabic or English numbers and vice versa</h3>
 				</a>
 				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">digitsArToFa</span><span style="color: #000000">, </span><span style="color: #001080">digitsArToEn</span><span style="color: #000000">, </span><span style="color: #001080">digitsEnToFa</span><span style="color: #000000">, </span><span style="color: #001080">digitsFaToEn</span><span style="color: #000000"> , </span><span style="color: #001080">digitsEnToAr</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
 
-<span style="color: #795E26">digitsArToFa</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;٠١٢٣٤٥٦٧٨٩&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;۰۱۲۳۴۵۶۷۸۹&quot;</span>
 <span style="color: #795E26">digitsArToFa</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;۸۹123۴۵&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;۸۹123۴۵&quot;</span>
-<span style="color: #795E26">digitsArToFa</span><span style="color: #000000">(</span><span style="color: #098658">456128</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;456128&quot;</span>
-<span style="color: #795E26">digitsArToFa</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Text ٠١٢٣٤٥٦٧٨٩&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;Text ۰۱۲۳۴۵۶۷۸۹&quot;</span>
 
-<span style="color: #795E26">digitsArToEn</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;٠١٢٣٤٥٦٧٨٩&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;0123456789&quot;</span>
 <span style="color: #795E26">digitsArToEn</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;٨٩123٤٥&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;8912345&quot;</span>
-<span style="color: #795E26">digitsArToEn</span><span style="color: #000000">(</span><span style="color: #098658">456128</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;456128&quot;</span>
-
-<span style="color: #795E26">digitsArToEn</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Text ٠١٢٣٤٥٦٧٨٩&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;Text 0123456789&quot;</span>
 
 <span style="color: #795E26">digitsEnToFa</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;123۴۵۶&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;۱۲۳۴۵۶&quot;</span>
-<span style="color: #795E26">digitsEnToFa</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;٤٥٦&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;٤٥٦&quot;</span>
-<span style="color: #795E26">digitsEnToFa</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;123۴۵۶&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;۱۲۳۴۵۶&quot;</span>
 
-<span style="color: #795E26">digitsEnToAr</span><span style="color: #000000">(</span><span style="color: #098658">1234567891</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;۱۲۳٤٥٦۷۸۹۱&quot;</span>
 <span style="color: #795E26">digitsEnToAr</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;123٤٥٦&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;۱۲۳٤٥٦&quot;</span>
 </code></pre>
 				<a href="#validate-iranian-national-numbercode-e-melli" id="validate-iranian-national-numbercode-e-melli" style="color: inherit; text-decoration: none;">
@@ -254,27 +244,12 @@
 				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">verifyIranianNationalId</span><span style="color: #000000">, </span><span style="color: #001080">getPlaceByIranNationalId</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
 
 <span style="color: #795E26">verifyIranianNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0499370899&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// true</span>
-<span style="color: #795E26">verifyIranianNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0790419904&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// true</span>
-<span style="color: #795E26">verifyIranianNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0084575948&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// true</span>
-<span style="color: #795E26">verifyIranianNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0963695398&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// true</span>
-<span style="color: #795E26">verifyIranianNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0684159414&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// true</span>
-<span style="color: #795E26">verifyIranianNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0067749828&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// true</span>
 <span style="color: #795E26">verifyIranianNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0684159415&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// false</span>
 </code></pre>
 				<a href="#find-city-and-province-name-by-national-idcode-e-melli" id="find-city-and-province-name-by-national-idcode-e-melli" style="color: inherit; text-decoration: none;">
 					<h3>Find city and province name by national-id(code-e Melli)</h3>
 				</a>
-				<pre><code class="language-javascript"><span style="color: #795E26">getPlaceByIranNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0499370899&quot;</span><span style="color: #000000">).</span><span style="color: #001080">city</span><span style="color: #000000">; </span><span style="color: #008000">// &quot;شهرری&quot;</span>
-<span style="color: #795E26">getPlaceByIranNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0790419904&quot;</span><span style="color: #000000">).</span><span style="color: #001080">city</span><span style="color: #000000">; </span><span style="color: #008000">// &quot;سبزوار&quot;</span>
-<span style="color: #795E26">getPlaceByIranNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0084575948&quot;</span><span style="color: #000000">).</span><span style="color: #001080">city</span><span style="color: #000000">; </span><span style="color: #008000">// &quot;تهران مرکزی&quot;</span>
-<span style="color: #795E26">getPlaceByIranNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0060495219&quot;</span><span style="color: #000000">).</span><span style="color: #001080">city</span><span style="color: #000000">; </span><span style="color: #008000">// &quot;تهران مرکزی&quot;</span>
-<span style="color: #795E26">getPlaceByIranNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0084545943&quot;</span><span style="color: #000000">).</span><span style="color: #001080">city</span><span style="color: #000000">; </span><span style="color: #008000">// &quot;تهران مرکزی&quot;</span>
-<span style="color: #795E26">getPlaceByIranNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0671658506&quot;</span><span style="color: #000000">).</span><span style="color: #001080">city</span><span style="color: #000000">; </span><span style="color: #008000">// &quot;بجنورد&quot;</span>
-<span style="color: #795E26">getPlaceByIranNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0671658506&quot;</span><span style="color: #000000">).</span><span style="color: #001080">city</span><span style="color: #000000">; </span><span style="color: #008000">// &quot;بجنورد&quot;</span>
-<span style="color: #795E26">getPlaceByIranNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0643005846&quot;</span><span style="color: #000000">).</span><span style="color: #001080">city</span><span style="color: #000000">; </span><span style="color: #008000">// &quot;بیرجند&quot;</span>
-<span style="color: #795E26">getPlaceByIranNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0906582709&quot;</span><span style="color: #000000">).</span><span style="color: #001080">city</span><span style="color: #000000">; </span><span style="color: #008000">// &quot;کاشمر&quot;</span>
-<span style="color: #795E26">getPlaceByIranNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0451727304&quot;</span><span style="color: #000000">).</span><span style="color: #001080">city</span><span style="color: #000000">; </span><span style="color: #008000">// &quot;شمیران&quot;</span>
-<span style="color: #795E26">getPlaceByIranNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0371359058&quot;</span><span style="color: #000000">).</span><span style="color: #001080">city</span><span style="color: #000000">; </span><span style="color: #008000">// &quot;قم&quot;</span>
+				<pre><code class="language-javascript"><span style="color: #795E26">getPlaceByIranNationalId</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;0084575948&quot;</span><span style="color: #000000">).</span><span style="color: #001080">city</span><span style="color: #000000">; </span><span style="color: #008000">// &quot;تهران مرکزی&quot;</span>
 </code></pre>
 				<a href="#bank-number-validation-and-get-the-name-of-the-bank-by-bank-account-number" id="bank-number-validation-and-get-the-name-of-the-bank-by-bank-account-number" style="color: inherit; text-decoration: none;">
 					<h3>Bank number validation and get the name of the bank by bank account number</h3>
@@ -282,10 +257,7 @@
 				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">verifyCardNumber</span><span style="color: #000000">, </span><span style="color: #001080">getBankNameFromCardNumber</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
 
 <span style="color: #795E26">verifyCardNumber</span><span style="color: #000000">(</span><span style="color: #098658">6037701689095443</span><span style="color: #000000">); </span><span style="color: #008000">// true</span>
-<span style="color: #795E26">verifyCardNumber</span><span style="color: #000000">(</span><span style="color: #098658">6219861034529007</span><span style="color: #000000">); </span><span style="color: #008000">// true</span>
-<span style="color: #795E26">verifyCardNumber</span><span style="color: #000000">(</span><span style="color: #098658">6219861034529008</span><span style="color: #000000">); </span><span style="color: #008000">// false</span>
-<span style="color: #795E26">getBankNameFromCardNumber</span><span style="color: #000000">(</span><span style="color: #098658">6037701689095443</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;بانک کشاورزی&quot;</span>
-<span style="color: #795E26">getBankNameFromCardNumber</span><span style="color: #000000">(</span><span style="color: #098658">6219861034529007</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;بانک سامان&quot;</span>
+
 <span style="color: #795E26">getBankNameFromCardNumber</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;6219861034529007&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;بانک سامان&quot;</span>
 </code></pre>
 				<a href="#validate-the-correctness-of-the-text-of-the-persian-language-and-clear-the-arabic-letters-in-the-persian-text" id="validate-the-correctness-of-the-text-of-the-persian-language-and-clear-the-arabic-letters-in-the-persian-text" style="color: inherit; text-decoration: none;">
@@ -299,7 +271,7 @@
 
 <span style="color: #795E26">hasPersian</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;This text includes فارسی&quot;</span><span style="color: #000000">) </span><span style="color: #008000">// true</span>
 
-<span style="color: #795E26">toPersianChars</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;علي&quot;</span><span style="color: #000000">)) </span><span style="color: #008000">// علی</span>
+<span style="color: #795E26">toPersianChars</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;علي&quot;</span><span style="color: #000000">) </span><span style="color: #008000">// علی</span>
 </code></pre>
 				<p><strong>Note</strong>: You can pass <code>2</code> more options to <code>isPersian</code> to customize it as your needs:</p>
 				<ul>
@@ -368,9 +340,8 @@
 
 <span style="color: #008000">// Calculate bill amount by bill id and payment id</span>
 <span style="color: #008000">// Convert to Iranian Rials</span>
-<span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Bill</span><span style="color: #000000">({ </span><span style="color: #001080">billId:</span><span style="color: #000000"> </span><span style="color: #098658">1117753200140</span><span style="color: #000000">, </span><span style="color: #001080">paymentId:</span><span style="color: #000000"> </span><span style="color: #098658">12070160</span><span style="color: #000000">, </span><span style="color: #001080">currency:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;rial&quot;</span><span style="color: #000000"> }).</span><span style="color: #795E26">getResult</span><span style="color: #000000">().</span><span style="color: #001080">amount</span><span style="color: #000000">; </span><span style="color: #008000">// 120000</span>
 <span style="color: #008000">// Return bill amount by Toman(Iranian currency type) by default</span>
-<span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Bill</span><span style="color: #000000">({ </span><span style="color: #001080">billId:</span><span style="color: #000000"> </span><span style="color: #098658">1117753200140</span><span style="color: #000000">, </span><span style="color: #001080">paymentId:</span><span style="color: #000000"> </span><span style="color: #098658">12070160</span><span style="color: #000000"> }).</span><span style="color: #795E26">getResult</span><span style="color: #000000">().</span><span style="color: #001080">amount</span><span style="color: #000000">; </span><span style="color: #008000">// 12000</span>
+<span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Bill</span><span style="color: #000000">({ </span><span style="color: #001080">billId:</span><span style="color: #000000"> </span><span style="color: #098658">1117753200140</span><span style="color: #000000">, </span><span style="color: #001080">paymentId:</span><span style="color: #000000"> </span><span style="color: #098658">12070160</span><span style="color: #000000">, </span><span style="color: #001080">currency:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;rial&quot;</span><span style="color: #000000"> }).</span><span style="color: #795E26">getResult</span><span style="color: #000000">().</span><span style="color: #001080">amount</span><span style="color: #000000">; </span><span style="color: #008000">// 120000</span>
 
 <span style="color: #008000">// Find Bill&#039;s type by bill id and payment id</span>
 <span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Bill</span><span style="color: #000000">({ </span><span style="color: #001080">billId:</span><span style="color: #000000"> </span><span style="color: #098658">7748317800142</span><span style="color: #000000">, </span><span style="color: #001080">paymentId:</span><span style="color: #000000"> </span><span style="color: #098658">1770160</span><span style="color: #000000"> }).</span><span style="color: #795E26">getResult</span><span style="color: #000000">().</span><span style="color: #001080">type</span><span style="color: #000000">; </span><span style="color: #008000">// تلفن ثابت</span>
@@ -479,7 +450,13 @@
 					template: 12 D 451 ایران  47
 					province: مرکزی ,
 					type: Car,
-					category: دیپلمات,<br>  }
+					category: دیپلمات,<br>    details: {
+					firstTwoDigits: 12,
+					plateCharacter: D,
+					nextThreeDigits: 451,
+					provinceCode: 47
+					}
+					}
 				*/</p>
 				<p>// handle motorcyles plate
 					Plate(12345678).info;
@@ -488,7 +465,11 @@
 					template: 123-45678,
 					province: مرکز تهران,
 					type: Motorcyle,
-					category: null
+					category: null,
+					details: {
+					digits: 45678
+					provinceCode:123
+					}
 					}
 				*/</p>
 				<pre><code><span style="color: #001080">Plates</span><span style="color: #000000"> </span><span style="color: #001080">that</span><span style="color: #000000"> </span><span style="color: #001080">have</span><span style="color: #000000"> </span><span style="color: #001080">farsi</span><span style="color: #000000"> </span><span style="color: #001080">digits</span><span style="color: #000000"> </span><span style="color: #0000FF">in</span><span style="color: #000000"> </span><span style="color: #795E26">them</span><span style="color: #000000">(</span><span style="color: #001080">like</span><span style="color: #000000">: </span><span style="color: #001080">الف</span><span style="color: #000000">، </span><span style="color: #001080">ب</span><span style="color: #000000">، </span><span style="color: #001080">ص</span><span style="color: #000000">) </span><span style="color: #001080">will</span><span style="color: #000000"> </span><span style="color: #001080">be</span><span style="color: #000000"> </span><span style="color: #001080">returned</span><span style="color: #000000"> </span><span style="color: #0000FF">in</span><span style="color: #000000"> </span><span style="color: #0000FF">this</span><span style="color: #000000"> </span><span style="color: #001080">template</span>
@@ -504,7 +485,7 @@
 <span style="color: #A31515">  true</span>
 <span style="color: #A31515">*/</span>
 
-<span style="color: #A31515">Plate(12345678).info;</span>
+<span style="color: #A31515">Plate(12345678).isValid;</span>
 <span style="color: #A31515">/*</span>
 <span style="color: #A31515">  true</span>
 <span style="color: #A31515">*/</span>
@@ -519,74 +500,153 @@
 <span style="color: #A31515">  will return false - plate can&#039;t have 0 in its digits (except last digit)</span>
 <span style="color: #A31515">*/</span>
 </code></pre>
-				<a href="#todo" id="todo" style="color: inherit; text-decoration: none;">
-					<h3>Todo</h3>
+				<a href="#convert-jalaali-date-time-into-a-time-ago" id="convert-jalaali-date-time-into-a-time-ago" style="color: inherit; text-decoration: none;">
+					<h3>Convert Jalaali date-time into a time ago</h3>
 				</a>
+				<p><strong>Usage</strong></p>
+				<blockquote>
+					<p>Suppose the current time is equal to <code>1400/03/17 18:00:00</code></p>
+				</blockquote>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">timeAgo</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
+
+<span style="color: #008000">// Previous</span>
+<span style="color: #795E26">timeAgo</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;1400/03/17 17:55:00&#039;</span><span style="color: #000000">) </span><span style="color: #008000">// 5 دقیقه قبل</span>
+<span style="color: #795E26">timeAgo</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;1400/02/17 18:00:00&#039;</span><span style="color: #000000">) </span><span style="color: #008000">// حدود 1 ماه  قبل</span>
+
+<span style="color: #008000">// Next</span>
+<span style="color: #795E26">timeAgo</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;1400/04/07 18:00:00&#039;</span><span style="color: #000000">) </span><span style="color: #008000">// حدود 3 هفته  بعد</span>
+<span style="color: #795E26">timeAgo</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;1401/03/17 18:00:00&#039;</span><span style="color: #000000">) </span><span style="color: #008000">// حدود 1 سال  بعد</span>
+</code></pre>
+				<a href="#validate-and-find-information-of-phone-number" id="validate-and-find-information-of-phone-number" style="color: inherit; text-decoration: none;">
+					<h3>Validate and find information of phone number</h3>
+				</a>
+				<p><strong>Usage</strong></p>
 				<ul>
-					<li><input disabled="" type="checkbox"> Write Jalaali and Gregorian functions to convert Date together.</li>
+					<li>Finding information such as province, type and model of phone number</li>
 				</ul>
-				<a href="#contributing" id="contributing" style="color: inherit; text-decoration: none;">
-					<h2>Contributing</h2>
-				</a>
-				<p>Thank you for your interest in contributing! Please feel free to put up a PR for any issue or feature request.</p>
-				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
-					<h2>License</h2>
-				</a>
-				<p>This project is licensed under the MIT License - see the <a href="https://github.com/ali-master/persian-tools/blob/master/LICENSE">LICENSE.md</a> file for details.</p>
-				<a href="#who39s-using-persian-tools" id="who39s-using-persian-tools" style="color: inherit; text-decoration: none;">
-					<h2>Who&#39;s using Persian tools?</h2>
-				</a>
-				<table>
-					<tr>
-						<td align="center">
-							<a href="https://pwa.bank-maskan.ir">
-								<img src="./images/showcases/bank-maskan.png" width="100px;" alt=""/><br /><sub><b>Bank Maskan</b></sub>
-							</a>
-						</td>
-						<td align="center">
-							<a href="https://mydong.ir">
-								<img src="./images/showcases/mydong.png" width="100px;" alt=""/><br /><sub><b>MyDong</b></sub>
-							</a>
-						</td>
-					</tr>
-				</table>
-				<p>If you&#39;re curious to see what can be accomplished with Persian tools, check out these apps!</p>
-				<p>If you have a software you&#39;d like to see added, please
-					<a href="https://help.github.com/articles/creating-a-pull-request/">open a pull request</a>!
-				All that&#39;s required is a name, link, and a PNG icon.</p>
-				<a href="#contributors-✨" id="contributors-✨" style="color: inherit; text-decoration: none;">
-					<h2>Contributors ✨</h2>
-				</a>
-				<p>Thanks goes to these wonderful people (<a href="https://allcontributors.org/docs/en/emoji-key">emoji key</a>):</p>
-				<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-				<!-- prettier-ignore-start -->
-				<!-- markdownlint-disable -->
-				<table>
-					<tr>
-						<td align="center"><a href="https://www.linkedin.com/in/alitorki/"><img src="https://avatars1.githubusercontent.com/u/9049092?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ali Torki</b></sub></a><br /><a href="#infra-ali-master" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=ali-master" title="Tests">⚠️</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=ali-master" title="Code">💻</a></td>
-						<td align="center"><a href="https://github.com/mssoheil"><img src="https://avatars3.githubusercontent.com/u/16543635?v=4?s=100" width="100px;" alt=""/><br /><sub><b>mssoheil</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=mssoheil" title="Tests">⚠️</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=mssoheil" title="Code">💻</a></td>
-						<td align="center"><a href="https://github.com/moh3n9595"><img src="https://avatars1.githubusercontent.com/u/20948388?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mohsen</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=moh3n9595" title="Tests">⚠️</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=moh3n9595" title="Code">💻</a></td>
-						<td align="center"><a href="http://titles.ir"><img src="https://avatars1.githubusercontent.com/u/1300289?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Hesam pourghazian</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=Hesamp" title="Code">💻</a></td>
-						<td align="center"><a href="https://github.com/amirqasemi74"><img src="https://avatars3.githubusercontent.com/u/20992734?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Amir Hossien Qasemi Moqaddam</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=amirqasemi74" title="Code">💻</a></td>
-						<td align="center"><a href="https://github.com/SeyyedKhandon"><img src="https://avatars.githubusercontent.com/u/59599950?v=4?s=100" width="100px;" alt=""/><br /><sub><b>SeyyedKhandon</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=SeyyedKhandon" title="Code">💻</a></td>
-						<td align="center"><a href="https://github.com/masoudDaliriyan"><img src="https://avatars.githubusercontent.com/u/25932831?v=4?s=100" width="100px;" alt=""/><br /><sub><b>msdDaliriyan</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=masoudDaliriyan" title="Code">💻</a></td>
-					</tr>
-					<tr>
-						<td align="center"><a href="https://mahdi-momeni.github.io/"><img src="https://avatars.githubusercontent.com/u/32864532?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mahdi</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=mahdi-momeni" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=mahdi-momeni" title="Tests">⚠️</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=mahdi-momeni" title="Documentation">📖</a></td>
-					</tr>
-				</table>
-				<!-- markdownlint-restore -->
-				<!-- prettier-ignore-end -->
-				<!-- ALL-CONTRIBUTORS-LIST:END -->
-				<p>This project follows the <a href="https://github.com/all-contributors/all-contributors">all-contributors</a> specification. Contributions of any kind welcome!</p>
-				<a href="#wallabyjs" id="wallabyjs" style="color: inherit; text-decoration: none;">
-					<h2>Wallaby.js</h2>
-				</a>
-				<p><a href="https://wallabyjs.com/oss/"><img src="https://img.shields.io/badge/wallaby.js-powered-blue.svg?style=for-the-badge&logo=github" alt="Wallaby.js"></a></p>
-				<p>This repository contributors are welcome to use
-					<a href="https://wallabyjs.com/oss/">Wallaby.js OSS License</a> to get
-					test results immediately as you type, and see the results in
-				your editor right next to your code.</p>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">phoneNumberDetail</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
+
+<span style="color: #795E26">phoneNumberDetail</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;9123456789&quot;</span><span style="color: #000000">);</span>
+<span style="color: #008000">/*</span>
+<span style="color: #008000">  {</span>
+<span style="color: #008000">    province: [&quot;البرز&quot;, &quot;زنجان&quot;, &quot;سمنان&quot;, &quot;قزوین&quot;, &quot;قم&quot;, &quot;برخی از شهرستان های استان مرکزی&quot;],</span>
+<span style="color: #008000">    base: &quot;تهران&quot;,</span>
+<span style="color: #008000">    operator: &quot;همراه اول&quot;,</span>
+<span style="color: #008000">    type: [&quot;permanent&quot;],</span>
+<span style="color: #008000">  }</span>
+<span style="color: #008000">*/</span>
+
+<span style="color: #795E26">phoneNumberDetail</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;09022002580&quot;</span><span style="color: #000000">);</span>
+<span style="color: #008000">/*</span>
+<span style="color: #008000">  {</span>
+<span style="color: #008000">    province: [],</span>
+<span style="color: #008000">    base: &quot;کشوری&quot;,</span>
+<span style="color: #008000">    operator: &quot;ایرانسل&quot;,</span>
+<span style="color: #008000">    type: [&quot;permanent&quot;, &quot;credit&quot;],</span>
+<span style="color: #008000">  }</span>
+<span style="color: #008000">*/</span>
+
+<span style="color: #795E26">phoneNumberDetail</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;09981000000&quot;</span><span style="color: #000000">);</span>
+<span style="color: #008000">/*</span>
+<span style="color: #008000">  {</span>
+<span style="color: #008000">    province: [],</span>
+<span style="color: #008000">    base: &quot;کشوری&quot;,</span>
+<span style="color: #008000">    operator: &quot;شاتل موبایل&quot;,</span>
+<span style="color: #008000">    type: [&quot;credit&quot;],</span>
+<span style="color: #008000">  }</span>
+<span style="color: #008000">*/</span>
+</code></pre>
+				<ul>
+					<li><p>Validating phone number</p>
+						<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">phoneNumberValidator</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
+
+</code></pre>
+					</li>
+				</ul>
+				<p>phoneNumberValidator(&quot;09122002580&quot;); // true
+				phoneNumberValidator(&quot;09192002580&quot;); // true</p>
+				<p>phoneNumberValidator(&quot;+989022002580&quot;); // true
+					phoneNumberValidator(&quot;09022002580&quot;); // true
+					phoneNumberValidator(&quot;989022002580&quot;); // true
+					phoneNumberValidator(&quot;00989022002580&quot;); // true
+				phoneNumberValidator(&quot;9022002580&quot;); // true</p>
+				<p>phoneNumberValidator(&quot;09802002580&quot;); // false</p>
+				<pre><code>
+
+<span style="color: #000000">### </span><span style="color: #001080">Todo</span>
+<span style="color: #000000">- [ ] </span><span style="color: #001080">Write</span><span style="color: #000000"> </span><span style="color: #001080">Jalaali</span><span style="color: #000000"> </span><span style="color: #001080">and</span><span style="color: #000000"> </span><span style="color: #001080">Gregorian</span><span style="color: #000000"> </span><span style="color: #001080">functions</span><span style="color: #000000"> </span><span style="color: #001080">to</span><span style="color: #000000"> </span><span style="color: #001080">convert</span><span style="color: #000000"> </span><span style="color: #267F99">Date</span><span style="color: #000000"> </span><span style="color: #001080">together</span><span style="color: #000000">.</span>
+
+<span style="color: #000000">## </span><span style="color: #001080">Contributing</span>
+
+<span style="color: #001080">Thank</span><span style="color: #000000"> </span><span style="color: #001080">you</span><span style="color: #000000"> </span><span style="color: #001080">for</span><span style="color: #000000"> </span><span style="color: #001080">your</span><span style="color: #000000"> </span><span style="color: #001080">interest</span><span style="color: #000000"> </span><span style="color: #0000FF">in</span><span style="color: #000000"> </span><span style="color: #001080">contributing</span><span style="color: #000000">! </span><span style="color: #001080">Please</span><span style="color: #000000"> </span><span style="color: #001080">feel</span><span style="color: #000000"> </span><span style="color: #001080">free</span><span style="color: #000000"> </span><span style="color: #001080">to</span><span style="color: #000000"> </span><span style="color: #001080">put</span><span style="color: #000000"> </span><span style="color: #001080">up</span><span style="color: #000000"> </span><span style="color: #001080">a</span><span style="color: #000000"> </span><span style="color: #0070C1">PR</span><span style="color: #000000"> </span><span style="color: #001080">for</span><span style="color: #000000"> </span><span style="color: #001080">any</span><span style="color: #000000"> </span><span style="color: #001080">issue</span><span style="color: #000000"> </span><span style="color: #001080">or</span><span style="color: #000000"> </span><span style="color: #001080">feature</span><span style="color: #000000"> </span><span style="color: #001080">request</span><span style="color: #000000">.</span>
+
+<span style="color: #000000">## </span><span style="color: #001080">License</span>
+
+<span style="color: #001080">This</span><span style="color: #000000"> </span><span style="color: #001080">project</span><span style="color: #000000"> </span><span style="color: #001080">is</span><span style="color: #000000"> </span><span style="color: #001080">licensed</span><span style="color: #000000"> </span><span style="color: #001080">under</span><span style="color: #000000"> </span><span style="color: #001080">the</span><span style="color: #000000"> </span><span style="color: #0070C1">MIT</span><span style="color: #000000"> </span><span style="color: #001080">License</span><span style="color: #000000"> - </span><span style="color: #001080">see</span><span style="color: #000000"> </span><span style="color: #001080">the</span><span style="color: #000000"> [</span><span style="color: #0070C1">LICENSE</span><span style="color: #000000">.</span><span style="color: #001080">md</span><span style="color: #000000">](</span><span style="color: #001080">https</span><span style="color: #000000">:</span><span style="color: #008000">//github.com/ali-master/persian-tools/blob/master/LICENSE) file for details.</span>
+
+<span style="color: #000000">## </span><span style="color: #001080">Who</span><span style="color: #A31515">&#039;s using Persian tools</span><span style="color: #CD3131">?</span>
+
+<span style="color: #000000">&lt;</span><span style="color: #267F99">table</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">    &lt;</span><span style="color: #267F99">tr</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">        &lt;</span><span style="color: #001080">td</span><span style="color: #000000"> </span><span style="color: #001080">align</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;center&quot;</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">            &lt;</span><span style="color: #001080">a</span><span style="color: #000000"> </span><span style="color: #001080">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://pwa.bank-maskan.ir&quot;</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">                &lt;</span><span style="color: #001080">img</span><span style="color: #000000"> </span><span style="color: #001080">src</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;./images/showcases/bank-maskan.png&quot;</span><span style="color: #000000"> </span><span style="color: #001080">width</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;100px;&quot;</span><span style="color: #000000"> </span><span style="color: #001080">alt</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;&quot;</span><span style="color: #811F3F">/&gt;&lt;br /</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">sub</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">b</span><span style="color: #000000">&gt;</span><span style="color: #001080">Bank</span><span style="color: #000000"> </span><span style="color: #001080">Maskan</span><span style="color: #000000">&lt;/</span><span style="color: #001080">b</span><span style="color: #000000">&gt;&lt;/</span><span style="color: #267F99">sub</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">            &lt;/</span><span style="color: #001080">a</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">        &lt;/</span><span style="color: #001080">td</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">        &lt;</span><span style="color: #001080">td</span><span style="color: #000000"> </span><span style="color: #001080">align</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;center&quot;</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">            &lt;</span><span style="color: #001080">a</span><span style="color: #000000"> </span><span style="color: #001080">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://mydong.ir&quot;</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">                &lt;</span><span style="color: #001080">img</span><span style="color: #000000"> </span><span style="color: #001080">src</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;./images/showcases/mydong.png&quot;</span><span style="color: #000000"> </span><span style="color: #001080">width</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;100px;&quot;</span><span style="color: #000000"> </span><span style="color: #001080">alt</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;&quot;</span><span style="color: #811F3F">/&gt;&lt;br /</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">sub</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">b</span><span style="color: #000000">&gt;</span><span style="color: #001080">MyDong</span><span style="color: #000000">&lt;/</span><span style="color: #001080">b</span><span style="color: #000000">&gt;&lt;/</span><span style="color: #267F99">sub</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">            &lt;/</span><span style="color: #001080">a</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">        &lt;/</span><span style="color: #001080">td</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">    &lt;/</span><span style="color: #001080">tr</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">&lt;/</span><span style="color: #001080">table</span><span style="color: #000000">&gt;</span>
+
+<span style="color: #001080">If</span><span style="color: #000000"> </span><span style="color: #001080">you</span><span style="color: #A31515">&#039;re curious to see what can be accomplished with Persian tools, check out these apps</span><span style="color: #CD3131">!</span>
+
+<span style="color: #001080">If</span><span style="color: #000000"> </span><span style="color: #001080">you</span><span style="color: #000000"> </span><span style="color: #001080">have</span><span style="color: #000000"> </span><span style="color: #001080">a</span><span style="color: #000000"> </span><span style="color: #001080">software</span><span style="color: #000000"> </span><span style="color: #001080">you</span><span style="color: #A31515">&#039;d like to see added, pleas</span><span style="color: #CD3131">e</span>
+<span style="color: #000000">[</span><span style="color: #001080">open</span><span style="color: #000000"> </span><span style="color: #001080">a</span><span style="color: #000000"> </span><span style="color: #001080">pull</span><span style="color: #000000"> </span><span style="color: #001080">request</span><span style="color: #000000">](</span><span style="color: #001080">https</span><span style="color: #000000">:</span><span style="color: #008000">//help.github.com/articles/creating-a-pull-request/)!</span>
+<span style="color: #001080">All</span><span style="color: #000000"> </span><span style="color: #001080">that</span><span style="color: #A31515">&#039;s required is a name, link, and a PNG icon</span><span style="color: #CD3131">.</span>
+
+<span style="color: #000000">## </span><span style="color: #001080">Contributors</span><span style="color: #000000"> ✨</span>
+
+<span style="color: #001080">Thanks</span><span style="color: #000000"> </span><span style="color: #001080">goes</span><span style="color: #000000"> </span><span style="color: #001080">to</span><span style="color: #000000"> </span><span style="color: #001080">these</span><span style="color: #000000"> </span><span style="color: #001080">wonderful</span><span style="color: #000000"> </span><span style="color: #795E26">people</span><span style="color: #000000"> ([</span><span style="color: #001080">emoji</span><span style="color: #000000"> </span><span style="color: #001080">key</span><span style="color: #000000">](</span><span style="color: #001080">https</span><span style="color: #000000">:</span><span style="color: #008000">//allcontributors.org/docs/en/emoji-key)):</span>
+
+<span style="color: #000000">&lt;!-- </span><span style="color: #0070C1">ALL</span><span style="color: #000000">-</span><span style="color: #0070C1">CONTRIBUTORS</span><span style="color: #000000">-</span><span style="color: #0070C1">LIST</span><span style="color: #000000">:</span><span style="color: #0070C1">START</span><span style="color: #000000"> - </span><span style="color: #001080">Do</span><span style="color: #000000"> </span><span style="color: #001080">not</span><span style="color: #000000"> </span><span style="color: #001080">remove</span><span style="color: #000000"> </span><span style="color: #001080">or</span><span style="color: #000000"> </span><span style="color: #001080">modify</span><span style="color: #000000"> </span><span style="color: #0000FF">this</span><span style="color: #000000"> </span><span style="color: #001080">section</span><span style="color: #000000"> --&gt;</span>
+<span style="color: #000000">&lt;!-- </span><span style="color: #001080">prettier</span><span style="color: #000000">-</span><span style="color: #001080">ignore</span><span style="color: #000000">-</span><span style="color: #001080">start</span><span style="color: #000000"> --&gt;</span>
+<span style="color: #000000">&lt;!-- </span><span style="color: #001080">markdownlint</span><span style="color: #000000">-</span><span style="color: #001080">disable</span><span style="color: #000000"> --&gt;</span>
+<span style="color: #000000">&lt;</span><span style="color: #267F99">table</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">  &lt;</span><span style="color: #267F99">tr</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">    &lt;</span><span style="color: #001080">td</span><span style="color: #000000"> </span><span style="color: #001080">align</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;center&quot;</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">a</span><span style="color: #000000"> </span><span style="color: #267F99">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://www.linkedin.com/in/alitorki/&quot;</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">img</span><span style="color: #000000"> </span><span style="color: #267F99">src</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://avatars1.githubusercontent.com/u/9049092?v=4?s=100&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">width</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;100px;&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">alt</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;&quot;</span><span style="color: #000000">/&gt;&lt;</span><span style="color: #267F99">br</span><span style="color: #000000"> /&gt;&lt;</span><span style="color: #267F99">sub</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">b</span><span style="color: #000000">&gt;</span><span style="color: #001080">Ali</span><span style="color: #000000"> </span><span style="color: #001080">Torki</span><span style="color: #000000">&lt;/</span><span style="color: #001080">b</span><span style="color: #000000">&gt;&lt;/</span><span style="color: #267F99">sub</span><span style="color: #000000">&gt;&lt;/</span><span style="color: #267F99">a</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">br</span><span style="color: #000000"> /&gt;&lt;</span><span style="color: #267F99">a</span><span style="color: #000000"> </span><span style="color: #267F99">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;#infra-ali-master&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">title</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;Infrastructure (Hosting, Build-Tools, etc)&quot;</span><span style="color: #000000">&gt;🚇&lt;/</span><span style="color: #001080">a</span><span style="color: #000000">&gt; &lt;</span><span style="color: #267F99">a</span><span style="color: #000000"> </span><span style="color: #267F99">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://github.com/persian-tools/persian-tools/commits?author=ali-master&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">title</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;Tests&quot;</span><span style="color: #000000">&gt;⚠️&lt;/</span><span style="color: #001080">a</span><span style="color: #000000">&gt; &lt;</span><span style="color: #267F99">a</span><span style="color: #000000"> </span><span style="color: #267F99">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://github.com/persian-tools/persian-tools/commits?author=ali-master&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">title</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;Code&quot;</span><span style="color: #000000">&gt;💻&lt;/</span><span style="color: #001080">a</span><span style="color: #000000">&gt;&lt;/</span><span style="color: #267F99">td</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">    &lt;</span><span style="color: #001080">td</span><span style="color: #000000"> </span><span style="color: #001080">align</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;center&quot;</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">a</span><span style="color: #000000"> </span><span style="color: #267F99">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://github.com/mssoheil&quot;</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">img</span><span style="color: #000000"> </span><span style="color: #267F99">src</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://avatars3.githubusercontent.com/u/16543635?v=4?s=100&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">width</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;100px;&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">alt</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;&quot;</span><span style="color: #000000">/&gt;&lt;</span><span style="color: #267F99">br</span><span style="color: #000000"> /&gt;&lt;</span><span style="color: #267F99">sub</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">b</span><span style="color: #000000">&gt;</span><span style="color: #001080">mssoheil</span><span style="color: #000000">&lt;/</span><span style="color: #001080">b</span><span style="color: #000000">&gt;&lt;/</span><span style="color: #267F99">sub</span><span style="color: #000000">&gt;&lt;/</span><span style="color: #267F99">a</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">br</span><span style="color: #000000"> /&gt;&lt;</span><span style="color: #267F99">a</span><span style="color: #000000"> </span><span style="color: #267F99">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://github.com/persian-tools/persian-tools/commits?author=mssoheil&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">title</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;Tests&quot;</span><span style="color: #000000">&gt;⚠️&lt;/</span><span style="color: #001080">a</span><span style="color: #000000">&gt; &lt;</span><span style="color: #267F99">a</span><span style="color: #000000"> </span><span style="color: #267F99">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://github.com/persian-tools/persian-tools/commits?author=mssoheil&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">title</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;Code&quot;</span><span style="color: #000000">&gt;💻&lt;/</span><span style="color: #001080">a</span><span style="color: #000000">&gt;&lt;/</span><span style="color: #267F99">td</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">    &lt;</span><span style="color: #001080">td</span><span style="color: #000000"> </span><span style="color: #001080">align</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;center&quot;</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">a</span><span style="color: #000000"> </span><span style="color: #267F99">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://github.com/moh3n9595&quot;</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">img</span><span style="color: #000000"> </span><span style="color: #267F99">src</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://avatars1.githubusercontent.com/u/20948388?v=4?s=100&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">width</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;100px;&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">alt</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;&quot;</span><span style="color: #000000">/&gt;&lt;</span><span style="color: #267F99">br</span><span style="color: #000000"> /&gt;&lt;</span><span style="color: #267F99">sub</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">b</span><span style="color: #000000">&gt;</span><span style="color: #001080">Mohsen</span><span style="color: #000000">&lt;/</span><span style="color: #001080">b</span><span style="color: #000000">&gt;&lt;/</span><span style="color: #267F99">sub</span><span style="color: #000000">&gt;&lt;/</span><span style="color: #267F99">a</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">br</span><span style="color: #000000"> /&gt;&lt;</span><span style="color: #267F99">a</span><span style="color: #000000"> </span><span style="color: #267F99">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://github.com/persian-tools/persian-tools/commits?author=moh3n9595&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">title</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;Tests&quot;</span><span style="color: #000000">&gt;⚠️&lt;/</span><span style="color: #001080">a</span><span style="color: #000000">&gt; &lt;</span><span style="color: #267F99">a</span><span style="color: #000000"> </span><span style="color: #267F99">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://github.com/persian-tools/persian-tools/commits?author=moh3n9595&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">title</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;Code&quot;</span><span style="color: #000000">&gt;💻&lt;/</span><span style="color: #001080">a</span><span style="color: #000000">&gt;&lt;/</span><span style="color: #267F99">td</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">    &lt;</span><span style="color: #001080">td</span><span style="color: #000000"> </span><span style="color: #001080">align</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;center&quot;</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">a</span><span style="color: #000000"> </span><span style="color: #267F99">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;http://titles.ir&quot;</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">img</span><span style="color: #000000"> </span><span style="color: #267F99">src</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://avatars1.githubusercontent.com/u/1300289?v=4?s=100&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">width</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;100px;&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">alt</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;&quot;</span><span style="color: #000000">/&gt;&lt;</span><span style="color: #267F99">br</span><span style="color: #000000"> /&gt;&lt;</span><span style="color: #267F99">sub</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">b</span><span style="color: #000000">&gt;</span><span style="color: #001080">Hesam</span><span style="color: #000000"> </span><span style="color: #001080">pourghazian</span><span style="color: #000000">&lt;/</span><span style="color: #001080">b</span><span style="color: #000000">&gt;&lt;/</span><span style="color: #267F99">sub</span><span style="color: #000000">&gt;&lt;/</span><span style="color: #267F99">a</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">br</span><span style="color: #000000"> /&gt;&lt;</span><span style="color: #267F99">a</span><span style="color: #000000"> </span><span style="color: #267F99">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://github.com/persian-tools/persian-tools/commits?author=Hesamp&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">title</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;Code&quot;</span><span style="color: #000000">&gt;💻&lt;/</span><span style="color: #001080">a</span><span style="color: #000000">&gt;&lt;/</span><span style="color: #267F99">td</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">    &lt;</span><span style="color: #001080">td</span><span style="color: #000000"> </span><span style="color: #001080">align</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;center&quot;</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">a</span><span style="color: #000000"> </span><span style="color: #267F99">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://github.com/amirqasemi74&quot;</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">img</span><span style="color: #000000"> </span><span style="color: #267F99">src</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://avatars3.githubusercontent.com/u/20992734?v=4?s=100&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">width</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;100px;&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">alt</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;&quot;</span><span style="color: #000000">/&gt;&lt;</span><span style="color: #267F99">br</span><span style="color: #000000"> /&gt;&lt;</span><span style="color: #267F99">sub</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">b</span><span style="color: #000000">&gt;</span><span style="color: #001080">Amir</span><span style="color: #000000"> </span><span style="color: #001080">Hossien</span><span style="color: #000000"> </span><span style="color: #001080">Qasemi</span><span style="color: #000000"> </span><span style="color: #001080">Moqaddam</span><span style="color: #000000">&lt;/</span><span style="color: #001080">b</span><span style="color: #000000">&gt;&lt;/</span><span style="color: #267F99">sub</span><span style="color: #000000">&gt;&lt;/</span><span style="color: #267F99">a</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">br</span><span style="color: #000000"> /&gt;&lt;</span><span style="color: #267F99">a</span><span style="color: #000000"> </span><span style="color: #267F99">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://github.com/persian-tools/persian-tools/commits?author=amirqasemi74&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">title</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;Code&quot;</span><span style="color: #000000">&gt;💻&lt;/</span><span style="color: #001080">a</span><span style="color: #000000">&gt;&lt;/</span><span style="color: #267F99">td</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">    &lt;</span><span style="color: #001080">td</span><span style="color: #000000"> </span><span style="color: #001080">align</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;center&quot;</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">a</span><span style="color: #000000"> </span><span style="color: #267F99">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://github.com/SeyyedKhandon&quot;</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">img</span><span style="color: #000000"> </span><span style="color: #267F99">src</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://avatars.githubusercontent.com/u/59599950?v=4?s=100&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">width</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;100px;&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">alt</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;&quot;</span><span style="color: #000000">/&gt;&lt;</span><span style="color: #267F99">br</span><span style="color: #000000"> /&gt;&lt;</span><span style="color: #267F99">sub</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">b</span><span style="color: #000000">&gt;</span><span style="color: #001080">SeyyedKhandon</span><span style="color: #000000">&lt;/</span><span style="color: #001080">b</span><span style="color: #000000">&gt;&lt;/</span><span style="color: #267F99">sub</span><span style="color: #000000">&gt;&lt;/</span><span style="color: #267F99">a</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">br</span><span style="color: #000000"> /&gt;&lt;</span><span style="color: #267F99">a</span><span style="color: #000000"> </span><span style="color: #267F99">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://github.com/persian-tools/persian-tools/commits?author=SeyyedKhandon&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">title</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;Code&quot;</span><span style="color: #000000">&gt;💻&lt;/</span><span style="color: #001080">a</span><span style="color: #000000">&gt;&lt;/</span><span style="color: #267F99">td</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">    &lt;</span><span style="color: #001080">td</span><span style="color: #000000"> </span><span style="color: #001080">align</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;center&quot;</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">a</span><span style="color: #000000"> </span><span style="color: #267F99">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://github.com/masoudDaliriyan&quot;</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">img</span><span style="color: #000000"> </span><span style="color: #267F99">src</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://avatars.githubusercontent.com/u/25932831?v=4?s=100&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">width</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;100px;&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">alt</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;&quot;</span><span style="color: #000000">/&gt;&lt;</span><span style="color: #267F99">br</span><span style="color: #000000"> /&gt;&lt;</span><span style="color: #267F99">sub</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">b</span><span style="color: #000000">&gt;</span><span style="color: #001080">msdDaliriyan</span><span style="color: #000000">&lt;/</span><span style="color: #001080">b</span><span style="color: #000000">&gt;&lt;/</span><span style="color: #267F99">sub</span><span style="color: #000000">&gt;&lt;/</span><span style="color: #267F99">a</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">br</span><span style="color: #000000"> /&gt;&lt;</span><span style="color: #267F99">a</span><span style="color: #000000"> </span><span style="color: #267F99">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://github.com/persian-tools/persian-tools/commits?author=masoudDaliriyan&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">title</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;Code&quot;</span><span style="color: #000000">&gt;💻&lt;/</span><span style="color: #001080">a</span><span style="color: #000000">&gt;&lt;/</span><span style="color: #267F99">td</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">  &lt;/</span><span style="color: #001080">tr</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">  &lt;</span><span style="color: #267F99">tr</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">    &lt;</span><span style="color: #001080">td</span><span style="color: #000000"> </span><span style="color: #001080">align</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;center&quot;</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">a</span><span style="color: #000000"> </span><span style="color: #267F99">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://mahdi-momeni.github.io/&quot;</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">img</span><span style="color: #000000"> </span><span style="color: #267F99">src</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://avatars.githubusercontent.com/u/32864532?v=4?s=100&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">width</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;100px;&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">alt</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;&quot;</span><span style="color: #000000">/&gt;&lt;</span><span style="color: #267F99">br</span><span style="color: #000000"> /&gt;&lt;</span><span style="color: #267F99">sub</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">b</span><span style="color: #000000">&gt;</span><span style="color: #001080">Mahdi</span><span style="color: #000000">&lt;/</span><span style="color: #001080">b</span><span style="color: #000000">&gt;&lt;/</span><span style="color: #267F99">sub</span><span style="color: #000000">&gt;&lt;/</span><span style="color: #267F99">a</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">br</span><span style="color: #000000"> /&gt;&lt;</span><span style="color: #267F99">a</span><span style="color: #000000"> </span><span style="color: #267F99">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://github.com/persian-tools/persian-tools/commits?author=mahdi-momeni&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">title</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;Code&quot;</span><span style="color: #000000">&gt;💻&lt;/</span><span style="color: #001080">a</span><span style="color: #000000">&gt; &lt;</span><span style="color: #267F99">a</span><span style="color: #000000"> </span><span style="color: #267F99">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://github.com/persian-tools/persian-tools/commits?author=mahdi-momeni&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">title</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;Tests&quot;</span><span style="color: #000000">&gt;⚠️&lt;/</span><span style="color: #001080">a</span><span style="color: #000000">&gt; &lt;</span><span style="color: #267F99">a</span><span style="color: #000000"> </span><span style="color: #267F99">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://github.com/persian-tools/persian-tools/commits?author=mahdi-momeni&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">title</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;Documentation&quot;</span><span style="color: #000000">&gt;📖&lt;/</span><span style="color: #001080">a</span><span style="color: #000000">&gt;&lt;/</span><span style="color: #267F99">td</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">    &lt;</span><span style="color: #001080">td</span><span style="color: #000000"> </span><span style="color: #001080">align</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;center&quot;</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">a</span><span style="color: #000000"> </span><span style="color: #267F99">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://dev.to/psparsa&quot;</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">img</span><span style="color: #000000"> </span><span style="color: #267F99">src</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://avatars.githubusercontent.com/u/57572461?v=4?s=100&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">width</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;100px;&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">alt</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;&quot;</span><span style="color: #000000">/&gt;&lt;</span><span style="color: #267F99">br</span><span style="color: #000000"> /&gt;&lt;</span><span style="color: #267F99">sub</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">b</span><span style="color: #000000">&gt;</span><span style="color: #0070C1">PS</span><span style="color: #000000">-</span><span style="color: #0070C1">PARSA</span><span style="color: #000000">&lt;/</span><span style="color: #001080">b</span><span style="color: #000000">&gt;&lt;/</span><span style="color: #267F99">sub</span><span style="color: #000000">&gt;&lt;/</span><span style="color: #267F99">a</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">br</span><span style="color: #000000"> /&gt;&lt;</span><span style="color: #267F99">a</span><span style="color: #000000"> </span><span style="color: #267F99">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://github.com/persian-tools/persian-tools/commits?author=psparsa&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">title</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;Tests&quot;</span><span style="color: #000000">&gt;⚠️&lt;/</span><span style="color: #001080">a</span><span style="color: #000000">&gt; &lt;</span><span style="color: #267F99">a</span><span style="color: #000000"> </span><span style="color: #267F99">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://github.com/persian-tools/persian-tools/commits?author=psparsa&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">title</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;Code&quot;</span><span style="color: #000000">&gt;💻&lt;/</span><span style="color: #001080">a</span><span style="color: #000000">&gt; &lt;</span><span style="color: #267F99">a</span><span style="color: #000000"> </span><span style="color: #267F99">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;#ideas-psparsa&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">title</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;Ideas, Planning, &amp; Feedback&quot;</span><span style="color: #000000">&gt;🤔&lt;/</span><span style="color: #001080">a</span><span style="color: #000000">&gt;&lt;/</span><span style="color: #267F99">td</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">    &lt;</span><span style="color: #001080">td</span><span style="color: #000000"> </span><span style="color: #001080">align</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;center&quot;</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">a</span><span style="color: #000000"> </span><span style="color: #267F99">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;http://amirduzandeh.ir/&quot;</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">img</span><span style="color: #000000"> </span><span style="color: #267F99">src</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://avatars.githubusercontent.com/u/16349391?v=4?s=100&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">width</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;100px;&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">alt</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;&quot;</span><span style="color: #000000">/&gt;&lt;</span><span style="color: #267F99">br</span><span style="color: #000000"> /&gt;&lt;</span><span style="color: #267F99">sub</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">b</span><span style="color: #000000">&gt;</span><span style="color: #001080">Amirhossein</span><span style="color: #000000"> </span><span style="color: #001080">Douzandeh</span><span style="color: #000000"> </span><span style="color: #001080">Zenoozi</span><span style="color: #000000">&lt;/</span><span style="color: #001080">b</span><span style="color: #000000">&gt;&lt;/</span><span style="color: #267F99">sub</span><span style="color: #000000">&gt;&lt;/</span><span style="color: #267F99">a</span><span style="color: #000000">&gt;&lt;</span><span style="color: #267F99">br</span><span style="color: #000000"> /&gt;&lt;</span><span style="color: #267F99">a</span><span style="color: #000000"> </span><span style="color: #267F99">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://github.com/persian-tools/persian-tools/commits?author=amirzenoozi&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">title</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;Code&quot;</span><span style="color: #000000">&gt;💻&lt;/</span><span style="color: #001080">a</span><span style="color: #000000">&gt; &lt;</span><span style="color: #267F99">a</span><span style="color: #000000"> </span><span style="color: #267F99">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;https://github.com/persian-tools/persian-tools/commits?author=amirzenoozi&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">title</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;Tests&quot;</span><span style="color: #000000">&gt;⚠️&lt;/</span><span style="color: #001080">a</span><span style="color: #000000">&gt; &lt;</span><span style="color: #267F99">a</span><span style="color: #000000"> </span><span style="color: #267F99">href</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;#ideas-amirzenoozi&quot;</span><span style="color: #000000"> </span><span style="color: #267F99">title</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;Ideas, Planning, &amp; Feedback&quot;</span><span style="color: #000000">&gt;🤔&lt;/</span><span style="color: #001080">a</span><span style="color: #000000">&gt;&lt;/</span><span style="color: #267F99">td</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">  &lt;/</span><span style="color: #001080">tr</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">&lt;/</span><span style="color: #001080">table</span><span style="color: #000000">&gt;</span>
+
+<span style="color: #000000">&lt;!-- </span><span style="color: #001080">markdownlint</span><span style="color: #000000">-</span><span style="color: #001080">restore</span><span style="color: #000000"> --&gt;</span>
+<span style="color: #000000">&lt;!-- </span><span style="color: #001080">prettier</span><span style="color: #000000">-</span><span style="color: #001080">ignore</span><span style="color: #000000">-</span><span style="color: #001080">end</span><span style="color: #000000"> --&gt;</span>
+
+<span style="color: #000000">&lt;!-- </span><span style="color: #0070C1">ALL</span><span style="color: #000000">-</span><span style="color: #0070C1">CONTRIBUTORS</span><span style="color: #000000">-</span><span style="color: #0070C1">LIST</span><span style="color: #000000">:</span><span style="color: #0070C1">END</span><span style="color: #000000"> --&gt;</span>
+
+<span style="color: #001080">This</span><span style="color: #000000"> </span><span style="color: #001080">project</span><span style="color: #000000"> </span><span style="color: #001080">follows</span><span style="color: #000000"> </span><span style="color: #001080">the</span><span style="color: #000000"> [</span><span style="color: #001080">all</span><span style="color: #000000">-</span><span style="color: #001080">contributors</span><span style="color: #000000">](</span><span style="color: #001080">https</span><span style="color: #000000">:</span><span style="color: #008000">//github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!</span>
+
+<span style="color: #000000">## </span><span style="color: #001080">Wallaby</span><span style="color: #000000">.</span><span style="color: #001080">js</span>
+
+<span style="color: #000000">[![</span><span style="color: #001080">Wallaby</span><span style="color: #000000">.</span><span style="color: #001080">js</span><span style="color: #000000">](</span><span style="color: #001080">https</span><span style="color: #000000">:</span><span style="color: #008000">//img.shields.io/badge/wallaby.js-powered-blue.svg?style=for-the-badge&amp;logo=github)](https://wallabyjs.com/oss/)</span>
+
+<span style="color: #001080">This</span><span style="color: #000000"> </span><span style="color: #001080">repository</span><span style="color: #000000"> </span><span style="color: #001080">contributors</span><span style="color: #000000"> </span><span style="color: #001080">are</span><span style="color: #000000"> </span><span style="color: #001080">welcome</span><span style="color: #000000"> </span><span style="color: #001080">to</span><span style="color: #000000"> </span><span style="color: #001080">use</span>
+<span style="color: #000000">[</span><span style="color: #001080">Wallaby</span><span style="color: #000000">.</span><span style="color: #001080">js</span><span style="color: #000000"> </span><span style="color: #0070C1">OSS</span><span style="color: #000000"> </span><span style="color: #001080">License</span><span style="color: #000000">](</span><span style="color: #001080">https</span><span style="color: #000000">:</span><span style="color: #008000">//wallabyjs.com/oss/) to get</span>
+<span style="color: #001080">test</span><span style="color: #000000"> </span><span style="color: #001080">results</span><span style="color: #000000"> </span><span style="color: #001080">immediately</span><span style="color: #000000"> </span><span style="color: #AF00DB">as</span><span style="color: #000000"> </span><span style="color: #267F99">you</span><span style="color: #000000"> </span><span style="color: #267F99">type</span><span style="color: #000000">, </span><span style="color: #001080">and</span><span style="color: #000000"> </span><span style="color: #001080">see</span><span style="color: #000000"> </span><span style="color: #001080">the</span><span style="color: #000000"> </span><span style="color: #001080">results</span><span style="color: #000000"> </span><span style="color: #0000FF">in</span>
+<span style="color: #001080">your</span><span style="color: #000000"> </span><span style="color: #001080">editor</span><span style="color: #000000"> </span><span style="color: #001080">right</span><span style="color: #000000"> </span><span style="color: #001080">next</span><span style="color: #000000"> </span><span style="color: #001080">to</span><span style="color: #000000"> </span><span style="color: #001080">your</span><span style="color: #000000"> </span><span style="color: #001080">code</span><span style="color: #000000">.</span>
+</code></pre>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -640,12 +700,6 @@
 					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="modules.html#plateresultapitypestring" class="tsd-kind-icon">Plate<wbr>Result<wbr>Api<wbr>Type<wbr>String</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="modules.html#numbertowords" class="tsd-kind-icon">Number<wbr>ToWords</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="modules.html#wordstonumber" class="tsd-kind-icon">Words<wbr>ToNumber</a>
 					</li>
 					<li class=" tsd-kind-variable">
 						<a href="modules.html#acceptablekeywords" class="tsd-kind-icon">acceptable<wbr>Keywords</a>
@@ -708,6 +762,9 @@
 						<a href="modules.html#ispersian" class="tsd-kind-icon">is<wbr>Persian</a>
 					</li>
 					<li class=" tsd-kind-function">
+						<a href="modules.html#numbertowords" class="tsd-kind-icon">number<wbr>ToWords</a>
+					</li>
+					<li class=" tsd-kind-function">
 						<a href="modules.html#phonenumberdetail" class="tsd-kind-icon">phone<wbr>Number<wbr>Detail</a>
 					</li>
 					<li class=" tsd-kind-function">
@@ -720,6 +777,9 @@
 						<a href="modules.html#removeordinalsuffix" class="tsd-kind-icon">remove<wbr>Ordinal<wbr>Suffix</a>
 					</li>
 					<li class=" tsd-kind-function">
+						<a href="modules.html#timeago" class="tsd-kind-icon">time<wbr>Ago</a>
+					</li>
+					<li class=" tsd-kind-function">
 						<a href="modules.html#topersianchars" class="tsd-kind-icon">to<wbr>Persian<wbr>Chars</a>
 					</li>
 					<li class=" tsd-kind-function">
@@ -727,6 +787,9 @@
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#verifyiraniannationalid" class="tsd-kind-icon">verify<wbr>Iranian<wbr>National<wbr>Id</a>
+					</li>
+					<li class=" tsd-kind-function tsd-has-type-parameter">
+						<a href="modules.html#wordstonumber" class="tsd-kind-icon">words<wbr>ToNumber</a>
 					</li>
 				</ul>
 			</nav>
