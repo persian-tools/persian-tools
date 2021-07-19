@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.2](https://github.com/persian-tools/persian-tools/compare/v1.6.1...v1.6.2) (2021-07-19)
+
+
+### Bug Fixes
+
+* **phoneNumber:** regex issue ([a94363c](https://github.com/persian-tools/persian-tools/commit/a94363c1f6a20f489351657aec44cdb2fd6d940c))
+* **README:** remove redundant examples and cleanup ([#83](https://github.com/persian-tools/persian-tools/issues/83)) ([2118932](https://github.com/persian-tools/persian-tools/commit/21189324ba998300dcd1c214cc750de03077fcd3))
+
 ### 1.6.2-beta.5 (2021-07-11)
 
 ### 1.6.2-beta.4 (2021-07-11)
