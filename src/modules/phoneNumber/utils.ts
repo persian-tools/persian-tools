@@ -211,10 +211,14 @@ export const operators: Record<string, OperatorModel> = {
  * 4. 09123456789
  * 4. 9123456789
  */
-export const mobileRegex = /(\+98|0|98|0098)?([ ]|-|[()]){0,2}9[0-9]([ ]|-|[()]){0,2}(?:[0-9]([ ]|-|[()]){0,2}){8}/;
+export const mobileRegex = /^(\+98|98|0098|0)?9\d{9}$/;
 
 export function getPhonePrefix(mobile: string): string {
-	const prefix = `${mobile}`.match(mobileRegex)?.[1] as string;
+	const phoneCountryPrefix = `${mobile}`.match(mobileRegex);
 
+	/* 
+		Remove country code from phone number then slice first 3 digits ( operator prefix ) 
+	*/
+	const prefix = phoneCountryPrefix && mobile.replace(phoneCountryPrefix![1], "").slice(0, 3);
 	return prefix || "";
 }

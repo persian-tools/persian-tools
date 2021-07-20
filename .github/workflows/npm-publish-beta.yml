@@ -1,0 +1,74 @@
+name: Beta Release
+
+on:
+    push:
+        branches: [develop]
+
+jobs:
+  release-beta:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+        - name: Setup Git
+          uses: fregante/setup-git-user@v1
+        - name: Standard Version
+          run: |
+            npm ci
+            npm run release:beta
+            git pull
+            git push --follow-tags origin develop
+
+  release-tag:
+      needs: release-beta
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+
+        - name: Get previous tag
+          id: previoustag
+          uses: "WyriHaximus/github-action-get-previous-tag@v1"
+          
+        - name: Release
+          run: |
+            CHANGELOG=$(sed -n "/^## \\[${{ env.VERSION }}\\]/,/^## /p" CHANGELOG.md | sed '1d;$d') && gh release create ${{ env.VERSION }} -t "${{ env.NAME }}" --notes "$CHANGELOG"
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            VERSION: ${{ steps.previoustag.outputs.tag }}
+            NAME: ${{ steps.previoustag.outputs.tag }}
+
+  publish-npm:
+    needs: release-tag
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+          registry-url: https://registry.npmjs.org/
+      - run: npm ci
+      - run: git pull
+      - run: npm publish --access public --tag beta
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
+  publish-gpr:
+    needs: release-tag
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+          registry-url: https://npm.pkg.github.com/
+      - run: npm ci
+      - run: git pull
+      - run: npm publish --access public --tag beta
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
