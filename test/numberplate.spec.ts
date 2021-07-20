@@ -50,7 +50,10 @@ describe("number plate module", () => {
 		expect(info1).toEqual({
 			type: "Car",
 			template: template1,
-			province: "مرکزی",
+			province: {
+				fa: "مرکزی",
+				en: "Markazi"
+			},
 			category: "شخصی",
 			details: {
 				firstTwoDigits: "12",
@@ -94,7 +97,10 @@ describe("number plate module", () => {
 		expect(info1).toEqual({
 			type: "Motorcycle",
 			template: template1,
-			province: "مرکز تهران",
+			province: {
+				fa: "مرکز تهران",
+				en: "Tehran"
+			},
 			category: null,
 			details: {
 				digits: "45478",
@@ -135,7 +141,10 @@ describe("number plate module", () => {
 			const plate1Info: PlateResultApi = {
 				type: "Car",
 				template: template1,
-				province: "مرکزی",
+				province: {
+					fa: "مرکزی",
+					en: "Markazi"
+				},
 				category: "شخصی",
 				details: {
 					firstTwoDigits: "12",
@@ -155,7 +164,10 @@ describe("number plate module", () => {
 			const info: PlateResultApi = {
 				type: "Motorcycle",
 				template: "121-45478",
-				province: "مرکز تهران",
+				province: {
+					fa: "مرکز تهران",
+					en: "Tehran"
+				},
 				category: null,
 				details: {
 					digits: "45478",
@@ -220,7 +232,10 @@ describe("number plate module", () => {
 			const info: PlateResultApi = {
 				type: "Car",
 				template: `12${"g"}451${"ایران"}47`,
-				province: "مرکزی",
+				province: {
+					fa: "مرکزی",
+					en: "Markazi"
+				},
 				category: null,
 				details: {
 					firstTwoDigits: "12",
@@ -285,7 +300,10 @@ describe("number plate module", () => {
 		expect(info1).toEqual({
 			type: "Car",
 			template: `12${"ب"}145${"ایران"}47`,
-			province: "مرکزی",
+			province: {
+				fa: "مرکزی",
+				en: "Markazi"
+			},
 			category: "شخصی",
 			details: {
 				firstTwoDigits: "12",
@@ -304,7 +322,10 @@ describe("number plate module", () => {
 		expect(info2).toEqual({
 			type: "Motorcycle",
 			template: "121-45478",
-			province: "مرکز تهران",
+			province: {
+				fa: "مرکز تهران",
+				en: "Tehran"
+			},
 			category: null,
 			details: {
 				digits: "45478",
