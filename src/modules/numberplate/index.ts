@@ -1,5 +1,5 @@
 import { plateDataset } from "./codes.skip";
-import { isPlateNumberValid, normalizePlate } from "./helpers";
+import { isPlateNumberValid, normalizePlate, findPlateProvince } from "./helpers";
 // Types
 import type {
 	NormalizedPlate,
@@ -75,7 +75,7 @@ export function carHandler(plate: NormalizedPlate): PlateResultApi {
 		5,
 	)}ایران${provinceCode}`;
 
-	const province = plateDataset.Car[provinceCode];
+	const province = findPlateProvince(provinceCode, 'Car');
 	const category = plate.char ? plateDataset.Category[plate.char] : null;
 	const details: PlateResultDetailModel = {
 		firstTwoDigits: plate.numbers.slice(0, 2),
@@ -97,7 +97,7 @@ export function motorcycleHandler(plate: NormalizedPlate): PlateResultApi {
 	const type: PlateResultApiTypeString = "Motorcycle";
 	const template = `${provinceCode}-${plate.numbers.slice(3)}`;
 
-	const province = plateDataset.Motorcycle[provinceCode];
+	const province = findPlateProvince(provinceCode, 'Motorcycle');
 	const details: PlateResultMotorcycleDetailModel = {
 		digits: plate.numbers.slice(3),
 		provinceCode: provinceCode.toString(),

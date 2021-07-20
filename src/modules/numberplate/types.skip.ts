@@ -57,7 +57,7 @@ export interface PlateResultMotorcycleDetailModel {
  */
 export interface PlateResultApi {
 	template: string;
-	province: string | null;
+	province: multiLangProvince | null;
 	type: PlateResultApiTypeString;
 	details: PlateResultDetailModel | PlateResultMotorcycleDetailModel;
 	category: string | null;
@@ -69,6 +69,7 @@ export interface PlateResultApi {
  */
 export type PlateOptions = string | PlateApi;
 export type ProvinceObject = Array<{ province: string; codes: Array<number> }>;
+export type multiLangProvince = { fa: string | Array<string>, en: string | Array<string> };
 
 export interface NormalizedPlate {
 	numbers: string;
