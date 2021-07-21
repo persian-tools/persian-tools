@@ -1,8 +1,7 @@
+import {MultiLangProvince} from './types.skip';
+
 export interface CarDataset {
-	[index: number]: {
-		fa : string | Array<string>,
-		en: string | Array<string>,
-	};
+	[index: number]: MultiLangProvince;
 }
 export interface CategoryDataset {
 	[index: string]: string;

@@ -1,4 +1,4 @@
-import { NormalizedPlate, PlateOptions } from "./types.skip";
+import {MultiLangProvince, NormalizedPlate, PlateOptions} from './types.skip';
 import { plateDataset } from "./codes.skip";
 
 export const normalizePlate = (plate: PlateOptions): NormalizedPlate => {
@@ -32,6 +32,6 @@ export const isPlateNumberValid = (numbers: string): boolean => {
 		.every((num) => +num !== 0);
 };
 
-export const findPlateProvince = (provinceCode : number, type: 'Car' | 'Motorcycle'): { fa: string | Array<string>, en: string | Array<string> } => {
+export const findPlateProvince = (provinceCode : number, type: 'Car' | 'Motorcycle'): MultiLangProvince => {
 	return plateDataset[type][provinceCode];
 };
