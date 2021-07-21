@@ -76,7 +76,7 @@ export function carHandler(plate: NormalizedPlate): PlateResultApi {
 	)}ایران${provinceCode}`;
 
 	const provinceDetails = findPlateProvince(provinceCode, 'Car');
-	const province = ( Array.isArray(provinceDetails['fa']) ? provinceDetails['fa'].join(' - ') : provinceDetails['fa'] );
+	const province = provinceDetails && ( Array.isArray(provinceDetails['fa'] ) ? provinceDetails['fa'].join(' - ') : provinceDetails['fa'] );
 	const category = plate.char ? plateDataset.Category[plate.char] : null;
 	const details: PlateResultDetailModel = {
 		firstTwoDigits: plate.numbers.slice(0, 2),
@@ -100,7 +100,7 @@ export function motorcycleHandler(plate: NormalizedPlate): PlateResultApi {
 	const template = `${provinceCode}-${plate.numbers.slice(3)}`;
 
 	const provinceDetails = findPlateProvince(provinceCode, 'Motorcycle');
-	const province = ( Array.isArray(provinceDetails['fa']) ? provinceDetails['fa'].join(' - ') : provinceDetails['fa'] );
+	const province = provinceDetails && ( Array.isArray(provinceDetails['fa']) ? provinceDetails['fa'].join(' - ') : provinceDetails['fa'] );
 	const details: PlateResultMotorcycleDetailModel = {
 		digits: plate.numbers.slice(3),
 		provinceCode: provinceCode.toString(),

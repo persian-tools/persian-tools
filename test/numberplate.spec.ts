@@ -50,7 +50,8 @@ describe("number plate module", () => {
 		expect(info1).toEqual({
 			type: "Car",
 			template: template1,
-			province: {
+			province: "مرکزی",
+			provinceDetails: {
 				fa: "مرکزی",
 				en: "Markazi"
 			},
@@ -75,6 +76,7 @@ describe("number plate module", () => {
 			type: "Car",
 			template: template2,
 			province: null,
+			provinceDetails: null,
 			category: null,
 			details: {
 				firstTwoDigits: "12",
@@ -97,7 +99,8 @@ describe("number plate module", () => {
 		expect(info1).toEqual({
 			type: "Motorcycle",
 			template: template1,
-			province: {
+			province: "مرکز تهران",
+			provinceDetails: {
 				fa: "مرکز تهران",
 				en: "Tehran"
 			},
@@ -120,6 +123,7 @@ describe("number plate module", () => {
 			type: "Motorcycle",
 			template: template2,
 			province: null,
+			provinceDetails: null,
 			category: null,
 			details: {
 				digits: "45118",
@@ -141,7 +145,8 @@ describe("number plate module", () => {
 			const plate1Info: PlateResultApi = {
 				type: "Car",
 				template: template1,
-				province: {
+				province: "مرکزی",
+				provinceDetails: {
 					fa: "مرکزی",
 					en: "Markazi"
 				},
@@ -164,7 +169,8 @@ describe("number plate module", () => {
 			const info: PlateResultApi = {
 				type: "Motorcycle",
 				template: "121-45478",
-				province: {
+				province: "مرکز تهران",
+				provinceDetails: {
 					fa: "مرکز تهران",
 					en: "Tehran"
 				},
@@ -192,6 +198,7 @@ describe("number plate module", () => {
 				type: "Car",
 				template: template1,
 				province: null,
+				provinceDetails: null,
 				category: null,
 				details: {
 					firstTwoDigits: "12",
@@ -213,6 +220,7 @@ describe("number plate module", () => {
 				type: "Motorcycle",
 				template: template2,
 				province: null,
+				provinceDetails: null,
 				category: null,
 				details: {
 					digits: "45118",
@@ -232,7 +240,8 @@ describe("number plate module", () => {
 			const info: PlateResultApi = {
 				type: "Car",
 				template: `12${"g"}451${"ایران"}47`,
-				province: {
+				province: "مرکزی",
+				provinceDetails: {
 					fa: "مرکزی",
 					en: "Markazi"
 				},
@@ -260,6 +269,7 @@ describe("number plate module", () => {
 				template: `12${"g"}451${"ایران"}50`, // province 50 does not exist
 				category: "دولتی",
 				province: null,
+				provinceDetails: null,
 				details: {
 					firstTwoDigits: "12",
 					nextThreeDigits: "451",
@@ -280,6 +290,7 @@ describe("number plate module", () => {
 				template: `100-45678`, // province 100 does not exist
 				category: null,
 				province: null,
+				provinceDetails: null,
 				details: {
 					digits: "45678",
 					provinceCode: "100"
@@ -300,7 +311,8 @@ describe("number plate module", () => {
 		expect(info1).toEqual({
 			type: "Car",
 			template: `12${"ب"}145${"ایران"}47`,
-			province: {
+			province: "مرکزی",
+			provinceDetails: {
 				fa: "مرکزی",
 				en: "Markazi"
 			},
@@ -322,7 +334,8 @@ describe("number plate module", () => {
 		expect(info2).toEqual({
 			type: "Motorcycle",
 			template: "121-45478",
-			province: {
+			province: "مرکز تهران",
+			provinceDetails: {
 				fa: "مرکز تهران",
 				en: "Tehran"
 			},
