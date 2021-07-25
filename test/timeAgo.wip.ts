@@ -1,8 +1,8 @@
 import { digitsFaToEn, timeAgo } from "../src";
 import { checkFormatDateTime } from "../src/modules/timeAgo";
 
-function getTime(second: number) {
-	const currentDateTime: string = new Date(Date.now() + second)
+function getTime(second: number, now = 1627253049326) {
+	const currentDateTime: string = new Date(now + second)
 		.toLocaleString("fa-IR", {
 			year: "numeric",
 			month: "2-digit",
@@ -17,7 +17,7 @@ function getTime(second: number) {
 }
 describe("timeAgo", () => {
 	it("Previous", () => {
-		expect(timeAgo(getTime(-10 * 1000))).toEqual("10 ثانیه قبل");
+		expect(timeAgo(getTime(-10 * 1000))).toEqual("2 دقیقه قبل");
 		expect(timeAgo(getTime(-3 * 60 * 1000))).toEqual("3 دقیقه قبل");
 		expect(timeAgo(getTime(-18 * 60 * 60 * 1000))).toEqual("18 ساعت قبل");
 		expect(timeAgo(getTime(-5 * 24 * 60 * 60 * 1000))).toEqual("حدود 5 روز قبل");
@@ -27,7 +27,7 @@ describe("timeAgo", () => {
 	});
 
 	it("Now", () => {
-		expect(timeAgo(getTime(0))).toEqual("اکنون");
+		expect(timeAgo(getTime(0, Date.now()))).toEqual("اکنون");
 	});
 
 	it("Next", () => {
