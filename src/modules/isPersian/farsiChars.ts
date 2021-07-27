@@ -1,7 +1,7 @@
 export const faAlphabet = "ابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهی";
 export const faNumber = "۰۱۲۳۴۵۶۷۸۹";
-export const faShortVowells = "َُِ";
+export const faShortVowels = "َُِ";
 export const faOthers = "‌آاً";
 export const faMixedWithArabic = "ًٌٍَُِّْٰٔءك‌ةۀأإيـئؤ،";
-export const faText = faAlphabet + faNumber + faShortVowells + faOthers;
+export const faText = faAlphabet + faNumber + faShortVowels + faOthers;
 export const faComplexText = faText + faMixedWithArabic;
