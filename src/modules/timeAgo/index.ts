@@ -28,8 +28,7 @@ export function convertToTimeStamp(datetime: string): number {
  * @returns {number} Calculates the timestamp of current date-time.
  */
 export function getTimeNow(): number {
-	const now = Date.now();
-	const currentDateTime: string = new Date(now)
+	const currentDateTime: string = new Date(Date.now())
 		.toLocaleString("fa-IR", {
 			year: "numeric",
 			month: "2-digit",
