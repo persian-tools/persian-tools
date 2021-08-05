@@ -8,7 +8,7 @@
 	"types": "./build/persian-tools.d.ts",
 	"sideEffect": false,
 	"scripts": {
-		"micro:build": "microbundle src/index.ts --compress --name persian-tools --strict",
+		"micro:build": "microbundle src/index.ts --compress --name PersianTools --strict",
 		"postmicro:build": "mv ./build/index.d.ts ./build/persian-tools.d.ts && rm -rf ./build/setupTests.d.ts",
 		"micro:dev": "microbundle watch",
 		"test": "jest",

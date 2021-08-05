@@ -2,7 +2,7 @@ import { digitsEnToFa, digitsFaToEn, digitsArToFa, digitsArToEn, digitsEnToAr } 
 
 describe("Digits converter", () => {
 	it("digitsArToFa", () => {
-		expect(digitsArToFa("٠١٢٣٤٥٦٧٨٩")).toEqual("٠١٢٣۴۵۶٧٨٩");
+		expect(digitsArToFa("٠١٢٣٤٥٦٧٨٩")).toEqual("۰۱۲۳۴۵۶۷۸۹");
 		expect(digitsArToFa("۸۹123۴۵")).toEqual("۸۹123۴۵");
 		try {
 			//@ts-ignore
@@ -11,11 +11,12 @@ describe("Digits converter", () => {
 			expect(e.message).toEqual("PersianTools: digitsArToFa - The input must be string");
 		}
 		expect(digitsArToFa("")).toEqual("");
-		expect(digitsArToFa("Text ٠١٢٣٤٥٦٧٨٩")).toEqual("Text ٠١٢٣۴۵۶٧٨٩");
+		expect(digitsArToFa("Text ٠١٢٣٤٥٦٧٨٩")).toEqual("Text ۰۱۲۳۴۵۶۷۸۹");
 	});
 
 	it("digitsArToEn", () => {
 		expect(digitsArToEn("۰۱۲۳٤٥٦۷۸۹")).toEqual("0123456789");
+		expect(digitsArToEn("٠٤٩٩٣٧٠٨٩٩")).toEqual("0499370899");
 		expect(digitsArToEn("89۱۲۳4٥")).toEqual("8912345");
 
 		try {

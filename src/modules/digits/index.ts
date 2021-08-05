@@ -1,5 +1,5 @@
 const faNums = "۰۱۲۳۴۵۶۷۸۹";
-const arNums = "۰۱۲۳٤٥٦۷۸۹";
+const arNums = ["۰۱۲۳٤٥٦۷۸۹", "٠١٢٣٤٥٦٧٨٩"];
 
 /**
  * digitsEnToFa
@@ -17,8 +17,7 @@ export function digitsEnToFa(value?: number | string): string {
 
 	let str = (!isString ? `${value}` : value) as string;
 	for (let i = 0; i < 10; i++) {
-		const replaceEnToFa = new RegExp(`${i}`, "g");
-		str = str.replace(replaceEnToFa, faNums[i]);
+		str = str.replace(new RegExp(`${i}`, "g"), faNums[i]);
 	}
 
 	return str;
@@ -39,8 +38,7 @@ export function digitsEnToAr(value?: number | string): string {
 
 	let str = `${value}`;
 	for (let i = 0; i < 10; i++) {
-		const replaceEnToAr = new RegExp(`${i}`, "g");
-		str = str.replace(replaceEnToAr, arNums[i]);
+		str = str.replace(new RegExp(`${i}`, "g"), arNums[0][i]);
 	}
 
 	return str;
@@ -60,8 +58,7 @@ export function digitsFaToEn(str: string): string {
 	}
 
 	for (let i = 0; i < 10; i++) {
-		const replaceFaToEn = new RegExp(faNums[i], "g");
-		str = str.replace(replaceFaToEn, `${i}`);
+		str = str.replace(new RegExp(faNums[i], "g"), `${i}`);
 	}
 
 	return str;
@@ -82,9 +79,7 @@ export function digitsArToFa(str: string): string {
 
 	let result = `${str}`;
 	for (let i = 0; i < 10; i++) {
-		const replaceArabicToPersian = new RegExp(arNums[i], "g");
-
-		result = result.replace(replaceArabicToPersian, faNums[i]);
+		result = result.replace(new RegExp(arNums[0][i] + "|" + arNums[1][i], "g"), faNums[i]);
 	}
 
 	return result;
@@ -105,8 +100,7 @@ export function digitsArToEn(str: string): string {
 
 	let result = str;
 	for (let i = 0; i < 10; i++) {
-		const replaceArabicToEnglish = new RegExp(arNums[i], "g");
-		result = String(result).replace(replaceArabicToEnglish, `${i}`);
+		result = String(result).replace(new RegExp(arNums[0][i] + "|" + arNums[1][i], "g"), `${i}`);
 	}
 
 	return result;
