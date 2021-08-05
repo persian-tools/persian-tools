@@ -15,3 +15,7 @@ export const replaceArray = (string: string, find: ReplaceArrayDictionary): stri
  * @type regex
  */
 export const ArabicContextualForms = /[ي|ﻱ|ﻲ|ﻚ|ك|ﻚ|ﺔ|ﺓ|ة]/g;
+
+export const kindOf = (inp: unknown): string => Object.prototype.toString.call(inp).slice(8, -1).toLowerCase();
+
+export const toPositive = (n: number): number => Math.abs(n);
