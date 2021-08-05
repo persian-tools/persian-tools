@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/persian-tools/persian-tools/compare/v1.6.3...v1.7.0) (2021-08-05)
+
+
+### Bug Fixes
+
+* change micro:build object name to PersianTools ([f4cc48d](https://github.com/persian-tools/persian-tools/commit/f4cc48de704427aa468730fa097f41649f5d29f9))
+* **#103:** digitsArToFa and digitsArToEn encoding issue ([4cd080b](https://github.com/persian-tools/persian-tools/commit/4cd080ba9b4063974d15d9c8287ffe3df36ec073)), closes [#103](https://github.com/persian-tools/persian-tools/issues/103)
+
+### [1.6.2-beta.5](https://github.com/persian-tools/persian-tools/compare/v1.6.2-beta.4...v1.6.2-beta.5) (2021-07-11)
+
+### [1.6.2-beta.4](https://github.com/persian-tools/persian-tools/compare/v1.6.2-beta.3...v1.6.2-beta.4) (2021-07-11)
+
+### [1.6.2-beta.3](https://github.com/persian-tools/persian-tools/compare/v1.6.2-beta.2...v1.6.2-beta.3) (2021-07-11)
+
+### [1.6.2-beta.2](https://github.com/persian-tools/persian-tools/compare/v1.6.2-beta.1...v1.6.2-beta.2) (2021-07-11)
+
+### [1.6.2-beta.1](https://github.com/persian-tools/persian-tools/compare/v1.6.2-beta.0...v1.6.2-beta.1) (2021-07-11)
+
+### [1.6.2-beta.0](https://github.com/persian-tools/persian-tools/compare/v1.6.1...v1.6.2-beta.0) (2021-07-11)
+
+
+### Features
+
+* **numberToWords:** make it functional ([0eba53b](https://github.com/persian-tools/persian-tools/commit/0eba53b1097161db8168924d03f977c07e4bd70b))
+* **Plate:** add details to Plate result ([#77](https://github.com/persian-tools/persian-tools/issues/77)) ([2ded9b3](https://github.com/persian-tools/persian-tools/commit/2ded9b32c2cee972593283d947effc1a855c8d63))
+* **wordsToNumber:** make it functional ([6538d88](https://github.com/persian-tools/persian-tools/commit/6538d889868abe979d3f1aea9a136cff1d24efa1))
+
+
+### Bug Fixes
+
+* **phoneNumber:** getPhonePrefix utility not returning the correct value ([#93](https://github.com/persian-tools/persian-tools/issues/93)) ([2686b39](https://github.com/persian-tools/persian-tools/commit/2686b399e60621165fc5b07c72b744327611c204))
+
 ### 1.6.2-beta.5 (2021-07-11)
 
 ### 1.6.2-beta.4 (2021-07-11)
