@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.7.1](https://github.com/persian-tools/persian-tools/compare/v1.7.0...v1.7.1) (2021-08-10)
+
+
+### Bug Fixes
+
+* bundle size and remove all source map files ([89577ad](https://github.com/persian-tools/persian-tools/commit/89577adcbcc4bf0c7439c2aa8c94436df7a6dd43))
+
 ## [1.7.0](https://github.com/persian-tools/persian-tools/compare/v1.6.3...v1.7.0) (2021-08-05)
 
 
