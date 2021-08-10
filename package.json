@@ -9,7 +9,7 @@
 	"sideEffect": false,
 	"scripts": {
 		"micro:build": "microbundle src/index.ts --compress --name PersianTools --strict",
-		"postmicro:build": "mv ./build/index.d.ts ./build/persian-tools.d.ts && rm -rf ./build/setupTests.d.ts",
+		"postmicro:build": "mv ./build/index.d.ts ./build/persian-tools.d.ts && npx rimraf ./build/setupTests.d.ts ./build/*.map",
 		"micro:dev": "microbundle watch",
 		"test": "cross-env NODE_ENV=test jest",
 		"lint": "eslint \"src/**/*.{ts,json}\" --max-warnings=0",
