@@ -1,30 +1,50 @@
-import { Sheba } from "../src";
+import { isShebaValid, getShebaInfo, shebaIso7064Mod97 } from "../src/modules/sheba";
 
 describe("Sheba", () => {
-	it("Verify, Should be truthy", () => {
-		expect(new Sheba("IR820540102680020817909002").validate()).toBeTruthy();
+	it("isShebaValid Should return true", () => {
+		expect(isShebaValid("IR820540102680020817909002")).toBeTruthy();
+		expect(isShebaValid("IR550570022080013447370101")).toBeTruthy();
 	});
 
-	it("Verify, Should be falsy", () => {
-		expect(new Sheba("IR01234567890123456789").validate()).toBeFalsy();
-		expect(new Sheba("IR012345678901234567890123456789").validate()).toBeFalsy();
-		expect(new Sheba("IR01234567890123456789").validate()).toBeFalsy();
-		expect(new Sheba("IR012345678901234567890123").validate()).toBeFalsy();
-		expect(new Sheba("IR012345678901234567890123").validate()).toBeFalsy();
+	it("isShebaValid Should return false", () => {
+		expect(isShebaValid("IR01234567890123456789")).toBeFalsy();
+		expect(isShebaValid("IR012345678901234567890123456789")).toBeFalsy();
+		expect(isShebaValid("IR012345678901234567890123")).toBeFalsy();
+		expect(isShebaValid("012345678901234567890123")).toBeFalsy();
 	});
 
-	it("Recognize", () => {
-		expect(new Sheba("IR820540102680020817909002").recognize()).toEqual(
+	it("shebaIso7064Mod97 should return true value", () => {
+		expect(shebaIso7064Mod97("820540102680020817909002")).toEqual(1);
+		expect(shebaIso7064Mod97("550570022080013447370101")).toEqual(6);
+	});
+
+	it("shebaIso7064Mod97 should return wrong value", () => {
+		expect(shebaIso7064Mod97("012345678901234567890123456789")).toEqual(44);
+		expect(shebaIso7064Mod97("01234567890123456789")).toEqual(10);
+		expect(shebaIso7064Mod97("012345678901234567890123")).toEqual(19);
+	});
+
+	it("getShebaInfo should works", () => {
+		expect(getShebaInfo("IR820540102680020817909002")).toEqual(
 			expect.objectContaining({
 				nickname: "parsian",
 				accountNumber: "020817909002",
 				code: "054",
 			}),
 		);
+		expect(getShebaInfo("IR550570022080013447370101")).toEqual({
+			accountNumber: "220800134473701",
+			accountNumberAvailable: true,
+			code: "057",
+			formattedAccountNumber: "220-800-13447370-1",
+			name: "Pasargad Bank",
+			nickname: "pasargad",
+			persianName: "بانک پاسارگاد",
+		});
 	});
 
-	it("Recognize should be falsy", () => {
-		expect(new Sheba("IR012345678901234567890123").recognize()).toBeFalsy();
-		expect(new Sheba("IR012345678A01234567890123").recognize()).toBeFalsy();
+	it("getShebaInfo should return null", () => {
+		expect(getShebaInfo("IR012345678901234567890123")).toBeFalsy();
+		expect(getShebaInfo("IR012345678A01234567890123")).toBeFalsy();
 	});
 });
