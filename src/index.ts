@@ -31,7 +31,7 @@ export { default as halfSpace } from "./modules/halfSpace";
 // Bill info
 export { default as Bill } from "./modules/bill";
 // Sheba
-export { default as Sheba } from "./modules/sheba";
+export * from "./modules/sheba";
 // Number plate
 export {
 	default as Plate,

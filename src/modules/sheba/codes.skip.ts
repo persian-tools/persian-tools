@@ -13,125 +13,125 @@ export interface ShebaResult {
 	formattedAccountNumber?: string;
 	process?: (str: string) => ShebaProcess;
 }
-
-export const codesSkip: Array<ShebaResult> = [
-	{
+export type ShebaMapCodes = Record<string, ShebaResult>;
+export const shebaMapCodes: ShebaMapCodes = {
+	10: {
+		code: "010",
 		nickname: "central-bank",
 		name: "Central Bank of Iran",
 		persianName: "بانک مرکزی جمهوری اسلامی ایران",
-		code: "010",
 		accountNumberAvailable: false,
 	},
-	{
+	11: {
+		code: "011",
 		nickname: "sanat-o-madan",
 		name: "Sanat O Madan Bank",
 		persianName: "بانک صنعت و معدن",
-		code: "011",
 		accountNumberAvailable: false,
 	},
-	{
+	12: {
+		code: "012",
 		nickname: "mellat",
 		name: "Mellat Bank",
 		persianName: "بانک ملت",
-		code: "012",
 		accountNumberAvailable: false,
 	},
-	{
+	13: {
+		code: "013",
 		nickname: "refah",
 		name: "Refah Bank",
 		persianName: "بانک رفاه کارگران",
-		code: "013",
 		accountNumberAvailable: false,
 	},
-	{
+	14: {
+		code: "014",
 		nickname: "maskan",
 		name: "Maskan Bank",
 		persianName: "بانک مسکن",
-		code: "014",
 		accountNumberAvailable: false,
 	},
-	{
+	15: {
+		code: "015",
 		nickname: "sepah",
 		name: "Sepah Bank",
 		persianName: "بانک سپه",
-		code: "015",
 		accountNumberAvailable: false,
 	},
-	{
+	16: {
+		code: "016",
 		nickname: "keshavarzi",
 		name: "Keshavarzi",
 		persianName: "بانک کشاورزی",
-		code: "016",
 		accountNumberAvailable: false,
 	},
-	{
+	17: {
+		code: "017",
 		nickname: "melli",
 		name: "Melli",
 		persianName: "بانک ملی ایران",
-		code: "017",
 		accountNumberAvailable: false,
 	},
-	{
+	18: {
+		code: "018",
 		nickname: "tejarat",
 		name: "Tejarat Bank",
 		persianName: "بانک تجارت",
-		code: "018",
 		accountNumberAvailable: false,
 	},
-	{
+	19: {
+		code: "019",
 		nickname: "saderat",
 		name: "Saderat Bank",
 		persianName: "بانک صادرات ایران",
-		code: "019",
 		accountNumberAvailable: false,
 	},
-	{
+	20: {
+		code: "020",
 		nickname: "tosee-saderat",
 		name: "Tose Saderat Bank",
 		persianName: "بانک توسعه صادرات",
-		code: "020",
 		accountNumberAvailable: false,
 	},
-	{
+	21: {
+		code: "021",
 		nickname: "post",
 		name: "Post Bank",
 		persianName: "پست بانک ایران",
-		code: "021",
 		accountNumberAvailable: false,
 	},
-	{
+	22: {
+		code: "022",
 		nickname: "toose-taavon",
 		name: "Tosee Taavon Bank",
 		persianName: "بانک توسعه تعاون",
-		code: "022",
 		accountNumberAvailable: false,
 	},
-	{
+	51: {
+		code: "051",
 		nickname: "tosee",
 		name: "Tosee Bank",
 		persianName: "موسسه اعتباری توسعه",
-		code: "051",
 		accountNumberAvailable: false,
 	},
-	{
+	52: {
+		code: "052",
 		nickname: "ghavamin",
 		name: "Ghavamin Bank",
 		persianName: "بانک قوامین",
-		code: "052",
 		accountNumberAvailable: false,
 	},
-	{
+	53: {
+		code: "053",
 		nickname: "karafarin",
 		name: "Karafarin Bank",
 		persianName: "بانک کارآفرین",
-		code: "053",
 		accountNumberAvailable: false,
 	},
-	{
+	54: {
+		code: "054",
 		nickname: "parsian",
 		name: "Parsian Bank",
 		persianName: "بانک پارسیان",
-		code: "054",
 		accountNumberAvailable: true,
 		process(str: string): ShebaProcess {
 			str = str.substring(14);
@@ -143,25 +143,25 @@ export const codesSkip: Array<ShebaResult> = [
 			};
 		},
 	},
-	{
+	55: {
+		code: "055",
 		nickname: "eghtesad-novin",
 		name: "Eghtesad Novin Bank",
 		persianName: "بانک اقتصاد نوین",
-		code: "055",
 		accountNumberAvailable: false,
 	},
-	{
+	56: {
+		code: "056",
 		nickname: "saman",
 		name: "Saman Bank",
 		persianName: "بانک سامان",
-		code: "056",
 		accountNumberAvailable: false,
 	},
-	{
+	57: {
+		code: "057",
 		nickname: "pasargad",
 		name: "Pasargad Bank",
 		persianName: "بانک پاسارگاد",
-		code: "057",
 		accountNumberAvailable: true,
 		process(str: string): ShebaProcess {
 			str = str.substring(7);
@@ -178,32 +178,32 @@ export const codesSkip: Array<ShebaResult> = [
 			};
 		},
 	},
-	{
+	58: {
+		code: "058",
 		nickname: "sarmayeh",
 		name: "Sarmayeh Bank",
 		persianName: "بانک سرمایه",
-		code: "058",
 		accountNumberAvailable: false,
 	},
-	{
+	59: {
+		code: "059",
 		nickname: "sina",
 		name: "Sina Bank",
 		persianName: "بانک سینا",
-		code: "059",
 		accountNumberAvailable: false,
 	},
-	{
+	60: {
+		code: "060",
 		nickname: "mehr-iran",
 		name: "Mehr Iran Bank",
 		persianName: "بانک مهر ایران",
-		code: "060",
 		accountNumberAvailable: false,
 	},
-	{
+	61: {
+		code: "061",
 		nickname: "shahr",
 		name: "City Bank",
 		persianName: "بانک شهر",
-		code: "061",
 		accountNumberAvailable: true,
 		process(str: string): ShebaProcess {
 			str = str.substring(7);
@@ -217,114 +217,102 @@ export const codesSkip: Array<ShebaResult> = [
 			};
 		},
 	},
-	{
+	62: {
+		code: "062",
 		nickname: "ayandeh",
 		name: "Ayandeh Bank",
 		persianName: "بانک آینده",
-		code: "062",
 		accountNumberAvailable: false,
 	},
-	{
+	63: {
+		code: "063",
 		nickname: "ansar",
 		name: "Ansar Bank",
 		persianName: "بانک انصار",
-		code: "063",
 		accountNumberAvailable: false,
 	},
-	{
+	64: {
+		code: "064",
 		nickname: "gardeshgari",
 		name: "Gardeshgari Bank",
 		persianName: "بانک گردشگری",
-		code: "064",
 		accountNumberAvailable: false,
 	},
-	{
+	65: {
+		code: "065",
 		nickname: "hekmat-iranian",
 		name: "Hekmat Iranian Bank",
 		persianName: "بانک حکمت ایرانیان",
-		code: "065",
 		accountNumberAvailable: false,
 	},
-	{
+	66: {
+		code: "066",
 		nickname: "dey",
 		name: "Dey Bank",
 		persianName: "بانک دی",
-		code: "066",
 		accountNumberAvailable: false,
 	},
-	{
+	69: {
+		code: "069",
 		nickname: "iran-zamin",
 		name: "Iran Zamin Bank",
 		persianName: "بانک ایران زمین",
-		code: "069",
 		accountNumberAvailable: false,
 	},
-	{
+	70: {
+		code: "070",
 		nickname: "resalat",
 		name: "Resalat Bank",
 		persianName: "بانک قرض الحسنه رسالت",
-		code: "070",
 		accountNumberAvailable: false,
 	},
-	{
+	73: {
+		code: "073",
 		nickname: "kosar",
 		name: "Kosar Credit Institute",
 		persianName: "موسسه اعتباری کوثر",
-		code: "073",
 		accountNumberAvailable: false,
 	},
-	{
+	75: {
+		code: "075",
 		nickname: "melal",
 		name: "Melal Credit Institute",
 		persianName: "موسسه اعتباری ملل",
-		code: "075",
 		accountNumberAvailable: false,
 	},
-	{
+	78: {
+		code: "078",
 		nickname: "middle-east-bank",
 		name: "Middle East Bank",
 		persianName: "بانک خاورمیانه",
-		code: "078",
 		accountNumberAvailable: false,
 	},
-	{
+	80: {
+		code: "080",
 		nickname: "noor-bank",
 		name: "Noor Credit Institution",
 		persianName: "موسسه اعتباری نور",
-		code: "080",
 		accountNumberAvailable: false,
 	},
-	{
+	79: {
+		code: "079",
 		nickname: "mehr-eqtesad",
 		name: "Mehr Eqtesad Bank",
 		persianName: "بانک مهر اقتصاد",
-		code: "079",
 		accountNumberAvailable: false,
 	},
-	{
+	90: {
+		code: "090",
 		nickname: "mehr-iran",
 		name: "Mehr Iran Bank",
 		persianName: "بانک مهر ایران",
-		code: "090",
 		accountNumberAvailable: false,
 	},
-	{
+	95: {
+		code: "095",
 		nickname: "iran-venezuela",
 		name: "Iran and Venezuela Bank",
 		persianName: "بانک ایران و ونزوئلا",
-		code: "095",
 		accountNumberAvailable: false,
 	},
-];
-
-export interface ShebaHashTable {
-	[code: string]: ShebaResult;
-}
-
-const shebaHashTable: ShebaHashTable = {};
-for (let i = 0; i < codesSkip.length; i++) {
-	const bank = codesSkip[i];
-	shebaHashTable[bank.code] = bank;
-}
-
-export { shebaHashTable };
+};
