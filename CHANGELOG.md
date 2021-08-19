@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0-beta.0](https://github.com/persian-tools/persian-tools/compare/v1.7.1...v1.8.0-beta.0) (2021-08-19)
+
+
+### Features
+
+* **Sheba:** make it functional to be more tree-shakeable ([9f9c0e5](https://github.com/persian-tools/persian-tools/commit/9f9c0e5d49d9395ca8108da072d63ddb9163fb41))
+
 ### [1.7.1](https://github.com/persian-tools/persian-tools/compare/v1.7.0...v1.7.1) (2021-08-10)
 
 
