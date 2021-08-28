@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/persian-tools/persian-tools/compare/v1.8.0-beta.0...v2.0.0) (2021-08-28)
+
+
+### ⚠ BREAKING CHANGES
+
+* **README:** update the Sheba section which is now written in functional
+
+* **README:** update the Sheba section which is now written in functional ([4451df1](https://github.com/persian-tools/persian-tools/commit/4451df156868be457ca456da5af6448b7e8ee1ef))
+
 ## [1.8.0-beta.0](https://github.com/persian-tools/persian-tools/compare/v1.7.1...v1.8.0-beta.0) (2021-08-19)
 
 
