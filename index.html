@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Persian Tools - v1.7.1</title>
-	<meta name="description" content="Documentation for Persian Tools - v1.7.1">
+	<title>Persian Tools - v2.0.0</title>
+	<meta name="description" content="Documentation for Persian Tools - v2.0.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
 	<script async src="assets/js/search.js" id="search-script"></script>
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">Persian Tools - v1.7.1</a>
+					<a href="index.html" class="title">Persian Tools - v2.0.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -48,7 +48,7 @@
 	</div>
 	<div class="tsd-page-title">
 		<div class="container">
-			<h1>Persian Tools - v1.7.1</h1>
+			<h1>Persian Tools - v2.0.0</h1>
 		</div>
 	</div>
 </header>
@@ -373,19 +373,19 @@
 					<h3>Iranian Sheba(IBAN)</h3>
 				</a>
 				<ul>
-					<li>Check validation<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Sheba</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
+					<li>Check validation<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">isShebaValid</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
 
 </code></pre>
 					</li>
 				</ul>
-				<p>new Sheba(&quot;IR820540102680020817909002&quot;).validate(); // true
-				new Sheba(&quot;IR01234567890123456789&quot;).validate() // false</p>
+				<p>isShebaValid(&quot;IR820540102680020817909002&quot;); // true
+				isShebaValid(&quot;IR01234567890123456789&quot;); // false</p>
 				<pre><code>
 <span style="color: #000000">- </span><span style="color: #001080">Recognize</span><span style="color: #000000"> </span><span style="color: #001080">bank</span><span style="color: #000000"> </span><span style="color: #001080">information</span>
 <span style="color: #A31515">```javascript</span>
-<span style="color: #A31515">import { Sheba } from &quot;@persian-tools/persian-tools&quot;;</span>
+<span style="color: #A31515">import { getShebaInfo } from &quot;@persian-tools/persian-tools&quot;;</span>
 
-<span style="color: #A31515">new Sheba(&quot;IR820540102680020817909002&quot;).recognize();</span>
+<span style="color: #A31515">getShebaInfo(&quot;IR820540102680020817909002&quot;);</span>
 <span style="color: #A31515">/*</span>
 <span style="color: #A31515"> Result: {</span>
 <span style="color: #A31515">    &quot;nickname&quot;: &quot;parsian&quot;,</span>
@@ -665,9 +665,6 @@
 					<li class=" tsd-kind-class">
 						<a href="classes/bill.html" class="tsd-kind-icon">Bill</a>
 					</li>
-					<li class=" tsd-kind-class">
-						<a href="classes/sheba.html" class="tsd-kind-icon">Sheba</a>
-					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/extractcardnumber.html" class="tsd-kind-icon">Extract<wbr>Card<wbr>Number</a>
 					</li>
@@ -693,6 +690,12 @@
 						<a href="interfaces/plateresultapi.html" class="tsd-kind-icon">Plate<wbr>Result<wbr>Api</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/shebaprocess.html" class="tsd-kind-icon">Sheba<wbr>Process</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/shebaresult.html" class="tsd-kind-icon">Sheba<wbr>Result</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/wordstonumberoptions.html" class="tsd-kind-icon">Words<wbr>ToNumber<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
@@ -701,11 +704,23 @@
 					<li class=" tsd-kind-type-alias">
 						<a href="modules.html#plateresultapitypestring" class="tsd-kind-icon">Plate<wbr>Result<wbr>Api<wbr>Type<wbr>String</a>
 					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#shebamapcodes" class="tsd-kind-icon">Sheba<wbr>Map<wbr>Codes</a>
+					</li>
 					<li class=" tsd-kind-variable">
 						<a href="modules.html#acceptablekeywords" class="tsd-kind-icon">acceptable<wbr>Keywords</a>
 					</li>
 					<li class=" tsd-kind-variable">
 						<a href="modules.html#cardnumberregex" class="tsd-kind-icon">card<wbr>Number<wbr>Regex</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#shebamapcodes" class="tsd-kind-icon">sheba<wbr>Map<wbr>Codes</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#shebapattern" class="tsd-kind-icon">sheba<wbr>Pattern</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#shebapatterncode" class="tsd-kind-icon">sheba<wbr>Pattern<wbr>Code</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#plate" class="tsd-kind-icon">Plate</a>
@@ -747,6 +762,9 @@
 						<a href="modules.html#getplacebyirannationalid" class="tsd-kind-icon">get<wbr>Place<wbr>ByIran<wbr>National<wbr>Id</a>
 					</li>
 					<li class=" tsd-kind-function">
+						<a href="modules.html#getshebainfo" class="tsd-kind-icon">get<wbr>Sheba<wbr>Info</a>
+					</li>
+					<li class=" tsd-kind-function">
 						<a href="modules.html#halfspace" class="tsd-kind-icon">half<wbr>Space</a>
 					</li>
 					<li class=" tsd-kind-function">
@@ -762,6 +780,9 @@
 						<a href="modules.html#ispersian" class="tsd-kind-icon">is<wbr>Persian</a>
 					</li>
 					<li class=" tsd-kind-function">
+						<a href="modules.html#isshebavalid" class="tsd-kind-icon">is<wbr>Sheba<wbr>Valid</a>
+					</li>
+					<li class=" tsd-kind-function">
 						<a href="modules.html#numbertowords" class="tsd-kind-icon">number<wbr>ToWords</a>
 					</li>
 					<li class=" tsd-kind-function">
@@ -775,6 +796,9 @@
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#removeordinalsuffix" class="tsd-kind-icon">remove<wbr>Ordinal<wbr>Suffix</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-private">
+						<a href="modules.html#shebaiso7064mod97" class="tsd-kind-icon">sheba<wbr>Iso7064<wbr>Mod97</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#timeago" class="tsd-kind-icon">time<wbr>Ago</a>
@@ -802,7 +826,6 @@
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
 				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
