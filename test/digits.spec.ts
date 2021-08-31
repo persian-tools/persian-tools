@@ -1,4 +1,4 @@
-import { digitsEnToFa, digitsFaToEn, digitsArToFa, digitsArToEn, digitsEnToAr } from "../src";
+import { digitsEnToFa, digitsFaToEn, digitsFaToAr, digitsArToFa, digitsArToEn, digitsEnToAr } from "../src";
 
 describe("Digits converter", () => {
 	it("digitsArToFa", () => {
@@ -79,6 +79,18 @@ describe("Digits converter", () => {
 			digitsFaToEn();
 		} catch (e) {
 			expect(e.message).toEqual("PersianTools: digitsFaToEn - The input must be string");
+		}
+	});
+
+	it("digitsFaToAr", () => {
+		expect(digitsFaToAr("۰۱۲۳۴۵۶۷۸۹")).toEqual("۰۱۲۳٤٥٦۷۸۹");
+		expect(digitsFaToAr("۱۷۸۲۳۴۰۵۶۹")).toEqual("۱۷۸۲۳٤۰٥٦۹");
+		expect(digitsFaToAr("۷۸٤۲۳٤۴")).toEqual("۷۸٤۲۳٤٤");
+		try {
+			//@ts-ignore
+			digitsFaToAr();
+		} catch (e) {
+			expect(e.message).toEqual("PersianTools: digitsFaToAr - The input must be string");
 		}
 	});
 });

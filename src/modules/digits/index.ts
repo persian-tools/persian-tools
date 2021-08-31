@@ -59,6 +59,21 @@ export const digitsFaToEn: DigitsFaToEn = (value) => {
 	return strConverter({ str: String(value), originCharList: faNums, destCharList: enNums });
 };
 
+type DigitsFaToAr = (value: string) => string;
+/**
+ * digitsFaToAr
+ *
+ * @category Digits
+ * @description Takes a string made of English digits only, and
+ * returns a string that represents the same number but with
+ * Persian digits
+ */
+export const digitsFaToAr: DigitsFaToAr = (value) => {
+	if (typeof value !== "string") throw TypeError("PersianTools: digitsFaToAr - The input must be string");
+
+	return strConverter({ str: String(value), originCharList: faNums, destCharList: arNums });
+};
+
 type DigitsArToFa = (value: string) => string;
 /**
  * digitsArToFa
