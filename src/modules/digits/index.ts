@@ -17,9 +17,9 @@ type DigitsEnToFa = (value: number | string) => string;
  * digitsEnToFa
  *
  * @category Digits
- * @description Takes a string made of English digits only, and
- * returns a string that represents the same number but with
- * Persian digits
+ * @description Takes a string or number and
+ * returns a string that represents the same value but
+ * its english digits are replaced with farsi digits
  */
 export const digitsEnToFa: DigitsEnToFa = (value) => {
 	if (typeof value !== "string" && typeof value !== "number")
@@ -33,9 +33,9 @@ type DigitsEnToAr = (value: number | string) => string;
  * digitsEnToAr
  *
  * @category Digits
- * @description Takes a string made of English digits only, and
- * returns a string that represents the same number but with
- * Arabic digits
+ * @description Takes a string or number and
+ * returns a string that represents the same value but
+ * its english digits are replaced with arabic digits
  */
 export const digitsEnToAr: DigitsEnToAr = (value) => {
 	if (typeof value !== "string" && typeof value !== "number")
@@ -49,9 +49,9 @@ type DigitsFaToEn = (value: string) => string;
  * digitsFaToEn
  *
  * @category Digits
- * @description Takes a string made of English digits only, and
- * returns a string that represents the same number but with
- * Persian digits
+ * @description Takes a string and
+ * returns a string that represents the same value but
+ * its farsi digits are replaced with english digits
  */
 export const digitsFaToEn: DigitsFaToEn = (value) => {
 	if (typeof value !== "string") throw TypeError("PersianTools: digitsFaToEn - The input must be string");
@@ -64,9 +64,9 @@ type DigitsFaToAr = (value: string) => string;
  * digitsFaToAr
  *
  * @category Digits
- * @description Takes a string made of English digits only, and
- * returns a string that represents the same number but with
- * Persian digits
+ * @description Takes a string and
+ * returns a string that represents the same value but
+ * its farsi digits are replaced with arabic digits
  */
 export const digitsFaToAr: DigitsFaToAr = (value) => {
 	if (typeof value !== "string") throw TypeError("PersianTools: digitsFaToAr - The input must be string");
@@ -79,9 +79,9 @@ type DigitsArToFa = (value: string) => string;
  * digitsArToFa
  *
  * @category Digits
- * @description Takes a string that contains digits, and
- * replaces all Arabic digits with the corresponding Persian
- * digits
+ * @description Takes a string and
+ * returns a string that represents the same value but
+ * its arabic digits are replaced with farsi digits
  */
 export const digitsArToFa: DigitsArToFa = (value) => {
 	if (typeof value !== "string") throw TypeError("PersianTools: digitsArToFa - The input must be string");
@@ -94,9 +94,9 @@ type DigitsArToEn = (value: string) => string;
  * digitsArToEn
  *
  * @category Digits
- * @description Takes a string that contains digits, and
- * replaces all Arabic digits with the corresponding English
- * digits
+ * @description Takes a string and
+ * returns a string that represents the same value but
+ * its arabic digits are replaced with english digits
  */
 export const digitsArToEn: DigitsArToEn = (value) => {
 	if (typeof value !== "string") throw TypeError("PersianTools: digitsArToEn - The input must be string");
