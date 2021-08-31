@@ -1,6 +1,18 @@
-const faNums = "۰۱۲۳۴۵۶۷۸۹";
-const arNums = "۰۱۲۳٤٥٦۷۸۹";
+const enNums = "0123456789".split("");
+const faNums = "۰۱۲۳۴۵۶۷۸۹".split("");
+const arNums = "۰۱۲۳٤٥٦۷۸۹".split("");
 
+type StrConverter = (arg: { str: string; originCharList: string[]; destCharList: string[] }) => string;
+const strConverter: StrConverter = ({ str, originCharList, destCharList }) =>
+	str
+		.split("")
+		.map((char) => {
+			const charIndex = originCharList.indexOf(char);
+			return charIndex > -1 ? destCharList[charIndex] : char;
+		})
+		.join("");
+
+type DigitsEnToFa = (value: number | string) => string;
 /**
  * digitsEnToFa
  *
@@ -9,21 +21,14 @@ const arNums = "۰۱۲۳٤٥٦۷۸۹";
  * returns a string that represents the same number but with
  * Persian digits
  */
-export function digitsEnToFa(value?: number | string): string {
-	const isString = typeof value === "string";
-	if (typeof value !== "number" && !isString) {
-		throw new TypeError("PersianTools: digitsEnToFa - The input must be string or number");
-	}
+export const digitsEnToFa: DigitsEnToFa = (value) => {
+	if (typeof value !== "string" && typeof value !== "number")
+		throw TypeError("PersianTools: digitsEnToFa - The input must be string or number");
 
-	let str = (!isString ? `${value}` : value) as string;
-	for (let i = 0; i < 10; i++) {
-		const replaceEnToFa = new RegExp(`${i}`, "g");
-		str = str.replace(replaceEnToFa, faNums[i]);
-	}
+	return strConverter({ str: String(value), originCharList: enNums, destCharList: faNums });
+};
 
-	return str;
-}
-
+type DigitsEnToAr = (value: number | string) => string;
 /**
  * digitsEnToAr
  *
@@ -32,20 +37,14 @@ export function digitsEnToFa(value?: number | string): string {
  * returns a string that represents the same number but with
  * Arabic digits
  */
-export function digitsEnToAr(value?: number | string): string {
-	if (typeof value !== "number" && typeof value !== "string") {
-		throw new TypeError("PersianTools: digitsEnToAr - The input must be number or string");
-	}
+export const digitsEnToAr: DigitsEnToAr = (value) => {
+	if (typeof value !== "string" && typeof value !== "number")
+		throw TypeError("PersianTools: digitsEnToAr - The input must be number or string");
 
-	let str = `${value}`;
-	for (let i = 0; i < 10; i++) {
-		const replaceEnToAr = new RegExp(`${i}`, "g");
-		str = str.replace(replaceEnToAr, arNums[i]);
-	}
+	return strConverter({ str: String(value), originCharList: enNums, destCharList: arNums });
+};
 
-	return str;
-}
-
+type DigitsFaToEn = (value: string) => string;
 /**
  * digitsFaToEn
  *
@@ -54,19 +53,13 @@ export function digitsEnToAr(value?: number | string): string {
  * returns a string that represents the same number but with
  * Persian digits
  */
-export function digitsFaToEn(str: string): string {
-	if (typeof str !== "string") {
-		throw new Error("PersianTools: digitsFaToEn - The input must be string");
-	}
+export const digitsFaToEn: DigitsFaToEn = (value) => {
+	if (typeof value !== "string") throw TypeError("PersianTools: digitsFaToEn - The input must be string");
 
-	for (let i = 0; i < 10; i++) {
-		const replaceFaToEn = new RegExp(faNums[i], "g");
-		str = str.replace(replaceFaToEn, `${i}`);
-	}
+	return strConverter({ str: String(value), originCharList: faNums, destCharList: enNums });
+};
 
-	return str;
-}
-
+type DigitsArToFa = (value: string) => string;
 /**
  * digitsArToFa
  *
@@ -75,21 +68,13 @@ export function digitsFaToEn(str: string): string {
  * replaces all Arabic digits with the corresponding Persian
  * digits
  */
-export function digitsArToFa(str: string): string {
-	if (typeof str !== "string") {
-		throw new TypeError("PersianTools: digitsArToFa - The input must be string");
-	}
+export const digitsArToFa: DigitsArToFa = (value) => {
+	if (typeof value !== "string") throw TypeError("PersianTools: digitsArToFa - The input must be string");
 
-	let result = `${str}`;
-	for (let i = 0; i < 10; i++) {
-		const replaceArabicToPersian = new RegExp(arNums[i], "g");
+	return strConverter({ str: String(value), originCharList: arNums, destCharList: faNums });
+};
 
-		result = result.replace(replaceArabicToPersian, faNums[i]);
-	}
-
-	return result;
-}
-
+type DigitsArToEn = (value: string) => string;
 /**
  * digitsArToEn
  *
@@ -98,16 +83,8 @@ export function digitsArToFa(str: string): string {
  * replaces all Arabic digits with the corresponding English
  * digits
  */
-export function digitsArToEn(str: string): string {
-	if (typeof str !== "string") {
-		throw new TypeError("PersianTools: digitsArToEn - The input must be string");
-	}
+export const digitsArToEn: DigitsArToEn = (value) => {
+	if (typeof value !== "string") throw TypeError("PersianTools: digitsArToEn - The input must be string");
 
-	let result = str;
-	for (let i = 0; i < 10; i++) {
-		const replaceArabicToEnglish = new RegExp(arNums[i], "g");
-		result = String(result).replace(replaceArabicToEnglish, `${i}`);
-	}
-
-	return result;
-}
+	return strConverter({ str: String(value), originCharList: arNums, destCharList: enNums });
+};
