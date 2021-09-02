@@ -1,8 +1,6 @@
 import { enNums, faNums, arNums } from "./numsList";
 import digitsConverter from "./digitsConverter";
 
-type DigitsFaToX = (value: string) => string;
-
 /**
  * digitsFaToEn
  *
@@ -11,7 +9,7 @@ type DigitsFaToX = (value: string) => string;
  * returns a string that represents the same value but
  * its farsi digits are replaced with english digits
  */
-const digitsFaToEn: DigitsFaToX = (value) => {
+const digitsFaToEn: DigitsOrigToDest = (value) => {
 	if (typeof value !== "string") throw TypeError("PersianTools: digitsFaToEn - The input must be string");
 
 	return digitsConverter({ str: String(value), originCharList: faNums, destCharList: enNums });
@@ -25,7 +23,7 @@ const digitsFaToEn: DigitsFaToX = (value) => {
  * returns a string that represents the same value but
  * its farsi digits are replaced with arabic digits
  */
-const digitsFaToAr: DigitsFaToX = (value) => {
+const digitsFaToAr: DigitsOrigToDest = (value) => {
 	if (typeof value !== "string") throw TypeError("PersianTools: digitsFaToAr - The input must be string");
 
 	return digitsConverter({ str: String(value), originCharList: faNums, destCharList: arNums });
