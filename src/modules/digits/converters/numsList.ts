@@ -1,5 +1,5 @@
-const enNums = "0123456789".split("");
-const faNums = "۰۱۲۳۴۵۶۷۸۹".split("");
-const arNums = "۰۱۲۳٤٥٦۷۸۹".split("");
+const enNums = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+const faNums = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
+const arNums = ["۰", "۱", "۲", "۳", "٤", "٥", "٦", "۷", "۸", "۹"];
 
 export { enNums, faNums, arNums };
