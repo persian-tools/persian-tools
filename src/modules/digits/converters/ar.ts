@@ -1,5 +1,5 @@
 import { enNums, faNums, arNums } from "./numsList";
-import strConverter from "./strConverter";
+import digitsConverter from "./digitsConverter";
 
 type DigitsArToX = (value: string) => string;
 
@@ -14,7 +14,7 @@ type DigitsArToX = (value: string) => string;
 const digitsArToFa: DigitsArToX = (value) => {
 	if (typeof value !== "string") throw TypeError("PersianTools: digitsArToFa - The input must be string");
 
-	return strConverter({ str: String(value), originCharList: arNums, destCharList: faNums });
+	return digitsConverter({ str: String(value), originCharList: arNums, destCharList: faNums });
 };
 
 /**
@@ -28,7 +28,7 @@ const digitsArToFa: DigitsArToX = (value) => {
 const digitsArToEn: DigitsArToX = (value) => {
 	if (typeof value !== "string") throw TypeError("PersianTools: digitsArToEn - The input must be string");
 
-	return strConverter({ str: String(value), originCharList: arNums, destCharList: enNums });
+	return digitsConverter({ str: String(value), originCharList: arNums, destCharList: enNums });
 };
 
 export { digitsArToFa, digitsArToEn };
