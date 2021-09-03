@@ -1,5 +1,5 @@
-import { enNums, faNums, arNums } from "./numsList";
-import digitsConverter from "./digitsConverter";
+import { faNums, arNums } from "./digitsList";
+import { faDigitsRegex } from "./digitsRegex";
 
 /**
  * digitsFaToEn
@@ -12,7 +12,7 @@ import digitsConverter from "./digitsConverter";
 const digitsFaToEn: DigitsOrigToDest = (value) => {
 	if (typeof value !== "string") throw TypeError("PersianTools: digitsFaToEn - The input must be string");
 
-	return digitsConverter({ str: String(value), originCharList: faNums, destCharList: enNums });
+	return String(value).replace(faDigitsRegex, (char) => `${faNums.indexOf(char)}`);
 };
 
 /**
@@ -26,7 +26,7 @@ const digitsFaToEn: DigitsOrigToDest = (value) => {
 const digitsFaToAr: DigitsOrigToDest = (value) => {
 	if (typeof value !== "string") throw TypeError("PersianTools: digitsFaToAr - The input must be string");
 
-	return digitsConverter({ str: String(value), originCharList: faNums, destCharList: arNums });
+	return String(value).replace(faDigitsRegex, (char) => arNums[faNums.indexOf(char)]);
 };
 
 export { digitsFaToEn, digitsFaToAr };
