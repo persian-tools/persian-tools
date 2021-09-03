@@ -9,7 +9,7 @@ import { enDigitsRegex } from "./digitsRegex";
  * returns a string that represents the same value but
  * its english digits are replaced with farsi digits
  */
-const digitsEnToFa: DigitsOrigToDest<string | number> = (value) => {
+const digitsEnToFa: DigitsConverter<string | number> = (value) => {
 	if (typeof value !== "string" && typeof value !== "number")
 		throw TypeError("PersianTools: digitsEnToFa - The input must be string or number");
 
@@ -24,7 +24,7 @@ const digitsEnToFa: DigitsOrigToDest<string | number> = (value) => {
  * returns a string that represents the same value but
  * its english digits are replaced with arabic digits
  */
-const digitsEnToAr: DigitsOrigToDest<string | number> = (value) => {
+const digitsEnToAr: DigitsConverter<string | number> = (value) => {
 	if (typeof value !== "string" && typeof value !== "number")
 		throw TypeError("PersianTools: digitsEnToAr - The input must be number or string");
 

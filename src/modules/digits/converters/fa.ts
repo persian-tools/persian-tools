@@ -9,7 +9,7 @@ import { faDigitsRegex } from "./digitsRegex";
  * returns a string that represents the same value but
  * its farsi digits are replaced with english digits
  */
-const digitsFaToEn: DigitsOrigToDest = (value) => {
+const digitsFaToEn: DigitsConverter = (value) => {
 	if (typeof value !== "string") throw TypeError("PersianTools: digitsFaToEn - The input must be string");
 
 	return String(value).replace(faDigitsRegex, (char) => `${faNums.indexOf(char)}`);
@@ -23,7 +23,7 @@ const digitsFaToEn: DigitsOrigToDest = (value) => {
  * returns a string that represents the same value but
  * its farsi digits are replaced with arabic digits
  */
-const digitsFaToAr: DigitsOrigToDest = (value) => {
+const digitsFaToAr: DigitsConverter = (value) => {
 	if (typeof value !== "string") throw TypeError("PersianTools: digitsFaToAr - The input must be string");
 
 	return String(value).replace(faDigitsRegex, (char) => arNums[faNums.indexOf(char)]);
