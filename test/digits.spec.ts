@@ -2,7 +2,7 @@ import { digitsEnToFa, digitsFaToEn, digitsFaToAr, digitsArToFa, digitsArToEn, d
 
 describe("Digits converter", () => {
 	it("digitsArToFa", () => {
-		expect(digitsArToFa("٠١٢٣٤٥٦٧٨٩")).toEqual("٠١٢٣۴۵۶٧٨٩");
+		expect(digitsArToFa("٠١٢٣٤٥٦٧٨٩")).toEqual("۰۱۲۳۴۵۶۷۸۹");
 		expect(digitsArToFa("۸۹123۴۵")).toEqual("۸۹123۴۵");
 		try {
 			//@ts-ignore
@@ -11,12 +11,12 @@ describe("Digits converter", () => {
 			expect(e.message).toEqual("PersianTools: digitsArToFa - The input must be string");
 		}
 		expect(digitsArToFa("")).toEqual("");
-		expect(digitsArToFa("Text ٠١٢٣٤٥٦٧٨٩")).toEqual("Text ٠١٢٣۴۵۶٧٨٩");
+		expect(digitsArToFa("Text ٠١٢٣٤٥٦٧٨٩")).toEqual("Text ۰۱۲۳۴۵۶۷۸۹");
 	});
 
 	it("digitsArToEn", () => {
-		expect(digitsArToEn("۰۱۲۳٤٥٦۷۸۹")).toEqual("0123456789");
-		expect(digitsArToEn("89۱۲۳4٥")).toEqual("8912345");
+		expect(digitsArToEn("٠١٢٣٤٥٦٧٨٩")).toEqual("0123456789");
+		expect(digitsArToEn("89١٢٣4٥")).toEqual("8912345");
 
 		try {
 			//@ts-ignore
@@ -25,7 +25,7 @@ describe("Digits converter", () => {
 			expect(e.message).toEqual("PersianTools: digitsArToEn - The input must be string");
 		}
 
-		expect(digitsArToEn("Text ۰۱۲۳٤٥٦۷۸۹")).toEqual("Text 0123456789");
+		expect(digitsArToEn("Text ٠١٢٣٤٥٦٧٨٩")).toEqual("Text 0123456789");
 	});
 
 	it("digitsEnToFa", () => {
@@ -51,10 +51,10 @@ describe("Digits converter", () => {
 	});
 
 	it("digitsEnToAr", () => {
-		expect(digitsEnToAr(123456)).toEqual("۱۲۳٤٥٦");
-		expect(digitsEnToAr(1234567891)).toEqual("۱۲۳٤٥٦۷۸۹۱");
-		expect(digitsEnToAr(0)).toEqual("۰");
-		expect(digitsEnToAr("123٤٥٦")).toEqual("۱۲۳٤٥٦");
+		expect(digitsEnToAr(123456)).toEqual("١٢٣٤٥٦");
+		expect(digitsEnToAr(1234567891)).toEqual("١٢٣٤٥٦٧٨٩١");
+		expect(digitsEnToAr(0)).toEqual("٠");
+		expect(digitsEnToAr("123٤٥٦")).toEqual("١٢٣٤٥٦");
 		try {
 			//@ts-ignore
 			digitsEnToAr();
@@ -83,9 +83,9 @@ describe("Digits converter", () => {
 	});
 
 	it("digitsFaToAr", () => {
-		expect(digitsFaToAr("۰۱۲۳۴۵۶۷۸۹")).toEqual("۰۱۲۳٤٥٦۷۸۹");
-		expect(digitsFaToAr("۱۷۸۲۳۴۰۵۶۹")).toEqual("۱۷۸۲۳٤۰٥٦۹");
-		expect(digitsFaToAr("۷۸٤۲۳٤۴")).toEqual("۷۸٤۲۳٤٤");
+		expect(digitsFaToAr("۰۱۲۳۴۵۶۷۸۹")).toEqual("٠١٢٣٤٥٦٧٨٩");
+		expect(digitsFaToAr("۱۷۸۲۳۴۰۵۶۹")).toEqual("١٧٨٢٣٤٠٥٦٩");
+		expect(digitsFaToAr("۷۸٤۲۳٤۴")).toEqual("٧٨٤٢٣٤٤");
 		try {
 			//@ts-ignore
 			digitsFaToAr();

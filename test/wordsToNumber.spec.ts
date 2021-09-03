@@ -16,25 +16,25 @@ describe("WordsToNumber", () => {
 	it("Should convert truly and convert to Arabic digits", () => {
 		expect(
 			wordsToNumber<string>("منفی سه هزار", { digits: "ar" }),
-		).toEqual("-۳۰۰۰");
+		).toEqual("-٣٠٠٠");
 		expect(
 			wordsToNumber<string>("سه هزار دویست و دوازده", { digits: "ar" }),
-		).toEqual("۳۲۱۲");
+		).toEqual("٣٢١٢");
 		expect(
 			wordsToNumber<string>("دوازده هزار بیست دو", { digits: "ar" }),
-		).toEqual("۱۲۰۲۲");
+		).toEqual("١٢٠٢٢");
 		expect(
 			wordsToNumber<string>("دوازده هزار بیست دو", { digits: "ar", addCommas: true }),
-		).toEqual("۱۲,۰۲۲");
+		).toEqual("١٢,٠٢٢");
 		expect(
 			wordsToNumber<string>("دوازده هزار و بیست و دو", { digits: "ar", addCommas: true }),
-		).toEqual("۱۲,۰۲۲");
+		).toEqual("١٢,٠٢٢");
 		expect(
 			wordsToNumber<string>("چهارصد پنجاه هزار", { digits: "ar", addCommas: true }),
-		).toEqual("٤٥۰,۰۰۰");
+		).toEqual("٤٥٠,٠٠٠");
 		expect(
 			wordsToNumber<string>("چهارصد پنجاه هزار", { digits: "ar" }),
-		).toEqual("٤٥۰۰۰۰");
+		).toEqual("٤٥٠٠٠٠");
 	});
 
 	it("Should convert with ordinal words", () => {
