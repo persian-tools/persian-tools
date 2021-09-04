@@ -1,5 +1,6 @@
-import { faNums, arNums } from "./digitsList";
-import { faDigitsRegex } from "./digitsRegex";
+import { faNums, arNums } from "../digitsList";
+import { faDigitsRegex } from "../digitsRegex";
+import DigitsConverter from "./DigitsConverterType";
 
 /**
  * digitsFaToEn
