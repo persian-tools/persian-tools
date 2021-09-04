@@ -17,6 +17,7 @@ describe("Digits converter", () => {
 	it("digitsArToEn", () => {
 		expect(digitsArToEn("٠١٢٣٤٥٦٧٨٩")).toEqual("0123456789");
 		expect(digitsArToEn("89١٢٣4٥")).toEqual("8912345");
+		expect(digitsArToEn("0123۴۵۶789")).toEqual("0123۴۵۶789");
 
 		try {
 			//@ts-ignore
@@ -86,6 +87,8 @@ describe("Digits converter", () => {
 		expect(digitsFaToAr("۰۱۲۳۴۵۶۷۸۹")).toEqual("٠١٢٣٤٥٦٧٨٩");
 		expect(digitsFaToAr("۱۷۸۲۳۴۰۵۶۹")).toEqual("١٧٨٢٣٤٠٥٦٩");
 		expect(digitsFaToAr("۷۸٤۲۳٤۴")).toEqual("٧٨٤٢٣٤٤");
+		expect(digitsFaToAr("٤٤٤444۴۴۴")).toEqual("٤٤٤444٤٤٤");
+
 		try {
 			//@ts-ignore
 			digitsFaToAr();
