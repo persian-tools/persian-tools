@@ -1,6 +1,6 @@
-import { faNums, arNums } from "../digitsList";
-import { enDigitsRegex } from "../digitsRegex";
-import { DigitsConverter } from "./DigitsConverterType";
+import { faNums, arNums, enDigitsRegex } from "../digits.constants";
+// Types
+import type { DigitsConverter } from "../digits.types";
 
 /**
  * digitsEnToFa
