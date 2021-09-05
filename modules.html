@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Persian Tools - v2.0.0</title>
-	<meta name="description" content="Documentation for Persian Tools - v2.0.0">
+	<title>Persian Tools - v3.0.0</title>
+	<meta name="description" content="Documentation for Persian Tools - v3.0.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
 	<script async src="assets/js/search.js" id="search-script"></script>
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">Persian Tools - v2.0.0</a>
+					<a href="index.html" class="title">Persian Tools - v3.0.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -48,7 +48,7 @@
 	</div>
 	<div class="tsd-page-title">
 		<div class="container">
-			<h1>Persian Tools - v2.0.0</h1>
+			<h1>Persian Tools - v3.0.0</h1>
 		</div>
 	</div>
 </header>
@@ -105,6 +105,7 @@
 						<section class="tsd-index-section ">
 							<h3>Other Type aliases</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="modules.html#digitsconverter" class="tsd-kind-icon">Digits<wbr>Converter</a></li>
 								<li class="tsd-kind-type-alias"><a href="modules.html#shebamapcodes" class="tsd-kind-icon">Sheba<wbr>Map<wbr>Codes</a></li>
 							</ul>
 							<h3>Plate Type aliases</h3>
@@ -136,6 +137,7 @@
 								<li class="tsd-kind-function"><a href="modules.html#digitsartofa" class="tsd-kind-icon">digits<wbr>ArTo<wbr>Fa</a></li>
 								<li class="tsd-kind-function"><a href="modules.html#digitsentoar" class="tsd-kind-icon">digits<wbr>EnTo<wbr>Ar</a></li>
 								<li class="tsd-kind-function"><a href="modules.html#digitsentofa" class="tsd-kind-icon">digits<wbr>EnTo<wbr>Fa</a></li>
+								<li class="tsd-kind-function"><a href="modules.html#digitsfatoar" class="tsd-kind-icon">digits<wbr>FaTo<wbr>Ar</a></li>
 								<li class="tsd-kind-function"><a href="modules.html#digitsfatoen" class="tsd-kind-icon">digits<wbr>FaTo<wbr>En</a></li>
 							</ul>
 							<h3>National id Functions</h3>
@@ -182,13 +184,53 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Other Type aliases</h2>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-has-type-parameter">
+					<a name="digitsconverter" class="tsd-anchor"></a>
+					<h3>Digits<wbr>Converter</h3>
+					<div class="tsd-signature tsd-kind-icon">Digits<wbr>Converter&lt;I, O&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">I</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">O</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/digits/digits.types.ts#L1">modules/digits/digits.types.ts:1</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>I = <span class="tsd-signature-type">string</span></h4>
+						</li>
+						<li>
+							<h4>O = <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">I</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">O</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>value: <span class="tsd-signature-type">I</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">O</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias">
 					<a name="shebamapcodes" class="tsd-anchor"></a>
 					<h3>Sheba<wbr>Map<wbr>Codes</h3>
 					<div class="tsd-signature tsd-kind-icon">Sheba<wbr>Map<wbr>Codes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="interfaces/shebaresult.html" class="tsd-signature-type" data-tsd-kind="Interface">ShebaResult</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/sheba/codes.skip.ts#L16">modules/sheba/codes.skip.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/sheba/codes.skip.ts#L16">modules/sheba/codes.skip.ts:16</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -201,7 +243,7 @@
 					<div class="tsd-signature tsd-kind-icon">Plate<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="interfaces/plateapi.html" class="tsd-signature-type" data-tsd-kind="Interface">PlateApi</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/numberplate/types.skip.ts#L70">modules/numberplate/types.skip.ts:70</a></li>
+							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/numberplate/types.skip.ts#L70">modules/numberplate/types.skip.ts:70</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -211,7 +253,7 @@
 					<div class="tsd-signature tsd-kind-icon">Plate<wbr>Result<wbr>Api<wbr>Type<wbr>String<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-symbol">typeof </span><a href="enums/platetypes.html" class="tsd-signature-type" data-tsd-kind="Enumeration">PlateTypes</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/numberplate/types.skip.ts#L32">modules/numberplate/types.skip.ts:32</a></li>
+							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/numberplate/types.skip.ts#L32">modules/numberplate/types.skip.ts:32</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -224,7 +266,7 @@
 					<div class="tsd-signature tsd-kind-icon">acceptable<wbr>Keywords<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/extractCardNumbers/utils.ts#L25">modules/extractCardNumbers/utils.ts:25</a></li>
+							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/extractCardNumbers/utils.ts#L25">modules/extractCardNumbers/utils.ts:25</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -252,7 +294,7 @@
 					<div class="tsd-signature tsd-kind-icon">card<wbr>Number<wbr>Regex<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/extractCardNumbers/utils.ts#L13">modules/extractCardNumbers/utils.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/extractCardNumbers/utils.ts#L13">modules/extractCardNumbers/utils.ts:13</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -280,7 +322,7 @@
 					<div class="tsd-signature tsd-kind-icon">sheba<wbr>Map<wbr>Codes<span class="tsd-signature-symbol">:</span> <a href="modules.html#shebamapcodes" class="tsd-signature-type" data-tsd-kind="Type alias">ShebaMapCodes</a><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/sheba/codes.skip.ts#L17">modules/sheba/codes.skip.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/sheba/codes.skip.ts#L17">modules/sheba/codes.skip.ts:17</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -290,7 +332,7 @@
 					<div class="tsd-signature tsd-kind-icon">sheba<wbr>Pattern<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/sheba/index.ts#L7">modules/sheba/index.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/sheba/index.ts#L7">modules/sheba/index.ts:7</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -307,7 +349,7 @@
 					<div class="tsd-signature tsd-kind-icon">sheba<wbr>Pattern<wbr>Code<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/sheba/index.ts#L12">modules/sheba/index.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/sheba/index.ts#L12">modules/sheba/index.ts:12</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -331,7 +373,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/extractCardNumbers/index.ts#L53">modules/extractCardNumbers/index.ts:53</a></li>
+									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/extractCardNumbers/index.ts#L53">modules/extractCardNumbers/index.ts:53</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -365,7 +407,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/getBankNameFromCardNumber/index.ts#L15">modules/getBankNameFromCardNumber/index.ts:15</a></li>
+									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/getBankNameFromCardNumber/index.ts#L15">modules/getBankNameFromCardNumber/index.ts:15</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -402,7 +444,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/verifyCardNumber/index.ts#L10">modules/verifyCardNumber/index.ts:10</a></li>
+									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/verifyCardNumber/index.ts#L10">modules/verifyCardNumber/index.ts:10</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -433,15 +475,15 @@
 				<h2>Digits Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function">
 					<a name="digitsartoen" class="tsd-anchor"></a>
-					<h3>digits<wbr>ArTo<wbr>En</h3>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> digits<wbr>ArTo<wbr>En</h3>
 					<ul class="tsd-signatures tsd-kind-function">
-						<li class="tsd-signature tsd-kind-icon">digits<wbr>ArTo<wbr>En<span class="tsd-signature-symbol">(</span>str<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">digits<wbr>ArTo<wbr>En<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/digits/index.ts#L96">modules/digits/index.ts:96</a></li>
+									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/digits/converters/ar.ts#L27">modules/digits/converters/ar.ts:27</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -450,16 +492,16 @@
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>description</dt>
-									<dd><p>Takes a string that contains digits, and
-											replaces all Arabic digits with the corresponding English
-										digits</p>
+									<dd><p>Takes a string and
+											returns a string that represents the same value but
+										its arabic digits are replaced with english digits</p>
 									</dd>
 								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>str: <span class="tsd-signature-type">string</span></h5>
+									<h5>value: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -468,15 +510,15 @@
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function">
 					<a name="digitsartofa" class="tsd-anchor"></a>
-					<h3>digits<wbr>ArTo<wbr>Fa</h3>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> digits<wbr>ArTo<wbr>Fa</h3>
 					<ul class="tsd-signatures tsd-kind-function">
-						<li class="tsd-signature tsd-kind-icon">digits<wbr>ArTo<wbr>Fa<span class="tsd-signature-symbol">(</span>str<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">digits<wbr>ArTo<wbr>Fa<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/digits/index.ts#L75">modules/digits/index.ts:75</a></li>
+									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/digits/converters/ar.ts#L13">modules/digits/converters/ar.ts:13</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -485,16 +527,16 @@
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>description</dt>
-									<dd><p>Takes a string that contains digits, and
-											replaces all Arabic digits with the corresponding Persian
-										digits</p>
+									<dd><p>Takes a string and
+											returns a string that represents the same value but
+										its arabic digits are replaced with farsi digits</p>
 									</dd>
 								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>str: <span class="tsd-signature-type">string</span></h5>
+									<h5>value: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -503,15 +545,15 @@
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function">
 					<a name="digitsentoar" class="tsd-anchor"></a>
-					<h3>digits<wbr>EnTo<wbr>Ar</h3>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> digits<wbr>EnTo<wbr>Ar</h3>
 					<ul class="tsd-signatures tsd-kind-function">
-						<li class="tsd-signature tsd-kind-icon">digits<wbr>EnTo<wbr>Ar<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">digits<wbr>EnTo<wbr>Ar<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/digits/index.ts#L34">modules/digits/index.ts:34</a></li>
+									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/digits/converters/en.ts#L28">modules/digits/converters/en.ts:28</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -520,16 +562,16 @@
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>description</dt>
-									<dd><p>Takes a string made of English digits only, and
-											returns a string that represents the same number but with
-										Arabic digits</p>
+									<dd><p>Takes a string or number and
+											returns a string that represents the same value but
+										its english digits are replaced with arabic digits</p>
 									</dd>
 								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> value: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+									<h5>value: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -538,15 +580,15 @@
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function">
 					<a name="digitsentofa" class="tsd-anchor"></a>
-					<h3>digits<wbr>EnTo<wbr>Fa</h3>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> digits<wbr>EnTo<wbr>Fa</h3>
 					<ul class="tsd-signatures tsd-kind-function">
-						<li class="tsd-signature tsd-kind-icon">digits<wbr>EnTo<wbr>Fa<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">digits<wbr>EnTo<wbr>Fa<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/digits/index.ts#L12">modules/digits/index.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/digits/converters/en.ts#L13">modules/digits/converters/en.ts:13</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -555,16 +597,51 @@
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>description</dt>
-									<dd><p>Takes a string made of English digits only, and
-											returns a string that represents the same number but with
-										Persian digits</p>
+									<dd><p>Takes a string or number and
+											returns a string that represents the same value but
+										its english digits are replaced with farsi digits</p>
 									</dd>
 								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> value: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+									<h5>value: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="digitsfatoar" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> digits<wbr>FaTo<wbr>Ar</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">digits<wbr>FaTo<wbr>Ar<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/digits/converters/fa.ts#L27">modules/digits/converters/fa.ts:27</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>digitsFaToAr</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>description</dt>
+									<dd><p>Takes a string and
+											returns a string that represents the same value but
+										its farsi digits are replaced with arabic digits</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -573,15 +650,15 @@
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function">
 					<a name="digitsfatoen" class="tsd-anchor"></a>
-					<h3>digits<wbr>FaTo<wbr>En</h3>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> digits<wbr>FaTo<wbr>En</h3>
 					<ul class="tsd-signatures tsd-kind-function">
-						<li class="tsd-signature tsd-kind-icon">digits<wbr>FaTo<wbr>En<span class="tsd-signature-symbol">(</span>str<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">digits<wbr>FaTo<wbr>En<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/digits/index.ts#L55">modules/digits/index.ts:55</a></li>
+									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/digits/converters/fa.ts#L13">modules/digits/converters/fa.ts:13</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -590,16 +667,16 @@
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>description</dt>
-									<dd><p>Takes a string made of English digits only, and
-											returns a string that represents the same number but with
-										Persian digits</p>
+									<dd><p>Takes a string and
+											returns a string that represents the same value but
+										its farsi digits are replaced with english digits</p>
 									</dd>
 								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>str: <span class="tsd-signature-type">string</span></h5>
+									<h5>value: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -619,7 +696,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/getPlaceByIranNationalId/index.ts#L32">modules/getPlaceByIranNationalId/index.ts:32</a></li>
+									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/getPlaceByIranNationalId/index.ts#L32">modules/getPlaceByIranNationalId/index.ts:32</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -656,7 +733,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/nationalId/index.ts#L8">modules/nationalId/index.ts:8</a></li>
+									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/nationalId/index.ts#L8">modules/nationalId/index.ts:8</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -693,7 +770,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/wordsToNumber/index.ts#L67">modules/wordsToNumber/index.ts:67</a></li>
+									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/wordsToNumber/index.ts#L67">modules/wordsToNumber/index.ts:67</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -734,7 +811,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/numberplate/index.ts#L22">modules/numberplate/index.ts:22</a></li>
+									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/numberplate/index.ts#L22">modules/numberplate/index.ts:22</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -766,7 +843,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/sortText/index.ts#L13">modules/sortText/index.ts:13</a></li>
+									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/sortText/index.ts#L13">modules/sortText/index.ts:13</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -813,7 +890,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/URLfix/index.ts#L8">modules/URLfix/index.ts:8</a></li>
+									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/URLfix/index.ts#L8">modules/URLfix/index.ts:8</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -847,7 +924,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/commas/add.ts#L11">modules/commas/add.ts:11</a></li>
+									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/commas/add.ts#L11">modules/commas/add.ts:11</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -881,7 +958,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/addOrdinalSuffix/addOrdinalSuffix.ts#L7">modules/addOrdinalSuffix/addOrdinalSuffix.ts:7</a></li>
+									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/addOrdinalSuffix/addOrdinalSuffix.ts#L7">modules/addOrdinalSuffix/addOrdinalSuffix.ts:7</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -918,7 +995,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/sheba/index.ts#L18">modules/sheba/index.ts:18</a></li>
+									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/sheba/index.ts#L18">modules/sheba/index.ts:18</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -948,7 +1025,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/halfSpace/index.ts#L8">modules/halfSpace/index.ts:8</a></li>
+									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/halfSpace/index.ts#L8">modules/halfSpace/index.ts:8</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -984,7 +1061,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/isArabic/index.ts#L22">modules/isArabic/index.ts:22</a></li>
+									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/isArabic/index.ts#L22">modules/isArabic/index.ts:22</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1013,7 +1090,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/isPersian/index.ts#L25">modules/isPersian/index.ts:25</a></li>
+									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/isPersian/index.ts#L25">modules/isPersian/index.ts:25</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1048,7 +1125,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/isArabic/index.ts#L10">modules/isArabic/index.ts:10</a></li>
+									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/isArabic/index.ts#L10">modules/isArabic/index.ts:10</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1083,7 +1160,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/isPersian/index.ts#L11">modules/isPersian/index.ts:11</a></li>
+									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/isPersian/index.ts#L11">modules/isPersian/index.ts:11</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1124,7 +1201,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/sheba/index.ts#L62">modules/sheba/index.ts:62</a></li>
+									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/sheba/index.ts#L62">modules/sheba/index.ts:62</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1154,7 +1231,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/numberToWords/index.ts#L11">modules/numberToWords/index.ts:11</a></li>
+									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/numberToWords/index.ts#L11">modules/numberToWords/index.ts:11</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1180,7 +1257,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/commas/remove.ts#L7">modules/commas/remove.ts:7</a></li>
+									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/commas/remove.ts#L7">modules/commas/remove.ts:7</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1209,7 +1286,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/removeOrdinalSuffix/index.ts#L10">modules/removeOrdinalSuffix/index.ts:10</a></li>
+									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/removeOrdinalSuffix/index.ts#L10">modules/removeOrdinalSuffix/index.ts:10</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1250,7 +1327,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/sheba/index.ts#L46">modules/sheba/index.ts:46</a></li>
+									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/sheba/index.ts#L46">modules/sheba/index.ts:46</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1280,7 +1357,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/toPersianChars/index.ts#L14">modules/toPersianChars/index.ts:14</a></li>
+									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/toPersianChars/index.ts#L14">modules/toPersianChars/index.ts:14</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1320,7 +1397,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/phoneNumber/detail.ts#L19">modules/phoneNumber/detail.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/phoneNumber/detail.ts#L19">modules/phoneNumber/detail.ts:19</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1357,7 +1434,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/phoneNumber/validator.ts#L7">modules/phoneNumber/validator.ts:7</a></li>
+									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/phoneNumber/validator.ts#L7">modules/phoneNumber/validator.ts:7</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1383,7 +1460,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/a023ef2/src/modules/timeAgo/index.ts#L63">modules/timeAgo/index.ts:63</a></li>
+									<li>Defined in <a href="https://github.com/persian-tools/persian-tools/blob/5252a87/src/modules/timeAgo/index.ts#L64">modules/timeAgo/index.ts:64</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1456,6 +1533,9 @@
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/wordstonumberoptions.html" class="tsd-kind-icon">Words<wbr>ToNumber<wbr>Options</a>
 					</li>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="modules.html#digitsconverter" class="tsd-kind-icon">Digits<wbr>Converter</a>
+					</li>
 					<li class=" tsd-kind-type-alias">
 						<a href="modules.html#plateoptions" class="tsd-kind-icon">Plate<wbr>Options</a>
 					</li>
@@ -1506,6 +1586,9 @@
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#digitsentofa" class="tsd-kind-icon">digits<wbr>EnTo<wbr>Fa</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#digitsfatoar" class="tsd-kind-icon">digits<wbr>FaTo<wbr>Ar</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="modules.html#digitsfatoen" class="tsd-kind-icon">digits<wbr>FaTo<wbr>En</a>
