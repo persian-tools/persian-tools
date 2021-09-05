@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Persian Tools - v3.0.0</title>
-	<meta name="description" content="Documentation for Persian Tools - v3.0.0">
+	<title>Persian Tools - v3.0.1</title>
+	<meta name="description" content="Documentation for Persian Tools - v3.0.1">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
 	<script async src="assets/js/search.js" id="search-script"></script>
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">Persian Tools - v3.0.0</a>
+					<a href="index.html" class="title">Persian Tools - v3.0.1</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -48,7 +48,7 @@
 	</div>
 	<div class="tsd-page-title">
 		<div class="container">
-			<h1>Persian Tools - v3.0.0</h1>
+			<h1>Persian Tools - v3.0.1</h1>
 		</div>
 	</div>
 </header>
@@ -228,7 +228,7 @@
 				<a href="#convert-persian-numbers-to-arabic-or-english-numbers-and-vice-versa" id="convert-persian-numbers-to-arabic-or-english-numbers-and-vice-versa" style="color: inherit; text-decoration: none;">
 					<h3>Convert Persian numbers to Arabic or English numbers and vice versa</h3>
 				</a>
-				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">digitsArToFa</span><span style="color: #000000">, </span><span style="color: #001080">digitsArToEn</span><span style="color: #000000">, </span><span style="color: #001080">digitsEnToFa</span><span style="color: #000000">, </span><span style="color: #001080">digitsFaToEn</span><span style="color: #000000"> , </span><span style="color: #001080">digitsEnToAr</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
+				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">digitsArToFa</span><span style="color: #000000">, </span><span style="color: #001080">digitsArToEn</span><span style="color: #000000">, </span><span style="color: #001080">digitsEnToFa</span><span style="color: #000000">, </span><span style="color: #001080">digitsFaToEn</span><span style="color: #000000"> , </span><span style="color: #001080">digitsEnToAr</span><span style="color: #000000">, </span><span style="color: #001080">digitsFaToAr</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@persian-tools/persian-tools&quot;</span><span style="color: #000000">;</span>
 
 <span style="color: #795E26">digitsArToFa</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;۸۹123۴۵&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;۸۹123۴۵&quot;</span>
 
@@ -237,6 +237,8 @@
 <span style="color: #795E26">digitsEnToFa</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;123۴۵۶&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;۱۲۳۴۵۶&quot;</span>
 
 <span style="color: #795E26">digitsEnToAr</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;123٤٥٦&quot;</span><span style="color: #000000">); </span><span style="color: #008000">// &quot;۱۲۳٤٥٦&quot;</span>
+
+<span style="color: #795E26">digitsFaToAr</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;۱۷۸۲۳۴۰۵۶۹&quot;</span><span style="color: #000000">) </span><span style="color: #008000">// ١٧٨٢٣٤٠٥٦٩</span>
 </code></pre>
 				<a href="#validate-iranian-national-numbercode-e-melli" id="validate-iranian-national-numbercode-e-melli" style="color: inherit; text-decoration: none;">
 					<h3>Validate Iranian national number(code-e Melli)</h3>
