@@ -2,6 +2,67 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/persian-tools/persian-tools/compare/v1.7.0-beta.1...v3.0.0) (2021-09-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* **README:** update the Sheba section which is now written in functional
+
+### Features
+
+* **Sheba:** make it functional to be more tree-shakeable ([daa4eda](https://github.com/persian-tools/persian-tools/commit/daa4edad53b56b82c19ec362190910bf6a384fa6))
+
+
+### Bug Fixes
+
+* bundle size and remove all source map files ([90c3328](https://github.com/persian-tools/persian-tools/commit/90c3328441c5a9a1de3ffbb13f5fd8c9a15de5be))
+* change micro:build object name to PersianTools ([9dd8c58](https://github.com/persian-tools/persian-tools/commit/9dd8c5810e47b85427866a14cac59fc21c7c3279))
+* **#99:** node and npm versions error while installing ([935cf9b](https://github.com/persian-tools/persian-tools/commit/935cf9b992aa145748c6c197354e9cb1be7925f9)), closes [#99](https://github.com/persian-tools/persian-tools/issues/99)
+
+
+* **README:** update the Sheba section which is now written in functional ([cadbbd0](https://github.com/persian-tools/persian-tools/commit/cadbbd06e0e41a5d3b4702889dc2a3d632ed95f9))
+
+## [2.0.0](https://github.com/persian-tools/persian-tools/compare/v1.8.0-beta.0...v2.0.0) (2021-08-28)
+
+
+### ⚠ BREAKING CHANGES
+
+* **README:** update the Sheba section which is now written in functional
+
+* **README:** update the Sheba section which is now written in functional ([4451df1](https://github.com/persian-tools/persian-tools/commit/4451df156868be457ca456da5af6448b7e8ee1ef))
+
+## [1.8.0-beta.0](https://github.com/persian-tools/persian-tools/compare/v1.7.1...v1.8.0-beta.0) (2021-08-19)
+
+
+### Features
+
+* **Sheba:** make it functional to be more tree-shakeable ([9f9c0e5](https://github.com/persian-tools/persian-tools/commit/9f9c0e5d49d9395ca8108da072d63ddb9163fb41))
+
+### [1.7.1](https://github.com/persian-tools/persian-tools/compare/v1.7.0...v1.7.1) (2021-08-10)
+
+
+### Bug Fixes
+
+* bundle size and remove all source map files ([89577ad](https://github.com/persian-tools/persian-tools/commit/89577adcbcc4bf0c7439c2aa8c94436df7a6dd43))
+
+## [1.7.0](https://github.com/persian-tools/persian-tools/compare/v1.6.3...v1.7.0) (2021-08-05)
+
+
+### Bug Fixes
+
+* change micro:build object name to PersianTools ([f4cc48d](https://github.com/persian-tools/persian-tools/commit/f4cc48de704427aa468730fa097f41649f5d29f9))
+* **#103:** digitsArToFa and digitsArToEn encoding issue ([4cd080b](https://github.com/persian-tools/persian-tools/commit/4cd080ba9b4063974d15d9c8287ffe3df36ec073)), closes [#103](https://github.com/persian-tools/persian-tools/issues/103)
+
+### [1.6.3](https://github.com/persian-tools/persian-tools/compare/v1.6.2...v1.6.3) (2021-07-25)
+
+
+### Bug Fixes
+
+* **#99:** node and npm versions error while installing ([08db1d0](https://github.com/persian-tools/persian-tools/commit/08db1d0cfd1073fe9778e140b8fdd03e4e33ffa0)), closes [#99](https://github.com/persian-tools/persian-tools/issues/99)
+
+### [1.6.2](https://github.com/persian-tools/persian-tools/compare/v1.6.2-beta.5...v1.6.2) (2021-07-19)
+
 ## [2.0.0](https://github.com/persian-tools/persian-tools/compare/v1.8.0-beta.0...v2.0.0) (2021-08-28)
 
 
