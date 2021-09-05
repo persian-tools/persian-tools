@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 1.7.0-beta.0 (2021-09-05)
+
+
+### Features
+
+* **digits:** code refactoring + implementing the `fa to ar` converter ([#109](https://github.com/persian-tools/persian-tools/issues/109)) ([27086ca](https://github.com/persian-tools/persian-tools/commit/27086ca8a1fc484840bb34a9e722987cebf49df7))
+
 ### 1.6.2-beta.5 (2021-07-11)
 
 ### 1.6.2-beta.4 (2021-07-11)
