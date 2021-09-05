@@ -10,12 +10,12 @@ it("Remove commas", () => {
 		//@ts-ignore
 		removeCommas(300);
 	} catch (e) {
-		expect(e.message).toEqual("PersianTools: removeCommas - The input must be string");
+		expect((e as Error).message).toEqual("PersianTools: removeCommas - The input must be string");
 	}
 	try {
 		//@ts-ignore
 		removeCommas();
 	} catch (e) {
-		expect(e.message).toEqual("PersianTools: removeCommas - The input must be string");
+		expect((e as Error).message).toEqual("PersianTools: removeCommas - The input must be string");
 	}
 });
