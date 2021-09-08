@@ -1,4 +1,9 @@
-export default [
+export interface IBank {
+	code: string;
+	name: string;
+}
+
+const iBank: readonly IBank[] = Object.freeze([
 	{
 		name: "بانک آینده",
 		code: "636214",
@@ -179,4 +184,6 @@ export default [
 		name: "موسسه اعتباری توسعه",
 		code: "628157",
 	},
-];
+]);
+
+export default iBank;
