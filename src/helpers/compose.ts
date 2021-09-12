@@ -1,7 +1,7 @@
 type Func<I, O> = (input: I) => O;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type Compose = (...functions: Func<any, any>[]) => Func<any, any>;
+export type Compose = (...functions: Func<any, any>[]) => Func<any, any>;
 
 /**
  * Performs right-to-left function composition. The arguments
@@ -14,9 +14,7 @@ type Compose = (...functions: Func<any, any>[]) => Func<any, any>;
  * @symb compose(f, g, h)(x) = f(g(h(x)))
  */
 
-const compose: Compose =
+export const compose: Compose =
 	(...functions) =>
 	(arg) =>
 		functions.reduceRight((prev, current) => current(prev), arg);
-
-export { compose, Compose };
