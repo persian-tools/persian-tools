@@ -1,0 +1,110 @@
+/**
+ * RemainedTime
+ *
+ * @description Takes a date(it could be string, number or date) and calculate years,
+ * months, days, hours, minutes and seconds remained to that specific date.
+ *
+ * @param {string | number | Date} date - a string, number or date
+ * @return {RemainedTime & ToString & IsFinished}
+ */
+
+import { digitsEnToFa } from "../digits";
+import { getCurrentDateTime } from "./getCurrentDateTime";
+
+type RemainedTime = {
+	Years: number;
+	Months: number;
+	Days: number;
+	Hours: number;
+	Minutes: number;
+	Seconds: number;
+};
+
+type ToString = { toString: () => string };
+
+type IsFinished = { isFinished: boolean };
+
+const secondsInYear = 60 * 60 * 24 * 365;
+const secondsInMonth = 60 * 60 * 24 * 30;
+const secondsInDay = 60 * 60 * 24;
+const secondsInHour = 60 * 60 * 1;
+const secondsInMinute = 60 * 1;
+
+function RemainedTime(date: string | number | Date): RemainedTime & ToString & IsFinished {
+	const dueDate = new Date(date);
+	if (isNaN(dueDate.getDate())) {
+		throw new TypeError("PersianTools: RemainedTime - The input must be a valid date");
+	}
+	const now = getCurrentDateTime();
+	let remainedTime = Math.floor((Number(dueDate) - Number(now)) / 1000);
+
+	if (Number(dueDate) - Number(now) < 0) {
+		return {
+			Years: 0,
+			Months: 0,
+			Days: 0,
+			Hours: 0,
+			Minutes: 0,
+			Seconds: 0,
+			toString: () => {
+				return "";
+			},
+			isFinished: Number(dueDate) - Number(now) < 0,
+		};
+	}
+
+	const Years = Math.floor(remainedTime / secondsInYear);
+	remainedTime %= secondsInYear;
+
+	const Months = Math.floor(remainedTime / secondsInMonth);
+	remainedTime %= secondsInMonth;
+
+	const Days = Math.floor(remainedTime / secondsInDay);
+	remainedTime %= secondsInDay;
+
+	const Hours = Math.floor(remainedTime / secondsInHour);
+	remainedTime %= secondsInHour;
+
+	const Minutes = Math.floor(remainedTime / secondsInMinute);
+	remainedTime %= secondsInMinute;
+
+	const Seconds = remainedTime;
+
+	return {
+		Years,
+		Months,
+		Days,
+		Hours,
+		Minutes,
+		Seconds,
+		toString: () => {
+			return toString({ Years, Months, Days, Hours, Minutes, Seconds });
+		},
+		isFinished: Number(dueDate) - Number(now) < 0,
+	};
+}
+
+const toString = (remainedTime: RemainedTime): string => {
+	const year: string = remainedTime.Years > 0 ? `${digitsEnToFa(remainedTime.Years)} سال و ` : ``;
+	const mongth: string =
+		remainedTime.Months === 0 && remainedTime.Years === 0 ? `` : `${digitsEnToFa(remainedTime.Months)} ماه و `;
+	const day: string =
+		remainedTime.Months === 0 && remainedTime.Years === 0 && remainedTime.Days === 0
+			? ``
+			: `${digitsEnToFa(remainedTime.Days)} روز و `;
+	const hour: string =
+		remainedTime.Months === 0 && remainedTime.Years === 0 && remainedTime.Days === 0 && remainedTime.Hours === 0
+			? ``
+			: `${digitsEnToFa(remainedTime.Hours)} ساعت و `;
+	const minute: string =
+		remainedTime.Months === 0 &&
+		remainedTime.Years === 0 &&
+		remainedTime.Days === 0 &&
+		remainedTime.Hours === 0 &&
+		remainedTime.Minutes == 0
+			? ``
+			: `${digitsEnToFa(remainedTime.Minutes)} دقیقه و `;
+	const second = `${digitsEnToFa(remainedTime.Seconds)} ثانیه`;
+	return year + mongth + day + hour + minute + second;
+};
+export default RemainedTime;
