@@ -38,7 +38,7 @@ function RemainedTime(date: string | number | Date): RemainedTime & ToString & I
 	const now = getCurrentDateTime();
 	let remainedTime = Math.floor((Number(dueDate) - Number(now)) / 1000);
 
-	if (Number(dueDate) - Number(now) < 0) {
+	if (Number(dueDate) - Number(now) <= 0) {
 		return {
 			Years: 0,
 			Months: 0,
@@ -49,7 +49,7 @@ function RemainedTime(date: string | number | Date): RemainedTime & ToString & I
 			toString: () => {
 				return "";
 			},
-			isFinished: Number(dueDate) - Number(now) < 0,
+			isFinished: true,
 		};
 	}
 
@@ -80,7 +80,7 @@ function RemainedTime(date: string | number | Date): RemainedTime & ToString & I
 		toString: () => {
 			return toString({ Years, Months, Days, Hours, Minutes, Seconds });
 		},
-		isFinished: Number(dueDate) - Number(now) < 0,
+		isFinished: false,
 	};
 }
 
