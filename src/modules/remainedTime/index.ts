@@ -86,7 +86,7 @@ function RemainedTime(date: string | number | Date): RemainedTime & ToString & I
 
 /**
  *
- * @param remainedTime
+ * @param remainedTime contains years, months, days, hours, minutes and seconds remianed to a specific date
  * @returns string that shows remained time in persian.
  * when the year is zero we are not going to show the user `سال`
  * when the year is zero and the month is also zero we are not going to show both `سال` and `ماه`
@@ -96,16 +96,30 @@ function RemainedTime(date: string | number | Date): RemainedTime & ToString & I
 const toString = (remainedTime: RemainedTime): string => {
 	const { faYears, faMonths, faDays, faHours, faMinutes, faSeconds } = convertToFaDigit(remainedTime);
 	const { Years, Months, Days, Hours, Minutes } = remainedTime;
-	const year: string = Years === 0 ? `` : `${faYears} سال و `;
-	const mongth: string = Years === 0 && Months === 0 ? `` : `${faMonths} ماه و `;
-	const day: string = Years === 0 && Months === 0 && Days === 0 ? `` : `${faDays} روز و `;
-	const hour: string = Years === 0 && Months === 0 && Days === 0 && Hours === 0 ? `` : `${faHours} ساعت و `;
-	const minute: string =
-		Months === 0 && Years === 0 && Days === 0 && Hours === 0 && Minutes == 0 ? `` : `${faMinutes} دقیقه و `;
+
+	const remainedTimeInSeconds =
+		Years * secondsInYear +
+		Months * secondsInMonth +
+		Days * secondsInDay +
+		Hours * secondsInHour +
+		Minutes * secondsInMinute;
+
+	const year = remainedTimeInSeconds < secondsInYear ? `` : `${faYears} سال و `;
+	const mongth = remainedTimeInSeconds < secondsInMonth ? `` : `${faMonths} ماه و `;
+	const day = remainedTimeInSeconds < secondsInDay ? `` : `${faDays} روز و `;
+	const hour = remainedTimeInSeconds < secondsInHour ? `` : `${faHours} ساعت و `;
+	const minute = remainedTimeInSeconds < secondsInMinute ? `` : `${faMinutes} دقیقه و `;
 	const second = `${faSeconds} ثانیه`;
+
 	return year + mongth + day + hour + minute + second;
 };
 
+/**
+ *
+ * @param remainedTime
+ * @returns convert years, months, days, hours, minutes and seconds to farsi digits and return them in an object with keys:
+ * `faYears`, `faMonths`, `faHours`, `faMinutes`, `faSeconds`
+ */
 const convertToFaDigit = (
 	remainedTime: RemainedTime,
 ): {
