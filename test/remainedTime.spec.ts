@@ -6,6 +6,11 @@ jest.mock("../src/modules/remainedTime/getCurrentDateTime", () => {
 });
 
 describe("RemainedTime", () => {
+	it("should throw error when we are not passing a correct date format", () => {
+		expect(() => {
+			RemainedTime("Hello-World!");
+		}).toThrow(new TypeError("PersianTools: RemainedTime - The input must be a valid date"));
+	});
 	it("should calculate remained time correctly", () => {
 		const { Years, Minutes, Months, Hours, Seconds, Days, isFinished } = RemainedTime("2023-05-14T13:35:59Z");
 		expect(Years).toBe(1);
