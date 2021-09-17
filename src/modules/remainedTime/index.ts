@@ -84,27 +84,46 @@ function RemainedTime(date: string | number | Date): RemainedTime & ToString & I
 	};
 }
 
+/**
+ *
+ * @param remainedTime
+ * @returns string that shows remained time in persian.
+ * when the year is zero we are not going to show the user `سال`
+ * when the year is zero and the month is also zero we are not going to show both `سال` and `ماه`
+ * when the year, month and hour are zero we are going to omit related phrases from the output.
+ * when the year, month, hour and minute are zero we only show the seconds remianed in output.
+ */
 const toString = (remainedTime: RemainedTime): string => {
-	const year: string = remainedTime.Years > 0 ? `${digitsEnToFa(remainedTime.Years)} سال و ` : ``;
-	const mongth: string =
-		remainedTime.Months === 0 && remainedTime.Years === 0 ? `` : `${digitsEnToFa(remainedTime.Months)} ماه و `;
-	const day: string =
-		remainedTime.Months === 0 && remainedTime.Years === 0 && remainedTime.Days === 0
-			? ``
-			: `${digitsEnToFa(remainedTime.Days)} روز و `;
-	const hour: string =
-		remainedTime.Months === 0 && remainedTime.Years === 0 && remainedTime.Days === 0 && remainedTime.Hours === 0
-			? ``
-			: `${digitsEnToFa(remainedTime.Hours)} ساعت و `;
+	const { faYears, faMonths, faDays, faHours, faMinutes, faSeconds } = convertToFaDigit(remainedTime);
+	const { Years, Months, Days, Hours, Minutes } = remainedTime;
+	const year: string = Years === 0 ? `` : `${faYears} سال و `;
+	const mongth: string = Years === 0 && Months === 0 ? `` : `${faMonths} ماه و `;
+	const day: string = Years === 0 && Months === 0 && Days === 0 ? `` : `${faDays} روز و `;
+	const hour: string = Years === 0 && Months === 0 && Days === 0 && Hours === 0 ? `` : `${faHours} ساعت و `;
 	const minute: string =
-		remainedTime.Months === 0 &&
-		remainedTime.Years === 0 &&
-		remainedTime.Days === 0 &&
-		remainedTime.Hours === 0 &&
-		remainedTime.Minutes == 0
-			? ``
-			: `${digitsEnToFa(remainedTime.Minutes)} دقیقه و `;
-	const second = `${digitsEnToFa(remainedTime.Seconds)} ثانیه`;
+		Months === 0 && Years === 0 && Days === 0 && Hours === 0 && Minutes == 0 ? `` : `${faMinutes} دقیقه و `;
+	const second = `${faSeconds} ثانیه`;
 	return year + mongth + day + hour + minute + second;
 };
+
+const convertToFaDigit = (
+	remainedTime: RemainedTime,
+): {
+	faYears: string;
+	faMonths: string;
+	faDays: string;
+	faHours: string;
+	faMinutes: string;
+	faSeconds: string;
+} => {
+	return {
+		faYears: digitsEnToFa(remainedTime.Years),
+		faMonths: digitsEnToFa(remainedTime.Months),
+		faDays: digitsEnToFa(remainedTime.Days),
+		faHours: digitsEnToFa(remainedTime.Hours),
+		faMinutes: digitsEnToFa(remainedTime.Minutes),
+		faSeconds: digitsEnToFa(remainedTime.Seconds),
+	};
+};
+
 export default RemainedTime;
