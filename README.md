@@ -127,7 +127,7 @@ wordsToNumber("دوازده هزار بیست دو", { addCommas: true }) // "12
 ```javascript
 import { WordsToNumber } from "@persian-tools/persian-tools";
 
-wordsToNumber("یگصد و بنجاه هزار", { fuzzy: true }) // "150000"  
+wordsToNumber("یکصد و بنجاه هزار", { fuzzy: true }) // "150000"  
 wordsToNumber("دویشت ر بیشت هزار", { fuzzy: true }) // "220000"  
 wordsToNumber("منقی ضد", { fuzzy: true }) // "-100"  
 ```
