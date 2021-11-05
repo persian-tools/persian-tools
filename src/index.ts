@@ -51,4 +51,4 @@ export * from "./modules/phoneNumber";
 export { default as timeAgo } from "./modules/timeAgo";
 
 // RemainingTime
-export { default as RemainingTime } from "./modules/remainingTime";
+export { default as remainingTime } from "./modules/remainingTime";

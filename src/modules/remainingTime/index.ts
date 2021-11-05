@@ -12,12 +12,12 @@ import { digitsEnToFa } from "../digits";
 import { getCurrentDateTime } from "./getCurrentDateTime";
 
 type RemainingTime = {
-	Years: number;
-	Months: number;
-	Days: number;
-	Hours: number;
-	Minutes: number;
-	Seconds: number;
+	years: number;
+	months: number;
+	days: number;
+	hours: number;
+	minutes: number;
+	seconds: number;
 };
 
 type ToString = { toString: () => string };
@@ -30,22 +30,22 @@ const secondsInDay = 60 * 60 * 24;
 const secondsInHour = 60 * 60 * 1;
 const secondsInMinute = 60 * 1;
 
-function RemainingTime(date: string | number | Date): RemainingTime & ToString & IsFinished {
+function remainingTime(date: string | number | Date): RemainingTime & ToString & IsFinished {
 	const dueDate = new Date(date);
 	if (isNaN(dueDate.getDate())) {
-		throw new TypeError("PersianTools: RemainingTime - The input must be a valid date");
+		throw new TypeError("PersianTools: remainingTime - The input must be a valid date");
 	}
 	const now = getCurrentDateTime();
 	let remainingTime = Math.floor((Number(dueDate) - Number(now)) / 1000);
 
 	if (Number(dueDate) - Number(now) <= 0) {
 		return {
-			Years: 0,
-			Months: 0,
-			Days: 0,
-			Hours: 0,
-			Minutes: 0,
-			Seconds: 0,
+			years: 0,
+			months: 0,
+			days: 0,
+			hours: 0,
+			minutes: 0,
+			seconds: 0,
 			toString: () => {
 				return "";
 			},
@@ -53,32 +53,32 @@ function RemainingTime(date: string | number | Date): RemainingTime & ToString &
 		};
 	}
 
-	const Years = Math.floor(remainingTime / secondsInYear);
+	const years = Math.floor(remainingTime / secondsInYear);
 	remainingTime %= secondsInYear;
 
-	const Months = Math.floor(remainingTime / secondsInMonth);
+	const months = Math.floor(remainingTime / secondsInMonth);
 	remainingTime %= secondsInMonth;
 
-	const Days = Math.floor(remainingTime / secondsInDay);
+	const days = Math.floor(remainingTime / secondsInDay);
 	remainingTime %= secondsInDay;
 
-	const Hours = Math.floor(remainingTime / secondsInHour);
+	const hours = Math.floor(remainingTime / secondsInHour);
 	remainingTime %= secondsInHour;
 
-	const Minutes = Math.floor(remainingTime / secondsInMinute);
+	const minutes = Math.floor(remainingTime / secondsInMinute);
 	remainingTime %= secondsInMinute;
 
-	const Seconds = remainingTime;
+	const seconds = remainingTime;
 
 	return {
-		Years,
-		Months,
-		Days,
-		Hours,
-		Minutes,
-		Seconds,
+		years,
+		months,
+		days,
+		hours,
+		minutes,
+		seconds,
 		toString: () => {
-			return toString({ Years, Months, Days, Hours, Minutes, Seconds });
+			return toString({ years, months, days, hours, minutes, seconds });
 		},
 		isFinished: false,
 	};
@@ -95,14 +95,14 @@ function RemainingTime(date: string | number | Date): RemainingTime & ToString &
  */
 const toString = (remainingTime: RemainingTime): string => {
 	const { faYears, faMonths, faDays, faHours, faMinutes, faSeconds } = convertToFaDigit(remainingTime);
-	const { Years, Months, Days, Hours, Minutes } = remainingTime;
+	const { years, months, days, hours, minutes } = remainingTime;
 
 	const remainingTimeInSeconds =
-		Years * secondsInYear +
-		Months * secondsInMonth +
-		Days * secondsInDay +
-		Hours * secondsInHour +
-		Minutes * secondsInMinute;
+		years * secondsInYear +
+		months * secondsInMonth +
+		days * secondsInDay +
+		hours * secondsInHour +
+		minutes * secondsInMinute;
 
 	const year = remainingTimeInSeconds < secondsInYear ? `` : `${faYears} سال و `;
 	const mongth = remainingTimeInSeconds < secondsInMonth ? `` : `${faMonths} ماه و `;
@@ -131,13 +131,13 @@ const convertToFaDigit = (
 	faSeconds: string;
 } => {
 	return {
-		faYears: digitsEnToFa(remainingTime.Years),
-		faMonths: digitsEnToFa(remainingTime.Months),
-		faDays: digitsEnToFa(remainingTime.Days),
-		faHours: digitsEnToFa(remainingTime.Hours),
-		faMinutes: digitsEnToFa(remainingTime.Minutes),
-		faSeconds: digitsEnToFa(remainingTime.Seconds),
+		faYears: digitsEnToFa(remainingTime.years),
+		faMonths: digitsEnToFa(remainingTime.months),
+		faDays: digitsEnToFa(remainingTime.days),
+		faHours: digitsEnToFa(remainingTime.hours),
+		faMinutes: digitsEnToFa(remainingTime.minutes),
+		faSeconds: digitsEnToFa(remainingTime.seconds),
 	};
 };
 
-export default RemainingTime;
+export default remainingTime;
