@@ -15,6 +15,8 @@ export * from "./modules/commas";
 // Iran National-ID
 export { default as verifyIranianNationalId } from "./modules/nationalId";
 export { default as getPlaceByIranNationalId, IPlaceByNationalId } from "./modules/getPlaceByIranNationalId";
+// Iran Legal-ID
+export { default as verifyIranianLegalId } from "./modules/legalId";
 // Card-Number utilities
 export { default as verifyCardNumber } from "./modules/verifyCardNumber";
 export * from "./modules/extractCardNumbers/utils";
