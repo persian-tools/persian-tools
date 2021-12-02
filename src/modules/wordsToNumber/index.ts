@@ -39,7 +39,7 @@ function compute(tokens: string[]): number {
 		} else if (!isNaN(Number(token))) {
 			sum += parseInt(token, 10);
 		} else {
-			sum *= MAGNITUDE[token];
+			sum === 0 ? (sum = MAGNITUDE[token]) : (sum *= MAGNITUDE[token]);
 		}
 	});
 	return isNegative ? sum * -1 : sum;

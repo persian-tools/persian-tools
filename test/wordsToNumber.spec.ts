@@ -1,4 +1,5 @@
 import { wordsToNumber } from "../src";
+import { UNITS, TEN, MAGNITUDE } from "../src/modules/wordsToNumber/constants";
 
 describe("WordsToNumber", () => {
 	it("Should convert truly", () => {
@@ -72,5 +73,32 @@ describe("WordsToNumber", () => {
 		expect(
 			wordsToNumber<number>("ضد و بنچاه و دو", { fuzzy: true }),
 		).toEqual(152);
+	});
+
+	describe("UNITS", () => {
+		Object.entries(UNITS).forEach(pair => {
+			const [key, value] = pair;
+			it(`${value}`, () => {
+				expect(wordsToNumber(key)).toEqual(value);
+			});
+		})
+	});
+
+	describe("TEN", () => {
+		Object.entries(TEN).forEach((pair) => {
+			const [key, value] = pair;
+			it(`${value}`, () => {
+				expect(wordsToNumber(key)).toEqual(value);
+			});
+		});
+	});
+
+	describe("MAGNITUDE", () => {
+		Object.entries(MAGNITUDE).forEach((pair) => {
+			const [key, value] = pair;
+			it(`${value}`, () => {
+				expect(wordsToNumber(key)).toEqual(value);
+			});
+		});
 	});
 });
