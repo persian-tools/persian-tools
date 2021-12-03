@@ -1,4 +1,4 @@
-import {verifyIranianLegalId} from "../src";
+import { verifyIranianLegalId } from "../src";
 
 it("Validation of Iranian Legal Number", () => {
 	expect(verifyIranianLegalId()).toBeUndefined();
