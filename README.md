@@ -528,11 +528,5 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
-## Wallaby.js
-
-[![Wallaby.js](https://img.shields.io/badge/wallaby.js-powered-blue.svg?style=for-the-badge&logo=github)](https://wallabyjs.com/oss/)
-
-This repository contributors are welcome to use
-[Wallaby.js OSS License](https://wallabyjs.com/oss/) to get
-test results immediately as you type, and see the results in
-your editor right next to your code.
+# Supporters :open_hands:
+[![Stargazers repo roster for @persian-tools/persian-tools](https://reporoster.com/stars/persian-tools/persian-tools)](https://github.com/persian-tools/persian-tools/stargazers)
