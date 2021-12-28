@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/persian-tools/persian-tools/compare/v3.0.1...v3.1.0) (2021-12-28)
+
+
+### Features
+
+* add legal id validation module and test ([7083b30](https://github.com/persian-tools/persian-tools/commit/7083b302d2bb60cd024ef7fcdf185a4a6d692976))
+
+
+### Bug Fixes
+
+* **#122:** node 17 supports ([2ed8bd6](https://github.com/persian-tools/persian-tools/commit/2ed8bd63a734305255ecaa4ee21e5753bf2a0d65)), closes [#122](https://github.com/persian-tools/persian-tools/issues/122)
+* wordsToNumber return 0 for MAGNITUDE constants ([61e63be](https://github.com/persian-tools/persian-tools/commit/61e63bed620d0299249b4eb659405d5e6803d3db))
+
 ### [3.0.1](https://github.com/persian-tools/persian-tools/compare/v3.0.0...v3.0.1) (2021-09-05)
 
 ## [3.0.0](https://github.com/persian-tools/persian-tools/compare/v1.7.0-beta.1...v3.0.0) (2021-09-05)
