@@ -49,3 +49,6 @@ export * from "./modules/phoneNumber";
 
 // TimeAgo
 export { default as timeAgo } from "./modules/timeAgo";
+
+// RemainingTime
+export { default as remainingTime } from "./modules/remainingTime";
