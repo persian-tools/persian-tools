@@ -17,7 +17,7 @@ it("Validation of Iranian National Number(code-e Melli)", () => {
 	expect(verifyIranianNationalId(123000000)).toBeFalsy();
 	expect(verifyIranianNationalId(1230000000)).toBeFalsy();
 	expect(verifyIranianNationalId("0000000000")).toBeFalsy();
-	expect(verifyIranianNationalId("1111111111")).toBeFalsy();
+	expect(verifyIranianNationalId("1111111111")).not.toBeFalsy();
 	expect(verifyIranianNationalId("4444444444")).toBeFalsy();
 	expect(verifyIranianNationalId("9999999999")).toBeFalsy();
 	expect(verifyIranianNationalId("12300000")).toBeFalsy();
