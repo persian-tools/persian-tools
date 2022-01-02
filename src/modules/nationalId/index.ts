@@ -10,19 +10,19 @@ function verifyIranianNationalId(nationalId?: string | number): boolean | undefi
 	if (!nationalId) return;
 	let code = nationalId.toString();
 	const codeLength = code.length;
-	const monoDigits = [
-		"0000000000",
-		"2222222222",
-		"3333333333",
-		"4444444444",
-		"5555555555",
-		"6666666666",
-		"7777777777",
-		"8888888888",
-		"9999999999",
-	];
+	const notAllowedDigits = {
+		"0000000000": true,
+		"2222222222": true,
+		"3333333333": true,
+		"4444444444": true,
+		"5555555555": true,
+		"6666666666": true,
+		"7777777777": true,
+		"8888888888": true,
+		"9999999999": true,
+	};
 
-	if (monoDigits.indexOf(code) > -1) return false;
+	if (code in notAllowedDigits) return false;
 	if (codeLength < 8 || codeLength > 10) return false;
 	code = ("00" + code).substr(codeLength + 2 - 10);
 	if (+code.substr(3, 6) === 0) return false;
