@@ -23,6 +23,7 @@
 -   [Add and remove commas to numbers](#add-and-remove-commas).
 -   [Convert Persian numbers to Arabic or English numbers and vice versa](#convert-persian-numbers-to-arabic-or-english-numbers-and-vice-versa).
 -   [Validate Iranian national number(code-e Melli)](#validate-iranian-national-numbercode-e-melli).
+-   [Validate Iranian legal id(shenase hoghoghi)](#validate-iranian-legal-id).
 -   [Find city and province name by national code(code-e Melli)](#find-city-and-province-name-by-national-idcode-e-melli).
 -   [Bill calculator](#bill-calculator).
 -   [Check Iranian Sheba(IBAN) validation and recognize bank information by sheba code](#iranian-shebaiban).
@@ -175,6 +176,15 @@ import { verifyIranianNationalId, getPlaceByIranNationalId } from "@persian-tool
 
 verifyIranianNationalId("0499370899"); // true
 verifyIranianNationalId("0684159415"); // false
+```
+
+### Validate Iranian legal id(shenase hoghoghi)
+
+```javascript
+import { verifyIranianLegalId } from "@persian-tools/persian-tools";
+
+verifyIranianLegalId(10380285692) // false
+verifyIranianLegalId(10380284790) // true
 ```
 
 ### Find city and province name by national-id(code-e Melli)
