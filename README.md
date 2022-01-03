@@ -426,15 +426,14 @@ timeAgo('1401/03/17 18:00:00') // حدود 1 سال  بعد
 ```js 
 import { remainingTime } from "@persian-tools/persian-tools";
 
-// CurrentDateTime: () => new Date("2022-04-12T10:30:51Z")
-
 remainingTime("2023-05-14T13:35:59Z").toString() // ۱ سال و ۱ ماه و ۲ روز و ۳ ساعت و ۵ دقیقه و ۸ ثانیه 
-remainingTime("2022-05-14T13:35:59Z").toString() // ۱ ماه و ۲ روز و ۳ ساعت و ۵ دقیقه و ۸ ثانیه 
-remainingTime("2022-04-14T13:35:59Z").toString() // ۲ روز و ۳ ساعت و ۵ دقیقه و ۸ ثانیه 
-remainingTime("2022-04-12T13:35:59Z").toString() // ۳ ساعت و ۵ دقیقه و ۸ ثانیه 
-remainingTime("2022-04-12T10:35:59Z").toString() // ۵ دقیقه و ۸ ثانیه 
-remainingTime("2022-04-12T10:30:59Z").toString() // ۸ ثانیه 
-remainingTime("2018-04-12T10:30:51Z").toString() // "" 
+
+const { years, months, days, hours, minutes, seconds, isFinished } = remainingTime("2023-05-14T13:35:59Z");
+console.log(years) // 1
+console.log(minutes) // 5
+console.log(isFinished) // false
+
+remainingTime("2018-04-12T10:30:51Z").isFinished // true 
 ```
 
 ### Validate and find information of phone number
