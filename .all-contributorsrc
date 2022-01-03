@@ -114,6 +114,17 @@
         "code",
         "test"
       ]
+    },
+    {
+      "login": "mediv0",
+      "name": "mediv0",
+      "avatar_url": "https://avatars.githubusercontent.com/u/36822136?v=4",
+      "profile": "https://www.mahdi.wtf/",
+      "contributions": [
+        "code",
+        "test",
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7,
