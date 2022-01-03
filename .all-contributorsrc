@@ -114,6 +114,16 @@
         "code",
         "test"
       ]
+    },
+    {
+      "login": "realsaeedhassani",
+      "name": "Saeed Hasani Borzadaran",
+      "avatar_url": "https://avatars.githubusercontent.com/u/20496196?v=4",
+      "profile": "https://www.linkedin.com/in/realsaeedhassani/",
+      "contributions": [
+        "code",
+        "test"
+      ]
     }
   ],
   "contributorsPerLine": 7,
