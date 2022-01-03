@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.2.0](https://github.com/persian-tools/persian-tools/compare/v3.1.1...v3.2.0) (2022-01-03)
+
+
+### Features
+
+* :sparkles: add remainingTime function ([#116](https://github.com/persian-tools/persian-tools/issues/116)) ([9989cd5](https://github.com/persian-tools/persian-tools/commit/9989cd514f86a2c24e0bd4abffa4fb735c860ce8))
+
+
+### Bug Fixes
+
+* **nationalId:** add check mono ids ([#123](https://github.com/persian-tools/persian-tools/issues/123)) ([#127](https://github.com/persian-tools/persian-tools/issues/127)) ([a303b89](https://github.com/persian-tools/persian-tools/commit/a303b89dca28f436149f17c55b85283fafc56328))
+
 ### [3.1.1](https://github.com/persian-tools/persian-tools/compare/v3.1.0...v3.1.1) (2021-12-28)
 
 ## [3.1.0](https://github.com/persian-tools/persian-tools/compare/v3.0.1...v3.1.0) (2021-12-28)
