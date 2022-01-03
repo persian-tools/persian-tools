@@ -117,6 +117,17 @@
       ]
     },
     {
+      "login": "mediv0",
+      "name": "mediv0",
+      "avatar_url": "https://avatars.githubusercontent.com/u/36822136?v=4",
+      "profile": "https://www.mahdi.wtf/",
+      "contributions": [
+        "code",
+        "test",
+        "ideas"
+      ]
+     },
+     {
       "login": "pshaddel",
       "name": "Poorshad Shaddel",
       "avatar_url": "https://avatars.githubusercontent.com/u/43247296?v=4",
@@ -168,7 +179,7 @@
      }
     }
   ],
-  "contributorsPerLine": 6,
+  "contributorsPerLine": 7,
   "projectName": "persian-tools",
   "projectOwner": "persian-tools",
   "repoType": "github",
