@@ -117,6 +117,17 @@
       ]
     },
     {
+      "login": "pshaddel",
+      "name": "Poorshad Shaddel",
+      "avatar_url": "https://avatars.githubusercontent.com/u/43247296?v=4",
+      "profile": "https://www.linkedin.com/in/poorshad/",
+      "contributions": [
+        "code",
+        "test",
+        "ideas"
+      ]
+     },
+     {
       "login": "theMasix",
       "name": "Seyed Masih Sajadi",
       "avatar_url": "https://avatars.githubusercontent.com/u/22872117?v=4",
@@ -157,7 +168,7 @@
      }
     }
   ],
-  "contributorsPerLine": 7,
+  "contributorsPerLine": 6,
   "projectName": "persian-tools",
   "projectOwner": "persian-tools",
   "repoType": "github",
