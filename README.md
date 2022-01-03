@@ -23,7 +23,7 @@
 -   [Add and remove commas to numbers](#add-and-remove-commas).
 -   [Convert Persian numbers to Arabic or English numbers and vice versa](#convert-persian-numbers-to-arabic-or-english-numbers-and-vice-versa).
 -   [Validate Iranian national number(code-e Melli)](#validate-iranian-national-numbercode-e-melli).
--   [Validate Iranian legal id(shenase hoghoghi)](#validate-iranian-legal-id).
+-   [Validate Iranian legal id(shenase hoghoghi)](#validate-iranian-legal-idshenase-hoghoghi).
 -   [Find city and province name by national code(code-e Melli)](#find-city-and-province-name-by-national-idcode-e-melli).
 -   [Bill calculator](#bill-calculator).
 -   [Check Iranian Sheba(IBAN) validation and recognize bank information by sheba code](#iranian-shebaiban).
@@ -33,6 +33,7 @@
 -   [Fix Persian characters in URL](#fix-persian-characters-in-url).
 -   [Fix Persian zero-width non-joiner(Replace spaces by half-space)](#fix-persian-zero-width-non-joinerreplace-spaces-by-half-space)
 -   [Convert Jalaali date-time into a time ago](#convert-jalaali-date-time-into-a-time-ago)
+-   [Get the Remaining Time of the Date](#get-the-remaining-time-of-the-date)
 -   [Validate and find information of phone number](#validate-and-find-information-of-phone-number).
 
 ## Getting started
@@ -413,6 +414,27 @@ timeAgo('1400/02/17 18:00:00') // حدود 1 ماه  قبل
 // Next
 timeAgo('1400/04/07 18:00:00') // حدود 3 هفته  بعد
 timeAgo('1401/03/17 18:00:00') // حدود 1 سال  بعد
+```
+
+### Get the Remaining Time of the Date 
+
+**Usage**
+
+>Takes a date(it could be string, number or date) and calculate years,
+>months, days, hours, minutes and seconds remained to that specific date. 
+
+```js 
+import { remainingTime } from "@persian-tools/persian-tools";
+
+// CurrentDateTime: () => new Date("2022-04-12T10:30:51Z")
+
+remainingTime("2023-05-14T13:35:59Z").toString() // ۱ سال و ۱ ماه و ۲ روز و ۳ ساعت و ۵ دقیقه و ۸ ثانیه 
+remainingTime("2022-05-14T13:35:59Z").toString() // ۱ ماه و ۲ روز و ۳ ساعت و ۵ دقیقه و ۸ ثانیه 
+remainingTime("2022-04-14T13:35:59Z").toString() // ۲ روز و ۳ ساعت و ۵ دقیقه و ۸ ثانیه 
+remainingTime("2022-04-12T13:35:59Z").toString() // ۳ ساعت و ۵ دقیقه و ۸ ثانیه 
+remainingTime("2022-04-12T10:35:59Z").toString() // ۵ دقیقه و ۸ ثانیه 
+remainingTime("2022-04-12T10:30:59Z").toString() // ۸ ثانیه 
+remainingTime("2018-04-12T10:30:51Z").toString() // "" 
 ```
 
 ### Validate and find information of phone number
