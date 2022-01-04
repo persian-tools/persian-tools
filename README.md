@@ -429,9 +429,9 @@ import { remainingTime } from "@persian-tools/persian-tools";
 remainingTime("2023-05-14T13:35:59Z").toString() // ۱ سال و ۱ ماه و ۲ روز و ۳ ساعت و ۵ دقیقه و ۸ ثانیه 
 
 const { years, months, days, hours, minutes, seconds, isFinished } = remainingTime("2023-05-14T13:35:59Z");
-console.log(years) // 1
-console.log(minutes) // 5
-console.log(isFinished) // false
+years // 1
+minutes // 5
+isFinished // false
 
 remainingTime("2018-04-12T10:30:51Z").isFinished // true 
 ```
