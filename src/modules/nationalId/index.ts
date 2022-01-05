@@ -10,19 +10,6 @@ function verifyIranianNationalId(nationalId?: string | number): boolean | undefi
 	if (!nationalId) return;
 	let code = nationalId.toString();
 	const codeLength = code.length;
-	const notAllowedDigits = {
-		"0000000000": true,
-		"2222222222": true,
-		"3333333333": true,
-		"4444444444": true,
-		"5555555555": true,
-		"6666666666": true,
-		"7777777777": true,
-		"8888888888": true,
-		"9999999999": true,
-	};
-
-	if (code in notAllowedDigits) return false;
 	if (codeLength < 8 || codeLength > 10) return false;
 	code = ("00" + code).substring(codeLength + 2 - 10);
 	if (+code.substring(3, 9) === 0) return false;
