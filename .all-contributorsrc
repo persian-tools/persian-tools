@@ -126,8 +126,8 @@
         "test",
         "ideas"
       ]
-     },
-     {
+    },
+    {
       "login": "pshaddel",
       "name": "Poorshad Shaddel",
       "avatar_url": "https://avatars.githubusercontent.com/u/43247296?v=4",
@@ -137,8 +137,8 @@
         "test",
         "ideas"
       ]
-     },
-     {
+    },
+    {
       "login": "theMasix",
       "name": "Seyed Masih Sajadi",
       "avatar_url": "https://avatars.githubusercontent.com/u/22872117?v=4",
@@ -147,8 +147,8 @@
         "code",
         "test"
       ]
-     },
-     {
+    },
+    {
       "login": "ghonchesefidi",
       "name": "Mohammad Ghonchesefidi",
       "avatar_url": "https://avatars.githubusercontent.com/u/30124243?v=4",
@@ -157,8 +157,8 @@
         "code",
         "test"
       ]
-     },
-     {
+    },
+    {
       "login": "realsaeedhassani",
       "name": "Saeed Hasani Borzadaran",
       "avatar_url": "https://avatars.githubusercontent.com/u/20496196?v=4",
@@ -167,8 +167,8 @@
         "code",
         "test"
       ]
-     },
-     {
+    },
+    {
       "login": "mrunderline",
       "name": "Ali Madihi",
       "avatar_url": "https://avatars.githubusercontent.com/u/23085360?v=4",
@@ -176,7 +176,6 @@
       "contributions": [
         "code"
       ]
-     }
     }
   ],
   "contributorsPerLine": 7,
