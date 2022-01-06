@@ -176,6 +176,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Amir-Alipour",
+      "name": "Amir",
+      "avatar_url": "https://avatars.githubusercontent.com/u/73488911?v=4",
+      "profile": "https://github.com/Amir-Alipour",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
