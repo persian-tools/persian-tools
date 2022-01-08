@@ -35,6 +35,7 @@
 -   [Convert Jalaali date-time into a time ago](#convert-jalaali-date-time-into-a-time-ago)
 -   [Get the Remaining Time of the Date](#get-the-remaining-time-of-the-date)
 -   [Validate and find information of phone number](#validate-and-find-information-of-phone-number).
+-   [Detect and Filter swear words from text](#detect-and-filter-swear-words-from-text).
 
 ## Getting started
 
@@ -493,6 +494,30 @@ phoneNumberValidator("9022002580"); // true
 phoneNumberValidator("09802002580"); // false
 ```
 
+### Detect and Filter swear words from text
+
+**Usage**
+
+>detect and filter persian swear words from text
+>or detect a word is swear or not
+
+```js 
+import { persianSwear } from "@persian-tools/persian-tools";
+
+let swear = new persianSwear()
+
+swear.isBad("لاشی") //true
+
+swear.addWord("سلام")
+swear.isBad("سلام") //true
+swear.removeWord("سلام")
+swear.isBad("سلام") //false
+
+swear.isContain("سلام لاشی چطوری") //true
+
+swear.filterSwear("سلام لاشی چطوری") // سلام***  چطوری
+swear.filterSwear("سلام لاشی چطوری", "+++") // سلام+++  چطوری
+```
 
 ### Todo
 - [ ] Write Jalaali and Gregorian functions to convert Date together.
