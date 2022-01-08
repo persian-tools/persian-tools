@@ -52,3 +52,6 @@ export { default as timeAgo } from "./modules/timeAgo";
 
 // RemainingTime
 export { default as remainingTime } from "./modules/remainingTime";
+
+// Persian Swear words
+export {default as persianSwear} from './modules/persianSwearWords';
