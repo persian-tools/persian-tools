@@ -1,3 +1,4 @@
+// ist of mostly repeated swear words in persian language
 export const words: string[] = [
     "آب کیر",
     "آشغال",

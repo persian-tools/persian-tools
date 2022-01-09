@@ -17,7 +17,11 @@ class persianSwear {
     private badWords: string[]
 
 
-    // ======================
+    /**
+     * @constructor 
+     * 
+     * @description set the default words into {badWord}
+     */
     constructor() {
         this.badWords = [...words];
     }
@@ -43,6 +47,7 @@ class persianSwear {
      *
      * @memberof  persianSwear
      * @param     {String} word - the word for add to swear list
+     * @return   void
      */
     addWord(word: string): void {
         const found = this.badWords.find(w => w === word)
@@ -56,6 +61,7 @@ class persianSwear {
      *
      * @memberof  persianSwear
      * @param     {String} word - the word for remove from swear list
+     * @return   void
      */
     removeWord(word: string): void {
         this.badWords = this.badWords.filter(e => e !== word)
@@ -83,7 +89,7 @@ class persianSwear {
      * @memberof  persianSwear
      * @param     {String} text - the text for filter swear words
      * @param     {String} prefix? - the symbol you wanna replace with swear word
-     * @return    {boolean} filtered text from swear words
+     * @return    {String} filtered text from swear words
      */
     filterSwear(text: string, prefix = "***"): string {
         let text_result = ""
