@@ -1,4 +1,4 @@
-import data from './data.json'
+import { words } from "./data";
 
 /**
  * detect and filter persian swear words
@@ -19,7 +19,7 @@ class persianSwear {
 
     // ======================
     constructor() {
-        this.badWords = [...data.words];
+        this.badWords = [...words];
     }
 
 
@@ -85,9 +85,9 @@ class persianSwear {
      * @param     {String} prefix? - the symbol you wanna replace with swear word
      * @return    {boolean} filtered text from swear words
      */
-    filterSwear(text: string, prefix: string = "***"): string {
-        let text_result: string = ""
-        let text_splited: string[] = text.split(" ")
+    filterSwear(text: string, prefix = "***"): string {
+        let text_result = ""
+        const text_splited: string[] = text.split(" ")
         for (let i = 0; i < text_splited.length; i++) {
             if (this.isBad(text_splited[i]))
                 text_result += prefix

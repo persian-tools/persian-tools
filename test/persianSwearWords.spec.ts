@@ -20,7 +20,7 @@ describe("persianSwear", () => {
     })
     it("should filter swear word in text with custom symbol", () => {
         let swear = new persianSwear()
-        expect(swear.filterSwear("چطوری لاشی")).toBe("چطوری ***")
-        expect(swear.filterSwear("چطوری لاشی", "+++")).toBe("چطوری +++")
+        expect(swear.filterSwear("چطوری لاشی")).toBe("چطوری *** ")
+        expect(swear.filterSwear("چطوری لاشی", "+++")).toBe("چطوری +++ ")
     })
 })
