@@ -11,7 +11,7 @@ describe("Ordinal suffix", () => {
 		try {
 			addOrdinalSuffix();
 		} catch (e) {
-			expect(e.message).toBe("PersianTools: addOrdinalSuffix - The input must be string");
+			expect((e as Error).message).toBe("PersianTools: addOrdinalSuffix - The input must be string");
 		}
 	});
 });

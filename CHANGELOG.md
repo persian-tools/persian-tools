@@ -2,14 +2,152 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## 1.7.0-beta.1 (2021-09-05)
+### [3.2.1](https://github.com/persian-tools/persian-tools/compare/v3.2.0...v3.2.1) (2022-01-06)
 
-## 1.7.0-beta.0 (2021-09-05)
+## [3.2.0](https://github.com/persian-tools/persian-tools/compare/v3.1.1...v3.2.0) (2022-01-03)
 
 
 ### Features
 
-* **digits:** code refactoring + implementing the `fa to ar` converter ([#109](https://github.com/persian-tools/persian-tools/issues/109)) ([27086ca](https://github.com/persian-tools/persian-tools/commit/27086ca8a1fc484840bb34a9e722987cebf49df7))
+* :sparkles: add remainingTime function ([#116](https://github.com/persian-tools/persian-tools/issues/116)) ([9989cd5](https://github.com/persian-tools/persian-tools/commit/9989cd514f86a2c24e0bd4abffa4fb735c860ce8))
+
+
+### Bug Fixes
+
+* **nationalId:** add check mono ids ([#123](https://github.com/persian-tools/persian-tools/issues/123)) ([#127](https://github.com/persian-tools/persian-tools/issues/127)) ([a303b89](https://github.com/persian-tools/persian-tools/commit/a303b89dca28f436149f17c55b85283fafc56328))
+
+### [3.1.1](https://github.com/persian-tools/persian-tools/compare/v3.1.0...v3.1.1) (2021-12-28)
+
+## [3.1.0](https://github.com/persian-tools/persian-tools/compare/v3.0.1...v3.1.0) (2021-12-28)
+
+
+### Features
+
+* add legal id validation module and test ([7083b30](https://github.com/persian-tools/persian-tools/commit/7083b302d2bb60cd024ef7fcdf185a4a6d692976))
+
+
+### Bug Fixes
+
+* **#122:** node 17 supports ([2ed8bd6](https://github.com/persian-tools/persian-tools/commit/2ed8bd63a734305255ecaa4ee21e5753bf2a0d65)), closes [#122](https://github.com/persian-tools/persian-tools/issues/122)
+* wordsToNumber return 0 for MAGNITUDE constants ([61e63be](https://github.com/persian-tools/persian-tools/commit/61e63bed620d0299249b4eb659405d5e6803d3db))
+
+### [3.0.1](https://github.com/persian-tools/persian-tools/compare/v3.0.0...v3.0.1) (2021-09-05)
+
+## [3.0.0](https://github.com/persian-tools/persian-tools/compare/v1.7.0-beta.1...v3.0.0) (2021-09-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* **README:** update the Sheba section which is now written in functional
+
+### Features
+
+* **Sheba:** make it functional to be more tree-shakeable ([daa4eda](https://github.com/persian-tools/persian-tools/commit/daa4edad53b56b82c19ec362190910bf6a384fa6))
+
+
+### Bug Fixes
+
+* bundle size and remove all source map files ([90c3328](https://github.com/persian-tools/persian-tools/commit/90c3328441c5a9a1de3ffbb13f5fd8c9a15de5be))
+* change micro:build object name to PersianTools ([9dd8c58](https://github.com/persian-tools/persian-tools/commit/9dd8c5810e47b85427866a14cac59fc21c7c3279))
+* **#99:** node and npm versions error while installing ([935cf9b](https://github.com/persian-tools/persian-tools/commit/935cf9b992aa145748c6c197354e9cb1be7925f9)), closes [#99](https://github.com/persian-tools/persian-tools/issues/99)
+
+
+* **README:** update the Sheba section which is now written in functional ([cadbbd0](https://github.com/persian-tools/persian-tools/commit/cadbbd06e0e41a5d3b4702889dc2a3d632ed95f9))
+
+## [2.0.0](https://github.com/persian-tools/persian-tools/compare/v1.8.0-beta.0...v2.0.0) (2021-08-28)
+
+
+### ⚠ BREAKING CHANGES
+
+* **README:** update the Sheba section which is now written in functional
+
+* **README:** update the Sheba section which is now written in functional ([4451df1](https://github.com/persian-tools/persian-tools/commit/4451df156868be457ca456da5af6448b7e8ee1ef))
+
+## [1.8.0-beta.0](https://github.com/persian-tools/persian-tools/compare/v1.7.1...v1.8.0-beta.0) (2021-08-19)
+
+
+### Features
+
+* **Sheba:** make it functional to be more tree-shakeable ([9f9c0e5](https://github.com/persian-tools/persian-tools/commit/9f9c0e5d49d9395ca8108da072d63ddb9163fb41))
+
+### [1.7.1](https://github.com/persian-tools/persian-tools/compare/v1.7.0...v1.7.1) (2021-08-10)
+
+
+### Bug Fixes
+
+* bundle size and remove all source map files ([89577ad](https://github.com/persian-tools/persian-tools/commit/89577adcbcc4bf0c7439c2aa8c94436df7a6dd43))
+
+## [1.7.0](https://github.com/persian-tools/persian-tools/compare/v1.6.3...v1.7.0) (2021-08-05)
+
+
+### Bug Fixes
+
+* change micro:build object name to PersianTools ([f4cc48d](https://github.com/persian-tools/persian-tools/commit/f4cc48de704427aa468730fa097f41649f5d29f9))
+* **#103:** digitsArToFa and digitsArToEn encoding issue ([4cd080b](https://github.com/persian-tools/persian-tools/commit/4cd080ba9b4063974d15d9c8287ffe3df36ec073)), closes [#103](https://github.com/persian-tools/persian-tools/issues/103)
+
+### [1.6.3](https://github.com/persian-tools/persian-tools/compare/v1.6.2...v1.6.3) (2021-07-25)
+
+
+### Bug Fixes
+
+* **#99:** node and npm versions error while installing ([08db1d0](https://github.com/persian-tools/persian-tools/commit/08db1d0cfd1073fe9778e140b8fdd03e4e33ffa0)), closes [#99](https://github.com/persian-tools/persian-tools/issues/99)
+
+### [1.6.2](https://github.com/persian-tools/persian-tools/compare/v1.6.2-beta.5...v1.6.2) (2021-07-19)
+
+## [2.0.0](https://github.com/persian-tools/persian-tools/compare/v1.8.0-beta.0...v2.0.0) (2021-08-28)
+
+
+### ⚠ BREAKING CHANGES
+
+* **README:** update the Sheba section which is now written in functional
+
+* **README:** update the Sheba section which is now written in functional ([4451df1](https://github.com/persian-tools/persian-tools/commit/4451df156868be457ca456da5af6448b7e8ee1ef))
+
+## [1.8.0-beta.0](https://github.com/persian-tools/persian-tools/compare/v1.7.1...v1.8.0-beta.0) (2021-08-19)
+
+
+### Features
+
+* **Sheba:** make it functional to be more tree-shakeable ([9f9c0e5](https://github.com/persian-tools/persian-tools/commit/9f9c0e5d49d9395ca8108da072d63ddb9163fb41))
+
+### [1.7.1](https://github.com/persian-tools/persian-tools/compare/v1.7.0...v1.7.1) (2021-08-10)
+
+
+### Bug Fixes
+
+* bundle size and remove all source map files ([89577ad](https://github.com/persian-tools/persian-tools/commit/89577adcbcc4bf0c7439c2aa8c94436df7a6dd43))
+
+## [1.7.0](https://github.com/persian-tools/persian-tools/compare/v1.6.3...v1.7.0) (2021-08-05)
+
+
+### Bug Fixes
+
+* change micro:build object name to PersianTools ([f4cc48d](https://github.com/persian-tools/persian-tools/commit/f4cc48de704427aa468730fa097f41649f5d29f9))
+* **#103:** digitsArToFa and digitsArToEn encoding issue ([4cd080b](https://github.com/persian-tools/persian-tools/commit/4cd080ba9b4063974d15d9c8287ffe3df36ec073)), closes [#103](https://github.com/persian-tools/persian-tools/issues/103)
+
+### [1.6.2-beta.5](https://github.com/persian-tools/persian-tools/compare/v1.6.2-beta.4...v1.6.2-beta.5) (2021-07-11)
+
+### [1.6.2-beta.4](https://github.com/persian-tools/persian-tools/compare/v1.6.2-beta.3...v1.6.2-beta.4) (2021-07-11)
+
+### [1.6.2-beta.3](https://github.com/persian-tools/persian-tools/compare/v1.6.2-beta.2...v1.6.2-beta.3) (2021-07-11)
+
+### [1.6.2-beta.2](https://github.com/persian-tools/persian-tools/compare/v1.6.2-beta.1...v1.6.2-beta.2) (2021-07-11)
+
+### [1.6.2-beta.1](https://github.com/persian-tools/persian-tools/compare/v1.6.2-beta.0...v1.6.2-beta.1) (2021-07-11)
+
+### [1.6.2-beta.0](https://github.com/persian-tools/persian-tools/compare/v1.6.1...v1.6.2-beta.0) (2021-07-11)
+
+
+### Features
+
+* **numberToWords:** make it functional ([0eba53b](https://github.com/persian-tools/persian-tools/commit/0eba53b1097161db8168924d03f977c07e4bd70b))
+* **Plate:** add details to Plate result ([#77](https://github.com/persian-tools/persian-tools/issues/77)) ([2ded9b3](https://github.com/persian-tools/persian-tools/commit/2ded9b32c2cee972593283d947effc1a855c8d63))
+* **wordsToNumber:** make it functional ([6538d88](https://github.com/persian-tools/persian-tools/commit/6538d889868abe979d3f1aea9a136cff1d24efa1))
+
+
+### Bug Fixes
+
+* **phoneNumber:** getPhonePrefix utility not returning the correct value ([#93](https://github.com/persian-tools/persian-tools/issues/93)) ([2686b39](https://github.com/persian-tools/persian-tools/commit/2686b399e60621165fc5b07c72b744327611c204))
 
 ### 1.6.2-beta.5 (2021-07-11)
 

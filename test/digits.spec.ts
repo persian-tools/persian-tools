@@ -8,7 +8,7 @@ describe("Digits converter", () => {
 			//@ts-ignore
 			digitsArToFa();
 		} catch (e) {
-			expect(e.message).toEqual("PersianTools: digitsArToFa - The input must be string");
+			expect((e as Error).message).toEqual("PersianTools: digitsArToFa - The input must be string");
 		}
 		expect(digitsArToFa("")).toEqual("");
 		expect(digitsArToFa("Text ٠١٢٣٤٥٦٧٨٩")).toEqual("Text ۰۱۲۳۴۵۶۷۸۹");
@@ -23,7 +23,7 @@ describe("Digits converter", () => {
 			//@ts-ignore
 			digitsArToEn();
 		} catch (e) {
-			expect(e.message).toEqual("PersianTools: digitsArToEn - The input must be string");
+			expect((e as Error).message).toEqual("PersianTools: digitsArToEn - The input must be string");
 		}
 
 		expect(digitsArToEn("Text ٠١٢٣٤٥٦٧٨٩")).toEqual("Text 0123456789");
@@ -40,14 +40,14 @@ describe("Digits converter", () => {
 			//@ts-ignore
 			digitsEnToFa();
 		} catch (e) {
-			expect(e.message).toEqual("PersianTools: digitsEnToFa - The input must be string or number");
+			expect((e as Error).message).toEqual("PersianTools: digitsEnToFa - The input must be string or number");
 		}
 
 		try {
 			//@ts-ignore
 			digitsEnToFa(undefined);
 		} catch (e) {
-			expect(e.message).toEqual("PersianTools: digitsEnToFa - The input must be string or number");
+			expect((e as Error).message).toEqual("PersianTools: digitsEnToFa - The input must be string or number");
 		}
 	});
 
@@ -60,14 +60,14 @@ describe("Digits converter", () => {
 			//@ts-ignore
 			digitsEnToAr();
 		} catch (e) {
-			expect(e.message).toEqual("PersianTools: digitsEnToAr - The input must be number or string");
+			expect((e as Error).message).toEqual("PersianTools: digitsEnToAr - The input must be number or string");
 		}
 
 		try {
 			//@ts-ignore
 			digitsEnToAr(undefined);
 		} catch (e) {
-			expect(e.message).toEqual("PersianTools: digitsEnToAr - The input must be number or string");
+			expect((e as Error).message).toEqual("PersianTools: digitsEnToAr - The input must be number or string");
 		}
 	});
 
@@ -79,7 +79,7 @@ describe("Digits converter", () => {
 			//@ts-ignore
 			digitsFaToEn();
 		} catch (e) {
-			expect(e.message).toEqual("PersianTools: digitsFaToEn - The input must be string");
+			expect((e as Error).message).toEqual("PersianTools: digitsFaToEn - The input must be string");
 		}
 	});
 
@@ -93,7 +93,7 @@ describe("Digits converter", () => {
 			//@ts-ignore
 			digitsFaToAr();
 		} catch (e) {
-			expect(e.message).toEqual("PersianTools: digitsFaToAr - The input must be string");
+			expect((e as Error).message).toEqual("PersianTools: digitsFaToAr - The input must be string");
 		}
 	});
 });

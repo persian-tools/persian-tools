@@ -23,6 +23,7 @@
 -   [Add and remove commas to numbers](#add-and-remove-commas).
 -   [Convert Persian numbers to Arabic or English numbers and vice versa](#convert-persian-numbers-to-arabic-or-english-numbers-and-vice-versa).
 -   [Validate Iranian national number(code-e Melli)](#validate-iranian-national-numbercode-e-melli).
+-   [Validate Iranian legal id(shenase hoghoghi)](#validate-iranian-legal-idshenase-hoghoghi).
 -   [Find city and province name by national code(code-e Melli)](#find-city-and-province-name-by-national-idcode-e-melli).
 -   [Bill calculator](#bill-calculator).
 -   [Check Iranian Sheba(IBAN) validation and recognize bank information by sheba code](#iranian-shebaiban).
@@ -32,6 +33,7 @@
 -   [Fix Persian characters in URL](#fix-persian-characters-in-url).
 -   [Fix Persian zero-width non-joiner(Replace spaces by half-space)](#fix-persian-zero-width-non-joinerreplace-spaces-by-half-space)
 -   [Convert Jalaali date-time into a time ago](#convert-jalaali-date-time-into-a-time-ago)
+-   [Get the Remaining Time of the Date](#get-the-remaining-time-of-the-date)
 -   [Validate and find information of phone number](#validate-and-find-information-of-phone-number).
 -   [Abbreviate and Expand numbers](#abbreviate-and-expand-numbers).
 
@@ -156,7 +158,7 @@ removeCommas("30,000,000") // 30000000
 ### Convert Persian numbers to Arabic or English numbers and vice versa
 
 ```javascript
-import { digitsArToFa, digitsArToEn, digitsEnToFa, digitsFaToEn , digitsEnToAr } from "@persian-tools/persian-tools";
+import { digitsArToFa, digitsArToEn, digitsEnToFa, digitsFaToEn , digitsEnToAr, digitsFaToAr } from "@persian-tools/persian-tools";
 
 digitsArToFa("۸۹123۴۵"); // "۸۹123۴۵"
 
@@ -165,6 +167,8 @@ digitsArToEn("٨٩123٤٥"); // "8912345"
 digitsEnToFa("123۴۵۶"); // "۱۲۳۴۵۶"
 
 digitsEnToAr("123٤٥٦"); // "۱۲۳٤٥٦"
+
+digitsFaToAr("۱۷۸۲۳۴۰۵۶۹") // ١٧٨٢٣٤٠٥٦٩
 ```
 
 ### Validate Iranian national number(code-e Melli)
@@ -174,6 +178,15 @@ import { verifyIranianNationalId, getPlaceByIranNationalId } from "@persian-tool
 
 verifyIranianNationalId("0499370899"); // true
 verifyIranianNationalId("0684159415"); // false
+```
+
+### Validate Iranian legal id(shenase hoghoghi)
+
+```javascript
+import { verifyIranianLegalId } from "@persian-tools/persian-tools";
+
+verifyIranianLegalId(10380285692) // false
+verifyIranianLegalId(10380284790) // true
 ```
 
 ### Find city and province name by national-id(code-e Melli)
@@ -404,6 +417,26 @@ timeAgo('1400/04/07 18:00:00') // حدود 3 هفته  بعد
 timeAgo('1401/03/17 18:00:00') // حدود 1 سال  بعد
 ```
 
+### Get the Remaining Time of the Date 
+
+**Usage**
+
+>Takes a date(it could be string, number or date) and calculate years,
+>months, days, hours, minutes and seconds remained to that specific date. 
+
+```js 
+import { remainingTime } from "@persian-tools/persian-tools";
+
+remainingTime("2023-05-14T13:35:59Z").toString() // ۱ سال و ۱ ماه و ۲ روز و ۳ ساعت و ۵ دقیقه و ۸ ثانیه 
+
+const { years, months, days, hours, minutes, seconds, isFinished } = remainingTime("2023-05-14T13:35:59Z");
+years // 1
+minutes // 5
+isFinished // false
+
+remainingTime("2018-04-12T10:30:51Z").isFinished // true 
+```
+
 ### Validate and find information of phone number
 
 **Usage**
@@ -543,12 +576,22 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="http://titles.ir"><img src="https://avatars1.githubusercontent.com/u/1300289?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Hesam pourghazian</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=Hesamp" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/amirqasemi74"><img src="https://avatars3.githubusercontent.com/u/20992734?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Amir Hossien Qasemi Moqaddam</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=amirqasemi74" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/SeyyedKhandon"><img src="https://avatars.githubusercontent.com/u/59599950?v=4?s=100" width="100px;" alt=""/><br /><sub><b>SeyyedKhandon</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=SeyyedKhandon" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/masoudDaliriyan"><img src="https://avatars.githubusercontent.com/u/25932831?v=4?s=100" width="100px;" alt=""/><br /><sub><b>msdDaliriyan</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=masoudDaliriyan" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/masoudDaliriyan"><img src="https://avatars.githubusercontent.com/u/25932831?v=4?s=100" width="100px;" alt=""/><br /><sub><b>msdDaliriyan</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=masoudDaliriyan" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=masoudDaliriyan" title="Tests">⚠️</a></td>
   </tr>
   <tr>
     <td align="center"><a href="https://mahdi-momeni.github.io/"><img src="https://avatars.githubusercontent.com/u/32864532?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mahdi</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=mahdi-momeni" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=mahdi-momeni" title="Tests">⚠️</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=mahdi-momeni" title="Documentation">📖</a></td>
     <td align="center"><a href="https://dev.to/psparsa"><img src="https://avatars.githubusercontent.com/u/57572461?v=4?s=100" width="100px;" alt=""/><br /><sub><b>PS-PARSA</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=psparsa" title="Tests">⚠️</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=psparsa" title="Code">💻</a> <a href="#ideas-psparsa" title="Ideas, Planning, & Feedback">🤔</a></td>
     <td align="center"><a href="http://amirduzandeh.ir/"><img src="https://avatars.githubusercontent.com/u/16349391?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Amirhossein Douzandeh Zenoozi</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=amirzenoozi" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=amirzenoozi" title="Tests">⚠️</a> <a href="#ideas-amirzenoozi" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://github.com/M0rteza-M"><img src="https://avatars.githubusercontent.com/u/79398146?v=4?s=100" width="100px;" alt=""/><br /><sub><b>M0rteza-M</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=M0rteza-M" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=M0rteza-M" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://www.mahdi.wtf/"><img src="https://avatars.githubusercontent.com/u/36822136?v=4?s=100" width="100px;" alt=""/><br /><sub><b>mediv0</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=mediv0" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=mediv0" title="Tests">⚠️</a> <a href="#ideas-mediv0" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://www.linkedin.com/in/poorshad/"><img src="https://avatars.githubusercontent.com/u/43247296?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Poorshad Shaddel</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=pshaddel" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=pshaddel" title="Tests">⚠️</a> <a href="#ideas-pshaddel" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="http://t.me/theMasix"><img src="https://avatars.githubusercontent.com/u/22872117?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Seyed Masih Sajadi</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=theMasix" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=theMasix" title="Tests">⚠️</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://www.samasarin.com"><img src="https://avatars.githubusercontent.com/u/30124243?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mohammad Ghonchesefidi</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=ghonchesefidi" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=ghonchesefidi" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://www.linkedin.com/in/realsaeedhassani/"><img src="https://avatars.githubusercontent.com/u/20496196?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Saeed Hasani Borzadaran</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=realsaeedhassani" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=realsaeedhassani" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://github.com/mrunderline"><img src="https://avatars.githubusercontent.com/u/23085360?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ali Madihi</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=mrunderline" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/Amir-Alipour"><img src="https://avatars.githubusercontent.com/u/73488911?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Amir</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=Amir-Alipour" title="Documentation">📖</a></td>
   </tr>
 </table>
 
@@ -559,11 +602,5 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
-## Wallaby.js
-
-[![Wallaby.js](https://img.shields.io/badge/wallaby.js-powered-blue.svg?style=for-the-badge&logo=github)](https://wallabyjs.com/oss/)
-
-This repository contributors are welcome to use
-[Wallaby.js OSS License](https://wallabyjs.com/oss/) to get
-test results immediately as you type, and see the results in
-your editor right next to your code.
+# Supporters :open_hands:
+[![Stargazers repo roster for @persian-tools/persian-tools](https://reporoster.com/stars/persian-tools/persian-tools)](https://github.com/persian-tools/persian-tools/stargazers)
