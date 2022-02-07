@@ -1,12 +1,3 @@
----
-name: Pull request
-about: Add or Edit some feature
-title: ''
-labels: ''
-assignees: ''
-
----
-
 <!--
 Thanks for your interest in the project. Bugs filed and PRs submitted are appreciated!
 
