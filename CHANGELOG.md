@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.3.0-beta.0](https://github.com/persian-tools/persian-tools/compare/v3.2.0...v3.3.0-beta.0) (2022-02-07)
+
+
+### Features
+
+* **abbreviation:** add abbreviateNumber and expandNumber functions ([#144](https://github.com/persian-tools/persian-tools/issues/144)) ([77b28b8](https://github.com/persian-tools/persian-tools/commit/77b28b8d65107824c79bc4d064047982c776082e))
+
+
+### Bug Fixes
+
+* **nationalId:** add check mono ids ([#123](https://github.com/persian-tools/persian-tools/issues/123)) ([a09b28b](https://github.com/persian-tools/persian-tools/commit/a09b28bb56459ccf605f125949b1e958730fd45c))
+* **wordsToNumber:** better magnitude handling ([#145](https://github.com/persian-tools/persian-tools/issues/145)) ([a5c289e](https://github.com/persian-tools/persian-tools/commit/a5c289e6e08447850930e2b543c052a603cafd1e))
+* **wordsToNumber:** detect before magnitudes tokens ([9b58c12](https://github.com/persian-tools/persian-tools/commit/9b58c125e4ddedb45ae72b2841378177c3652bd9))
+
 ### [3.2.1](https://github.com/persian-tools/persian-tools/compare/v3.2.0...v3.2.1) (2022-01-06)
 
 ## [3.2.0](https://github.com/persian-tools/persian-tools/compare/v3.1.1...v3.2.0) (2022-01-03)
