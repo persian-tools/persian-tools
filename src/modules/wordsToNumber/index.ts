@@ -25,23 +25,33 @@ export interface WordsToNumberOptions {
 
 function compute(tokens: string[]): number {
 	let sum = 0;
+	let eachMagnitudeSum = 0;
 	let isNegative = false;
+	let magnitudeSeen = false;
 
 	tokens.forEach((token) => {
 		token = digitsFaToEn(token)!;
 
+		if (magnitudeSeen) {
+			magnitudeSeen = false;
+			sum += eachMagnitudeSum;
+			eachMagnitudeSum = 0;
+		}
+
 		if (token === PREFIXES[0]) {
 			isNegative = true;
 		} else if (UNITS[token] != null) {
-			sum += UNITS[token];
+			eachMagnitudeSum += UNITS[token];
 		} else if (TEN[token] != null) {
-			sum += TEN[token];
+			eachMagnitudeSum += TEN[token];
 		} else if (!isNaN(Number(token))) {
-			sum += parseInt(token, 10);
+			eachMagnitudeSum += parseInt(token, 10);
 		} else {
-			sum *= MAGNITUDE[token];
+			eachMagnitudeSum *= MAGNITUDE[token];
+			magnitudeSeen = true;
 		}
 	});
+	sum += eachMagnitudeSum;
 	return isNegative ? sum * -1 : sum;
 }
 
