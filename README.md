@@ -33,6 +33,7 @@
 -   [Fix Persian zero-width non-joiner(Replace spaces by half-space)](#fix-persian-zero-width-non-joinerreplace-spaces-by-half-space)
 -   [Convert Jalaali date-time into a time ago](#convert-jalaali-date-time-into-a-time-ago)
 -   [Validate and find information of phone number](#validate-and-find-information-of-phone-number).
+-   [Abbreviate and Expand numbers](#abbreviate-and-expand-numbers).
 
 ## Getting started
 
@@ -460,6 +461,38 @@ phoneNumberValidator("9022002580"); // true
 phoneNumberValidator("09802002580"); // false
 ```
 
+
+
+
+
+### Abbreviate and Expand numbers
+
+**Usage**
+
+- Abbreviate numbers
+```js 
+import { abbreviateNumber } from "@persian-tools/persian-tools";
+
+abbreviateNumber(1000); // expected 1.0 کیلو
+abbreviateNumber(12, {digit: 0}); // expected 12
+abbreviateNumber(1100, {digit: 2}); // expected 1.10 کیلو
+abbreviateNumber(1100, {digit: 2, padding: false}); // expected 1.1 کیلو
+abbreviateNumber(1234.56, {digit: 2}); // expected 1.23 کیلو
+abbreviateNumber(1234, {symbols: ['', ' کیلوگرم']}); // expected 1.2 کیلوگرم
+abbreviateNumber(1234567, {symbols: ['', ' کیلوگرم']}); // expected 1234.5 کیلوگرم
+```
+
+- Make numbers unabbreviated
+```js 
+import { expandNumber } from "@persian-tools/persian-tools";
+
+expandNumber("-25"); // expected -25
+expandNumber("-1.3 کیلو"); // expected -1300
+expandNumber("1.123456 کیلو"); // expected 1123.456
+expandNumber("666kilo", ["", "kilo", "Mega"]); // expected 666000
+```
+
+>**NOTE:** symbols is optional that can be an array of units, defaulting to ["", " کیلو", " مگا", " گیگا", " ترا", " پتا"].
 
 ### Todo
 - [ ] Write Jalaali and Gregorian functions to convert Date together.

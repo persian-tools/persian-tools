@@ -47,3 +47,6 @@ export * from "./modules/phoneNumber";
 
 // TimeAgo
 export { default as timeAgo } from "./modules/timeAgo";
+
+// Abbreviation
+export { abbreviateNumber, expandNumber, AbbreviateOptions } from "./modules/abbreviation";
