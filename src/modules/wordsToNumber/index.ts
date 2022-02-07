@@ -28,6 +28,7 @@ function compute(tokens: string[]): number {
 	let eachMagnitudeSum = 0;
 	let isNegative = false;
 	let magnitudeSeen = false;
+	let isTokenBeforeMagnitude = false;
 
 	tokens.forEach((token) => {
 		token = digitsFaToEn(token)!;
@@ -42,13 +43,18 @@ function compute(tokens: string[]): number {
 			isNegative = true;
 		} else if (UNITS[token] != null) {
 			eachMagnitudeSum += UNITS[token];
+			isTokenBeforeMagnitude = true;
 		} else if (TEN[token] != null) {
 			eachMagnitudeSum += TEN[token];
+			isTokenBeforeMagnitude = true;
 		} else if (!isNaN(Number(token))) {
 			eachMagnitudeSum += parseInt(token, 10);
+			isTokenBeforeMagnitude = true;
 		} else {
-			eachMagnitudeSum *= MAGNITUDE[token];
+			if (eachMagnitudeSum === 0 && !isTokenBeforeMagnitude) eachMagnitudeSum += MAGNITUDE[token];
+			else eachMagnitudeSum *= MAGNITUDE[token];
 			magnitudeSeen = true;
+			isTokenBeforeMagnitude = false;
 		}
 	});
 	sum += eachMagnitudeSum;
