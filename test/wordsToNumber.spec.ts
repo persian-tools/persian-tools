@@ -8,6 +8,8 @@ describe("WordsToNumber", () => {
 		expect(wordsToNumber<number>("یک میلیون")).toEqual(1000000);
 		expect(wordsToNumber<number>("صفر میلیون")).toEqual(0);
 		expect(wordsToNumber<number>("صفر میلیون و ده")).toEqual(10);
+		expect(wordsToNumber<number>("یازده میلیارد و صفر میلیون و دو")).toEqual(11000000002);
+		expect(wordsToNumber<number>("یازده میلیارد و دو")).toEqual(11000000002);
 		expect(wordsToNumber<number>("میلیارد و ده")).toEqual(1000000010);
 		expect(wordsToNumber<number>("سه بیلیون و چهارده میلیون و دو")).toEqual(3014000002);
 		expect(wordsToNumber<number>("دو میلیون و دویست هزار و سیصد و پنجاه و هفت")).toEqual(2200357);
