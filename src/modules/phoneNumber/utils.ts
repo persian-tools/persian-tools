@@ -69,7 +69,7 @@ export const MCI = {
 		operator: operatorsMap.MCI,
 	},
 	"918": {
-		province: ["کردستان", "ایلام", "همدان"],
+		province: ["کردستان", "ایلام", "همدان", "مرکزی"],
 		base: "کرمانشاه",
 		type: ["permanent", "credit"],
 		operator: operatorsMap.MCI,
