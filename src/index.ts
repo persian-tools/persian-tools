@@ -55,3 +55,4 @@ export { default as remainingTime } from "./modules/remainingTime";
 
 // Abbreviation
 export { abbreviateNumber, expandNumber, AbbreviateOptions } from "./modules/abbreviation";
+export { isValidIranCity } from "./modules/isValidIranCity";
