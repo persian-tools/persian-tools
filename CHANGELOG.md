@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.3.0-beta.1](https://github.com/persian-tools/persian-tools/compare/v3.3.0-beta.0...v3.3.0-beta.1) (2022-02-26)
+
+
+### Bug Fixes
+
+* **phoneNumber:** add markazi province ([#150](https://github.com/persian-tools/persian-tools/issues/150)) ([68ef70b](https://github.com/persian-tools/persian-tools/commit/68ef70bd8bd108325a9b2a6aa5c68fa99a84aea2))
+
 ## [3.3.0-beta.0](https://github.com/persian-tools/persian-tools/compare/v3.2.0...v3.3.0-beta.0) (2022-02-07)
 
 
