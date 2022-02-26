@@ -559,6 +559,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://www.linkedin.com/in/realsaeedhassani/"><img src="https://avatars.githubusercontent.com/u/20496196?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Saeed Hasani Borzadaran</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=realsaeedhassani" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=realsaeedhassani" title="Tests">⚠️</a></td>
     <td align="center"><a href="https://github.com/mrunderline"><img src="https://avatars.githubusercontent.com/u/23085360?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ali Madihi</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=mrunderline" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/Amir-Alipour"><img src="https://avatars.githubusercontent.com/u/73488911?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Amir</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=Amir-Alipour" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://codewars.com/users/KavehKarami"><img src="https://avatars.githubusercontent.com/u/48356643?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Kaveh Karami</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=KavehKarami" title="Code">💻</a></td>
   </tr>
 </table>
 

@@ -185,6 +185,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "KavehKarami",
+      "name": "Kaveh Karami",
+      "avatar_url": "https://avatars.githubusercontent.com/u/48356643?v=4",
+      "profile": "http://codewars.com/users/KavehKarami",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
