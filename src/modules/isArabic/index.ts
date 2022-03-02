@@ -1,4 +1,4 @@
-import { ArabicContextualForms } from "../../helpers";
+import { arabicContextualForms } from "../../helpers";
 
 /**
  * Check if string is Arabic
@@ -10,7 +10,7 @@ import { ArabicContextualForms } from "../../helpers";
 export const isArabic = (str: string, trimPattern = /["'-+()\s.]/g): boolean => {
 	const text = str.replace(trimPattern, "");
 
-	return /^[\u0600-\u06FF\s]+$/.test(text) && ArabicContextualForms.test(text);
+	return /^[\u0600-\u06FF\s]+$/.test(text) && arabicContextualForms.test(text);
 };
 
 /**
@@ -19,6 +19,6 @@ export const isArabic = (str: string, trimPattern = /["'-+()\s.]/g): boolean => 
  * @param {string} str
  * @return {boolean} Return true if the entered string includes persian characters
  */
-export const hasArabic = (str: string): boolean => /[\u0600-\u06FF]/.test(str) && ArabicContextualForms.test(str);
+export const hasArabic = (str: string): boolean => /[\u0600-\u06FF]/.test(str) && arabicContextualForms.test(str);
 
 export default isArabic;
