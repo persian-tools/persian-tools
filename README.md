@@ -225,7 +225,7 @@ toPersianChars("علي") // علی
 ### Fix Persian characters in URL.
 
 ```javascript
-import { isPersian, toPersianChars } from "@persian-tools/persian-tools";
+import { URLfix } from "@persian-tools/persian-tools";
 
 URLfix(
 	"https://fa.wikipedia.org/wiki/%D9%85%D8%AF%DB%8C%D8%A7%D9%88%DB%8C%DA%A9%DB%8C:Gadget-Extra-Editbuttons-botworks.js",
