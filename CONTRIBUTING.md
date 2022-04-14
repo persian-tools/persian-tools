@@ -1,0 +1,3 @@
+- [ ] All tests should be passed
+- [ ] Commits should follow the [Commit message conventions](https://www.conventionalcommits.org/) rules.
+- [ ] README.md should be updated if you add/update a feature.
