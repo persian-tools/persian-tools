@@ -493,6 +493,18 @@ phoneNumberValidator("9022002580"); // true
 phoneNumberValidator("09802002580"); // false
 ```
 
+- Normalizing phone number
+
+```js
+import { normalizePhoneNumber } from "@persian-tools/persian-tools";
+
+phoneNumberNormalizer("+989022002580", "0"); // 09022002580
+phoneNumberNormalizer("989022002580", "0"); // 09022002580
+phoneNumberNormalizer("09022002580", "0"); // 09022002580
+phoneNumberNormalizer("09022002580", "+98"); // +989022002580
+phoneNumberNormalizer("09802002580", "0"); // Error: phone number is not valid
+```
+
 
 ### Todo
 - [ ] Write Jalaali and Gregorian functions to convert Date together.
