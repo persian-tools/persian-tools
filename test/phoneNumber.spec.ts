@@ -73,7 +73,7 @@ describe("Iranian Phone Number Utilities", () => {
 		});
 	});
 
-	describe.only("Normalize", () => {
+	describe("Normalize", () => {
 		it("Should return the normalized phone number", () => {
 			// normalize to 0
 			expect(phoneNumberNormalizer("+989373708555", "0")).toEqual("09373708555");
