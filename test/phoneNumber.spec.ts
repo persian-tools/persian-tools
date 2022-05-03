@@ -1,4 +1,4 @@
-import { phoneNumberDetail, phoneNumberValidator } from "../src";
+import { phoneNumberDetail, phoneNumberValidator, phoneNumberNormalizer } from "../src";
 import { getPhonePrefix } from "../src/modules/phoneNumber/utils";
 
 describe("Iranian Phone Number Utilities", () => {
@@ -70,6 +70,32 @@ describe("Iranian Phone Number Utilities", () => {
 
 		it("Should return nothing", () => {
 			expect(getPhonePrefix("000989022002580")).toEqual("");
+		});
+	});
+
+	describe.only("Normalize", () => {
+		it("Should return the normalized phone number", () => {
+			// normalize to 0
+			expect(phoneNumberNormalizer("+989373708555", "0")).toEqual("09373708555");
+			expect(phoneNumberNormalizer("989373708555", "0")).toEqual("09373708555");
+			expect(phoneNumberNormalizer("00989022002580", "0")).toEqual("09022002580");
+			expect(phoneNumberNormalizer("09122002580", "0")).toEqual("09122002580");
+			expect(phoneNumberNormalizer("9322002580", "0")).toEqual("09322002580");
+
+			// normalize to +98
+			expect(phoneNumberNormalizer("09373708555", "+98")).toEqual("+989373708555");
+			expect(phoneNumberNormalizer("09022002580", "+98")).toEqual("+989022002580");
+			expect(phoneNumberNormalizer("09122002580", "+98")).toEqual("+989122002580");
+			expect(phoneNumberNormalizer("9322002580", "+98")).toEqual("+989322002580");
+			expect(phoneNumberNormalizer("00989022002580", "+98")).toEqual("+989022002580");
+		});
+
+		it("should throw if phone number is not valid", () => {
+			expect(() => phoneNumberNormalizer("0", "+98")).toThrow();
+			expect(() => phoneNumberNormalizer("+98", "+98")).toThrow();
+			expect(() => phoneNumberNormalizer("99999999999", "+98")).toThrow();
+			expect(() => phoneNumberNormalizer("   99999999     ", "+98")).toThrow();
+			expect(() => phoneNumberNormalizer("09802002580", "0")).toThrow();
 		});
 	});
 });
