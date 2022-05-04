@@ -502,7 +502,6 @@ phoneNumberNormalizer("+989022002580", "0"); // 09022002580
 phoneNumberNormalizer("989022002580", "0"); // 09022002580
 phoneNumberNormalizer("09022002580", "0"); // 09022002580
 phoneNumberNormalizer("09022002580", "+98"); // +989022002580
-phoneNumberNormalizer("09802002580", "0"); // Error: phone number is not valid
 ```
 
 
