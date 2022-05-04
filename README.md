@@ -496,7 +496,7 @@ phoneNumberValidator("09802002580"); // false
 - Normalizing phone number
 
 ```js
-import { normalizePhoneNumber } from "@persian-tools/persian-tools";
+import { phoneNumberNormalizer } from "@persian-tools/persian-tools";
 
 phoneNumberNormalizer("+989022002580", "0"); // 09022002580
 phoneNumberNormalizer("989022002580", "0"); // 09022002580
