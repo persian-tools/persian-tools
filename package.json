@@ -71,7 +71,7 @@
 		"husky": "7.0.4",
 		"jest": "27.5.1",
 		"jest-cli": "27.5.1",
-		"microbundle": "0.14.2",
+		"microbundle": "0.15.0",
 		"prettier": "2.6.2",
 		"prettier-eslint": "13.0.0",
 		"rimraf": "3.0.2",
