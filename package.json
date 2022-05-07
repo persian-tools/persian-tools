@@ -60,7 +60,7 @@
 		"@typescript-eslint/parser": "5.21.0",
 		"cross-env": "7.0.3",
 		"eslint": "8.15.0",
-		"eslint-config-standard": "16.0.3",
+		"eslint-config-standard": "17.0.0",
 		"eslint-friendly-formatter": "4.0.1",
 		"eslint-plugin-import": "2.26.0",
 		"eslint-plugin-node": "11.1.0",
