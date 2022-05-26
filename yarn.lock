@@ -5314,10 +5314,10 @@ prelude-ls@^1.2.1:
   version "1.2.1"
   resolved "https://registry.npmjs.org/prelude-ls/-/prelude-ls-1.2.1.tgz"
 
-prettier-eslint@15.0.0:
-  version "15.0.0"
-  resolved "https://registry.yarnpkg.com/prettier-eslint/-/prettier-eslint-15.0.0.tgz#727c5f2f8f40dc745b08694f1a17eaf2ab68e9e7"
-  integrity sha512-VkzXkxg1YQrXfPDmD0ydfHZWA4vE2DcOz2ac4WPkCS0nLqevUrkg0aNrMGSeNtCH+BFdc2W+YQizCdHAChEJCw==
+prettier-eslint@15.0.1:
+  version "15.0.1"
+  resolved "https://registry.yarnpkg.com/prettier-eslint/-/prettier-eslint-15.0.1.tgz#2543a43e9acec2a9767ad6458165ce81f353db9c"
+  integrity sha512-mGOWVHixSvpZWARqSDXbdtTL54mMBxc5oQYQ6RAqy8jecuNJBgN3t9E5a81G66F8x8fsKNiR1HWaBV66MJDOpg==
   dependencies:
     "@types/eslint" "^8.4.2"
     "@types/prettier" "^2.6.0"
