@@ -76,7 +76,7 @@
 		"prettier-eslint": "15.0.1",
 		"rimraf": "3.0.2",
 		"standard-version": "9.5.0",
-		"ts-jest": "28.0.3",
+		"ts-jest": "28.0.5",
 		"typedoc": "0.22.16"
 	},
 	"dependencies": {
