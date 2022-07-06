@@ -1,3 +1,4 @@
+import { toPersianChars } from "../src";
 import { isPersian, hasPersian } from "../src/modules/isPersian";
 
 it("isPersian", () => {
@@ -15,6 +16,11 @@ it("isPersian", () => {
 		),
 	).toBeFalsy();
 	expect(isPersian("")).toBeFalsy();
+});
+
+it("isPersian Bug#208, shah, mahdi", () => {
+	expect(isPersian(toPersianChars("مهدی") as string)).toBe(true);
+	expect(isPersian(toPersianChars("شاه") as string)).toBe(true);
 });
 
 it("hasPersian", () => {
