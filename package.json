@@ -9,7 +9,7 @@
 	"sideEffect": false,
 	"scripts": {
 		"micro:build": "microbundle src/index.ts --compress --name PersianTools --strict",
-		"postmicro:build": "mv ./build/index.d.ts ./build/persian-tools.d.ts && npx rimraf ./build/setupTests.d.ts ./build/*.map",
+		"postmicro:build": "mv ./build/index.d.ts ./build/persian-tools.d.ts && npx rimraf ./build/setupTests.d.ts",
 		"micro:dev": "microbundle watch",
 		"test": "vitest run",
 		"test:watch": "vitest watch",
