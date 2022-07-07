@@ -1,3 +1,4 @@
+import { it, expect } from "vitest";
 import { numberToWords } from "../src";
 
 it("numberToWords", () => {

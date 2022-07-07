@@ -1,3 +1,4 @@
+import { describe, it, expect } from "vitest";
 import { digitsFaToEn, timeAgo } from "../src";
 import { checkFormatDateTime } from "../src/modules/timeAgo";
 

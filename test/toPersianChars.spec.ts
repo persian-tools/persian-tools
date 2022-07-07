@@ -1,3 +1,4 @@
+import { it, expect } from "vitest";
 import { toPersianChars } from "../src";
 
 it("toPersianChars", () => {

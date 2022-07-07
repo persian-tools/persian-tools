@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.4.0](https://github.com/persian-tools/persian-tools/compare/v3.3.0...v3.4.0) (2022-07-07)
+
+
+### Features
+
+* install & config the vite and remove jest ([e8c14a8](https://github.com/persian-tools/persian-tools/commit/e8c14a83f26735b5cf7f6d827539a0180cf418b0))
+
+
+### Bug Fixes
+
+* [#208](https://github.com/persian-tools/persian-tools/issues/208) isPersian replacing ه wit arabic ه ([#225](https://github.com/persian-tools/persian-tools/issues/225)) ([15bd04e](https://github.com/persian-tools/persian-tools/commit/15bd04ef483ce24f9017f2ecf86db86d566d3839))
+* **#226:** webpack failed to parse source map ([13590c2](https://github.com/persian-tools/persian-tools/commit/13590c2fb1c940542b6a599aa5dd48fb61b1c564)), closes [#226](https://github.com/persian-tools/persian-tools/issues/226)
+
 ## [3.3.0](https://github.com/persian-tools/persian-tools/compare/v3.2.0...v3.3.0) (2022-05-06)
 
 

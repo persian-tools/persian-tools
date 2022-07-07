@@ -1,6 +1,6 @@
+import { describe, it, expect } from "vitest";
 import { isPlateNumberValid, normalizePlate } from "../src/modules/numberplate/helpers";
 import { PlateResultApi } from "../src/modules/numberplate/types.skip";
-
 import plate, {
 	getPlateHandler,
 	carHandler,

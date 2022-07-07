@@ -1,3 +1,4 @@
+import { it, expect } from "vitest";
 import { SortText } from "../src";
 
 it("Sort Persian text", () => {

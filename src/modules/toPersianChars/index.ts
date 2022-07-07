@@ -39,9 +39,8 @@ function toPersianChars(str: string): string | undefined {
 	str = str.replace(/ي/g, "ی");
 	str = str.replace(/ك/g, "ک");
 	str = str.replace(/ى/g, "ی");
-	str = str.replace(new RegExp("ه($|[^ء-يٱ-ە])", "g"), "ە$1");
+	str = str.replace(new RegExp("([^ء-يٱ-ە]|$)ه", "g"), "ە$1");
 	str = str.replace(/ە‌/g, "ە");
-	str = str.replace(/ه/g, "ھ");
 
 	// NOTE: This will also undo changes to categories which is not good
 	// but we will undo that later
