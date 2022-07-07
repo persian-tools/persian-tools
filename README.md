@@ -504,6 +504,20 @@ phoneNumberNormalizer("09022002580", "0"); // 09022002580
 phoneNumberNormalizer("09022002580", "+98"); // +989022002580
 ```
 
+### Find capital city by state name
+
+**Usage**
+
+> finding capital city name of state you enter
+
+```js
+import { findCapitalByStateName } from "@persian-tools/persian-tools";
+
+findCapitalByStateName('خراسان رضوی'); // مشهد
+findCapitalByStateName('آذربایجان شرقی'); // تبریز 
+findCapitalByStateName('مشهد') // noStateFound
+```
+
 
 ### Todo
 - [ ] Write Jalaali and Gregorian functions to convert Date together.

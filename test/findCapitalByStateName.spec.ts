@@ -1,4 +1,4 @@
-import { findCapitalByStateName } from '../src/modules/findCapitalByStateName/'
+import { findCapitalByStateName } from '../src/modules/findCapitalByStateName'
 
 it("findCapitalByStateName", () => {
 	expect(findCapitalByStateName("کهگیلویه و بویراحمد")).toBeTruthy();
