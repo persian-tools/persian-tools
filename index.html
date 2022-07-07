@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>Persian Tools - v3.3.0</title><meta name="description" content="Documentation for Persian Tools - v3.3.0"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">Persian Tools - v3.3.0</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1>Persian Tools - v3.3.0 </h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography"><div align="center">
+<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>Persian Tools - v3.4.0</title><meta name="description" content="Documentation for Persian Tools - v3.4.0"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">Persian Tools - v3.4.0</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1>Persian Tools - v3.4.0 </h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography"><div align="center">
     <p align="center">
         <img src="./images/logo.png" width="200" />
     </p>
@@ -88,27 +88,30 @@ to convert your code to something older browsers understand.</p>
 | <code>digits</code>                  | Result will be converted to the English or Persian digits     | <code>en</code>
 | <code>addCommas</code>               | Commas will be added to the Result                            | <code>false</code></p>
 <ul>
-<li>Convert with no option
-```javascript
-import { wordsToNumber } from &quot;@persian-tools/persian-tools&quot;;</li>
+<li>Convert with no option</li>
 </ul>
-<p>wordsToNumber(&quot;منفی سه هزارمین&quot;) // -3000
-wordsToNumber(&quot;منفی سه هزارم&quot;) // -3000
-wordsToNumber(&quot;منفی سه هزار&quot;) // -3000
-wordsToNumber(&quot;سه هزار دویست و دوازده&quot;) // 3212
-wordsToNumber(&quot;دوازده هزار بیست دو&quot;) // 12022</p>
-<pre><code><span class="hl-2">- </span><span class="hl-8">Digits</span><span class="hl-2"> </span><span class="hl-8">converter</span><br/><span class="hl-12">```js</span><br/><span class="hl-12">wordsToNumber(&quot;منفی سه هزارمین&quot;, { digits: &quot;fa&quot; }) // &quot;-۳۰۰۰&quot;</span><br/><span class="hl-12">wordsToNumber(&quot;دوازده هزار بیست دو&quot;, { digits: &quot;fa&quot; }) // ۱۲۰۲۲</span>
+<pre><code class="language-javascript"><span class="hl-11">import</span><span class="hl-2"> { </span><span class="hl-8">wordsToNumber</span><span class="hl-2"> } </span><span class="hl-11">from</span><span class="hl-2"> </span><span class="hl-12">&quot;@persian-tools/persian-tools&quot;</span><span class="hl-2">;</span><br/><br/><span class="hl-9">wordsToNumber</span><span class="hl-2">(</span><span class="hl-12">&quot;منفی سه هزارمین&quot;</span><span class="hl-2">) </span><span class="hl-3">// -3000</span><br/><span class="hl-9">wordsToNumber</span><span class="hl-2">(</span><span class="hl-12">&quot;منفی سه هزارم&quot;</span><span class="hl-2">) </span><span class="hl-3">// -3000</span><br/><span class="hl-9">wordsToNumber</span><span class="hl-2">(</span><span class="hl-12">&quot;منفی سه هزار&quot;</span><span class="hl-2">) </span><span class="hl-3">// -3000</span><br/><span class="hl-9">wordsToNumber</span><span class="hl-2">(</span><span class="hl-12">&quot;سه هزار دویست و دوازده&quot;</span><span class="hl-2">) </span><span class="hl-3">// 3212</span><br/><span class="hl-9">wordsToNumber</span><span class="hl-2">(</span><span class="hl-12">&quot;دوازده هزار بیست دو&quot;</span><span class="hl-2">) </span><span class="hl-3">// 12022</span>
 </code></pre>
 <ul>
-<li>Add commas<pre><code class="language-js"><span class="hl-9">wordsToNumber</span><span class="hl-2">(</span><span class="hl-12">&quot;منفی سه هزارمین&quot;</span><span class="hl-2">, { </span><span class="hl-8">addCommas:</span><span class="hl-2"> </span><span class="hl-7">true</span><span class="hl-2"> }) </span><span class="hl-3">// &quot;-3,000&quot;</span><br/><span class="hl-9">wordsToNumber</span><span class="hl-2">(</span><span class="hl-12">&quot;دوازده هزار بیست دو&quot;</span><span class="hl-2">, { </span><span class="hl-8">addCommas:</span><span class="hl-2"> </span><span class="hl-7">true</span><span class="hl-2"> }) </span><span class="hl-3">// &quot;12,022&quot;</span>
-</code></pre>
-</li>
-<li>Fuzzy typo fixer(<code>v1.5.0</code>):
-```javascript
-import { WordsToNumber } from &quot;@persian-tools/persian-tools&quot;;</li>
+<li>Digits converter</li>
 </ul>
-<p>wordsToNumber(&quot;یگصد و بنجاه هزار&quot;, { fuzzy: true }) // &quot;150000&quot;<br>wordsToNumber(&quot;دویشت ر بیشت هزار&quot;, { fuzzy: true }) // &quot;220000&quot;<br>wordsToNumber(&quot;منقی ضد&quot;, { fuzzy: true }) // &quot;-100&quot;  </p>
-<pre><code><br/><span class="hl-2">### </span><span class="hl-8">Convert</span><span class="hl-2"> </span><span class="hl-8">Numbers</span><span class="hl-2"> </span><span class="hl-8">to</span><span class="hl-2"> </span><span class="hl-8">Persian</span><span class="hl-2"> </span><span class="hl-8">words</span><br/><span class="hl-12">```javascript</span><br/><span class="hl-12">import { numberToWords } from &quot;@persian-tools/persian-tools&quot;;</span><br/><br/><span class="hl-12">numberToWords(500443) // &quot;پانصد هزار و چهار صد و چهل و سه&quot;</span><br/><span class="hl-12">numberToWords(&quot;500,443&quot;) // &quot;پانصد هزار و چهار صد و چهل و سه&quot;</span><br/><span class="hl-12">numberToWords(&quot;500,443&quot;, { ordinal: true }) // &quot;پانصد هزار و چهار صد و چهل و سوم&quot;</span><br/><span class="hl-12">numberToWords(30000000000) // &quot;سی میلیارد&quot;</span>
+<pre><code class="language-js"><span class="hl-9">wordsToNumber</span><span class="hl-2">(</span><span class="hl-12">&quot;منفی سه هزارمین&quot;</span><span class="hl-2">, { </span><span class="hl-8">digits:</span><span class="hl-2"> </span><span class="hl-12">&quot;fa&quot;</span><span class="hl-2"> }) </span><span class="hl-3">// &quot;-۳۰۰۰&quot;</span><br/><span class="hl-9">wordsToNumber</span><span class="hl-2">(</span><span class="hl-12">&quot;دوازده هزار بیست دو&quot;</span><span class="hl-2">, { </span><span class="hl-8">digits:</span><span class="hl-2"> </span><span class="hl-12">&quot;fa&quot;</span><span class="hl-2"> }) </span><span class="hl-3">// ۱۲۰۲۲</span>
+</code></pre>
+<ul>
+<li>Add commas</li>
+</ul>
+<pre><code class="language-js"><span class="hl-9">wordsToNumber</span><span class="hl-2">(</span><span class="hl-12">&quot;منفی سه هزارمین&quot;</span><span class="hl-2">, { </span><span class="hl-8">addCommas:</span><span class="hl-2"> </span><span class="hl-7">true</span><span class="hl-2"> }) </span><span class="hl-3">// &quot;-3,000&quot;</span><br/><span class="hl-9">wordsToNumber</span><span class="hl-2">(</span><span class="hl-12">&quot;دوازده هزار بیست دو&quot;</span><span class="hl-2">, { </span><span class="hl-8">addCommas:</span><span class="hl-2"> </span><span class="hl-7">true</span><span class="hl-2"> }) </span><span class="hl-3">// &quot;12,022&quot;</span>
+</code></pre>
+<ul>
+<li>Fuzzy typo fixer(<code>v1.5.0</code>):</li>
+</ul>
+<pre><code class="language-javascript"><span class="hl-11">import</span><span class="hl-2"> { </span><span class="hl-8">WordsToNumber</span><span class="hl-2"> } </span><span class="hl-11">from</span><span class="hl-2"> </span><span class="hl-12">&quot;@persian-tools/persian-tools&quot;</span><span class="hl-2">;</span><br/><br/><span class="hl-9">wordsToNumber</span><span class="hl-2">(</span><span class="hl-12">&quot;یگصد و بنجاه هزار&quot;</span><span class="hl-2">, { </span><span class="hl-8">fuzzy:</span><span class="hl-2"> </span><span class="hl-7">true</span><span class="hl-2"> }) </span><span class="hl-3">// &quot;150000&quot;  </span><br/><span class="hl-9">wordsToNumber</span><span class="hl-2">(</span><span class="hl-12">&quot;دویشت ر بیشت هزار&quot;</span><span class="hl-2">, { </span><span class="hl-8">fuzzy:</span><span class="hl-2"> </span><span class="hl-7">true</span><span class="hl-2"> }) </span><span class="hl-3">// &quot;220000&quot;  </span><br/><span class="hl-9">wordsToNumber</span><span class="hl-2">(</span><span class="hl-12">&quot;منقی ضد&quot;</span><span class="hl-2">, { </span><span class="hl-8">fuzzy:</span><span class="hl-2"> </span><span class="hl-7">true</span><span class="hl-2"> }) </span><span class="hl-3">// &quot;-100&quot;  </span>
+</code></pre>
+
+<a href="#convert-numbers-to-persian-words" id="convert-numbers-to-persian-words" style="color: inherit; text-decoration: none;">
+  <h3>Convert Numbers to Persian words</h3>
+</a>
+<pre><code class="language-javascript"><span class="hl-11">import</span><span class="hl-2"> { </span><span class="hl-8">numberToWords</span><span class="hl-2"> } </span><span class="hl-11">from</span><span class="hl-2"> </span><span class="hl-12">&quot;@persian-tools/persian-tools&quot;</span><span class="hl-2">;</span><br/><br/><span class="hl-9">numberToWords</span><span class="hl-2">(</span><span class="hl-10">500443</span><span class="hl-2">) </span><span class="hl-3">// &quot;پانصد هزار و چهار صد و چهل و سه&quot;</span><br/><span class="hl-9">numberToWords</span><span class="hl-2">(</span><span class="hl-12">&quot;500,443&quot;</span><span class="hl-2">) </span><span class="hl-3">// &quot;پانصد هزار و چهار صد و چهل و سه&quot;</span><br/><span class="hl-9">numberToWords</span><span class="hl-2">(</span><span class="hl-12">&quot;500,443&quot;</span><span class="hl-2">, { </span><span class="hl-8">ordinal:</span><span class="hl-2"> </span><span class="hl-7">true</span><span class="hl-2"> }) </span><span class="hl-3">// &quot;پانصد هزار و چهار صد و چهل و سوم&quot;</span><br/><span class="hl-9">numberToWords</span><span class="hl-2">(</span><span class="hl-10">30000000000</span><span class="hl-2">) </span><span class="hl-3">// &quot;سی میلیارد&quot;</span>
 </code></pre>
 <p><strong>NOTE:</strong> This function supports the largest safe integer (9007199254740991 / 2^53 - 1)</p>
 
@@ -184,13 +187,14 @@ import { WordsToNumber } from &quot;@persian-tools/persian-tools&quot;;</li>
   <h3>Iranian Sheba(IBAN)</h3>
 </a>
 <ul>
-<li>Check validation
-```javascript
-import { isShebaValid } from &quot;@persian-tools/persian-tools&quot;;</li>
+<li>Check validation</li>
 </ul>
-<p>isShebaValid(&quot;IR820540102680020817909002&quot;); // true
-isShebaValid(&quot;IR01234567890123456789&quot;); // false</p>
-<pre><code><br/><span class="hl-2">- </span><span class="hl-8">Recognize</span><span class="hl-2"> </span><span class="hl-8">bank</span><span class="hl-2"> </span><span class="hl-8">information</span><br/><span class="hl-12">```javascript</span><br/><span class="hl-12">import { getShebaInfo } from &quot;@persian-tools/persian-tools&quot;;</span><br/><br/><span class="hl-12">getShebaInfo(&quot;IR820540102680020817909002&quot;);</span><br/><span class="hl-12">/*</span><br/><span class="hl-12"> Result: {</span><br/><span class="hl-12">    &quot;nickname&quot;: &quot;parsian&quot;,</span><br/><span class="hl-12">    &quot;name&quot;: &quot;Parsian Bank&quot;,</span><br/><span class="hl-12">    &quot;persianName&quot;: &quot;بانک پارسیان&quot;,</span><br/><span class="hl-12">    &quot;code&quot;: &quot;054&quot;,</span><br/><span class="hl-12">    &quot;accountNumberAvailable&quot;: true,</span><br/><span class="hl-12">    &quot;accountNumber&quot;: &quot;020817909002&quot;,</span><br/><span class="hl-12">    &quot;formattedAccountNumber&quot;: &quot;002-00817909-002&quot;</span><br/><span class="hl-12">  }</span><br/><span class="hl-12">*/</span>
+<pre><code class="language-javascript"><span class="hl-11">import</span><span class="hl-2"> { </span><span class="hl-8">isShebaValid</span><span class="hl-2"> } </span><span class="hl-11">from</span><span class="hl-2"> </span><span class="hl-12">&quot;@persian-tools/persian-tools&quot;</span><span class="hl-2">;</span><br/><br/><span class="hl-9">isShebaValid</span><span class="hl-2">(</span><span class="hl-12">&quot;IR820540102680020817909002&quot;</span><span class="hl-2">); </span><span class="hl-3">// true</span><br/><span class="hl-9">isShebaValid</span><span class="hl-2">(</span><span class="hl-12">&quot;IR01234567890123456789&quot;</span><span class="hl-2">); </span><span class="hl-3">// false</span>
+</code></pre>
+<ul>
+<li>Recognize bank information</li>
+</ul>
+<pre><code class="language-javascript"><span class="hl-11">import</span><span class="hl-2"> { </span><span class="hl-8">getShebaInfo</span><span class="hl-2"> } </span><span class="hl-11">from</span><span class="hl-2"> </span><span class="hl-12">&quot;@persian-tools/persian-tools&quot;</span><span class="hl-2">;</span><br/><br/><span class="hl-9">getShebaInfo</span><span class="hl-2">(</span><span class="hl-12">&quot;IR820540102680020817909002&quot;</span><span class="hl-2">);</span><br/><span class="hl-3">/*</span><br/><span class="hl-3"> Result: {</span><br/><span class="hl-3">    &quot;nickname&quot;: &quot;parsian&quot;,</span><br/><span class="hl-3">    &quot;name&quot;: &quot;Parsian Bank&quot;,</span><br/><span class="hl-3">    &quot;persianName&quot;: &quot;بانک پارسیان&quot;,</span><br/><span class="hl-3">    &quot;code&quot;: &quot;054&quot;,</span><br/><span class="hl-3">    &quot;accountNumberAvailable&quot;: true,</span><br/><span class="hl-3">    &quot;accountNumber&quot;: &quot;020817909002&quot;,</span><br/><span class="hl-3">    &quot;formattedAccountNumber&quot;: &quot;002-00817909-002&quot;</span><br/><span class="hl-3">  }</span><br/><span class="hl-3">*/</span>
 </code></pre>
 
 <a href="#fix-persian-zero-width-non-joinerreplace-spaces-by-half-space" id="fix-persian-zero-width-non-joinerreplace-spaces-by-half-space" style="color: inherit; text-decoration: none;">
@@ -210,42 +214,17 @@ isShebaValid(&quot;IR01234567890123456789&quot;); // false</p>
 <pre><code class="language-js"><span class="hl-11">import</span><span class="hl-2"> { </span><span class="hl-8">Plate</span><span class="hl-2"> } </span><span class="hl-11">from</span><span class="hl-2"> </span><span class="hl-12">&quot;@persian-tools/persian-tools&quot;</span><span class="hl-2">;</span><br/><br/><span class="hl-9">Plate</span><span class="hl-2">(</span><span class="hl-12">&quot;12D45147&quot;</span><span class="hl-2">); </span><span class="hl-3">// passing string argument</span><br/><br/><span class="hl-3">// or passing in object style</span><br/><span class="hl-9">Plate</span><span class="hl-2">({</span><br/><span class="hl-2">  </span><span class="hl-8">number:</span><span class="hl-2"> </span><span class="hl-12">&quot;1245147&quot;</span><span class="hl-2">,</span><br/><span class="hl-2">  </span><span class="hl-8">char:</span><span class="hl-2"> </span><span class="hl-12">&quot;الف&quot;</span><br/><span class="hl-2">})</span>
 </code></pre>
 <ul>
-<li>Getting info about plate
-```js
-import { Plate } from &quot;@persian-tools/persian-tools&quot;;</li>
+<li>Getting info about plate</li>
 </ul>
-<p>Plate(&quot;12D45147&quot;).info;
-/*
-  {
-      template: 12 D 451 ایران  47
-    province: مرکزی ,
-    type: Car,
-    category: دیپلمات,<br>    details: {
-    firstTwoDigits: 12,
-    plateCharacter: D,
-    nextThreeDigits: 451,
-    provinceCode: 47
-    }
-  }
-*/</p>
-<p>// handle motorcyles plate
-Plate(12345678).info;
-/*
-  {
-    template: 123-45678,
-    province: مرکز تهران,
-    type: Motorcyle,
-    category: null,
-    details: {
-        digits: 45678
-    provinceCode:123
-    }
-  }
-*/</p>
-<pre><code><span class="hl-8">Plates</span><span class="hl-2"> </span><span class="hl-8">that</span><span class="hl-2"> </span><span class="hl-8">have</span><span class="hl-2"> </span><span class="hl-8">farsi</span><span class="hl-2"> </span><span class="hl-8">digits</span><span class="hl-2"> </span><span class="hl-7">in</span><span class="hl-2"> </span><span class="hl-9">them</span><span class="hl-2">(</span><span class="hl-8">like</span><span class="hl-2">: </span><span class="hl-8">الف</span><span class="hl-2">، </span><span class="hl-8">ب</span><span class="hl-2">، </span><span class="hl-8">ص</span><span class="hl-2">) </span><span class="hl-8">will</span><span class="hl-2"> </span><span class="hl-8">be</span><span class="hl-2"> </span><span class="hl-8">returned</span><span class="hl-2"> </span><span class="hl-7">in</span><span class="hl-2"> </span><span class="hl-7">this</span><span class="hl-2"> </span><span class="hl-8">template</span>
+<pre><code class="language-js"><span class="hl-11">import</span><span class="hl-2"> { </span><span class="hl-8">Plate</span><span class="hl-2"> } </span><span class="hl-11">from</span><span class="hl-2"> </span><span class="hl-12">&quot;@persian-tools/persian-tools&quot;</span><span class="hl-2">;</span><br/><br/><span class="hl-9">Plate</span><span class="hl-2">(</span><span class="hl-12">&quot;12D45147&quot;</span><span class="hl-2">).</span><span class="hl-8">info</span><span class="hl-2">;</span><br/><span class="hl-3">/*</span><br/><span class="hl-3">  {</span><br/><span class="hl-3">      template: 12 D 451 ایران  47</span><br/><span class="hl-3">    province: مرکزی ,</span><br/><span class="hl-3">    type: Car,</span><br/><span class="hl-3">    category: دیپلمات,   </span><br/><span class="hl-3">    details: {</span><br/><span class="hl-3">    firstTwoDigits: 12,</span><br/><span class="hl-3">    plateCharacter: D,</span><br/><span class="hl-3">    nextThreeDigits: 451,</span><br/><span class="hl-3">    provinceCode: 47</span><br/><span class="hl-3">    }</span><br/><span class="hl-3">  }</span><br/><span class="hl-3">*/</span><br/><br/><span class="hl-3">// handle motorcyles plate</span><br/><span class="hl-9">Plate</span><span class="hl-2">(</span><span class="hl-10">12345678</span><span class="hl-2">).</span><span class="hl-8">info</span><span class="hl-2">;</span><br/><span class="hl-3">/*</span><br/><span class="hl-3">  {</span><br/><span class="hl-3">    template: 123-45678,</span><br/><span class="hl-3">    province: مرکز تهران,</span><br/><span class="hl-3">    type: Motorcyle,</span><br/><span class="hl-3">    category: null,</span><br/><span class="hl-3">    details: {</span><br/><span class="hl-3">        digits: 45678</span><br/><span class="hl-3">    provinceCode:123</span><br/><span class="hl-3">    }</span><br/><span class="hl-3">  }</span><br/><span class="hl-3">*/</span>
 </code></pre>
-<p>  ${first_two_digits}${plate_character}${next_three_digits}ایران${province_code}</p>
-<pre><code><br/><span class="hl-2">- </span><span class="hl-8">Checking</span><span class="hl-2"> </span><span class="hl-11">if</span><span class="hl-2"> </span><span class="hl-8">plate</span><span class="hl-2"> </span><span class="hl-8">is</span><span class="hl-2"> </span><span class="hl-8">valid</span><br/><span class="hl-12">```js</span><br/><span class="hl-12">import { Plate } from &quot;@persian-tools/persian-tools&quot;;</span><br/><br/><span class="hl-12">Plate(&quot;12D45147&quot;).isValid;</span><br/><span class="hl-12">/*</span><br/><span class="hl-12">  true</span><br/><span class="hl-12">*/</span><br/><br/><span class="hl-12">Plate(12345678).isValid;</span><br/><span class="hl-12">/*</span><br/><span class="hl-12">  true</span><br/><span class="hl-12">*/</span><br/><br/><span class="hl-12">Plate(1234567).isValid</span><br/><span class="hl-12">/*</span><br/><span class="hl-12">  will return false - plate character is not provided</span><br/><span class="hl-12">*/</span><br/><br/><span class="hl-12">Plate(1204567).isValid</span><br/><span class="hl-12">/*</span><br/><span class="hl-12">  will return false - plate can&#39;t have 0 in its digits (except last digit)</span><br/><span class="hl-12">*/</span>
+<p>Plates that have farsi digits in them(like: الف، ب، ص) will be returned in this template</p>
+<pre><code><span class="hl-2">  </span><span class="hl-8">$</span><span class="hl-2">{</span><span class="hl-8">first_two_digits</span><span class="hl-2">}</span><span class="hl-8">$</span><span class="hl-2">{</span><span class="hl-8">plate_character</span><span class="hl-2">}</span><span class="hl-8">$</span><span class="hl-2">{</span><span class="hl-8">next_three_digits</span><span class="hl-2">}</span><span class="hl-8">ایران$</span><span class="hl-2">{</span><span class="hl-8">province_code</span><span class="hl-2">}</span>
+</code></pre>
+<ul>
+<li>Checking if plate is valid</li>
+</ul>
+<pre><code class="language-js"><span class="hl-11">import</span><span class="hl-2"> { </span><span class="hl-8">Plate</span><span class="hl-2"> } </span><span class="hl-11">from</span><span class="hl-2"> </span><span class="hl-12">&quot;@persian-tools/persian-tools&quot;</span><span class="hl-2">;</span><br/><br/><span class="hl-9">Plate</span><span class="hl-2">(</span><span class="hl-12">&quot;12D45147&quot;</span><span class="hl-2">).</span><span class="hl-8">isValid</span><span class="hl-2">;</span><br/><span class="hl-3">/*</span><br/><span class="hl-3">  true</span><br/><span class="hl-3">*/</span><br/><br/><span class="hl-9">Plate</span><span class="hl-2">(</span><span class="hl-10">12345678</span><span class="hl-2">).</span><span class="hl-8">isValid</span><span class="hl-2">;</span><br/><span class="hl-3">/*</span><br/><span class="hl-3">  true</span><br/><span class="hl-3">*/</span><br/><br/><span class="hl-9">Plate</span><span class="hl-2">(</span><span class="hl-10">1234567</span><span class="hl-2">).</span><span class="hl-8">isValid</span><br/><span class="hl-3">/*</span><br/><span class="hl-3">  will return false - plate character is not provided</span><br/><span class="hl-3">*/</span><br/><br/><span class="hl-9">Plate</span><span class="hl-2">(</span><span class="hl-10">1204567</span><span class="hl-2">).</span><span class="hl-8">isValid</span><br/><span class="hl-3">/*</span><br/><span class="hl-3">  will return false - plate can&#39;t have 0 in its digits (except last digit)</span><br/><span class="hl-3">*/</span>
 </code></pre>
 
 <a href="#convert-jalaali-date-time-into-a-time-ago" id="convert-jalaali-date-time-into-a-time-ago" style="color: inherit; text-decoration: none;">
