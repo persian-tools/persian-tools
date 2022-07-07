@@ -11,7 +11,9 @@
 		"micro:build": "microbundle src/index.ts --compress --name PersianTools --strict",
 		"postmicro:build": "mv ./build/index.d.ts ./build/persian-tools.d.ts && npx rimraf ./build/setupTests.d.ts ./build/*.map",
 		"micro:dev": "microbundle watch",
-		"test": "cross-env NODE_ENV=test jest",
+		"test": "vitest",
+		"test:ui": "vitest --ui",
+		"coverage": "vitest run --coverage",
 		"lint": "eslint \"src/**/*.{ts,json}\" --max-warnings=0",
 		"lint:fix": "npm run lint -- --fix",
 		"prerelease": "npm run test",
@@ -55,9 +57,9 @@
 	"devDependencies": {
 		"@commitlint/cli": "17.0.1",
 		"@commitlint/config-conventional": "17.0.0",
-		"@types/jest": "27.5.1",
 		"@typescript-eslint/eslint-plugin": "5.27.0",
 		"@typescript-eslint/parser": "5.27.0",
+		"@vitest/ui": "^0.17.1",
 		"cross-env": "7.0.3",
 		"eslint": "8.17.0",
 		"eslint-config-standard": "16.0.3",
@@ -69,15 +71,14 @@
 		"eslint-plugin-security": "1.5.0",
 		"eslint-plugin-standard": "4.1.0",
 		"husky": "8.0.1",
-		"jest": "28.1.0",
-		"jest-cli": "28.1.0",
 		"microbundle": "0.15.0",
 		"prettier": "2.7.0",
 		"prettier-eslint": "15.0.1",
 		"rimraf": "3.0.2",
 		"standard-version": "9.5.0",
-		"ts-jest": "28.0.5",
-		"typedoc": "0.22.16"
+		"typedoc": "0.22.16",
+		"vite": "^2.9.13",
+		"vitest": "^0.17.1"
 	},
 	"dependencies": {
 		"fastest-levenshtein": "^1.0.12"
