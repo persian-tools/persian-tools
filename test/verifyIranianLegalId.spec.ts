@@ -1,3 +1,4 @@
+import { it, expect } from "vitest";
 import { verifyIranianLegalId } from "../src";
 
 it("Validation of Iranian Legal Number", () => {

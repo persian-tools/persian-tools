@@ -11,8 +11,9 @@
 		"micro:build": "microbundle src/index.ts --compress --name PersianTools --strict",
 		"postmicro:build": "mv ./build/index.d.ts ./build/persian-tools.d.ts && npx rimraf ./build/setupTests.d.ts ./build/*.map",
 		"micro:dev": "microbundle watch",
-		"test": "vitest",
-		"test:ui": "vitest --ui",
+		"test": "vitest run",
+		"test:watch": "vitest watch",
+		"test:ui": "npm run test:watch -- --ui",
 		"coverage": "vitest run --coverage",
 		"lint": "eslint \"src/**/*.{ts,json}\" --max-warnings=0",
 		"lint:fix": "npm run lint -- --fix",
@@ -88,7 +89,7 @@
 		"not IE 10"
 	],
 	"engines": {
-		"node": ">=10.0.0",
-		"npm": ">=6.0.0"
+		"node": ">=14",
+		"npm": ">=7.0.0"
 	}
 }

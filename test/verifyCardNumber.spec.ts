@@ -1,3 +1,4 @@
+import { it, expect } from "vitest";
 import { verifyCardNumber } from "../src";
 
 it("Bank number validation", () => {

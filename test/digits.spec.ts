@@ -1,4 +1,5 @@
 import { digitsEnToFa, digitsFaToEn, digitsFaToAr, digitsArToFa, digitsArToEn, digitsEnToAr } from "../src";
+import { describe, it, expect } from "vitest";
 
 describe("Digits converter", () => {
 	it("digitsArToFa", () => {
