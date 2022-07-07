@@ -21,7 +21,7 @@
 		"skipLibCheck": true,
 		"sourceMap": true,
 		"strict": true,
-		"types": ["jest", "node"]
+		"types": ["node", "vitest/globals"]
 	},
 	"include": ["src", "tests"],
 	"exclude": ["node_modules"]

@@ -9,9 +9,12 @@
 	"sideEffect": false,
 	"scripts": {
 		"micro:build": "microbundle src/index.ts --compress --name PersianTools --strict",
-		"postmicro:build": "mv ./build/index.d.ts ./build/persian-tools.d.ts && npx rimraf ./build/setupTests.d.ts ./build/*.map",
+		"postmicro:build": "mv ./build/index.d.ts ./build/persian-tools.d.ts && npx rimraf ./build/setupTests.d.ts",
 		"micro:dev": "microbundle watch",
-		"test": "cross-env NODE_ENV=test jest",
+		"test": "vitest run",
+		"test:watch": "vitest watch",
+		"test:ui": "npm run test:watch -- --ui",
+		"coverage": "vitest run --coverage",
 		"lint": "eslint \"src/**/*.{ts,json}\" --max-warnings=0",
 		"lint:fix": "npm run lint -- --fix",
 		"prerelease": "npm run test",
@@ -69,15 +72,14 @@
 		"eslint-plugin-security": "1.5.0",
 		"eslint-plugin-standard": "4.1.0",
 		"husky": "8.0.1",
-		"jest": "28.1.2",
-		"jest-cli": "28.1.2",
 		"microbundle": "0.15.0",
 		"prettier": "2.7.1",
 		"prettier-eslint": "15.0.1",
 		"rimraf": "3.0.2",
 		"standard-version": "9.5.0",
-		"ts-jest": "28.0.5",
-		"typedoc": "0.22.16"
+		"typedoc": "0.22.16",
+		"vite": "^2.9.13",
+		"vitest": "^0.17.1"
 	},
 	"dependencies": {
 		"fastest-levenshtein": "^1.0.12"
@@ -87,7 +89,7 @@
 		"not IE 10"
 	],
 	"engines": {
-		"node": ">=10.0.0",
-		"npm": ">=6.0.0"
+		"node": ">=14",
+		"npm": ">=7.0.0"
 	}
 }

@@ -1,3 +1,4 @@
+import { it, expect } from "vitest";
 import { URLfix } from "../src";
 
 it("URLfix", () => {

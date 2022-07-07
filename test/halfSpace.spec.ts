@@ -1,4 +1,5 @@
 import { halfSpace } from "../src";
+import { describe, it, expect } from "vitest";
 
 describe("halfSpace", () => {
 	it("should replace spaces by half-space ", () => {

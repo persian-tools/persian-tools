@@ -1,4 +1,5 @@
 import { getPlaceByIranNationalId } from "../src";
+import { describe, it, expect } from "vitest";
 
 it("Get the city and province name by national code", () => {
 	expect(getPlaceByIranNationalId("0499370899")?.city).toEqual("شهرری");
