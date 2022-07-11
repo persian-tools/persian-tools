@@ -1,0 +1,6 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "vitest.enable": true,
+  "testing.alwaysRevealTestOnStateChange": true,
+  "testing.automaticallyOpenPeekView": "never"
+}

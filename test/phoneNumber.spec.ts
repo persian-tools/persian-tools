@@ -1,3 +1,4 @@
+import { describe, it, expect } from "vitest";
 import { phoneNumberDetail, phoneNumberValidator, phoneNumberNormalizer } from "../src";
 import { getPhonePrefix } from "../src/modules/phoneNumber/utils";
 

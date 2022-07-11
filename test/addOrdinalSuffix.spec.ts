@@ -1,4 +1,5 @@
 import { addOrdinalSuffix } from "../src";
+import { describe, it, expect } from "vitest";
 
 describe("Ordinal suffix", () => {
 	it("Add", () => {

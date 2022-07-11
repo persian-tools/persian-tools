@@ -1,4 +1,5 @@
 import { isArabic } from "../src/modules/isArabic";
+import { describe, it, expect } from "vitest";
 
 it("isArabic", () => {
 	expect(isArabic("این یک متن فارسی است؟")).toBeFalsy();

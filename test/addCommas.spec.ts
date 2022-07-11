@@ -1,4 +1,5 @@
 import { addCommas } from "../src";
+import { describe, it, expect } from "vitest";
 
 describe("AddCommas", () => {
 	it("Add and remove commas", () => {
@@ -14,8 +15,7 @@ describe("AddCommas", () => {
 		expect(addCommas("51000.123456789")).toEqual("51,000.123456789");
 
 		expect(addCommas(300)).toEqual("300");
-		// @ts-ignore
-		expect(addCommas(3000)).toBeType("string");
+		expect(addCommas(3000)).toBeTypeOf("string");
 	});
 
 	it("Add falsy value", () => {

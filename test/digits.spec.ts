@@ -1,4 +1,5 @@
 import { digitsEnToFa, digitsFaToEn, digitsFaToAr, digitsArToFa, digitsArToEn, digitsEnToAr } from "../src";
+import { describe, it, expect } from "vitest";
 
 describe("Digits converter", () => {
 	it("digitsArToFa", () => {
@@ -95,5 +96,12 @@ describe("Digits converter", () => {
 		} catch (e) {
 			expect((e as Error).message).toEqual("PersianTools: digitsFaToAr - The input must be string");
 		}
+	});
+
+	it("chaining behavior", () => {
+		expect(digitsFaToEn(digitsArToFa("٤٤٤444۴۴۴"))).toBe("444444444");
+		expect(digitsFaToEn(digitsArToFa("٠١٢٣٤٥٦٧٨٩"))).toBe("0123456789");
+		expect(digitsEnToFa(digitsArToEn("٠١٢٣٤٥٦٧٨٩"))).toBe("۰۱۲۳۴۵۶۷۸۹");
+		expect(digitsEnToFa(digitsArToEn("Text ٠١٢٣٤٥٦٧٨٩"))).toBe("Text ۰۱۲۳۴۵۶۷۸۹");
 	});
 });

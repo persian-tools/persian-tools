@@ -1,3 +1,4 @@
+import { describe, it, expect } from "vitest";
 import { removeOrdinalSuffix } from "../src";
 
 it("Remove ordinal suffix", () => {

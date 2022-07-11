@@ -1,3 +1,4 @@
+import { describe, it, expect } from "vitest";
 import { wordsToNumber } from "../src";
 import { UNITS, TEN, MAGNITUDE } from "../src/modules/wordsToNumber/constants";
 
@@ -44,12 +45,12 @@ describe("WordsToNumber", () => {
 	});
 
 	describe("UNITS", () => {
-		Object.entries(UNITS).forEach(pair => {
+		Object.entries(UNITS).forEach((pair) => {
 			const [key, value] = pair;
 			it(`${value}`, () => {
 				expect(wordsToNumber(key)).toEqual(value);
 			});
-		})
+		});
 	});
 
 	describe("TEN", () => {

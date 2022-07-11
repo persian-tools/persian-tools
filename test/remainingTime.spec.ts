@@ -1,5 +1,7 @@
 import { remainingTime } from "../src";
-jest.mock("../src/modules/remainingTime/getCurrentDateTime", () => {
+import { vi, describe, it, expect } from "vitest";
+
+vi.mock("../src/modules/remainingTime/getCurrentDateTime", () => {
 	return {
 		getCurrentDateTime: () => new Date("2022-04-12T10:30:51Z"),
 	};

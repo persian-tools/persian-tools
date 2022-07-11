@@ -1,3 +1,4 @@
+import { describe, it, expect } from "vitest";
 import { fuzzy } from "../src/modules/wordsToNumber/fuzzy";
 import { ALL_WORDS } from "../src/modules/wordsToNumber/constants";
 
