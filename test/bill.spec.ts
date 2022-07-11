@@ -1,4 +1,5 @@
 import { Bill } from "../src";
+import { describe, it, expect } from "vitest";
 
 describe("Bill Calculator", () => {
 	it("Calculate bill amount", () => {

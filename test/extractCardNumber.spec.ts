@@ -1,4 +1,5 @@
 import extractCardNumber from "../src/modules/extractCardNumbers";
+import { describe, it, expect } from "vitest";
 
 const mockString = `شماره کارتم رو برات نوشتم:
 6219-8610-3452-9007
