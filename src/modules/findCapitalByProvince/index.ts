@@ -6,7 +6,7 @@ import { states } from './states';
  * @returns {string} capital name
  */
 
-export const findCapitalByStateName = (state: String) => {
+export const findCapitalByProvince = (state: string) => {
   const arrayStates = Object.keys(states);
   
   for (let index = 0; index < arrayStates.length; index++) {
@@ -17,4 +17,4 @@ export const findCapitalByStateName = (state: String) => {
   return 'noStateFound'
 }
 
-export default findCapitalByStateName;
+export default findCapitalByProvince;
