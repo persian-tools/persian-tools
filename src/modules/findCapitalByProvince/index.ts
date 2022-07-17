@@ -14,7 +14,7 @@ export const findCapitalByProvince = (state: string) => {
      return states[arrayStates[index]];
     }
   }
-  return 'noStateFound'
+  return '404'
 }
 
 export default findCapitalByProvince;

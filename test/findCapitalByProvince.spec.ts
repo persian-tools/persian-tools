@@ -1,4 +1,5 @@
-import { findCapitalByProvince } from '../src/modules/findCapitalByProvince'
+import { findCapitalByProvince } from '../src';
+import { it, expect } from "vitest";
 
 it("findCapitalByProvince", () => {
 	expect(findCapitalByProvince("کهگیلویه و بویراحمد")).toBeTruthy();
