@@ -514,11 +514,11 @@ phoneNumberNormalizer("09022002580", "+98"); // +989022002580
 ```js
 import { findCapitalByProvince } from "@persian-tools/persian-tools";
 
-findCapitalByStateName('خراسان رضوی'); // مشهد
-findCapitalByStateName('آذربایجان شرقی'); // تبریز 
+findCapitalByProvince('خراسان رضوی'); // مشهد
+findCapitalByProvince('آذربایجان شرقی'); // تبریز 
 
 // this throw an error string 'noProvinceFound'
-findCapitalByStateName('مشهد') 
+findCapitalByProvince('مشهد') 
 ```
 
 
