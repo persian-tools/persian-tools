@@ -11,7 +11,7 @@ import  toPersianChars  from "../toPersianChars"
 export const findCapitalByProvince = (state: string) => {
   const arrayStates = Object.keys(states);
   
-  for (let index in arrayStates) { 
+  for (const index in arrayStates) { 
     if (toPersianChars(halfSpace(state)) === toPersianChars(halfSpace(arrayStates[index]))) {
      return states[arrayStates[index]];
     }
