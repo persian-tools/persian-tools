@@ -59,10 +59,10 @@
 		"@commitlint/cli": "17.0.3",
 		"@commitlint/config-conventional": "17.0.3",
 		"@types/jest": "28.1.4",
-		"@typescript-eslint/eslint-plugin": "5.30.5",
-		"@typescript-eslint/parser": "5.30.5",
+		"@typescript-eslint/eslint-plugin": "5.30.7",
+		"@typescript-eslint/parser": "5.30.7",
 		"cross-env": "7.0.3",
-		"eslint": "8.19.0",
+		"eslint": "8.20.0",
 		"eslint-config-standard": "17.0.0",
 		"eslint-friendly-formatter": "4.0.1",
 		"eslint-plugin-import": "2.26.0",
@@ -78,8 +78,8 @@
 		"rimraf": "3.0.2",
 		"standard-version": "9.5.0",
 		"typedoc": "0.22.16",
-		"vite": "2.9.14",
-		"vitest": "0.18.0"
+		"vite": "3.0.2",
+		"vitest": "0.18.1"
 	},
 	"dependencies": {
 		"fastest-levenshtein": "^1.0.12"
