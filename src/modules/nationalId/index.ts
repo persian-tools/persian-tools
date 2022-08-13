@@ -23,7 +23,7 @@ function verifyIranianNationalId(nationalId?: string | number): boolean | undefi
 	};
 
 	if (code in notAllowedDigits) return false;
-	if (codeLength < 8 || codeLength > 10) return false;
+	if (codeLength !== 10) return false;
 	code = ("00" + code).substring(codeLength + 2 - 10);
 	if (+code.substring(3, 9) === 0) return false;
 
