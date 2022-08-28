@@ -15,7 +15,7 @@ export interface IBank {
 function getBankNameFromCardNumber(digits?: number | string): string | null | undefined {
 	if (!digits) return;
 
-	if (digits && digits.toString().length === 16) {
+	if (digits && digits.toString().length >= 6 && digits.toString().length <= 16) {
 		const code = digits.toString().substr(0, 6);
 		const findBank = (banksCode as IBank[]).find((bank) => bank.code === code);
 
