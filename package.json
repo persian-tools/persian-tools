@@ -56,7 +56,7 @@
 	},
 	"homepage": "https://persian-tools.github.io/persian-tools",
 	"devDependencies": {
-		"@commitlint/cli": "17.1.1",
+		"@commitlint/cli": "17.1.2",
 		"@commitlint/config-conventional": "17.1.0",
 		"@types/jest": "28.1.4",
 		"@typescript-eslint/eslint-plugin": "5.34.0",
