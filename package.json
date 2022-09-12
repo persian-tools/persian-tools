@@ -62,7 +62,7 @@
 		"@typescript-eslint/eslint-plugin": "5.36.1",
 		"@typescript-eslint/parser": "5.36.1",
 		"cross-env": "7.0.3",
-		"eslint": "8.21.0",
+		"eslint": "8.23.1",
 		"eslint-config-standard": "17.0.0",
 		"eslint-friendly-formatter": "4.0.1",
 		"eslint-plugin-import": "2.26.0",
