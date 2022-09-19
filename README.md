@@ -13,6 +13,7 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/persian-tools/persian-tools/badge)](https://www.codefactor.io/repository/github/persian-tools/persian-tools)
 [![GitHub contributors](https://img.shields.io/github/contributors/persian-tools/persian-tools.svg)](https://GitHub.com/persian-tools/persian-tools/contributors/)
 [![Wallaby.js](https://img.shields.io/badge/wallaby.js-powered-blue.svg?style=flat&logo=github)](https://wallabyjs.com/oss/)
+[![kandi X-Ray](https://kandi.openweaver.com/badges/xray.svg)](https://kandi.openweaver.com/typescript/persian-tools/persian-tools)
 </div>
 <hr />
 
