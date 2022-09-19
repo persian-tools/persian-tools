@@ -150,6 +150,7 @@ const IrancellModel = {
 };
 
 export const Irancell = {
+	"900": IrancellModel,
 	"930": IrancellModel,
 	"933": IrancellModel,
 	"935": IrancellModel,
