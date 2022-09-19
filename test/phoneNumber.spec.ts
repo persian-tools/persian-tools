@@ -40,6 +40,7 @@ describe("Iranian Phone Number Utilities", () => {
 			expect(phoneNumberValidator("09122002580")).toBeTruthy();
 			expect(phoneNumberValidator("09322002580")).toBeTruthy();
 			expect(phoneNumberValidator("09192002580")).toBeTruthy();
+			expect(phoneNumberValidator("09002002580")).toBeTruthy();
 		});
 
 		it("Should return true with different prefixes or without prefix", () => {
@@ -62,6 +63,7 @@ describe("Iranian Phone Number Utilities", () => {
 			expect(getPhonePrefix("09981000000")).toEqual("998");
 			expect(getPhonePrefix("09123200007")).toEqual("912");
 			expect(getPhonePrefix("09300880440")).toEqual("930");
+			expect(getPhonePrefix("09000880440")).toEqual("900");
 		});
 
 		it("Should return the prefix with 98 or +98", () => {
