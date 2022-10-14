@@ -79,7 +79,7 @@
 		"standard-version": "9.5.0",
 		"typedoc": "0.22.16",
 		"vite": "3.1.2",
-		"vitest": "0.23.2"
+		"vitest": "0.24.3"
 	},
 	"dependencies": {
 		"fastest-levenshtein": "^1.0.12"
