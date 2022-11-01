@@ -68,7 +68,7 @@ export default function timeAgo(datetime = ""): string {
 		throw new TypeError("PersianTools: timeAgo - The input format must be yyyy/mm/dd hh:mm:ss");
 
 	// If input be null then tsDateTime get current timestamp
-	if (!datetime) return 'اکنون';
+	if (!datetime) return "اکنون";
 	// TimeNow
 	const tsTimeNow = getTimeNow();
 
@@ -85,8 +85,8 @@ export default function timeAgo(datetime = ""): string {
 		month = day * 30,
 		year = day * 365;
 
-	// for preventing future seconds 
-	const ignoreMiliSeconds = -10000 // 10s
+	// for preventing future seconds
+	const ignoreMiliSeconds = -10000; // 10s
 
 	if (elapsed == 0 || (elapsed <= 0 && elapsed >= ignoreMiliSeconds)) return "اکنون";
 
@@ -110,4 +110,3 @@ export default function timeAgo(datetime = ""): string {
 		return "حدود " + Math.round(elapsed / year) + " سال " + prevOrNext;
 	}
 }
-
