@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.4.1](https://github.com/persian-tools/persian-tools/compare/v3.4.0...v3.4.1) (2022-09-19)
+
+
+### Bug Fixes
+
+* **#280:** can't accept phone number starts with 0900 ([#283](https://github.com/persian-tools/persian-tools/issues/283)) ([4a8b7d7](https://github.com/persian-tools/persian-tools/commit/4a8b7d7dcd7eae0528a06a75f8453f39293e5098)), closes [#280](https://github.com/persian-tools/persian-tools/issues/280)
+* **getBankNameFromCardNumber:** allow detecting by at least 6 nums ([#269](https://github.com/persian-tools/persian-tools/issues/269)) ([33c883e](https://github.com/persian-tools/persian-tools/commit/33c883e265f283882995da44f17286bc971ba1ff)), closes [#257](https://github.com/persian-tools/persian-tools/issues/257)
+
 ## [3.4.0](https://github.com/persian-tools/persian-tools/compare/v3.3.0...v3.4.0) (2022-07-07)
 
 
