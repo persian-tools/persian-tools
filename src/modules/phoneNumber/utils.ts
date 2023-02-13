@@ -110,6 +110,18 @@ export const MCI = {
 		type: ["credit"],
 		operator: operatorsMap.MCI,
 	},
+	"995": {
+		province: [],
+		base: "کشوری",
+		type: ["permanent", "credit"],
+		operator: operatorsMap.MCI,
+	},
+	"996": {
+		province: [],
+		base: "کشوری",
+		type: ["permanent", "credit"],
+		operator: operatorsMap.MCI,
+	}
 };
 
 export const Taliya = {

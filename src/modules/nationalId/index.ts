@@ -12,6 +12,7 @@ function verifyIranianNationalId(nationalId?: string | number): boolean | undefi
 	const codeLength = code.length;
 	const notAllowedDigits = {
 		"0000000000": true,
+		"1111111111": true,
 		"2222222222": true,
 		"3333333333": true,
 		"4444444444": true,
