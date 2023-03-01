@@ -26,6 +26,13 @@ describe("Sheba", () => {
 	});
 
 	it("getShebaInfo should works", () => {
+		expect(getShebaInfo("IR790610000000700796858044")).toEqual(
+			expect.objectContaining({
+				nickname: "shahr",
+				accountNumber: "700796858044",
+				code: "061",
+			}),
+		);
 		expect(getShebaInfo("IR820540102680020817909002")).toEqual(
 			expect.objectContaining({
 				nickname: "parsian",
