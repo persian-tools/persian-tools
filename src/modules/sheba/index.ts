@@ -29,13 +29,11 @@ export function getShebaInfo(shebaCode: string): ShebaResult | null {
 
 	if (bank.accountNumberAvailable) {
 		const data = bank.process?.(shebaCode);
-
 		bank.accountNumber = data?.normal;
 		bank.formattedAccountNumber = data?.formatted;
 	}
 
 	delete bank.process;
-
 	return bank;
 }
 
@@ -43,9 +41,9 @@ export function getShebaInfo(shebaCode: string): ShebaResult | null {
  * @private
  * @since 1.7.1
  */
-export function shebaIso7064Mod97(iban: string): number {
-	let remainder = iban,
-		block;
+export const shebaIso7064Mod97 = (iban: string): number => {
+	let remainder = iban;
+	let block;
 
 	while (remainder.length > 2) {
 		block = remainder.slice(0, 9);
@@ -53,30 +51,23 @@ export function shebaIso7064Mod97(iban: string): number {
 	}
 
 	return parseInt(remainder, 10) % 97;
-}
+};
 
 /**
  * @public
  * @since 1.7.1
  */
 export function isShebaValid(shebaCode: string): boolean {
-	if (shebaCode.length !== 26) {
-		return false;
-	}
-
-	if (!shebaPattern.test(shebaCode)) {
+	if (shebaCode.length !== 26 || !shebaPattern.test(shebaCode)) {
 		return false;
 	}
 
 	const d1 = shebaCode.charCodeAt(0) - 65 + 10;
 	const d2 = shebaCode.charCodeAt(1) - 65 + 10;
+	const newStr = shebaCode.substr(4) + d1 + d2 + shebaCode.substr(2, 2);
 
-	let newStr = shebaCode.substr(4);
-	newStr += d1.toString() + d2.toString() + shebaCode.substr(2, 2);
-
-	const remainder = shebaIso7064Mod97(newStr);
-
-	return remainder === 1;
+	// Check reminder
+	return shebaIso7064Mod97(newStr) === 1;
 }
 
 export * from "./codes.skip";

@@ -1,20 +1,14 @@
+import { toString } from "../../type.handler";
+
 /**
  * Remove all commas in string
  *
  * @param string which separated by commas
  * @return A number which includes any commas
  */
-function removeCommas(str: string): number {
-	if (typeof str !== "string") {
-		throw new TypeError("PersianTools: removeCommas - The input must be string");
-	}
-
-	let result = "" + str;
-	if (result.indexOf(",") !== -1) {
-		result = result.replace(/,\s?/g, "");
-	}
-
-	return Number(result);
-}
+const removeCommas = (str: string): number => {
+	const result = toString(str, "removeCommas");
+	return result.indexOf(",") !== -1 ? +result.replace(/,\s?/g, "") : +result;
+};
 
 export default removeCommas;

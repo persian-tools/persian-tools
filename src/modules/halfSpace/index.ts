@@ -1,3 +1,6 @@
+import { toString } from "../../type.handler";
+import { StringNumber } from "../../types";
+
 /**
  * Replace halfSpace in string(Zero-width non-joiner)
  *
@@ -5,12 +8,8 @@
  * @return clean entered persian string
  * @param str
  */
-const halfSpace = (str: string): string => {
-	if (typeof str !== "string") {
-		throw new TypeError("the input must be string");
-	}
-
-	return str
+const halfSpace = (str: StringNumber): string => {
+	return toString(str, "halfSpace")
 		.replace(/\u00ad/g, "‌")
 		.replace(/\u200C{2,}/g, "‌")
 		.replace(/([۰-۹0-9إأةؤورزژاآدذ،؛,:«»\\/@#$٪×*()ـ\-=|])\u200c/g, "$1")

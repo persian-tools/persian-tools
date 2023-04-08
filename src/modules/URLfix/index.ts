@@ -20,12 +20,8 @@ const URLfix = (value?: string): string | undefined => {
 	// Decode URIs
 	// NOTE: This would convert all %20's to _'s which could break some links
 	// but we will undo that later on
-	value = value.replace(/(http\S+)/g, (_, p) => decodeURI(p));
-
 	// Revive all instances of %20 to make sure no links is broken
-	value = value.replace(/\u200c\u200c\u200c_\u200c\u200c\u200c/g, "%20");
-
-	return value;
+	return value.replace(/(http\S+)/g, (_, p) => decodeURI(p)).replace(/\u200c\u200c\u200c_\u200c\u200c\u200c/g, "%20");
 };
 
 export default URLfix;

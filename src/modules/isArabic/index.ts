@@ -9,7 +9,6 @@ import { ArabicContextualForms } from "../../helpers";
  */
 export const isArabic = (str: string, trimPattern = /["'-+()\s.]/g): boolean => {
 	const text = str.replace(trimPattern, "");
-
 	return /^[\u0600-\u06FF\s]+$/.test(text) && ArabicContextualForms.test(text);
 };
 

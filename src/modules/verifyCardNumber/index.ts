@@ -7,12 +7,12 @@
  * @param {number} digits - card number
  * @return {boolean}
  */
-function verifyCardNumber(digits: number): boolean | undefined {
-	if (!digits) return;
+const verifyCardNumber = (digits: number): boolean | undefined => {
+	if (!digits) {
+		return;
+	}
 	const digitsResult = String(digits);
-
 	const length = digitsResult.length;
-
 	if (
 		length < 16 ||
 		parseInt(digitsResult.substr(1, 10), 10) === 0 ||
@@ -21,17 +21,15 @@ function verifyCardNumber(digits: number): boolean | undefined {
 		return false;
 	}
 
-	let radix,
-		subDigit,
-		sum = 0;
-
+	let radix;
+	let subDigit;
+	let sum = 0;
 	for (let i = 0; i < 16; i++) {
 		radix = i % 2 === 0 ? 2 : 1;
-
 		subDigit = parseInt(digitsResult.substr(i, 1), 10) * radix;
 		sum += subDigit > 9 ? subDigit - 9 : subDigit;
 	}
 	return sum % 10 === 0;
-}
+};
 
 export default verifyCardNumber;

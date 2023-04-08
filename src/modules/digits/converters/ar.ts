@@ -1,6 +1,11 @@
+import { toString } from "../../../type.handler";
+import { StringNumber } from "../../../types";
 import { faNums, arNums, arDigitsRegex } from "../digits.constants";
 // Types
 import type { DigitsConverter } from "../digits.types";
+
+const digitsArToFaFunc = (char: string) => faNums[arNums.indexOf(char)];
+const digitsArToEnFunc = (char: string) => `${arNums.indexOf(char)}`;
 
 /**
  * digitsArToFa
@@ -10,11 +15,8 @@ import type { DigitsConverter } from "../digits.types";
  * returns a string that represents the same value but
  * its arabic digits are replaced with farsi digits
  */
-const digitsArToFa: DigitsConverter = (value) => {
-	if (typeof value !== "string") throw TypeError("PersianTools: digitsArToFa - The input must be string");
-
-	return String(value).replace(arDigitsRegex, (char) => faNums[arNums.indexOf(char)]);
-};
+const digitsArToFa: DigitsConverter<StringNumber> = (value: StringNumber): string =>
+	toString(value, "digitsArToFa").replace(arDigitsRegex, digitsArToFaFunc);
 
 /**
  * digitsArToEn
@@ -24,10 +26,7 @@ const digitsArToFa: DigitsConverter = (value) => {
  * returns a string that represents the same value but
  * its arabic digits are replaced with english digits
  */
-const digitsArToEn: DigitsConverter = (value) => {
-	if (typeof value !== "string") throw TypeError("PersianTools: digitsArToEn - The input must be string");
-
-	return String(value).replace(arDigitsRegex, (char) => `${arNums.indexOf(char)}`);
-};
+const digitsArToEn: DigitsConverter = (value) =>
+	toString(value, "digitsArToEn").replace(arDigitsRegex, digitsArToEnFunc);
 
 export { digitsArToFa, digitsArToEn };

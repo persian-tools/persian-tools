@@ -13,61 +13,44 @@ import type {
 	PlateTypes,
 } from "./types.skip";
 
+export type PlateHandler = (plate: NormalizedPlate) => PlateResultApi;
+
 /**
  * Get plate info and validation
  *
  * @param plate  An object containing the number and char value or a string.
  * @return  An object containing plate and validation info.
  */
-export default function plate(plate: PlateOptions): PlateResult {
+const plate = (plate: PlateOptions): PlateResult => {
 	const normalizedPlate = normalizePlate(plate);
 	const info = getPlateInfo(normalizedPlate);
 	const isValid = isPlateValid(info, normalizedPlate.numbers);
-
 	return {
 		info,
 		isValid,
 	};
-}
+};
 
-export function getPlateInfo(plate: NormalizedPlate): PlateResultApi {
-	const getInfo = getPlateHandler(plate);
-	return getInfo(plate);
-}
+const getPlateInfo = (plate: NormalizedPlate): PlateResultApi => getPlateHandler(plate)(plate);
 
-export function isPlateValid(plateInfo: PlateResultApi, plateNumber: string): boolean {
-	// 1. no zeros and chars, [1-9] allowed
-	if (!isPlateNumberValid(plateNumber)) {
-		return false;
+// 1. no zeros and chars, [1-9] allowed
+// 2. if type Car => category should exist
+// 3. province exist
+const isPlateValid = (plateInfo: PlateResultApi, plateNumber: string): boolean =>
+	!(!isPlateNumberValid(plateNumber) || (plateInfo.type === "Car" && !plateInfo?.category) || !plateInfo?.province);
+
+const getPlateHandler = (plate: NormalizedPlate): PlateHandler => {
+	const len = plate.numbers?.length;
+	if (len === 7) {
+		return carHandler;
 	}
-
-	// 2. if type Car => category should exist
-	if (plateInfo.type === "Car" && !plateInfo?.category) {
-		return false;
+	if (len === 8) {
+		return motorcycleHandler;
 	}
+	throw new Error("a Plate must be 7 or 8 digits long");
+};
 
-	// 3. province exist
-	if (!plateInfo?.province) {
-		return false;
-	}
-
-	return true;
-}
-
-export function getPlateHandler(plate: NormalizedPlate): (plate: NormalizedPlate) => PlateResultApi {
-	let handler;
-	if (plate.numbers?.length === 7) {
-		handler = carHandler;
-	} else if (plate.numbers?.length === 8) {
-		handler = motorcycleHandler;
-	} else {
-		throw new Error("a Plate must be 7 or 8 digits long");
-	}
-
-	return handler;
-}
-
-export function carHandler(plate: NormalizedPlate): PlateResultApi {
+const carHandler = (plate: NormalizedPlate): PlateResultApi => {
 	const provinceCode = +plate.numbers.slice(5, 7);
 	const type: PlateResultApiTypeString = "Car";
 	const template = `${plate.numbers.slice(0, 2)}${plate.char ? plate.char : null}${plate.numbers.slice(
@@ -91,8 +74,9 @@ export function carHandler(plate: NormalizedPlate): PlateResultApi {
 		province: province || null,
 		category,
 	};
-}
-export function motorcycleHandler(plate: NormalizedPlate): PlateResultApi {
+};
+
+const motorcycleHandler = (plate: NormalizedPlate): PlateResultApi => {
 	const provinceCode = +plate.numbers.slice(0, 3);
 	const type: PlateResultApiTypeString = "Motorcycle";
 	const template = `${provinceCode}-${plate.numbers.slice(3)}`;
@@ -110,6 +94,19 @@ export function motorcycleHandler(plate: NormalizedPlate): PlateResultApi {
 		details,
 		category: null,
 	};
-}
+};
 
-export { PlateOptions, PlateResult, PlateApi, PlateResultApi, PlateResultApiTypeString, PlateTypes };
+export default plate;
+export {
+	getPlateHandler,
+	PlateOptions,
+	PlateResult,
+	PlateApi,
+	PlateResultApi,
+	PlateResultApiTypeString,
+	PlateTypes,
+	carHandler,
+	motorcycleHandler,
+	isPlateValid,
+	getPlateInfo,
+};

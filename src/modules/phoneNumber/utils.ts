@@ -121,7 +121,7 @@ export const MCI = {
 		base: "کشوری",
 		type: ["permanent", "credit"],
 		operator: operatorsMap.MCI,
-	}
+	},
 };
 
 export const Taliya = {
@@ -157,7 +157,7 @@ export const RightTel = {
 		base: "کشوری",
 		type: ["credit"],
 		operator: operatorsMap.RightTel,
-	}
+	},
 };
 
 const IrancellModel = {
@@ -232,12 +232,11 @@ export const operators: Record<string, OperatorModel> = {
  */
 export const mobileRegex = /^(\+98|98|0098|0)?9(\d{2})\d{7}$/;
 
-export function getPhonePrefix(mobile: string): string {
+export const getPhonePrefix = (mobile: string): string => {
 	const phoneCountryPrefix = `${mobile}`.match(mobileRegex);
-
 	/*
 		Remove country code from phone number then slice first 3 digits ( operator prefix )
 	*/
 	const prefix = phoneCountryPrefix && mobile.replace(phoneCountryPrefix![1], "").slice(0, 3);
 	return prefix || "";
-}
+};

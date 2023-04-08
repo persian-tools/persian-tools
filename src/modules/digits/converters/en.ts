@@ -1,6 +1,11 @@
+import { StringNumber } from "../../../types";
 import { faNums, arNums, enDigitsRegex } from "../digits.constants";
+import { toString } from "../../../type.handler";
 // Types
 import type { DigitsConverter } from "../digits.types";
+
+const digitsEnToFaFunc = (char: string) => `${faNums[+char]}`;
+const digitsEnToArFunc = (char: string) => `${arNums[+char]}`;
 
 /**
  * digitsEnToFa
@@ -10,12 +15,8 @@ import type { DigitsConverter } from "../digits.types";
  * returns a string that represents the same value but
  * its english digits are replaced with farsi digits
  */
-const digitsEnToFa: DigitsConverter<string | number> = (value) => {
-	if (typeof value !== "string" && typeof value !== "number")
-		throw TypeError("PersianTools: digitsEnToFa - The input must be string or number");
-
-	return String(value).replace(enDigitsRegex, (char) => `${faNums[Number(char)]}`);
-};
+const digitsEnToFa: DigitsConverter<StringNumber> = (value: StringNumber): string =>
+	toString(value, "digitsEnToFa").replace(enDigitsRegex, digitsEnToFaFunc);
 
 /**
  * digitsEnToAr
@@ -25,11 +26,7 @@ const digitsEnToFa: DigitsConverter<string | number> = (value) => {
  * returns a string that represents the same value but
  * its english digits are replaced with arabic digits
  */
-const digitsEnToAr: DigitsConverter<string | number> = (value) => {
-	if (typeof value !== "string" && typeof value !== "number")
-		throw TypeError("PersianTools: digitsEnToAr - The input must be number or string");
-
-	return String(value).replace(enDigitsRegex, (char) => `${arNums[Number(char)]}`);
-};
+const digitsEnToAr: DigitsConverter<StringNumber> = (value: StringNumber): string =>
+	toString(value, "digitsEnToAr").replace(enDigitsRegex, digitsEnToArFunc);
 
 export { digitsEnToFa, digitsEnToAr };

@@ -17,11 +17,11 @@ import { phoneNumberValidator } from ".";
  * phoneNumberNormalizer("09022002580", "+98"); //+989022002580
  * phoneNumberNormalizer("09802002580", "0"); // Error : this is not valid phone number
  */
-export default function phoneNumberNormalizer(phoneNumber: string, token: "0" | "+98") {
+const phoneNumberNormalizer = (phoneNumber: string, token: "0" | "+98") => {
 	if (!phoneNumberValidator(phoneNumber)) {
 		throw new Error("phone number is not valid");
 	}
+	return token + phoneNumber.split(/^(?:\+98|98|0098|0)/).pop();
+};
 
-	const phoneSuffix = phoneNumber.split(/^(?:\+98|98|0098|0)/).pop();
-	return token + phoneSuffix;
-}
+export default phoneNumberNormalizer;
