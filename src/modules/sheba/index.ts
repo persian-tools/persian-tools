@@ -60,6 +60,8 @@ export function shebaIso7064Mod97(iban: string): number {
  * @since 1.7.1
  */
 export function isShebaValid(shebaCode: string): boolean {
+	if (!shebaCode.startsWith('IR')) shebaCode = `IR${shebaCode}`
+	
 	if (shebaCode.length !== 26) {
 		return false;
 	}
