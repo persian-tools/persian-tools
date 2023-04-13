@@ -64,7 +64,6 @@ class Bill {
 		this.billId = null;
 		this.billPayment = null;
 		this.billTypes = billTypes;
-
 		if (billId && paymentId) {
 			this.setId(billId);
 			this.setPaymentId(paymentId);
@@ -81,9 +80,7 @@ class Bill {
 
 	public getAmount(): number {
 		const currency = this.currency == "rial" ? 1000 : 100;
-		const amount = parseInt(`${this.billPayment}`.slice(0, -5)) * currency;
-
-		return amount;
+		return parseInt(`${this.billPayment}`.slice(0, -5)) * currency;
 	}
 
 	public getBillType(): BillTypes {
@@ -91,38 +88,34 @@ class Bill {
 	}
 
 	public getBarcode(): string {
-		return this.billId + "000" + this.billPayment;
+		return `${this.billId}000${this.billPayment}`;
 	}
+
 	public findByBarcode(barcode?: string): BillBarcodeModel {
 		const $barcode = (barcode || this.barcode) as string;
-
 		return {
-			billId: Number($barcode.substr(0, 13)),
-			paymentId: Number($barcode.substr(16, 10)),
+			billId: +$barcode.substr(0, 13),
+			paymentId: +$barcode.substr(16, 10),
 		};
 	}
 
 	public verificationBillPayment(): boolean {
 		const billId = `${this.billId}`;
 		let paymentId = `${this.billPayment}`;
-
-		let result = false;
 		if (!paymentId || paymentId.length < 6) {
-			return result;
+			return false;
 		}
 		const firstControlBit = paymentId.charAt(paymentId.length - 2) + "";
 		const secondControlBit = paymentId.charAt(paymentId.length - 1) + "";
 		paymentId = paymentId.substr(0, paymentId.length - 2);
-		result =
+		return (
 			this.CalTheBit(paymentId) === Number(firstControlBit) &&
-			this.CalTheBit(billId + paymentId + firstControlBit) === Number(secondControlBit);
-
-		return result;
+			this.CalTheBit(billId + paymentId + firstControlBit) === Number(secondControlBit)
+		);
 	}
 
 	public verificationBillId(): boolean {
 		let newBillId = `${this.billId}`;
-
 		let result = false;
 		if (!newBillId || newBillId.length < 6) {
 			return false;
@@ -134,7 +127,6 @@ class Bill {
 		result = $result === Number(controlBit);
 
 		const billType = this.getBillType();
-
 		return result && billType !== "unknown";
 	}
 
@@ -150,9 +142,7 @@ class Bill {
 			Base++;
 		}
 		sum %= 11;
-		if (sum < 2) sum = 0;
-		else sum = 11 - sum;
-		return sum;
+		return sum < 2 ? 0 : 11 - sum;
 	}
 
 	public verificationBill(): boolean {

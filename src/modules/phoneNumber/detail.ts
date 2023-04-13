@@ -16,21 +16,23 @@ import { OperatorModel } from "./utils";
  * @example
  * phoneNumberDetail("9123456789")
  */
-export default function phoneNumberDetail(mobile: string): OperatorModel | null {
+const phoneNumberDetail = (mobile: string): OperatorModel | null => {
 	/**
 	 * @type boolean
 	 */
-	if (phoneNumberValidator(mobile)) {
-		/**
-		 * @type string
-		 */
-		const prefix = getPhonePrefix(mobile);
-
-		/**
-		 * @type OperatorModel
-		 */
-		return operators[prefix];
+	if (!phoneNumberValidator(mobile)) {
+		return null;
 	}
 
-	return null;
-}
+	/**
+	 * @type string
+	 */
+	const prefix = getPhonePrefix(mobile);
+
+	/**
+	 * @type OperatorModel
+	 */
+	return operators[prefix];
+};
+
+export default phoneNumberDetail;

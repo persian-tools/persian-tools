@@ -3,7 +3,6 @@ import { NormalizedPlate, PlateOptions } from "./types.skip";
 export const normalizePlate = (plate: PlateOptions): NormalizedPlate => {
 	let char;
 	let plateNumbers;
-
 	const nonDigitRegex = /\D/g;
 
 	if (typeof plate === "string") {

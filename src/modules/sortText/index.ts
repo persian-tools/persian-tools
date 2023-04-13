@@ -1,3 +1,5 @@
+import { throwError } from "../../error-handler";
+
 /**
  * SortText
  *
@@ -10,15 +12,13 @@
  * @param {string | string[]} str - a String or a list of strings
  * @return {string[]}
  */
-function SortText<T extends string>(str: T | T[]): T[] {
+const sortText = <T extends string>(str: T | T[]): T[] => {
 	if (typeof str !== "string" && !Array.isArray(str)) {
-		throw new TypeError("PersianTools: SortText - The input must be string or an array of strings");
+		throwError("SortText", "The input must be string or an array of strings");
 	}
-
 	const stringResult = (typeof str === "string" ? str.split(" ") : str) as T[];
 	stringResult.sort((a, b) => a.localeCompare(b, "fa", { ignorePunctuation: true }));
-
 	return stringResult;
-}
+};
 
-export default SortText;
+export default sortText;

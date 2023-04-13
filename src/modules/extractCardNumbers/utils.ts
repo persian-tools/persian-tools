@@ -11,6 +11,7 @@
  * @constant
  */
 export const cardNumberRegex = new RegExp("([\u06F0-\u06F90-9-_.*]{16,20})", "img");
+
 /**
  * Acceptable keywords between numbers are:
  * 1. Star -> *

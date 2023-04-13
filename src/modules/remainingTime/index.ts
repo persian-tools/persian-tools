@@ -21,7 +21,6 @@ type RemainingTime = {
 };
 
 type ToString = { toString: () => string };
-
 type IsFinished = { isFinished: boolean };
 
 const secondsInYear = 60 * 60 * 24 * 365;
@@ -46,9 +45,7 @@ function remainingTime(date: string | number | Date): RemainingTime & ToString &
 			hours: 0,
 			minutes: 0,
 			seconds: 0,
-			toString: () => {
-				return "";
-			},
+			toString: () => "",
 			isFinished: true,
 		};
 	}
@@ -77,9 +74,7 @@ function remainingTime(date: string | number | Date): RemainingTime & ToString &
 		hours,
 		minutes,
 		seconds,
-		toString: () => {
-			return toString({ years, months, days, hours, minutes, seconds });
-		},
+		toString: () => toString({ years, months, days, hours, minutes, seconds }),
 		isFinished: false,
 	};
 }

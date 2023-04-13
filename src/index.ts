@@ -28,7 +28,7 @@ export {
 export { default as getBankNameFromCardNumber } from "./modules/getBankNameFromCardNumber";
 // Fix and sort persian string
 export { default as URLfix } from "./modules/URLfix";
-export { default as SortText } from "./modules/sortText";
+export { default as sortText } from "./modules/sortText";
 export { default as halfSpace } from "./modules/halfSpace";
 // Bill info
 export { default as Bill } from "./modules/bill";

@@ -1,8 +1,9 @@
+import { StringNumber, StringNumberArray } from "../../types";
 import NationalIdJSON from "./nationalId.skip";
 import ProvincesJSON from "./provincesCodes.skip";
 
 export interface IProvince {
-	code: number | string;
+	code: StringNumber;
 	city: string;
 }
 
@@ -15,7 +16,7 @@ export interface INationalId extends IProvince {
  * @category National id
  */
 export interface IPlaceByNationalId {
-	codes: number[] | string[];
+	codes: StringNumberArray;
 	city: string;
 	province: string;
 }
@@ -30,29 +31,33 @@ export interface IPlaceByNationalId {
  * @return If nationalId is valid, function returns an object of details, but if nationalId is invalid, return an error message
  */
 function getPlaceByIranNationalId(nationalId?: string): IPlaceByNationalId | null | undefined {
-	if (!nationalId) return;
+	if (!nationalId) {
+		return;
+	}
 
-	if (nationalId && nationalId.length === 10) {
-		const code = nationalId.toString().substring(0, 3);
-		const find = (NationalIdJSON as INationalId[]).filter((row) => row.code.toString().includes(code));
+	if (nationalId.length === 10) {
+		const nationalIdFilter = (row: INationalId) => row.code.toString().includes(code);
 
-		if (find.length) {
-			const findProvinces = (ProvincesJSON as IProvince[]).filter(
-				(province) => province.code === find[0].parentCode,
-			);
-			const code = find[0].code.toString();
+		const code = nationalId.substring(0, 3);
+		const find = (NationalIdJSON as INationalId[]).find(nationalIdFilter);
+
+		if (find) {
+			const provinceFilter = (province: IProvince) => province.code === find.parentCode;
+
+			const findProvinces = (ProvincesJSON as IProvince[]).find(provinceFilter);
+			const { city: province } = findProvinces ?? { city: "unknown" };
+			const codes = find.code.toString().split("-");
+			const city = find.city;
 
 			return {
-				city: find[0].city,
-				province: findProvinces.length ? findProvinces[0].city : "unknown",
-				codes: code.includes("-") ? code.split("-") : [code],
+				city,
+				province,
+				codes,
 			};
-		} else {
-			return null;
 		}
-	} else {
-		return null;
 	}
+
+	return null;
 }
 
 export default getPlaceByIranNationalId;
