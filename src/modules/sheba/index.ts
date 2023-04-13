@@ -5,6 +5,7 @@ import { shebaMapCodes, ShebaResult } from "./codes.skip";
  * @since v1.4.2
  */
 export const shebaPattern = /IR[0-9]{24}/;
+
 /**
  * @public
  * @since v1.4.2
@@ -58,13 +59,17 @@ export const shebaIso7064Mod97 = (iban: string): number => {
  * @since 1.7.1
  */
 export function isShebaValid(shebaCode: string): boolean {
+	shebaCode = shebaCode.toUpperCase();
+	if (!shebaCode.startsWith("IR")) {
+		shebaCode = `IR${shebaCode}`;
+	}
 	if (shebaCode.length !== 26 || !shebaPattern.test(shebaCode)) {
 		return false;
 	}
 
 	const d1 = shebaCode.charCodeAt(0) - 65 + 10;
 	const d2 = shebaCode.charCodeAt(1) - 65 + 10;
-	const newStr = shebaCode.substr(4) + d1 + d2 + shebaCode.substr(2, 2);
+	const newStr = shebaCode.substring(4) + d1 + d2 + shebaCode.substring(2, 4);
 
 	// Check reminder
 	return shebaIso7064Mod97(newStr) === 1;
