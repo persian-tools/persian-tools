@@ -1,5 +1,7 @@
 import { digitsFaToEn } from "../digits";
 
+const patternDateTime = /^\d{4}\/\d{1,2}\/\d{1,2} \d{1,2}:\d{1,2}:\d{1,2}$/;
+
 /**
  * Convert a date-time value to timestamp.
  *
@@ -7,7 +9,6 @@ import { digitsFaToEn } from "../digits";
  * @returns {number} Calculates the timestamp of the input.
  */
 export function convertToTimeStamp(datetime: string): number {
-	const patternDateTime = /(\d+)\/(\d+)\/(\d+) (\d+):(\d+):(\d+)/;
 	const dateTime = datetime.match(patternDateTime);
 	if (dateTime) {
 		const date: Date = new Date(
@@ -50,7 +51,7 @@ export function getTimeNow(): number {
  * @returns {boolean} If format of datetime is ok, return true.
  */
 export function checkFormatDateTime(datetime: string): boolean {
-	return Boolean(datetime.match(/^\d{4}\/\d{1,2}\/\d{1,2} \d{1,2}:\d{1,2}:\d{1,2}$/));
+	return Boolean(datetime.match(patternDateTime));
 }
 
 /**
