@@ -7,7 +7,7 @@
 export interface OperatorModel {
 	province: string[];
 	base: string;
-	model?: string;
+	operator?: string;
 	type: string[];
 }
 
