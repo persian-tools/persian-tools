@@ -1,5 +1,5 @@
 /**
- * Operators model such as province, base city, model, type(permanent or credit or both)
+ * Operators model such as province, base city, model, type (permanent or credit or both)
  *
  * @interface
  * @category Phone number
@@ -7,8 +7,9 @@
 export interface OperatorModel {
 	province: string[];
 	base: string;
-	operator?: string;
-	type: string[];
+	model?: string;
+	operator: string;
+	type: ("permanent" | "credit")[];
 }
 
 export const operatorsMap = {
@@ -19,7 +20,7 @@ export const operatorsMap = {
 	RightTel: "رایتل",
 };
 
-export const MCI = {
+export const MCI: Record<string, OperatorModel> = {
 	"910": {
 		base: "کشوری",
 		province: [],
@@ -124,7 +125,7 @@ export const MCI = {
 	}
 };
 
-export const Taliya = {
+export const Taliya: Record<string, OperatorModel> = {
 	"932": {
 		province: [],
 		base: "کشوری",
@@ -133,7 +134,7 @@ export const Taliya = {
 	},
 };
 
-export const RightTel = {
+export const RightTel: Record<string, OperatorModel> = {
 	"920": {
 		province: [],
 		base: "کشوری",
@@ -165,9 +166,9 @@ const IrancellModel = {
 	base: "کشوری",
 	type: ["permanent", "credit"],
 	operator: operatorsMap.Irancell,
-};
+} as OperatorModel;
 
-export const Irancell = {
+export const Irancell: Record<string, OperatorModel> = {
 	"930": IrancellModel,
 	"933": IrancellModel,
 	"935": IrancellModel,
@@ -196,8 +197,8 @@ export const Irancell = {
 	},
 };
 
-export const ShatelMobile = {
-	998: {
+export const ShatelMobile:Record<string, OperatorModel> = {
+	"998": {
 		province: [],
 		base: "کشوری",
 		type: ["credit"],
@@ -212,7 +213,8 @@ export const prefixes: string[] = [
 	...Object.keys(Irancell),
 	...Object.keys(ShatelMobile),
 ];
-export const operators: Record<string, OperatorModel> = {
+
+export const operators = {
 	...MCI,
 	...Taliya,
 	...Irancell,
