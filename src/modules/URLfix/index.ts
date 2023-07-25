@@ -1,31 +1,21 @@
 /**
- * Used for fix Persian characters in URL
- *
  * @method URLfix
- * @param URL string
- * @return A string of fixed URL
+ * @description Used for fix Persian characters in URL
+ * @param {string} url
+ * @param {string} separator - optional argument to replace character with space in URLs. by default return URL with space
+ * @example
+ * URLfix('https://fa.wikipedia.org/wiki/%D9%85%DA%A9%D8%A7%D9%86%DB%8C%DA%A9%20%DA%A9%D9%88%D8%A7%D9%86%D8%AA%D9%88%D9%85%DB%8C', '_')
+ * return 'https://fa.wikipedia.org/wiki/مکانیک_کوانتومی'
+ * @return {string} a string of fixed URL
  */
-const URLfix = (value?: string): string | undefined => {
-	if (!value) {
-		return;
-	}
 
-	// Replace every %20 with _ to protect them from decodeURI
-	let old = "";
-	while (old !== value) {
-		old = value;
-		value = value.replace(/(http\S+?)%20/g, "$1\u200c\u200c\u200c_\u200c\u200c\u200c");
-	}
+function URLfix(url?: string, separator?: string): string | undefined {
+	if (!url) return;
+	url = decodeURIComponent(url);
 
-	// Decode URIs
-	// NOTE: This would convert all %20's to _'s which could break some links
-	// but we will undo that later on
-	value = value.replace(/(http\S+)/g, (_, p) => decodeURI(p));
+	if (separator) return url.replace(" ", separator);
 
-	// Revive all instances of %20 to make sure no links is broken
-	value = value.replace(/\u200c\u200c\u200c_\u200c\u200c\u200c/g, "%20");
-
-	return value;
-};
+	return url;
+}
 
 export default URLfix;
