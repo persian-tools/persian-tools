@@ -38,8 +38,7 @@ export function getTimeNow(): number {
 			minute: "2-digit",
 			second: "2-digit",
 		})
-		.replace(/‏|،/g, "");
-
+		.replace(/‏|،|,/g, "");
 	return convertToTimeStamp(digitsFaToEn(currentDateTime));
 }
 
