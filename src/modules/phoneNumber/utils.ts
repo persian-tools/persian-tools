@@ -110,6 +110,18 @@ export const MCI = {
 		type: ["credit"],
 		operator: operatorsMap.MCI,
 	},
+	"995": {
+		province: [],
+		base: "کشوری",
+		type: ["permanent", "credit"],
+		operator: operatorsMap.MCI,
+	},
+	"996": {
+		province: [],
+		base: "کشوری",
+		type: ["permanent", "credit"],
+		operator: operatorsMap.MCI,
+	}
 };
 
 export const Taliya = {
@@ -140,6 +152,12 @@ export const RightTel = {
 		type: ["credit"],
 		operator: operatorsMap.RightTel,
 	},
+	"923": {
+		province: [],
+		base: "کشوری",
+		type: ["credit"],
+		operator: operatorsMap.RightTel,
+	}
 };
 
 const IrancellModel = {
@@ -161,6 +179,7 @@ export const Irancell = {
 	"902": IrancellModel,
 	"903": IrancellModel,
 	"905": IrancellModel,
+	"900": IrancellModel,
 	"904": {
 		province: [],
 		base: "کشوری",
@@ -211,13 +230,13 @@ export const operators: Record<string, OperatorModel> = {
  * 4. 09123456789
  * 4. 9123456789
  */
-export const mobileRegex = /^(\+98|98|0098|0)?9\d{9}$/;
+export const mobileRegex = /^(\+98|98|0098|0)?9(\d{2})\d{7}$/;
 
 export function getPhonePrefix(mobile: string): string {
 	const phoneCountryPrefix = `${mobile}`.match(mobileRegex);
 
-	/* 
-		Remove country code from phone number then slice first 3 digits ( operator prefix ) 
+	/*
+		Remove country code from phone number then slice first 3 digits ( operator prefix )
 	*/
 	const prefix = phoneCountryPrefix && mobile.replace(phoneCountryPrefix![1], "").slice(0, 3);
 	return prefix || "";

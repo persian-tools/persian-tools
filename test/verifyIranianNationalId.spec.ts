@@ -23,12 +23,12 @@ describe("Validation of Iranian National Number(code-e Melli)", () => {
 		expect(verifyIranianNationalId("123000000")).toBeFalsy();
 		expect(verifyIranianNationalId("1230000000")).toBeFalsy();
 		expect(verifyIranianNationalId("0684159415")).toBeFalsy();
+		expect(verifyIranianNationalId("1111111111")).toBeFalsy();
 	});
 	it("Check Truly inputs", () => {
 		expect(verifyIranianNationalId(11537027)).not.toBeFalsy();
 		expect(verifyIranianNationalId(787833770)).not.toBeFalsy();
 		expect(verifyIranianNationalId(1583250689)).not.toBeFalsy();
-		expect(verifyIranianNationalId("1111111111")).not.toBeFalsy();
 		expect(verifyIranianNationalId("0499370899")).not.toBeFalsy();
 		expect(verifyIranianNationalId("0790419904")).not.toBeFalsy();
 		expect(verifyIranianNationalId("0084575948")).not.toBeFalsy();

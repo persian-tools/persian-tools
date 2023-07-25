@@ -64,18 +64,18 @@ export function checkFormatDateTime(datetime: string): boolean {
 export default function timeAgo(datetime = ""): string {
 	if (typeof datetime !== "string") throw new TypeError("PersianTools: timeAgo - The input must be string");
 
-	if (!checkFormatDateTime(datetime) && datetime !== "")
+	if (!datetime && !checkFormatDateTime(datetime))
 		throw new TypeError("PersianTools: timeAgo - The input format must be yyyy/mm/dd hh:mm:ss");
 
-	// Timestamp DateTime
-	let tsDateTime: number;
-
 	// If input be null then tsDateTime get current timestamp
-	if (datetime === "") tsDateTime = getTimeNow();
-	else tsDateTime = convertToTimeStamp(datetime);
-
+	if (!datetime) return "اکنون";
 	// TimeNow
 	const tsTimeNow = getTimeNow();
+
+	// Timestamp DateTime
+	const tsDateTime: number = convertToTimeStamp(datetime);
+
+	let elapsed = tsTimeNow - tsDateTime;
 
 	// TimeAgo
 	const minute = 60 * 1000,
@@ -85,9 +85,10 @@ export default function timeAgo(datetime = ""): string {
 		month = day * 30,
 		year = day * 365;
 
-	let elapsed = tsTimeNow - tsDateTime;
+	// for preventing future seconds
+	const ignoreMiliSeconds = -10000; // 10s
 
-	if (elapsed === 0) return "اکنون";
+	if (elapsed == 0 || (elapsed <= 0 && elapsed >= ignoreMiliSeconds)) return "اکنون";
 
 	const prevOrNext: string = elapsed > 0 ? "قبل" : "بعد";
 
