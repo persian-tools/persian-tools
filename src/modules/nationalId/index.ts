@@ -37,7 +37,7 @@ function verifyIranianNationalId(nationalId?: string | number): boolean | undefi
 
 	sum = sum % 11;
 
-	return codeLength === 10 && ((sum < 2 && lastNumber === sum) || (sum >= 2 && lastNumber === 11 - sum)) ;
+	return (sum < 2 && lastNumber === sum) || (sum >= 2 && lastNumber === 11 - sum);
 }
 
 export default verifyIranianNationalId;
