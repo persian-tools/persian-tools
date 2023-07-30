@@ -35,6 +35,7 @@
 -   [Convert Jalaali date-time into a time ago](#convert-jalaali-date-time-into-a-time-ago)
 -   [Get the Remaining Time of the Date](#get-the-remaining-time-of-the-date)
 -   [Validate and find information of phone number](#validate-and-find-information-of-phone-number).
+-   [Find capital city by province name ](#find-capital-city-by-province-name)
 
 ## Getting started
 
@@ -502,6 +503,22 @@ phoneNumberNormalizer("+989022002580", "0"); // 09022002580
 phoneNumberNormalizer("989022002580", "0"); // 09022002580
 phoneNumberNormalizer("09022002580", "0"); // 09022002580
 phoneNumberNormalizer("09022002580", "+98"); // +989022002580
+```
+
+### Find capital city by province name
+
+**Usage**
+
+> This function returns the Capital City name by its state name but if the State name was the Capital name, it produces a string with the value: `self`. if the function can't find anything, it throws an error.
+
+```js
+import { findCapitalByProvince } from "@persian-tools/persian-tools";
+
+findCapitalByProvince('خراسان رضوی'); // مشهد
+findCapitalByProvince('آذربایجان شرقی'); // تبریز 
+
+// this throw an error string 'noProvinceFound'
+findCapitalByProvince('مشهد') 
 ```
 
 

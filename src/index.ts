@@ -52,3 +52,7 @@ export { default as timeAgo } from "./modules/timeAgo";
 
 // RemainingTime
 export { default as remainingTime } from "./modules/remainingTime";
+
+//Find capital city by state name
+
+export { default as findCapitalByProvince } from "./modules/findCapitalByProvince";
