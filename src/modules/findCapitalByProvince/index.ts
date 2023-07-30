@@ -1,6 +1,5 @@
-import { states } from './states';
-import  halfSpace  from "../halfSpace";
-import  toPersianChars  from "../toPersianChars"
+import { states } from "./states";
+import toPersianChars from "../toPersianChars";
 
 /**
  * Returns the capital name of province you enter
@@ -9,14 +8,9 @@ import  toPersianChars  from "../toPersianChars"
  */
 
 export const findCapitalByProvince = (state: string) => {
-  const arrayStates = Object.keys(states);
-  
-  for (const index in arrayStates) { 
-    if (toPersianChars(halfSpace(state)) === toPersianChars(halfSpace(arrayStates[index]))) {
-     return states[arrayStates[index]];
-    }
-  }
-  throw 'noProvinceFound'
-}
+	const normalizeState = toPersianChars(state) as string;
+	if (normalizeState in states) return states[normalizeState];
+	throw new Error("no province found");
+};
 
 export default findCapitalByProvince;

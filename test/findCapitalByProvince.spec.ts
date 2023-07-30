@@ -1,13 +1,19 @@
-import { findCapitalByProvince } from '../src';
+import { findCapitalByProvince } from "../src";
 import { it, expect } from "vitest";
 
-it("findCapitalByProvince", () => {
-	expect(findCapitalByProvince("کهگیلویه و بویراحمد")).toBeTruthy();
-	expect(findCapitalByProvince("خراسان رضوی")).toBeTruthy();
-
-	expect(findCapitalByProvince("Lorem")).toBeFalsy();
-	expect(findCapitalByProvince("خراسان")).toBeFalsy();
-	expect(findCapitalByProvince("استانی که وجود ندارد")).toBeFalsy();
-	expect(findCapitalByProvince("State")).toBeFalsy();
-	expect(findCapitalByProvince("")).toBeFalsy();
+it("should throw an error when there isn't any province", () => {
+	expect(() => {
+		findCapitalByProvince("random");
+	}).toThrow();
 });
+
+it("should return the correct value", () => {
+	expect(findCapitalByProvince("تهران")).toBe("تهران");
+	expect(findCapitalByProvince("مرکزی")).toBe("اراک");
+	expect(findCapitalByProvince("خراسان رضوی")).toBe("مشهد");
+});
+
+it("should work with arabic letter", () => {
+	expect(findCapitalByProvince("خراسان رضوي")).toBe("مشهد");
+});
+

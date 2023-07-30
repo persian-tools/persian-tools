@@ -13,6 +13,7 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/persian-tools/persian-tools/badge)](https://www.codefactor.io/repository/github/persian-tools/persian-tools)
 [![GitHub contributors](https://img.shields.io/github/contributors/persian-tools/persian-tools.svg)](https://GitHub.com/persian-tools/persian-tools/contributors/)
 [![Wallaby.js](https://img.shields.io/badge/wallaby.js-powered-blue.svg?style=flat&logo=github)](https://wallabyjs.com/oss/)
+
 </div>
 <hr />
 
@@ -50,41 +51,46 @@ Add the following code to an HTML file:
 
 ```html
 <html>
-<head>
-    <!-- Load PersianTools.js -->
-    <script src="https://cdn.jsdelivr.net/npm/@persian-tools/persian-tools/build/persian-tools.umd.js"></script>
+	<head>
+		<!-- Load PersianTools.js -->
+		<script src="https://cdn.jsdelivr.net/npm/@persian-tools/persian-tools/build/persian-tools.umd.js"></script>
 
-    <!-- Place your code in the script tag below. You can also use an external .js file -->
-    <script type="text/javascript">
-        // Notice there is no 'import' statement. 'all persian-tools functions like digitsEnToFa, etc...' is available on the index-page
-        // because of the script tag above.
+		<!-- Place your code in the script tag below. You can also use an external .js file -->
+		<script type="text/javascript">
+			// Notice there is no 'import' statement. 'all persian-tools functions like digitsEnToFa, etc...' is available on the index-page
+			// because of the script tag above.
 
-        // Takes a string made of English digits only, and returns a string that represents the same number but with Persian digits
-        var convertToFa = PersianTools.digitsEnToFa(1234567);
+			// Takes a string made of English digits only, and returns a string that represents the same number but with Persian digits
+			var convertToFa = PersianTools.digitsEnToFa(1234567);
 
-        // etc...
-    </script>
-</head>
+			// etc...
+		</script>
+	</head>
 
-<body></body>
+	<body></body>
 </html>
 ```
 
 Open up that html file in your browser, and the code should run!
 
 ### Install
+
 Install the PersianTools to your project using <a href="https://yarnpkg.com/en/" target="_blank">yarn</a> <em>or</em> <a href="https://docs.npmjs.com/cli/npm" target="_blank">npm</a>. <b>Note:</b> Because
 we use ES2017 syntax (such as `import`), this workflow assumes you are using a modern browser, or a bundler/transpiler
 to convert your code to something older browsers understand.
+
 ```bash
 $ npm install --save @persian-tools/persian-tools
 ```
+
 or
+
 ```bash
 $ yarn add @persian-tools/persian-tools
 ```
 
 ### Simple usage
+
 ```javascript
 import * as persianTools from "@persian-tools/persian-tools";
 // or
@@ -101,64 +107,83 @@ const convertedToFa = digitsEnToFa(1234567);
 Let's take a look at what an example test case would look like using Persian-tools.
 
 ### Convert Persian words to the number
-| Options                   | Description                                                   | Default
-|---                	    |---                                                            |--- 
-| `fuzzy`**(Beta)**       | Fix typo in the Persian words by using [`levenshtein`](https://en.wikipedia.org/wiki/Levenshtein_distance) algorithm  | `false`
-| `digits`                  | Result will be converted to the English or Persian digits     | `en`
-| `addCommas`               | Commas will be added to the Result                            | `false`
-- Convert with no option
+
+| Options           | Description                                                                                                          | Default |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------- | ------- |
+| `fuzzy`**(Beta)** | Fix typo in the Persian words by using [`levenshtein`](https://en.wikipedia.org/wiki/Levenshtein_distance) algorithm | `false` |
+| `digits`          | Result will be converted to the English or Persian digits                                                            | `en`    |
+| `addCommas`       | Commas will be added to the Result                                                                                   | `false` |
+
+-   Convert with no option
+
 ```javascript
 import { wordsToNumber } from "@persian-tools/persian-tools";
 
-wordsToNumber("منفی سه هزارمین") // -3000
-wordsToNumber("منفی سه هزارم") // -3000
-wordsToNumber("منفی سه هزار") // -3000
-wordsToNumber("سه هزار دویست و دوازده") // 3212
-wordsToNumber("دوازده هزار بیست دو") // 12022
+wordsToNumber("منفی سه هزارمین"); // -3000
+wordsToNumber("منفی سه هزارم"); // -3000
+wordsToNumber("منفی سه هزار"); // -3000
+wordsToNumber("سه هزار دویست و دوازده"); // 3212
+wordsToNumber("دوازده هزار بیست دو"); // 12022
 ```
-- Digits converter
+
+-   Digits converter
+
 ```js
-wordsToNumber("منفی سه هزارمین", { digits: "fa" }) // "-۳۰۰۰"
-wordsToNumber("دوازده هزار بیست دو", { digits: "fa" }) // ۱۲۰۲۲
+wordsToNumber("منفی سه هزارمین", { digits: "fa" }); // "-۳۰۰۰"
+wordsToNumber("دوازده هزار بیست دو", { digits: "fa" }); // ۱۲۰۲۲
 ```
-- Add commas
+
+-   Add commas
+
 ```js
-wordsToNumber("منفی سه هزارمین", { addCommas: true }) // "-3,000"
-wordsToNumber("دوازده هزار بیست دو", { addCommas: true }) // "12,022"
-```  
-- Fuzzy typo fixer(`v1.5.0`):
+wordsToNumber("منفی سه هزارمین", { addCommas: true }); // "-3,000"
+wordsToNumber("دوازده هزار بیست دو", { addCommas: true }); // "12,022"
+```
+
+-   Fuzzy typo fixer(`v1.5.0`):
+
 ```javascript
 import { WordsToNumber } from "@persian-tools/persian-tools";
 
-wordsToNumber("یگصد و بنجاه هزار", { fuzzy: true }) // "150000"  
-wordsToNumber("دویشت ر بیشت هزار", { fuzzy: true }) // "220000"  
-wordsToNumber("منقی ضد", { fuzzy: true }) // "-100"  
+wordsToNumber("یگصد و بنجاه هزار", { fuzzy: true }); // "150000"
+wordsToNumber("دویشت ر بیشت هزار", { fuzzy: true }); // "220000"
+wordsToNumber("منقی ضد", { fuzzy: true }); // "-100"
 ```
 
 ### Convert Numbers to Persian words
+
 ```javascript
 import { numberToWords } from "@persian-tools/persian-tools";
 
-numberToWords(500443) // "پانصد هزار و چهار صد و چهل و سه"
-numberToWords("500,443") // "پانصد هزار و چهار صد و چهل و سه"
-numberToWords("500,443", { ordinal: true }) // "پانصد هزار و چهار صد و چهل و سوم"
-numberToWords(30000000000) // "سی میلیارد"
+numberToWords(500443); // "پانصد هزار و چهار صد و چهل و سه"
+numberToWords("500,443"); // "پانصد هزار و چهار صد و چهل و سه"
+numberToWords("500,443", { ordinal: true }); // "پانصد هزار و چهار صد و چهل و سوم"
+numberToWords(30000000000); // "سی میلیارد"
 ```
+
 **NOTE:** This function supports the largest safe integer (9007199254740991 / 2^53 - 1)
 
 ### Add and remove commas
+
 ```javascript
 import { addCommas, removeCommas } from "@persian-tools/persian-tools";
 
-addCommas(30000000) // "30,000,000"
+addCommas(30000000); // "30,000,000"
 
-removeCommas("30,000,000") // 30000000
+removeCommas("30,000,000"); // 30000000
 ```
 
 ### Convert Persian numbers to Arabic or English numbers and vice versa
 
 ```javascript
-import { digitsArToFa, digitsArToEn, digitsEnToFa, digitsFaToEn , digitsEnToAr, digitsFaToAr } from "@persian-tools/persian-tools";
+import {
+	digitsArToFa,
+	digitsArToEn,
+	digitsEnToFa,
+	digitsFaToEn,
+	digitsEnToAr,
+	digitsFaToAr,
+} from "@persian-tools/persian-tools";
 
 digitsArToFa("۸۹123۴۵"); // "۸۹123۴۵"
 
@@ -168,7 +193,7 @@ digitsEnToFa("123۴۵۶"); // "۱۲۳۴۵۶"
 
 digitsEnToAr("123٤٥٦"); // "۱۲۳٤٥٦"
 
-digitsFaToAr("۱۷۸۲۳۴۰۵۶۹") // ١٧٨٢٣٤٠٥٦٩
+digitsFaToAr("۱۷۸۲۳۴۰۵۶۹"); // ١٧٨٢٣٤٠٥٦٩
 ```
 
 ### Validate Iranian national number(code-e Melli)
@@ -185,11 +210,12 @@ verifyIranianNationalId("0684159415"); // false
 ```javascript
 import { verifyIranianLegalId } from "@persian-tools/persian-tools";
 
-verifyIranianLegalId(10380285692) // false
-verifyIranianLegalId(10380284790) // true
+verifyIranianLegalId(10380285692); // false
+verifyIranianLegalId(10380284790); // true
 ```
 
 ### Find city and province name by national-id(code-e Melli)
+
 ```javascript
 getPlaceByIranNationalId("0084575948").city; // "تهران مرکزی"
 ```
@@ -209,13 +235,13 @@ getBankNameFromCardNumber("6219861034529007"); // "بانک سامان"
 ```javascript
 import { isPersian, hasPersian, toPersianChars } from "@persian-tools/persian-tools";
 
-isPersian("این یک متن فارسی است؟") // true
-isPersian("Lorem Ipsum Test") // false
-isPersian("هل هذا نص فارسي؟")// false
+isPersian("این یک متن فارسی است؟"); // true
+isPersian("Lorem Ipsum Test"); // false
+isPersian("هل هذا نص فارسي؟"); // false
 
-hasPersian("This text includes فارسی") // true
+hasPersian("This text includes فارسی"); // true
 
-toPersianChars("علي") // علی
+toPersianChars("علي"); // علی
 ```
 
 **Note**: You can pass `2` more options to `isPersian` to customize it as your needs:
@@ -234,16 +260,19 @@ URLfix(
 URLfix("https://en.wikipedia.org/wiki/Persian_alphabet"); // "https://en.wikipedia.org/wiki/Persian_alphabet",
 URLfix("Sample Text"); // "Sample Text"
 ```
+
 ### Bill calculator
-| Method                  | Description                             | Return type
-|---                	  |---	                                    |---
-| `getResult`               | Result of bill calculated information	| BillResult
-| `getAmount`  	          | Calculate Bill amount by payment id and bill id which entered by the Bill constructor | number
-| `getBillType`        	  | Get Bill provider type name         	| BillTypes
-| `getBarcode`              | Calculate and get Bill's barcode        | `string`
-| `verificationBill`        | Validate entered both Bill id and payment id, and return true if bill id and payment id relation was true | boolean
-| `verificationBillId`      | Validate entered Bill id                | `boolean`
-| `verificationBillPayment` | Validate entered Bill payment id        | `boolean`
+
+| Method                    | Description                                                                                               | Return type |
+| ------------------------- | --------------------------------------------------------------------------------------------------------- | ----------- |
+| `getResult`               | Result of bill calculated information                                                                     | BillResult  |
+| `getAmount`               | Calculate Bill amount by payment id and bill id which entered by the Bill constructor                     | number      |
+| `getBillType`             | Get Bill provider type name                                                                               | BillTypes   |
+| `getBarcode`              | Calculate and get Bill's barcode                                                                          | `string`    |
+| `verificationBill`        | Validate entered both Bill id and payment id, and return true if bill id and payment id relation was true | boolean     |
+| `verificationBillId`      | Validate entered Bill id                                                                                  | `boolean`   |
+| `verificationBillPayment` | Validate entered Bill payment id                                                                          | `boolean`   |
+
 ```js
 import { Bill } from "@persian-tools/persian-tools";
 
@@ -281,7 +310,8 @@ new Bill({ barcode: "22343223446130001070189" }).findByBarcode(); // { billId: 2
 
 ### Iranian Sheba(IBAN)
 
-- Check validation
+-   Check validation
+
 ```javascript
 import { isShebaValid } from "@persian-tools/persian-tools";
 
@@ -289,7 +319,8 @@ isShebaValid("IR820540102680020817909002"); // true
 isShebaValid("IR01234567890123456789"); // false
 ```
 
-- Recognize bank information
+-   Recognize bank information
+
 ```javascript
 import { getShebaInfo } from "@persian-tools/persian-tools";
 
@@ -312,17 +343,18 @@ getShebaInfo("IR820540102680020817909002");
 ```javascript
 import { halfSpace } from "@persian-tools/persian-tools";
 
-halfSpace("نمی ‌خواهی درخت ها را ببینیم؟") // "نمی‌خواهی درخت‌ها را ببینیم؟"
+halfSpace("نمی ‌خواهی درخت ها را ببینیم؟"); // "نمی‌خواهی درخت‌ها را ببینیم؟"
 ```
 
-
 ### Get information(province, category, type) about vehicles plate
-| Properties                  | Description                             | Return type
-|---                	  |---	                                    |---
-| `info`               | provide info about plate	| PlateResultApi
-| `isValid`  	          | checks if plate is valid or not  | boolean
+
+| Properties | Description                     | Return type    |
+| ---------- | ------------------------------- | -------------- |
+| `info`     | provide info about plate        | PlateResultApi |
+| `isValid`  | checks if plate is valid or not | boolean        |
 
 **Usage**
+
 ```js
 import { Plate } from "@persian-tools/persian-tools";
 
@@ -330,12 +362,13 @@ Plate("12D45147"); // passing string argument
 
 // or passing in object style
 Plate({
-  number: "1245147",
-  char: "الف"
-})
+	number: "1245147",
+	char: "الف",
+});
 ```
 
-- Getting info about plate
+-   Getting info about plate
+
 ```js
 import { Plate } from "@persian-tools/persian-tools";
 
@@ -370,12 +403,15 @@ Plate(12345678).info;
   }
 */
 ```
+
 Plates that have farsi digits in them(like: الف، ب، ص) will be returned in this template
+
 ```
   ${first_two_digits}${plate_character}${next_three_digits}ایران${province_code}
 ```
 
-- Checking if plate is valid
+-   Checking if plate is valid
+
 ```js
 import { Plate } from "@persian-tools/persian-tools";
 
@@ -389,59 +425,60 @@ Plate(12345678).isValid;
   true
 */
 
-Plate(1234567).isValid
+Plate(1234567).isValid;
 /*
   will return false - plate character is not provided
 */
 
-Plate(1204567).isValid
+Plate(1204567).isValid;
 /*
   will return false - plate can't have 0 in its digits (except last digit)
 */
 ```
+
 ### Convert Jalaali date-time into a time ago
 
 **Usage**
 
->Suppose the current time is equal to `1400/03/17 18:00:00`
+> Suppose the current time is equal to `1400/03/17 18:00:00`
 
 ```js
 import { timeAgo } from "@persian-tools/persian-tools";
 
 // Previous
-timeAgo('1400/03/17 17:55:00') // 5 دقیقه قبل
-timeAgo('1400/02/17 18:00:00') // حدود 1 ماه  قبل
+timeAgo("1400/03/17 17:55:00"); // 5 دقیقه قبل
+timeAgo("1400/02/17 18:00:00"); // حدود 1 ماه  قبل
 
 // Next
-timeAgo('1400/04/07 18:00:00') // حدود 3 هفته  بعد
-timeAgo('1401/03/17 18:00:00') // حدود 1 سال  بعد
+timeAgo("1400/04/07 18:00:00"); // حدود 3 هفته  بعد
+timeAgo("1401/03/17 18:00:00"); // حدود 1 سال  بعد
 ```
 
-### Get the Remaining Time of the Date 
+### Get the Remaining Time of the Date
 
 **Usage**
 
->Takes a date(it could be string, number or date) and calculate years,
->months, days, hours, minutes and seconds remained to that specific date. 
+> Takes a date(it could be string, number or date) and calculate years,
+> months, days, hours, minutes and seconds remained to that specific date.
 
-```js 
+```js
 import { remainingTime } from "@persian-tools/persian-tools";
 
-remainingTime("2023-05-14T13:35:59Z").toString() // ۱ سال و ۱ ماه و ۲ روز و ۳ ساعت و ۵ دقیقه و ۸ ثانیه 
+remainingTime("2023-05-14T13:35:59Z").toString(); // ۱ سال و ۱ ماه و ۲ روز و ۳ ساعت و ۵ دقیقه و ۸ ثانیه
 
 const { years, months, days, hours, minutes, seconds, isFinished } = remainingTime("2023-05-14T13:35:59Z");
-years // 1
-minutes // 5
-isFinished // false
+years; // 1
+minutes; // 5
+isFinished; // false
 
-remainingTime("2018-04-12T10:30:51Z").isFinished // true 
+remainingTime("2018-04-12T10:30:51Z").isFinished; // true
 ```
 
 ### Validate and find information of phone number
 
 **Usage**
 
-- Finding information such as province, type and model of phone number
+-   Finding information such as province, type and model of phone number
 
 ```js
 import { phoneNumberDetail } from "@persian-tools/persian-tools";
@@ -477,8 +514,8 @@ phoneNumberDetail("09981000000");
 */
 ```
 
-- Validating phone number
-  
+-   Validating phone number
+
 ```js
 import { phoneNumberValidator } from "@persian-tools/persian-tools";
 
@@ -494,7 +531,7 @@ phoneNumberValidator("9022002580"); // true
 phoneNumberValidator("09802002580"); // false
 ```
 
-- Normalizing phone number
+-   Normalizing phone number
 
 ```js
 import { phoneNumberNormalizer } from "@persian-tools/persian-tools";
@@ -509,21 +546,21 @@ phoneNumberNormalizer("09022002580", "+98"); // +989022002580
 
 **Usage**
 
-> This function returns the Capital City name by its state name but if the State name was the Capital name, it produces a string with the value: `self`. if the function can't find anything, it throws an error.
+> This function returns the Capital City name by its state name. if it can't find anything, it will throws an error.
 
 ```js
 import { findCapitalByProvince } from "@persian-tools/persian-tools";
 
-findCapitalByProvince('خراسان رضوی'); // مشهد
-findCapitalByProvince('آذربایجان شرقی'); // تبریز 
+findCapitalByProvince("خراسان رضوی"); // مشهد
+findCapitalByProvince("آذربایجان شرقی"); // تبریز
 
-// this throw an error string 'noProvinceFound'
-findCapitalByProvince('مشهد') 
+// this throw an error string 'no province found'
+findCapitalByProvince("دبی");
 ```
 
-
 ### Todo
-- [ ] Write Jalaali and Gregorian functions to convert Date together.
+
+-   [ ] Write Jalaali and Gregorian functions to convert Date together.
 
 ## Contributing
 
@@ -605,4 +642,5 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
 # Supporters :open_hands:
+
 [![Stargazers repo roster for @persian-tools/persian-tools](https://reporoster.com/stars/persian-tools/persian-tools)](https://github.com/persian-tools/persian-tools/stargazers)
