@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.5.0](https://github.com/persian-tools/persian-tools/compare/v3.4.1...v3.5.0) (2023-08-05)
+
+
+### Features
+
+* implement find capital by state name module ([#223](https://github.com/persian-tools/persian-tools/issues/223)) ([742add5](https://github.com/persian-tools/persian-tools/commit/742add5d5fce8219850b9da3df0ccc1bdfcfb39a))
+
+
+### Bug Fixes
+
+* **#308:** update test verifyIranianNationalId.spec.ts ([a4a3936](https://github.com/persian-tools/persian-tools/commit/a4a3936a3ca60b5e3d9adad7f290daed70a7b709)), closes [#308](https://github.com/persian-tools/persian-tools/issues/308)
+* incorrect typings for phoneNumberDetail ([#323](https://github.com/persian-tools/persian-tools/issues/323)) ([ba66500](https://github.com/persian-tools/persian-tools/commit/ba6650061aee85ac44cdb0f6c9db9b86fd5e8f99))
+
 ### [3.4.1](https://github.com/persian-tools/persian-tools/compare/v3.4.0...v3.4.1) (2022-09-19)
 
 
