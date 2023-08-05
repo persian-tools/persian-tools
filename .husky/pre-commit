@@ -4,3 +4,4 @@
 npm run prettier:ci
 npm run lint
 npm test
+echo $?
