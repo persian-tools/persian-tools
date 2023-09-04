@@ -10,7 +10,7 @@ const invalidPostalCodes = [
     "test invalid postalCode"
 ]
 
-describe("halfSpace", () => {
+describe("iranianPostalCode", () => {
     it('valid postal code', () => {
         expect(iranianPostalCodeValidate(validPostalCode)).toBeTruthy()
     })
