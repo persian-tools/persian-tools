@@ -11,7 +11,7 @@ function allCharactersSame(inputString?: string): boolean | undefined {
 		return false;
 	}
 
-	let n = inputString?.toString()?.length;
+	const n = inputString?.toString()?.length;
 	for (let i = 1; i < n; i++)
 		if (inputString[i] !== inputString[0])
 			return false;
