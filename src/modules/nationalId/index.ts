@@ -6,7 +6,7 @@
  * @return {Boolean}                    [valid or no]
  */
 
-function allCharactersSame(inputString?: string): boolean | undefined {
+function allCharactersSame(inputString?: string): boolean {
 	if (!inputString){
 		return false;
 	}
