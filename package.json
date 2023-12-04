@@ -78,7 +78,7 @@
 		"rimraf": "5.0.1",
 		"standard-version": "9.5.0",
 		"typedoc": "0.22.16",
-		"vite": "4.4.8",
+		"vite": "4.5.1",
 		"vitest": "0.34.1"
 	},
 	"dependencies": {
