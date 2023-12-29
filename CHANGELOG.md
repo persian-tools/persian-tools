@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.5.1](https://github.com/persian-tools/persian-tools/compare/v3.5.0...v3.5.1) (2023-12-29)
+
+
+### Bug Fixes
+
+* **toPersianChars:** wrong result in converting ی | reported by [#344](https://github.com/persian-tools/persian-tools/issues/344) ([4e2c6c8](https://github.com/persian-tools/persian-tools/commit/4e2c6c8392b77016eb4d89aaf5b82d456fd99a34))
+
 ## [3.5.0](https://github.com/persian-tools/persian-tools/compare/v3.4.1...v3.5.0) (2023-08-05)
 
 
