@@ -56,3 +56,6 @@ export { default as remainingTime } from "./modules/remainingTime";
 //Find capital city by state name
 
 export { default as findCapitalByProvince } from "./modules/findCapitalByProvince";
+
+//iranian postal code validation
+export { default as iranianPostalCodeValidate } from './modules/iranianPostalCode'

@@ -37,6 +37,7 @@
 -   [Get the Remaining Time of the Date](#get-the-remaining-time-of-the-date)
 -   [Validate and find information of phone number](#validate-and-find-information-of-phone-number).
 -   [Find capital city by province name ](#find-capital-city-by-province-name)
+-   [Validate Iranian Postal code](#validate-iranian-postal-code).
 
 ## Getting started
 
@@ -556,6 +557,23 @@ findCapitalByProvince("آذربایجان شرقی"); // تبریز
 
 // this throw an error string 'no province found'
 findCapitalByProvince("دبی");
+```
+
+### Validate Iranian Postal code
+
+**Usage**
+
+> this function validate entry postal code and return boolean for validation confirm
+
+```js
+import { iranianPostalCodeValidate } from "@persian-tools/persian-tools";
+
+// valid postal code
+iranianPostalCodeValidate("1193653471"); // true
+
+// invalid postal code
+iranianPostalCodeValidate("142386473"); // false
+iranianPostalCodeValidate("1111111111"); // false
 ```
 
 ### Todo
