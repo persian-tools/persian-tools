@@ -39,5 +39,4 @@ describe("isPersian", () => {
 		expect(hasPersian("这是波斯文字吗?")).toBeFalsy();
 		expect(hasPersian("")).toBeFalsy();
 	});
-
-})
+});
