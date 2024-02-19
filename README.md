@@ -37,7 +37,7 @@
 -   [Get the Remaining Time of the Date](#get-the-remaining-time-of-the-date)
 -   [Validate and find information of phone number](#validate-and-find-information-of-phone-number).
 -   [Find capital city by province name ](#find-capital-city-by-province-name)
-
+-   [Find province from coordinate ](#find-province-from-coordinate)
 ## Getting started
 
 There are two main ways to get PersianTools.js in your JavaScript project:
@@ -557,6 +557,26 @@ findCapitalByProvince("آذربایجان شرقی"); // تبریز
 // this throw an error string 'no province found'
 findCapitalByProvince("دبی");
 ```
+### Find province from coordinate 
+
+**Usage**
+
+> Find the province from a given coordinate point. If it cannot find anything, it will throw an error.
+
+```javascript
+import { findProvinceFromCoordinate } from "@persian-tools/persian-tools";
+
+// Find province for a given coordinate point
+const point = { latitude: 35.6892, longitude: 51.3890 };
+
+const province = findProvinceFromCoordinate(point);
+
+findProvinceFromCoordinate(point)["name"]; // "تهران"
+findProvinceFromCoordinate(point).properties['name:fa']; // "تهران"
+findProvinceFromCoordinate(point).properties['name:en']; // "Tehran"
+
+```
+
 
 ### Todo
 
