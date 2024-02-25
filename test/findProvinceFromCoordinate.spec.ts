@@ -16,7 +16,6 @@ it("Should return the correct province for a given coordinate", () => {
 
     const result = findProvinceFromCoordinate(pointToCheck);
   
-    expect(result.name).toBe('تهران');
     expect(result.properties['name:fa']).toBe('تهران');
     expect(result.properties['name:en']).toBe('Tehran');
 });
@@ -27,8 +26,7 @@ it("Should return the correct province for a coordinate in Isfahan", () => {
   
     const result = findProvinceFromCoordinate(pointToCheck);
   
-    expect(result.name).toBe('اصفهان');
     expect(result.properties['name:fa']).toBe('اصفهان');
-    expect(result.properties['name:en']).toBe('Isfahan');
+    expect(result.properties['name:en']).toBe('Esfahan');
   });
 

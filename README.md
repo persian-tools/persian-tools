@@ -571,7 +571,6 @@ const point = { latitude: 35.6892, longitude: 51.3890 };
 
 const province = findProvinceFromCoordinate(point);
 
-findProvinceFromCoordinate(point)["name"]; // "تهران"
 findProvinceFromCoordinate(point).properties['name:fa']; // "تهران"
 findProvinceFromCoordinate(point).properties['name:en']; // "Tehran"
 

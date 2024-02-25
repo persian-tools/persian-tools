@@ -1,16 +1,11 @@
 import { GeoJSONData } from "./IRGeoJSON";
 
-
 interface Point {
 	longitude: number;
 	latitude: number;
 }
 
 interface GeoJSONFeature {
-	id: number;
-	osm_type: string;
-	type: string;
-	name: string;
 	properties: Record<string, string | undefined>;
 	geometry: {
 		type: string;
@@ -19,8 +14,10 @@ interface GeoJSONFeature {
 }
 
 interface Province {
-	name: string;
-	properties: object;
+	properties: {
+		'name:fa': string;
+		'name:en': string;
+	};
 	geometry: object; 
 }
 
@@ -62,11 +59,9 @@ export const findProvinceFromCoordinate = (pointToCheck: Point): Province => {
 	}
 	if (foundProvince) {
 		const normalizedProvinceObject: Province = {
-			name: foundProvince.name,
 			properties: {
-				'name:fa': foundProvince.properties.name,
-				'name:en': foundProvince.properties['name:en'],
-				'ISO3166-2': foundProvince.properties['ISO3166-2'],
+				'name:fa': foundProvince.properties.name || "",
+				'name:en': foundProvince.properties['name:en'] || "",
 			},
 			geometry: foundProvince.geometry
 		};
