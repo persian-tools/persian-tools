@@ -14,19 +14,19 @@ it("Should return the correct province for a given coordinate", () => {
 
     const pointToCheck = { longitude: 51.38897, latitude: 35.6892 };
 
-    const result = findProvinceFromCoordinate(pointToCheck);
+    const {fa , en } = findProvinceFromCoordinate(pointToCheck);
   
-    expect(result.properties['name:fa']).toBe('تهران');
-    expect(result.properties['name:en']).toBe('Tehran');
+    expect(fa).toBe('تهران');
+    expect(en).toBe('Tehran');
 });
 
 it("Should return the correct province for a coordinate in Isfahan", () => {
 
     const pointToCheck = { longitude: 51.6660, latitude: 32.6546 };
   
-    const result = findProvinceFromCoordinate(pointToCheck);
+    const {fa , en } = findProvinceFromCoordinate(pointToCheck);
   
-    expect(result.properties['name:fa']).toBe('اصفهان');
-    expect(result.properties['name:en']).toBe('Esfahan');
+    expect(fa).toBe('اصفهان');
+    expect(en).toBe('Esfahan');
   });
 
