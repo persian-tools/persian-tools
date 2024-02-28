@@ -2,5 +2,8 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "vitest.enable": true,
   "testing.alwaysRevealTestOnStateChange": true,
-  "testing.automaticallyOpenPeekView": "never"
+  "testing.automaticallyOpenPeekView": "never",
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  }
 }
