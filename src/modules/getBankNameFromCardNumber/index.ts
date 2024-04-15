@@ -16,19 +16,11 @@ function getBankNameFromCardNumber(digits?: number | string): string | null | un
 	if (!digits) return;
 
 	const digitsLength = digits.toString().length;
+	if (digitsLength < 6 || digitsLength > 16) return null;
 
-	if (digits && digitsLength >= 6 && digitsLength <= 16) {
-		const code = digits.toString().substr(0, 6);
-		const findBank = (banksCode as IBank[]).find((bank) => bank.code === code);
-
-		if (findBank) {
-			return findBank.name;
-		} else {
-			return null;
-		}
-	} else {
-		return null;
-	}
+	const code = digits.toString().substring(0, 6);
+	const findBank = (banksCode as IBank[]).find((bank) => bank.code === code);
+	return findBank?findBank.name:null;
 }
 
 export default getBankNameFromCardNumber;
