@@ -1,4 +1,4 @@
-import banksCode from "./banksCode.skip";
+import {cardBank} from "./banksCode.skip";
 
 export interface IBank {
 	code: string;
@@ -19,8 +19,8 @@ function getBankNameFromCardNumber(digits?: number | string): string | null | un
 	if (digitsLength < 6 || digitsLength > 16) return null;
 
 	const code = digits.toString().substring(0, 6);
-	const findBank = (banksCode as IBank[]).find((bank) => bank.code === code);
-	return findBank?findBank.name:null;
+	if (code in cardBank) return cardBank[code];
+	return null;
 }
 
 export default getBankNameFromCardNumber;
