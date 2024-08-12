@@ -56,3 +56,6 @@ export { default as remainingTime } from "./modules/remainingTime";
 //Find capital city by state name
 
 export { default as findCapitalByProvince } from "./modules/findCapitalByProvince";
+
+//Find Province from Coordinates
+export { default as findProvinceFromCoordinate } from "./modules/findProvinceFromCoordinate";
