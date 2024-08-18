@@ -9,28 +9,29 @@
  */
 function verifyCardNumber(digits: number): boolean | undefined {
 	if (!digits) return;
-	const digitsResult = String(digits);
+	const digitsResult = digits.toString().split("").map(Number);
 
 	const length = digitsResult.length;
 
-	if (
-		length < 16 ||
-		parseInt(digitsResult.substr(1, 10), 10) === 0 ||
-		parseInt(digitsResult.substr(10, 6), 10) === 0
-	) {
+	if (length < 16) {
 		return false;
 	}
 
-	let radix,
-		subDigit,
-		sum = 0;
+	let sum = 0;
+	for (let i = 0; i < length; i++) {
+		let digit = digitsResult[i];
 
-	for (let i = 0; i < 16; i++) {
-		radix = i % 2 === 0 ? 2 : 1;
+		if ((i + 1) % 2 !== 0) {
+			digit *= 2;
 
-		subDigit = parseInt(digitsResult.substr(i, 1), 10) * radix;
-		sum += subDigit > 9 ? subDigit - 9 : subDigit;
+			if (digit > 9) {
+				digit -= 9;
+			}
+		}
+
+		sum += digit;
 	}
+
 	return sum % 10 === 0;
 }
 

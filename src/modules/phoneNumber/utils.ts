@@ -122,7 +122,7 @@ export const MCI: Record<string, OperatorModel> = {
 		base: "کشوری",
 		type: ["permanent", "credit"],
 		operator: operatorsMap.MCI,
-	}
+	},
 };
 
 export const Taliya: Record<string, OperatorModel> = {
@@ -158,7 +158,7 @@ export const RightTel: Record<string, OperatorModel> = {
 		base: "کشوری",
 		type: ["credit"],
 		operator: operatorsMap.RightTel,
-	}
+	},
 };
 
 const IrancellModel = {
@@ -197,7 +197,7 @@ export const Irancell: Record<string, OperatorModel> = {
 	},
 };
 
-export const ShatelMobile:Record<string, OperatorModel> = {
+export const ShatelMobile: Record<string, OperatorModel> = {
 	"998": {
 		province: [],
 		base: "کشوری",

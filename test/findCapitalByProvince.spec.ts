@@ -16,4 +16,3 @@ it("should return the correct value", () => {
 it("should work with arabic letter", () => {
 	expect(findCapitalByProvince("خراسان رضوي")).toBe("مشهد");
 });
-
