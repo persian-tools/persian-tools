@@ -3,6 +3,10 @@ import { verifyIranianNationalId } from "../src";
 
 // https://www.searchline.ir/idcode
 describe("Validation of Iranian National Number(code-e Melli)", () => {
+	it("National Id first 3 digits should be a valid city code", () => {
+		expect(verifyIranianNationalId("0123456789")).toBeFalsy();
+		expect(verifyIranianNationalId("1234567890")).toBeFalsy();
+	});
 	it("Empty String/Argument or Zero number should be undefined", () => {
 		expect(verifyIranianNationalId("")).toBeUndefined();
 		expect(verifyIranianNationalId()).toBeUndefined();
