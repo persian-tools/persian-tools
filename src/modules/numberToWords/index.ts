@@ -21,13 +21,13 @@ const numberToWords: NumberToWordsType = (numberValue, options) => {
 	const getWord = (n: number) => numbersWordList[n] ?? "";
 	const addNegativeSuffix = (str: string) => "منفی" + " " + str;
 
-	function transformeToWord(num: number): string {
+	function transformToWord(num: number): string {
 		if (num === 0) return "";
 		if (num <= 9) return getWord(num);
 		else if (num >= 11 && num <= 19) return getWord(num);
 
 		const residual = num <= 99 ? num % 10 : num % 100;
-		return residual === 0 ? getWord(num) : `${getWord(num - residual)} و ${transformeToWord(residual)}`;
+		return residual === 0 ? getWord(num) : `${getWord(num - residual)} و ${transformToWord(residual)}`;
 	}
 
 	/**
@@ -37,18 +37,18 @@ const numberToWords: NumberToWordsType = (numberValue, options) => {
 	 */
 
 	function performer(num: number): string {
-		if (num <= 999) return transformeToWord(num);
+		if (num <= 999) return transformToWord(num);
 
 		const getUnitName = (numberOfZeros: number) =>
 			numberOfZeros === 0 ? "" : numbersWordList[Number.parseInt(`1${"0".repeat(numberOfZeros)}`)];
 
-		const seperated = Number(num).toLocaleString().split(",");
+		const separated = Number(num).toLocaleString("en-US").split(",");
 
-		const numbersArr = seperated
+		const numbersArr = separated
 			.map((value, index) => {
 				const { transformedVal, unitName } = Object.freeze({
-					transformedVal: transformeToWord(Number.parseInt(value, 10)),
-					unitName: getUnitName((seperated.length - (index + 1)) * 3),
+					transformedVal: transformToWord(Number.parseInt(value, 10)),
+					unitName: getUnitName((separated.length - (index + 1)) * 3),
 				});
 
 				return transformedVal ? transformedVal + " " + unitName : "";
