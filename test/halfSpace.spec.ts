@@ -37,6 +37,18 @@ describe("halfSpace", () => {
 		})
 	})
 
+	it("just removes the space before ها and تر if it comes after non-joining letters", () => {
+		const pairs = [
+			{actual: "زیبا تر", expected: "زیباتر"},
+			{actual: "تبر ها", expected: "تبرها"},
+			{actual: "شفتالو هایشان", expected: "شفتالوهایشان"}
+		]
+
+		pairs.forEach(({actual, expected}) => {
+			expect(halfSpace(actual)).toEqual( expected)
+		})
+	})
+
 	it("should throw", () => {
 		expect(() => {
 			// @ts-ignore

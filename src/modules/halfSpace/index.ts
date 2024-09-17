@@ -23,8 +23,14 @@ const halfSpace = (str: string): string => {
 		.replace(/((\s|^)ن?می)\u0020/g, "$1‌")
 		.replace(/((\s|^)بی)\u0020/g, "$1‌")
 		.replace(/\u0020((ام|ات|اش|ای|اید|ایم|اند)\s)/g, "‌$1")
+		// remove space before ها if previous letter doesn't join
+		.replace(/([ادذرزژو])\u0020(ها(ی)?(?:$|[ ،؛:»)]))/g, "$1$2")
 		.replace(/\u0020(ها(ی)?(?:$|[ ،؛:»)]))/g, "‌$1")
+		// remove space before تر if previous letter doesn't join
+		.replace(/([ادذرزژو])\u0020(تر((ی)|(ین))?(?:$|[ ،؛:»)]))/g, "$1$2")
 		.replace(/\u0020(تر((ی)|(ین))?(?:$|[ ،؛:»)]))/g, "‌$1")
+		// remove space before ها if previous letter doesn't join
+		.replace(/([ادذرزژو])\u0020((هایی|هایم|هایت|هایش|هایمان|هایتان|هایشان)(?:$|[ ،؛:»)]))/g, "$1$2")
 		.replace(/\u0020((هایی|هایم|هایت|هایش|هایمان|هایتان|هایشان)(?:$|[ ،؛:»)]))/g, "‌$1");
 };
 
