@@ -33,16 +33,16 @@ function verifyIranianNationalId(nationalCode?: string | number): boolean | unde
 		return false
 	}
 
-	let temp = nationalCode.toString();
+	let nationalCodeInString  = nationalCode.toString();
 
-	if (!nationalCode || nationalCode?.toString().length !== 10 || allCharactersSame(temp)) {
+	if (!nationalCode || nationalCode?.toString().length !== 10 || allCharactersSame(nationalCodeInString )) {
 		return false;
 	}
-	temp = `0000${temp}`.substr(temp?.length + 4 - 10);
-	if (parseInt(temp.substr(3, 6), 10) === 0) return false;
-	const c = parseInt(temp.substr(9, 1), 10);
+	nationalCodeInString  = `0000${nationalCodeInString }`.substr(nationalCodeInString ?.length + 4 - 10);
+	if (parseInt(nationalCodeInString .substr(3, 6), 10) === 0) return false;
+	const c = parseInt(nationalCodeInString .substr(9, 1), 10);
 	let s = 0;
-	for (let i = 0; i < 9; i++) s += parseInt(temp.substr(i, 1), 10) * (10 - i);
+	for (let i = 0; i < 9; i++) s += parseInt(nationalCodeInString .substr(i, 1), 10) * (10 - i);
 	s %= 11;
 	return (s < 2 && c === s) || (s >= 2 && c === 11 - s)
 }
