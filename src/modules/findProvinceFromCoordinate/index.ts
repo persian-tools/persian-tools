@@ -1,4 +1,4 @@
-import { GeoJSONData } from "./IRGeoJSON";
+import { GeoJSONData } from "./irGeoJSON";
 
 interface Point {
 	longitude: number;
