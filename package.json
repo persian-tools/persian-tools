@@ -58,7 +58,7 @@
 	"devDependencies": {
 		"@commitlint/cli": "18.4.3",
 		"@commitlint/config-conventional": "18.4.3",
-		"@types/jest": "29.5.11",
+		"@types/jest": "29.5.14",
 		"@typescript-eslint/eslint-plugin": "6.16.0",
 		"@typescript-eslint/parser": "6.16.0",
 		"cross-env": "7.0.3",
