@@ -1,4 +1,4 @@
-import {cardBank} from "./banksCode.skip";
+import { cardBank } from "./banksCode.skip";
 
 export interface IBank {
 	code: string;

@@ -39,7 +39,7 @@ function compute(tokens: string[]): number {
 		} else if (!isNaN(Number(token))) {
 			sum += parseInt(token, 10);
 		} else {
-			sum === 0 ? (sum = MAGNITUDE[token]) : (sum *= MAGNITUDE[token]);
+			sum = sum === 0 ? MAGNITUDE[token] : sum * MAGNITUDE[token];
 		}
 	});
 	return isNegative ? sum * -1 : sum;
@@ -71,9 +71,8 @@ export default function wordsToNumber<TResult extends string | number>(
 	if (!words) return "" as TResult;
 
 	// Remove ordinal suffixes
-	words = words.replace(new RegExp("مین$", "ig"), "");
 	words = removeOrdinalSuffix(words)!;
-	// Fix Persian typo's if enabled if this option is enabled
+	// Fix Persian typo's if enabled is this option is enabled
 	const classified = isEnabledFuzzy ? fuzzy(words) : words;
 	const computeNumbers = compute(tokenize(classified!));
 	const addCommasIfNeeded: string | number = shouldAddCommas ? addCommas(computeNumbers) : (computeNumbers as number);

@@ -1,6 +1,5 @@
 import phoneNumberValidator from "./validator";
-import { getPhonePrefix, operators } from "./utils";
-import { OperatorModel } from "./utils";
+import { getPhonePrefix, operators, OperatorModel } from "./utils";
 
 /**
  * Find information such as Province, type and model of mobile number.
@@ -17,18 +16,9 @@ import { OperatorModel } from "./utils";
  * phoneNumberDetail("9123456789")
  */
 export default function phoneNumberDetail(mobile: string): OperatorModel | null {
-	/**
-	 * @type boolean
-	 */
 	if (phoneNumberValidator(mobile)) {
-		/**
-		 * @type string
-		 */
 		const prefix = getPhonePrefix(mobile);
 
-		/**
-		 * @type OperatorModel
-		 */
 		return operators[prefix];
 	}
 

@@ -1,4 +1,4 @@
-import { phoneNumberValidator } from ".";
+import phoneNumberValidator from "./validator";
 
 /**
  * Normalize a phone number to a standard format based on the provided token.
@@ -7,7 +7,7 @@ import { phoneNumberValidator } from ".";
  * @category Phone number
  * @public
  * @constructor
- * @param {string} number phone number
+ * @param phoneNumber
  * @param {string} token can be either `+98` or `0`
  * @return String | never
  * @example

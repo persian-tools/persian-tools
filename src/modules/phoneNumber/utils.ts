@@ -207,13 +207,13 @@ export const ShatelMobile: Record<string, OperatorModel> = {
 	},
 };
 
-export const Aptel:Record<string, OperatorModel> = {
+export const Aptel: Record<string, OperatorModel> = {
 	"999": {
 		base: "کشوری",
 		province: [],
 		type: ["permanent", "credit"],
 		operator: operatorsMap.Aptel,
-	}
+	},
 };
 
 export const prefixes: string[] = [
@@ -231,7 +231,7 @@ export const operators = {
 	...Irancell,
 	...ShatelMobile,
 	...RightTel,
-	...Aptel
+	...Aptel,
 };
 
 /**

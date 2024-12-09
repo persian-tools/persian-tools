@@ -88,26 +88,19 @@ function remainingTime(date: string | number | Date): RemainingTime & ToString &
  * @param remainingTime contains years, months, days, hours, minutes and seconds remianed to a specific date
  * @returns Converts the remaining time to a Persian string representation.
  * Persian string representation of the remaining time, showing non-zero fields with their respective units.
-*/
+ */
 const toString = (remainingTime: RemainingTime): string => {
-	const { years, months, days, hours, minutes , seconds } = remainingTime;
-	const result :string[] = [];
+	const { years, months, days, hours, minutes, seconds } = remainingTime;
+	const result: string[] = [];
 
-	if (years > 0) 
-		result.push(`${years} سال`);
-	if (months > 0) 
-		result.push(`${months} ماه`);
-	if (days > 0) 
-		result.push(`${days} روز`);
-	if (hours > 0) 
-		result.push(`${hours} ساعت`);
-	if (minutes > 0) 
-		result.push(`${minutes} دقیقه`);
-	if (seconds > 0) 
-		result.push(`${seconds} ثانیه`);
+	if (years > 0) result.push(`${years} سال`);
+	if (months > 0) result.push(`${months} ماه`);
+	if (days > 0) result.push(`${days} روز`);
+	if (hours > 0) result.push(`${hours} ساعت`);
+	if (minutes > 0) result.push(`${minutes} دقیقه`);
+	if (seconds > 0) result.push(`${seconds} ثانیه`);
 
 	return digitsEnToFa(result.join(" و "));
 };
-
 
 export default remainingTime;

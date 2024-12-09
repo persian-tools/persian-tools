@@ -7,8 +7,8 @@
  * removeOrdinalSuffix("سه هزارم") // سه هزار
  * removeOrdinalSuffix("سه هزارمین") // سه هزار
  */
-const removeOrdinalSuffix = (word: string): string | undefined => {
-	if (typeof word === "undefined") return;
+const removeOrdinalSuffix = (word: string): string => {
+	if (!word) return word;
 
 	word = word.replace(new RegExp("مین$", "ig"), "").replace(new RegExp("(ام| اُم)$", "ig"), "");
 	if (word.endsWith("سوم")) {
