@@ -18,6 +18,7 @@ export const operatorsMap = {
 	Irancell: "ایرانسل",
 	Taliya: "تالیا",
 	RightTel: "رایتل",
+	Aptel: "آپتل",
 };
 
 export const MCI: Record<string, OperatorModel> = {
@@ -206,12 +207,22 @@ export const ShatelMobile:Record<string, OperatorModel> = {
 	},
 };
 
+export const Aptel:Record<string, OperatorModel> = {
+	"999": {
+		base: "کشوری",
+		province: [],
+		type: ["permanent", "credit"],
+		operator: operatorsMap.Aptel,
+	}
+};
+
 export const prefixes: string[] = [
 	...Object.keys(MCI),
 	...Object.keys(Taliya),
 	...Object.keys(RightTel),
 	...Object.keys(Irancell),
 	...Object.keys(ShatelMobile),
+	...Object.keys(Aptel),
 ];
 
 export const operators = {
@@ -220,6 +231,7 @@ export const operators = {
 	...Irancell,
 	...ShatelMobile,
 	...RightTel,
+	...Aptel
 };
 
 /**
