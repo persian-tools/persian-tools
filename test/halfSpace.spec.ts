@@ -27,9 +27,10 @@ describe("halfSpace", () => {
 		const pairs = [
 			{actual: "درخت ها، باد", expected: "درخت‌ها، باد"},
 			{actual: "«درخت های»", expected: "«درخت‌های»"},
-			{actual: "(درخت هایش)", expected: "(درخت‌هایش)"},
+			{actual: "(پرانتزی هایش)", expected: "(پرانتزی‌هایش)"},
+			{actual: "سوالی هایش؟", expected: "سوالی‌هایش؟"},
+			{actual: "عجیب ترین!", expected: "عجیب‌ترین!"},
 			{actual: "بزرگ تر،", expected: "بزرگ‌تر،"},
-
 		]
 
 		pairs.forEach(({actual, expected}) => {
@@ -41,6 +42,9 @@ describe("halfSpace", () => {
 		const pairs = [
 			{actual: "زیبا تر", expected: "زیباتر"},
 			{actual: "تبر ها", expected: "تبرها"},
+			{actual: "(پرانتز هایش)", expected: "(پرانتزهایش)"},
+			{actual: "سوال آلود هایش؟", expected: "سوال آلودهایش؟"},
+			{actual: "تعجب‌انگیز ترین!", expected: "تعجب‌انگیزترین!"},
 			{actual: "شفتالو هایشان", expected: "شفتالوهایشان"}
 		]
 
