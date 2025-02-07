@@ -26,8 +26,8 @@
 		"prettier": "prettier --write 'src/**/*.{ts,json,js}' --config .prettierrc.js",
 		"prettier:ci": "prettier --list-different 'src/**/*.{ts,json,js}' --config .prettierrc.js",
 		"generate:docs": "make publish-docs",
-		"prepare": "husky",
-		"preinstall": "pnpx only-allow pnpm"
+		"prepare": "pnpm dlx is-ci || husky || true",
+		"preinstall": "pnpm dlx only-allow pnpm"
 	},
 	"directories": {
 		"test": "tests"
@@ -50,9 +50,9 @@
 		"verify iranian national id",
 		"verify iranian card-number",
 		"Persian zero-width non-joiner",
-    "Persian zero-width joiner",
-    "Persian half-space",
-    "Persian digits convertor"
+		"Persian zero-width joiner",
+		"Persian half-space",
+		"Persian digits convertor"
 	],
 	"author": "Ali Torki <ali_4286@live.com>",
 	"license": "MIT",
@@ -98,7 +98,7 @@
 	"engines": {
 		"node": ">=14",
 		"npm": ">=7.0.0",
-    "pnpm": ">=9.0.0"
+		"pnpm": ">=9.0.0"
 	},
 	"packageManager": "pnpm@10.2.1"
 }
