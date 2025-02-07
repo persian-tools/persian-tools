@@ -1,5 +1,5 @@
 import { states } from "./states";
-import toPersianChars from "../toPersianChars";
+import { toPersianChars } from "../toPersianChars";
 
 /**
  * Returns the capital name of province you enter

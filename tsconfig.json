@@ -21,8 +21,8 @@
 		"skipLibCheck": true,
 		"sourceMap": true,
 		"strict": true,
-		"types": ["node", "vitest/globals"]
-	},
-	"include": ["src", "tests"],
-	"exclude": ["node_modules"]
+    "declarationMap": true,
+  },
+  "include": ["src/**/*", "src/**/*.d.ts", "test/**/*.spec.ts"],
+  "exclude": ["node_modules", "build", "coverage", ".idea", ".vscode", "**/build/*"]
 }

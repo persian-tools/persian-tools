@@ -13,11 +13,11 @@
 		"micro:dev": "microbundle watch",
 		"test": "vitest run",
 		"test:watch": "vitest watch",
-		"test:ui": "pnpm run test:watch -- --ui",
+		"test:ui": "pnpm run test:watch --ui",
 		"coverage": "vitest run --coverage",
 		"coverage:ui": "vitest watch --coverage --ui",
 		"lint": "eslint ./src",
-		"lint:fix": "pnpm run lint -- --fix",
+		"lint:fix": "pnpm run lint --fix",
 		"prerelease": "pnpm run test",
 		"release": "pnpm run micro:build",
 		"postrelease": "standard-version && pnpm run generate:docs",
@@ -49,7 +49,10 @@
 		"Persian numbers to English",
 		"verify iranian national id",
 		"verify iranian card-number",
-		"Persian zero-width non-joiner"
+		"Persian zero-width non-joiner",
+    "Persian zero-width joiner",
+    "Persian half-space",
+    "Persian digits convertor"
 	],
 	"author": "Ali Torki <ali_4286@live.com>",
 	"license": "MIT",
@@ -94,7 +97,8 @@
 	],
 	"engines": {
 		"node": ">=14",
-		"npm": ">=7.0.0"
+		"npm": ">=7.0.0",
+    "pnpm": ">=9.0.0"
 	},
 	"packageManager": "pnpm@10.2.1"
 }
