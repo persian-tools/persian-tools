@@ -7,14 +7,25 @@ import pluginSecurity from "eslint-plugin-security";
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 
 export default [
-	{ files: ["**/*.{js,mjs,cjs,ts,json}"] },
 	{
+		files: ["**/*.{js,mjs,cjs,ts}"],
+		ignores: [
+			"node_modules",
+			"dist",
+			"eslint.config.js",
+			".idea",
+			".vscode",
+			".git",
+			".husky",
+			".github",
+			"coverage",
+			"build",
+		],
 		languageOptions: {
-			ecmaVersion: "latest",
-			sourceType: "module",
 			globals: {
 				...globals.browser,
-				...globals.jest,
+				...globals.node,
+				...globals.vitest,
 			},
 		},
 	},
@@ -26,17 +37,6 @@ export default [
 	importPlugin.flatConfigs.recommended,
 	importPlugin.flatConfigs.typescript,
 	{
-		ignores: [
-			"test",
-			"node_modules",
-			"build",
-			"dist",
-			"coverage",
-			".github",
-			".idea",
-			".vscode",
-			"eslint.config.mjs",
-		],
 		rules: {
 			"import/no-dynamic-require": "warn",
 			"import/no-nodejs-modules": "warn",
