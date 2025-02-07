@@ -13,20 +13,21 @@
 		"micro:dev": "microbundle watch",
 		"test": "vitest run",
 		"test:watch": "vitest watch",
-		"test:ui": "npm run test:watch -- --ui",
+		"test:ui": "pnpm run test:watch -- --ui",
 		"coverage": "vitest run --coverage",
 		"coverage:ui": "vitest watch --coverage --ui",
 		"lint": "eslint ./src",
-		"lint:fix": "npm run lint -- --fix",
-		"prerelease": "npm run test",
-		"release": "npm run micro:build",
-		"postrelease": "standard-version && npm run generate:docs",
-		"release:beta": "npm run micro:build",
+		"lint:fix": "pnpm run lint -- --fix",
+		"prerelease": "pnpm run test",
+		"release": "pnpm run micro:build",
+		"postrelease": "standard-version && pnpm run generate:docs",
+		"release:beta": "pnpm run micro:build",
 		"postrelease:beta": "standard-version --prerelease beta",
 		"prettier": "prettier --write 'src/**/*.{ts,json,js}' --config .prettierrc.js",
 		"prettier:ci": "prettier --list-different 'src/**/*.{ts,json,js}' --config .prettierrc.js",
 		"generate:docs": "make publish-docs",
-		"prepare": "husky"
+		"prepare": "husky",
+		"preinstall": "pnpx only-allow pnpm"
 	},
 	"directories": {
 		"test": "tests"
@@ -59,6 +60,7 @@
 	"devDependencies": {
 		"@commitlint/cli": "^19.7.1",
 		"@commitlint/config-conventional": "^19.7.1",
+		"@eslint/js": "^9.20.0",
 		"@types/jest": "^29.5.14",
 		"@vitest/coverage-v8": "^3.0.5",
 		"@vitest/ui": "^3.0.5",
@@ -70,6 +72,7 @@
 		"eslint-plugin-prettier": "^5.2.3",
 		"eslint-plugin-promise": "^7.2.1",
 		"eslint-plugin-security": "^3.0.1",
+		"globals": "^15.14.0",
 		"husky": "^9.1.7",
 		"microbundle": "^0.15.1",
 		"prettier": "^3.4.2",
@@ -77,6 +80,7 @@
 		"rimraf": "^6.0.1",
 		"standard-version": "^9.5.0",
 		"typedoc": "^0.27.6",
+		"typescript": "^5.7.3",
 		"typescript-eslint": "^8.23.0",
 		"vite": "^6.1.0",
 		"vitest": "^3.0.5"
@@ -91,5 +95,6 @@
 	"engines": {
 		"node": ">=14",
 		"npm": ">=7.0.0"
-	}
+	},
+	"packageManager": "pnpm@10.2.1"
 }
