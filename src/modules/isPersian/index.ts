@@ -1,3 +1,6 @@
+import { hasArabic } from "../isArabic";
+import { toPersianChars } from "../toPersianChars";
+// Constants
 import { faText, faComplexText } from "./farsiChars";
 
 // Trim characters which are common in Farsi text.
@@ -33,6 +36,19 @@ export const hasPersian = (str: string, isComplex: boolean = false): boolean => 
 };
 
 export const hasFarsi = hasPersian;
+
+/**
+ * Auto converts Arabic characters to Persian. It will only convert Arabic characters if the string contains Arabic characters.
+ * @param {string} value - The input string that may contain Arabic characters.
+ * @returns {string} A cleaned string with Persian characters replaced appropriately.
+ */
+export function autoArabicToPersian(value: string) {
+	if (hasArabic(value)) {
+		value = toPersianChars(value);
+	}
+
+	return value;
+}
 
 export * from "./farsiChars";
 export default isPersian;
