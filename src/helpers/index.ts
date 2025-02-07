@@ -1,5 +1,3 @@
-export const trim = (str: string): string => str.replace(/^\s+|\s+$/g, "");
-
 interface ReplaceArrayDictionary {
 	[key: string]: string;
 }
@@ -11,11 +9,14 @@ export const replaceArray = (string: string, find: ReplaceArrayDictionary): stri
 
 /**
  * A demonstration for the basic alphabet used in Modern Standard Arabic:
- *
- * @type regex
  */
-export const ArabicContextualForms = /[ي|ﻱ|ﻲ|ﻚ|ك|ﻚ|ﺔ|ﺓ|ة]/g;
+export const ArabicContextualForms = /[يﻱﻲﻚكﺔﺓة]/g;
 
-export const kindOf = (inp: unknown): string => Object.prototype.toString.call(inp).slice(8, -1).toLowerCase();
-
-export const toPositive = (n: number): number => Math.abs(n);
+/**
+ * Replaces the line breaks with a space.
+ *
+ * @param text - Some text
+ */
+export const removeLineBreaks = (text: string): string => {
+	return text.replace(/(\r\n|\n|\r)/gm, " ").replace(/\s+/g, " ");
+};
