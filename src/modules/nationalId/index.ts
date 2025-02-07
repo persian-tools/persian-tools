@@ -1,4 +1,70 @@
-const validNationalIdPrefixes = [
+export const validNationalIdPrefixes = new Set([
+	"001",
+	"002",
+	"003",
+	"004",
+	"005",
+	"006",
+	"007",
+	"008",
+	"011",
+	"015",
+	"020",
+	"025",
+	"031",
+	"032",
+	"037",
+	"038",
+	"041",
+	"042",
+	"043",
+	"044",
+	"045",
+	"048",
+	"049",
+	"051",
+	"052",
+	"053",
+	"055",
+	"056",
+	"057",
+	"058",
+	"059",
+	"060",
+	"061",
+	"062",
+	"063",
+	"064",
+	"065",
+	"067",
+	"068",
+	"069",
+	"070",
+	"072",
+	"073",
+	"074",
+	"075",
+	"076",
+	"077",
+	"078",
+	"079",
+	"081",
+	"082",
+	"083",
+	"084",
+	"085",
+	"086",
+	"087",
+	"088",
+	"089",
+	"090",
+	"091",
+	"092",
+	"093",
+	"094",
+	"096",
+	"097",
+	"098",
 	"105",
 	"106",
 	"108",
@@ -34,6 +100,7 @@ const validNationalIdPrefixes = [
 	"153",
 	"154",
 	"155",
+	"157",
 	"158",
 	"159",
 	"160",
@@ -116,6 +183,7 @@ const validNationalIdPrefixes = [
 	"251",
 	"252",
 	"253",
+	"254",
 	"255",
 	"256",
 	"257",
@@ -196,6 +264,7 @@ const validNationalIdPrefixes = [
 	"344",
 	"345",
 	"346",
+	"347",
 	"348",
 	"349",
 	"350",
@@ -265,8 +334,12 @@ const validNationalIdPrefixes = [
 	"428",
 	"431",
 	"432",
+	"436",
+	"437",
 	"438",
 	"439",
+	"440",
+	"441",
 	"442",
 	"443",
 	"444",
@@ -288,13 +361,17 @@ const validNationalIdPrefixes = [
 	"460",
 	"461",
 	"462",
+	"464",
 	"465",
 	"466",
 	"467",
 	"468",
 	"469",
 	"470",
+	"471",
+	"472",
 	"481",
+	"482",
 	"483",
 	"484",
 	"485",
@@ -306,6 +383,8 @@ const validNationalIdPrefixes = [
 	"491",
 	"492",
 	"493",
+	"494",
+	"495",
 	"496",
 	"497",
 	"498",
@@ -370,6 +449,7 @@ const validNationalIdPrefixes = [
 	"557",
 	"558",
 	"559",
+	"560",
 	"561",
 	"562",
 	"563",
@@ -396,11 +476,14 @@ const validNationalIdPrefixes = [
 	"584",
 	"585",
 	"586",
+	"587",
 	"588",
+	"589",
 	"590",
 	"591",
 	"592",
 	"593",
+	"594",
 	"595",
 	"596",
 	"597",
@@ -408,6 +491,7 @@ const validNationalIdPrefixes = [
 	"599",
 	"600",
 	"601",
+	"602",
 	"603",
 	"604",
 	"605",
@@ -419,6 +503,7 @@ const validNationalIdPrefixes = [
 	"611",
 	"612",
 	"613",
+	"614",
 	"615",
 	"616",
 	"617",
@@ -428,6 +513,7 @@ const validNationalIdPrefixes = [
 	"621",
 	"622",
 	"623",
+	"624",
 	"625",
 	"626",
 	"627",
@@ -442,11 +528,13 @@ const validNationalIdPrefixes = [
 	"636",
 	"637",
 	"638",
+	"639",
 	"640",
 	"641",
 	"642",
 	"643",
 	"644",
+	"645",
 	"646",
 	"647",
 	"648",
@@ -473,6 +561,7 @@ const validNationalIdPrefixes = [
 	"669",
 	"670",
 	"671",
+	"672",
 	"673",
 	"674",
 	"675",
@@ -508,6 +597,9 @@ const validNationalIdPrefixes = [
 	"705",
 	"706",
 	"707",
+	"708",
+	"709",
+	"710",
 	"711",
 	"712",
 	"713",
@@ -530,114 +622,119 @@ const validNationalIdPrefixes = [
 	"730",
 	"731",
 	"732",
-	"001",
-	"002",
-	"003",
-	"004",
-	"005",
-	"006",
-	"007",
-	"008",
-	"011",
-	"015",
-	"020",
-	"025",
-	"031",
-	"032",
-	"037",
-	"038",
-	"041",
-	"042",
-	"043",
-	"044",
-	"045",
-	"048",
-	"049",
-	"051",
-	"052",
-	"053",
-	"055",
-	"056",
-	"057",
-	"058",
-	"059",
-	"060",
-	"061",
-	"062",
-	"063",
-	"064",
-	"065",
-	"067",
-	"068",
-	"069",
-	"070",
-	"072",
-	"073",
-	"074",
-	"075",
-	"076",
-	"077",
-	"078",
-	"079",
-	"081",
-	"082",
-	"083",
-	"084",
-	"085",
-	"086",
-	"087",
-	"088",
-	"089",
-	"090",
-	"091",
-	"092",
-	"093",
-	"094",
-	"096",
-	"097",
-	"098",
-];
+	"775",
+	"778",
+	"986",
+]);
+
+// **Predefined dictionary** of disallowed repeated-digit sequences.
+export const invalidNationalIdSequences = new Set([
+	"0000000000",
+	"1111111111",
+	"2222222222",
+	"3333333333",
+	"4444444444",
+	"5555555555",
+	"6666666666",
+	"7777777777",
+	"8888888888",
+	"9999999999",
+]);
 
 /**
- * Check National-id validation
- * @category National id
- * @method verifyIranianNationalId
- * @param  {String?}          nationalId [String of national id - like this: 0018465986]
- * @return {Boolean}                    [valid or no]
+ * **Validates Iranian National ID** (Code Melli) using the official checksum algorithm.
+ *
+ * **Logic**:
+ * 1. **Check length**: If it's fewer than 8 digits, reject.
+ * 2. **Check if parseInt(code) is 0**: If the entire code is "0..." (e.g., "00000000"), reject.
+ * 3. **Zero-pad** the code to length 10 using four leading zeros and substring:
+ *    - `code = ('0000' + code).substr(length + 4 - 10)`
+ *    - This ensures the final string is exactly 10 characters, padded on the left.
+ * 4. **Check the 6 middle digits** (index 3..8):
+ *    - If `parseInt(code.substr(3, 6))` is `0`, reject.
+ * 5. **Compute the checksum**:
+ *    - Extract the last digit (`c = parseInt(code.substr(9, 1))`).
+ *    - Multiply each of the first 9 digits by descending weights (10 down to 2).
+ *    - Take the sum modulo 11.
+ *    - Compare the result to the check digit (`c`).
+ * 6. **Return a boolean** indicating if it passes.
+ *
+ * @param nationalId - The national ID as a string or number.
+ * @param options - An optional configuration object.
+ * @param options.checkPrefix - Whether to check the first 3 digits against a predefined list of valid city codes. Default is `true`.
+ * @returns A boolean indicating whether the ID is valid.
  */
-function verifyIranianNationalId(nationalId?: string | number): boolean | undefined {
-	if (!nationalId) return;
-	let code = nationalId.toString();
-	const codeLength = code.length;
-	const notAllowedDigits = {
-		"0000000000": true,
-		"1111111111": true,
-		"2222222222": true,
-		"3333333333": true,
-		"4444444444": true,
-		"5555555555": true,
-		"6666666666": true,
-		"7777777777": true,
-		"8888888888": true,
-		"9999999999": true,
-	};
-
-	if (code in notAllowedDigits) return false;
-	if (codeLength < 8 || codeLength > 10) return false;
-	code = ("00" + code).substring(codeLength + 2 - 10);
-	if (+code.substring(3, 9) === 0) return false;
-	const prefix = code.substring(0, 3);
-	if (validNationalIdPrefixes.indexOf(prefix) === -1) return false;
-	const lastNumber = +code.substring(9);
-	let sum = 0;
-
-	for (let i = 0; i < 9; i++) {
-		sum += +code.substring(i, i + 1) * (10 - i);
+export function verifyIranianNationalId(
+	nationalId: string | number,
+	options: VerifyIranianNationalIdOptions = { checkPrefix: true },
+): boolean {
+	if (typeof nationalId === "undefined" || nationalId === null || !nationalId) {
+		return false;
 	}
 
+	const idString = String(nationalId).trim();
+	const lengthOfId: number = idString.length;
+
+	// **Check** if this ID is one of the known invalid repeated-digit sequences.
+	if (invalidNationalIdSequences.has(idString)) {
+		return false;
+	}
+
+	// **If length < 8** or the parsed integer is zero, **return false**.
+	if (lengthOfId < 8 || parseInt(idString, 10) === 0) {
+		return false;
+	}
+
+	// **Zero-pad** the code to length 10 using the same substring approach:
+	//    - "0000" + code  => ensures at least 4 zeros, then take .substr(length+4-10).
+	//    - If code is length 8, for example, length+4-10 = 2, so we skip 2 chars from the left
+	//      of "0000" + code => resulting in a 10-digit string.
+	const paddedId = ("0000" + idString).substr(lengthOfId + 4 - 10);
+
+	// **Check the 6 middle digits**: parseInt of substring [3..8] => if 0, **return false**.
+	//    - Example: if those 6 digits are "000000", parseInt => 0 => invalid.
+	if (parseInt(paddedId.substr(3, 6), 10) === 0) {
+		return false;
+	}
+
+	// **Check the prefix** if the option is enabled.
+	if (options.checkPrefix) {
+		// **Extract the 3-digit prefix** and verify that it exists in our valid prefix list.
+		const prefix = paddedId.substring(0, 3);
+		if (!validNationalIdPrefixes.has(prefix)) {
+			return false;
+		}
+	}
+
+	// **Extract the check digit**: the last character in the 10-digit string.
+	const checkDigit = parseInt(paddedId.substr(9, 1), 10);
+
+	// **Compute the weighted sum** of the first 9 digits.
+	//    - The i-th digit is multiplied by (10 - i).
+	let sum = 0;
+	for (let i = 0; i < 9; i++) {
+		const digit = parseInt(paddedId.substr(i, 1), 10);
+
+		// **Multiply** the digit by the weight (10 - i) and **add** to the sum.
+		sum += digit * (10 - i);
+	}
+
+	// **Take** the sum modulo 11.
 	sum = sum % 11;
 
-	return (sum < 2 && lastNumber === sum) || (sum >= 2 && lastNumber === 11 - sum);
+	// **Return** whether the check digit matches:
+	//    - If sum < 2, check digit must be sum.
+	//    - Otherwise, check digit must be 11 - sum.
+	return (sum < 2 && checkDigit === sum) || (sum >= 2 && checkDigit === 11 - sum);
+}
+
+export interface VerifyIranianNationalIdOptions {
+	/**
+	 * **Check the first 3 digits** of the national ID against a **predefined list** of valid city codes.
+	 *
+	 * @default true
+	 */
+	checkPrefix?: boolean;
 }
 
 export default verifyIranianNationalId;
