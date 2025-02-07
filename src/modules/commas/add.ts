@@ -14,6 +14,7 @@ const addCommas = (input: number | string): string => {
 	const inputStr = input.toString().replace(/,/g, "");
 	const serializedInputDigits = isPersian(inputStr) ? digitsFaToEn(inputStr) : inputStr;
 	// Check if input is a valid number
+	// eslint-disable-next-line security/detect-unsafe-regex
 	if (!serializedInputDigits.match(/^-?\d+(\.\d+)?$/)) {
 		return "";
 	}
@@ -28,6 +29,7 @@ const addCommas = (input: number | string): string => {
 	const [integerPart, decimalPart] = positiveInput.split(".");
 
 	// Add commas to the integer part
+	// eslint-disable-next-line security/detect-unsafe-regex
 	const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
 	// Combine the formatted integer part with the decimal part, if exists

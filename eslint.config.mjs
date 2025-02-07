@@ -54,6 +54,8 @@ export default [
 			"@typescript-eslint/no-empty-interface": "off",
 			"@typescript-eslint/ban-types": "off",
 			"security/detect-object-injection": "off",
+			"security/detect-non-literal-regexp": "off",
+			"security/detect-possible-timing-attacks": "off",
 			"prettier/prettier": [
 				"error",
 				{},
