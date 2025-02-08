@@ -1,6 +1,6 @@
 {
 	"name": "@persian-tools/persian-tools",
-	"version": "3.6.0",
+	"version": "4.0.0-beta.0",
 	"description": "An anthology of a variety of tools for Persian language in javascript",
 	"exports": {
 		".": {

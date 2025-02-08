@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0-beta.0](https://github.com/persian-tools/persian-tools/compare/v3.6.0...v4.0.0-beta.0) (2025-02-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to pnpm and unbuild as builder
+
+### Features
+
+* change package-manager to pnpm and upgrade deps ([8050daf](https://github.com/persian-tools/persian-tools/commit/8050daf1fb73ae715769e75981dac3ab24b01769))
+* enhance wordsToNumber functionality with new options and refactored its unit tests ([ccfa377](https://github.com/persian-tools/persian-tools/commit/ccfa377963eb0b025cac9d4af7e858f9ba604eec))
+* migrate to pnpm and unbuild as builder ([0a88116](https://github.com/persian-tools/persian-tools/commit/0a881169299346084eac1651469c793383f439c5))
+* updated regexes and remove unused codes and eslint rules ([f212862](https://github.com/persian-tools/persian-tools/commit/f212862ecf172dd4f1fe845b116c1d6d6bbaeac4))
+
+
+### Bug Fixes
+
+* typedoc wrong options due to the upgrade process ([158fe84](https://github.com/persian-tools/persian-tools/commit/158fe842da0370b723c5d8a4d9e7a4a761ba6b11))
+* **VerifyIranianNationalId:** issues [#379](https://github.com/persian-tools/persian-tools/issues/379) and enhance performance and improved test coverage ([7025d06](https://github.com/persian-tools/persian-tools/commit/7025d06cbd9a81621019c89594c2803222e0d9a1))
+
 ## [3.6.0](https://github.com/persian-tools/persian-tools/compare/v3.5.2...v3.6.0) (2024-12-09)
 
 
