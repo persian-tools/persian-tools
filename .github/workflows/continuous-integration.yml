@@ -16,15 +16,15 @@ jobs:
 
         steps:
             - name: Checkout repository
-              uses: actions/checkout@latest
+              uses: actions/checkout@v4
 
             - name: Set up Node.js ${{ matrix.node-version }}
-              uses: actions/setup-node@latest
+              uses: actions/setup-node@v4
               with:
                   node-version: ${{ matrix.node-version }}
 
             - name: Cache dependencies
-              uses: actions/cache@latest
+              uses: actions/cache@v4
               with:
                   path: |
                       **/node_modules
@@ -43,13 +43,13 @@ jobs:
               run: pnpm run test
 
             - name: Upload coverage to Codecov
-              uses: codecov/codecov-action@latest
+              uses: codecov/codecov-action@v5
 
             - name: Build
               run: pnpm run micro:build
 
             - name: Archive production
-              uses: actions/upload-artifact@latest
+              uses: actions/upload-artifact@v4
               with:
                   name: build
                   path: |
