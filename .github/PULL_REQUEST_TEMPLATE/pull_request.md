@@ -1,32 +1,33 @@
 <!--
-Thanks for your interest in the project. Bugs filed and PRs submitted are appreciated!
-
-Please fill out the information below to expedite the review and (hopefully)
-merge of your pull request!
+Thank you for contributing to this project! We truly appreciate your effort.
+Please fill out the sections below to help us quickly review and merge your pull request.
 -->
 
-<!-- What changes are being made? (What feature/bug is being fixed here?) -->
+<!-- Briefly summarize the changes you introduced (What feature or bug does this address?) -->
+**Summary of Changes**:
 
-**What**:
+<!-- Why are these changes necessary? Reference any related issue or discussion if available. -->
+**Motivation**:
 
-<!-- Why are these changes necessary? -->
+<!-- How did you implement your changes? Outline major steps or decisions here. -->
+**Implementation Details**:
 
-**Why**:
+<!-- If relevant, mention any risks, edge cases, or potential issues introduced by your changes. -->
+**Potential Risks or Side Effects**:
 
-<!-- How were these changes implemented? -->
+<!-- If your change includes UI modifications or any visual element, attach screenshots or GIFs. -->
+**Screenshots/Documentation (if applicable)**:
 
-**How**:
-
-<!-- Have you done all of these things?  -->
+---
 
 **Checklist**:
+<!-- Replace "N/A" for items that do not apply and check off the rest as completed. 
+     Example: "- [x] Tests" -->
 
-<!-- add "N/A" to the end of each line that's irrelevant to your changes -->
+- [ ] Tests (unit/integration)
+- [ ] Documentation Updates
+- [ ] Follows [Conventional Commits](https://www.conventionalcommits.org/)
+- [ ] Ready to be merged
 
-<!-- to check an item, place an "x" in the box like so: "- [x] Documentation" -->
-
-- [ ] Tests
-- [ ] Ready to be merged <!-- In your opinion, is this ready to be merged as soon as it's reviewed? -->
-- [ ] Accepted [Conventional commits messaging rules](https://www.conventionalcommits.org/en/v1.0.0-beta.4/).
-
-<!-- feel free to add additional comments -->
+**Additional Comments**:
+<!-- Add any extra information, context, or questions for reviewers here. -->
