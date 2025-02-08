@@ -16,19 +16,19 @@ jobs:
 
         steps:
             - name: Checkout repository
-              uses: actions/checkout@v3
+              uses: actions/checkout@latest
 
             - name: Set up Node.js ${{ matrix.node-version }}
-              uses: actions/setup-node@v3
+              uses: actions/setup-node@latest
               with:
                   node-version: ${{ matrix.node-version }}
 
             - name: Cache dependencies
-              uses: actions/cache@v3
+              uses: actions/cache@latest
               with:
                   path: |
                       **/node_modules
-                  key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+                  key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
 
             - name: Install dependencies
               run: pnpm install
@@ -43,13 +43,13 @@ jobs:
               run: pnpm run test
 
             - name: Upload coverage to Codecov
-              uses: codecov/codecov-action@v3
+              uses: codecov/codecov-action@latest
 
             - name: Build
               run: pnpm run micro:build
 
             - name: Archive production
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@latest
               with:
                   name: build
                   path: |
