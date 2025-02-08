@@ -71,5 +71,3 @@ export const findProvinceFromCoordinate = (pointToCheck: Point): Province => {
 		throw new Error("Could not find province based on provided coordinates !");
 	}
 };
-
-export default findProvinceFromCoordinate;

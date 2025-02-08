@@ -31,22 +31,22 @@ jobs:
                   key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
             - name: Install dependencies
-              run: npm install --force
+              run: pnpm install
 
             - name: Run the lints
-              run: npm run lint
+              run: pnpm run lint
 
             - name: Run Prettier
-              run: npm run prettier:ci
+              run: pnpm run prettier:ci
 
             - name: Run the tests
-              run: npm run test
+              run: pnpm run test
 
             - name: Upload coverage to Codecov
               uses: codecov/codecov-action@v3
 
             - name: Build
-              run: npm run micro:build
+              run: pnpm run micro:build
 
             - name: Archive production
               uses: actions/upload-artifact@v3

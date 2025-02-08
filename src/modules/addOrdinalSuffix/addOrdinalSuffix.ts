@@ -4,7 +4,7 @@
  * @param number - Number, eg: "300000"
  * @return A string of ordinated number
  */
-const addOrdinalSuffix = (number?: string): string => {
+export const addOrdinalSuffix = (number?: string): string => {
 	if (typeof number !== "string") {
 		throw new TypeError("PersianTools: addOrdinalSuffix - The input must be string");
 	}
@@ -19,5 +19,3 @@ const addOrdinalSuffix = (number?: string): string => {
 
 	return number + "م";
 };
-
-export default addOrdinalSuffix;

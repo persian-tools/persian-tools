@@ -20,5 +20,3 @@ export const isArabic = (str: string, trimPattern = /["'-+()\s.]/g): boolean => 
  * @return {boolean} Return true if the entered string includes persian characters
  */
 export const hasArabic = (str: string): boolean => /[\u0600-\u06FF]/.test(str) && ArabicContextualForms.test(str);
-
-export default isArabic;

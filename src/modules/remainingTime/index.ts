@@ -30,7 +30,7 @@ const secondsInDay = 60 * 60 * 24;
 const secondsInHour = 60 * 60 * 1;
 const secondsInMinute = 60 * 1;
 
-function remainingTime(date: string | number | Date): RemainingTime & ToString & IsFinished {
+export function remainingTime(date: string | number | Date): RemainingTime & ToString & IsFinished {
 	const dueDate = new Date(date);
 	if (isNaN(dueDate.getDate())) {
 		throw new TypeError("PersianTools: remainingTime - The input must be a valid date");
@@ -102,5 +102,3 @@ const toString = (remainingTime: RemainingTime): string => {
 
 	return digitsEnToFa(result.join(" و "));
 };
-
-export default remainingTime;

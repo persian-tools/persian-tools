@@ -1,6 +1,6 @@
+import { zeroPad } from "../../helpers";
 import { convertToTimeStamp } from "./timestamp";
 import { autoConvertDigitsToEN } from "../digits";
-import { zeroPad } from "../../helpers";
 
 /**
  * **standardizeFaDateTime**:
@@ -15,6 +15,7 @@ import { zeroPad } from "../../helpers";
 export function standardizeFaDateTime(datetime: string): string {
 	// 1) Remove special punctuation / RTL chars and hidden markers (e.g., `،`, `\u200f`) and Commas(Arabic, Persian and English).
 	let cleaned = datetime
+		// eslint-disable-next-line security/detect-bidi-characters
 		.replace(/[‏،]/g, "")
 		.replace(/\u200f/g, "")
 		.replace(/\u200e/g, "")

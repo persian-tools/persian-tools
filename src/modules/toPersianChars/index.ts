@@ -78,5 +78,3 @@ export function toPersianChars(str: string): string {
 	// **4) Return** the fully transformed string
 	return transformed;
 }
-
-export default toPersianChars;

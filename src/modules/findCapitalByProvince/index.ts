@@ -10,7 +10,6 @@ import { toPersianChars } from "../toPersianChars";
 export const findCapitalByProvince = (state: string) => {
 	const normalizeState = toPersianChars(state) as string;
 	if (normalizeState in states) return states[normalizeState];
+
 	throw new Error("no province found");
 };
-
-export default findCapitalByProvince;

@@ -736,5 +736,3 @@ export interface VerifyIranianNationalIdOptions {
 	 */
 	checkPrefix?: boolean;
 }
-
-export default verifyIranianNationalId;

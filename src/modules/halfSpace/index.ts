@@ -299,5 +299,3 @@ export function halfSpace(persianText: string): string {
 
 	return finalResult;
 }
-
-export default halfSpace;

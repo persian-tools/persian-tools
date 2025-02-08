@@ -8,7 +8,7 @@ import { isPersian } from "../isPersian";
  * @param input
  * @return {string} string of separated numbers by commas, eg: 30,000
  */
-const addCommas = (input: number | string): string => {
+export const addCommas = (input: number | string): string => {
 	if (typeof input !== "number" && typeof input !== "string") return "";
 
 	const inputStr = input.toString().replace(/,/g, "");
@@ -38,5 +38,3 @@ const addCommas = (input: number | string): string => {
 	// Add the negative sign back if the number is negative
 	return isNegative ? `-${formattedNumber}` : formattedNumber;
 };
-
-export default addCommas;

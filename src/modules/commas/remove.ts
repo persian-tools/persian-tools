@@ -4,7 +4,7 @@
  * @param string which separated by commas
  * @return A number which includes any commas
  */
-function removeCommas(str: string): number {
+export function removeCommas(str: string): number {
 	if (typeof str !== "string") {
 		throw new TypeError("PersianTools: removeCommas - The input must be string");
 	}
@@ -16,5 +16,3 @@ function removeCommas(str: string): number {
 
 	return Number(result);
 }
-
-export default removeCommas;

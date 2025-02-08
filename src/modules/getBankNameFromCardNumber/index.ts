@@ -12,7 +12,7 @@ export interface IBank {
  * @param digits - Card number
  * @return string | null | undefined
  */
-function getBankNameFromCardNumber(digits?: number | string): string | null | undefined {
+export function getBankNameFromCardNumber(digits?: number | string): string | null | undefined {
 	if (!digits) return;
 
 	const digitsLength = digits.toString().length;
@@ -22,5 +22,3 @@ function getBankNameFromCardNumber(digits?: number | string): string | null | un
 	if (code in cardBank) return cardBank[code];
 	return null;
 }
-
-export default getBankNameFromCardNumber;

@@ -1,4 +1,4 @@
-pnpm dlx prettier $(git diff --cached --name-only --diff-filter=ACMR | sed 's| |\\ |g') --write --ignore-unknown
+pnpm prettier:ci
 pnpm lint
 pnpm test
 git update-index --again

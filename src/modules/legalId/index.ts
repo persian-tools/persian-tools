@@ -7,7 +7,7 @@
  * @return {Boolean}                    [valid or no]
  * @link http://www.aliarash.com/article/shenasameli/shenasa_meli.htm
  */
-function verifyIranianLegalId(legalId: string | number): boolean | undefined {
+export function verifyIranianLegalId(legalId: string | number): boolean | undefined {
 	if (!legalId) return;
 	legalId = String(legalId);
 	const len = legalId.length;
@@ -26,5 +26,3 @@ function verifyIranianLegalId(legalId: string | number): boolean | undefined {
 	if (sum === 10) sum = 0;
 	return controlDigit === sum;
 }
-
-export default verifyIranianLegalId;

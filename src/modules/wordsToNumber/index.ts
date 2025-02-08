@@ -140,7 +140,7 @@ function compute(tokens: string[]): number {
  *   // => "١,٥٠٠,٠٠٠"
  * ```
  */
-export default function wordsToNumber<TResult extends string | number>(
+export function wordsToNumber<TResult extends string | number>(
 	words: string,
 	config: WordsToNumberOptions = {},
 ): TResult {

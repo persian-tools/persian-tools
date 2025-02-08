@@ -246,7 +246,7 @@ export const operators = {
  */
 export const mobileRegex = /^(\+98|98|0098|0)?9(\d{2})\d{7}$/;
 
-export function getPhonePrefix(mobile: string): string {
+export function getPhoneNumberPrefix(mobile: string): string {
 	const phoneCountryPrefix = `${mobile}`.match(mobileRegex);
 
 	/*

@@ -132,5 +132,3 @@ export const removeOrdinalSuffix = (word: string): string => {
 
 	return word;
 };
-
-export default removeOrdinalSuffix;

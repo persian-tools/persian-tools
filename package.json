@@ -2,15 +2,25 @@
 	"name": "@persian-tools/persian-tools",
 	"version": "3.6.0",
 	"description": "An anthology of a variety of tools for Persian language in javascript",
-	"main": "./build/persian-tools.js",
-	"esmodule": "./build/persian-tools.esm.js",
-	"module": "./build/persian-tools.esm.js",
-	"types": "./build/persian-tools.d.ts",
+	"exports": {
+		".": {
+			"import": {
+				"types": "./build/persian-tools.d.mts",
+				"default": "./build/persian-tools.mjs"
+			},
+			"require": {
+				"types": "./build/persian-tools.d.cts",
+				"default": "./build/persian-tools.cjs"
+			}
+		}
+	},
+	"files": [
+		"build"
+	],
 	"sideEffect": false,
 	"scripts": {
-		"micro:build": "microbundle src/index.ts --compress --name PersianTools --strict",
-		"postmicro:build": "mv ./build/index.d.ts ./build/persian-tools.d.ts && npx rimraf ./build/setupTests.d.ts",
-		"micro:dev": "microbundle watch",
+		"build": "unbuild",
+		"build:watch": "unbuild --watch",
 		"test": "vitest run",
 		"test:watch": "vitest watch",
 		"test:ui": "pnpm run test:watch --ui",
@@ -19,9 +29,9 @@
 		"lint": "eslint ./src",
 		"lint:fix": "pnpm run lint --fix",
 		"prerelease": "pnpm run test",
-		"release": "pnpm run micro:build",
+		"release": "pnpm run build",
 		"postrelease": "standard-version && pnpm run generate:docs",
-		"release:beta": "pnpm run micro:build",
+		"release:beta": "pnpm run build",
 		"postrelease:beta": "standard-version --prerelease beta",
 		"prettier": "prettier --write 'src/**/*.{ts,json,js}' --config .prettierrc.js",
 		"prettier:ci": "prettier --list-different 'src/**/*.{ts,json,js}' --config .prettierrc.js",
@@ -36,9 +46,6 @@
 		"type": "git",
 		"url": "git+https://github.com/persian-tools/persian-tools.git"
 	},
-	"files": [
-		"build"
-	],
 	"keywords": [
 		"persian tools",
 		"number to persian words",
@@ -64,11 +71,9 @@
 		"@commitlint/cli": "^19.7.1",
 		"@commitlint/config-conventional": "^19.7.1",
 		"@eslint/js": "^9.20.0",
-		"@types/jest": "^29.5.14",
 		"@vitest/coverage-v8": "^3.0.5",
 		"@vitest/ui": "^3.0.5",
-		"cross-env": "^7.0.3",
-		"eslint": "^9.19.0",
+		"eslint": "^9.20.0",
 		"eslint-config-prettier": "^10.0.1",
 		"eslint-import-resolver-typescript": "^3.7.0",
 		"eslint-plugin-import": "^2.31.0",
@@ -77,14 +82,13 @@
 		"eslint-plugin-security": "^3.0.1",
 		"globals": "^15.14.0",
 		"husky": "^9.1.7",
-		"microbundle": "^0.15.1",
 		"prettier": "^3.4.2",
 		"prettier-eslint": "^16.3.0",
-		"rimraf": "^6.0.1",
 		"standard-version": "^9.5.0",
 		"typedoc": "^0.27.6",
 		"typescript": "^5.7.3",
 		"typescript-eslint": "^8.23.0",
+		"unbuild": "^3.3.1",
 		"vite": "^6.1.0",
 		"vitest": "^3.0.5"
 	},

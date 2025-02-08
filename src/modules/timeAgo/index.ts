@@ -8,7 +8,7 @@ import { checkFormatDateTime, getTimeNow, standardizeFaDateTime } from "./helper
  * @param datetime e.g. "1402/06/15 13:05:20" (Jalali)
  * @returns e.g. "حدود 1 سال قبل" or "اکنون"
  */
-export default function timeAgo(datetime: string = ""): string {
+export function timeAgo(datetime: string = ""): string {
 	// 1) Input must be string
 	if (typeof datetime !== "string") {
 		throw new TypeError("PersianTools: timeAgo - The input must be a string");
@@ -68,3 +68,5 @@ export default function timeAgo(datetime: string = ""): string {
 		return `حدود ${Math.round(elapsed / year)} سال ${prevOrNext}`;
 	}
 }
+
+export * from "./helpers";

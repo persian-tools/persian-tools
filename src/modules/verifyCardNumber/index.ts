@@ -7,7 +7,7 @@
  * @param {number} digits - card number
  * @return {boolean}
  */
-function verifyCardNumber(digits: number): boolean | undefined {
+export function verifyCardNumber(digits: number): boolean | undefined {
 	if (!digits) return;
 	const digitsResult = String(digits);
 
@@ -33,5 +33,3 @@ function verifyCardNumber(digits: number): boolean | undefined {
 	}
 	return sum % 10 === 0;
 }
-
-export default verifyCardNumber;

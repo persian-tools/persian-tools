@@ -5,8 +5,8 @@
 		"downlevelIteration": true,
 		"experimentalDecorators": true,
 		"importHelpers": false,
-		"target": "es5",
-		"lib": ["es5", "es6", "dom"],
+		"target": "ES2016",
+		"lib": ["es2017", "dom"],
 		"module": "ES2015",
 		"moduleResolution": "node",
 		"noEmitOnError": true,
@@ -21,8 +21,8 @@
 		"skipLibCheck": true,
 		"sourceMap": true,
 		"strict": true,
-    "declarationMap": true,
-  },
-  "include": ["src/**/*", "src/**/*.d.ts", "test/**/*.spec.ts"],
-  "exclude": ["node_modules", "build", "coverage", ".idea", ".vscode", "**/build/*"]
+		"declarationMap": true
+	},
+	"include": ["src/**/*.*"],
+	"exclude": ["node_modules", "build", "coverage", ".idea", ".vscode", "**/build/*"]
 }

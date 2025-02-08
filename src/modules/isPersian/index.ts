@@ -51,4 +51,3 @@ export function autoArabicToPersian(value: string) {
 }
 
 export * from "./farsiChars";
-export default isPersian;

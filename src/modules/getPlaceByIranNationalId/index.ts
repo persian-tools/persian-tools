@@ -29,7 +29,7 @@ export interface IPlaceByNationalId {
  * @param nationalId - string of national id - like this: 1111111111
  * @return If nationalId is valid, function returns an object of details, but if nationalId is invalid, return an error message
  */
-function getPlaceByIranNationalId(nationalId?: string): IPlaceByNationalId | null | undefined {
+export function getPlaceByIranNationalId(nationalId?: string): IPlaceByNationalId | null | undefined {
 	if (!nationalId) return;
 
 	if (nationalId && nationalId.length === 10) {
@@ -54,5 +54,3 @@ function getPlaceByIranNationalId(nationalId?: string): IPlaceByNationalId | nul
 		return null;
 	}
 }
-
-export default getPlaceByIranNationalId;
