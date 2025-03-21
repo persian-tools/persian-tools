@@ -1,93 +1,80 @@
-/* eslint-disable */
-
 /**
- * toPersianChars
+ * **toPersianChars**
  *
- * Description: Replaces all instances of ي and ك withی and ک,
- * respectively. It should not make any ch anges to Arabic text
- * surrounded by appropriate templates.
+ * **Description**:
+ * - Replaces common Arabic characters (`ي`, `ى`, `ك`) with their Persian equivalents (`ی`, `ی`, `ک`).
+ * - Preserves Arabic text inside double-curly-braces (`{{ ... }}`) by skipping those segments entirely.
+ * - Also includes diacritic replacements (e.g., `ً`, `ٌ`, `ٍ`, etc.) to standardize the text.
  *
  * @method toPersianChars
- * @param arabic characters
- * @return cleaned characters of arabic characters
+ * @param str - The input string that may contain Arabic forms.
+ * @returns A cleaned string with Persian characters replaced appropriately.
+ *
+ * **Example**:
+ * ```ts
+ *   toPersianChars("عبدالله بن عبدالعزیز");
+ *   // => "عبدالله بن عبدالعزیز" (unchanged if there's nothing to replace)
+ *
+ *   toPersianChars("كشتى ىيكى {{ARABIC|كلمه}}");
+ *   // => "کشتی یکی {{ARABIC|كلمه}}"  // 'كلمه' inside {{ }} is preserved
+ * ```
  */
-function toPersianChars(str: string): string | undefined {
-	if (!str) return;
+export function toPersianChars(str: string): string {
+	// **Early return** if the input is empty or falsy
+	if (!str) return "";
 
-	let old = "";
+	// **Regex** to find any text wrapped in {{...}} so we can skip converting those segments.
+	const templateRegex = /\{\{.*?\}\}/g;
 
-	// Do not touch the text inside links, images, categories
-	while (old != str) {
-		old = str;
+	// **Placeholder storage** for each matched segment inside {{...}}
+	const placeholders: string[] = [];
 
-		str = str.replace(
-			/\{\{(عەرەبی|بە عەرەبی|بە ئویغوری)\|(.*?)ى(.*?)\}\}/g,
-			"{{$1|$2\u200b\u200b\u200bی\u200b\u200b\u200b$3}}",
-		);
-		str = str.replace(/\{\{(بە سیندی)\|(.*?)ه(.*?)\}\}/g, "{{$1|$2\u200f\u200f\u200fھ\u200f\u200f\u200f$3}}");
-		str = str.replace(/\{\{(بە پەشتۆ)\|(.*?)ي(.*?)\}\}/g, "{{$1|$2\u200b\u200b\u200bی\u200b\u200b\u200b$3}}");
-		str = str.replace(/\[\[([^\]]*?\:[^\]]*?)ي(.*?)\]\]/g, "[[$1\u200f\u200f\u200fی\u200f\u200f\u200f$2]]");
-		str = str.replace(/\[\[([^\]]*?\:[^\]]*?)ى(.*?)\]\]/g, "[[$1\u200b\u200b\u200bی\u200b\u200b\u200b$2]]");
-		str = str.replace(/\[\[([^\]]*?\:[^\]]*?)ك(.*?)\]\]/g, "[[$1\u200f\u200f\u200fک\u200f\u200f\u200f$2]]");
-		str = str.replace(/\[\[([^\]]*?\:[^\]]*?)ه‌(.*?)\]\]/g, "[[$1\u200f\u200f\u200fە\u200f\u200f\u200f$2]]");
-		str = str.replace(/\[\[([^\]]*?\:[^\]]*?)ه(.*?)\]\]/g, "[[$1\u200f\u200f\u200fھ\u200f\u200f\u200f$2]]");
-	}
+	// **1) Extract** all `{{...}}` segments, store them, and replace with placeholders.
+	//    This ensures we don't transform any Arabic text in those segments.
+	const withoutTemplates = str.replace(templateRegex, (match) => {
+		placeholders.push(match); // store the original segment
+		const index = placeholders.length - 1; // placeholder index
+		return `__PLACEHOLDER__${index}__`; // unique placeholder to re-insert later
+	});
 
-	// Replace every ي and ك with ی and ک, respectively
-	// NOTE: This WILL mess with images, links, categories
-	// but we will undo it later
-	str = str.replace(/ي/g, "ی");
-	str = str.replace(/ك/g, "ک");
-	str = str.replace(/ى/g, "ی");
-	str = str.replace(new RegExp("([^ء-يٱ-ە]|$)ه", "g"), "ە$1");
-	str = str.replace(/ە‌/g, "ە");
+	// **2) Perform** Persian character replacements on the remaining text
+	//    outside the `{{...}}` blocks.
+	//    - We unify both "ي" (U+062F) and "ى" (U+0649) to the Persian "ی" (U+06CC).
+	//    - "ك" (U+062C) becomes "ک" (U+06A9).
+	//    - Retain or re-map diacritics (already in your code).
+	let transformed = withoutTemplates
+		.replace(/ى/g, "ی")
+		.replace(/ي/g, "ی")
+		.replace(/ك/g, "ک")
+		.replace(/٫/g, "٫")
+		.replace(/٬/g, "٬")
+		.replace(/٭/g, "٭")
+		.replace(/٪/g, "٪")
+		.replace(/ـ/g, "ـ")
+		.replace(/ً/g, "ً")
+		.replace(/ٌ/g, "ٌ")
+		.replace(/ٍ/g, "ٍ")
+		.replace(/َ/g, "َ")
+		.replace(/ُ/g, "ُ")
+		.replace(/ِ/g, "ِ")
+		.replace(/ّ/g, "ّ")
+		.replace(/ْ/g, "ْ")
+		.replace(/ٰ/g, "ٰ")
+		.replace(/ٔ/g, "ٔ")
+		.replace(/ٕ/g, "ٕ")
+		.replace(/ٖ/g, "ٖ")
+		.replace(/ٗ/g, "ٗ")
+		.replace(/٘/g, "٘")
+		.replace(/ٙ/g, "ٙ")
+		.replace(/ٚ/g, "ٚ")
+		.replace(/ٛ/g, "ٛ");
 
-	// NOTE: This will also undo changes to categories which is not good
-	// but we will undo that later
-	str = str.replace(/\u200f\u200f\u200fی\u200f\u200f\u200f/g, "ي");
-	str = str.replace(/\u200b\u200b\u200bی\u200b\u200b\u200b/g, "ى");
-	str = str.replace(/\u200f\u200f\u200fک\u200f\u200f\u200f/g, "ك");
-	str = str.replace(/\u200f\u200f\u200fه\u200f\u200f\u200f/g, "ه‌");
-	str = str.replace(/\u200f\u200f\u200fھ\u200f\u200f\u200f/g, "ه");
+	// **3) Re-insert** the preserved `{{...}}` blocks by replacing the placeholders
+	placeholders.forEach((original, i) => {
+		const placeholder = `__PLACEHOLDER__${i}__`;
+		transformed = transformed.replace(placeholder, original);
+	});
 
-	old = "";
-	// Replace every ي and ك in categories with ی and ک, respectively
-	while (old != str) {
-		old = str;
-		str = str.replace(/\[\[(پۆل|[Cc]ategory):(.*?)(ى|ي)(.*?)\]\]/g, "[[$1:$2ی$4]]");
-		str = str.replace(/\[\[(پۆل|[Cc]ategory):(.*?)ك(.*?)\]\]/g, "[[$1:$2ک$3]]");
-		str = str.replace(/\[\[(پۆل|[Cc]ategory):(.*?)ه‌(.*?)\]\]/g, "[[$1:$2$3ە]]");
-		str = str.replace(/\[\[(پۆل|[Cc]ategory):(.*?)ه(.*?)\]\]/g, "[[$1:$2ھ$3]]");
-	}
-
-	// Finally, replace every ی and ک in Arabic text with ي and ك, respectively
-	old = "";
-	while (old != str) {
-		old = str;
-		str = str.replace(
-			/\{\{(عەرەبی|سەرەتای عەرەبی)\}\}([^\}]*)ی([^\{]*)\{\{کۆتایی\sعەرەبی\}\}/g,
-			"{{$1}}$2ي$3{{کۆتایی عەرەبی}}",
-		);
-		str = str.replace(
-			/\{\{(عەرەبی|سەرەتای عەرەبی)\}\}([^\}]*)ک([^\{]*)\{\{کۆتایی\sعەرەبی\}\}/g,
-			"{{$1}}$2ك$3{{کۆتایی عەرەبی}}",
-		);
-		str = str.replace(
-			/\{\{(عەرەبی|سەرەتای عەرەبی)\}\}([^\}]*)ە([^\{]*)\{\{کۆتایی\sعەرەبی\}\}/g,
-			"{{$1}}$2ه$3{{کۆتایی عەرەبی}}",
-		);
-		str = str.replace(
-			/\{\{(عەرەبی|سەرەتای عەرەبی)\}\}([^\}]*)ھ([^\{]*)\{\{کۆتایی\sعەرەبی\}\}/g,
-			"{{$1}}$2ه$3{{کۆتایی عەرەبی}}",
-		);
-		str = str.replace(/\{\{(بە پەشتۆ)\|(.*?)ى(.*?)\}\}/g, "{{$1|$2ي$3}}");
-		str = str.replace(/\{\{(عەرەبی|بە عەرەبی|بە سیندی|بە ئویغوری)\|(.*?)ی(.*?)\}\}/g, "{{$1|$2ي$3}}");
-		str = str.replace(/\{\{(عەرەبی|بە عەرەبی|بە ئویغوری)\|(.*?)ک(.*?)\}\}/g, "{{$1|$2ك$3}}");
-		str = str.replace(/\{\{(عەرەبی|بە عەرەبی|فارسی|بە فارسی|ن.فارسی|بە پەشتۆ)\|(.*?)ە(.*?)\}\}/g, "{{$1|$2ه$3}}");
-		str = str.replace(/\{\{(عەرەبی|بە عەرەبی|فارسی|بە فارسی|ن.فارسی|بە پەشتۆ)\|(.*?)ھ(.*?)\}\}/g, "{{$1|$2ه$3}}");
-	}
-
-	return str;
+	// **4) Return** the fully transformed string
+	return transformed;
 }
-
-export default toPersianChars;

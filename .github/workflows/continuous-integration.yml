@@ -1,57 +1,55 @@
 name: Continuous Integration
 
 on:
-    push:
-        branches: [master]
-    pull_request:
-        branches: [master]
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
-        strategy:
-            matrix:
-                node-version: [14.x]
+    strategy:
+      matrix:
+        node-version: [14.x]
 
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v3
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-            - name: Set up Node.js ${{ matrix.node-version }}
-              uses: actions/setup-node@v3
-              with:
-                  node-version: ${{ matrix.node-version }}
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
 
-            - name: Cache dependencies
-              uses: actions/cache@v3
-              with:
-                  path: |
-                      **/node_modules
-                  key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.2.1
+          run_install: |
+            - recursive: true
+              args: [--frozen-lockfile]
 
-            - name: Install dependencies
-              run: npm install --force
+      - name: Run Eslint
+        run: pnpm run lint
 
-            - name: Run the lints
-              run: npm run lint
+      - name: Run Prettier
+        run: pnpm run prettier:ci
 
-            - name: Run Prettier
-              run: npm run prettier:ci
+      - name: Run Unit Tests
+        run: pnpm run test
 
-            - name: Run the tests
-              run: npm run test
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
 
-            - name: Upload coverage to Codecov
-              uses: codecov/codecov-action@v3
+      - name: Build
+        run: pnpm run build
 
-            - name: Build
-              run: npm run micro:build
-
-            - name: Archive production
-              uses: actions/upload-artifact@v3
-              with:
-                  name: build
-                  path: |
-                      build
-                      !build/**/*.md
+      - name: Archive production
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: |
+            build
+            !build/**/*.md

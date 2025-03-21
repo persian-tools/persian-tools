@@ -1,3 +1,4 @@
+
 /**
  * Check allCharactersSame
  * @category all Characters Same

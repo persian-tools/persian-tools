@@ -1,0 +1,11 @@
+{
+	"$schema": "https://typedoc.org/schema.json",
+	"out": "./docs/",
+	"readme": "README.md",
+	"name": "Persian Tools",
+	"entryPoints": ["./src/index.ts"],
+	"exclude": ["**/test/**/*", "**/*.js", "**/dist/**/*", "**/src/dummy/**"],
+	"excludeExternals": true,
+	"includeVersion": true,
+	"excludePrivate": false
+}

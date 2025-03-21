@@ -1,8 +1,0 @@
-test
-node_modules
-build
-dist
-coverage
-.github
-.idea
-.vscode

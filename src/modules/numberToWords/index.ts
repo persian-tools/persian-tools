@@ -1,6 +1,7 @@
-import numbersWordList from "./numbersWordList";
 import { removeCommas } from "../commas";
-import addOrdinalSuffix from "../addOrdinalSuffix/addOrdinalSuffix";
+import { addOrdinalSuffix } from "../addOrdinalSuffix/addOrdinalSuffix";
+// Constants
+import { numbersWordList } from "./numbersWordList";
 
 export interface NumberToWordsOptions {
 	ordinal?: boolean;
@@ -8,7 +9,7 @@ export interface NumberToWordsOptions {
 
 type NumberToWordsType = (numberValue: number | string, options?: NumberToWordsOptions) => string | TypeError;
 
-const numberToWords: NumberToWordsType = (numberValue, options) => {
+export const numberToWords: NumberToWordsType = (numberValue, options) => {
 	const isNumberValid = (n: number) => typeof n === "number" && Number.isSafeInteger(n) && n !== 0;
 	const isNegative = (n: number) => n < 0;
 	const numberIsNotValidError = () =>
@@ -21,13 +22,13 @@ const numberToWords: NumberToWordsType = (numberValue, options) => {
 	const getWord = (n: number) => numbersWordList[n] ?? "";
 	const addNegativeSuffix = (str: string) => "منفی" + " " + str;
 
-	function transformeToWord(num: number): string {
+	function transformToWord(num: number): string {
 		if (num === 0) return "";
 		if (num <= 9) return getWord(num);
 		else if (num >= 11 && num <= 19) return getWord(num);
 
 		const residual = num <= 99 ? num % 10 : num % 100;
-		return residual === 0 ? getWord(num) : `${getWord(num - residual)} و ${transformeToWord(residual)}`;
+		return residual === 0 ? getWord(num) : `${getWord(num - residual)} و ${transformToWord(residual)}`;
 	}
 
 	/**
@@ -37,7 +38,7 @@ const numberToWords: NumberToWordsType = (numberValue, options) => {
 	 */
 
 	function performer(num: number): string {
-		if (num <= 999) return transformeToWord(num);
+		if (num <= 999) return transformToWord(num);
 
 		const getUnitName = (numberOfZeros: number) =>
 			numberOfZeros === 0 ? "" : numbersWordList[Number.parseInt(`1${"0".repeat(numberOfZeros)}`)];
@@ -47,7 +48,7 @@ const numberToWords: NumberToWordsType = (numberValue, options) => {
 		const numbersArr = seperated
 			.map((value, index) => {
 				const { transformedVal, unitName } = Object.freeze({
-					transformedVal: transformeToWord(Number.parseInt(value, 10)),
+					transformedVal: transformToWord(Number.parseInt(value, 10)),
 					unitName: getUnitName((seperated.length - (index + 1)) * 3),
 				});
 
@@ -72,5 +73,3 @@ const numberToWords: NumberToWordsType = (numberValue, options) => {
 	};
 	return handleResult();
 };
-
-export default numberToWords;

@@ -1,111 +1,72 @@
-import { digitsFaToEn } from "../digits";
+import { convertToTimeStamp } from "./timestamp";
+import { checkFormatDateTime, getTimeNow, standardizeFaDateTime } from "./helpers";
 
 /**
- * Convert a date-time value to timestamp.
- *
- * @param {string} datetime Format must be yyyy/mm/dd hh:mm:ss.
- * @returns {number} Calculates the timestamp of the input.
- */
-export function convertToTimeStamp(datetime: string): number {
-	const patternDateTime = /(\d+)\/(\d+)\/(\d+) (\d+):(\d+):(\d+)/;
-	const dateTime = datetime.match(patternDateTime);
-	if (dateTime) {
-		const date: Date = new Date(
-			Number(dateTime[1]),
-			parseInt(dateTime[2], 10) - 1,
-			Number(dateTime[3]),
-			Number(dateTime[4]),
-			Number(dateTime[5]),
-			Number(dateTime[6]),
-		);
-		return date.getTime();
-	} else throw new TypeError("PersianTools: convertToTimeStamp - The input format must be yyyy/mm/dd hh:mm:ss");
-}
-
-/**
- * Get current timestamp of current date-time.
- *
- * @returns {number} Calculates the timestamp of current date-time.
- */
-export function getTimeNow(): number {
-	const now = Date.now();
-	const currentDateTime: string = new Date(now)
-		.toLocaleString("fa-IR", {
-			year: "numeric",
-			month: "2-digit",
-			day: "2-digit",
-			hour: "2-digit",
-			minute: "2-digit",
-			second: "2-digit",
-		})
-		.replace(/‏|،|,/g, "");
-	return convertToTimeStamp(digitsFaToEn(currentDateTime));
-}
-
-/**
- * Check format of Input.
- *
- * @param {string} datetime Format must be yyyy/mm/dd hh:mm:ss.
- * @returns {boolean} If format of datetime is ok, return true.
- */
-export function checkFormatDateTime(datetime: string): boolean {
-	return Boolean(datetime.match(/^\d{4}\/\d{1,2}\/\d{1,2} \d{1,2}:\d{1,2}:\d{1,2}$/));
-}
-
-/**
- * Converting Jalali date-time into a time ago.
+ * **Converts Jalali date-time** ("yyyy/mm/dd hh:mm:ss") into a human-readable "time ago".
  *
  * @category timeAgo
- *
- * @param {string} datetime Format must be yyyy/mm/dd hh:mm:ss. If no value is entered for input, the current time is considered.
- * @returns {string} Return time ago value. Eg: حدود 1 سال قبل
+ * @param datetime e.g. "1402/06/15 13:05:20" (Jalali)
+ * @returns e.g. "حدود 1 سال قبل" or "اکنون"
  */
-export default function timeAgo(datetime = ""): string {
-	if (typeof datetime !== "string") throw new TypeError("PersianTools: timeAgo - The input must be string");
+export function timeAgo(datetime: string = ""): string {
+	// 1) Input must be string
+	if (typeof datetime !== "string") {
+		throw new TypeError("PersianTools: timeAgo - The input must be a string");
+	}
 
-	if (!datetime && !checkFormatDateTime(datetime))
+	// 2) No input => interpret as "اکنون"
+	if (!datetime) {
+		return "اکنون";
+	}
+
+	// **PATCH**: Standardize the incoming datetime so it definitely has
+	// zero-padded month/day/hour/minute/second
+	const normalized = standardizeFaDateTime(datetime);
+
+	// 3) Validate the final format
+	if (!checkFormatDateTime(normalized)) {
 		throw new TypeError("PersianTools: timeAgo - The input format must be yyyy/mm/dd hh:mm:ss");
+	}
 
-	// If input be null then tsDateTime get current timestamp
-	if (!datetime) return "اکنون";
-	// TimeNow
+	// 4) Calculate "now" vs. this date
 	const tsTimeNow = getTimeNow();
+	const tsDateTime = convertToTimeStamp(normalized);
 
-	// Timestamp DateTime
-	const tsDateTime: number = convertToTimeStamp(datetime);
-
+	// 5) Determine difference
 	let elapsed = tsTimeNow - tsDateTime;
 
-	// TimeAgo
-	const minute = 60 * 1000,
-		hour = minute * 60,
-		day = hour * 24,
-		week = day * 7,
-		month = day * 30,
-		year = day * 365;
+	// ±10 seconds => "چند ثانیه قبل"
+	const ignoreSec = 10_000;
+	if (Math.abs(elapsed) <= ignoreSec) {
+		return elapsed > 0 ? "چند ثانیه قبل" : elapsed === 0 ? "اکنون" : "چند ثانیه بعد";
+	}
 
-	// for preventing future seconds
-	const ignoreMiliSeconds = -10000; // 10s
-
-	if (elapsed == 0 || (elapsed <= 0 && elapsed >= ignoreMiliSeconds)) return "اکنون";
-
+	// "قبل" vs. "بعد"
 	const prevOrNext: string = elapsed > 0 ? "قبل" : "بعد";
+	elapsed = Math.abs(elapsed);
 
-	elapsed = elapsed < 0 ? Math.abs(elapsed) : elapsed;
+	const minute = 60_000;
+	const hour = 3_600_000;
+	const day = 86_400_000;
+	const week = day * 7;
+	const month = day * 30;
+	const year = day * 365;
 
 	if (elapsed < minute) {
-		return Math.round(elapsed / 1000) + " ثانیه " + prevOrNext;
+		return `${Math.round(elapsed / 1000)} ثانیه ${prevOrNext}`;
 	} else if (elapsed < hour) {
-		return Math.round(elapsed / minute) + " دقیقه " + prevOrNext;
+		return `${Math.round(elapsed / minute)} دقیقه ${prevOrNext}`;
 	} else if (elapsed < day) {
-		return Math.round(elapsed / hour) + " ساعت " + prevOrNext;
+		return `${Math.round(elapsed / hour)} ساعت ${prevOrNext}`;
 	} else if (elapsed < week) {
-		return "حدود " + Math.round(elapsed / day) + " روز " + prevOrNext;
+		return `حدود ${Math.round(elapsed / day)} روز ${prevOrNext}`;
 	} else if (elapsed < month) {
-		return "حدود " + Math.round(elapsed / week) + " هفته " + prevOrNext;
+		return `حدود ${Math.round(elapsed / week)} هفته ${prevOrNext}`;
 	} else if (elapsed < year) {
-		return "حدود " + Math.round(elapsed / month) + " ماه " + prevOrNext;
+		return `حدود ${Math.round(elapsed / month)} ماه ${prevOrNext}`;
 	} else {
-		return "حدود " + Math.round(elapsed / year) + " سال " + prevOrNext;
+		return `حدود ${Math.round(elapsed / year)} سال ${prevOrNext}`;
 	}
 }
+
+export * from "./helpers";

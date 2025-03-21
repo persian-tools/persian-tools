@@ -12,7 +12,7 @@ interface BillTypesModel {
 	[key: number]: BillTypes;
 }
 
-const billTypes: BillTypesModel = {
+export const billTypes: BillTypesModel = {
 	1: "آب",
 	2: "برق",
 	3: "گاز",
@@ -29,7 +29,7 @@ interface BillBarcodeModel {
 	paymentId: number;
 }
 
-interface BillResult {
+export interface BillResult {
 	// bill amount
 	amount: number;
 	// bill type
@@ -44,14 +44,14 @@ interface BillResult {
 	isValidBillPayment: boolean;
 }
 
-interface BillParams {
+export interface BillParams {
 	billId?: number;
 	paymentId?: number;
 	currency?: Currency;
 	barcode?: string;
 }
 
-class Bill {
+export class Bill {
 	private readonly barcode: string | null;
 	private readonly currency: Currency;
 	private readonly billTypes: BillTypesModel;
@@ -176,5 +176,3 @@ class Bill {
 		};
 	}
 }
-
-export default Bill;

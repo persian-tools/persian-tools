@@ -14,12 +14,16 @@ import type {
 } from "./types.skip";
 
 /**
- * Get plate info and validation
+ * **getNumberPlateInfo**:
+ * - Normalizes the input plate.
+ * - Gets the plate info.
+ * - Checks if the plate is valid.
+ * - Returns the plate info and validation status.
  *
  * @param plate  An object containing the number and char value or a string.
  * @return  An object containing plate and validation info.
  */
-export default function plate(plate: PlateOptions): PlateResult {
+export function getNumberPlateInfo(plate: PlateOptions): PlateResult {
 	const normalizedPlate = normalizePlate(plate);
 	const info = getPlateInfo(normalizedPlate);
 	const isValid = isPlateValid(info, normalizedPlate.numbers);

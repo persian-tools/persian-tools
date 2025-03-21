@@ -2,7 +2,7 @@ interface NumbersWordListType {
 	[key: number]: string;
 }
 
-const numbersWordList: NumbersWordListType = {
+export const numbersWordList: NumbersWordListType = {
 	1: "یک",
 	2: "دو",
 	3: "سه",
@@ -45,5 +45,3 @@ const numbersWordList: NumbersWordListType = {
 	1000000000000: "تریلیون",
 	1000000000000000: "کوآدریلیون",
 };
-
-export default numbersWordList;

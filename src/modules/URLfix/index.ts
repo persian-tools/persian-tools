@@ -1,5 +1,5 @@
 /**
- * @method URLfix
+ * URLfix
  * @description Used for fix Persian characters in URL
  * @param {string} url
  * @param {string} separator - optional argument to replace character with space in URLs. by default return URL with space
@@ -9,7 +9,7 @@
  * @return {string} a string of fixed URL
  */
 
-function URLfix(url?: string, separator?: string): string | undefined {
+export function urlFix(url?: string, separator?: string): string | undefined {
 	if (!url) return;
 	url = decodeURIComponent(url);
 
@@ -17,5 +17,3 @@ function URLfix(url?: string, separator?: string): string | undefined {
 
 	return url;
 }
-
-export default URLfix;

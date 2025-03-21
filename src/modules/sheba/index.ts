@@ -62,7 +62,7 @@ export function shebaIso7064Mod97(iban: string): number {
 export function isShebaValid(shebaCode: string): boolean {
 	shebaCode = shebaCode.toUpperCase();
 
-	if (!shebaCode.startsWith('IR')) shebaCode = `IR${shebaCode}`
+	if (!shebaCode.startsWith("IR")) shebaCode = `IR${shebaCode}`;
 
 	if (shebaCode.length !== 26) {
 		return false;

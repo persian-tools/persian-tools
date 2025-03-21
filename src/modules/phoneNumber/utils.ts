@@ -18,6 +18,7 @@ export const operatorsMap = {
 	Irancell: "ایرانسل",
 	Taliya: "تالیا",
 	RightTel: "رایتل",
+	Aptel: "آپتل",
 };
 
 export const MCI: Record<string, OperatorModel> = {
@@ -122,7 +123,7 @@ export const MCI: Record<string, OperatorModel> = {
 		base: "کشوری",
 		type: ["permanent", "credit"],
 		operator: operatorsMap.MCI,
-	}
+	},
 };
 
 export const Taliya: Record<string, OperatorModel> = {
@@ -158,7 +159,7 @@ export const RightTel: Record<string, OperatorModel> = {
 		base: "کشوری",
 		type: ["credit"],
 		operator: operatorsMap.RightTel,
-	}
+	},
 };
 
 const IrancellModel = {
@@ -197,12 +198,21 @@ export const Irancell: Record<string, OperatorModel> = {
 	},
 };
 
-export const ShatelMobile:Record<string, OperatorModel> = {
+export const ShatelMobile: Record<string, OperatorModel> = {
 	"998": {
 		province: [],
 		base: "کشوری",
 		type: ["credit"],
 		operator: operatorsMap.shatelMobile,
+	},
+};
+
+export const Aptel: Record<string, OperatorModel> = {
+	"999": {
+		base: "کشوری",
+		province: [],
+		type: ["permanent", "credit"],
+		operator: operatorsMap.Aptel,
 	},
 };
 
@@ -212,6 +222,7 @@ export const prefixes: string[] = [
 	...Object.keys(RightTel),
 	...Object.keys(Irancell),
 	...Object.keys(ShatelMobile),
+	...Object.keys(Aptel),
 ];
 
 export const operators = {
@@ -220,6 +231,7 @@ export const operators = {
 	...Irancell,
 	...ShatelMobile,
 	...RightTel,
+	...Aptel,
 };
 
 /**
@@ -234,7 +246,7 @@ export const operators = {
  */
 export const mobileRegex = /^(\+98|98|0098|0)?9(\d{2})\d{7}$/;
 
-export function getPhonePrefix(mobile: string): string {
+export function getPhoneNumberPrefix(mobile: string): string {
 	const phoneCountryPrefix = `${mobile}`.match(mobileRegex);
 
 	/*

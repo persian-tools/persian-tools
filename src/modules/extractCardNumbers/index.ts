@@ -1,8 +1,8 @@
 import { hasPersian } from "../isPersian";
 import { digitsFaToEn } from "../digits";
-import verifyCardNumber from "../verifyCardNumber";
+import { verifyCardNumber } from "../verifyCardNumber";
 import { acceptableKeywords, cardNumberRegex } from "./utils";
-import getBankNameFromCardNumber from "../getBankNameFromCardNumber";
+import { getBankNameFromCardNumber } from "../getBankNameFromCardNumber";
 
 /**
  *
@@ -50,7 +50,7 @@ export interface ExtractCardNumberOptions {
  * @param str
  * @param options
  */
-function extractCardNumber(
+export function extractCardNumber(
 	str: string,
 	options: ExtractCardNumberOptions = {
 		checkValidation: true,
@@ -115,4 +115,3 @@ function extractCardNumber(
 }
 
 export * from "./utils";
-export default extractCardNumber;

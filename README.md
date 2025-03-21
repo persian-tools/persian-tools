@@ -1,42 +1,41 @@
 <div align="center">
 	<p align="center">
-		<img src="./images/logo.png" width="200" />
+		<img src="./images/logo.png" width="200" alt="PersianTools logo" />
 	</p>
 	<h1 align="center">Persian tools</h1>
-	<p align="center">PersianTools is a standalone, library-agnostic JavaScript that enables some of the Persian features for use in the JavaScript.</p>
+	<p align="center">A standalone, <strong>library-agnostic</strong> JavaScript utility for Persian language features.</p>
 
-[![Rate on Openbase](https://badges.openbase.com/js/rating/@persian-tools/persian-tools.svg)](https://openbase.com/js/@persian-tools/persian-tools?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge)
 ![CI/CD](https://github.com/persian-tools/persian-tools/workflows/Continuous%20Integration/badge.svg)
 [![codecov](https://codecov.io/gh/persian-tools/persian-tools/branch/master/graph/badge.svg)](https://codecov.io/gh/persian-tools/persian-tools)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/persian-tools/persian-tools/blob/master/LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange.svg)](https://github.com/persian-tools/persian-tools/compare)
 [![CodeFactor](https://www.codefactor.io/repository/github/persian-tools/persian-tools/badge)](https://www.codefactor.io/repository/github/persian-tools/persian-tools)
-[![GitHub contributors](https://img.shields.io/github/contributors/persian-tools/persian-tools.svg)](https://GitHub.com/persian-tools/persian-tools/contributors/)
-[![Wallaby.js](https://img.shields.io/badge/wallaby.js-powered-blue.svg?style=flat&logo=github)](https://wallabyjs.com/oss/)
+![GitHub contributors](https://img.shields.io/github/contributors/persian-tools/persian-tools.svg)
 
 </div>
 <hr />
 
 ## Features
 
--   [Convert Persian words to the number](#convert-persian-words-to-the-number).
--   [Convert Numbers to Persian words](#convert-numbers-to-persian-words).
--   [Add and remove commas to numbers](#add-and-remove-commas).
--   [Convert Persian numbers to Arabic or English numbers and vice versa](#convert-persian-numbers-to-arabic-or-english-numbers-and-vice-versa).
--   [Validate Iranian national number(code-e Melli)](#validate-iranian-national-numbercode-e-melli).
--   [Validate Iranian legal id(shenase hoghoghi)](#validate-iranian-legal-idshenase-hoghoghi).
--   [Find city and province name by national code(code-e Melli)](#find-city-and-province-name-by-national-idcode-e-melli).
--   [Bill calculator](#bill-calculator).
--   [Check Iranian Sheba(IBAN) validation and recognize bank information by sheba code](#iranian-shebaiban).
--   [Validate Bank card number](#bank-number-validation-and-get-the-name-of-the-bank-by-bank-account-number).
--   [Find Bank's name by Card number](#bank-number-validation-and-get-the-name-of-the-bank-by-bank-account-number).
--   [Validate the correctness of the text of the Persian language and clear the Arabic letters in the Persian text](#validate-the-correctness-of-the-text-of-the-persian-language-and-clear-the-arabic-letters-in-the-persian-text).
--   [Fix Persian characters in URL](#fix-persian-characters-in-url).
--   [Fix Persian zero-width non-joiner(Replace spaces by half-space)](#fix-persian-zero-width-non-joinerreplace-spaces-by-half-space)
--   [Convert Jalaali date-time into a time ago](#convert-jalaali-date-time-into-a-time-ago)
--   [Get the Remaining Time of the Date](#get-the-remaining-time-of-the-date)
--   [Validate and find information of phone number](#validate-and-find-information-of-phone-number).
--   [Find capital city by province name ](#find-capital-city-by-province-name)
+- [Convert Persian words to the number](#convert-persian-words-to-the-number).
+- [Convert Numbers to Persian words](#convert-numbers-to-persian-words).
+- [Add and remove commas to numbers](#add-and-remove-commas).
+- [Convert Persian numbers to Arabic or English numbers and vice versa](#convert-persian-numbers-to-arabic-or-english-numbers-and-vice-versa).
+- [Validate Iranian national number(code-e Melli)](#validate-iranian-national-numbercode-e-melli).
+- [Validate Iranian legal id(shenase hoghoghi)](#validate-iranian-legal-idshenase-hoghoghi).
+- [Find city and province name by national code(code-e Melli)](#find-city-and-province-name-by-national-idcode-e-melli).
+- [Bill calculator](#bill-calculator).
+- [Check Iranian Sheba(IBAN) validation and recognize bank information by sheba code](#iranian-shebaiban).
+- [Validate Bank card number](#bank-number-validation-and-get-the-name-of-the-bank-by-bank-account-number).
+- [Find Bank's name by Card number](#bank-number-validation-and-get-the-name-of-the-bank-by-bank-account-number).
+- [Validate the correctness of the text of the Persian language and clear the Arabic letters in the Persian text](#validate-the-correctness-of-the-text-of-the-persian-language-and-clear-the-arabic-letters-in-the-persian-text).
+- [Fix Persian characters in URL](#fix-persian-characters-in-url).
+- [Fix Persian zero-width non-joiner(Replace spaces by half-space)](#fix-persian-zero-width-non-joinerreplace-spaces-by-half-space)
+- [Convert Jalaali date-time into a time ago](#convert-jalaali-date-time-into-a-time-ago)
+- [Get the Remaining Time of the Date](#get-the-remaining-time-of-the-date)
+- [Validate and find information of phone number](#validate-and-find-information-of-phone-number).
+- [Find capital city by province name ](#find-capital-city-by-province-name)
+- [Find province from coordinate ](#find-province-from-coordinate)
 
 ## Getting started
 
@@ -108,13 +107,15 @@ Let's take a look at what an example test case would look like using Persian-too
 
 ### Convert Persian words to the number
 
-| Options           | Description                                                                                                          | Default |
-| ----------------- | -------------------------------------------------------------------------------------------------------------------- | ------- |
-| `fuzzy`**(Beta)** | Fix typo in the Persian words by using [`levenshtein`](https://en.wikipedia.org/wiki/Levenshtein_distance) algorithm | `false` |
-| `digits`          | Result will be converted to the English or Persian digits                                                            | `en`    |
-| `addCommas`       | Commas will be added to the Result                                                                                   | `false` |
+| Options                                    | Description                                                                         | Default |
+| ------------------------------------------ | ----------------------------------------------------------------------------------- | ------- |
+| `fuzzy`**(Beta)**                          | Fix typo in the Persian words by using **levenshtein** algorithm                    | `false` |
+| `digits`                                   | Result will be converted to the English or Persian digits                           | `en`    |
+| `addCommas`                                | Commas will be added to the Result                                                  | `false` |
+| `autoConvertDigitsToEn`**(New)**           | Automatically convert the digits to English digits if the input is a Persian number | `false` |
+| `autoConvertArabicCharsToPersian`**(New)** | Automatically convert the Arabic characters to Persian characters                   | `false` |
 
--   Convert with no option
+- Convert with no option
 
 ```javascript
 import { wordsToNumber } from "@persian-tools/persian-tools";
@@ -126,21 +127,21 @@ wordsToNumber("سه هزار دویست و دوازده"); // 3212
 wordsToNumber("دوازده هزار بیست دو"); // 12022
 ```
 
--   Digits converter
+- Digits converter
 
 ```js
 wordsToNumber("منفی سه هزارمین", { digits: "fa" }); // "-۳۰۰۰"
 wordsToNumber("دوازده هزار بیست دو", { digits: "fa" }); // ۱۲۰۲۲
 ```
 
--   Add commas
+- Add commas
 
 ```js
 wordsToNumber("منفی سه هزارمین", { addCommas: true }); // "-3,000"
 wordsToNumber("دوازده هزار بیست دو", { addCommas: true }); // "12,022"
 ```
 
--   Fuzzy typo fixer(`v1.5.0`):
+- Fuzzy typo fixer(`v1.5.0`):
 
 ```javascript
 import { WordsToNumber } from "@persian-tools/persian-tools";
@@ -198,6 +199,10 @@ digitsFaToAr("۱۷۸۲۳۴۰۵۶۹"); // ١٧٨٢٣٤٠٥٦٩
 
 ### Validate Iranian national number(code-e Melli)
 
+| Options                | Description                                                                       | Default |
+| ---------------------- | --------------------------------------------------------------------------------- | ------- |
+| `checkPrefix`**(New)** | Whether to check the first 3 digits against a predefined list of valid city codes | `true`  |
+
 ```javascript
 import { verifyIranianNationalId, getPlaceByIranNationalId } from "@persian-tools/persian-tools";
 
@@ -246,19 +251,19 @@ toPersianChars("علي"); // علی
 
 **Note**: You can pass `2` more options to `isPersian` to customize it as your needs:
 
--   `isComplex`: If you pass `true`, Then it accepts some of regular arabic characters which are commons in persian texts.(default is `false`)
--   `trimPattern`: By default the function skips some of characters e.g. `"'-+()؟.` and `whitespaces`. You can pass your own customized `regex` as you need.
+- `isComplex`: If you pass `true`, Then it accepts some of regular arabic characters which are commons in persian texts.(default is `false`)
+- `trimPattern`: By default the function skips some of characters e.g. `"'-+()؟.` and `whitespaces`. You can pass your own customized `regex` as you need.
 
 ### Fix Persian characters in URL.
 
 ```javascript
-import { URLfix } from "@persian-tools/persian-tools";
+import { urlFix } from "@persian-tools/persian-tools";
 
-URLfix(
+urlFix(
 	"https://fa.wikipedia.org/wiki/%D9%85%D8%AF%DB%8C%D8%A7%D9%88%DB%8C%DA%A9%DB%8C:Gadget-Extra-Editbuttons-botworks.js",
 ); // "https://fa.wikipedia.org/wiki/مدیاویکی:Gadget-Extra-Editbuttons-botworks.js"
-URLfix("https://en.wikipedia.org/wiki/Persian_alphabet"); // "https://en.wikipedia.org/wiki/Persian_alphabet",
-URLfix("Sample Text"); // "Sample Text"
+urlFix("https://en.wikipedia.org/wiki/Persian_alphabet"); // "https://en.wikipedia.org/wiki/Persian_alphabet",
+urlFix("Sample Text"); // "Sample Text"
 ```
 
 ### Bill calculator
@@ -310,7 +315,7 @@ new Bill({ barcode: "22343223446130001070189" }).findByBarcode(); // { billId: 2
 
 ### Iranian Sheba(IBAN)
 
--   Check validation
+- Check validation
 
 ```javascript
 import { isShebaValid } from "@persian-tools/persian-tools";
@@ -319,7 +324,7 @@ isShebaValid("IR820540102680020817909002"); // true
 isShebaValid("IR01234567890123456789"); // false
 ```
 
--   Recognize bank information
+- Recognize bank information
 
 ```javascript
 import { getShebaInfo } from "@persian-tools/persian-tools";
@@ -356,23 +361,23 @@ halfSpace("نمی ‌خواهی درخت ها را ببینیم؟"); // "نمی�
 **Usage**
 
 ```js
-import { Plate } from "@persian-tools/persian-tools";
+import { getNumberPlateInfo } from "@persian-tools/persian-tools";
 
-Plate("12D45147"); // passing string argument
+getNumberPlateInfo("12D45147"); // passing string argument
 
 // or passing in object style
-Plate({
+getNumberPlateInfo({
 	number: "1245147",
 	char: "الف",
 });
 ```
 
--   Getting info about plate
+- Getting info about plate
 
 ```js
-import { Plate } from "@persian-tools/persian-tools";
+import { getNumberPlateInfo } from "@persian-tools/persian-tools";
 
-Plate("12D45147").info;
+getNumberPlateInfo("12D45147").info;
 /*
   {
   	template: 12 D 451 ایران  47
@@ -389,7 +394,7 @@ Plate("12D45147").info;
 */
 
 // handle motorcyles plate
-Plate(12345678).info;
+getNumberPlateInfo(12345678).info;
 /*
   {
     template: 123-45678,
@@ -410,27 +415,27 @@ Plates that have farsi digits in them(like: الف، ب، ص) will be returned i
   ${first_two_digits}${plate_character}${next_three_digits}ایران${province_code}
 ```
 
--   Checking if plate is valid
+- Checking if plate is valid
 
 ```js
-import { Plate } from "@persian-tools/persian-tools";
+import { getNumberPlateInfo } from "@persian-tools/persian-tools";
 
-Plate("12D45147").isValid;
+getNumberPlateInfo("12D45147").isValid;
 /*
   true
 */
 
-Plate(12345678).isValid;
+getNumberPlateInfo(12345678).isValid;
 /*
   true
 */
 
-Plate(1234567).isValid;
+getNumberPlateInfo(1234567).isValid;
 /*
   will return false - plate character is not provided
 */
 
-Plate(1204567).isValid;
+getNumberPlateInfo(1204567).isValid;
 /*
   will return false - plate can't have 0 in its digits (except last digit)
 */
@@ -478,7 +483,7 @@ remainingTime("2018-04-12T10:30:51Z").isFinished; // true
 
 **Usage**
 
--   Finding information such as province, type and model of phone number
+- Finding information such as province, type and model of phone number
 
 ```js
 import { phoneNumberDetail } from "@persian-tools/persian-tools";
@@ -493,7 +498,7 @@ phoneNumberDetail("9123456789");
   }
 */
 
-phoneNumberDetail("09022002580");
+phoneNumberDetail("09301234567");
 /*
   {
     province: [],
@@ -514,32 +519,32 @@ phoneNumberDetail("09981000000");
 */
 ```
 
--   Validating phone number
+- Validating phone number
 
 ```js
-import { phoneNumberValidator } from "@persian-tools/persian-tools";
+import { isPhoneNumberValid } from "@persian-tools/persian-tools";
 
-phoneNumberValidator("09122002580"); // true
-phoneNumberValidator("09192002580"); // true
+isPhoneNumberValid("09122002580"); // true
+isPhoneNumberValid("09192002580"); // true
 
-phoneNumberValidator("+989022002580"); // true
-phoneNumberValidator("09022002580"); // true
-phoneNumberValidator("989022002580"); // true
-phoneNumberValidator("00989022002580"); // true
-phoneNumberValidator("9022002580"); // true
+isPhoneNumberValid("+989122002580"); // true
+isPhoneNumberValid("09122002580"); // true
+isPhoneNumberValid("989122002580"); // true
+isPhoneNumberValid("00989122002580"); // true
+isPhoneNumberValid("9122002580"); // true
 
-phoneNumberValidator("09802002580"); // false
+isPhoneNumberValid("09812002580"); // false
 ```
 
--   Normalizing phone number
+- Normalizing phone number
 
 ```js
 import { phoneNumberNormalizer } from "@persian-tools/persian-tools";
 
-phoneNumberNormalizer("+989022002580", "0"); // 09022002580
-phoneNumberNormalizer("989022002580", "0"); // 09022002580
-phoneNumberNormalizer("09022002580", "0"); // 09022002580
-phoneNumberNormalizer("09022002580", "+98"); // +989022002580
+phoneNumberNormalizer("+989122002580", "0"); // 09122002580
+phoneNumberNormalizer("989122002580", "0"); // 09122002580
+phoneNumberNormalizer("09122002580", "0"); // 09122002580
+phoneNumberNormalizer("09122002580", "+98"); // +989122002580
 ```
 
 ### Find capital city by province name
@@ -558,9 +563,30 @@ findCapitalByProvince("آذربایجان شرقی"); // تبریز
 findCapitalByProvince("دبی");
 ```
 
+### Find province from coordinate
+
+**Usage**
+
+> Find the province from a given coordinate point. If it cannot find anything, it will throw an error.
+
+```javascript
+import { findProvinceFromCoordinate } from "@persian-tools/persian-tools";
+
+// Find province for a given coordinate point
+const point = { latitude: 35.6892, longitude: 51.389 };
+
+const province = findProvinceFromCoordinate(point);
+
+province.fa; // "تهران"
+province.en; // "Tehran"
+
+// shorthand syntax using destructuring
+const { fa, en } = findProvinceFromCoordinate(point);
+```
+
 ### Todo
 
--   [ ] Write Jalaali and Gregorian functions to convert Date together.
+- [ ] Write Jalaali and Gregorian functions to convert Date together.
 
 ## Contributing
 
@@ -575,18 +601,23 @@ This project is licensed under the MIT License - see the [LICENSE.md](https://gi
 <table>
 	<tr>
 		<td align="center">
+			<a href="https://pooleno.ir">
+				<img src="https://pooleno.ir/static/images/pooleno-logo.svg" width="100px;" alt="Pooleno Crypto Exchange"/><br /><sub><b>Pooleno Exchange</b></sub>
+			</a>
+		</td>
+    <td align="center">
 			<a href="https://pwa.bank-maskan.ir">
-				<img src="./images/showcases/bank-maskan.png" width="100px;" alt=""/><br /><sub><b>Bank Maskan</b></sub>
+				<img src="./images/showcases/bank-maskan.png" width="100px;" alt="Bank Maskan (PWA)"/><br /><sub><b>Bank Maskan</b></sub>
 			</a>
 		</td>
 		<td align="center">
 			<a href="https://mydong.ir">
-				<img src="./images/showcases/mydong.png" width="100px;" alt=""/><br /><sub><b>MyDong</b></sub>
+				<img src="./images/showcases/mydong.png" width="100px;" alt="MyDong"/><br /><sub><b>MyDong</b></sub>
 			</a>
 		</td>
     <td align="center">
 			<a href="https://melkba.ir">
-				<img src="./images/showcases/melkba.png" width="100px;" alt=""/><br /><sub><b>Melkba</b></sub>
+				<img src="./images/showcases/melkba.png" width="100px;" alt="Melkba"/><br /><sub><b>Melkba</b></sub>
 			</a>
 		</td>
 	</tr>

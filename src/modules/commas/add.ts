@@ -2,25 +2,39 @@ import { digitsFaToEn } from "../digits";
 import { isPersian } from "../isPersian";
 
 /**
- * Add Commas to numbers
+ * Add Commas to numbers in a string or a number
  *
  * @method addCommas
- * @param {number} number, eg: 300000
+ * @param input
  * @return {string} string of separated numbers by commas, eg: 30,000
  */
-const addCommas = (number: number | string): string => {
-	if (typeof number !== "number" && typeof number !== "string") return "";
+export const addCommas = (input: number | string): string => {
+	if (typeof input !== "number" && typeof input !== "string") return "";
 
-	const convertedToString = number.toString();
-	const tokenizedToEnglish = isPersian(convertedToString)
-		? (digitsFaToEn(convertedToString) as string)
-		: convertedToString;
+	const inputStr = input.toString().replace(/,/g, "");
+	const serializedInputDigits = isPersian(inputStr) ? digitsFaToEn(inputStr) : inputStr;
+	// Check if input is a valid number
+	// eslint-disable-next-line security/detect-unsafe-regex
+	if (!serializedInputDigits.match(/^-?\d+(\.\d+)?$/)) {
+		return "";
+	}
 
-	const tokenizedNumber = tokenizedToEnglish.split(".");
-	const integer = tokenizedNumber[0].replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
-	const decimal = tokenizedNumber[1] ? `.${tokenizedNumber[1]}` : "";
+	// Determine if the number is negative
+	const isNegative = serializedInputDigits.startsWith("-");
 
-	return integer + decimal;
+	// Remove the negative sign for processing
+	const positiveInput = isNegative ? serializedInputDigits.slice(1) : serializedInputDigits;
+
+	// Split the input into integer and decimal parts
+	const [integerPart, decimalPart] = positiveInput.split(".");
+
+	// Add commas to the integer part
+	// eslint-disable-next-line security/detect-unsafe-regex
+	const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+	// Combine the formatted integer part with the decimal part, if exists
+	const formattedNumber = decimalPart ? `${formattedInteger}.${decimalPart}` : formattedInteger;
+
+	// Add the negative sign back if the number is negative
+	return isNegative ? `-${formattedNumber}` : formattedNumber;
 };
-
-export default addCommas;

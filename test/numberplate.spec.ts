@@ -1,13 +1,14 @@
 import { describe, it, expect } from "vitest";
 import { isPlateNumberValid, normalizePlate } from "../src/modules/numberplate/helpers";
 import { PlateResultApi } from "../src/modules/numberplate/types.skip";
-import plate, {
+import {
+	getNumberPlateInfo,
 	getPlateHandler,
 	carHandler,
 	motorcycleHandler,
 	isPlateValid,
 	getPlateInfo,
-} from "../src/modules/numberplate/index";
+} from "../src/modules/numberplate";
 
 describe("number plate module", () => {
 	it("getPlateHandler should set handler to carHandler if plate length is 7", () => {
@@ -314,7 +315,7 @@ describe("number plate module", () => {
 	});
 
 	it("plate should expose info & isValid to the user", () => {
-		const vehicle = plate("12ب45147");
+		const vehicle = getNumberPlateInfo("12ب45147");
 
 		expect(vehicle.info).toBeTruthy();
 		expect(vehicle.isValid).toBeDefined();

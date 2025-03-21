@@ -2,6 +2,53 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0-beta.0](https://github.com/persian-tools/persian-tools/compare/v3.6.0...v4.0.0-beta.0) (2025-02-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate to pnpm and unbuild as builder
+
+### Features
+
+* change package-manager to pnpm and upgrade deps ([8050daf](https://github.com/persian-tools/persian-tools/commit/8050daf1fb73ae715769e75981dac3ab24b01769))
+* enhance wordsToNumber functionality with new options and refactored its unit tests ([ccfa377](https://github.com/persian-tools/persian-tools/commit/ccfa377963eb0b025cac9d4af7e858f9ba604eec))
+* migrate to pnpm and unbuild as builder ([0a88116](https://github.com/persian-tools/persian-tools/commit/0a881169299346084eac1651469c793383f439c5))
+* updated regexes and remove unused codes and eslint rules ([f212862](https://github.com/persian-tools/persian-tools/commit/f212862ecf172dd4f1fe845b116c1d6d6bbaeac4))
+
+
+### Bug Fixes
+
+* typedoc wrong options due to the upgrade process ([158fe84](https://github.com/persian-tools/persian-tools/commit/158fe842da0370b723c5d8a4d9e7a4a761ba6b11))
+* **VerifyIranianNationalId:** issues [#379](https://github.com/persian-tools/persian-tools/issues/379) and enhance performance and improved test coverage ([7025d06](https://github.com/persian-tools/persian-tools/commit/7025d06cbd9a81621019c89594c2803222e0d9a1))
+
+## [3.6.0](https://github.com/persian-tools/persian-tools/compare/v3.5.2...v3.6.0) (2024-12-09)
+
+
+### Features
+
+* add google idx config ([65ed6ea](https://github.com/persian-tools/persian-tools/commit/65ed6eaa26c3f310caf3ad86f9fa7bc4a50a529a))
+* find province form coordinate module ([#361](https://github.com/persian-tools/persian-tools/issues/361)) ([e05d9c9](https://github.com/persian-tools/persian-tools/commit/e05d9c97593e575562e793d3cc2889e468763fec))
+* **PhoneNumber:** added Aptel mobile code ([#370](https://github.com/persian-tools/persian-tools/issues/370)) ([346d4f9](https://github.com/persian-tools/persian-tools/commit/346d4f9eee7d93b8b25db4f9788a796c8fe87ad2))
+* remove circular deps and minor improvements ([da2228d](https://github.com/persian-tools/persian-tools/commit/da2228d6974b8966fa81c77be9920d834142df20))
+* upgrade deps and migrate eslint to v9 ([b254769](https://github.com/persian-tools/persian-tools/commit/b2547697d097efc8d1c9cbe2b9cb3f423ece9cda))
+
+
+### Bug Fixes
+
+* **AddCommas:** regex security issue in formatter ([158deff](https://github.com/persian-tools/persian-tools/commit/158deff4923d50d10d684ac69479f7148ec4bf46))
+* irGeoJSON file name import ([#368](https://github.com/persian-tools/persian-tools/issues/368)) ([3ae8110](https://github.com/persian-tools/persian-tools/commit/3ae811018e8677034be92b353663a7528497c26f))
+* validate nationalId first 3 digits ([#354](https://github.com/persian-tools/persian-tools/issues/354)) ([ef11174](https://github.com/persian-tools/persian-tools/commit/ef1117436283c84969d84d586a6bbc64835b1ee3))
+
+### [3.5.2](https://github.com/persian-tools/persian-tools/compare/v3.5.1...v3.5.2) (2024-01-09)
+
+### [3.5.1](https://github.com/persian-tools/persian-tools/compare/v3.5.0...v3.5.1) (2023-12-29)
+
+
+### Bug Fixes
+
+* **toPersianChars:** wrong result in converting ی | reported by [#344](https://github.com/persian-tools/persian-tools/issues/344) ([4e2c6c8](https://github.com/persian-tools/persian-tools/commit/4e2c6c8392b77016eb4d89aaf5b82d456fd99a34))
+
 ## [3.5.0](https://github.com/persian-tools/persian-tools/compare/v3.4.1...v3.5.0) (2023-08-05)
 
 
