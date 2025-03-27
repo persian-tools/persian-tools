@@ -1,3 +1,6 @@
+import config from "../../config";
+const baseUrl = config.baseUrl;
+
 export interface ShebaProcess {
 	normal: string;
 	formatted: string;
@@ -12,6 +15,7 @@ export interface ShebaResult {
 	accountNumberAvailable: boolean;
 	formattedAccountNumber?: string;
 	process?: (str: string) => ShebaProcess;
+	logo: string;
 }
 export type ShebaMapCodes = Record<string, ShebaResult>;
 export const shebaMapCodes: ShebaMapCodes = {
@@ -21,6 +25,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Central Bank of Iran",
 		persianName: "بانک مرکزی جمهوری اسلامی ایران",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Bank_Markazi.svg`,
 	},
 	11: {
 		code: "011",
@@ -28,6 +33,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Sanat O Madan Bank",
 		persianName: "بانک صنعت و معدن",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Sanat_Madan.svg`,
 	},
 	12: {
 		code: "012",
@@ -35,6 +41,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Mellat Bank",
 		persianName: "بانک ملت",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Mellat.svg`,
 	},
 	13: {
 		code: "013",
@@ -42,6 +49,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Refah Bank",
 		persianName: "بانک رفاه کارگران",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Refah.svg`,
 	},
 	14: {
 		code: "014",
@@ -49,6 +57,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Maskan Bank",
 		persianName: "بانک مسکن",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Maskan.svg`,
 	},
 	15: {
 		code: "015",
@@ -56,6 +65,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Sepah Bank",
 		persianName: "بانک سپه",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Sepah.svg`,
 	},
 	16: {
 		code: "016",
@@ -63,6 +73,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Keshavarzi",
 		persianName: "بانک کشاورزی",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Keshavarzi.svg`,
 	},
 	17: {
 		code: "017",
@@ -70,6 +81,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Melli",
 		persianName: "بانک ملی ایران",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Melli.svg`,
 	},
 	18: {
 		code: "018",
@@ -77,6 +89,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Tejarat Bank",
 		persianName: "بانک تجارت",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Tejarat.svg`,
 	},
 	19: {
 		code: "019",
@@ -84,6 +97,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Saderat Bank",
 		persianName: "بانک صادرات ایران",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Saderat.svg`,
 	},
 	20: {
 		code: "020",
@@ -91,6 +105,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Tose Saderat Bank",
 		persianName: "بانک توسعه صادرات",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Tosee_Saderat.svg`,
 	},
 	21: {
 		code: "021",
@@ -98,6 +113,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Post Bank",
 		persianName: "پست بانک ایران",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Postbank.svg`,
 	},
 	22: {
 		code: "022",
@@ -105,6 +121,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Tosee Taavon Bank",
 		persianName: "بانک توسعه تعاون",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Tosee_Taavon.svg`,
 	},
 	51: {
 		code: "051",
@@ -112,6 +129,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Tosee Bank",
 		persianName: "موسسه اعتباری توسعه",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Tosee.svg`,
 	},
 	52: {
 		code: "052",
@@ -119,6 +137,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Ghavamin Bank",
 		persianName: "بانک قوامین",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Ghavamin.svg`,
 	},
 	53: {
 		code: "053",
@@ -126,6 +145,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Karafarin Bank",
 		persianName: "بانک کارآفرین",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Karafarin.svg`,
 	},
 	54: {
 		code: "054",
@@ -142,6 +162,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 				formatted: formatted,
 			};
 		},
+		logo: `${baseUrl}/Parsian.svg`,
 	},
 	55: {
 		code: "055",
@@ -149,6 +170,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Eghtesad Novin Bank",
 		persianName: "بانک اقتصاد نوین",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Eghtesad_Novin.svg`,
 	},
 	56: {
 		code: "056",
@@ -156,6 +178,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Saman Bank",
 		persianName: "بانک سامان",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Saman.svg`,
 	},
 	57: {
 		code: "057",
@@ -177,6 +200,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 				formatted: formatted,
 			};
 		},
+		logo: `${baseUrl}/Pasargad.svg`,
 	},
 	58: {
 		code: "058",
@@ -184,6 +208,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Sarmayeh Bank",
 		persianName: "بانک سرمایه",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Sarmayeh.svg`,
 	},
 	59: {
 		code: "059",
@@ -191,6 +216,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Sina Bank",
 		persianName: "بانک سینا",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Sina.svg`,
 	},
 	60: {
 		code: "060",
@@ -198,6 +224,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Mehr Iran Bank",
 		persianName: "بانک مهر ایران",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Mehr_Iran.svg`,
 	},
 	61: {
 		code: "061",
@@ -216,6 +243,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 				formatted: str,
 			};
 		},
+		logo: `${baseUrl}/Shahr.svg`,
 	},
 	62: {
 		code: "062",
@@ -223,6 +251,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Ayandeh Bank",
 		persianName: "بانک آینده",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Ayandeh.svg`,
 	},
 	63: {
 		code: "063",
@@ -230,6 +259,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Ansar Bank",
 		persianName: "بانک انصار",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Ansar.svg`,
 	},
 	64: {
 		code: "064",
@@ -237,6 +267,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Gardeshgari Bank",
 		persianName: "بانک گردشگری",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Gardeshgari.svg`,
 	},
 	65: {
 		code: "065",
@@ -244,6 +275,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Hekmat Iranian Bank",
 		persianName: "بانک حکمت ایرانیان",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Hekmat.svg`,
 	},
 	66: {
 		code: "066",
@@ -251,6 +283,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Dey Bank",
 		persianName: "بانک دی",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Dey.svg`,
 	},
 	69: {
 		code: "069",
@@ -258,6 +291,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Iran Zamin Bank",
 		persianName: "بانک ایران زمین",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Iran_Zamin.svg`,
 	},
 	70: {
 		code: "070",
@@ -265,6 +299,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Resalat Bank",
 		persianName: "بانک قرض الحسنه رسالت",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Resalat.svg`,
 	},
 	73: {
 		code: "073",
@@ -272,6 +307,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Kosar Credit Institute",
 		persianName: "موسسه اعتباری کوثر",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Kosar.svg`,
 	},
 	75: {
 		code: "075",
@@ -279,6 +315,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Melal Credit Institute",
 		persianName: "موسسه اعتباری ملل",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Melall.svg`,
 	},
 	78: {
 		code: "078",
@@ -286,6 +323,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Middle East Bank",
 		persianName: "بانک خاورمیانه",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Khavar_Mianeh.svg`,
 	},
 	80: {
 		code: "080",
@@ -293,6 +331,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Noor Credit Institution",
 		persianName: "موسسه اعتباری نور",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Noor.svg`,
 	},
 	79: {
 		code: "079",
@@ -300,6 +339,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Mehr Eqtesad Bank",
 		persianName: "بانک مهر اقتصاد",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Mehr_Eghtesad.svg`,
 	},
 	90: {
 		code: "090",
@@ -307,6 +347,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Mehr Iran Bank",
 		persianName: "بانک مهر ایران",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Mehr_Iran.svg`,
 	},
 	95: {
 		code: "095",
@@ -314,5 +355,6 @@ export const shebaMapCodes: ShebaMapCodes = {
 		name: "Iran and Venezuela Bank",
 		persianName: "بانک ایران و ونزوئلا",
 		accountNumberAvailable: false,
+		logo: `${baseUrl}/Iran_Venezuela.svg`,
 	},
 };
