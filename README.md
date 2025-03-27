@@ -338,7 +338,8 @@ getShebaInfo("IR820540102680020817909002");
     "code": "054",
     "accountNumberAvailable": true,
     "accountNumber": "020817909002",
-    "formattedAccountNumber": "002-00817909-002"
+    "formattedAccountNumber": "002-00817909-002",
+    "logo": 'https://ir-banks.github.io/logos/banks/Parsian.svg'
   }
 */
 ```
