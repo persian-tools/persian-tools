@@ -58,7 +58,9 @@ export default [
 			"security/detect-possible-timing-attacks": "off",
 			"prettier/prettier": [
 				"error",
-				{},
+				{
+					endOfLine: "auto",
+				},
 				{
 					usePrettierrc: true,
 				},
