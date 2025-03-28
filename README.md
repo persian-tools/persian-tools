@@ -225,14 +225,29 @@ verifyIranianLegalId(10380284790); // true
 getPlaceByIranNationalId("0084575948").city; // "تهران مرکزی"
 ```
 
-### Bank number validation and get the name of the bank by bank account number
+### Bank number validation and get the name of the bank or logo by bank account number
 
 ```javascript
-import { verifyCardNumber, getBankNameFromCardNumber } from "@persian-tools/persian-tools";
+import {
+	verifyCardNumber,
+	getBankNameFromCardNumber,
+	getBankLogoAndNameFromCardNumber,
+} from "@persian-tools/persian-tools";
 
 verifyCardNumber(6037701689095443); // true
 
 getBankNameFromCardNumber("6219861034529007"); // "بانک سامان"
+getBankNameFromCardNumber("62198"); // "بانک سامان"
+
+getBankLogoAndNameFromCardNumber("6219861034529007");
+getBankLogoAndNameFromCardNumber("621986");
+/*
+output:
+{
+    name: 'بانک سامان',
+    logo: 'https://ir-banks.github.io/logos/banks/Saman.svg',
+}
+*/
 ```
 
 ### Validate the correctness of the text of the Persian language and clear the Arabic letters in the Persian text.
