@@ -1,5 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { isShebaValid, getShebaInfo, shebaIso7064Mod97 } from "../src/modules/sheba";
+import config from "../src/config";
+const baseUrl = config.baseUrl;
 
 describe("Sheba", () => {
 	it("isShebaValid Should return true", () => {
@@ -31,6 +33,7 @@ describe("Sheba", () => {
 				nickname: "shahr",
 				accountNumber: "700796858044",
 				code: "061",
+				logo: `${baseUrl}/Shahr.svg`,
 			}),
 		);
 		expect(getShebaInfo("IR820540102680020817909002")).toEqual(
@@ -38,6 +41,7 @@ describe("Sheba", () => {
 				nickname: "parsian",
 				accountNumber: "020817909002",
 				code: "054",
+				logo: `${baseUrl}/Parsian.svg`,
 			}),
 		);
 		expect(getShebaInfo("IR550570022080013447370101")).toEqual({
@@ -48,6 +52,7 @@ describe("Sheba", () => {
 			name: "Pasargad Bank",
 			nickname: "pasargad",
 			persianName: "بانک پاسارگاد",
+			logo: `${baseUrl}/Pasargad.svg`,
 		});
 	});
 
