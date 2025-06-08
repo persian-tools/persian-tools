@@ -1,4 +1,5 @@
 import { postalCodeRanges } from "./postalCodeRanges.skip";
+import { isValidPostalCode } from "./validator";
 
 export interface LocationInfo {
 	state: string;
@@ -13,6 +14,8 @@ export interface LocationInfo {
  * @return LocationInfo | null | undefined
  */
 export function getLocationFromPostalCode(postalCode: string): LocationInfo | null {
+	if (!isValidPostalCode(postalCode)) return null;
+
 	const prefix = parseInt(postalCode.substring(0, 5));
 
 	for (const range of postalCodeRanges) {
