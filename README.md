@@ -584,6 +584,27 @@ province.en; // "Tehran"
 const { fa, en } = findProvinceFromCoordinate(point);
 ```
 
+### Find state and city information from postal code
+
+**Usage**
+
+> Retrieve the state and city corresponding to a given 10-digit Iranian postal code.
+
+```javascript
+import { getLocationFromPostalCode } from "@persian-tools/persian-tools";
+
+// Retrieve location information for a specific postal code
+const location = getLocationFromPostalCode("4513869999");
+
+location.state; // "زنجان"
+location.city;  // "ابهر"
+
+// Using destructuring
+const { state, city } = getLocationFromPostalCode("4513869999");
+
+```
+
+
 ### Todo
 
 - [ ] Write Jalaali and Gregorian functions to convert Date together.
