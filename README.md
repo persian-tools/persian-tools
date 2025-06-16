@@ -449,6 +449,19 @@ Thanks to these amazing people ([emoji key](https://allcontributors.org/docs/en/
     <td align="center"><a href="http://codewars.com/users/KavehKarami"><img src="https://avatars.githubusercontent.com/u/48356643?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Kaveh Karami</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=KavehKarami" title="Code">💻</a></td>
     <td align="center"><a href="https://damoon.pro"><img src="https://avatars.githubusercontent.com/u/64106883?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mehdi Shah abbasian</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=shahabbasian" title="Documentation">📖</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/Amirali-Yavari"><img src="https://avatars.githubusercontent.com/u/97870997?v=4?s=100" width="100px;" alt=""/><br /><sub><b>amirali yavari</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=Amirali-Yavari" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/TahaNamdar"><img src="https://avatars.githubusercontent.com/u/42145229?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Taha Namdar</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=TahaNamdar" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/alirezasariri78"><img src="https://avatars.githubusercontent.com/u/131848129?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Alireza Sariri</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=alirezasariri78" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/geek-sajjad"><img src="https://avatars.githubusercontent.com/u/30924359?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sajad Sohrabi</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=geek-sajjad" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/pooooriya"><img src="https://avatars.githubusercontent.com/u/65160744?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Pouriya Babaali</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=pooooriya" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/norouzex"><img src="https://avatars.githubusercontent.com/u/62938584?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mohammad norouzi</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=norouzex" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/thevilx"><img src="https://avatars.githubusercontent.com/u/80054917?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mohamad Amin Mirzaei</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=thevilx" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/Moeinmn"><img src="https://avatars.githubusercontent.com/u/69215813?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Moein Moeinnia</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=Moeinmn" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/ahangarha"><img src="https://avatars.githubusercontent.com/u/11241315?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mostafa Ahangarha</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=ahangarha" title="Code">💻</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-restore -->
@@ -463,12 +476,6 @@ Thanks to these amazing people ([emoji key](https://allcontributors.org/docs/en/
 ## 📄 License
 
 **MIT License** - see [LICENSE](./LICENSE) for details.
-
----
-
-## 🙏 Stargazers
-
-[![Stargazers repo roster for @persian-tools/persian-tools](https://reporoster.com/stars/persian-tools/persian-tools)](https://github.com/persian-tools/persian-tools/stargazers)
 
 ---
 
