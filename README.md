@@ -30,8 +30,8 @@ Persian Tools provides **25+ utilities** for Persian language processing:
 - **Ordinal Numbers**: Convert to/from ordinal forms
 
 ### 🏛️ Validation & Verification  
-- **National ID**: Validate Iranian national codes (کد ملی)
-- **Legal ID**: Validate Iranian legal entity IDs (شناسه حقوقی)
+- **National ID**: Validate & generate Iranian national codes (کد ملی)
+- **Legal ID**: Validate Iranian legal entity IDs (شناسه حقوقی)  
 - **Phone Numbers**: Validate & extract operator info
 - **Bank Cards**: Validate & identify bank names
 - **IBAN/Sheba**: Validate Iranian bank account numbers
@@ -147,7 +147,7 @@ wordsToNumber("یگصد و بنجاه هزار", { fuzzy: true }); // 150000
 <summary><strong>National ID Validation</strong> - Validate Iranian national codes</summary>
 
 ```typescript
-import { verifyIranianNationalId, getPlaceByIranNationalId } from '@persian-tools/persian-tools';
+import { verifyIranianNationalId, getPlaceByIranNationalId, createIranianNationalId } from '@persian-tools/persian-tools';
 
 // Validation
 verifyIranianNationalId("0499370899"); // true
@@ -156,6 +156,48 @@ verifyIranianNationalId("1234567890"); // false
 // Location lookup
 getPlaceByIranNationalId("0084575948"); 
 // { city: "تهران مرکزی", province: "تهران" }
+
+// Generation
+createIranianNationalId(); // "0499370899"
+createIranianNationalId({ preventRepeatedDigits: true }); // "1234567890"
+```
+</details>
+
+<details>
+<summary><strong>National ID Generation</strong> - Generate valid Iranian national codes</summary>
+
+```typescript
+import { 
+  createIranianNationalId, 
+  createIranianNationalIdDetailed,
+  validateNationalIdChecksum 
+} from '@persian-tools/persian-tools';
+
+// Basic generation
+createIranianNationalId(); // "0499370899"
+
+// Generate without repeated digits
+createIranianNationalId({ preventRepeatedDigits: true }); // "1234567890"
+
+// Detailed generation with metadata
+const result = createIranianNationalIdDetailed({
+  preventRepeatedDigits: true,
+  maxRetries: 50
+});
+
+console.log(result.nationalId);         // "1234567890"  
+console.log(result.checkDigit);         // 0
+console.log(result.attempts);           // 1
+console.log(result.hasRepeatedDigits);  // false
+console.log(result.digits);             // [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+
+// Validate generated IDs
+validateNationalIdChecksum(result.nationalId); // true
+
+// Custom random generator (for testing)
+createIranianNationalId({
+  randomGenerator: () => 0.5 // Always returns 0.5
+});
 ```
 </details>
 
