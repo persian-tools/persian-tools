@@ -22,4 +22,9 @@ it("numberToWords", () => {
 	expect(numberToWords(9006199254740992)).toEqual(
 		"نه کوآدریلیون و شش تریلیون و صد و نود و نه میلیارد و دویست و پنجاه و چهار میلیون و هفت صد و چهل هزار و نه صد و نود و دو",
 	);
+
+	// Test locale independence - verify fix for Issue #404
+	// This specifically tests that numberToWords works when system locale is Persian
+	expect(numberToWords(1000)).toEqual("یک هزار");
+	expect(numberToWords(12345)).toEqual("دوازده هزار و سیصد و چهل و پنج");
 });

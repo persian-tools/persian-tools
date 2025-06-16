@@ -43,7 +43,7 @@ export const numberToWords: NumberToWordsType = (numberValue, options) => {
 		const getUnitName = (numberOfZeros: number) =>
 			numberOfZeros === 0 ? "" : numbersWordList[Number.parseInt(`1${"0".repeat(numberOfZeros)}`)];
 
-		const seperated = Number(num).toLocaleString().split(",");
+		const seperated = Number(num).toLocaleString("en-US").split(",");
 
 		const numbersArr = seperated
 			.map((value, index) => {
