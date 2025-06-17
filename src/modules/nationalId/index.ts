@@ -736,3 +736,14 @@ export interface VerifyIranianNationalIdOptions {
 	 */
 	checkPrefix?: boolean;
 }
+
+// Export National ID generation functions
+export {
+	createIranianNationalId,
+	createIranianNationalIdDetailed,
+	createIranianRoundNationalId,
+	isValidNationalIdFormat,
+	validateNationalIdChecksum,
+	type NationalIdGenerationOptions,
+	type NationalIdGenerationResult,
+} from "./create-national-id";
