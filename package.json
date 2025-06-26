@@ -104,5 +104,5 @@
 		"npm": ">=7.0.0",
 		"pnpm": ">=9.0.0"
 	},
-	"packageManager": "pnpm@10.12.1"
+	"packageManager": "pnpm@10.12.4"
 }
