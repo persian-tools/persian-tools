@@ -1215,7 +1215,7 @@ export default [
 		parentCode: 17,
 	},
 	{
-		code: "252",
+		code: "252-254",
 		city: "استهبان",
 		parentCode: 17,
 	},

@@ -97,6 +97,11 @@ describe("verifyIranianNationalId Function Tests", () => {
 			// Known example that used to have prefix issues
 			expect(verifyIranianNationalId("4400276201")).toBe(true);
 		});
+
+		it("21) should return true for '2540201288' - issue #413 regression test", () => {
+			// Test for issue #413: This national ID should be valid
+			expect(verifyIranianNationalId("2540201288")).toBe(true);
+		});
 	});
 
 	/**
