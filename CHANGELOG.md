@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0](https://github.com/persian-tools/persian-tools/compare/v4.0.0-beta.0...v4.0.0) (2025-09-08)
+
+
+### Features
+
+* add contributors to README and .all-contributorsrc ([32c2765](https://github.com/persian-tools/persian-tools/commit/32c276554dbb91a3ee552282db62c39015ed0d38))
+* add Iranian National ID generation and validation functions ([4a11f5f](https://github.com/persian-tools/persian-tools/commit/4a11f5f1ff0fad83e7501edb067e556bcc28b365))
+* add slugify function and related utilities for Persian text ([b054146](https://github.com/persian-tools/persian-tools/commit/b054146932ce200dd8a4d182dec8a9cec332f562))
+* add text analysis module with statistics and language detection ([1bfece3](https://github.com/persian-tools/persian-tools/commit/1bfece3edfe2dd77e9c2a6bee5351a1c22b4159b))
+* enhance numberToWords ([e32892d](https://github.com/persian-tools/persian-tools/commit/e32892dcd688db506e369e252fd7f704725cc5e8))
+* update README with new utilities for Persian text processing ([25269ca](https://github.com/persian-tools/persian-tools/commit/25269ca32e4917571aaacb6d5b39c969d94c0178))
+
+
+### Bug Fixes
+
+* ensure locale independence in numberToWords function [#404](https://github.com/persian-tools/persian-tools/issues/404) ([6a04d18](https://github.com/persian-tools/persian-tools/commit/6a04d18afa5e3efeb00745e50e45626e7cde3411))
+* update banks code ([#397](https://github.com/persian-tools/persian-tools/issues/397)) ([2854648](https://github.com/persian-tools/persian-tools/commit/285464890040c9add67e39e8cd9d91c7f8fec14e))
+
 ## [4.0.0-beta.0](https://github.com/persian-tools/persian-tools/compare/v3.6.0...v4.0.0-beta.0) (2025-02-08)
 
 
