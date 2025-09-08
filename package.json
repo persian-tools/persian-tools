@@ -28,9 +28,9 @@
 		"coverage:ui": "vitest watch --coverage --ui",
 		"lint": "eslint ./src",
 		"lint:fix": "pnpm run lint --fix",
-		"prerelease": "pnpm run test",
-		"release": "pnpm run build",
-		"postrelease": "standard-version && pnpm run generate:docs",
+		"prerelease": "pnpm run test && pnpm run build",
+		"release": "standard-version && pnpm run generate:docs",
+		"postrelease": "git push --follow-tags origin master && npm publish",
 		"release:beta": "pnpm run build",
 		"postrelease:beta": "standard-version --prerelease beta",
 		"prettier": "prettier --write 'src/**/*.{ts,json,js}' --config .prettierrc.js",
@@ -104,5 +104,8 @@
 		"npm": ">=7.0.0",
 		"pnpm": ">=9.0.0"
 	},
-	"packageManager": "pnpm@10.12.1"
+	"packageManager": "pnpm@10.12.1",
+  "publishConfig": {
+    "access": "public"
+  }
 }
