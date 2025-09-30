@@ -88,7 +88,7 @@
 		"typescript": "^5.9.2",
 		"typescript-eslint": "^8.45.0",
 		"unbuild": "^3.6.1",
-		"vite": "^7.1.7",
+		"vite": "^6.3.5",
 		"vitest": "^3.2.4"
 	},
 	"dependencies": {
