@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.0.4](https://github.com/persian-tools/persian-tools/compare/v4.0.3...v4.0.4) (2025-09-30)
+
 ### [4.0.3](https://github.com/persian-tools/persian-tools/compare/v4.0.2...v4.0.3) (2025-09-08)
 
 ### [4.0.2](https://github.com/persian-tools/persian-tools/compare/v4.0.1...v4.0.2) (2025-09-08)
