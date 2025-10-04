@@ -23,5 +23,6 @@ export * from "./modules/timeAgo";
 export * from "./modules/remainingTime";
 export * from "./modules/findCapitalByProvince";
 export * from "./modules/findProvinceFromCoordinate";
+export * from "./modules/getLocationFromPostalCode";
 export * from "./modules/slugify";
 export * from "./modules/textAnalyzer";
