@@ -18,7 +18,7 @@ export default defineBuildConfig({
 	],
 	outDir: "build",
 	declaration: "compatible",
-	sourcemap: true,
+	sourcemap: false,
 	clean: true,
 	failOnWarn: false,
 	rollup: {

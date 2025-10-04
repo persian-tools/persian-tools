@@ -21,7 +21,7 @@
 
 ## ✨ Features
 
-Persian Tools provides **25+ utilities** for Persian language processing:
+Persian Tools provides **27+ utilities** for Persian language processing:
 
 ### 🔢 Numbers & Text
 - **Number Conversion**: Persian words ↔ numbers with fuzzy matching
@@ -53,6 +53,8 @@ Persian Tools provides **25+ utilities** for Persian language processing:
 - **URL Fixing**: Decode Persian URLs
 - **Half-Space**: Fix Persian typography
 - **Time Utilities**: Persian time-ago & remaining time
+- **Slugify**: Generate URL-safe slugs from Persian text
+- **Text Analysis**: Comprehensive Persian text analysis
 
 ---
 
@@ -331,6 +333,71 @@ timeAgo("1400/03/17 17:55:00"); // "5 دقیقه قبل"
 // Remaining time
 remainingTime("2025-12-31T23:59:59Z").toString(); 
 // "۱ سال و ۲ ماه و ۱۵ روز"
+```
+</details>
+
+<details>
+<summary><strong>Slugify</strong> - Generate URL-safe slugs from Persian text</summary>
+
+```typescript
+import { slugify, createSlug, slugifySimple } from '@persian-tools/persian-tools';
+
+// Basic usage
+slugify("سلام دنیا"); // "سلام-دنیا"
+slugify("چگونه برنامه‌نویسی یاد بگیریم؟"); // "چگونه-برنامه-نویسی-یاد-بگیریم"
+
+// Custom options
+slugify("سلام دنیا", {
+  separator: "_",     // Use underscore instead of dash
+  maxLength: 20,      // Limit length
+  lowercase: false    // Don't convert to lowercase
+}); // "سلام_دنیا"
+
+// Preserve numbers
+slugify("سال ۱۴۰۰", { preserveNumbers: true }); // "سال-۱۴۰۰"
+
+// Helper functions
+createSlug("مقاله جدید"); // "مقاله-جدید"
+slugifySimple("تست ساده"); // "تست-ساده"
+```
+</details>
+
+<details>
+<summary><strong>Text Analysis</strong> - Comprehensive Persian text analysis</summary>
+
+```typescript
+import { analyzeText, getTextSummary, getTextComplexity, cleanText } from '@persian-tools/persian-tools';
+
+// Full analysis
+const analysis = analyzeText("این یک متن فارسی است.");
+// {
+//   statistics: {
+//     totalWords: 5,
+//     totalCharacters: 20,
+//     persianCharacters: 15,
+//     // ... more stats
+//   },
+//   language: {
+//     primaryLanguage: "persian",
+//     confidence: 95,
+//     isPurePersian: true
+//   },
+//   readability: {
+//     complexity: "ساده",
+//     readingTime: 1,
+//     averageWordsPerSentence: 5
+//   },
+//   suggestions: [...]
+// }
+
+// Quick helpers
+getTextSummary("سلام دنیا"); 
+// "متن شامل 2 کلمه در 1 جمله است. زبان اصلی: فارسی (100% اطمینان). زمان مطالعه تقریبی: 1 دقیقه."
+
+getTextComplexity("این جمله ساده است"); // "ساده"
+
+// Text cleaning
+cleanText("سَلامٌ   123   دنیا"); // "سلام ۱۲۳ دنیا"
 ```
 </details>
 
