@@ -468,6 +468,14 @@ pnpm lint:fix     # Fix linting issues
 
 ---
 
+## In Memory of @mediv0 🕊️
+
+This project is dedicated to the memory of [@mediv0](https://github.com/mediv0),  
+a valued contributor whose passion and work helped shape Persian Tools.  
+Your code lives on, and you will always be remembered in our community. ❤️
+
+---
+
 ## 🤝 Contributing
 
 We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md) for details.
