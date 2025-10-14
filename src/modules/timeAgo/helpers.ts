@@ -80,6 +80,7 @@ export function getTimeNow(): number {
 		hour: "2-digit",
 		minute: "2-digit",
 		second: "2-digit",
+		timeZone: "Asia/Tehran",
 	});
 
 	// **Standardize** the fa-IR string to guaranteed "yyyy/mm/dd hh:mm:ss"
