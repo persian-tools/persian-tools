@@ -1,4 +1,4 @@
-pnpm prettier:ci
+pnpm format:ci
 pnpm lint
 pnpm test
 git update-index --again

@@ -1,7 +1,7 @@
 prepare-release:
 	pnpm install
 	pnpm lint
-	pnpm prettier:ci
+	pnpm format:ci
 	pnpm test
 	pnpm build
 .PHONY: prepare-release
