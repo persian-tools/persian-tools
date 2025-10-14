@@ -4,17 +4,7 @@
     "socials": {
       "github": "https://github.com/persian-tools/persian-tools",
       "linkedin": "https://www.linkedin.com/company/persian-tools"
-    },
-    "links": [
-      {
-        "href": "https://github.com/persian-tools/persian-tools",
-        "label": "GitHub"
-      },
-      {
-        "href": "https://www.npmjs.com/package/persian-tools",
-        "label": "NPM"
-      }
-    ]
+    }
   },
   "api": {
     "playground": {
@@ -132,9 +122,5 @@
   "favicon": {
     "light": "https://raw.githubusercontent.com/persian-tools/persian-tools/master/images/logo.png",
     "dark": "https://raw.githubusercontent.com/persian-tools/persian-tools/master/images/logo.png"
-  },
-  "colors": {
-    "primary": "#ff0000"
-  },
-  "navigation": {}
+  }
 }
