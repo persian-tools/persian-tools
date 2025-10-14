@@ -2,8 +2,8 @@
 	<p align="center">
 		<img src="./images/logo.png" width="200" alt="PersianTools logo" />
 	</p>
-	<h1 align="center">🇮🇷 Persian Tools</h1>
-	<p align="center">A modern, <strong>library-agnostic</strong> TypeScript utility for Persian language features.</p>
+	<h1 align="center">🇮🇷 Persian Tools — The Complete TypeScript Toolkit for Persian (Farsi) Apps</h1>
+	<p align="center">A comprehensive, <strong>library-agnostic</strong> TypeScript toolkit for Persian (Farsi) text, numbers, validation, and locale utilities — runs in Node.js, Bun, and the browser.</p>
 
 [![CI/CD](https://github.com/persian-tools/persian-tools/workflows/Continuous%20Integration/badge.svg)](https://github.com/persian-tools/persian-tools/actions)
 [![codecov](https://codecov.io/gh/persian-tools/persian-tools/branch/master/graph/badge.svg)](https://codecov.io/gh/persian-tools/persian-tools)
