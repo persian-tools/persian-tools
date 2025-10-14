@@ -26,7 +26,7 @@ Persian Tools provides **27+ utilities** for Persian language processing:
 ### 🔢 Numbers & Text
 - [**Number Conversion**](#ex-number-conversion): Persian words ↔ numbers with fuzzy matching
 - [**Digit Conversion**](#ex-digit-conversion): Persian ↔ Arabic ↔ English digits
-- [**Comma Formatting**](#ex-number-conversion): Add/remove thousands separators
+- [**Comma Formatting**](#ex-number-conversion): Add/remove thousands of separators
 - [**Ordinal Numbers**](#ex-number-conversion): Convert to/from ordinal forms
 
 ### 🏛️ Validation & Verification  
