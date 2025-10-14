@@ -284,6 +284,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "hamidne",
+      "name": "Hamid Nasr",
+      "avatar_url": "https://avatars.githubusercontent.com/u/53326634?v=4",
+      "profile": "https://hamidne.ir",
+      "contributions": [
+        "code",
+        "content"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -291,5 +301,7 @@
   "projectOwner": "persian-tools",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": true,
+  "commitType": "docs",
+  "commitConvention": "angular"
 }
