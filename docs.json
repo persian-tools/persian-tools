@@ -1,0 +1,146 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "footer": {
+    "socials": {
+      "github": "https://github.com/persian-tools/persian-tools",
+      "linkedin": "https://www.linkedin.com/company/persian-tools"
+    }
+  },
+  "api": {
+    "playground": {
+      "display": "interactive"
+    },
+    "params": {
+      "expanded": "closed"
+    }
+  },
+  "background": {
+    "color": {
+      "light": "#fafafa",
+      "dark": "#0a0a0a"
+    },
+    "decoration": "grid"
+  },
+  "icons": {
+    "library": "lucide"
+  },
+  "theme": "mint",
+  "name": "Persian Tools",
+  "description": "A comprehensive, high-performance TypeScript toolkit for Persian (Farsi) text, numbers, validation, and locale utilities — works in Node.js, Bun, and the browser.",
+  "seo": {
+    "metatags": {
+      "title": "Persian Tools",
+      "description": "A comprehensive, high-performance TypeScript toolkit for Persian (Farsi) text, numbers, validation, and locale utilities — works in Node.js, Bun, and the browser.",
+      "image": "https://raw.githubusercontent.com/persian-tools/persian-tools/master/images/logo.png",
+      "twitter:card": "summary_large_image",
+      "twitter:site": "@persian_tools",
+      "twitter:creator": "@persian_tools",
+      "twitter:title": "Persian Tools",
+      "twitter:description": "A comprehensive, high-performance TypeScript toolkit for Persian (Farsi) text, numbers, validation, and locale utilities — works in Node.js, Bun, and the browser.",
+      "twitter:image": "https://raw.githubusercontent.com/persian-tools/persian-tools/master/images/logo.png",
+      "og:title": "Persian Tools",
+      "og:description": "A comprehensive, high-performance TypeScript toolkit for Persian (Farsi) text, numbers, validation, and locale utilities — works in Node.js, Bun, and the browser.",
+      "og:image": "https://raw.githubusercontent.com/persian-tools/persian-tools/master/images/logo.png",
+      "og:url": "https://persian-tools.usestrict.dev/persian-tools",
+      "og:type": "website",
+      "og:site_name": "Persian Tools",
+      "og:locale": "en_US",
+      "og:locale:alternate": "fa_IR",
+      "article:author": "https://persian-tools.usestrict.dev",
+      "article:published_time": "2017-09-01T00:00:00+00:00",
+      "article:modified_time": "2025-10-01T00:00:00+00:00",
+      "article:section": "Tools",
+      "article:tag": "Persian, Language, Tools, Javascript, Typescript, persian tools, number to persian words, persian words to number, Arabic numbers to Persian, Arabic numbers to English, English numbers to Persian, Persian numbers to English, verify iranian national id, verify iranian card-number, half-space, digits convertor"
+    },
+    "indexing": "all"
+  },
+  "search": {
+    "prompt": "Search for any Persian Tools topic..."
+  },
+  "navbar": {
+    "links": [
+      {
+        "href": "https://github.com/persian-tools/persian-tools",
+        "label": "GitHub"
+      },
+      {
+        "href": "https://www.npmjs.com/package/persian-tools",
+        "label": "NPM"
+      },
+      {
+        "href": "https://persian-tools.usestrict.dev",
+        "label": "Docs"
+      },
+      {
+        "href": "https://github.com/persian-tools/persian-tools/blob/master/CONTRIBUTING.md",
+        "label": "Contribute"
+      }
+    ]
+  },
+  "interaction": {
+    "drilldown": true
+  },
+  "logo": {
+    "href": "https://persian-tools.usestrict.dev",
+    "dark": "https://raw.githubusercontent.com/persian-tools/persian-tools/master/images/logo.png",
+    "light": "https://raw.githubusercontent.com/persian-tools/persian-tools/master/images/logo.png"
+  },
+  "errors": {
+    "404": {
+      "title": "Page Not Found",
+      "description": "The page you are looking for does not exist."
+    }
+  },
+  "contextual": {
+    "options": [
+      {
+        "title": "English",
+        "description": "English version of the documentation",
+        "href": {
+          "base": "https://persian-tools.usestrict.dev",
+          "query": [
+            {
+              "key": "lang",
+              "value": "en"
+            }
+          ]
+        }
+      },
+      {
+        "title": "Persian (فارسی)",
+        "description": "Persian version of the documentation.",
+        "href": {
+          "base": "https://persian-tools.usestrict.dev",
+          "query": [
+            {
+              "key": "lang",
+              "value": "fa"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "favicon": {
+    "light": "https://raw.githubusercontent.com/persian-tools/persian-tools/master/images/logo.png",
+    "dark": "https://raw.githubusercontent.com/persian-tools/persian-tools/master/images/logo.png"
+  },
+  "colors": {
+    "primary": "#ff0000"
+  },
+  "navigation": {
+    "pages": [
+      "introduction",
+      "ex-number-conversion",
+      "ex-digit-conversion",
+      "ex-comma-formatting",
+      "ex-ordinal-numbers",
+      "ex-validation",
+      "ex-national-id",
+      "ex-phone-number",
+      "ex-bank-card",
+      "ex-iban",
+      "ex-geographic-utilities"
+    ]
+  }
+}
