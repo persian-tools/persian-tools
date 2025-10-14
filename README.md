@@ -24,37 +24,37 @@
 Persian Tools provides **27+ utilities** for Persian language processing:
 
 ### 🔢 Numbers & Text
-- **Number Conversion**: Persian words ↔ numbers with fuzzy matching
-- **Digit Conversion**: Persian ↔ Arabic ↔ English digits
-- **Comma Formatting**: Add/remove thousands separators
-- **Ordinal Numbers**: Convert to/from ordinal forms
+- [**Number Conversion**](#ex-number-conversion): Persian words ↔ numbers with fuzzy matching
+- [**Digit Conversion**](#ex-digit-conversion): Persian ↔ Arabic ↔ English digits
+- [**Comma Formatting**](#ex-number-conversion): Add/remove thousands separators
+- [**Ordinal Numbers**](#ex-number-conversion): Convert to/from ordinal forms
 
 ### 🏛️ Validation & Verification  
-- **National ID**: Validate & generate Iranian national codes (کد ملی)
-- **Legal ID**: Validate Iranian legal entity IDs (شناسه حقوقی)  
-- **Phone Numbers**: Validate & extract operator info
-- **Bank Cards**: Validate & identify bank names
-- **IBAN/Sheba**: Validate Iranian bank account numbers
+- [**National ID**](#ex-national-id): Validate & generate Iranian national codes (کد ملی)
+- [**Legal ID**](#ex-validation): Validate Iranian legal entity IDs (شناسه حقوقی)  
+- [**Phone Numbers**](#ex-phone-number): Validate & extract operator info
+- [**Bank Cards**](#ex-bank-card): Validate & identify bank names
+- [**IBAN/Sheba**](#ex-iban): Validate Iranian bank account numbers
 
 ### 🌍 Geographic & Location
-- **Place Lookup**: Find city/province by national ID
-- **Capital Cities**: Get province capitals
-- **Coordinates**: Find province from GPS coordinates
-- **Vehicle Plates**: Parse Iranian license plates
+- [**Place Lookup**](#ex-national-id): Find city/province by national ID
+- [**Capital Cities**](#ex-geographic-utilities): Get province capitals
+- [**Coordinates**](#ex-geographic-utilities): Find province from GPS coordinates
+- [**Vehicle Plates**](#ex-vehicle-plates): Parse Iranian license plates
 
 ### 💰 Financial & Utilities
-- **Bill Calculator**: Parse Iranian utility bills
-- **Bank Detection**: Identify banks from card numbers
-- **IBAN Tools**: Complete Iranian banking support
+- [**Bill Calculator**](#ex-banking): Parse Iranian utility bills
+- [**Bank Detection**](#ex-bank-card): Identify banks from card numbers
+- [**IBAN Tools**](#ex-iban): Complete Iranian banking support
 
 ### 📝 Text Processing
-- **Persian Validation**: Detect pure Persian text
-- **Character Cleanup**: Remove Arabic chars from Persian
-- **URL Fixing**: Decode Persian URLs
-- **Half-Space**: Fix Persian typography
-- **Time Utilities**: Persian time-ago & remaining time
-- **Slugify**: Generate URL-safe slugs from Persian text
-- **Text Analysis**: Comprehensive Persian text analysis
+- [**Persian Validation**](#ex-persian-text): Detect pure Persian text
+- [**Character Cleanup**](#ex-persian-text): Remove Arabic chars from Persian
+- [**URL Fixing**](#ex-text-processing): Decode Persian URLs
+- [**Half-Space**](#ex-text-processing): Fix Persian typography
+- [**Time Utilities**](#ex-time-utilities): Persian time-ago & remaining time
+- [**Slugify**](#ex-slugify): Generate URL-safe slugs from Persian text
+- [**Text Analysis**](#ex-text-analysis): Comprehensive Persian text analysis
 
 ---
 
@@ -101,6 +101,7 @@ const { numberToWords } = require('@persian-tools/persian-tools');
 
 ## 📖 API Reference
 
+<a id="ex-number-conversion"></a>
 ### 🔢 Number Conversion
 
 <details>
@@ -143,8 +144,10 @@ wordsToNumber("یگصد و بنجاه هزار", { fuzzy: true }); // 150000
 ```
 </details>
 
+<a id="ex-validation"></a>
 ### 🏛️ Validation
 
+<a id="ex-national-id"></a>
 <details>
 <summary><strong>National ID Validation</strong> - Validate Iranian national codes</summary>
 
@@ -165,6 +168,7 @@ createIranianNationalId({ preventRepeatedDigits: true }); // "1234567890"
 ```
 </details>
 
+<a id="ex-national-id-generation"></a>
 <details>
 <summary><strong>National ID Generation</strong> - Generate valid Iranian national codes</summary>
 
@@ -203,6 +207,7 @@ createIranianNationalId({
 ```
 </details>
 
+<a id="ex-phone-number"></a>
 <details>
 <summary><strong>Phone Number Validation</strong> - Iranian mobile numbers</summary>
 
@@ -223,8 +228,10 @@ phoneNumberDetail("09123456789");
 ```
 </details>
 
+<a id="ex-banking"></a>
 ### 💰 Banking & Finance
 
+<a id="ex-bank-card"></a>
 <details>
 <summary><strong>Bank Card Validation</strong> - Validate and identify Iranian bank cards</summary>
 
@@ -239,6 +246,7 @@ getBankNameFromCardNumber("6219861034529007"); // "بانک سامان"
 ```
 </details>
 
+<a id="ex-iban"></a>
 <details>
 <summary><strong>IBAN/Sheba Validation</strong> - Iranian bank account validation</summary>
 
@@ -259,8 +267,10 @@ getShebaInfo("IR820540102680020817909002");
 ```
 </details>
 
+<a id="ex-text-processing"></a>
 ### 📝 Text Processing
 
+<a id="ex-persian-text"></a>
 <details>
 <summary><strong>Persian Text Validation</strong> - Validate and clean Persian text</summary>
 
@@ -277,6 +287,7 @@ toPersianChars("علي"); // "علی" (fixes Arabic chars)
 ```
 </details>
 
+<a id="ex-digit-conversion"></a>
 <details>
 <summary><strong>Digit Conversion</strong> - Convert between number systems</summary>
 
@@ -294,8 +305,10 @@ digitsArToFa("٧٨٩"); // "۷۸۹"
 ```
 </details>
 
+<a id="ex-geographic-utilities"></a>
 ### 🌍 Geographic & Utilities
 
+<a id="ex-vehicle-plates"></a>
 <details>
 <summary><strong>Vehicle Plates</strong> - Parse Iranian license plates</summary>
 
@@ -321,6 +334,7 @@ getNumberPlateInfo(12345678).info;
 ```
 </details>
 
+<a id="ex-time-utilities"></a>
 <details>
 <summary><strong>Time Utilities</strong> - Persian time formatting</summary>
 
@@ -336,6 +350,7 @@ remainingTime("2025-12-31T23:59:59Z").toString();
 ```
 </details>
 
+<a id="ex-slugify"></a>
 <details>
 <summary><strong>Slugify</strong> - Generate URL-safe slugs from Persian text</summary>
 
@@ -362,6 +377,7 @@ slugifySimple("تست ساده"); // "تست-ساده"
 ```
 </details>
 
+<a id="ex-text-analysis"></a>
 <details>
 <summary><strong>Text Analysis</strong> - Comprehensive Persian text analysis</summary>
 
