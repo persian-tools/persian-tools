@@ -1,0 +1,228 @@
+---
+title: "Ordinal Suffix"
+description: "Add or remove ordinal suffixes to Persian numbers"
+icon: "list-ol"
+---
+
+# Ordinal Suffix
+
+Add or remove Persian ordinal suffixes (اُم/م) to numbers, converting between cardinal and ordinal forms.
+
+## Available Functions
+
+- `addOrdinalSuffix` - Add ordinal suffix to numbers
+- `removeOrdinalSuffix` - Remove ordinal suffix from text
+
+## Basic Usage
+
+```typescript
+import { addOrdinalSuffix, removeOrdinalSuffix } from '@persian-tools/persian-tools';
+
+// Add ordinal suffix
+console.log(addOrdinalSuffix('چهار'));
+// Output: "چهارم"
+
+console.log(addOrdinalSuffix('بیست و سه'));
+// Output: "بیست و سوم"
+
+// Remove ordinal suffix
+console.log(removeOrdinalSuffix('دهم'));
+// Output: "ده"
+```
+
+## API Reference
+
+### addOrdinalSuffix
+
+Add the appropriate ordinal suffix to a Persian number word.
+
+<ParamField path="input" type="string" required>
+  Persian number word (e.g., "یک", "دو", "سه")
+</ParamField>
+
+<ResponseField name="result" type="string">
+  Number with ordinal suffix (e.g., "اول", "دوم", "سوم")
+</ResponseField>
+
+```typescript
+addOrdinalSuffix('یک');      // "اول"
+addOrdinalSuffix('دو');      // "دوم"
+addOrdinalSuffix('سه');      // "سوم"
+addOrdinalSuffix('ده');      // "دهم"
+addOrdinalSuffix('صد');      // "صدم"
+```
+
+### removeOrdinalSuffix
+
+Remove ordinal suffixes from Persian text.
+
+<ParamField path="input" type="string" required>
+  Text containing ordinal numbers
+</ParamField>
+
+<ResponseField name="result" type="string">
+  Text with ordinal suffixes removed
+</ResponseField>
+
+```typescript
+removeOrdinalSuffix('اول');      // "یک"
+removeOrdinalSuffix('دوم');      // "دو"
+removeOrdinalSuffix('سوم');      // "سه"
+removeOrdinalSuffix('دهم');      // "ده"
+```
+
+## Examples
+
+### Special Forms
+
+Persian has special ordinal forms for certain numbers:
+
+```typescript
+import { addOrdinalSuffix } from '@persian-tools/persian-tools';
+
+// Special forms
+console.log(addOrdinalSuffix('یک'));
+// "اول" (not "یکم")
+
+console.log(addOrdinalSuffix('سه'));
+// "سوم" (not "سهم")
+
+// Regular forms
+console.log(addOrdinalSuffix('پنج'));
+// "پنجم"
+
+console.log(addOrdinalSuffix('شش'));
+// "ششم"
+```
+
+### Compound Numbers
+
+```typescript
+import { addOrdinalSuffix } from '@persian-tools/persian-tools';
+
+console.log(addOrdinalSuffix('بیست'));
+// "بیستم"
+
+console.log(addOrdinalSuffix('بیست و یک'));
+// "بیست و اول"
+
+console.log(addOrdinalSuffix('سی و سه'));
+// "سی و سوم"
+
+console.log(addOrdinalSuffix('صد و پنج'));
+// "صد و پنجم"
+```
+
+### Date Formatting
+
+```typescript
+import { addOrdinalSuffix } from '@persian-tools/persian-tools';
+
+const formatDate = (day: string, month: string): string => {
+  const ordinalDay = addOrdinalSuffix(day);
+  return `${ordinalDay} ${month}`;
+};
+
+console.log(formatDate('بیست و سه', 'مهر'));
+// "بیست و سوم مهر"
+```
+
+### Ranking Display
+
+```typescript
+import { addOrdinalSuffix, numberToWords } from '@persian-tools/persian-tools';
+
+const displayRank = (rank: number): string => {
+  const words = numberToWords(rank);
+  const ordinal = addOrdinalSuffix(words);
+  return `رتبه ${ordinal}`;
+};
+
+console.log(displayRank(1));  // "رتبه اول"
+console.log(displayRank(2));  // "رتبه دوم"
+console.log(displayRank(10)); // "رتبه دهم"
+```
+
+### Removing Suffixes from Text
+
+```typescript
+import { removeOrdinalSuffix } from '@persian-tools/persian-tools';
+
+const text = 'او در مسابقه اول شد و جایزه دوم را برد';
+console.log(removeOrdinalSuffix(text));
+// "او در مسابقه یک شد و جایزه دو را برد"
+```
+
+## Use Cases
+
+<AccordionGroup>
+  <Accordion title="Calendar & Dates" icon="calendar">
+    Format Persian calendar dates:
+    ```typescript
+    const day = numberToWords(15);
+    const ordinalDay = addOrdinalSuffix(day);
+    console.log(`${ordinalDay} خرداد`);
+    // "پانزدهم خرداد"
+    ```
+  </Accordion>
+
+  <Accordion title="Rankings & Positions" icon="trophy">
+    Display competition rankings:
+    ```typescript
+    const position = 3;
+    const words = numberToWords(position);
+    console.log(`${addOrdinalSuffix(words)} شد`);
+    // "سوم شد"
+    ```
+  </Accordion>
+
+  <Accordion title="Sequential Content" icon="list-ol">
+    Label sequential items:
+    ```typescript
+    const chapters = [1, 2, 3, 4, 5];
+    chapters.forEach(num => {
+      const words = numberToWords(num);
+      console.log(`فصل ${addOrdinalSuffix(words)}`);
+    });
+    // "فصل اول", "فصل دوم", ...
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Special Ordinals
+
+| Cardinal | Ordinal | English |
+|----------|---------|---------|
+| یک       | اول     | First   |
+| دو       | دوم     | Second  |
+| سه       | سوم     | Third   |
+| چهار     | چهارم   | Fourth  |
+| پنج      | پنجم    | Fifth   |
+| شش       | ششم     | Sixth   |
+| هفت      | هفتم    | Seventh |
+| هشت      | هشتم    | Eighth  |
+| نه       | نهم     | Ninth   |
+| ده       | دهم     | Tenth   |
+
+## Related Functions
+
+<CardGroup cols={2}>
+  <Card title="Number to Words" icon="arrow-right-to-bracket" href="/utilities/numbers/number-to-words">
+    Convert numbers to Persian words
+  </Card>
+  <Card title="Words to Number" icon="arrow-left-from-bracket" href="/utilities/numbers/words-to-number">
+    Convert Persian words to numbers
+  </Card>
+</CardGroup>
+
+## Type Definition
+
+```typescript
+function addOrdinalSuffix(input: string): string;
+function removeOrdinalSuffix(input: string): string;
+```
+
+<Note>
+  The function handles special Persian ordinal forms automatically (e.g., "یک" → "اول" not "یکم").
+</Note>
+

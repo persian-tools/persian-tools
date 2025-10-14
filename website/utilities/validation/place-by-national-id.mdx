@@ -1,0 +1,258 @@
+---
+title: "Get Place by National ID"
+description: "Extract birth location information from Iranian national IDs"
+icon: "location-dot"
+---
+
+# Get Place by National ID
+
+Extract the birth city and province from an Iranian national ID number.
+
+## Basic Usage
+
+```typescript
+import { getPlaceByIranNationalId } from '@persian-tools/persian-tools';
+
+const location = getPlaceByIranNationalId('0499370899');
+console.log(location);
+// Output: { city: 'تهران', province: 'تهران' }
+```
+
+## API Reference
+
+<ParamField path="nationalId" type="string" required>
+  Valid 10-digit Iranian national ID
+</ParamField>
+
+<ResponseField name="result" type="object | undefined">
+  Object containing city and province, or `undefined` if location cannot be determined
+
+  <Expandable title="properties">
+    <ResponseField name="city" type="string">
+      Birth city name in Persian
+    </ResponseField>
+
+    <ResponseField name="province" type="string">
+      Province name in Persian
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## Examples
+
+### Extract Location Information
+
+```typescript
+import { getPlaceByIranNationalId } from '@persian-tools/persian-tools';
+
+console.log(getPlaceByIranNationalId('0499370899'));
+// { city: 'تهران', province: 'تهران' }
+
+console.log(getPlaceByIranNationalId('1234567890'));
+// { city: 'اصفهان', province: 'اصفهان' }
+```
+
+### User Profile Enhancement
+
+```typescript
+import {
+  verifyIranianNationalId,
+  getPlaceByIranNationalId
+} from '@persian-tools/persian-tools';
+
+interface UserProfile {
+  name: string;
+  nationalId: string;
+  birthPlace?: {
+    city: string;
+    province: string;
+  };
+}
+
+const createUserProfile = (name: string, nationalId: string): UserProfile => {
+  if (!verifyIranianNationalId(nationalId)) {
+    throw new Error('کد ملی نامعتبر است');
+  }
+
+  const birthPlace = getPlaceByIranNationalId(nationalId);
+
+  return {
+    name,
+    nationalId,
+    birthPlace
+  };
+};
+
+const profile = createUserProfile('رضا محمدی', '0499370899');
+console.log(profile);
+// {
+//   name: 'رضا محمدی',
+//   nationalId: '0499370899',
+//   birthPlace: { city: 'تهران', province: 'تهران' }
+// }
+```
+
+### Demographics Analysis
+
+```typescript
+import { getPlaceByIranNationalId } from '@persian-tools/persian-tools';
+
+const analyzeUsersByProvince = (nationalIds: string[]) => {
+  const provinceCount = new Map<string, number>();
+
+  nationalIds.forEach(id => {
+    const location = getPlaceByIranNationalId(id);
+    if (location) {
+      const count = provinceCount.get(location.province) || 0;
+      provinceCount.set(location.province, count + 1);
+    }
+  });
+
+  return Object.fromEntries(provinceCount);
+};
+
+const ids = ['0499370899', '1234567890', '0491832456'];
+console.log(analyzeUsersByProvince(ids));
+// { 'تهران': 2, 'اصفهان': 1 }
+```
+
+### Display User Origin
+
+```typescript
+import { getPlaceByIranNationalId } from '@persian-tools/persian-tools';
+
+const displayUserOrigin = (nationalId: string): string => {
+  const location = getPlaceByIranNationalId(nationalId);
+
+  if (!location) {
+    return 'نامشخص';
+  }
+
+  if (location.city === location.province) {
+    return location.city;
+  }
+
+  return `${location.city}, ${location.province}`;
+};
+
+console.log(displayUserOrigin('0499370899'));
+// "تهران"
+```
+
+## Use Cases
+
+<AccordionGroup>
+  <Accordion title="User Registration" icon="user-plus">
+    Auto-fill location fields during registration:
+    ```typescript
+    const handleNationalIdInput = (nationalId: string) => {
+      const location = getPlaceByIranNationalId(nationalId);
+
+      if (location) {
+        setFormData({
+          ...formData,
+          birthCity: location.city,
+          birthProvince: location.province
+        });
+      }
+    };
+    ```
+  </Accordion>
+
+  <Accordion title="Demographics Dashboard" icon="chart-pie">
+    Analyze user distribution by province:
+    ```typescript
+    const users = await getUsers();
+    const distribution = users.reduce((acc, user) => {
+      const location = getPlaceByIranNationalId(user.nationalId);
+      if (location) {
+        acc[location.province] = (acc[location.province] || 0) + 1;
+      }
+      return acc;
+    }, {});
+    ```
+  </Accordion>
+
+  <Accordion title="Shipping Optimization" icon="truck">
+    Optimize delivery based on user origins:
+    ```typescript
+    const suggestDeliveryHub = (nationalId: string) => {
+      const location = getPlaceByIranNationalId(nationalId);
+      return location ? location.province : 'تهران';
+    };
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Supported Provinces
+
+The function recognizes birth locations for all 31 Iranian provinces, including:
+
+- تهران
+- اصفهان
+- خراسان رضوی
+- فارس
+- خوزستان
+- آذربایجان شرقی
+- آذربایجان غربی
+- And 24 more provinces
+
+## Important Notes
+
+<Warning>
+  Not all national IDs can be mapped to a specific location. Some IDs may return `undefined` if the location code is not in the database.
+</Warning>
+
+<Note>
+  The location represents the birth place at the time of ID issuance, not necessarily the current residence.
+</Note>
+
+## Error Handling
+
+```typescript
+import {
+  verifyIranianNationalId,
+  getPlaceByIranNationalId
+} from '@persian-tools/persian-tools';
+
+const safeGetLocation = (nationalId: string) => {
+  // First verify the ID is valid
+  if (!verifyIranianNationalId(nationalId)) {
+    return { error: 'کد ملی نامعتبر است' };
+  }
+
+  const location = getPlaceByIranNationalId(nationalId);
+
+  if (!location) {
+    return { error: 'محل تولد قابل شناسایی نیست' };
+  }
+
+  return { location };
+};
+```
+
+## Related Functions
+
+<CardGroup cols={2}>
+  <Card title="National ID Validation" icon="id-card" href="/utilities/validation/national-id">
+    Validate national IDs
+  </Card>
+  <Card title="Find Capital by Province" icon="landmark" href="/utilities/geographic/capital-by-province">
+    Get province capital cities
+  </Card>
+  <Card title="Find Province from Coordinates" icon="map-location-dot" href="/utilities/geographic/province-from-coordinate">
+    Get province from GPS coordinates
+  </Card>
+</CardGroup>
+
+## Type Definition
+
+```typescript
+interface Location {
+  city: string;
+  province: string;
+}
+
+function getPlaceByIranNationalId(nationalId: string): Location | undefined;
+```
+

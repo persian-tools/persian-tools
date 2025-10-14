@@ -1,0 +1,171 @@
+---
+title: "Bill Validation"
+description: "Parse and validate Iranian utility bills"
+icon: "file-invoice"
+---
+
+# Bill Validation
+
+Parse and validate Iranian utility bills (قبض) including electricity, water, gas, and telecommunication bills.
+
+## Basic Usage
+
+```typescript
+import { Bill } from '@persian-tools/persian-tools';
+
+const bill = new Bill({
+  billId: '1234567890123',
+  paymentId: '1234567890123'
+});
+
+const result = bill.getResult();
+console.log(result);
+// {
+//   isValid: true,
+//   billType: 'برق',
+//   amount: 50000,
+//   ...
+// }
+```
+
+## API Reference
+
+### Constructor
+
+<ParamField path="options" type="object" required>
+  <Expandable title="properties">
+    <ParamField path="billId" type="string" required>
+      Bill identifier (شناسه قبض)
+    </ParamField>
+
+    <ParamField path="paymentId" type="string" required>
+      Payment identifier (شناسه پرداخت)
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+### Methods
+
+#### getResult()
+
+Get parsed bill information.
+
+<ResponseField name="result" type="object">
+  <Expandable title="properties">
+    <ResponseField name="isValid" type="boolean">
+      Whether the bill is valid
+    </ResponseField>
+
+    <ResponseField name="billType" type="string">
+      Type of bill (برق, آب, گاز, تلفن)
+    </ResponseField>
+
+    <ResponseField name="amount" type="number">
+      Bill amount in Rials
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+#### getBarcode()
+
+Get the barcode representation of the bill.
+
+<ResponseField name="result" type="string">
+  Barcode string
+</ResponseField>
+
+## Examples
+
+### Bill Payment Processing
+
+```typescript
+import { Bill } from '@persian-tools/persian-tools';
+
+const processBillPayment = (billId: string, paymentId: string) => {
+  const bill = new Bill({ billId, paymentId });
+  const result = bill.getResult();
+
+  if (!result.isValid) {
+    throw new Error('اطلاعات قبض نامعتبر است');
+  }
+
+  return {
+    type: result.billType,
+    amount: result.amount,
+    barcode: bill.getBarcode()
+  };
+};
+```
+
+### Bill Validator
+
+```typescript
+import { Bill } from '@persian-tools/persian-tools';
+
+const validateBill = (billData: { billId: string; paymentId: string }) => {
+  try {
+    const bill = new Bill(billData);
+    const result = bill.getResult();
+
+    return {
+      isValid: result.isValid,
+      info: result.isValid ? {
+        type: result.billType,
+        amount: result.amount
+      } : null
+    };
+  } catch (error) {
+    return { isValid: false, error: 'خطا در پردازش قبض' };
+  }
+};
+```
+
+## Use Cases
+
+<AccordionGroup>
+  <Accordion title="Payment Gateway" icon="credit-card">
+    Process utility bill payments:
+    ```typescript
+    const payBill = (billId: string, paymentId: string) => {
+      const bill = new Bill({ billId, paymentId });
+      const result = bill.getResult();
+      if (result.isValid) {
+        // Process payment
+      }
+    };
+    ```
+  </Accordion>
+
+  <Accordion title="Bill Scanner App" icon="barcode">
+    Scan and validate bills:
+    ```typescript
+    const scanBill = (barcode: string) => {
+      // Parse barcode to get billId and paymentId
+      const bill = new Bill({ billId, paymentId });
+      return bill.getResult();
+    };
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Type Definition
+
+```typescript
+interface BillConstructor {
+  billId: string;
+  paymentId: string;
+}
+
+interface BillResult {
+  isValid: boolean;
+  billType?: string;
+  amount?: number;
+}
+
+class Bill {
+  constructor(options: BillConstructor);
+  getResult(): BillResult;
+  getBarcode(): string;
+}
+```
+

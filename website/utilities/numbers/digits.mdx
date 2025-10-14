@@ -1,0 +1,231 @@
+---
+title: "Digit Conversion"
+description: "Convert between Persian, Arabic, and English digit systems"
+icon: "0"
+---
+
+# Digit Conversion
+
+Convert digits between Persian (۰-۹), Arabic (٠-٩), and English (0-9) numeral systems.
+
+## Available Functions
+
+- `digitsEnToFa` - English to Persian digits
+- `digitsFaToEn` - Persian to English digits
+- `digitsArToFa` - Arabic to Persian digits
+- `digitsArToEn` - Arabic to English digits
+- `digitsFaToAr` - Persian to Arabic digits (rare)
+
+## Basic Usage
+
+```typescript
+import {
+  digitsEnToFa,
+  digitsFaToEn,
+  digitsArToFa
+} from '@persian-tools/persian-tools';
+
+// English to Persian
+console.log(digitsEnToFa('123'));
+// Output: "۱۲۳"
+
+// Persian to English
+console.log(digitsFaToEn('۱۲۳'));
+// Output: "123"
+
+// Arabic to Persian
+console.log(digitsArToFa('٠١٢٣'));
+// Output: "۰۱۲۳"
+```
+
+## API Reference
+
+### digitsEnToFa
+
+Convert English digits to Persian.
+
+<ParamField path="input" type="string" required>
+  String containing English digits (0-9)
+</ParamField>
+
+<ResponseField name="result" type="string">
+  String with Persian digits (۰-۹)
+</ResponseField>
+
+```typescript
+digitsEnToFa('Price: 1234 Toman');
+// "Price: ۱۲۳۴ Toman"
+```
+
+### digitsFaToEn
+
+Convert Persian digits to English.
+
+<ParamField path="input" type="string" required>
+  String containing Persian digits (۰-۹)
+</ParamField>
+
+<ResponseField name="result" type="string">
+  String with English digits (0-9)
+</ResponseField>
+
+```typescript
+digitsFaToEn('قیمت: ۱۲۳۴ تومان');
+// "قیمت: 1234 تومان"
+```
+
+### digitsArToFa
+
+Convert Arabic digits to Persian.
+
+<ParamField path="input" type="string" required>
+  String containing Arabic digits (٠-٩)
+</ParamField>
+
+<ResponseField name="result" type="string">
+  String with Persian digits (۰-۹)
+</ResponseField>
+
+```typescript
+digitsArToFa('٠١٢٣٤٥٦٧٨٩');
+// "۰۱۲۳۴۵۶۷۸۹"
+```
+
+### digitsArToEn
+
+Convert Arabic digits to English.
+
+<ParamField path="input" type="string" required>
+  String containing Arabic digits (٠-٩)
+</ParamField>
+
+<ResponseField name="result" type="string">
+  String with English digits (0-9)
+</ResponseField>
+
+```typescript
+digitsArToEn('٠١٢٣');
+// "0123"
+```
+
+## Examples
+
+### Mixed Content
+
+Converts only the digits, preserving other characters:
+
+```typescript
+import { digitsEnToFa } from '@persian-tools/persian-tools';
+
+console.log(digitsEnToFa('تاریخ: 2024/10/14'));
+// "تاریخ: ۲۰۲۴/۱۰/۱۴"
+
+console.log(digitsEnToFa('کد پستی: 1234567890'));
+// "کد پستی: ۱۲۳۴۵۶۷۸۹۰"
+```
+
+### Display Formatting
+
+```typescript
+import { digitsEnToFa, addCommas } from '@persian-tools/persian-tools';
+
+const formatPrice = (price: number): string => {
+  const withCommas = addCommas(price.toString());
+  return digitsEnToFa(withCommas);
+};
+
+console.log(formatPrice(1234567));
+// "۱,۲۳۴,۵۶۷"
+```
+
+### Form Input Processing
+
+```typescript
+import { digitsFaToEn } from '@persian-tools/persian-tools';
+
+const handlePhoneInput = (input: string): string => {
+  // Convert Persian digits to English for processing
+  return digitsFaToEn(input);
+};
+
+console.log(handlePhoneInput('۰۹۱۲۳۴۵۶۷۸۹'));
+// "09123456789"
+```
+
+### Cleaning Mixed Arabic/Persian Text
+
+```typescript
+import { digitsArToFa, toPersianChars } from '@persian-tools/persian-tools';
+
+const normalizePersianText = (text: string): string => {
+  // First convert Arabic chars to Persian
+  const persianChars = toPersianChars(text);
+  // Then convert Arabic digits to Persian
+  return digitsArToFa(persianChars);
+};
+
+console.log(normalizePersianText('سلام ٠١٢٣'));
+// "سلام ۰۱۲۳"
+```
+
+## Use Cases
+
+<AccordionGroup>
+  <Accordion title="UI Display" icon="display">
+    Display numbers in Persian for Persian interfaces:
+    ```typescript
+    const age = 25;
+    const display = `سن: ${digitsEnToFa(age.toString())}`;
+    // "سن: ۲۵"
+    ```
+  </Accordion>
+
+  <Accordion title="Data Processing" icon="database">
+    Normalize digit formats before database storage:
+    ```typescript
+    const userInput = '۰۹۱۲۳۴۵۶۷۸۹';
+    const normalized = digitsFaToEn(userInput);
+    // Store as: "09123456789"
+    ```
+  </Accordion>
+
+  <Accordion title="API Integration" icon="plug">
+    Convert Persian input for English-only APIs:
+    ```typescript
+    const persianDate = '۱۴۰۳/۰۷/۲۳';
+    const apiDate = digitsFaToEn(persianDate);
+    // Send to API: "1403/07/23"
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Digit Mapping
+
+| English | Persian | Arabic |
+|---------|---------|--------|
+| 0       | ۰       | ٠      |
+| 1       | ۱       | ١      |
+| 2       | ۲       | ٢      |
+| 3       | ۳       | ٣      |
+| 4       | ۴       | ٤      |
+| 5       | ۵       | ٥      |
+| 6       | ۶       | ٦      |
+| 7       | ۷       | ٧      |
+| 8       | ۸       | ٨      |
+| 9       | ۹       | ٩      |
+
+## Related Functions
+
+<CardGroup cols={2}>
+  <Card title="Add Commas" icon="comma" href="/utilities/numbers/commas">
+    Format numbers with thousand separators
+  </Card>
+  <Card title="Number to Words" icon="arrow-right-to-bracket" href="/utilities/numbers/number-to-words">
+    Convert numbers to Persian words
+  </Card>
+</CardGroup>
+
+<Tip>
+  Always convert Persian digits to English before performing mathematical operations or API calls.
+</Tip>
+

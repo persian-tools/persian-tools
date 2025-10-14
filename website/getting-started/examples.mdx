@@ -1,0 +1,403 @@
+---
+title: "Examples"
+description: "Practical examples of using Persian Tools in real-world scenarios"
+icon: "lightbulb"
+---
+
+# Practical Examples
+
+Learn how to use Persian Tools in real-world scenarios with these practical examples.
+
+## E-commerce Application
+
+### Format Prices
+
+```typescript
+import { digitsEnToFa, addCommas } from '@persian-tools/persian-tools';
+
+const formatPrice = (price: number): string => {
+  const withCommas = addCommas(price.toString());
+  const persianDigits = digitsEnToFa(withCommas);
+  return `${persianDigits} تومان`;
+};
+
+console.log(formatPrice(1250000)); // "۱,۲۵۰,۰۰۰ تومان"
+console.log(formatPrice(500)); // "۵۰۰ تومان"
+```
+
+### Validate Customer Information
+
+```typescript
+import {
+  verifyIranianNationalId,
+  verifyCardNumber,
+  getPlaceByIranNationalId
+} from '@persian-tools/persian-tools';
+
+interface CustomerValidation {
+  isValid: boolean;
+  errors: string[];
+  location?: { city: string; province: string };
+}
+
+const validateCustomer = (
+  nationalId: string,
+  cardNumber: string
+): CustomerValidation => {
+  const errors: string[] = [];
+
+  if (!verifyIranianNationalId(nationalId)) {
+    errors.push('کد ملی نامعتبر است');
+  }
+
+  if (!verifyCardNumber(cardNumber)) {
+    errors.push('شماره کارت نامعتبر است');
+  }
+
+  const location = verifyIranianNationalId(nationalId)
+    ? getPlaceByIranNationalId(nationalId)
+    : undefined;
+
+  return {
+    isValid: errors.length === 0,
+    errors,
+    location
+  };
+};
+
+// Usage
+const result = validateCustomer('0499370899', '6037701689095443');
+console.log(result);
+// {
+//   isValid: true,
+//   errors: [],
+//   location: { city: 'تهران', province: 'تهران' }
+// }
+```
+
+## Form Validation
+
+### User Registration Form
+
+```typescript
+import {
+  verifyIranianNationalId,
+  verifyCardNumber,
+  isPersian,
+  validatePhoneNumber
+} from '@persian-tools/persian-tools';
+
+interface RegistrationForm {
+  name: string;
+  nationalId: string;
+  phone: string;
+  cardNumber: string;
+}
+
+interface ValidationErrors {
+  [key: string]: string;
+}
+
+const validateRegistration = (form: RegistrationForm): ValidationErrors => {
+  const errors: ValidationErrors = {};
+
+  // Validate name is Persian
+  if (!isPersian(form.name)) {
+    errors.name = 'نام باید به فارسی باشد';
+  }
+
+  // Validate national ID
+  if (!verifyIranianNationalId(form.nationalId)) {
+    errors.nationalId = 'کد ملی نامعتبر است';
+  }
+
+  // Validate phone number
+  if (!validatePhoneNumber(form.phone)) {
+    errors.phone = 'شماره تلفن نامعتبر است';
+  }
+
+  // Validate card number
+  if (!verifyCardNumber(form.cardNumber)) {
+    errors.cardNumber = 'شماره کارت نامعتبر است';
+  }
+
+  return errors;
+};
+```
+
+## Content Management System
+
+### Generate URL Slugs
+
+```typescript
+import { slugify, toPersianChars } from '@persian-tools/persian-tools';
+
+const generateSlug = (title: string): string => {
+  // Convert Arabic chars to Persian first
+  const persianTitle = toPersianChars(title);
+
+  // Generate URL-safe slug
+  return slugify(persianTitle);
+};
+
+console.log(generateSlug('معرفی محصولات جدید'));
+// "معرفی-محصولات-جدید"
+
+console.log(generateSlug('راهنمای خرید 2024'));
+// "راهنمای-خرید-2024"
+```
+
+### Text Analysis
+
+```typescript
+import { textAnalyzer } from '@persian-tools/persian-tools';
+
+const analyzeContent = (content: string) => {
+  const analysis = textAnalyzer(content);
+
+  return {
+    readingTime: Math.ceil(analysis.words / 200), // Assuming 200 WPM
+    characterCount: analysis.characters,
+    wordCount: analysis.words,
+    lineCount: analysis.lines,
+    summary: `${analysis.words} کلمه، ${analysis.characters} حرف`
+  };
+};
+
+const content = `
+  فارسی یکی از زیباترین زبان‌های جهان است.
+  این متن برای تست تحلیل متن نوشته شده است.
+`;
+
+console.log(analyzeContent(content));
+// {
+//   readingTime: 1,
+//   characterCount: 75,
+//   wordCount: 15,
+//   lineCount: 2,
+//   summary: "15 کلمه، 75 حرف"
+// }
+```
+
+## Banking Application
+
+### Identify Bank from Card Number
+
+```typescript
+import {
+  getBankNameFromCardNumber,
+  verifyCardNumber,
+  extractCardNumbers
+} from '@persian-tools/persian-tools';
+
+const processCardNumber = (input: string) => {
+  // Extract card numbers from text
+  const cards = extractCardNumbers(input);
+
+  if (cards.length === 0) {
+    return { error: 'هیچ شماره کارتی یافت نشد' };
+  }
+
+  const cardNumber = cards[0];
+
+  // Verify card number
+  if (!verifyCardNumber(cardNumber)) {
+    return { error: 'شماره کارت نامعتبر است' };
+  }
+
+  // Get bank name
+  const bankName = getBankNameFromCardNumber(cardNumber);
+
+  return {
+    cardNumber,
+    bankName,
+    isValid: true
+  };
+};
+
+console.log(processCardNumber('شماره کارت من: 6037-7016-8909-5443'));
+// {
+//   cardNumber: '6037701689095443',
+//   bankName: 'بانک کشاورزی',
+//   isValid: true
+// }
+```
+
+### IBAN Validation
+
+```typescript
+import { verifySheba, getShebaInfo } from '@persian-tools/persian-tools';
+
+const validateIBAN = (iban: string) => {
+  const isValid = verifySheba(iban);
+
+  if (!isValid) {
+    return { error: 'شماره شبا نامعتبر است' };
+  }
+
+  const info = getShebaInfo(iban);
+
+  return {
+    isValid: true,
+    bankName: info.bankName,
+    formatted: info.formatted
+  };
+};
+
+console.log(validateIBAN('IR820540102680020817909002'));
+// {
+//   isValid: true,
+//   bankName: 'بانک پارسیان',
+//   formatted: 'IR82 0540 1026 8002 0817 9090 02'
+// }
+```
+
+## Utility Bill Processing
+
+### Parse Bill Information
+
+```typescript
+import { Bill } from '@persian-tools/persian-tools';
+
+const processBill = (billId: string, paymentId: string) => {
+  const bill = new Bill({ billId, paymentId });
+
+  const result = bill.getResult();
+
+  if (!result.isValid) {
+    return { error: 'اطلاعات قبض نامعتبر است' };
+  }
+
+  return {
+    type: result.billType,
+    amount: result.amount,
+    isValid: true,
+    barcode: bill.getBarcode()
+  };
+};
+```
+
+## Date and Time Utilities
+
+### Display Time Ago
+
+```typescript
+import { timeAgo, digitsEnToFa } from '@persian-tools/persian-tools';
+
+const formatTimeAgo = (date: Date): string => {
+  const ago = timeAgo(date);
+  return digitsEnToFa(ago);
+};
+
+const postDate = new Date('2024-10-13T10:00:00');
+console.log(formatTimeAgo(postDate)); // "۱ روز پیش"
+```
+
+### Show Remaining Time
+
+```typescript
+import { remainingTime } from '@persian-tools/persian-tools';
+
+const showCountdown = (targetDate: Date) => {
+  const remaining = remainingTime(targetDate);
+
+  return `${remaining.days} روز و ${remaining.hours} ساعت مانده`;
+};
+
+const eventDate = new Date('2024-12-31T23:59:59');
+console.log(showCountdown(eventDate));
+```
+
+## Text Processing
+
+### Fix URL Encoding
+
+```typescript
+import { URLfix } from '@persian-tools/persian-tools';
+
+const fixPersianURL = (url: string): string => {
+  return URLfix(url);
+};
+
+console.log(fixPersianURL('https://example.com/search?q=%D8%AA%D8%B3%D8%AA'));
+// "https://example.com/search?q=تست"
+```
+
+### Add Half-Spaces
+
+```typescript
+import { addHalfSpaceChar } from '@persian-tools/persian-tools';
+
+const fixTypography = (text: string): string => {
+  return addHalfSpaceChar(text);
+};
+
+console.log(fixTypography('می‌خواهم به شما کمک کنم'));
+// Adds proper half-spaces before Persian suffixes
+```
+
+## Number Conversion
+
+### Convert Numbers to Persian Words
+
+```typescript
+import { numberToWords, digitsEnToFa } from '@persian-tools/persian-tools';
+
+const formatNumberWithWords = (num: number) => {
+  const words = numberToWords(num);
+  const digits = digitsEnToFa(num.toString());
+
+  return {
+    digits,
+    words,
+    display: `${digits} (${words})`
+  };
+};
+
+console.log(formatNumberWithWords(1234));
+// {
+//   digits: '۱۲۳۴',
+//   words: 'یک هزار و دویست و سی و چهار',
+//   display: '۱۲۳۴ (یک هزار و دویست و سی و چهار)'
+// }
+```
+
+### Parse Persian Text to Numbers
+
+```typescript
+import { wordsToNumber } from '@persian-tools/persian-tools';
+
+const parseUserInput = (input: string): number => {
+  return wordsToNumber(input, { fuzzy: true });
+};
+
+console.log(parseUserInput('یک هزار و دویست')); // 1200
+console.log(parseUserInput('سیصد')); // 300
+```
+
+## Vehicle Plate Recognition
+
+```typescript
+import { Numberplate } from '@persian-tools/persian-tools';
+
+const parsePlate = (plateNumber: string) => {
+  const plate = new Numberplate(plateNumber);
+
+  if (!plate.isValid) {
+    return { error: 'شماره پلاک نامعتبر است' };
+  }
+
+  const info = plate.getInfo();
+
+  return {
+    province: info.province,
+    type: info.type,
+    category: info.category
+  };
+};
+```
+
+<Tip>
+  These examples demonstrate common use cases. You can combine multiple utilities to build more complex functionality.
+</Tip>
+

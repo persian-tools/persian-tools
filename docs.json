@@ -128,19 +128,80 @@
   "colors": {
     "primary": "#ff0000"
   },
-  "navigation": {
-    "pages": [
-      "introduction",
-      "ex-number-conversion",
-      "ex-digit-conversion",
-      "ex-comma-formatting",
-      "ex-ordinal-numbers",
-      "ex-validation",
-      "ex-national-id",
-      "ex-phone-number",
-      "ex-bank-card",
-      "ex-iban",
-      "ex-geographic-utilities"
-    ]
-  }
+  "navigation": [
+    {
+      "group": "Getting Started",
+      "icon": "rocket",
+      "pages": [
+        "introduction",
+        "getting-started/installation",
+        "getting-started/usage",
+        "getting-started/examples"
+      ]
+    },
+    {
+      "group": "Number Utilities",
+      "icon": "calculator",
+      "pages": [
+        "utilities/numbers/number-to-words",
+        "utilities/numbers/words-to-number",
+        "utilities/numbers/digits",
+        "utilities/numbers/commas",
+        "utilities/numbers/ordinal-suffix"
+      ]
+    },
+    {
+      "group": "Validation",
+      "icon": "shield-check",
+      "pages": [
+        "utilities/validation/national-id",
+        "utilities/validation/place-by-national-id",
+        "utilities/validation/legal-id",
+        "utilities/validation/card-number",
+        "utilities/validation/phone-number"
+      ]
+    },
+    {
+      "group": "Text Processing",
+      "icon": "text",
+      "pages": [
+        "utilities/text/persian-chars",
+        "utilities/text/half-space",
+        "utilities/text/slugify",
+        "utilities/text/url-fix",
+        "utilities/text/text-analyzer"
+      ]
+    },
+    {
+      "group": "Banking",
+      "icon": "building-columns",
+      "pages": [
+        "utilities/banking/sheba",
+        "utilities/banking/bill"
+      ]
+    },
+    {
+      "group": "Geographic",
+      "icon": "map-location-dot",
+      "pages": [
+        "utilities/geographic/capital-by-province",
+        "utilities/geographic/province-from-coordinate"
+      ]
+    },
+    {
+      "group": "Time Utilities",
+      "icon": "clock",
+      "pages": [
+        "utilities/time/time-ago",
+        "utilities/time/remaining-time"
+      ]
+    },
+    {
+      "group": "Vehicle",
+      "icon": "car",
+      "pages": [
+        "utilities/vehicle/numberplate"
+      ]
+    }
+  ]
 }

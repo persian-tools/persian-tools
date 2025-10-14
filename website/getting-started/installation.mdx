@@ -1,0 +1,95 @@
+---
+title: "Installation"
+description: "Learn how to install and set up Persian Tools in your project"
+icon: "download"
+---
+
+# Installation
+
+Persian Tools is available as an NPM package and can be used in Node.js, Bun, Deno, and browser environments.
+
+## Package Manager
+
+<CodeGroup>
+
+```bash npm
+npm install @persian-tools/persian-tools
+```
+
+```bash yarn
+yarn add @persian-tools/persian-tools
+```
+
+```bash pnpm
+pnpm add @persian-tools/persian-tools
+```
+
+```bash bun
+bun add @persian-tools/persian-tools
+```
+
+</CodeGroup>
+
+## Browser CDN
+
+For quick prototyping or legacy projects, you can use a CDN:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@persian-tools/persian-tools/build/persian-tools.cjs"></script>
+<script>
+  // Access via global PersianTools object
+  console.log(PersianTools.numberToWords(1234));
+  // Output: "یک هزار و دویست و سی و چهار"
+</script>
+```
+
+## Requirements
+
+<CardGroup cols={2}>
+  <Card title="Node.js" icon="node">
+    Version 14.x or higher
+  </Card>
+  <Card title="TypeScript" icon="typescript">
+    Version 4.5 or higher (optional)
+  </Card>
+</CodeGroup>
+
+## Verify Installation
+
+Create a simple test file to verify the installation:
+
+<CodeGroup>
+
+```typescript TypeScript
+import { numberToWords, digitsEnToFa } from '@persian-tools/persian-tools';
+
+console.log(numberToWords(1234));
+// Output: "یک هزار و دویست و سی و چهار"
+
+console.log(digitsEnToFa("123"));
+// Output: "۱۲۳"
+```
+
+```javascript JavaScript
+const { numberToWords, digitsEnToFa } = require('@persian-tools/persian-tools');
+
+console.log(numberToWords(1234));
+// Output: "یک هزار و دویست و سی و چهار"
+
+console.log(digitsEnToFa("123"));
+// Output: "۱۲۳"
+```
+
+</CodeGroup>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Basic Usage" icon="code" href="/getting-started/usage">
+    Learn the fundamentals
+  </Card>
+  <Card title="Examples" icon="lightbulb" href="/getting-started/examples">
+    See practical examples
+  </Card>
+</CardGroup>
+

@@ -1,0 +1,147 @@
+---
+title: "Vehicle Plate Recognition"
+description: "Parse and validate Iranian vehicle license plates"
+icon: "car"
+---
+
+# Vehicle Plate Recognition
+
+Parse and validate Iranian vehicle license plates (پلاک خودرو).
+
+## Basic Usage
+
+```typescript
+import { Numberplate } from '@persian-tools/persian-tools';
+
+const plate = new Numberplate('12ع34567');
+console.log(plate.isValid);
+// Output: true
+
+const info = plate.getInfo();
+console.log(info);
+// Output: { province: 'تهران', type: 'شخصی', ... }
+```
+
+## API Reference
+
+### Constructor
+
+<ParamField path="plateNumber" type="string" required>
+  Vehicle plate number string
+</ParamField>
+
+### Properties
+
+<ResponseField name="isValid" type="boolean">
+  Whether the plate number is valid
+</ResponseField>
+
+### Methods
+
+#### getInfo()
+
+Get detailed information about the plate.
+
+<ResponseField name="result" type="object">
+  <Expandable title="properties">
+    <ResponseField name="province" type="string">
+      Province where plate was issued
+    </ResponseField>
+
+    <ResponseField name="type" type="string">
+      Vehicle type (شخصی, عمومی, دولتی, etc.)
+    </ResponseField>
+
+    <ResponseField name="category" type="string">
+      Vehicle category
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## Examples
+
+### Parking System
+
+```typescript
+import { Numberplate } from '@persian-tools/persian-tools';
+
+const validateParkingEntry = (plateNumber: string) => {
+  const plate = new Numberplate(plateNumber);
+
+  if (!plate.isValid) {
+    throw new Error('شماره پلاک نامعتبر است');
+  }
+
+  const info = plate.getInfo();
+
+  return {
+    plate: plateNumber,
+    province: info.province,
+    vehicleType: info.type,
+    timestamp: new Date()
+  };
+};
+```
+
+### Traffic Violation System
+
+```typescript
+import { Numberplate } from '@persian-tools/persian-tools';
+
+const recordViolation = (plateNumber: string, violation: string) => {
+  const plate = new Numberplate(plateNumber);
+
+  if (!plate.isValid) {
+    return { error: 'Invalid plate number' };
+  }
+
+  return {
+    plate: plateNumber,
+    violation,
+    info: plate.getInfo()
+  };
+};
+```
+
+## Use Cases
+
+<AccordionGroup>
+  <Accordion title="Parking Management" icon="square-parking">
+    Track vehicle entries and exits:
+    ```typescript
+    const logEntry = (plateNumber: string) => {
+      const plate = new Numberplate(plateNumber);
+      if (plate.isValid) {
+        // Log entry
+      }
+    };
+    ```
+  </Accordion>
+
+  <Accordion title="Access Control" icon="shield">
+    Validate authorized vehicles:
+    ```typescript
+    const checkAuthorization = (plateNumber: string) => {
+      const plate = new Numberplate(plateNumber);
+      return plate.isValid && authorizedPlates.includes(plateNumber);
+    };
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Type Definition
+
+```typescript
+interface PlateInfo {
+  province: string;
+  type: string;
+  category: string;
+}
+
+class Numberplate {
+  constructor(plateNumber: string);
+  isValid: boolean;
+  getInfo(): PlateInfo;
+}
+```
+

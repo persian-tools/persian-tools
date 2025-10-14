@@ -1,0 +1,175 @@
+---
+title: "Comma Formatting"
+description: "Add or remove thousand separators from numbers"
+icon: "comma"
+---
+
+# Comma Formatting
+
+Format numbers with thousand separators or remove them for processing.
+
+## Available Functions
+
+- `addCommas` - Add thousand separators
+- `removeCommas` - Remove thousand separators
+
+## Basic Usage
+
+```typescript
+import { addCommas, removeCommas } from '@persian-tools/persian-tools';
+
+// Add commas
+console.log(addCommas(1234567));
+// Output: "1,234,567"
+
+// Remove commas
+console.log(removeCommas('1,234,567'));
+// Output: "1234567"
+```
+
+## API Reference
+
+### addCommas
+
+Add thousand separators to a number.
+
+<ParamField path="input" type="number | string" required>
+  Number or numeric string to format
+</ParamField>
+
+<ResponseField name="result" type="string">
+  Formatted string with commas
+</ResponseField>
+
+```typescript
+addCommas(1000);        // "1,000"
+addCommas(1234567);     // "1,234,567"
+addCommas('9876543');   // "9,876,543"
+```
+
+### removeCommas
+
+Remove thousand separators from a string.
+
+<ParamField path="input" type="string" required>
+  String containing commas to remove
+</ParamField>
+
+<ResponseField name="result" type="string">
+  String without commas
+</ResponseField>
+
+```typescript
+removeCommas('1,234,567');  // "1234567"
+removeCommas('1,000');      // "1000"
+```
+
+## Examples
+
+### Price Formatting
+
+```typescript
+import { addCommas, digitsEnToFa } from '@persian-tools/persian-tools';
+
+const formatPrice = (price: number): string => {
+  const withCommas = addCommas(price);
+  const persianDigits = digitsEnToFa(withCommas);
+  return `${persianDigits} تومان`;
+};
+
+console.log(formatPrice(1250000));
+// "۱,۲۵۰,۰۰۰ تومان"
+```
+
+### Form Input
+
+```typescript
+import { removeCommas } from '@persian-tools/persian-tools';
+
+const handleNumberInput = (input: string): number => {
+  const cleaned = removeCommas(input);
+  return parseInt(cleaned, 10);
+};
+
+console.log(handleNumberInput('1,234,567'));
+// 1234567
+```
+
+### Decimal Numbers
+
+```typescript
+import { addCommas } from '@persian-tools/persian-tools';
+
+console.log(addCommas(1234567.89));
+// "1,234,567.89"
+
+console.log(addCommas('9876543.21'));
+// "9,876,543.21"
+```
+
+### Large Numbers
+
+```typescript
+import { addCommas } from '@persian-tools/persian-tools';
+
+console.log(addCommas(1000000000));
+// "1,000,000,000"
+
+console.log(addCommas(123456789012));
+// "123,456,789,012"
+```
+
+## Use Cases
+
+<AccordionGroup>
+  <Accordion title="Financial Display" icon="money-bill">
+    Format currency for display:
+    ```typescript
+    const balance = 5000000;
+    const formatted = addCommas(balance);
+    console.log(`موجودی: ${formatted} ریال`);
+    // "موجودی: 5,000,000 ریال"
+    ```
+  </Accordion>
+
+  <Accordion title="Input Sanitization" icon="broom">
+    Clean user input before processing:
+    ```typescript
+    const userInput = '1,234,567';
+    const number = parseInt(removeCommas(userInput), 10);
+    // Process: 1234567
+    ```
+  </Accordion>
+
+  <Accordion title="Statistics Display" icon="chart-bar">
+    Format large statistics:
+    ```typescript
+    const views = 1234567;
+    console.log(`بازدید: ${addCommas(views)}`);
+    // "بازدید: 1,234,567"
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Related Functions
+
+<CardGroup cols={2}>
+  <Card title="Digit Conversion" icon="0" href="/utilities/numbers/digits">
+    Convert between digit systems
+  </Card>
+  <Card title="Number to Words" icon="arrow-right-to-bracket" href="/utilities/numbers/number-to-words">
+    Convert numbers to Persian words
+  </Card>
+</CardGroup>
+
+## Type Definition
+
+```typescript
+function addCommas(input: number | string): string;
+function removeCommas(input: string): string;
+```
+
+<Tip>
+  Combine with `digitsEnToFa` for Persian-friendly number display.
+</Tip>
+

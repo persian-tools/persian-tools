@@ -1,0 +1,205 @@
+---
+title: "Words to Number"
+description: "Convert Persian words to numeric values with fuzzy matching support"
+icon: "arrow-left-from-bracket"
+---
+
+# Words to Number
+
+Convert Persian word representations to numeric values, with support for fuzzy matching to handle typos and variations.
+
+## Basic Usage
+
+```typescript
+import { wordsToNumber } from '@persian-tools/persian-tools';
+
+console.log(wordsToNumber('یک هزار و دویست'));
+// Output: 1200
+
+console.log(wordsToNumber('سیصد'));
+// Output: 300
+
+console.log(wordsToNumber('صفر'));
+// Output: 0
+```
+
+## Parameters
+
+<ParamField path="words" type="string" required>
+  The Persian words to convert to a number
+</ParamField>
+
+<ParamField path="options" type="WordsToNumberOptions">
+  Optional configuration object
+
+  <Expandable title="properties">
+    <ParamField path="fuzzy" type="boolean" default="false">
+      Enable fuzzy matching to handle typos and variations
+    </ParamField>
+
+    <ParamField path="digits" type="'fa' | 'en' | 'ar'" default="'en'">
+      The digit system for the output
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+## Return Value
+
+<ResponseField name="result" type="number">
+  The numeric value. Returns 0 if the input cannot be parsed.
+</ResponseField>
+
+## Examples
+
+### Basic Conversion
+
+```typescript
+import { wordsToNumber } from '@persian-tools/persian-tools';
+
+// Simple numbers
+console.log(wordsToNumber('پنج'));
+// 5
+
+// Compound numbers
+console.log(wordsToNumber('بیست و پنج'));
+// 25
+
+// Hundreds
+console.log(wordsToNumber('دویست و پنجاه'));
+// 250
+
+// Thousands
+console.log(wordsToNumber('سه هزار و چهارصد'));
+// 3400
+```
+
+### Fuzzy Matching
+
+Handle typos and variations:
+
+```typescript
+import { wordsToNumber } from '@persian-tools/persian-tools';
+
+// With typos
+console.log(wordsToNumber('یکهزار', { fuzzy: true }));
+// 1000
+
+// Alternative spellings
+console.log(wordsToNumber('سیصد و پنجاه', { fuzzy: true }));
+// 350
+
+// Missing spaces
+console.log(wordsToNumber('دوهزارودویست', { fuzzy: true }));
+// 2200
+```
+
+### Large Numbers
+
+```typescript
+import { wordsToNumber } from '@persian-tools/persian-tools';
+
+console.log(wordsToNumber('یک میلیون'));
+// 1000000
+
+console.log(wordsToNumber('پنج میلیارد'));
+// 5000000000
+
+console.log(wordsToNumber('یک میلیون و دویست هزار'));
+// 1200000
+```
+
+### Mixed Input
+
+```typescript
+import { wordsToNumber } from '@persian-tools/persian-tools';
+
+// Numbers with Persian digits
+console.log(wordsToNumber('۱۲۳'));
+// 123
+
+// Mixed text and numbers
+console.log(wordsToNumber('یک هزار و ۲۰۰'));
+// 1200
+```
+
+## Use Cases
+
+<AccordionGroup>
+  <Accordion title="Voice Input Processing" icon="microphone">
+    Convert speech-to-text number outputs:
+    ```typescript
+    const voiceInput = 'دو هزار و پانصد';
+    const amount = wordsToNumber(voiceInput);
+    console.log(amount); // 2500
+    ```
+  </Accordion>
+
+  <Accordion title="Form Parsing" icon="input-text">
+    Parse user-written numbers:
+    ```typescript
+    const userInput = 'سیصد و پنجاه هزار تومان';
+    const value = wordsToNumber(userInput, { fuzzy: true });
+    // Extract: 350000
+    ```
+  </Accordion>
+
+  <Accordion title="Document Processing" icon="file-text">
+    Extract numbers from Persian documents:
+    ```typescript
+    const text = 'مبلغ پنج میلیون ریال پرداخت شد';
+    const amount = wordsToNumber('پنج میلیون');
+    console.log(amount); // 5000000
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Error Handling
+
+```typescript
+import { wordsToNumber } from '@persian-tools/persian-tools';
+
+// Invalid input returns 0
+console.log(wordsToNumber('سلام'));
+// 0
+
+// Empty string returns 0
+console.log(wordsToNumber(''));
+// 0
+
+// Always validate the result
+const input = 'متن نامعتبر';
+const result = wordsToNumber(input);
+if (result === 0 && input !== 'صفر') {
+  console.error('Could not parse input');
+}
+```
+
+## Related Functions
+
+<CardGroup cols={2}>
+  <Card title="Number to Words" icon="arrow-right-to-bracket" href="/utilities/numbers/number-to-words">
+    Convert numbers to Persian words
+  </Card>
+  <Card title="Digit Conversion" icon="0" href="/utilities/numbers/digits">
+    Convert between digit systems
+  </Card>
+</CardGroup>
+
+## Type Definition
+
+```typescript
+interface WordsToNumberOptions {
+  fuzzy?: boolean;
+  digits?: 'fa' | 'en' | 'ar';
+}
+
+function wordsToNumber(
+  words: string,
+  options?: WordsToNumberOptions
+): number;
+```
+
+<Tip>
+  Enable fuzzy matching when processing user input to handle common typos and spacing variations.
+</Tip>
+

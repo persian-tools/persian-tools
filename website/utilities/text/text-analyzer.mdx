@@ -1,0 +1,144 @@
+---
+title: "Text Analyzer"
+description: "Analyze Persian text to get detailed statistics"
+icon: "magnifying-glass-chart"
+---
+
+# Text Analyzer
+
+Analyze Persian text to extract detailed statistics including character count, word count, and line count.
+
+## Basic Usage
+
+```typescript
+import { textAnalyzer } from '@persian-tools/persian-tools';
+
+const text = `
+سلام به همه
+این یک متن آزمایشی است
+`;
+
+const stats = textAnalyzer(text);
+console.log(stats);
+// {
+//   characters: 35,
+//   words: 7,
+//   lines: 2
+// }
+```
+
+## API Reference
+
+<ParamField path="text" type="string" required>
+  Persian text to analyze
+</ParamField>
+
+<ResponseField name="result" type="TextAnalysis">
+  Object containing text statistics
+
+  <Expandable title="properties">
+    <ResponseField name="characters" type="number">
+      Total character count (excluding whitespace)
+    </ResponseField>
+
+    <ResponseField name="words" type="number">
+      Total word count
+    </ResponseField>
+
+    <ResponseField name="lines" type="number">
+      Total line count
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## Examples
+
+### Reading Time Estimator
+
+```typescript
+import { textAnalyzer } from '@persian-tools/persian-tools';
+
+const estimateReadingTime = (content: string): number => {
+  const analysis = textAnalyzer(content);
+  const wordsPerMinute = 200; // Average Persian reading speed
+  return Math.ceil(analysis.words / wordsPerMinute);
+};
+
+console.log(estimateReadingTime('سلام '.repeat(500)));
+// 3 (minutes)
+```
+
+### Content Summary
+
+```typescript
+import { textAnalyzer } from '@persian-tools/persian-tools';
+
+const generateContentSummary = (content: string) => {
+  const stats = textAnalyzer(content);
+
+  return {
+    summary: `${stats.words} کلمه، ${stats.characters} حرف`,
+    readingTime: Math.ceil(stats.words / 200),
+    lineCount: stats.lines
+  };
+};
+```
+
+### Form Character Counter
+
+```typescript
+import { textAnalyzer } from '@persian-tools/persian-tools';
+
+const validateTextLength = (text: string, maxChars: number) => {
+  const stats = textAnalyzer(text);
+
+  return {
+    isValid: stats.characters <= maxChars,
+    remaining: maxChars - stats.characters,
+    current: stats.characters
+  };
+};
+
+console.log(validateTextLength('سلام دنیا', 20));
+// { isValid: true, remaining: 11, current: 9 }
+```
+
+## Use Cases
+
+<AccordionGroup>
+  <Accordion title="Blog Platform" icon="blog">
+    Show reading time and stats:
+    ```typescript
+    const article = {
+      title: 'عنوان مقاله',
+      content: '...',
+      stats: textAnalyzer(content),
+      readingTime: Math.ceil(textAnalyzer(content).words / 200)
+    };
+    ```
+  </Accordion>
+
+  <Accordion title="Social Media" icon="share-nodes">
+    Validate post length:
+    ```typescript
+    const MAX_CHARS = 280;
+    const stats = textAnalyzer(postContent);
+    if (stats.characters > MAX_CHARS) {
+      alert('پست شما خیلی طولانی است');
+    }
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Type Definition
+
+```typescript
+interface TextAnalysis {
+  characters: number;
+  words: number;
+  lines: number;
+}
+
+function textAnalyzer(text: string): TextAnalysis;
+```
+
