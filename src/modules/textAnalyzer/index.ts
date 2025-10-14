@@ -148,16 +148,14 @@ export function analyzeText(text: string, options: TextAnalyzerOptions = {}): Te
 
 	const statistics = calculateStatistics(cleanedText);
 	const ratios = calculateRatios(statistics);
-	const readability = includeReadability
-		? calculateReadability(cleanedText, statistics, wordsPerMinute)
-		: getDefaultReadability();
+	const readability =
+		includeReadability ? calculateReadability(cleanedText, statistics, wordsPerMinute) : getDefaultReadability();
 	const language = detectLanguage(cleanedText, statistics);
 	const sentiment = includeSentiment ? analyzeSentiment(cleanedText) : getDefaultSentiment();
 	const keywords = includeKeywords ? analyzeKeywords(cleanedText, keywordLimit) : getDefaultKeywords();
 	const style = includeStyle ? analyzeStyle(cleanedText, statistics) : getDefaultStyle();
-	const suggestions = includeSuggestions
-		? generateSuggestions(cleanedText, language, statistics, sentiment, style)
-		: [];
+	const suggestions =
+		includeSuggestions ? generateSuggestions(cleanedText, language, statistics, sentiment, style) : [];
 	const quality = assessQuality(statistics, readability, language);
 
 	return {

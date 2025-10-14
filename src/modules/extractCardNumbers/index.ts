@@ -73,9 +73,10 @@ export function extractCardNumber(
 		const matches = str.match(cardNumberRegex);
 
 		let serialize = matches?.map<ExtractCardNumber>((matchedCardNumber, index) => {
-			let cardNumber = acceptableKeywords.test(matchedCardNumber)
-				? matchedCardNumber.replace(acceptableKeywords, "")
-				: matchedCardNumber;
+			let cardNumber =
+				acceptableKeywords.test(matchedCardNumber) ?
+					matchedCardNumber.replace(acceptableKeywords, "")
+				:	matchedCardNumber;
 			/**
 			 * If Card-Number includes Persian digits, we should convert all Persian digits to English.
 			 *
