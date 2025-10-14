@@ -6,7 +6,7 @@
 	<p align="center">A comprehensive, <strong>library-agnostic</strong> TypeScript toolkit for Persian (Farsi) text, numbers, validation, and locale utilities — runs in Node.js, Bun, and the browser.</p>
 
 [![CI/CD](https://github.com/persian-tools/persian-tools/workflows/Continuous%20Integration/badge.svg)](https://github.com/persian-tools/persian-tools/actions)
-[![codecov](https://codecov.io/gh/persian-tools/persian-tools/branch/master/graph/badge.svg)](https://codecov.io/gh/persian-tools/persian-tools)
+[![codecov](https://codecov.io/gh/persian-tools/persian-tools/branch/master/graph/badge.svg?token=5miXfqhibu)](https://codecov.io/gh/persian-tools/persian-tools)
 [![npm version](https://img.shields.io/npm/v/@persian-tools/persian-tools.svg)](https://npm.im/@persian-tools/persian-tools)
 [![npm downloads](https://img.shields.io/npm/dm/@persian-tools/persian-tools.svg)](https://npm.im/@persian-tools/persian-tools)
 [![bundle size](https://img.shields.io/bundlephobia/minzip/@persian-tools/persian-tools)](https://bundlephobia.com/package/@persian-tools/persian-tools)
