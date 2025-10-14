@@ -1,186 +1,240 @@
 ---
-title: "Basic Usage"
-description: "Learn the fundamentals of using Persian Tools in your application"
-icon: "code"
+title: "Usage Guide"
+description: "Learn how to use Persian Tools utilities in your applications"
+icon: "play"
 ---
 
-# Basic Usage
+# Usage Guide
 
-This guide covers the fundamental concepts and patterns for using Persian Tools effectively.
+Persian Tools provides a comprehensive set of utilities for Persian language processing. This guide covers the fundamental patterns and best practices for using the library.
 
-## Import Styles
+## Import Patterns
 
-Persian Tools supports multiple import styles to fit your project's needs.
+### Tree-Shaking (Recommended)
 
-### Named Imports (Recommended)
-
-Import only the functions you need for optimal tree-shaking:
+Import only the utilities you need for optimal bundle size:
 
 ```typescript
-import { numberToWords, digitsEnToFa, verifyIranianNationalId } from '@persian-tools/persian-tools';
+import { numberToWords, isPersian, addCommas } from "persian-tools";
 
-const result = numberToWords(1234);
-console.log(result); // "یک هزار و دویست و سی و چهار"
+// Usage
+const persianNumber = numberToWords(1234);
+const isValidPersian = isPersian("سلام دنیا");
+const formattedNumber = addCommas(1234567);
 ```
 
 ### Namespace Import
 
-Import everything under a namespace:
+Import the entire library under a namespace:
 
 ```typescript
-import * as PersianTools from '@persian-tools/persian-tools';
+import * as PersianTools from "persian-tools";
 
-const result = PersianTools.numberToWords(1234);
-console.log(result); // "یک هزار و دویست و سی و چهار"
+// Usage
+const persianNumber = PersianTools.numberToWords(1234);
+const isValidPersian = PersianTools.isPersian("سلام دنیا");
 ```
 
 ### CommonJS
 
-For Node.js projects using CommonJS:
+For Node.js environments using CommonJS:
 
 ```javascript
-const { numberToWords, digitsEnToFa } = require('@persian-tools/persian-tools');
+const { numberToWords, isPersian } = require("persian-tools");
 
-const result = numberToWords(1234);
+// Usage
+const persianNumber = numberToWords(1234);
+const isValidPersian = isPersian("سلام دنیا");
 ```
+
+## Core Patterns
+
+### Number Processing
+
+<CodeGroup>
+```typescript Number to Words
+import { numberToWords } from 'persian-tools';
+
+// Basic conversion
+numberToWords(1234); // "یک هزار و دویست و سی و چهار"
+
+// With ordinal suffix
+numberToWords(1234, { ordinal: true }); // "یک هزار و دویست و سی و چهارم"
+
+````
+
+```typescript Words to Number
+import { wordsToNumber } from 'persian-tools';
+
+// Exact matching
+wordsToNumber('یک هزار و دویست و سی و چهار'); // 1234
+
+// Fuzzy matching
+wordsToNumber('یکهزار دویست سی چهار', { fuzzy: true }); // 1234
+````
+
+```typescript Digit Conversion
+import { digitsEnToFa, digitsFaToEn } from "persian-tools";
+
+// English to Persian digits
+digitsEnToFa("1234567890"); // "۱۲۳۴۵۶۷۸۹۰"
+
+// Persian to English digits
+digitsFaToEn("۱۲۳۴۵۶۷۸۹۰"); // "1234567890"
+```
+
+</CodeGroup>
+
+### Text Validation
+
+<CodeGroup>
+```typescript Persian Text
+import { isPersian, isArabic } from 'persian-tools';
+
+// Check if text is Persian
+isPersian('سلام دنیا'); // true
+isPersian('Hello World'); // false
+
+// Check if text is Arabic
+isArabic('مرحبا بالعالم'); // true
+isArabic('سلام دنیا'); // false
+
+````
+
+```typescript Character Conversion
+import { toPersianChars } from 'persian-tools';
+
+// Convert Arabic/English chars to Persian
+toPersianChars('علي'); // "علی" (Arabic ي to Persian ی)
+toPersianChars('كتاب'); // "کتاب" (Arabic ك to Persian ک)
+````
+
+</CodeGroup>
+
+### Validation
+
+<CodeGroup>
+```typescript National ID
+import { verifyIranianNationalId, getPlaceByIranNationalId } from 'persian-tools';
+
+// Verify Iranian National ID
+verifyIranianNationalId('0499370899'); // true
+verifyIranianNationalId('1234567890'); // false
+
+// Get place by National ID
+getPlaceByIranNationalId('0499370899'); // { city: 'خمین', province: 'مرکزی' }
+
+````
+
+```typescript Card Numbers
+import { verifyCardNumber, getBankNameFromCardNumber } from 'persian-tools';
+
+// Verify card number
+verifyCardNumber('6274129005473742'); // true
+
+// Get bank name
+getBankNameFromCardNumber('6274129005473742'); // 'بانک پارسیان'
+````
+
+</CodeGroup>
+
+## Configuration Options
+
+Many utilities accept configuration objects for customized behavior:
+
+### Number Conversion Options
+
+```typescript
+import { numberToWords, wordsToNumber } from "persian-tools";
+
+// Number to words with options
+numberToWords(1234, {
+	ordinal: true, // Add ordinal suffix
+	currency: true, // Format as currency
+	scale: "short", // Use short scale
+});
+
+// Words to number with fuzzy matching
+wordsToNumber("یک هزار دویست", {
+	fuzzy: true, // Enable fuzzy matching
+	digits: "persian", // Accept Persian digits
+});
+```
+
+### Text Processing Options
+
+```typescript
+import { halfSpace, slugify } from "persian-tools";
+
+// Half-space with custom options
+halfSpace("کتاب ها", {
+	cleanExtraSpaces: true,
+	replaceNumbers: false,
+});
+
+// Slugify with options
+slugify("عنوان مقاله ای", {
+	separator: "-",
+	lowercase: true,
+	trim: true,
+});
+```
+
+## Error Handling
+
+Persian Tools utilities are designed to be robust and handle edge cases gracefully:
+
+```typescript
+import { numberToWords, verifyIranianNationalId } from "persian-tools";
+
+// Utilities return sensible defaults for invalid input
+numberToWords(null); // ""
+numberToWords(-1); // "" (negative numbers not supported)
+
+// Validation utilities return boolean values
+verifyIranianNationalId("invalid"); // false
+verifyIranianNationalId(""); // false
+```
+
+## Performance Considerations
+
+<AccordionGroup>
+  <Accordion title="🚀 Lazy Loading" icon="bolt">
+    Import utilities individually to enable tree-shaking and reduce bundle size.
+  </Accordion>
+
+<Accordion title="📈 Caching" icon="cache">
+	For repeated operations with the same input, consider implementing your own caching layer.
+</Accordion>
+
+  <Accordion title="⚡ Batch Processing" icon="layer-group">
+    For processing large datasets, process items in batches to avoid blocking the main thread.
+  </Accordion>
+</AccordionGroup>
 
 ## TypeScript Support
 
-Persian Tools is written in TypeScript and provides complete type definitions.
+Persian Tools provides comprehensive TypeScript definitions:
 
 ```typescript
-import { numberToWords, type NumberToWordsOptions } from '@persian-tools/persian-tools';
+import { numberToWords, NumberToWordsOptions } from "persian-tools";
 
-// Full type safety and autocomplete
+// Type-safe options
 const options: NumberToWordsOptions = {
-  ordinal: false
+	ordinal: true,
+	currency: false,
 };
 
 const result: string = numberToWords(1234, options);
 ```
 
-## Error Handling
-
-Most functions in Persian Tools return safe, predictable values:
-
-```typescript
-import { verifyIranianNationalId, wordsToNumber } from '@persian-tools/persian-tools';
-
-// Validation functions return boolean
-const isValid = verifyIranianNationalId("0499370899"); // true
-
-// Conversion functions handle invalid input gracefully
-const number = wordsToNumber("سلام"); // Returns 0 for invalid input
-```
-
-<Tip>
-  Always check return values for validation functions. They return `false` for invalid input rather than throwing errors.
-</Tip>
-
-## Common Patterns
-
-### Chaining Operations
-
-Combine multiple utilities for complex transformations:
-
-```typescript
-import { digitsEnToFa, addCommas, numberToWords } from '@persian-tools/persian-tools';
-
-// Convert English digits to Persian and add commas
-const formatNumber = (num: number): string => {
-  return addCommas(digitsEnToFa(num.toString()));
-};
-
-console.log(formatNumber(1234567)); // "۱,۲۳۴,۵۶۷"
-```
-
-### Form Validation
-
-Use validation utilities in forms:
-
-```typescript
-import { verifyIranianNationalId, verifyCardNumber } from '@persian-tools/persian-tools';
-
-const validateForm = (nationalId: string, cardNumber: string) => {
-  const errors: string[] = [];
-
-  if (!verifyIranianNationalId(nationalId)) {
-    errors.push('Invalid national ID');
-  }
-
-  if (!verifyCardNumber(cardNumber)) {
-    errors.push('Invalid card number');
-  }
-
-  return errors;
-};
-```
-
-### Data Formatting
-
-Format data for display:
-
-```typescript
-import { digitsEnToFa, addCommas } from '@persian-tools/persian-tools';
-
-const formatCurrency = (amount: number): string => {
-  const formatted = addCommas(amount.toString());
-  return `${digitsEnToFa(formatted)} ریال`;
-};
-
-console.log(formatCurrency(1500000)); // "۱,۵۰۰,۰۰۰ ریال"
-```
-
-## Performance Tips
-
-<AccordionGroup>
-  <Accordion title="Import Only What You Need" icon="leaf">
-    Use named imports to ensure your bundler can tree-shake unused code:
-    ```typescript
-    // ✅ Good - only imports what you need
-    import { numberToWords } from '@persian-tools/persian-tools';
-
-    // ❌ Avoid - imports everything
-    import * as PersianTools from '@persian-tools/persian-tools';
-    ```
-  </Accordion>
-
-  <Accordion title="Reuse Compiled Patterns" icon="recycle">
-    Some utilities create patterns internally. For repeated use, consider memoization:
-    ```typescript
-    import { isPersian } from '@persian-tools/persian-tools';
-
-    // For validating many strings, call once per string
-    const texts = ['سلام', 'hello', 'مرحبا'];
-    const results = texts.map(text => isPersian(text));
-    ```
-  </Accordion>
-
-  <Accordion title="Batch Operations" icon="layer-group">
-    When processing multiple items, batch them to reduce overhead:
-    ```typescript
-    import { digitsEnToFa } from '@persian-tools/persian-tools';
-
-    const numbers = ['123', '456', '789'];
-    const converted = numbers.map(num => digitsEnToFa(num));
-    ```
-  </Accordion>
-</AccordionGroup>
-
 ## Next Steps
 
 <CardGroup cols={2}>
-  <Card title="Examples" icon="lightbulb" href="/getting-started/examples">
-    See practical code examples
-  </Card>
-  <Card title="Number Utilities" icon="calculator" href="/utilities/numbers/number-to-words">
-    Explore number conversion
-  </Card>
-  <Card title="Validation" icon="shield-check" href="/utilities/validation/national-id">
-    Learn about validation utilities
-  </Card>
-  <Card title="Text Processing" icon="text" href="/utilities/text/persian-chars">
-    Process Persian text
-  </Card>
+	<Card title="Examples" icon="code-simple" href="/getting-started/examples">
+		Explore practical examples and common use cases
+	</Card>
+	<Card title="Number Utilities" icon="calculator" href="/utilities/numbers/number-to-words">
+		Learn about number processing utilities
+	</Card>
 </CardGroup>
-

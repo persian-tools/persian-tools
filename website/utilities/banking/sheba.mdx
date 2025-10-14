@@ -16,14 +16,14 @@ Validate Iranian IBAN numbers (SHEBA) and extract bank information.
 ## Basic Usage
 
 ```typescript
-import { verifySheba, getShebaInfo } from '@persian-tools/persian-tools';
+import { verifySheba, getShebaInfo } from "@persian-tools/persian-tools";
 
 // Validate SHEBA
-console.log(verifySheba('IR820540102680020817909002'));
+console.log(verifySheba("IR820540102680020817909002"));
 // Output: true
 
 // Get bank info
-console.log(getShebaInfo('IR820540102680020817909002'));
+console.log(getShebaInfo("IR820540102680020817909002"));
 // Output: { bankName: 'بانک پارسیان', formatted: 'IR82 0540 1026 8002 0817 9090 02' }
 ```
 
@@ -34,17 +34,17 @@ console.log(getShebaInfo('IR820540102680020817909002'));
 Validate an Iranian SHEBA/IBAN number.
 
 <ParamField path="sheba" type="string" required>
-  SHEBA number (with or without IR prefix)
+	SHEBA number (with or without IR prefix)
 </ParamField>
 
 <ResponseField name="result" type="boolean">
-  `true` if valid, `false` otherwise
+	`true` if valid, `false` otherwise
 </ResponseField>
 
 ```typescript
-verifySheba('IR820540102680020817909002');     // true
-verifySheba('820540102680020817909002');        // true (without IR)
-verifySheba('IR00000000000000000000000000');    // false
+verifySheba("IR820540102680020817909002"); // true
+verifySheba("820540102680020817909002"); // true (without IR)
+verifySheba("IR00000000000000000000000000"); // false
 ```
 
 ### getShebaInfo
@@ -52,7 +52,7 @@ verifySheba('IR00000000000000000000000000');    // false
 Extract bank information from a SHEBA number.
 
 <ParamField path="sheba" type="string" required>
-  Valid SHEBA number
+	Valid SHEBA number
 </ParamField>
 
 <ResponseField name="result" type="object">
@@ -66,6 +66,7 @@ Extract bank information from a SHEBA number.
     <ResponseField name="formatted" type="string">
       Formatted SHEBA with spaces
     </ResponseField>
+
   </Expandable>
 </ResponseField>
 
@@ -74,23 +75,23 @@ Extract bank information from a SHEBA number.
 ### Payment Transfer
 
 ```typescript
-import { verifySheba, getShebaInfo } from '@persian-tools/persian-tools';
+import { verifySheba, getShebaInfo } from "@persian-tools/persian-tools";
 
 const initiateTransfer = (sheba: string, amount: number) => {
-  if (!verifySheba(sheba)) {
-    throw new Error('شماره شبا نامعتبر است');
-  }
+	if (!verifySheba(sheba)) {
+		throw new Error("شماره شبا نامعتبر است");
+	}
 
-  const bankInfo = getShebaInfo(sheba);
+	const bankInfo = getShebaInfo(sheba);
 
-  return {
-    recipient: bankInfo.formatted,
-    bank: bankInfo.bankName,
-    amount
-  };
+	return {
+		recipient: bankInfo.formatted,
+		bank: bankInfo.bankName,
+		amount,
+	};
 };
 
-console.log(initiateTransfer('IR820540102680020817909002', 1000000));
+console.log(initiateTransfer("IR820540102680020817909002", 1000000));
 // {
 //   recipient: 'IR82 0540 1026 8002 0817 9090 02',
 //   bank: 'بانک پارسیان',
@@ -101,30 +102,32 @@ console.log(initiateTransfer('IR820540102680020817909002', 1000000));
 ### Form Validation
 
 ```typescript
-import { verifySheba } from '@persian-tools/persian-tools';
+import { verifySheba } from "@persian-tools/persian-tools";
 
-const validateShebaInput = (input: string): {
-  isValid: boolean;
-  error?: string;
+const validateShebaInput = (
+	input: string,
+): {
+	isValid: boolean;
+	error?: string;
 } => {
-  // Remove spaces and normalize
-  const cleaned = input.replace(/\s/g, '').toUpperCase();
+	// Remove spaces and normalize
+	const cleaned = input.replace(/\s/g, "").toUpperCase();
 
-  if (!cleaned.startsWith('IR') && cleaned.length !== 24) {
-    return {
-      isValid: false,
-      error: 'شماره شبا باید ۲۶ کاراکتر باشد'
-    };
-  }
+	if (!cleaned.startsWith("IR") && cleaned.length !== 24) {
+		return {
+			isValid: false,
+			error: "شماره شبا باید ۲۶ کاراکتر باشد",
+		};
+	}
 
-  if (!verifySheba(cleaned)) {
-    return {
-      isValid: false,
-      error: 'شماره شبا نامعتبر است'
-    };
-  }
+	if (!verifySheba(cleaned)) {
+		return {
+			isValid: false,
+			error: "شماره شبا نامعتبر است",
+		};
+	}
 
-  return { isValid: true };
+	return { isValid: true };
 };
 ```
 
@@ -159,6 +162,7 @@ const validateShebaInput = (input: string): {
 ## SHEBA Format
 
 Iranian SHEBA numbers follow this format:
+
 - **IR** - Country code
 - **2 digits** - Check digits
 - **3 digits** - Bank code
@@ -169,23 +173,22 @@ Total: 26 characters
 ## Related Functions
 
 <CardGroup cols={2}>
-  <Card title="Card Number Validation" icon="credit-card" href="/utilities/validation/card-number">
-    Validate bank card numbers
-  </Card>
-  <Card title="Bill Validation" icon="file-invoice" href="/utilities/banking/bill">
-    Process utility bills
-  </Card>
+	<Card title="Card Number Validation" icon="credit-card" href="/utilities/validation/card-number">
+		Validate bank card numbers
+	</Card>
+	<Card title="Bill Validation" icon="file-invoice" href="/utilities/banking/bill">
+		Process utility bills
+	</Card>
 </CardGroup>
 
 ## Type Definition
 
 ```typescript
 interface ShebaInfo {
-  bankName: string;
-  formatted: string;
+	bankName: string;
+	formatted: string;
 }
 
 function verifySheba(sheba: string): boolean;
 function getShebaInfo(sheba: string): ShebaInfo;
 ```
-

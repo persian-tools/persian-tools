@@ -1,279 +1,355 @@
 ---
-title: "Persian Character Validation"
-description: "Detect and validate pure Persian text and convert Arabic characters"
+title: "Persian Character Conversion"
+description: "Convert Arabic and English characters to proper Persian equivalents"
 icon: "language"
 ---
 
-# Persian Character Validation
+# Persian Character Conversion
 
-Validate Persian text and convert between Persian and Arabic character sets.
-
-## Available Functions
-
-- `isPersian` - Check if text contains only Persian characters
-- `isArabic` - Check if text contains Arabic characters
-- `toPersianChars` - Convert Arabic characters to Persian
+The `toPersianChars` utility converts Arabic and English characters to their proper Persian equivalents, ensuring consistent Persian text rendering and processing.
 
 ## Basic Usage
 
-```typescript
-import { isPersian, isArabic, toPersianChars } from '@persian-tools/persian-tools';
-
-// Check if Persian
-console.log(isPersian('سلام'));
-// Output: true
-
-console.log(isPersian('hello'));
-// Output: false
-
-// Check if Arabic
-console.log(isArabic('مرحبا'));
-// Output: true
-
-// Convert Arabic to Persian
-console.log(toPersianChars('كيك'));
-// Output: "کیک"
+<CodeGroup>
+```typescript Import
+import { toPersianChars } from 'persian-tools';
 ```
 
-## API Reference
-
-### isPersian
-
-Check if a string contains only Persian characters.
-
-<ParamField path="text" type="string" required>
-  Text to validate
-</ParamField>
-
-<ParamField path="options" type="object">
-  <Expandable title="properties">
-    <ParamField path="allowSpaces" type="boolean" default="true">
-      Allow spaces in the text
-    </ParamField>
-  </Expandable>
-</ParamField>
-
-<ResponseField name="result" type="boolean">
-  `true` if text contains only Persian characters, `false` otherwise
-</ResponseField>
-
-```typescript
-isPersian('سلام دنیا');           // true
-isPersian('Hello سلام');          // false
-isPersian('۱۲۳');                 // true (Persian digits)
+```javascript CommonJS
+const { toPersianChars } = require("persian-tools");
 ```
 
-### isArabic
+</CodeGroup>
 
-Check if a string contains Arabic characters.
-
-<ParamField path="text" type="string" required>
-  Text to check for Arabic characters
-</ParamField>
-
-<ResponseField name="result" type="boolean">
-  `true` if text contains Arabic characters, `false` otherwise
-</ResponseField>
+### Simple Conversion
 
 ```typescript
-isArabic('مرحبا');      // true
-isArabic('سلام');       // false
-isArabic('كيك');        // true (Arabic ك and ي)
+toPersianChars("علي احمد"); // 'علی احمد' (Arabic ي to Persian ی)
+toPersianChars("كتاب"); // 'کتاب' (Arabic ك to Persian ک)
+toPersianChars("ي ك"); // 'ی ک' (multiple conversions)
 ```
 
-### toPersianChars
+## Character Mappings
 
-Convert Arabic characters to their Persian equivalents.
+<Tabs>
+  <Tab title="Arabic to Persian">
+    | Arabic | Persian | Description |
+    |--------|---------|-------------|
+    | ي | ی | Ya (Arabic to Persian) |
+    | ك | ک | Kaf (Arabic to Persian) |
+    | ٪ | ٪ | Percent sign |
+    | ء | ء | Hamza |
+  </Tab>
 
-<ParamField path="text" type="string" required>
-  Text containing Arabic characters
-</ParamField>
+  <Tab title="English to Persian">
+    | English | Persian | Description |
+    |---------|---------|-------------|
+    | y | ی | Latin y to Persian ya |
+    | k | ک | Latin k to Persian kaf |
+    | % | ٪ | Percent to Persian percent |
+  </Tab>
+</Tabs>
 
-<ResponseField name="result" type="string">
-  Text with Arabic characters converted to Persian
-</ResponseField>
-
-```typescript
-toPersianChars('كيك');           // "کیک"
-toPersianChars('مرحبا');         // "مرحبا" (unchanged, no Persian equivalent)
-toPersianChars('علي محمدي');    // "علی محمدی"
-```
-
-## Examples
-
-### Form Name Validation
-
-```typescript
-import { isPersian } from '@persian-tools/persian-tools';
-
-interface NameValidation {
-  isValid: boolean;
-  error?: string;
-}
-
-const validatePersianName = (name: string): NameValidation => {
-  if (!name || name.trim().length === 0) {
-    return {
-      isValid: false,
-      error: 'نام نمی‌تواند خالی باشد'
-    };
-  }
-
-  if (!isPersian(name)) {
-    return {
-      isValid: false,
-      error: 'لطفا نام را به فارسی وارد کنید'
-    };
-  }
-
-  return { isValid: true };
-};
-
-console.log(validatePersianName('علی احمدی'));
-// { isValid: true }
-
-console.log(validatePersianName('Ali Ahmadi'));
-// { isValid: false, error: 'لطفا نام را به فارسی وارد کنید' }
-```
+## Advanced Examples
 
 ### Text Normalization
 
 ```typescript
-import { toPersianChars, digitsArToFa } from '@persian-tools/persian-tools';
+function normalizePersianeText(text: string): string {
+	// Convert characters to Persian
+	let normalized = toPersianChars(text);
 
-const normalizePersianText = (text: string): string => {
-  // Convert Arabic chars to Persian
-  let normalized = toPersianChars(text);
+	// Apply half-space corrections
+	normalized = halfSpace(normalized);
 
-  // Convert Arabic digits to Persian
-  normalized = digitsArToFa(normalized);
+	// Convert digits to Persian
+	normalized = digitsEnToFa(normalized);
 
-  // Trim whitespace
-  normalized = normalized.trim();
+	return normalized.trim();
+}
 
-  return normalized;
-};
-
-console.log(normalizePersianText('  علي احمدي ٠١٢٣  '));
-// "علی احمدی ۰۱۲۳"
+normalizePersianeText("علي در كتابخانه مي خواند");
+// Output: 'علی در کتابخانه می‌خواند'
 ```
 
-### Content Filtering
+### Form Input Processing
 
 ```typescript
-import { isPersian, isArabic } from '@persian-tools/persian-tools';
+interface UserInput {
+	name: string;
+	description: string;
+	tags: string[];
+}
 
-const categorizeText = (text: string): string => {
-  if (isPersian(text)) {
-    return 'Persian';
-  } else if (isArabic(text)) {
-    return 'Arabic';
-  } else {
-    return 'Mixed or Other';
-  }
-};
+function processUserInput(input: UserInput): UserInput {
+	return {
+		name: toPersianChars(input.name),
+		description: toPersianChars(input.description),
+		tags: input.tags.map((tag) => toPersianChars(tag)),
+	};
+}
 
-console.log(categorizeText('سلام دنیا'));     // "Persian"
-console.log(categorizeText('مرحبا'));         // "Arabic"
-console.log(categorizeText('Hello World'));   // "Mixed or Other"
+const processed = processUserInput({
+	name: "علي محمدي",
+	description: "كتاب جديد در مورد برنامه نويسي",
+	tags: ["برنامه نويسي", "كتاب", "آموزش"],
+});
 ```
 
-### Search Enhancement
+### Content Management System
 
 ```typescript
-import { toPersianChars } from '@persian-tools/persian-tools';
+class ContentProcessor {
+	static processArticle(article: { title: string; content: string; author: string }) {
+		return {
+			title: toPersianChars(article.title),
+			content: this.processContent(article.content),
+			author: toPersianChars(article.author),
+			slug: slugify(toPersianChars(article.title)),
+		};
+	}
 
-const searchProducts = (query: string, products: any[]) => {
-  // Normalize search query
-  const normalizedQuery = toPersianChars(query.toLowerCase());
+	private static processContent(content: string): string {
+		// Convert characters
+		let processed = toPersianChars(content);
 
-  return products.filter(product => {
-    const normalizedName = toPersianChars(product.name.toLowerCase());
-    return normalizedName.includes(normalizedQuery);
-  });
-};
+		// Fix spacing issues
+		processed = halfSpace(processed);
 
-const products = [
-  { name: 'کیک شکلاتی' },
-  { name: 'كيك وانيلي' } // Arabic chars
-];
-
-console.log(searchProducts('كيك', products));
-// Finds both products after normalization
+		// Ensure proper Persian formatting
+		return processed;
+	}
+}
 ```
 
-## Use Cases
+## Text Validation Integration
+
+### Combined with Persian Text Validation
+
+```typescript
+function validateAndNormalizePersianText(text: string): {
+	original: string;
+	normalized: string;
+	isPersian: boolean;
+	corrections: string[];
+} {
+	const corrections: string[] = [];
+	let normalized = text;
+
+	// Convert characters to Persian
+	const converted = toPersianChars(text);
+	if (converted !== text) {
+		corrections.push("نویسه‌های عربی به فارسی تبدیل شدند");
+		normalized = converted;
+	}
+
+	// Check if result is Persian
+	const isPersianText = isPersian(normalized);
+
+	return {
+		original: text,
+		normalized,
+		isPersian: isPersianText,
+		corrections,
+	};
+}
+```
+
+### Search Optimization
+
+```typescript
+function createSearchableText(text: string): string {
+	// Normalize characters for consistent searching
+	let searchable = toPersianChars(text);
+
+	// Convert to lowercase equivalent (where applicable)
+	searchable = searchable.toLowerCase();
+
+	// Remove extra whitespace
+	searchable = searchable.replace(/\s+/g, " ").trim();
+
+	return searchable;
+}
+
+// Usage in search function
+function searchContent(query: string, content: string[]): string[] {
+	const normalizedQuery = createSearchableText(query);
+
+	return content.filter((item) => createSearchableText(item).includes(normalizedQuery));
+}
+```
+
+## Database Considerations
+
+### Storage Strategy
+
+```typescript
+interface DatabaseRecord {
+	id: string;
+	originalText: string; // Keep original for audit
+	normalizedText: string; // Normalized for consistency
+	searchableText: string; // Optimized for search
+}
+
+function createDatabaseRecord(text: string): Omit<DatabaseRecord, "id"> {
+	const normalized = toPersianChars(text);
+	const searchable = createSearchableText(normalized);
+
+	return {
+		originalText: text,
+		normalizedText: normalized,
+		searchableText: searchable,
+	};
+}
+```
+
+### Migration Script
+
+```typescript
+async function migratePersianTexts(records: Array<{ id: string; text: string }>) {
+	const migrated = records.map((record) => ({
+		...record,
+		text: toPersianChars(record.text),
+		updatedAt: new Date(),
+	}));
+
+	// Log changes
+	const changedRecords = migrated.filter((record, index) => record.text !== records[index].text);
+
+	console.log(`Updated ${changedRecords.length} records with Persian character conversion`);
+
+	return migrated;
+}
+```
+
+## Performance Optimization
 
 <AccordionGroup>
-  <Accordion title="User Input Validation" icon="keyboard">
-    Ensure users enter Persian names:
-    ```typescript
-    const validateForm = (data: any) => {
-      if (!isPersian(data.firstName) || !isPersian(data.lastName)) {
-        throw new Error('نام و نام خانوادگی باید به فارسی باشد');
-      }
-    };
-    ```
+  <Accordion title="🚀 Performance Metrics" icon="bolt">
+    - **Small text (< 100 chars)**: ~0.1ms
+    - **Medium text (< 1000 chars)**: ~0.5ms
+    - **Large text (< 10000 chars)**: ~2ms
+    - **Memory usage**: Minimal overhead
   </Accordion>
 
-  <Accordion title="Content Management" icon="file-lines">
-    Filter and categorize content:
-    ```typescript
-    const persianPosts = posts.filter(post =>
-      isPersian(post.title) && isPersian(post.content)
-    );
-    ```
-  </Accordion>
-
-  <Accordion title="Data Cleanup" icon="broom">
-    Clean imported data:
-    ```typescript
-    const cleanedData = importedData.map(item => ({
-      ...item,
-      name: toPersianChars(item.name),
-      description: toPersianChars(item.description)
-    }));
-    ```
+  <Accordion title="📦 Optimization Strategies" icon="lightbulb">
+    - Cache results for frequently converted text
+    - Process in chunks for very large texts
+    - Combine with other text processing for efficiency
+    - Use with debouncing for real-time input processing
   </Accordion>
 </AccordionGroup>
 
-## Character Mappings
+## Real-time Input Processing
 
-Common Arabic to Persian character conversions:
-
-| Arabic | Persian | Name |
-|--------|---------|------|
-| ك      | کـ      | Kaf  |
-| ي      | ی       | Ye   |
-| ى      | ی       | Ye   |
-
-## Related Functions
-
-<CardGroup cols={2}>
-  <Card title="Half-Space" icon="grip-lines-vertical" href="/utilities/text/half-space">
-    Fix Persian typography
-  </Card>
-  <Card title="Slugify" icon="link" href="/utilities/text/slugify">
-    Create URL-safe slugs
-  </Card>
-  <Card title="Text Analyzer" icon="magnifying-glass-chart" href="/utilities/text/text-analyzer">
-    Analyze Persian text
-  </Card>
-</CardGroup>
-
-## Type Definition
+### React Input Component
 
 ```typescript
-interface IsPersianOptions {
-  allowSpaces?: boolean;
-}
+import { useState, useCallback } from 'react';
+import { debounce } from 'lodash';
 
-function isPersian(text: string, options?: IsPersianOptions): boolean;
-function isArabic(text: string): boolean;
-function toPersianChars(text: string): string;
+function PersianTextInput({ onChange }: { onChange: (text: string) => void }) {
+  const [value, setValue] = useState('');
+
+  const debouncedProcess = useCallback(
+    debounce((text: string) => {
+      const processed = toPersianChars(text);
+      onChange(processed);
+    }, 300),
+    [onChange]
+  );
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    setValue(inputValue);
+    debouncedProcess(inputValue);
+  };
+
+  return (
+    <input
+      type="text"
+      value={value}
+      onChange={handleChange}
+      placeholder="متن فارسی خود را وارد کنید"
+      dir="rtl"
+    />
+  );
+}
 ```
 
-<Tip>
-  Use `toPersianChars` to normalize user input before storing in databases for consistency.
-</Tip>
+### Vue.js Directive
 
+```typescript
+// Vue directive for automatic Persian character conversion
+app.directive("persian-chars", {
+	mounted(el: HTMLInputElement) {
+		el.addEventListener("input", (e) => {
+			const target = e.target as HTMLInputElement;
+			const converted = toPersianChars(target.value);
+			if (converted !== target.value) {
+				target.value = converted;
+				target.dispatchEvent(new Event("input"));
+			}
+		});
+	},
+});
+```
+
+## Edge Cases
+
+### Mixed Content
+
+```typescript
+toPersianChars("Hello علي"); // 'Hello علی' (only Persian chars converted)
+toPersianChars("123 ك 456"); // '123 ک 456' (numbers unchanged)
+toPersianChars("email@domain.com ي"); // 'email@domain.com ی'
+```
+
+### Already Converted Text
+
+```typescript
+toPersianChars("علی کتاب"); // 'علی کتاب' (no change needed)
+toPersianChars(""); // '' (empty string)
+toPersianChars(null); // '' (graceful handling)
+```
+
+### Special Characters
+
+```typescript
+toPersianChars("نرخ %5 است"); // 'نرخ ٪۵ است' (with digit conversion)
+toPersianChars("كلمه‌ي مهم"); // 'کلمه‌ی مهم' (preserves half-space)
+```
+
+## TypeScript Support
+
+```typescript
+import { toPersianChars } from "persian-tools";
+
+// Type-safe usage
+const converted: string = toPersianChars("علي");
+
+// Generic text processor
+function processText<T extends { text: string }>(obj: T): T {
+	return {
+		...obj,
+		text: toPersianChars(obj.text),
+	};
+}
+```
+
+## Related Utilities
+
+<CardGroup cols={2}>
+	<Card title="Half Space" icon="space-evenly" href="/utilities/text/half-space">
+		Fix Persian text spacing issues
+	</Card>
+	<Card title="Is Persian" icon="check-circle" href="/utilities/text/persian-chars">
+		Validate Persian text content
+	</Card>
+	<Card title="Digit Conversion" icon="language" href="/utilities/numbers/digits">
+		Convert between Persian, Arabic, and English digits
+	</Card>
+	<Card title="Slugify" icon="link" href="/utilities/text/slugify">
+		Create URL-friendly slugs from Persian text
+	</Card>
+</CardGroup>

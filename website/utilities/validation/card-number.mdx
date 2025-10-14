@@ -17,22 +17,18 @@ Validate Iranian bank card numbers and extract card information including bank n
 ## Basic Usage
 
 ```typescript
-import {
-  verifyCardNumber,
-  getBankNameFromCardNumber,
-  extractCardNumbers
-} from '@persian-tools/persian-tools';
+import { verifyCardNumber, getBankNameFromCardNumber, extractCardNumbers } from "@persian-tools/persian-tools";
 
 // Validate card number
-console.log(verifyCardNumber('6037701689095443'));
+console.log(verifyCardNumber("6037701689095443"));
 // Output: true
 
 // Get bank name
-console.log(getBankNameFromCardNumber('6037701689095443'));
+console.log(getBankNameFromCardNumber("6037701689095443"));
 // Output: "بانک کشاورزی"
 
 // Extract from text
-console.log(extractCardNumbers('کارت من: 6037-7016-8909-5443'));
+console.log(extractCardNumbers("کارت من: 6037-7016-8909-5443"));
 // Output: ['6037701689095443']
 ```
 
@@ -43,16 +39,16 @@ console.log(extractCardNumbers('کارت من: 6037-7016-8909-5443'));
 Validate a bank card number using the Luhn algorithm.
 
 <ParamField path="cardNumber" type="string" required>
-  16-digit bank card number
+	16-digit bank card number
 </ParamField>
 
 <ResponseField name="result" type="boolean">
-  `true` if valid, `false` otherwise
+	`true` if valid, `false` otherwise
 </ResponseField>
 
 ```typescript
-verifyCardNumber('6037701689095443');  // true
-verifyCardNumber('1234567890123456');  // false
+verifyCardNumber("6037701689095443"); // true
+verifyCardNumber("1234567890123456"); // false
 ```
 
 ### getBankNameFromCardNumber
@@ -60,16 +56,16 @@ verifyCardNumber('1234567890123456');  // false
 Identify the bank from a card number.
 
 <ParamField path="cardNumber" type="string" required>
-  Valid 16-digit bank card number
+	Valid 16-digit bank card number
 </ParamField>
 
 <ResponseField name="result" type="string">
-  Bank name in Persian, or empty string if not found
+	Bank name in Persian, or empty string if not found
 </ResponseField>
 
 ```typescript
-getBankNameFromCardNumber('6037701689095443');  // "بانک کشاورزی"
-getBankNameFromCardNumber('6219861034529007');  // "بانک سامان"
+getBankNameFromCardNumber("6037701689095443"); // "بانک کشاورزی"
+getBankNameFromCardNumber("6219861034529007"); // "بانک سامان"
 ```
 
 ### extractCardNumbers
@@ -77,15 +73,15 @@ getBankNameFromCardNumber('6219861034529007');  // "بانک سامان"
 Extract all card numbers from a text string.
 
 <ParamField path="text" type="string" required>
-  Text containing card numbers
+	Text containing card numbers
 </ParamField>
 
 <ResponseField name="result" type="string[]">
-  Array of extracted card numbers (cleaned, digits only)
+	Array of extracted card numbers (cleaned, digits only)
 </ResponseField>
 
 ```typescript
-extractCardNumbers('کارت ۱: 6037-7016-8909-5443 و کارت ۲: 6219861034529007');
+extractCardNumbers("کارت ۱: 6037-7016-8909-5443 و کارت ۲: 6219861034529007");
 // ['6037701689095443', '6219861034529007']
 ```
 
@@ -94,41 +90,41 @@ extractCardNumbers('کارت ۱: 6037-7016-8909-5443 و کارت ۲: 62198610345
 ### Payment Form Validation
 
 ```typescript
-import { verifyCardNumber, getBankNameFromCardNumber } from '@persian-tools/persian-tools';
+import { verifyCardNumber, getBankNameFromCardNumber } from "@persian-tools/persian-tools";
 
 interface CardValidation {
-  isValid: boolean;
-  bankName?: string;
-  error?: string;
+	isValid: boolean;
+	bankName?: string;
+	error?: string;
 }
 
 const validatePaymentCard = (cardNumber: string): CardValidation => {
-  // Remove spaces and dashes
-  const cleaned = cardNumber.replace(/[\s-]/g, '');
+	// Remove spaces and dashes
+	const cleaned = cardNumber.replace(/[\s-]/g, "");
 
-  if (cleaned.length !== 16) {
-    return {
-      isValid: false,
-      error: 'شماره کارت باید ۱۶ رقم باشد'
-    };
-  }
+	if (cleaned.length !== 16) {
+		return {
+			isValid: false,
+			error: "شماره کارت باید ۱۶ رقم باشد",
+		};
+	}
 
-  if (!verifyCardNumber(cleaned)) {
-    return {
-      isValid: false,
-      error: 'شماره کارت نامعتبر است'
-    };
-  }
+	if (!verifyCardNumber(cleaned)) {
+		return {
+			isValid: false,
+			error: "شماره کارت نامعتبر است",
+		};
+	}
 
-  const bankName = getBankNameFromCardNumber(cleaned);
+	const bankName = getBankNameFromCardNumber(cleaned);
 
-  return {
-    isValid: true,
-    bankName: bankName || 'نامشخص'
-  };
+	return {
+		isValid: true,
+		bankName: bankName || "نامشخص",
+	};
 };
 
-console.log(validatePaymentCard('6037-7016-8909-5443'));
+console.log(validatePaymentCard("6037-7016-8909-5443"));
 // {
 //   isValid: true,
 //   bankName: 'بانک کشاورزی'
@@ -138,34 +134,34 @@ console.log(validatePaymentCard('6037-7016-8909-5443'));
 ### Display Card Information
 
 ```typescript
-import { getBankNameFromCardNumber } from '@persian-tools/persian-tools';
+import { getBankNameFromCardNumber } from "@persian-tools/persian-tools";
 
 const formatCardDisplay = (cardNumber: string): string => {
-  const bankName = getBankNameFromCardNumber(cardNumber);
-  const masked = cardNumber.slice(0, 6) + '******' + cardNumber.slice(-4);
+	const bankName = getBankNameFromCardNumber(cardNumber);
+	const masked = cardNumber.slice(0, 6) + "******" + cardNumber.slice(-4);
 
-  return `${bankName} - ${masked}`;
+	return `${bankName} - ${masked}`;
 };
 
-console.log(formatCardDisplay('6037701689095443'));
+console.log(formatCardDisplay("6037701689095443"));
 // "بانک کشاورزی - 603770******5443"
 ```
 
 ### Extract Cards from Email/SMS
 
 ```typescript
-import { extractCardNumbers, verifyCardNumber } from '@persian-tools/persian-tools';
+import { extractCardNumbers, verifyCardNumber } from "@persian-tools/persian-tools";
 
 const processPaymentMessage = (message: string) => {
-  const cards = extractCardNumbers(message);
+	const cards = extractCardNumbers(message);
 
-  const validCards = cards.filter(card => verifyCardNumber(card));
+	const validCards = cards.filter((card) => verifyCardNumber(card));
 
-  return validCards.map(card => ({
-    number: card,
-    bank: getBankNameFromCardNumber(card),
-    masked: card.slice(0, 6) + '******' + card.slice(-4)
-  }));
+	return validCards.map((card) => ({
+		number: card,
+		bank: getBankNameFromCardNumber(card),
+		masked: card.slice(0, 6) + "******" + card.slice(-4),
+	}));
 };
 
 const sms = `
@@ -183,28 +179,28 @@ console.log(processPaymentMessage(sms));
 ### Multi-Card Support
 
 ```typescript
-import { verifyCardNumber, getBankNameFromCardNumber } from '@persian-tools/persian-tools';
+import { verifyCardNumber, getBankNameFromCardNumber } from "@persian-tools/persian-tools";
 
 interface SavedCard {
-  id: string;
-  number: string;
-  bank: string;
-  isPrimary: boolean;
+	id: string;
+	number: string;
+	bank: string;
+	isPrimary: boolean;
 }
 
 const addCardToWallet = (cardNumber: string, existingCards: SavedCard[]): SavedCard[] => {
-  if (!verifyCardNumber(cardNumber)) {
-    throw new Error('شماره کارت نامعتبر است');
-  }
+	if (!verifyCardNumber(cardNumber)) {
+		throw new Error("شماره کارت نامعتبر است");
+	}
 
-  const newCard: SavedCard = {
-    id: Date.now().toString(),
-    number: cardNumber,
-    bank: getBankNameFromCardNumber(cardNumber),
-    isPrimary: existingCards.length === 0
-  };
+	const newCard: SavedCard = {
+		id: Date.now().toString(),
+		number: cardNumber,
+		bank: getBankNameFromCardNumber(cardNumber),
+		isPrimary: existingCards.length === 0,
+	};
 
-  return [...existingCards, newCard];
+	return [...existingCards, newCard];
 };
 ```
 
@@ -224,14 +220,10 @@ const addCardToWallet = (cardNumber: string, existingCards: SavedCard[]): SavedC
     ```
   </Accordion>
 
-  <Accordion title="Digital Wallet" icon="wallet">
-    Store and manage multiple cards:
-    ```typescript
-    const cards = userCards.filter(card =>
-      verifyCardNumber(card.number)
-    );
-    ```
-  </Accordion>
+<Accordion title="Digital Wallet" icon="wallet">
+	Store and manage multiple cards: ```typescript const cards = userCards.filter(card => verifyCardNumber(card.number)
+	); ```
+</Accordion>
 
   <Accordion title="Fraud Detection" icon="shield-halved">
     Validate card numbers before processing:
@@ -265,6 +257,7 @@ The function recognizes cards from all major Iranian banks including:
 ## Card Number Format
 
 Iranian bank cards use a 16-digit format validated with the Luhn algorithm:
+
 - First 6 digits: Bank identification number (BIN)
 - Next 9 digits: Account identifier
 - Last digit: Check digit
@@ -272,12 +265,12 @@ Iranian bank cards use a 16-digit format validated with the Luhn algorithm:
 ## Related Functions
 
 <CardGroup cols={2}>
-  <Card title="SHEBA/IBAN Validation" icon="building-columns" href="/utilities/banking/sheba">
-    Validate Iranian IBAN numbers
-  </Card>
-  <Card title="Phone Number Validation" icon="phone" href="/utilities/validation/phone-number">
-    Validate phone numbers
-  </Card>
+	<Card title="SHEBA/IBAN Validation" icon="building-columns" href="/utilities/banking/sheba">
+		Validate Iranian IBAN numbers
+	</Card>
+	<Card title="Phone Number Validation" icon="phone" href="/utilities/validation/phone-number">
+		Validate phone numbers
+	</Card>
 </CardGroup>
 
 ## Type Definition
@@ -288,7 +281,4 @@ function getBankNameFromCardNumber(cardNumber: string): string;
 function extractCardNumbers(text: string): string[];
 ```
 
-<Tip>
-  Always validate card numbers on the server side for security, even if validated on the client.
-</Tip>
-
+<Tip>Always validate card numbers on the server side for security, even if validated on the client.</Tip>

@@ -11,9 +11,9 @@ Convert timestamps to human-readable Persian relative time strings (e.g., "5 د�
 ## Basic Usage
 
 ```typescript
-import { timeAgo } from '@persian-tools/persian-tools';
+import { timeAgo } from "@persian-tools/persian-tools";
 
-const date = new Date('2024-10-14T10:00:00');
+const date = new Date("2024-10-14T10:00:00");
 console.log(timeAgo(date));
 // Output: "5 ساعت پیش" (example output)
 ```
@@ -21,11 +21,11 @@ console.log(timeAgo(date));
 ## API Reference
 
 <ParamField path="date" type="Date | number" required>
-  Date object or timestamp to convert
+	Date object or timestamp to convert
 </ParamField>
 
 <ResponseField name="result" type="string">
-  Relative time string in Persian
+	Relative time string in Persian
 </ResponseField>
 
 ## Examples
@@ -33,14 +33,14 @@ console.log(timeAgo(date));
 ### Social Media Posts
 
 ```typescript
-import { timeAgo, digitsEnToFa } from '@persian-tools/persian-tools';
+import { timeAgo, digitsEnToFa } from "@persian-tools/persian-tools";
 
 const formatPostTime = (postDate: Date): string => {
-  const relative = timeAgo(postDate);
-  return digitsEnToFa(relative);
+	const relative = timeAgo(postDate);
+	return digitsEnToFa(relative);
 };
 
-const post = { createdAt: new Date('2024-10-14T09:00:00') };
+const post = { createdAt: new Date("2024-10-14T09:00:00") };
 console.log(formatPostTime(post.createdAt));
 // "۱ ساعت پیش"
 ```
@@ -48,22 +48,23 @@ console.log(formatPostTime(post.createdAt));
 ### Comment Timestamps
 
 ```typescript
-import { timeAgo } from '@persian-tools/persian-tools';
+import { timeAgo } from "@persian-tools/persian-tools";
 
 interface Comment {
-  text: string;
-  timestamp: Date;
+	text: string;
+	timestamp: Date;
 }
 
 const displayComment = (comment: Comment) => ({
-  text: comment.text,
-  time: timeAgo(comment.timestamp)
+	text: comment.text,
+	time: timeAgo(comment.timestamp),
 });
 ```
 
 ## Time Ranges
 
 The function returns appropriate Persian phrases for:
+
 - Seconds: "چند لحظه پیش"
 - Minutes: "X دقیقه پیش"
 - Hours: "X ساعت پیش"
@@ -77,4 +78,3 @@ The function returns appropriate Persian phrases for:
 ```typescript
 function timeAgo(date: Date | number): string;
 ```
-

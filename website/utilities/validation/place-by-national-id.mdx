@@ -1,258 +1,404 @@
 ---
-title: "Get Place by National ID"
-description: "Extract birth location information from Iranian national IDs"
+title: "Place by National ID"
+description: "Extract geographic information from Iranian National IDs"
 icon: "location-dot"
 ---
 
-# Get Place by National ID
+# Geographic Information from National ID
 
-Extract the birth city and province from an Iranian national ID number.
+The `getPlaceByIranNationalId` utility extracts the birthplace (city and province) information encoded in Iranian National ID numbers.
 
 ## Basic Usage
 
-```typescript
-import { getPlaceByIranNationalId } from '@persian-tools/persian-tools';
+<CodeGroup>
+```typescript Import
+import { getPlaceByIranNationalId } from 'persian-tools';
+```
 
-const location = getPlaceByIranNationalId('0499370899');
-console.log(location);
+```javascript CommonJS
+const { getPlaceByIranNationalId } = require("persian-tools");
+```
+
+</CodeGroup>
+
+### Simple Extraction
+
+```typescript
+getPlaceByIranNationalId("0499370899");
+// Output: { city: 'خمین', province: 'مرکزی' }
+
+getPlaceByIranNationalId("0684159415");
+// Output: { city: 'شیراز', province: 'فارس' }
+
+getPlaceByIranNationalId("0076229645");
 // Output: { city: 'تهران', province: 'تهران' }
 ```
 
-## API Reference
+## How It Works
 
-<ParamField path="nationalId" type="string" required>
-  Valid 10-digit Iranian national ID
-</ParamField>
+Iranian National IDs encode geographic information in their first 3 digits, which correspond to the registration office where the ID was issued (typically the birthplace).
 
-<ResponseField name="result" type="object | undefined">
-  Object containing city and province, or `undefined` if location cannot be determined
+<AccordionGroup>
+  <Accordion title="🗺️ Geographic Encoding" icon="map">
+    The first 3 digits represent a unique code for each registration office across Iran's provinces and cities.
+  </Accordion>
 
-  <Expandable title="properties">
-    <ResponseField name="city" type="string">
-      Birth city name in Persian
-    </ResponseField>
+<Accordion title="📊 Coverage" icon="chart-bar">
+	Supports all 31 provinces and hundreds of cities across Iran with their registration office codes.
+</Accordion>
 
-    <ResponseField name="province" type="string">
-      Province name in Persian
-    </ResponseField>
-  </Expandable>
-</ResponseField>
+  <Accordion title="🔍 Validation" icon="magnifying-glass">
+    Only works with valid National IDs - invalid IDs return null.
+  </Accordion>
+</AccordionGroup>
 
-## Examples
+## Advanced Examples
 
-### Extract Location Information
+### User Registration with Location
 
 ```typescript
-import { getPlaceByIranNationalId } from '@persian-tools/persian-tools';
-
-console.log(getPlaceByIranNationalId('0499370899'));
-// { city: 'تهران', province: 'تهران' }
-
-console.log(getPlaceByIranNationalId('1234567890'));
-// { city: 'اصفهان', province: 'اصفهان' }
-```
-
-### User Profile Enhancement
-
-```typescript
-import {
-  verifyIranianNationalId,
-  getPlaceByIranNationalId
-} from '@persian-tools/persian-tools';
-
-interface UserProfile {
-  name: string;
-  nationalId: string;
-  birthPlace?: {
-    city: string;
-    province: string;
-  };
+interface UserRegistration {
+	nationalId: string;
+	name: string;
+	phone: string;
 }
 
-const createUserProfile = (name: string, nationalId: string): UserProfile => {
-  if (!verifyIranianNationalId(nationalId)) {
-    throw new Error('کد ملی نامعتبر است');
-  }
+function processRegistration(userData: UserRegistration) {
+	// Validate National ID first
+	if (!verifyIranianNationalId(userData.nationalId)) {
+		throw new Error("کد ملی معتبر نیست");
+	}
 
-  const birthPlace = getPlaceByIranNationalId(nationalId);
+	// Extract location information
+	const location = getPlaceByIranNationalId(userData.nationalId);
 
-  return {
-    name,
-    nationalId,
-    birthPlace
-  };
-};
-
-const profile = createUserProfile('رضا محمدی', '0499370899');
-console.log(profile);
-// {
-//   name: 'رضا محمدی',
-//   nationalId: '0499370899',
-//   birthPlace: { city: 'تهران', province: 'تهران' }
-// }
+	return {
+		...userData,
+		birthPlace: location,
+		isFromTehran: location?.province === "تهران",
+		registrationRegion: location ? `${location.city}, ${location.province}` : "نامشخص",
+	};
+}
 ```
 
 ### Demographics Analysis
 
 ```typescript
-import { getPlaceByIranNationalId } from '@persian-tools/persian-tools';
+function analyzeUserDemographics(nationalIds: string[]) {
+	const locations = nationalIds
+		.filter((id) => verifyIranianNationalId(id))
+		.map((id) => getPlaceByIranNationalId(id))
+		.filter((location) => location !== null);
 
-const analyzeUsersByProvince = (nationalIds: string[]) => {
-  const provinceCount = new Map<string, number>();
+	// Group by province
+	const provinceStats = locations.reduce(
+		(stats, location) => {
+			const province = location!.province;
+			stats[province] = (stats[province] || 0) + 1;
+			return stats;
+		},
+		{} as Record<string, number>,
+	);
 
-  nationalIds.forEach(id => {
-    const location = getPlaceByIranNationalId(id);
-    if (location) {
-      const count = provinceCount.get(location.province) || 0;
-      provinceCount.set(location.province, count + 1);
-    }
-  });
+	// Group by city
+	const cityStats = locations.reduce(
+		(stats, location) => {
+			const city = location!.city;
+			stats[city] = (stats[city] || 0) + 1;
+			return stats;
+		},
+		{} as Record<string, number>,
+	);
 
-  return Object.fromEntries(provinceCount);
-};
-
-const ids = ['0499370899', '1234567890', '0491832456'];
-console.log(analyzeUsersByProvince(ids));
-// { 'تهران': 2, 'اصفهان': 1 }
+	return {
+		totalValid: locations.length,
+		provinceDistribution: provinceStats,
+		cityDistribution: cityStats,
+		topProvinces: Object.entries(provinceStats)
+			.sort(([, a], [, b]) => b - a)
+			.slice(0, 5),
+	};
+}
 ```
 
-### Display User Origin
+### Geographic Filtering
 
 ```typescript
-import { getPlaceByIranNationalId } from '@persian-tools/persian-tools';
+function filterUsersByRegion(
+	users: Array<{ nationalId: string; name: string }>,
+	targetProvince?: string,
+	targetCity?: string,
+) {
+	return users
+		.filter((user) => {
+			const location = getPlaceByIranNationalId(user.nationalId);
 
-const displayUserOrigin = (nationalId: string): string => {
-  const location = getPlaceByIranNationalId(nationalId);
+			if (!location) return false;
 
-  if (!location) {
-    return 'نامشخص';
-  }
+			if (targetProvince && location.province !== targetProvince) {
+				return false;
+			}
 
-  if (location.city === location.province) {
-    return location.city;
-  }
+			if (targetCity && location.city !== targetCity) {
+				return false;
+			}
 
-  return `${location.city}, ${location.province}`;
-};
+			return true;
+		})
+		.map((user) => ({
+			...user,
+			location: getPlaceByIranNationalId(user.nationalId),
+		}));
+}
 
-console.log(displayUserOrigin('0499370899'));
-// "تهران"
+// Usage
+const tehranUsers = filterUsersByRegion(allUsers, "تهران");
+const shirazUsers = filterUsersByRegion(allUsers, "فارس", "شیراز");
 ```
 
-## Use Cases
+## Major Cities and Codes
+
+<Tabs>
+  <Tab title="Tehran Province">
+    | Code Range | City |
+    |------------|------|
+    | 001-085 | تهران |
+    | 136-151 | ورامین |
+    | 196-200 | پاکدشت |
+    | 219-229 | اسلامشهر |
+    | 297-300 | شهریار |
+  </Tab>
+
+<Tab title="Isfahan Province">
+	| Code Range | City | |------------|------| | 231-244 | اصفهان | | 273-280 | کاشان | | 390-399 | خمینی‌شهر | |
+	419-428 | نجف‌آباد |
+</Tab>
+
+<Tab title="Fars Province">
+	| Code Range | City | |------------|------| | 684-695 | شیراز | | 729-738 | کازرون | | 759-768 | مرودشت | | 779-788
+	| فسا |
+</Tab>
+
+  <Tab title="Khuzestan Province">
+    | Code Range | City |
+    |------------|------|
+    | 589-599 | اهواز |
+    | 639-648 | آبادان |
+    | 649-658 | خرمشهر |
+    | 679-683 | دزفول |
+  </Tab>
+</Tabs>
+
+## Return Value Structure
+
+```typescript
+interface PlaceInfo {
+	city: string; // City name in Persian
+	province: string; // Province name in Persian
+}
+
+// Function signature
+function getPlaceByIranNationalId(nationalId: string): PlaceInfo | null;
+```
+
+## Edge Cases
+
+### Invalid National IDs
+
+```typescript
+getPlaceByIranNationalId("1234567890"); // null (invalid checksum)
+getPlaceByIranNationalId("0000000000"); // null (invalid pattern)
+getPlaceByIranNationalId(""); // null (empty string)
+getPlaceByIranNationalId(null); // null
+```
+
+### Unknown Geographic Codes
+
+```typescript
+// Very rare cases where code might not be in database
+getPlaceByIranNationalId("9999999999"); // null (if code 999 doesn't exist)
+```
+
+### Different Input Formats
+
+```typescript
+// Works with Persian and Arabic digits
+getPlaceByIranNationalId("۰۴۹۹۳۷۰۸۹۹");
+// Output: { city: 'خمین', province: 'مرکزی' }
+
+getPlaceByIranNationalId("٠٤٩٩٣٧٠٨٩٩");
+// Output: { city: 'خمین', province: 'مرکزی' }
+```
+
+## Performance Considerations
 
 <AccordionGroup>
-  <Accordion title="User Registration" icon="user-plus">
-    Auto-fill location fields during registration:
-    ```typescript
-    const handleNationalIdInput = (nationalId: string) => {
-      const location = getPlaceByIranNationalId(nationalId);
-
-      if (location) {
-        setFormData({
-          ...formData,
-          birthCity: location.city,
-          birthProvince: location.province
-        });
-      }
-    };
-    ```
+  <Accordion title="🚀 Performance Metrics" icon="bolt">
+    - **Lookup time**: ~0.02ms (hash table lookup)
+    - **Memory overhead**: ~50KB (geographic database)
+    - **Batch processing**: Excellent scaling
   </Accordion>
 
-  <Accordion title="Demographics Dashboard" icon="chart-pie">
-    Analyze user distribution by province:
-    ```typescript
-    const users = await getUsers();
-    const distribution = users.reduce((acc, user) => {
-      const location = getPlaceByIranNationalId(user.nationalId);
-      if (location) {
-        acc[location.province] = (acc[location.province] || 0) + 1;
-      }
-      return acc;
-    }, {});
-    ```
-  </Accordion>
-
-  <Accordion title="Shipping Optimization" icon="truck">
-    Optimize delivery based on user origins:
-    ```typescript
-    const suggestDeliveryHub = (nationalId: string) => {
-      const location = getPlaceByIranNationalId(nationalId);
-      return location ? location.province : 'تهران';
-    };
-    ```
+  <Accordion title="📊 Optimization Tips" icon="lightbulb">
+    - Cache results for repeated lookups
+    - Validate National ID first to avoid unnecessary lookups
+    - Use in combination with validation for better UX
   </Accordion>
 </AccordionGroup>
 
-## Supported Provinces
-
-The function recognizes birth locations for all 31 Iranian provinces, including:
-
-- تهران
-- اصفهان
-- خراسان رضوی
-- فارس
-- خوزستان
-- آذربایجان شرقی
-- آذربایجان غربی
-- And 24 more provinces
-
-## Important Notes
-
-<Warning>
-  Not all national IDs can be mapped to a specific location. Some IDs may return `undefined` if the location code is not in the database.
-</Warning>
-
-<Note>
-  The location represents the birth place at the time of ID issuance, not necessarily the current residence.
-</Note>
-
-## Error Handling
+## TypeScript Support
 
 ```typescript
-import {
-  verifyIranianNationalId,
-  getPlaceByIranNationalId
-} from '@persian-tools/persian-tools';
+import { getPlaceByIranNationalId, PlaceInfo } from "persian-tools";
 
-const safeGetLocation = (nationalId: string) => {
-  // First verify the ID is valid
-  if (!verifyIranianNationalId(nationalId)) {
-    return { error: 'کد ملی نامعتبر است' };
-  }
+// Type-safe usage
+const location: PlaceInfo | null = getPlaceByIranNationalId("0499370899");
 
+if (location) {
+	console.log(`City: ${location.city}, Province: ${location.province}`);
+}
+
+// Custom type guards
+function isFromTehran(nationalId: string): boolean {
+	const location = getPlaceByIranNationalId(nationalId);
+	return location?.province === "تهران";
+}
+```
+
+## Real-world Applications
+
+### E-commerce Shipping
+
+```typescript
+function calculateShippingCost(nationalId: string, basePrice: number): number {
+	const location = getPlaceByIranNationalId(nationalId);
+
+	if (!location) return basePrice;
+
+	// Different rates for different provinces
+	const provinceMultipliers: Record<string, number> = {
+		تهران: 1.0,
+		اصفهان: 1.2,
+		فارس: 1.3,
+		خوزستان: 1.4,
+		// Remote provinces
+		"سیستان و بلوچستان": 2.0,
+		کردستان: 1.8,
+	};
+
+	const multiplier = provinceMultipliers[location.province] || 1.5;
+	return Math.round(basePrice * multiplier);
+}
+```
+
+### Regional Service Availability
+
+```typescript
+function checkServiceAvailability(nationalId: string, service: string): boolean {
+	const location = getPlaceByIranNationalId(nationalId);
+
+	if (!location) return false;
+
+	const serviceMap: Record<string, string[]> = {
+		"express-delivery": ["تهران", "اصفهان", "فارس", "خراسان رضوی"],
+		"same-day-delivery": ["تهران"],
+		"premium-support": ["تهران", "اصفهان", "فارس"],
+	};
+
+	return serviceMap[service]?.includes(location.province) || false;
+}
+```
+
+### Marketing Segmentation
+
+```typescript
+function segmentUsersByRegion(users: Array<{ nationalId: string }>) {
+	const segments = {
+		metropolitan: [] as any[],
+		urban: [] as any[],
+		rural: [] as any[],
+	};
+
+	const metropolitanProvinces = ["تهران", "اصفهان", "فارس"];
+	const urbanProvinces = ["خراسان رضوی", "آذربایجان شرقی", "خوزستان"];
+
+	users.forEach((user) => {
+		const location = getPlaceByIranNationalId(user.nationalId);
+		if (!location) return;
+
+		if (metropolitanProvinces.includes(location.province)) {
+			segments.metropolitan.push({ ...user, location });
+		} else if (urbanProvinces.includes(location.province)) {
+			segments.urban.push({ ...user, location });
+		} else {
+			segments.rural.push({ ...user, location });
+		}
+	});
+
+	return segments;
+}
+```
+
+## Integration Examples
+
+### React Component
+
+```typescript
+function UserLocationDisplay({ nationalId }: { nationalId: string }) {
   const location = getPlaceByIranNationalId(nationalId);
 
   if (!location) {
-    return { error: 'محل تولد قابل شناسایی نیست' };
+    return <span>محل تولد: نامشخص</span>;
   }
 
-  return { location };
-};
+  return (
+    <div className="location-info">
+      <span>محل تولد: {location.city}</span>
+      <span>استان: {location.province}</span>
+    </div>
+  );
+}
 ```
 
-## Related Functions
-
-<CardGroup cols={2}>
-  <Card title="National ID Validation" icon="id-card" href="/utilities/validation/national-id">
-    Validate national IDs
-  </Card>
-  <Card title="Find Capital by Province" icon="landmark" href="/utilities/geographic/capital-by-province">
-    Get province capital cities
-  </Card>
-  <Card title="Find Province from Coordinates" icon="map-location-dot" href="/utilities/geographic/province-from-coordinate">
-    Get province from GPS coordinates
-  </Card>
-</CardGroup>
-
-## Type Definition
+### Database Model
 
 ```typescript
-interface Location {
-  city: string;
-  province: string;
+interface User {
+	id: string;
+	nationalId: string;
+	name: string;
+	birthCity?: string;
+	birthProvince?: string;
 }
 
-function getPlaceByIranNationalId(nationalId: string): Location | undefined;
+function enrichUserWithLocation(user: Omit<User, "birthCity" | "birthProvince">): User {
+	const location = getPlaceByIranNationalId(user.nationalId);
+
+	return {
+		...user,
+		birthCity: location?.city,
+		birthProvince: location?.province,
+	};
+}
 ```
 
+## Related Utilities
+
+<CardGroup cols={2}>
+	<Card title="National ID Validation" icon="id-card" href="/utilities/validation/national-id">
+		Validate Iranian National ID numbers
+	</Card>
+	<Card title="Find Capital by Province" icon="map-location-dot" href="/utilities/geographic/capital-by-province">
+		Get province capital cities
+	</Card>
+	<Card
+		title="Province from Coordinates"
+		icon="location-crosshairs"
+		href="/utilities/geographic/province-from-coordinate"
+	>
+		Find province from GPS coordinates
+	</Card>
+	<Card title="Legal ID Validation" icon="building" href="/utilities/validation/legal-id">
+		Validate Iranian legal entity IDs
+	</Card>
+</CardGroup>

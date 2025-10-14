@@ -11,11 +11,11 @@ Parse and validate Iranian utility bills (قبض) including electricity, water, 
 ## Basic Usage
 
 ```typescript
-import { Bill } from '@persian-tools/persian-tools';
+import { Bill } from "@persian-tools/persian-tools";
 
 const bill = new Bill({
-  billId: '1234567890123',
-  paymentId: '1234567890123'
+	billId: "1234567890123",
+	paymentId: "1234567890123",
 });
 
 const result = bill.getResult();
@@ -41,6 +41,7 @@ console.log(result);
     <ParamField path="paymentId" type="string" required>
       Payment identifier (شناسه پرداخت)
     </ParamField>
+
   </Expandable>
 </ParamField>
 
@@ -63,6 +64,7 @@ Get parsed bill information.
     <ResponseField name="amount" type="number">
       Bill amount in Rials
     </ResponseField>
+
   </Expandable>
 </ResponseField>
 
@@ -71,7 +73,7 @@ Get parsed bill information.
 Get the barcode representation of the bill.
 
 <ResponseField name="result" type="string">
-  Barcode string
+	Barcode string
 </ResponseField>
 
 ## Examples
@@ -79,44 +81,47 @@ Get the barcode representation of the bill.
 ### Bill Payment Processing
 
 ```typescript
-import { Bill } from '@persian-tools/persian-tools';
+import { Bill } from "@persian-tools/persian-tools";
 
 const processBillPayment = (billId: string, paymentId: string) => {
-  const bill = new Bill({ billId, paymentId });
-  const result = bill.getResult();
+	const bill = new Bill({ billId, paymentId });
+	const result = bill.getResult();
 
-  if (!result.isValid) {
-    throw new Error('اطلاعات قبض نامعتبر است');
-  }
+	if (!result.isValid) {
+		throw new Error("اطلاعات قبض نامعتبر است");
+	}
 
-  return {
-    type: result.billType,
-    amount: result.amount,
-    barcode: bill.getBarcode()
-  };
+	return {
+		type: result.billType,
+		amount: result.amount,
+		barcode: bill.getBarcode(),
+	};
 };
 ```
 
 ### Bill Validator
 
 ```typescript
-import { Bill } from '@persian-tools/persian-tools';
+import { Bill } from "@persian-tools/persian-tools";
 
 const validateBill = (billData: { billId: string; paymentId: string }) => {
-  try {
-    const bill = new Bill(billData);
-    const result = bill.getResult();
+	try {
+		const bill = new Bill(billData);
+		const result = bill.getResult();
 
-    return {
-      isValid: result.isValid,
-      info: result.isValid ? {
-        type: result.billType,
-        amount: result.amount
-      } : null
-    };
-  } catch (error) {
-    return { isValid: false, error: 'خطا در پردازش قبض' };
-  }
+		return {
+			isValid: result.isValid,
+			info:
+				result.isValid ?
+					{
+						type: result.billType,
+						amount: result.amount,
+					}
+				:	null,
+		};
+	} catch (error) {
+		return { isValid: false, error: "خطا در پردازش قبض" };
+	}
 };
 ```
 
@@ -152,20 +157,19 @@ const validateBill = (billData: { billId: string; paymentId: string }) => {
 
 ```typescript
 interface BillConstructor {
-  billId: string;
-  paymentId: string;
+	billId: string;
+	paymentId: string;
 }
 
 interface BillResult {
-  isValid: boolean;
-  billType?: string;
-  amount?: number;
+	isValid: boolean;
+	billType?: string;
+	amount?: number;
 }
 
 class Bill {
-  constructor(options: BillConstructor);
-  getResult(): BillResult;
-  getBarcode(): string;
+	constructor(options: BillConstructor);
+	getResult(): BillResult;
+	getBarcode(): string;
 }
 ```
-

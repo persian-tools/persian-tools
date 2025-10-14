@@ -11,9 +11,9 @@ Calculate and format the remaining time until a future date with Persian output.
 ## Basic Usage
 
 ```typescript
-import { remainingTime } from '@persian-tools/persian-tools';
+import { remainingTime } from "@persian-tools/persian-tools";
 
-const futureDate = new Date('2024-12-31T23:59:59');
+const futureDate = new Date("2024-12-31T23:59:59");
 const remaining = remainingTime(futureDate);
 
 console.log(remaining);
@@ -23,7 +23,7 @@ console.log(remaining);
 ## API Reference
 
 <ParamField path="date" type="Date | number" required>
-  Future date or timestamp
+	Future date or timestamp
 </ParamField>
 
 <ResponseField name="result" type="object">
@@ -45,6 +45,7 @@ console.log(remaining);
     <ResponseField name="seconds" type="number">
       Remaining seconds (0-59)
     </ResponseField>
+
   </Expandable>
 </ResponseField>
 
@@ -53,19 +54,19 @@ console.log(remaining);
 ### Countdown Timer
 
 ```typescript
-import { remainingTime, digitsEnToFa } from '@persian-tools/persian-tools';
+import { remainingTime, digitsEnToFa } from "@persian-tools/persian-tools";
 
 const displayCountdown = (targetDate: Date): string => {
-  const time = remainingTime(targetDate);
+	const time = remainingTime(targetDate);
 
-  const days = digitsEnToFa(time.days.toString());
-  const hours = digitsEnToFa(time.hours.toString());
-  const minutes = digitsEnToFa(time.minutes.toString());
+	const days = digitsEnToFa(time.days.toString());
+	const hours = digitsEnToFa(time.hours.toString());
+	const minutes = digitsEnToFa(time.minutes.toString());
 
-  return `${days} روز و ${hours} ساعت و ${minutes} دقیقه`;
+	return `${days} روز و ${hours} ساعت و ${minutes} دقیقه`;
 };
 
-const eventDate = new Date('2024-12-31T23:59:59');
+const eventDate = new Date("2024-12-31T23:59:59");
 console.log(displayCountdown(eventDate));
 // "۷۸ روز و ۱۳ ساعت و ۵۹ دقیقه"
 ```
@@ -73,18 +74,18 @@ console.log(displayCountdown(eventDate));
 ### Event Countdown
 
 ```typescript
-import { remainingTime } from '@persian-tools/persian-tools';
+import { remainingTime } from "@persian-tools/persian-tools";
 
 const showEventCountdown = (eventDate: Date) => {
-  const time = remainingTime(eventDate);
+	const time = remainingTime(eventDate);
 
-  if (time.days > 0) {
-    return `${time.days} روز مانده`;
-  } else if (time.hours > 0) {
-    return `${time.hours} ساعت مانده`;
-  } else {
-    return `${time.minutes} دقیقه مانده`;
-  }
+	if (time.days > 0) {
+		return `${time.days} روز مانده`;
+	} else if (time.hours > 0) {
+		return `${time.hours} ساعت مانده`;
+	} else {
+		return `${time.minutes} دقیقه مانده`;
+	}
 };
 ```
 
@@ -112,12 +113,11 @@ const showEventCountdown = (eventDate: Date) => {
 
 ```typescript
 interface RemainingTime {
-  days: number;
-  hours: number;
-  minutes: number;
-  seconds: number;
+	days: number;
+	hours: number;
+	minutes: number;
+	seconds: number;
 }
 
 function remainingTime(date: Date | number): RemainingTime;
 ```
-

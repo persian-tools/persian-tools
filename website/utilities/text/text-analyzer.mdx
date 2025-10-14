@@ -11,7 +11,7 @@ Analyze Persian text to extract detailed statistics including character count, w
 ## Basic Usage
 
 ```typescript
-import { textAnalyzer } from '@persian-tools/persian-tools';
+import { textAnalyzer } from "@persian-tools/persian-tools";
 
 const text = `
 سلام به همه
@@ -30,7 +30,7 @@ console.log(stats);
 ## API Reference
 
 <ParamField path="text" type="string" required>
-  Persian text to analyze
+	Persian text to analyze
 </ParamField>
 
 <ResponseField name="result" type="TextAnalysis">
@@ -48,6 +48,7 @@ console.log(stats);
     <ResponseField name="lines" type="number">
       Total line count
     </ResponseField>
+
   </Expandable>
 </ResponseField>
 
@@ -56,50 +57,50 @@ console.log(stats);
 ### Reading Time Estimator
 
 ```typescript
-import { textAnalyzer } from '@persian-tools/persian-tools';
+import { textAnalyzer } from "@persian-tools/persian-tools";
 
 const estimateReadingTime = (content: string): number => {
-  const analysis = textAnalyzer(content);
-  const wordsPerMinute = 200; // Average Persian reading speed
-  return Math.ceil(analysis.words / wordsPerMinute);
+	const analysis = textAnalyzer(content);
+	const wordsPerMinute = 200; // Average Persian reading speed
+	return Math.ceil(analysis.words / wordsPerMinute);
 };
 
-console.log(estimateReadingTime('سلام '.repeat(500)));
+console.log(estimateReadingTime("سلام ".repeat(500)));
 // 3 (minutes)
 ```
 
 ### Content Summary
 
 ```typescript
-import { textAnalyzer } from '@persian-tools/persian-tools';
+import { textAnalyzer } from "@persian-tools/persian-tools";
 
 const generateContentSummary = (content: string) => {
-  const stats = textAnalyzer(content);
+	const stats = textAnalyzer(content);
 
-  return {
-    summary: `${stats.words} کلمه، ${stats.characters} حرف`,
-    readingTime: Math.ceil(stats.words / 200),
-    lineCount: stats.lines
-  };
+	return {
+		summary: `${stats.words} کلمه، ${stats.characters} حرف`,
+		readingTime: Math.ceil(stats.words / 200),
+		lineCount: stats.lines,
+	};
 };
 ```
 
 ### Form Character Counter
 
 ```typescript
-import { textAnalyzer } from '@persian-tools/persian-tools';
+import { textAnalyzer } from "@persian-tools/persian-tools";
 
 const validateTextLength = (text: string, maxChars: number) => {
-  const stats = textAnalyzer(text);
+	const stats = textAnalyzer(text);
 
-  return {
-    isValid: stats.characters <= maxChars,
-    remaining: maxChars - stats.characters,
-    current: stats.characters
-  };
+	return {
+		isValid: stats.characters <= maxChars,
+		remaining: maxChars - stats.characters,
+		current: stats.characters,
+	};
 };
 
-console.log(validateTextLength('سلام دنیا', 20));
+console.log(validateTextLength("سلام دنیا", 20));
 // { isValid: true, remaining: 11, current: 9 }
 ```
 
@@ -134,11 +135,10 @@ console.log(validateTextLength('سلام دنیا', 20));
 
 ```typescript
 interface TextAnalysis {
-  characters: number;
-  words: number;
-  lines: number;
+	characters: number;
+	words: number;
+	lines: number;
 }
 
 function textAnalyzer(text: string): TextAnalysis;
 ```
-

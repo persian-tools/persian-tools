@@ -11,9 +11,9 @@ Decode Persian URLs that have been percent-encoded, making them readable.
 ## Basic Usage
 
 ```typescript
-import { URLfix } from '@persian-tools/persian-tools';
+import { URLfix } from "@persian-tools/persian-tools";
 
-const encoded = 'https://example.com/search?q=%D8%AA%D8%B3%D8%AA';
+const encoded = "https://example.com/search?q=%D8%AA%D8%B3%D8%AA";
 console.log(URLfix(encoded));
 // Output: "https://example.com/search?q=تست"
 ```
@@ -21,11 +21,11 @@ console.log(URLfix(encoded));
 ## API Reference
 
 <ParamField path="url" type="string" required>
-  Percent-encoded URL containing Persian characters
+	Percent-encoded URL containing Persian characters
 </ParamField>
 
 <ResponseField name="result" type="string">
-  Decoded URL with readable Persian characters
+	Decoded URL with readable Persian characters
 </ResponseField>
 
 ## Examples
@@ -33,9 +33,9 @@ console.log(URLfix(encoded));
 ### Display Readable URLs
 
 ```typescript
-import { URLfix } from '@persian-tools/persian-tools';
+import { URLfix } from "@persian-tools/persian-tools";
 
-const shareUrl = '%D8%B3%D9%84%D8%A7%D9%85';
+const shareUrl = "%D8%B3%D9%84%D8%A7%D9%85";
 console.log(URLfix(shareUrl));
 // "سلام"
 ```
@@ -43,13 +43,13 @@ console.log(URLfix(shareUrl));
 ### Link Processing
 
 ```typescript
-import { URLfix } from '@persian-tools/persian-tools';
+import { URLfix } from "@persian-tools/persian-tools";
 
 const processLinks = (html: string): string => {
-  const urlPattern = /href="([^"]*)"/g;
-  return html.replace(urlPattern, (match, url) => {
-    return `href="${URLfix(url)}"`;
-  });
+	const urlPattern = /href="([^"]*)"/g;
+	return html.replace(urlPattern, (match, url) => {
+		return `href="${URLfix(url)}"`;
+	});
 };
 ```
 
@@ -58,4 +58,3 @@ const processLinks = (html: string): string => {
 ```typescript
 function URLfix(url: string): string;
 ```
-

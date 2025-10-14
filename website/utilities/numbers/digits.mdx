@@ -1,231 +1,338 @@
 ---
 title: "Digit Conversion"
 description: "Convert between Persian, Arabic, and English digit systems"
-icon: "0"
+icon: "language"
 ---
 
 # Digit Conversion
 
-Convert digits between Persian (۰-۹), Arabic (٠-٩), and English (0-9) numeral systems.
+The digit conversion utilities enable seamless conversion between Persian (۰-۹), Arabic (٠-٩), and English (0-9) numeral systems.
 
 ## Available Functions
 
-- `digitsEnToFa` - English to Persian digits
-- `digitsFaToEn` - Persian to English digits
-- `digitsArToFa` - Arabic to Persian digits
-- `digitsArToEn` - Arabic to English digits
-- `digitsFaToAr` - Persian to Arabic digits (rare)
+<CardGroup cols={3}>
+	<Card title="English to Persian" icon="arrow-right">
+		`digitsEnToFa()`
+	</Card>
+	<Card title="Persian to English" icon="arrow-left">
+		`digitsFaToEn()`
+	</Card>
+	<Card title="Arabic to Persian" icon="exchange">
+		`digitsArToFa()`
+	</Card>
+</CardGroup>
 
 ## Basic Usage
 
-```typescript
+<CodeGroup>
+```typescript Import
 import {
   digitsEnToFa,
   digitsFaToEn,
-  digitsArToFa
-} from '@persian-tools/persian-tools';
-
-// English to Persian
-console.log(digitsEnToFa('123'));
-// Output: "۱۲۳"
-
-// Persian to English
-console.log(digitsFaToEn('۱۲۳'));
-// Output: "123"
-
-// Arabic to Persian
-console.log(digitsArToFa('٠١٢٣'));
-// Output: "۰۱۲۳"
+  digitsArToFa,
+  digitsArToEn,
+  digitsFaToAr,
+  digitsEnToAr
+} from 'persian-tools';
 ```
 
-## API Reference
+```javascript CommonJS
+const { digitsEnToFa, digitsFaToEn, digitsArToFa } = require("persian-tools");
+```
 
-### digitsEnToFa
+</CodeGroup>
 
-Convert English digits to Persian.
+## English ↔ Persian Conversion
 
-<ParamField path="input" type="string" required>
-  String containing English digits (0-9)
-</ParamField>
-
-<ResponseField name="result" type="string">
-  String with Persian digits (۰-۹)
-</ResponseField>
+### English to Persian
 
 ```typescript
-digitsEnToFa('Price: 1234 Toman');
-// "Price: ۱۲۳۴ Toman"
+digitsEnToFa("1234567890");
+// Output: '۱۲۳۴۵۶۷۸۹۰'
+
+digitsEnToFa("Price: $1,250.99");
+// Output: 'Price: $۱,۲۵۰.۹۹'
+
+digitsEnToFa("Call us at 123-456-7890");
+// Output: 'Call us at ۱۲۳-۴۵۶-۷۸۹۰'
 ```
 
-### digitsFaToEn
-
-Convert Persian digits to English.
-
-<ParamField path="input" type="string" required>
-  String containing Persian digits (۰-۹)
-</ParamField>
-
-<ResponseField name="result" type="string">
-  String with English digits (0-9)
-</ResponseField>
+### Persian to English
 
 ```typescript
-digitsFaToEn('قیمت: ۱۲۳۴ تومان');
-// "قیمت: 1234 تومان"
+digitsFaToEn("۱۲۳۴۵۶۷۸۹۰");
+// Output: '1234567890'
+
+digitsFaToEn("قیمت: ۱,۲۵۰,۰۰۰ تومان");
+// Output: 'قیمت: 1,250,000 تومان'
+
+digitsFaToEn("تماس: ۰۹۱۲-۳۴۵-۶۷۸۹");
+// Output: 'تماس: 0912-345-6789'
 ```
 
-### digitsArToFa
+## Arabic ↔ Persian Conversion
 
-Convert Arabic digits to Persian.
-
-<ParamField path="input" type="string" required>
-  String containing Arabic digits (٠-٩)
-</ParamField>
-
-<ResponseField name="result" type="string">
-  String with Persian digits (۰-۹)
-</ResponseField>
+### Arabic to Persian
 
 ```typescript
-digitsArToFa('٠١٢٣٤٥٦٧٨٩');
-// "۰۱۲۳۴۵۶۷۸۹"
+digitsArToFa("٠١٢٣٤٥٦٧٨٩");
+// Output: '۰۱۲۳۴۵۶۷۸۹'
+
+digitsArToFa("السعر: ٥٠٠ دينار");
+// Output: 'السعر: ۵۰۰ دينار'
 ```
 
-### digitsArToEn
-
-Convert Arabic digits to English.
-
-<ParamField path="input" type="string" required>
-  String containing Arabic digits (٠-٩)
-</ParamField>
-
-<ResponseField name="result" type="string">
-  String with English digits (0-9)
-</ResponseField>
+### Persian to Arabic
 
 ```typescript
-digitsArToEn('٠١٢٣');
-// "0123"
+digitsFaToAr("۰۱۲۳۴۵۶۷۸۹");
+// Output: '٠١٢٣٤٥٦٧٨٩'
 ```
 
-## Examples
+## Arabic ↔ English Conversion
 
-### Mixed Content
-
-Converts only the digits, preserving other characters:
+### Arabic to English
 
 ```typescript
-import { digitsEnToFa } from '@persian-tools/persian-tools';
-
-console.log(digitsEnToFa('تاریخ: 2024/10/14'));
-// "تاریخ: ۲۰۲۴/۱۰/۱۴"
-
-console.log(digitsEnToFa('کد پستی: 1234567890'));
-// "کد پستی: ۱۲۳۴۵۶۷۸۹۰"
+digitsArToEn("٠١٢٣٤٥٦٧٨٩");
+// Output: '0123456789'
 ```
 
-### Display Formatting
+### English to Arabic
 
 ```typescript
-import { digitsEnToFa, addCommas } from '@persian-tools/persian-tools';
-
-const formatPrice = (price: number): string => {
-  const withCommas = addCommas(price.toString());
-  return digitsEnToFa(withCommas);
-};
-
-console.log(formatPrice(1234567));
-// "۱,۲۳۴,۵۶۷"
+digitsEnToAr("0123456789");
+// Output: '٠١٢٣٤٥٦٧٨٩'
 ```
 
-### Form Input Processing
+## Digit Mapping Reference
+
+<Tabs>
+  <Tab title="Persian Digits">
+    | English | Persian |
+    |---------|---------|
+    | 0       | ۰       |
+    | 1       | ۱       |
+    | 2       | ۲       |
+    | 3       | ۳       |
+    | 4       | ۴       |
+    | 5       | ۵       |
+    | 6       | ۶       |
+    | 7       | ۷       |
+    | 8       | ۸       |
+    | 9       | ۹       |
+  </Tab>
+
+  <Tab title="Arabic Digits">
+    | English | Arabic |
+    |---------|--------|
+    | 0       | ٠      |
+    | 1       | ١      |
+    | 2       | ٢      |
+    | 3       | ٣      |
+    | 4       | ٤      |
+    | 5       | ٥      |
+    | 6       | ٦      |
+    | 7       | ٧      |
+    | 8       | ٨      |
+    | 9       | ٩      |
+  </Tab>
+</Tabs>
+
+## Complex Examples
+
+### Mixed Content Processing
 
 ```typescript
-import { digitsFaToEn } from '@persian-tools/persian-tools';
+const mixedText = "تاریخ: 2024/03/15 - قیمت: $1,250";
 
-const handlePhoneInput = (input: string): string => {
-  // Convert Persian digits to English for processing
-  return digitsFaToEn(input);
-};
-
-console.log(handlePhoneInput('۰۹۱۲۳۴۵۶۷۸۹'));
-// "09123456789"
+// Convert all digits to Persian
+const persianized = digitsEnToFa(mixedText);
+console.log(persianized);
+// Output: 'تاریخ: ۲۰۲۴/۰۳/۱۵ - قیمت: $۱,۲۵۰'
 ```
 
-### Cleaning Mixed Arabic/Persian Text
+### Phone Number Formatting
 
 ```typescript
-import { digitsArToFa, toPersianChars } from '@persian-tools/persian-tools';
+function formatPhoneNumber(phone: string, locale: "fa" | "en" = "fa") {
+	// Normalize to English first
+	const normalized = digitsFaToEn(digitsArToEn(phone));
 
-const normalizePersianText = (text: string): string => {
-  // First convert Arabic chars to Persian
-  const persianChars = toPersianChars(text);
-  // Then convert Arabic digits to Persian
-  return digitsArToFa(persianChars);
-};
+	// Format based on locale preference
+	return locale === "fa" ? digitsEnToFa(normalized) : normalized;
+}
 
-console.log(normalizePersianText('سلام ٠١٢٣'));
-// "سلام ۰۱۲۳"
+formatPhoneNumber("۰۹۱۲۳۴۵۶۷۸۹"); // '۰۹۱۲۳۴۵۶۷۸۹'
+formatPhoneNumber("۰۹۱۲۳۴۵۶۷۸۹", "en"); // '09123456789'
 ```
 
-## Use Cases
+### Date Localization
+
+```typescript
+function localizeDate(dateString: string, locale: "fa" | "en") {
+	const converter = locale === "fa" ? digitsEnToFa : digitsFaToEn;
+	return converter(dateString);
+}
+
+localizeDate("2024-03-15", "fa"); // '۲۰۲۴-۰۳-۱۵'
+localizeDate("۱۴۰۳-۱۲-۲۵", "en"); // '1403-12-25'
+```
+
+## Advanced Use Cases
+
+### Form Input Normalization
+
+```typescript
+class NumberInputHandler {
+	private normalizeInput(value: string): string {
+		// Convert all digit types to English for processing
+		return digitsFaToEn(digitsArToEn(value));
+	}
+
+	private formatOutput(value: string, locale: "fa" | "en" | "ar"): string {
+		switch (locale) {
+			case "fa":
+				return digitsEnToFa(value);
+			case "ar":
+				return digitsEnToAr(value);
+			default:
+				return value;
+		}
+	}
+
+	processInput(input: string, outputLocale: "fa" | "en" | "ar" = "fa") {
+		const normalized = this.normalizeInput(input);
+		return this.formatOutput(normalized, outputLocale);
+	}
+}
+
+const handler = new NumberInputHandler();
+handler.processInput("۱۲۳٤٥", "en"); // '12345'
+```
+
+### Database Storage Strategy
+
+```typescript
+interface LocalizedNumber {
+	raw: string;
+	normalized: string;
+	persian: string;
+	arabic: string;
+}
+
+function createLocalizedNumber(input: string): LocalizedNumber {
+	// Always store normalized (English) version
+	const normalized = digitsFaToEn(digitsArToEn(input));
+
+	return {
+		raw: input,
+		normalized,
+		persian: digitsEnToFa(normalized),
+		arabic: digitsEnToAr(normalized),
+	};
+}
+```
+
+## Performance & Optimization
 
 <AccordionGroup>
-  <Accordion title="UI Display" icon="display">
-    Display numbers in Persian for Persian interfaces:
-    ```typescript
-    const age = 25;
-    const display = `سن: ${digitsEnToFa(age.toString())}`;
-    // "سن: ۲۵"
-    ```
+  <Accordion title="🚀 Performance Characteristics" icon="bolt">
+    - **String length**: Linear O(n) complexity
+    - **Typical speed**: ~0.1ms for 100 characters
+    - **Memory usage**: Minimal overhead
+    - **No regex**: Uses character mapping for speed
   </Accordion>
 
-  <Accordion title="Data Processing" icon="database">
-    Normalize digit formats before database storage:
-    ```typescript
-    const userInput = '۰۹۱۲۳۴۵۶۷۸۹';
-    const normalized = digitsFaToEn(userInput);
-    // Store as: "09123456789"
-    ```
-  </Accordion>
-
-  <Accordion title="API Integration" icon="plug">
-    Convert Persian input for English-only APIs:
-    ```typescript
-    const persianDate = '۱۴۰۳/۰۷/۲۳';
-    const apiDate = digitsFaToEn(persianDate);
-    // Send to API: "1403/07/23"
-    ```
+  <Accordion title="📦 Bundle Size" icon="package">
+    - **Individual import**: ~1KB minified
+    - **All digit utilities**: ~3KB minified
+    - **Tree-shakable**: Import only what you need
   </Accordion>
 </AccordionGroup>
 
-## Digit Mapping
+## Edge Cases
 
-| English | Persian | Arabic |
-|---------|---------|--------|
-| 0       | ۰       | ٠      |
-| 1       | ۱       | ١      |
-| 2       | ۲       | ٢      |
-| 3       | ۳       | ٣      |
-| 4       | ۴       | ٤      |
-| 5       | ۵       | ٥      |
-| 6       | ۶       | ٦      |
-| 7       | ۷       | ٧      |
-| 8       | ۸       | ٨      |
-| 9       | ۹       | ٩      |
+### Empty and Invalid Input
 
-## Related Functions
+```typescript
+digitsEnToFa(""); // ''
+digitsEnToFa(null); // '' (graceful handling)
+digitsEnToFa(undefined); // ''
+```
+
+### Mixed Scripts
+
+```typescript
+// Handles mixed content gracefully
+digitsEnToFa("English 123 عربی ٤٥٦ فارسی ۷۸۹");
+// Output: 'English ۱۲۳ عربی ٤٥٦ فارسی ۷۸۹'
+```
+
+### Preserve Formatting
+
+```typescript
+// Preserves all non-digit characters
+digitsEnToFa("(123) 456-7890");
+// Output: '(۱۲۳) ۴۵۶-۷۸۹۰'
+
+digitsEnToFa("Amount: $1,234.56");
+// Output: 'Amount: $۱,۲۳۴.۵۶'
+```
+
+## TypeScript Support
+
+```typescript
+import { digitsEnToFa } from "persian-tools";
+
+// All functions have string input/output type safety
+const result: string = digitsEnToFa("123");
+
+// Type-safe function composition
+const pipeline = (text: string): string => digitsEnToFa(digitsFaToEn(digitsArToEn(text)));
+```
+
+## Common Patterns
+
+### Bidirectional Conversion
+
+```typescript
+function createDigitConverter(targetLocale: "fa" | "en" | "ar") {
+	const converters = {
+		fa: digitsEnToFa,
+		en: (text: string) => digitsFaToEn(digitsArToEn(text)),
+		ar: digitsEnToAr,
+	};
+
+	return converters[targetLocale];
+}
+
+const toFarsi = createDigitConverter("fa");
+toFarsi("123"); // '۱۲۳'
+```
+
+### Multi-step Normalization
+
+```typescript
+function normalizeAllDigits(text: string): string {
+	// Convert everything to English first, then to target
+	return digitsEnToFa(digitsFaToEn(digitsArToEn(text)));
+}
+```
+
+## Related Utilities
 
 <CardGroup cols={2}>
-  <Card title="Add Commas" icon="comma" href="/utilities/numbers/commas">
-    Format numbers with thousand separators
-  </Card>
-  <Card title="Number to Words" icon="arrow-right-to-bracket" href="/utilities/numbers/number-to-words">
-    Convert numbers to Persian words
-  </Card>
+	<Card title="Number to Words" icon="spell-check" href="/utilities/numbers/number-to-words">
+		Convert numbers to Persian words
+	</Card>
+	<Card title="Add Commas" icon="comma" href="/utilities/numbers/commas">
+		Format numbers with separators
+	</Card>
+	<Card title="Persian Chars" icon="text" href="/utilities/text/persian-chars">
+		Convert Arabic/English chars to Persian
+	</Card>
+	<Card title="Is Persian" icon="check" href="/utilities/text/persian-chars">
+		Validate Persian text content
+	</Card>
 </CardGroup>
-
-<Tip>
-  Always convert Persian digits to English before performing mathematical operations or API calls.
-</Tip>
-

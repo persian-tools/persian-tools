@@ -16,25 +16,25 @@ Add Persian half-space (Zero-Width Non-Joiner - ZWNJ) characters to text for pro
 ## Basic Usage
 
 ```typescript
-import { addHalfSpaceChar, removeHalfSpaceChar } from '@persian-tools/persian-tools';
+import { addHalfSpaceChar, removeHalfSpaceChar } from "@persian-tools/persian-tools";
 
 // Add half-spaces
-console.log(addHalfSpaceChar('میخواهم به شما کمک کنم'));
+console.log(addHalfSpaceChar("میخواهم به شما کمک کنم"));
 // Output: "می‌خواهم به شما کمک کنم"
 
 // Remove half-spaces
-console.log(removeHalfSpaceChar('می‌خواهم'));
+console.log(removeHalfSpaceChar("می‌خواهم"));
 // Output: "میخواهم"
 ```
 
 ## API Reference
 
 <ParamField path="text" type="string" required>
-  Persian text to process
+	Persian text to process
 </ParamField>
 
 <ResponseField name="result" type="string">
-  Text with proper half-spaces added or removed
+	Text with proper half-spaces added or removed
 </ResponseField>
 
 ## Examples
@@ -42,13 +42,13 @@ console.log(removeHalfSpaceChar('می‌خواهم'));
 ### Content Publishing
 
 ```typescript
-import { addHalfSpaceChar } from '@persian-tools/persian-tools';
+import { addHalfSpaceChar } from "@persian-tools/persian-tools";
 
 const prepareForPublish = (content: string): string => {
-  return addHalfSpaceChar(content);
+	return addHalfSpaceChar(content);
 };
 
-const text = 'این کتاب میتواند برای شما مفید باشد';
+const text = "این کتاب میتواند برای شما مفید باشد";
 console.log(prepareForPublish(text));
 // "این کتاب می‌تواند برای شما مفید باشد"
 ```
@@ -56,22 +56,20 @@ console.log(prepareForPublish(text));
 ### Form Data Processing
 
 ```typescript
-import { addHalfSpaceChar } from '@persian-tools/persian-tools';
+import { addHalfSpaceChar } from "@persian-tools/persian-tools";
 
-const processArticle = (article: {
-  title: string;
-  content: string;
-}) => {
-  return {
-    title: addHalfSpaceChar(article.title),
-    content: addHalfSpaceChar(article.content)
-  };
+const processArticle = (article: { title: string; content: string }) => {
+	return {
+		title: addHalfSpaceChar(article.title),
+		content: addHalfSpaceChar(article.content),
+	};
 };
 ```
 
 ## Common Half-Space Patterns
 
 The function automatically adds half-spaces before:
+
 - می (present tense prefix)
 - نمی (negative present prefix)
 - بی (without)
@@ -80,11 +78,11 @@ The function automatically adds half-spaces before:
 - های (possessive plural)
 
 ```typescript
-addHalfSpaceChar('میرود');        // "می‌رود"
-addHalfSpaceChar('نمیتوانم');     // "نمی‌توانم"
-addHalfSpaceChar('بیحساب');       // "بی‌حساب"
-addHalfSpaceChar('بزرگتر');       // "بزرگ‌تر"
-addHalfSpaceChar('کتابها');       // "کتاب‌ها"
+addHalfSpaceChar("میرود"); // "می‌رود"
+addHalfSpaceChar("نمیتوانم"); // "نمی‌توانم"
+addHalfSpaceChar("بیحساب"); // "بی‌حساب"
+addHalfSpaceChar("بزرگتر"); // "بزرگ‌تر"
+addHalfSpaceChar("کتابها"); // "کتاب‌ها"
 ```
 
 ## Use Cases
@@ -114,12 +112,12 @@ addHalfSpaceChar('کتابها');       // "کتاب‌ها"
 ## Related Functions
 
 <CardGroup cols={2}>
-  <Card title="Persian Characters" icon="language" href="/utilities/text/persian-chars">
-    Validate and convert Persian text
-  </Card>
-  <Card title="Slugify" icon="link" href="/utilities/text/slugify">
-    Create URL-safe slugs
-  </Card>
+	<Card title="Persian Characters" icon="language" href="/utilities/text/persian-chars">
+		Validate and convert Persian text
+	</Card>
+	<Card title="Slugify" icon="link" href="/utilities/text/slugify">
+		Create URL-safe slugs
+	</Card>
 </CardGroup>
 
 ## Type Definition
@@ -128,4 +126,3 @@ addHalfSpaceChar('کتابها');       // "کتاب‌ها"
 function addHalfSpaceChar(text: string): string;
 function removeHalfSpaceChar(text: string): string;
 ```
-

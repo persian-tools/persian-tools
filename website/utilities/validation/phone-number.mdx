@@ -16,14 +16,14 @@ Validate Iranian mobile and landline phone numbers and extract operator informat
 ## Basic Usage
 
 ```typescript
-import { validatePhoneNumber, getPhoneOperator } from '@persian-tools/persian-tools';
+import { validatePhoneNumber, getPhoneOperator } from "@persian-tools/persian-tools";
 
 // Validate mobile number
-console.log(validatePhoneNumber('09123456789'));
+console.log(validatePhoneNumber("09123456789"));
 // Output: true
 
 // Get operator
-console.log(getPhoneOperator('09123456789'));
+console.log(getPhoneOperator("09123456789"));
 // Output: "همراه اول"
 ```
 
@@ -34,17 +34,17 @@ console.log(getPhoneOperator('09123456789'));
 Validate Iranian mobile and landline numbers.
 
 <ParamField path="phoneNumber" type="string" required>
-  Phone number to validate (with or without country code)
+	Phone number to validate (with or without country code)
 </ParamField>
 
 <ResponseField name="result" type="boolean">
-  `true` if valid, `false` otherwise
+	`true` if valid, `false` otherwise
 </ResponseField>
 
 ```typescript
-validatePhoneNumber('09123456789');     // true (mobile)
-validatePhoneNumber('02188776655');     // true (landline)
-validatePhoneNumber('1234567890');      // false (invalid)
+validatePhoneNumber("09123456789"); // true (mobile)
+validatePhoneNumber("02188776655"); // true (landline)
+validatePhoneNumber("1234567890"); // false (invalid)
 ```
 
 ### getPhoneOperator
@@ -52,17 +52,17 @@ validatePhoneNumber('1234567890');      // false (invalid)
 Get the mobile operator name from a mobile number.
 
 <ParamField path="mobileNumber" type="string" required>
-  Mobile number (starting with 09)
+	Mobile number (starting with 09)
 </ParamField>
 
 <ResponseField name="result" type="string">
-  Operator name in Persian, or empty string if not found
+	Operator name in Persian, or empty string if not found
 </ResponseField>
 
 ```typescript
-getPhoneOperator('09123456789');  // "همراه اول"
-getPhoneOperator('09353456789');  // "ایرانسل"
-getPhoneOperator('09213456789');  // "رایتل"
+getPhoneOperator("09123456789"); // "همراه اول"
+getPhoneOperator("09353456789"); // "ایرانسل"
+getPhoneOperator("09213456789"); // "رایتل"
 ```
 
 ## Examples
@@ -70,33 +70,33 @@ getPhoneOperator('09213456789');  // "رایتل"
 ### Form Validation
 
 ```typescript
-import { validatePhoneNumber, getPhoneOperator } from '@persian-tools/persian-tools';
+import { validatePhoneNumber, getPhoneOperator } from "@persian-tools/persian-tools";
 
 interface PhoneValidation {
-  isValid: boolean;
-  type?: 'mobile' | 'landline';
-  operator?: string;
-  error?: string;
+	isValid: boolean;
+	type?: "mobile" | "landline";
+	operator?: string;
+	error?: string;
 }
 
 const validatePhone = (phone: string): PhoneValidation => {
-  if (!validatePhoneNumber(phone)) {
-    return {
-      isValid: false,
-      error: 'شماره تلفن نامعتبر است'
-    };
-  }
+	if (!validatePhoneNumber(phone)) {
+		return {
+			isValid: false,
+			error: "شماره تلفن نامعتبر است",
+		};
+	}
 
-  const isMobile = phone.startsWith('09');
+	const isMobile = phone.startsWith("09");
 
-  return {
-    isValid: true,
-    type: isMobile ? 'mobile' : 'landline',
-    operator: isMobile ? getPhoneOperator(phone) : undefined
-  };
+	return {
+		isValid: true,
+		type: isMobile ? "mobile" : "landline",
+		operator: isMobile ? getPhoneOperator(phone) : undefined,
+	};
 };
 
-console.log(validatePhone('09123456789'));
+console.log(validatePhone("09123456789"));
 // {
 //   isValid: true,
 //   type: 'mobile',
@@ -107,39 +107,39 @@ console.log(validatePhone('09123456789'));
 ### SMS Service Integration
 
 ```typescript
-import { validatePhoneNumber, getPhoneOperator } from '@persian-tools/persian-tools';
+import { validatePhoneNumber, getPhoneOperator } from "@persian-tools/persian-tools";
 
 const sendSMS = (phone: string, message: string) => {
-  if (!validatePhoneNumber(phone)) {
-    throw new Error('Invalid phone number');
-  }
+	if (!validatePhoneNumber(phone)) {
+		throw new Error("Invalid phone number");
+	}
 
-  const operator = getPhoneOperator(phone);
+	const operator = getPhoneOperator(phone);
 
-  // Route SMS based on operator for better rates
-  return {
-    recipient: phone,
-    operator,
-    message
-  };
+	// Route SMS based on operator for better rates
+	return {
+		recipient: phone,
+		operator,
+		message,
+	};
 };
 ```
 
 ### Multi-Phone Support
 
 ```typescript
-import { validatePhoneNumber } from '@persian-tools/persian-tools';
+import { validatePhoneNumber } from "@persian-tools/persian-tools";
 
 const addPhoneToProfile = (phones: string[], newPhone: string): string[] => {
-  if (!validatePhoneNumber(newPhone)) {
-    throw new Error('شماره تلفن نامعتبر است');
-  }
+	if (!validatePhoneNumber(newPhone)) {
+		throw new Error("شماره تلفن نامعتبر است");
+	}
 
-  if (phones.includes(newPhone)) {
-    throw new Error('این شماره قبلا ثبت شده است');
-  }
+	if (phones.includes(newPhone)) {
+		throw new Error("این شماره قبلا ثبت شده است");
+	}
 
-  return [...phones, newPhone];
+	return [...phones, newPhone];
 };
 ```
 
@@ -171,14 +171,10 @@ All Iranian city area codes are supported (021 for Tehran, 031 for Isfahan, etc.
     ```
   </Accordion>
 
-  <Accordion title="Contact Management" icon="address-book">
-    Store and validate contacts:
-    ```typescript
-    const contacts = userContacts.filter(contact =>
-      validatePhoneNumber(contact.phone)
-    );
-    ```
-  </Accordion>
+<Accordion title="Contact Management" icon="address-book">
+	Store and validate contacts: ```typescript const contacts = userContacts.filter(contact =>
+	validatePhoneNumber(contact.phone) ); ```
+</Accordion>
 
   <Accordion title="Operator-Based Routing" icon="route">
     Route calls/SMS based on operator:
@@ -198,7 +194,4 @@ function validatePhoneNumber(phoneNumber: string): boolean;
 function getPhoneOperator(mobileNumber: string): string;
 ```
 
-<Tip>
-  Always validate phone numbers before sending SMS or making calls.
-</Tip>
-
+<Tip>Always validate phone numbers before sending SMS or making calls.</Tip>

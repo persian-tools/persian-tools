@@ -11,23 +11,23 @@ Validate Iranian legal entity identification numbers (شناسه حقوقی) use
 ## Basic Usage
 
 ```typescript
-import { verifyIranianLegalId } from '@persian-tools/persian-tools';
+import { verifyIranianLegalId } from "@persian-tools/persian-tools";
 
-console.log(verifyIranianLegalId('10320166911'));
+console.log(verifyIranianLegalId("10320166911"));
 // Output: true
 
-console.log(verifyIranianLegalId('12345678901'));
+console.log(verifyIranianLegalId("12345678901"));
 // Output: false
 ```
 
 ## API Reference
 
 <ParamField path="legalId" type="string" required>
-  The 11-digit legal entity ID to validate
+	The 11-digit legal entity ID to validate
 </ParamField>
 
 <ResponseField name="result" type="boolean">
-  `true` if valid, `false` otherwise
+	`true` if valid, `false` otherwise
 </ResponseField>
 
 ## Examples
@@ -35,78 +35,75 @@ console.log(verifyIranianLegalId('12345678901'));
 ### Company Registration Validation
 
 ```typescript
-import { verifyIranianLegalId } from '@persian-tools/persian-tools';
+import { verifyIranianLegalId } from "@persian-tools/persian-tools";
 
 interface CompanyValidation {
-  isValid: boolean;
-  errors: string[];
+	isValid: boolean;
+	errors: string[];
 }
 
 const validateCompany = (legalId: string): CompanyValidation => {
-  const errors: string[] = [];
+	const errors: string[] = [];
 
-  if (!legalId || legalId.length !== 11) {
-    errors.push('شناسه حقوقی باید ۱۱ رقم باشد');
-  }
+	if (!legalId || legalId.length !== 11) {
+		errors.push("شناسه حقوقی باید ۱۱ رقم باشد");
+	}
 
-  if (!/^\d+$/.test(legalId)) {
-    errors.push('شناسه حقوقی فقط باید شامل اعداد باشد');
-  }
+	if (!/^\d+$/.test(legalId)) {
+		errors.push("شناسه حقوقی فقط باید شامل اعداد باشد");
+	}
 
-  if (!verifyIranianLegalId(legalId)) {
-    errors.push('شناسه حقوقی نامعتبر است');
-  }
+	if (!verifyIranianLegalId(legalId)) {
+		errors.push("شناسه حقوقی نامعتبر است");
+	}
 
-  return {
-    isValid: errors.length === 0,
-    errors
-  };
+	return {
+		isValid: errors.length === 0,
+		errors,
+	};
 };
 
-console.log(validateCompany('10320166911'));
+console.log(validateCompany("10320166911"));
 // { isValid: true, errors: [] }
 ```
 
 ### B2B Platform Verification
 
 ```typescript
-import { verifyIranianLegalId } from '@persian-tools/persian-tools';
+import { verifyIranianLegalId } from "@persian-tools/persian-tools";
 
-const verifyBusinessPartner = (companyData: {
-  name: string;
-  legalId: string;
-}) => {
-  if (!verifyIranianLegalId(companyData.legalId)) {
-    throw new Error('شناسه حقوقی شرکت نامعتبر است');
-  }
+const verifyBusinessPartner = (companyData: { name: string; legalId: string }) => {
+	if (!verifyIranianLegalId(companyData.legalId)) {
+		throw new Error("شناسه حقوقی شرکت نامعتبر است");
+	}
 
-  return {
-    verified: true,
-    companyName: companyData.name,
-    legalId: companyData.legalId
-  };
+	return {
+		verified: true,
+		companyName: companyData.name,
+		legalId: companyData.legalId,
+	};
 };
 ```
 
 ### Form Validation
 
 ```typescript
-import { verifyIranianLegalId, digitsFaToEn } from '@persian-tools/persian-tools';
+import { verifyIranianLegalId, digitsFaToEn } from "@persian-tools/persian-tools";
 
 const validateLegalIdInput = (input: string): boolean => {
-  // Convert Persian digits to English
-  const normalized = digitsFaToEn(input.trim());
+	// Convert Persian digits to English
+	const normalized = digitsFaToEn(input.trim());
 
-  // Check length
-  if (normalized.length !== 11) {
-    return false;
-  }
+	// Check length
+	if (normalized.length !== 11) {
+		return false;
+	}
 
-  // Validate checksum
-  return verifyIranianLegalId(normalized);
+	// Validate checksum
+	return verifyIranianLegalId(normalized);
 };
 
-console.log(validateLegalIdInput('۱۰۳۲۰۱۶۶۹۱۱'));
+console.log(validateLegalIdInput("۱۰۳۲۰۱۶۶۹۱۱"));
 // true
 ```
 
@@ -159,12 +156,12 @@ The Iranian legal ID uses an 11-digit format with a checksum digit calculated us
 ## Related Functions
 
 <CardGroup cols={2}>
-  <Card title="National ID Validation" icon="id-card" href="/utilities/validation/national-id">
-    Validate personal national IDs
-  </Card>
-  <Card title="Card Number Validation" icon="credit-card" href="/utilities/validation/card-number">
-    Validate bank card numbers
-  </Card>
+	<Card title="National ID Validation" icon="id-card" href="/utilities/validation/national-id">
+		Validate personal national IDs
+	</Card>
+	<Card title="Card Number Validation" icon="credit-card" href="/utilities/validation/card-number">
+		Validate bank card numbers
+	</Card>
 </CardGroup>
 
 ## Type Definition
@@ -173,7 +170,4 @@ The Iranian legal ID uses an 11-digit format with a checksum digit calculated us
 function verifyIranianLegalId(legalId: string): boolean;
 ```
 
-<Tip>
-  Legal IDs are 11 digits long, whereas personal national IDs are 10 digits long.
-</Tip>
-
+<Tip>Legal IDs are 11 digits long, whereas personal national IDs are 10 digits long.</Tip>
