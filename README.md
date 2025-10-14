@@ -91,7 +91,7 @@ const { numberToWords } = require('@persian-tools/persian-tools');
 
 **Browser CDN**
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@persian-tools/persian-tools/build/persian-tools.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@persian-tools/persian-tools/build/persian-tools.cjs"></script>
 <script>
   console.log(PersianTools.numberToWords(1234));
 </script>
