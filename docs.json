@@ -111,10 +111,12 @@
         "description": "Persian version of the documentation.",
         "href": {
           "base": "https://persian-tools.usestrict.dev",
-          "query": [{
-            "key": "lang",
-            "value": "fa"
-          }]
+          "query": [
+            {
+              "key": "lang",
+              "value": "fa"
+            }
+          ]
         }
       }
     ]
@@ -122,5 +124,23 @@
   "favicon": {
     "light": "https://raw.githubusercontent.com/persian-tools/persian-tools/master/images/logo.png",
     "dark": "https://raw.githubusercontent.com/persian-tools/persian-tools/master/images/logo.png"
+  },
+  "colors": {
+    "primary": "#ff0000"
+  },
+  "navigation": {
+    "pages": [
+      "introduction",
+      "ex-number-conversion",
+      "ex-digit-conversion",
+      "ex-comma-formatting",
+      "ex-ordinal-numbers",
+      "ex-validation",
+      "ex-national-id",
+      "ex-phone-number",
+      "ex-bank-card",
+      "ex-iban",
+      "ex-geographic-utilities"
+    ]
   }
 }
