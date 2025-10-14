@@ -71,7 +71,7 @@ export function checkFormatDateTime(datetime: string): boolean {
  * - **Standardizing** it (removing hidden chars, zero-padding, etc.)
  * - Converting to a real JS timestamp
  */
-export function getTimeNow(): number {
+export function getTimeNow(timeZone = "Asia/Tehran"): number {
 	const now = new Date();
 	const faLocaleString = now.toLocaleString("fa-IR", {
 		year: "numeric",
@@ -80,7 +80,7 @@ export function getTimeNow(): number {
 		hour: "2-digit",
 		minute: "2-digit",
 		second: "2-digit",
-		timeZone: "Asia/Tehran",
+		timeZone,
 	});
 
 	// **Standardize** the fa-IR string to guaranteed "yyyy/mm/dd hh:mm:ss"

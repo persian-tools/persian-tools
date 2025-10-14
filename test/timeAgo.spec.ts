@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { timeAgo, checkFormatDateTime, standardizeFaDateTime } from "../src"; // <-- adjust the import path
+import { timeAgo, checkFormatDateTime, standardizeFaDateTime } from "../src";
 
 /**
  * **Helper** function to create a date string in "fa-IR" locale,

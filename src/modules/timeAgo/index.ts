@@ -9,7 +9,7 @@ import * as constants from "./constants";
  * @param datetime e.g. "1402/06/15 13:05:20" (Jalali)
  * @returns e.g. "حدود 1 سال قبل" or "اکنون"
  */
-export function timeAgo(datetime: string = ""): string {
+export function timeAgo(datetime: string = "", timeZone = "Asia/Tehran"): string {
 	// 1) Input must be string
 	if (typeof datetime !== "string") {
 		throw new TypeError("PersianTools: timeAgo - The input must be a string");
@@ -30,7 +30,7 @@ export function timeAgo(datetime: string = ""): string {
 	}
 
 	// 4) Calculate "now" vs. this date
-	const tsTimeNow = getTimeNow();
+	const tsTimeNow = getTimeNow(timeZone);
 	const tsDateTime = convertToTimeStamp(normalized);
 
 	// 5) Determine difference
