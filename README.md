@@ -532,7 +532,7 @@ pnpm lint:fix     # Fix linting issues
 	<tr>
 		<td align="center">
 			<a href="https://maani.app">
-				<img src="./images/showcases/maani.jpeg" width="100px;" alt="Maani"/><br />
+				<img src="./images/showcases/maani.png" width="100px;" alt="Maani"/><br />
 				<sub><b>Maani</b></sub>
 			</a>
 		</td>
