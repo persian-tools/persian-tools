@@ -34,6 +34,7 @@ Persian Tools provides **27+ utilities** for Persian language processing:
 - [**Legal ID**](#ex-validation): Validate Iranian legal entity IDs (شناسه حقوقی)  
 - [**Phone Numbers**](#ex-phone-number): Validate & extract operator info
 - [**Bank Cards**](#ex-bank-card): Validate & identify bank names
+- [**Extract Card Numbers**](#ex-extract-cards): Advanced card extraction with fuzzy matching & performance optimization
 - [**IBAN/Sheba**](#ex-iban): Validate Iranian bank account numbers
 
 ### 🌍 Geographic & Location
@@ -71,6 +72,9 @@ yarn add @persian-tools/persian-tools
 
 # pnpm
 pnpm add @persian-tools/persian-tools
+
+# bun
+bun add @persian-tools/persian-tools
 ```
 
 ### 💻 Usage
@@ -243,6 +247,79 @@ verifyCardNumber("6037701689095443"); // true
 
 // Bank identification  
 getBankNameFromCardNumber("6219861034529007"); // "بانک سامان"
+```
+</details>
+
+<a id="ex-extract-cards"></a>
+<details>
+<summary><strong>Extract Card Numbers</strong> - Advanced card extraction with performance optimization</summary>
+
+```typescript
+import { extractCardNumber, extractCardNumberWithMetrics } from '@persian-tools/persian-tools';
+
+// Basic extraction with validation
+const text = "Payment cards: 6037701689095443 and 6219-8610-3452-9007";
+const cards = extractCardNumber(text, {
+  checkValidation: true,
+  detectBankNumber: true
+});
+
+console.log(cards);
+// [
+//   {
+//     index: 1,
+//     base: "6037701689095443",
+//     pure: "6037701689095443",
+//     startIndex: 15,
+//     endIndex: 31,
+//     isValid: true,
+//     bankName: "بانک کشاورزی"
+//   },
+//   {
+//     index: 2,
+//     base: "6219-8610-3452-9007", 
+//     pure: "6219861034529007",
+//     startIndex: 36,
+//     endIndex: 55,
+//     isValid: true,
+//     bankName: "بانک سامان"
+//   }
+// ]
+
+// TypeScript function overloads for type safety
+const validatedCards = extractCardNumber(text, {
+  checkValidation: true,
+  detectBankNumber: false
+}); // Returns ExtractCardNumberWithValidation[]
+
+// Multi-format support (Persian, Arabic, separators)
+const multiFormat = "Cards: ۶۰۳۷۷۰۱۶۸۹۰۹۵۴۴۳ and 6037_7016_8909_5443";
+const results = extractCardNumber(multiFormat);
+// Automatically normalizes all formats to: "6037701689095443"
+
+// Fuzzy matching for masked cards
+const maskedText = "My card: 6037-****-8909-5443";
+const fuzzyResults = extractCardNumber(maskedText, {
+  enableFuzzyMatching: true,
+  checkValidation: false
+});
+
+// Large document optimization (1MB+ texts)
+const hugeDocument = "Large document content...".repeat(10000);
+const optimizedResults = extractCardNumber(hugeDocument, {
+  optimizeForLargeText: true,
+  maxResults: 10
+});
+
+// Performance monitoring with metrics
+const { cardNumbers, metrics } = extractCardNumberWithMetrics(text, {
+  includeContext: true,
+  contextLength: 20
+});
+
+console.log(`Processed ${metrics.textLength} chars in ${metrics.processingTime}ms`);
+console.log(`Found ${metrics.validCardNumbers} valid cards`);
+console.log(cardNumbers[0].context?.before); // "Payment cards: "
 ```
 </details>
 
@@ -508,52 +585,52 @@ We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md)
 
 ## 👨‍💻 Contributors
 
-Thanks to these amazing people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
-
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/alitorki/"><img src="https://avatars1.githubusercontent.com/u/9049092?v=4?s=100" width="100px;" alt="Ali Torki"/><br /><sub><b>Ali Torki</b></sub></a><br /><a href="#infra-ali-master" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=ali-master" title="Tests">⚠️</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=ali-master" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/mssoheil"><img src="https://avatars3.githubusercontent.com/u/16543635?v=4?s=100" width="100px;" alt="mssoheil"/><br /><sub><b>mssoheil</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=mssoheil" title="Tests">⚠️</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=mssoheil" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/moh3n9595"><img src="https://avatars1.githubusercontent.com/u/20948388?v=4?s=100" width="100px;" alt="Mohsen"/><br /><sub><b>Mohsen</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=moh3n9595" title="Tests">⚠️</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=moh3n9595" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="http://titles.ir"><img src="https://avatars1.githubusercontent.com/u/1300289?v=4?s=100" width="100px;" alt="Hesam pourghazian"/><br /><sub><b>Hesam pourghazian</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=Hesamp" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/amirqasemi74"><img src="https://avatars3.githubusercontent.com/u/20992734?v=4?s=100" width="100px;" alt="Amir Hossien Qasemi Moqaddam"/><br /><sub><b>Amir Hossien Qasemi Moqaddam</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=amirqasemi74" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/SeyyedKhandon"><img src="https://avatars.githubusercontent.com/u/59599950?v=4?s=100" width="100px;" alt="SeyyedKhandon"/><br /><sub><b>SeyyedKhandon</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=SeyyedKhandon" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/masoudDaliriyan"><img src="https://avatars.githubusercontent.com/u/25932831?v=4?s=100" width="100px;" alt="msdDaliriyan"/><br /><sub><b>msdDaliriyan</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=masoudDaliriyan" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=masoudDaliriyan" title="Tests">⚠️</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://www.linkedin.com/in/alitorki/"><img src="https://avatars1.githubusercontent.com/u/9049092?v=4?s=100" width="100px;" alt="Ali Torki"/><br /><sub><b>Ali Torki</b></sub></a><br /><a href="#infra-ali-master" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=ali-master" title="Tests">⚠️</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=ali-master" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/issues?q=author%3Aali-master" title="Bug reports">🐛</a> <a href="#content-ali-master" title="Content">🖋</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=ali-master" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/mssoheil"><img src="https://avatars3.githubusercontent.com/u/16543635?v=4?s=100" width="100px;" alt="mssoheil"/><br /><sub><b>mssoheil</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=mssoheil" title="Tests">⚠️</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=mssoheil" title="Code">💻</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/moh3n9595"><img src="https://avatars1.githubusercontent.com/u/20948388?v=4?s=100" width="100px;" alt="Mohsen"/><br /><sub><b>Mohsen</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=moh3n9595" title="Tests">⚠️</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=moh3n9595" title="Code">💻</a></td>
+      <td align="center" valign="top" width="20%"><a href="http://titles.ir"><img src="https://avatars1.githubusercontent.com/u/1300289?v=4?s=100" width="100px;" alt="Hesam pourghazian"/><br /><sub><b>Hesam pourghazian</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=Hesamp" title="Code">💻</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/amirqasemi74"><img src="https://avatars3.githubusercontent.com/u/20992734?v=4?s=100" width="100px;" alt="Amir Hossien Qasemi Moqaddam"/><br /><sub><b>Amir Hossien Qasemi Moqaddam</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=amirqasemi74" title="Code">💻</a></td>
     </tr>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://mahdi-momeni.github.io/"><img src="https://avatars.githubusercontent.com/u/32864532?v=4?s=100" width="100px;" alt="Mahdi"/><br /><sub><b>Mahdi</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=mahdi-momeni" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=mahdi-momeni" title="Tests">⚠️</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=mahdi-momeni" title="Documentation">📖</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://dev.to/psparsa"><img src="https://avatars.githubusercontent.com/u/57572461?v=4?s=100" width="100px;" alt="PS-PARSA"/><br /><sub><b>PS-PARSA</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=psparsa" title="Tests">⚠️</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=psparsa" title="Code">💻</a> <a href="#ideas-psparsa" title="Ideas, Planning, & Feedback">🤔</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="http://amirduzandeh.ir/"><img src="https://avatars.githubusercontent.com/u/16349391?v=4?s=100" width="100px;" alt="Amirhossein Douzandeh Zenoozi"/><br /><sub><b>Amirhossein Douzandeh Zenoozi</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=amirzenoozi" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=amirzenoozi" title="Tests">⚠️</a> <a href="#ideas-amirzenoozi" title="Ideas, Planning, & Feedback">🤔</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/M0rteza-M"><img src="https://avatars.githubusercontent.com/u/79398146?v=4?s=100" width="100px;" alt="M0rteza-M"/><br /><sub><b>M0rteza-M</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=M0rteza-M" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=M0rteza-M" title="Tests">⚠️</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://www.mahdi.wtf/"><img src="https://avatars.githubusercontent.com/u/36822136?v=4?s=100" width="100px;" alt="mediv0"/><br /><sub><b>mediv0</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=mediv0" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=mediv0" title="Tests">⚠️</a> <a href="#ideas-mediv0" title="Ideas, Planning, & Feedback">🤔</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/poorshad/"><img src="https://avatars.githubusercontent.com/u/43247296?v=4?s=100" width="100px;" alt="Poorshad Shaddel"/><br /><sub><b>Poorshad Shaddel</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=pshaddel" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=pshaddel" title="Tests">⚠️</a> <a href="#ideas-pshaddel" title="Ideas, Planning, & Feedback">🤔</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="http://t.me/theMasix"><img src="https://avatars.githubusercontent.com/u/22872117?v=4?s=100" width="100px;" alt="Seyed Masih Sajadi"/><br /><sub><b>Seyed Masih Sajadi</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=theMasix" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=theMasix" title="Tests">⚠️</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/SeyyedKhandon"><img src="https://avatars.githubusercontent.com/u/59599950?v=4?s=100" width="100px;" alt="SeyyedKhandon"/><br /><sub><b>SeyyedKhandon</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=SeyyedKhandon" title="Code">💻</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/masoudDaliriyan"><img src="https://avatars.githubusercontent.com/u/25932831?v=4?s=100" width="100px;" alt="msdDaliriyan"/><br /><sub><b>msdDaliriyan</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=masoudDaliriyan" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=masoudDaliriyan" title="Tests">⚠️</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://mahdi-momeni.github.io/"><img src="https://avatars.githubusercontent.com/u/32864532?v=4?s=100" width="100px;" alt="Mahdi"/><br /><sub><b>Mahdi</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=mahdi-momeni" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=mahdi-momeni" title="Tests">⚠️</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=mahdi-momeni" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://dev.to/psparsa"><img src="https://avatars.githubusercontent.com/u/57572461?v=4?s=100" width="100px;" alt="PS-PARSA"/><br /><sub><b>PS-PARSA</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=psparsa" title="Tests">⚠️</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=psparsa" title="Code">💻</a> <a href="#ideas-psparsa" title="Ideas, Planning, & Feedback">🤔</a></td>
+      <td align="center" valign="top" width="20%"><a href="http://amirduzandeh.ir/"><img src="https://avatars.githubusercontent.com/u/16349391?v=4?s=100" width="100px;" alt="Amirhossein Douzandeh Zenoozi"/><br /><sub><b>Amirhossein Douzandeh Zenoozi</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=amirzenoozi" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=amirzenoozi" title="Tests">⚠️</a> <a href="#ideas-amirzenoozi" title="Ideas, Planning, & Feedback">🤔</a></td>
     </tr>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://www.samasarin.com"><img src="https://avatars.githubusercontent.com/u/30124243?v=4?s=100" width="100px;" alt="Mohammad Ghonchesefidi"/><br /><sub><b>Mohammad Ghonchesefidi</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=ghonchesefidi" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=ghonchesefidi" title="Tests">⚠️</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/realsaeedhassani/"><img src="https://avatars.githubusercontent.com/u/20496196?v=4?s=100" width="100px;" alt="Saeed Hasani Borzadaran"/><br /><sub><b>Saeed Hasani Borzadaran</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=realsaeedhassani" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=realsaeedhassani" title="Tests">⚠️</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/mrunderline"><img src="https://avatars.githubusercontent.com/u/23085360?v=4?s=100" width="100px;" alt="Ali Madihi"/><br /><sub><b>Ali Madihi</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=mrunderline" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Amir-Alipour"><img src="https://avatars.githubusercontent.com/u/73488911?v=4?s=100" width="100px;" alt="Amir"/><br /><sub><b>Amir</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=Amir-Alipour" title="Documentation">📖</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="http://codewars.com/users/KavehKarami"><img src="https://avatars.githubusercontent.com/u/48356643?v=4?s=100" width="100px;" alt="Kaveh Karami"/><br /><sub><b>Kaveh Karami</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=KavehKarami" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://damoon.pro"><img src="https://avatars.githubusercontent.com/u/64106883?v=4?s=100" width="100px;" alt="Mehdi Shah abbasian"/><br /><sub><b>Mehdi Shah abbasian</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=shahabbasian" title="Documentation">📖</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Amirali-Yavari"><img src="https://avatars.githubusercontent.com/u/97870997?v=4?s=100" width="100px;" alt="amirali yavari"/><br /><sub><b>amirali yavari</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=Amirali-Yavari" title="Code">💻</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/M0rteza-M"><img src="https://avatars.githubusercontent.com/u/79398146?v=4?s=100" width="100px;" alt="M0rteza-M"/><br /><sub><b>M0rteza-M</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=M0rteza-M" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=M0rteza-M" title="Tests">⚠️</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://www.mahdi.wtf/"><img src="https://avatars.githubusercontent.com/u/36822136?v=4?s=100" width="100px;" alt="mediv0"/><br /><sub><b>mediv0</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=mediv0" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=mediv0" title="Tests">⚠️</a> <a href="#ideas-mediv0" title="Ideas, Planning, & Feedback">🤔</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://www.linkedin.com/in/poorshad/"><img src="https://avatars.githubusercontent.com/u/43247296?v=4?s=100" width="100px;" alt="Poorshad Shaddel"/><br /><sub><b>Poorshad Shaddel</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=pshaddel" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=pshaddel" title="Tests">⚠️</a> <a href="#ideas-pshaddel" title="Ideas, Planning, & Feedback">🤔</a></td>
+      <td align="center" valign="top" width="20%"><a href="http://t.me/theMasix"><img src="https://avatars.githubusercontent.com/u/22872117?v=4?s=100" width="100px;" alt="Seyed Masih Sajadi"/><br /><sub><b>Seyed Masih Sajadi</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=theMasix" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=theMasix" title="Tests">⚠️</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://www.samasarin.com"><img src="https://avatars.githubusercontent.com/u/30124243?v=4?s=100" width="100px;" alt="Mohammad Ghonchesefidi"/><br /><sub><b>Mohammad Ghonchesefidi</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=ghonchesefidi" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=ghonchesefidi" title="Tests">⚠️</a></td>
     </tr>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/TahaNamdar"><img src="https://avatars.githubusercontent.com/u/42145229?v=4?s=100" width="100px;" alt="Taha Namdar"/><br /><sub><b>Taha Namdar</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=TahaNamdar" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/alirezasariri78"><img src="https://avatars.githubusercontent.com/u/131848129?v=4?s=100" width="100px;" alt="Alireza Sariri"/><br /><sub><b>Alireza Sariri</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=alirezasariri78" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/geek-sajjad"><img src="https://avatars.githubusercontent.com/u/30924359?v=4?s=100" width="100px;" alt="Sajad Sohrabi"/><br /><sub><b>Sajad Sohrabi</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=geek-sajjad" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/pooooriya"><img src="https://avatars.githubusercontent.com/u/65160744?v=4?s=100" width="100px;" alt="Pouriya Babaali"/><br /><sub><b>Pouriya Babaali</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=pooooriya" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/norouzex"><img src="https://avatars.githubusercontent.com/u/62938584?v=4?s=100" width="100px;" alt="Mohammad norouzi"/><br /><sub><b>Mohammad norouzi</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=norouzex" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/thevilx"><img src="https://avatars.githubusercontent.com/u/80054917?v=4?s=100" width="100px;" alt="Mohamad Amin Mirzaei"/><br /><sub><b>Mohamad Amin Mirzaei</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=thevilx" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Moeinmn"><img src="https://avatars.githubusercontent.com/u/69215813?v=4?s=100" width="100px;" alt="Moein Moeinnia"/><br /><sub><b>Moein Moeinnia</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=Moeinmn" title="Code">💻</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://www.linkedin.com/in/realsaeedhassani/"><img src="https://avatars.githubusercontent.com/u/20496196?v=4?s=100" width="100px;" alt="Saeed Hasani Borzadaran"/><br /><sub><b>Saeed Hasani Borzadaran</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=realsaeedhassani" title="Code">💻</a> <a href="https://github.com/persian-tools/persian-tools/commits?author=realsaeedhassani" title="Tests">⚠️</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/mrunderline"><img src="https://avatars.githubusercontent.com/u/23085360?v=4?s=100" width="100px;" alt="Ali Madihi"/><br /><sub><b>Ali Madihi</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=mrunderline" title="Code">💻</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/Amir-Alipour"><img src="https://avatars.githubusercontent.com/u/73488911?v=4?s=100" width="100px;" alt="Amir"/><br /><sub><b>Amir</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=Amir-Alipour" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="20%"><a href="http://codewars.com/users/KavehKarami"><img src="https://avatars.githubusercontent.com/u/48356643?v=4?s=100" width="100px;" alt="Kaveh Karami"/><br /><sub><b>Kaveh Karami</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=KavehKarami" title="Code">💻</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://damoon.pro"><img src="https://avatars.githubusercontent.com/u/64106883?v=4?s=100" width="100px;" alt="Mehdi Shah abbasian"/><br /><sub><b>Mehdi Shah abbasian</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=shahabbasian" title="Documentation">📖</a></td>
     </tr>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/ahangarha"><img src="https://avatars.githubusercontent.com/u/11241315?v=4?s=100" width="100px;" alt="Mostafa Ahangarha"/><br /><sub><b>Mostafa Ahangarha</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=ahangarha" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://hamidne.ir"><img src="https://avatars.githubusercontent.com/u/53326634?v=4?s=100" width="100px;" alt="Hamid Nasr"/><br /><sub><b>Hamid Nasr</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=hamidne" title="Code">💻</a> <a href="#content-hamidne" title="Content">🖋</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/Amirali-Yavari"><img src="https://avatars.githubusercontent.com/u/97870997?v=4?s=100" width="100px;" alt="amirali yavari"/><br /><sub><b>amirali yavari</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=Amirali-Yavari" title="Code">💻</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/TahaNamdar"><img src="https://avatars.githubusercontent.com/u/42145229?v=4?s=100" width="100px;" alt="Taha Namdar"/><br /><sub><b>Taha Namdar</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=TahaNamdar" title="Code">💻</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/alirezasariri78"><img src="https://avatars.githubusercontent.com/u/131848129?v=4?s=100" width="100px;" alt="Alireza Sariri"/><br /><sub><b>Alireza Sariri</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=alirezasariri78" title="Code">💻</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/geek-sajjad"><img src="https://avatars.githubusercontent.com/u/30924359?v=4?s=100" width="100px;" alt="Sajad Sohrabi"/><br /><sub><b>Sajad Sohrabi</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=geek-sajjad" title="Code">💻</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/pooooriya"><img src="https://avatars.githubusercontent.com/u/65160744?v=4?s=100" width="100px;" alt="Pouriya Babaali"/><br /><sub><b>Pouriya Babaali</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=pooooriya" title="Code">💻</a></td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/norouzex"><img src="https://avatars.githubusercontent.com/u/62938584?v=4?s=100" width="100px;" alt="Mohammad norouzi"/><br /><sub><b>Mohammad norouzi</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=norouzex" title="Code">💻</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/thevilx"><img src="https://avatars.githubusercontent.com/u/80054917?v=4?s=100" width="100px;" alt="Mohamad Amin Mirzaei"/><br /><sub><b>Mohamad Amin Mirzaei</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=thevilx" title="Code">💻</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/Moeinmn"><img src="https://avatars.githubusercontent.com/u/69215813?v=4?s=100" width="100px;" alt="Moein Moeinnia"/><br /><sub><b>Moein Moeinnia</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=Moeinmn" title="Code">💻</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/ahangarha"><img src="https://avatars.githubusercontent.com/u/11241315?v=4?s=100" width="100px;" alt="Mostafa Ahangarha"/><br /><sub><b>Mostafa Ahangarha</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=ahangarha" title="Code">💻</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://hamidne.ir"><img src="https://avatars.githubusercontent.com/u/53326634?v=4?s=100" width="100px;" alt="Hamid Nasr"/><br /><sub><b>Hamid Nasr</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=hamidne" title="Code">💻</a> <a href="#content-hamidne" title="Content">🖋</a></td>
     </tr>
   </tbody>
 </table>
@@ -576,7 +653,9 @@ Thanks to these amazing people ([emoji key](https://allcontributors.org/docs/en/
 <div align="center">
   <p>Made with ❤️ by the Persian developer community</p>
   <p>
-    <a href="https://github.com/persian-tools/persian-tools">⭐ Star us on GitHub</a> •
-    <a href="https://twitter.com/intent/tweet?text=Check%20out%20Persian%20Tools%20-%20A%20modern%20TypeScript%20utility%20for%20Persian%20language%20features!&url=https://github.com/persian-tools/persian-tools">🐦 Share on Twitter</a>
+    <a href="https://persian-tools.usestrict.dev" rel="noreferrer noopener" target="_blank">📚 Documentation</a> •
+    <a href="https://github.com/persian-tools/persian-tools" rel="noreferrer noopener" target="_blank">⭐ Star us on GitHub</a> •
+    <a href="https://twitter.com/intent/tweet?text=Check%20out%20Persian%20Tools%20-%20A%20modern%20TypeScript%20utility%20for%20Persian%20language%20features!&url=https://github.com/persian-tools/persian-tools" rel="noreferrer noopener" target="_blank">🐦 Share on Twitter</a> • 
+    <a href="https://www.npmjs.com/package/@persian-tools/persian-tools" rel="noreferrer noopener" target="_blank">📦 View on NPM</a>
   </p>
 </div>
