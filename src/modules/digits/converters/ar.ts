@@ -1,3 +1,5 @@
+import { isString } from "../../../helpers";
+// Constants
 import { faNums, arNums, arDigitsRegex } from "../digits.constants";
 // Types
 import type { DigitsConverter } from "../digits.types";
@@ -11,7 +13,7 @@ import type { DigitsConverter } from "../digits.types";
  * its arabic digits are replaced with farsi digits
  */
 const digitsArToFa: DigitsConverter = (value) => {
-	if (typeof value !== "string") throw TypeError("PersianTools: digitsArToFa - The input must be string");
+	if (!isString(value)) throw TypeError("PersianTools: digitsArToFa - The input must be string");
 
 	return String(value).replace(arDigitsRegex, (char) => faNums[arNums.indexOf(char)]);
 };
@@ -25,7 +27,7 @@ const digitsArToFa: DigitsConverter = (value) => {
  * its arabic digits are replaced with english digits
  */
 const digitsArToEn: DigitsConverter = (value) => {
-	if (typeof value !== "string") throw TypeError("PersianTools: digitsArToEn - The input must be string");
+	if (!isString(value)) throw TypeError("PersianTools: digitsArToEn - The input must be string");
 
 	return String(value).replace(arDigitsRegex, (char) => `${arNums.indexOf(char)}`);
 };

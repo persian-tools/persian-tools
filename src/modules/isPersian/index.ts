@@ -4,7 +4,7 @@ import { toPersianChars } from "../toPersianChars";
 import { faText, faComplexText } from "./farsiChars";
 
 // Trim characters which are common in Farsi text.
-export const TRIM_REGEX = /["'-+()؟\s.]/g;
+export const TRIM_REGEX: RegExp = /["'-+()؟\s.]/g;
 
 /**
  * Check if string is in persian.
@@ -20,7 +20,7 @@ export const isPersian = (str: string, isComplex: boolean = false, trimPattern: 
 
 	return new RegExp(`^[${faRegex}]+$`).test(text);
 };
-export const isFarsi = isPersian;
+export const isFarsi: typeof isPersian = isPersian;
 
 /**
  * Check if string includes persian alphabet.
@@ -35,14 +35,14 @@ export const hasPersian = (str: string, isComplex: boolean = false): boolean => 
 	return new RegExp(`[${faRegex}]`).test(str);
 };
 
-export const hasFarsi = hasPersian;
+export const hasFarsi: typeof hasPersian = hasPersian;
 
 /**
  * Auto converts Arabic characters to Persian. It will only convert Arabic characters if the string contains Arabic characters.
  * @param {string} value - The input string that may contain Arabic characters.
  * @returns {string} A cleaned string with Persian characters replaced appropriately.
  */
-export function autoArabicToPersian(value: string) {
+export function autoArabicToPersian(value: string): string {
 	if (hasArabic(value)) {
 		value = toPersianChars(value);
 	}

@@ -1,5 +1,7 @@
 import { convertToTimeStamp } from "./timestamp";
 import { checkFormatDateTime, getTimeNow, standardizeFaDateTime } from "./helpers";
+import { isString } from "../../helpers";
+// Constants
 import * as constants from "./constants";
 
 /**
@@ -7,11 +9,12 @@ import * as constants from "./constants";
  *
  * @category timeAgo
  * @param datetime e.g. "1402/06/15 13:05:20" (Jalali)
+ * @param timeZone e.g. "Asia/Tehran"
  * @returns e.g. "حدود 1 سال قبل" or "اکنون"
  */
 export function timeAgo(datetime: string = "", timeZone = "Asia/Tehran"): string {
 	// 1) Input must be string
-	if (typeof datetime !== "string") {
+	if (!isString(datetime)) {
 		throw new TypeError("PersianTools: timeAgo - The input must be a string");
 	}
 
@@ -33,7 +36,7 @@ export function timeAgo(datetime: string = "", timeZone = "Asia/Tehran"): string
 	const tsTimeNow = getTimeNow(timeZone);
 	const tsDateTime = convertToTimeStamp(normalized);
 
-	// 5) Determine difference
+	// 5) Determine the difference
 	let elapsed = tsTimeNow - tsDateTime;
 
 	// Near now handling

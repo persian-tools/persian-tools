@@ -135,7 +135,7 @@ export const shebaMapCodes: ShebaMapCodes = {
 		accountNumberAvailable: true,
 		process(str: string): ShebaProcess {
 			str = str.substring(14);
-			const formatted = "0" + str.substr(0, 2) + "-0" + str.substr(2, 7) + "-" + str.substr(9, 3);
+			const formatted = "0" + str.slice(0, 2) + "-0" + str.slice(2, 9) + "-" + str.slice(9, 12);
 
 			return {
 				normal: str,
@@ -168,9 +168,8 @@ export const shebaMapCodes: ShebaMapCodes = {
 			while (str[0] === "0") {
 				str = str.substring(1);
 			}
-			str = str.substr(0, str.length - 2);
-			const formatted =
-				str.substr(0, 3) + "-" + str.substr(3, 3) + "-" + str.substr(6, 8) + "-" + str.substr(14, 1);
+			str = str.slice(0, str.length - 2);
+			const formatted = str.slice(0, 3) + "-" + str.slice(3, 6) + "-" + str.slice(6, 14) + "-" + str.slice(14, 15);
 
 			return {
 				normal: str,

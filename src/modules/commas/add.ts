@@ -1,15 +1,16 @@
 import { digitsFaToEn } from "../digits";
 import { isPersian } from "../isPersian";
+import { isNumber, isString } from "../../helpers";
 
 /**
  * Add Commas to numbers in a string or a number
  *
  * @method addCommas
- * @param input
- * @return {string} string of separated numbers by commas, eg: 30,000
+ * @param input - number or string to be formatted
+ * @return {string} string of separated numbers by commas, e.g.: 30,000
  */
 export const addCommas = (input: number | string): string => {
-	if (typeof input !== "number" && typeof input !== "string") return "";
+	if (!isString(input) && !isNumber(input)) return "";
 
 	const inputStr = input.toString().replace(/,/g, "");
 	const serializedInputDigits = isPersian(inputStr) ? digitsFaToEn(inputStr) : inputStr;

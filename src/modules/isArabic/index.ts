@@ -7,7 +7,7 @@ import { ArabicContextualForms } from "../../helpers";
  * @param {object} trimPattern Pattern of characters which you want to trim from the string e.g. "-+. ()"
  * @return {boolean} Return true if the entered string does not include other-language characters.
  */
-export const isArabic = (str: string, trimPattern = /["'-+()\s.]/g): boolean => {
+export const isArabic = (str: string, trimPattern: RegExp = /["'-+()\s.]/g): boolean => {
 	const text = str.replace(trimPattern, "");
 
 	return /^[\u0600-\u06FF\s]+$/.test(text) && ArabicContextualForms.test(text);

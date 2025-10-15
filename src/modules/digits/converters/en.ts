@@ -1,3 +1,4 @@
+import { isNumber, isString } from "../../../helpers";
 import { faNums, arNums, enDigitsRegex } from "../digits.constants";
 // Types
 import type { DigitsConverter } from "../digits.types";
@@ -11,7 +12,7 @@ import type { DigitsConverter } from "../digits.types";
  * its english digits are replaced with farsi digits
  */
 const digitsEnToFa: DigitsConverter<string | number> = (value) => {
-	if (typeof value !== "string" && typeof value !== "number")
+	if (!isString(value) && !isNumber(value))
 		throw TypeError("PersianTools: digitsEnToFa - The input must be string or number");
 
 	return String(value).replace(enDigitsRegex, (char) => `${faNums[Number(char)]}`);
@@ -26,7 +27,7 @@ const digitsEnToFa: DigitsConverter<string | number> = (value) => {
  * its english digits are replaced with arabic digits
  */
 const digitsEnToAr: DigitsConverter<string | number> = (value) => {
-	if (typeof value !== "string" && typeof value !== "number")
+	if (!isString(value) && !isNumber(value))
 		throw TypeError("PersianTools: digitsEnToAr - The input must be number or string");
 
 	return String(value).replace(enDigitsRegex, (char) => `${arNums[Number(char)]}`);

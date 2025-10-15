@@ -1,15 +1,16 @@
-import { shebaMapCodes, ShebaResult } from "./codes.skip";
+import { shebaMapCodes } from "./codes.skip";
+import { type ShebaResult } from "./codes.skip";
 
 /**
  * @public
  * @since v1.4.2
  */
-export const shebaPattern = /IR[0-9]{24}/;
+export const shebaPattern: RegExp = /IR[0-9]{24}/;
 /**
  * @public
  * @since v1.4.2
  */
-export const shebaPatternCode = /IR[0-9]{2}([0-9]{3})[0-9]{19}/;
+export const shebaPatternCode: RegExp = /IR[0-9]{2}([0-9]{3})[0-9]{19}/;
 
 /**
  * @public
@@ -75,8 +76,8 @@ export function isShebaValid(shebaCode: string): boolean {
 	const d1 = shebaCode.charCodeAt(0) - 65 + 10;
 	const d2 = shebaCode.charCodeAt(1) - 65 + 10;
 
-	let newStr = shebaCode.substr(4);
-	newStr += d1.toString() + d2.toString() + shebaCode.substr(2, 2);
+	let newStr = shebaCode.slice(4);
+	newStr += d1.toString() + d2.toString() + shebaCode.slice(2, 4);
 
 	const remainder = shebaIso7064Mod97(newStr);
 

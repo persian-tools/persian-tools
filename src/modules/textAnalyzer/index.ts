@@ -1,6 +1,8 @@
 import { isPersian } from "../isPersian";
-import { toPersianChars } from "../toPersianChars";
 import { digitsEnToFa } from "../digits";
+import { isString } from "../../helpers";
+import { toPersianChars } from "../toPersianChars";
+// Constants
 import {
 	PERSIAN_PUNCTUATION,
 	ARABIC_PUNCTUATION,
@@ -129,7 +131,7 @@ export interface TextAnalyzerOptions {
 }
 
 export function analyzeText(text: string, options: TextAnalyzerOptions = {}): TextAnalysisResult {
-	if (!text || typeof text !== "string") {
+	if (!text || !isString(text)) {
 		throw new Error("textAnalyzer: Input must be a non-empty string");
 	}
 

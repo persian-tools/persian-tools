@@ -6,7 +6,7 @@ import { digitsFaToEn } from "./fa";
  * @param value - The string to convert. May contain Persian or Arabic digits.
  * @returns The string with all digits converted to English.
  */
-export function autoConvertDigitsToEN(value: string) {
+export function autoConvertDigitsToEN(value: string): string {
 	if (!value) {
 		return value;
 	}

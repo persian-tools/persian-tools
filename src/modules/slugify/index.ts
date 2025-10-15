@@ -1,3 +1,4 @@
+import { isString } from "../../helpers";
 import { digitsEnToFa } from "../digits";
 import { toPersianChars } from "../toPersianChars";
 
@@ -61,7 +62,7 @@ export interface SlugifyOptions {
 }
 
 export function slugify(text: string, options: SlugifyOptions = {}): string {
-	if (!text || typeof text !== "string") {
+	if (!text || !isString(text)) {
 		throw new Error("slugify: Input must be a non-empty string");
 	}
 

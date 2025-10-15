@@ -37,9 +37,7 @@ export function getPlaceByIranNationalId(nationalId?: string): IPlaceByNationalI
 		const find = (NationalIdJSON as INationalId[]).filter((row) => row.code.toString().includes(code));
 
 		if (find.length) {
-			const findProvinces = (ProvincesJSON as IProvince[]).filter(
-				(province) => province.code === find[0].parentCode,
-			);
+			const findProvinces = (ProvincesJSON as IProvince[]).filter((province) => province.code === find[0].parentCode);
 			const code = find[0].code.toString();
 
 			return {

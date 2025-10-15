@@ -1,4 +1,6 @@
-import { NormalizedPlate, PlateOptions } from "./types.skip";
+import { isString } from "../../helpers";
+// Types
+import type { NormalizedPlate, PlateOptions } from "./types.skip";
 
 export const normalizePlate = (plate: PlateOptions): NormalizedPlate => {
 	let char;
@@ -6,7 +8,7 @@ export const normalizePlate = (plate: PlateOptions): NormalizedPlate => {
 
 	const nonDigitRegex = /\D/g;
 
-	if (typeof plate === "string") {
+	if (isString(plate)) {
 		char = plate.match(nonDigitRegex)?.join("");
 		plateNumbers = plate.replace(nonDigitRegex, "");
 	} else {
