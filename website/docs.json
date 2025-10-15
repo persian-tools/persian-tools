@@ -116,36 +116,6 @@
 			"description": "The page you are looking for does not exist."
 		}
 	},
-	"contextual": {
-		"options": [
-			{
-				"title": "English",
-				"description": "English version of the documentation",
-				"href": {
-					"base": "https://persian-tools.usestrict.dev",
-					"query": [
-						{
-							"key": "lang",
-							"value": "en"
-						}
-					]
-				}
-			},
-			{
-				"title": "Persian (فارسی)",
-				"description": "Persian version of the documentation.",
-				"href": {
-					"base": "https://persian-tools.usestrict.dev",
-					"query": [
-						{
-							"key": "lang",
-							"value": "fa"
-						}
-					]
-				}
-			}
-		]
-	},
 	"favicon": "https://raw.githubusercontent.com/persian-tools/persian-tools/master/images/logo.png",
 	"colors": {
 		"primary": "#3b82f6",
