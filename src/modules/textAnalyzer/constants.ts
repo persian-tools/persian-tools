@@ -1,6 +1,6 @@
 export const PERSIAN_PUNCTUATION = ["؟", "؛", "،", "«", "»", "٪"];
 export const ARABIC_PUNCTUATION = ["؟", "؛", "،"];
-export const ENGLISH_PUNCTUATION = [
+export const ENGLISH_PUNCTUATION: Set<string> = new Set([
 	"?",
 	";",
 	",",
@@ -18,10 +18,10 @@ export const ENGLISH_PUNCTUATION = [
 	"}",
 	"-",
 	"_",
-];
+]);
 
-export const PERSIAN_VOWELS = ["ا", "آ", "ه", "و", "ی", "ع"];
-export const PERSIAN_CONSONANTS = [
+export const PERSIAN_VOWELS: ReadonlyArray<string> = ["ا", "آ", "ه", "و", "ی", "ع"];
+export const PERSIAN_CONSONANTS: Set<string> = new Set([
 	"ب",
 	"پ",
 	"ت",
@@ -49,13 +49,13 @@ export const PERSIAN_CONSONANTS = [
 	"ل",
 	"م",
 	"ن",
-];
+]);
 
-export const DIACRITICS = ["ً", "ٌ", "ٍ", "َ", "ُ", "ِ", "ّ", "ْ"];
+export const DIACRITICS: Set<string> = new Set(["ً", "ٌ", "ٍ", "َ", "ُ", "ِ", "ّ", "ْ"]);
 
-export const ARABIC_SPECIFIC_CHARS = ["ذ", "ص", "ث", "ق", "ظ", "ط", "ض", "ع", "غ"];
+export const ARABIC_SPECIFIC_CHARS: Set<string> = new Set(["ذ", "ص", "ث", "ق", "ظ", "ط", "ض", "ع", "غ"]);
 
-export const STOPWORDS = [
+export const PERSIAN_STOP_WORDS: Set<string> = new Set([
 	"است",
 	"در",
 	"که",
@@ -80,9 +80,9 @@ export const STOPWORDS = [
 	"خود",
 	"بود",
 	"باشد",
-];
+]);
 
-export const FORMAL_INDICATORS = [
+export const FORMAL_INDICATORS: Set<string> = new Set([
 	"تحلیل",
 	"بررسی",
 	"مطالعه",
@@ -100,9 +100,9 @@ export const FORMAL_INDICATORS = [
 	"توسعه",
 	"طراحی",
 	"معماری",
-];
+]);
 
-export const INFORMAL_INDICATORS = [
+export const INFORMAL_INDICATORS: Set<string> = new Set([
 	"سلام",
 	"خداحافظ",
 	"خوبی",
@@ -117,9 +117,9 @@ export const INFORMAL_INDICATORS = [
 	"چه‌جوری",
 	"هعی",
 	"اوه",
-];
+]);
 
-export const TECHNICAL_INDICATORS = [
+export const TECHNICAL_INDICATORS: Set<string> = new Set([
 	"الگوریتم",
 	"پردازش",
 	"نرم‌افزار",
@@ -135,9 +135,9 @@ export const TECHNICAL_INDICATORS = [
 	"لایبرری",
 	"کامپایلر",
 	"دیباگر",
-];
+]);
 
-export const SENTIMENT_POSITIVE = [
+export const SENTIMENT_POSITIVE: Set<string> = new Set([
 	"خوب",
 	"عالی",
 	"فوق‌العاده",
@@ -153,9 +153,9 @@ export const SENTIMENT_POSITIVE = [
 	"خوشحال",
 	"راضی",
 	"موفق",
-];
+]);
 
-export const SENTIMENT_NEGATIVE = [
+export const SENTIMENT_NEGATIVE: Set<string> = new Set([
 	"بد",
 	"بدترین",
 	"ضعیف",
@@ -170,7 +170,7 @@ export const SENTIMENT_NEGATIVE = [
 	"عصبانی",
 	"ناراضی",
 	"ناموفق",
-];
+]);
 
 export const EMOTION_INDICATORS = {
 	joy: ["شاد", "خوشحال", "خندان", "سرخوش", "شادی", "خوشی"],
