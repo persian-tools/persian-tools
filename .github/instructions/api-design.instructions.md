@@ -150,7 +150,7 @@ export function validateNationalId(nationalId: string): boolean;
 ### README Examples
 ```typescript
 // Always provide working examples in README
-import { persianToEnglishDigits } from 'persian-tools';
+import { persianToEnglishDigits } from '@persian-tools/persian-tools';
 
 const result = persianToEnglishDigits('۱۲۳۴۵');
 console.log(result); // '12345'

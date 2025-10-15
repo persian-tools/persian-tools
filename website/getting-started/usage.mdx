@@ -53,7 +53,7 @@ const isValidPersian = isPersian("سلام دنیا");
 
 <CodeGroup>
 ```typescript Number to Words
-import { numberToWords } from 'persian-tools';
+import { numberToWords } from '@persian-tools/persian-tools';
 
 // Basic conversion
 numberToWords(1234); // "یک هزار و دویست و سی و چهار"
@@ -64,7 +64,7 @@ numberToWords(1234, { ordinal: true }); // "یک هزار و دویست و سی 
 ````
 
 ```typescript Words to Number
-import { wordsToNumber } from 'persian-tools';
+import { wordsToNumber } from '@persian-tools/persian-tools';
 
 // Exact matching
 wordsToNumber('یک هزار و دویست و سی و چهار'); // 1234
@@ -89,7 +89,7 @@ digitsFaToEn("۱۲۳۴۵۶۷۸۹۰"); // "1234567890"
 
 <CodeGroup>
 ```typescript Persian Text
-import { isPersian, isArabic } from 'persian-tools';
+import { isPersian, isArabic } from '@persian-tools/persian-tools';
 
 // Check if text is Persian
 isPersian('سلام دنیا'); // true
@@ -102,7 +102,7 @@ isArabic('سلام دنیا'); // false
 ````
 
 ```typescript Character Conversion
-import { toPersianChars } from 'persian-tools';
+import { toPersianChars } from '@persian-tools/persian-tools';
 
 // Convert Arabic/English chars to Persian
 toPersianChars('علي'); // "علی" (Arabic ي to Persian ی)
@@ -115,7 +115,7 @@ toPersianChars('كتاب'); // "کتاب" (Arabic ك to Persian ک)
 
 <CodeGroup>
 ```typescript National ID
-import { verifyIranianNationalId, getPlaceByIranNationalId } from 'persian-tools';
+import { verifyIranianNationalId, getPlaceByIranNationalId } from '@persian-tools/persian-tools';
 
 // Verify Iranian National ID
 verifyIranianNationalId('0499370899'); // true
@@ -127,7 +127,7 @@ getPlaceByIranNationalId('0499370899'); // { city: 'خمین', province: 'مرک
 ````
 
 ```typescript Card Numbers
-import { verifyCardNumber, getBankNameFromCardNumber } from 'persian-tools';
+import { verifyCardNumber, getBankNameFromCardNumber } from '@persian-tools/persian-tools';
 
 // Verify card number
 verifyCardNumber('6274129005473742'); // true

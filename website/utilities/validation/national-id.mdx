@@ -12,7 +12,7 @@ The `verifyIranianNationalId` utility validates Iranian national identification 
 
 <CodeGroup>
 ```typescript Import
-import { verifyIranianNationalId } from 'persian-tools';
+import { verifyIranianNationalId } from '@persian-tools/persian-tools';
 ```
 
 ```javascript CommonJS
@@ -316,8 +316,8 @@ function validateNationalId(req: Request, res: Response, next: NextFunction) {
 ## Security Considerations
 
 <Warning>
-	National ID validation should be used alongside other verification methods. A valid checksum doesn't guarantee the
-	ID belongs to the person claiming it.
+	National ID validation should be used alongside other verification methods. A valid checksum doesn't guarantee the ID
+	belongs to the person claiming it.
 </Warning>
 
 ```typescript
