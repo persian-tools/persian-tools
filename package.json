@@ -7,13 +7,13 @@
 		"./build/cjs",
 		"./build/esm"
 	],
-	"main": "./build/cjs/index.js",
-	"types": "./build/cjs/index.d.ts",
+	"module": "./build/esm/index.mjs",
+	"types": "./build/esm/index.d.mts",
 	"exports": {
 		".": {
-			"require": {
-				"types": "./build/cjs/index.d.ts",
-				"default": "./build/cjs/index.js"
+			"import": {
+				"types": "./build/esm/index.d.mts",
+				"default": "./build/esm/index.mjs"
 			}
 		},
 		"./package.json": "./package.json"
