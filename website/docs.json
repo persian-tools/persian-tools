@@ -157,12 +157,7 @@
 			{
 				"group": "Getting Started",
 				"icon": "rocket",
-				"pages": [
-					"introduction",
-					"getting-started/installation",
-					"getting-started/usage",
-					"getting-started/examples"
-				]
+				"pages": ["introduction", "getting-started/installation", "getting-started/usage", "getting-started/examples"]
 			},
 			{
 				"group": "Number Utilities",
