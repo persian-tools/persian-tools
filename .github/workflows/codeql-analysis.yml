@@ -4,7 +4,6 @@ on:
   push:
     branches: [master]
   pull_request:
-    # The branches below must be a subset of the branches above
     branches: [master]
   schedule:
     - cron: "0 3 * * 6"
@@ -28,7 +27,7 @@ jobs:
         uses: github/codeql-action/init@v4
         with:
           languages: ${{ matrix.language }}
-      - name: Autobuild
+      - name: Auto build
         uses: github/codeql-action/autobuild@v4
-      - name: Perform CodeQL Analysis
+      - name: Perform CodeQL analysis
         uses: github/codeql-action/analyze@v4

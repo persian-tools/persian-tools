@@ -1,0 +1,16 @@
+[
+  {
+    "name": "JS bundle",
+    "path": ["build/cjs/index.js", "build/esm/index.mjs"],
+    "limit": "840 kB",
+    "brotli": false,
+    "gzip": false
+  },
+  {
+    "name": "Type definitions",
+    "path": ["build/cjs/index.d.ts", "build/esm/index.d.mts"],
+    "limit": "85 kB",
+    "brotli": false,
+    "gzip": false
+  }
+]

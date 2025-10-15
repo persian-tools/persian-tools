@@ -54,13 +54,13 @@ git checkout -b agent/feature-name
 
 # Make changes following the patterns in existing code
 # Run tests
-pnpm test
+bun run test
 
 # Check linting
-pnpm lint
+bun run lint
 
 # Verify build
-pnpm build
+bun run build
 
 # Commit with conventional commit messages
 git commit -m "feat: add Persian text normalization utility"

@@ -90,7 +90,7 @@ All agents must understand:
 ```typescript
 // Standard error handling approach
 export function validateInput(input: string): ValidationResult {
-  if (typeof input !== 'string') {
+  if (!isString(input) {
     throw new TypeError('Input must be a string');
   }
   

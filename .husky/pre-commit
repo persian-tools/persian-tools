@@ -1,4 +1,4 @@
-pnpm format:ci
-pnpm lint
-pnpm test
+bun run format:ci
+bun run lint
+bun run test
 git update-index --again

@@ -50,7 +50,7 @@ export function validateNationalId(id: string): ValidationResult;
 ### Input Validation
 ```typescript
 export function processText(input: string): string {
-  if (typeof input !== 'string') {
+  if (!isString(input)) {
     throw new TypeError('Input must be a string');
   }
   
