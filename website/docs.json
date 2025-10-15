@@ -44,7 +44,7 @@
 			"light": "#fafafa",
 			"dark": "#0a0a0a"
 		},
-		"decoration": "grid"
+		"decoration": "gradient"
 	},
 	"icons": {
 		"library": "lucide"
@@ -86,23 +86,28 @@
 		"links": [
 			{
 				"href": "https://persian-tools.usestrict.dev/showcase",
-				"label": "Showcase"
+				"label": "Showcase",
+				"icon": "star"
 			},
 			{
 				"href": "https://github.com/persian-tools/persian-tools",
-				"label": "GitHub"
+				"label": "GitHub",
+				"icon": "github"
 			},
 			{
 				"href": "https://www.npmjs.com/package/@persian-tools/persian-tools",
-				"label": "NPM"
+				"label": "NPM",
+				"icon": "npm"
 			},
 			{
 				"href": "https://github.com/orgs/persian-tools",
-				"label": "Persian Tools Org"
+				"label": "Persian Tools Org",
+				"icon": "organization"
 			},
 			{
 				"href": "https://github.com/persian-tools/persian-tools/blob/master/CONTRIBUTING.md",
-				"label": "Contribute"
+				"label": "Contribute",
+				"icon": "handshake"
 			}
 		]
 	},
