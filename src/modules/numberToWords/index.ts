@@ -1,19 +1,13 @@
 import { removeCommas } from "../commas";
 import { addOrdinalSuffix } from "../addOrdinalSuffix/addOrdinalSuffix";
-import { numbersWordList } from "./numbersWordList";
-
-/**
- * Options interface for configuring number to words conversion
- */
-export interface NumberToWordsOptions {
-	/** Convert the result to ordinal form (e.g., "سوم" instead of "سه") */
-	ordinal?: boolean;
-}
-
-/**
- * Type definition for the main numberToWords function
- */
-type NumberToWordsType = (numberValue: number | string, options?: NumberToWordsOptions) => string | TypeError;
+import { isNumber, isString } from "../../helpers/type-guards";
+// Errors
+import { PersianToolsTypeError } from "../../helpers/errors";
+// Constants
+import { PERSIAN_NUMBERS_IN_WORD_MAPPINGS } from "./constants";
+import { JOINERS, PREFIXES } from "../wordsToNumber/constants";
+// Types
+import type { NumberToWordsOptions } from "./types";
 
 /**
  * Converts a numeric value to its Persian word representation
@@ -27,10 +21,13 @@ type NumberToWordsType = (numberValue: number | string, options?: NumberToWordsO
  * numberToWords("1,000") // "یک هزار"
  * numberToWords(3, { ordinal: true }) // "سوم"
  */
-export const numberToWords: NumberToWordsType = (numberValue, options) => {
+export function numberToWords(
+	numberValue: number | string,
+	options?: NumberToWordsOptions,
+): string | PersianToolsTypeError {
 	// Input validation and normalization
 	const normalizedNumber = normalizeInput(numberValue);
-	if (normalizedNumber instanceof TypeError) {
+	if (normalizedNumber instanceof PersianToolsTypeError) {
 		return normalizedNumber;
 	}
 
@@ -46,12 +43,12 @@ export const numberToWords: NumberToWordsType = (numberValue, options) => {
 	const absoluteNumber = Math.abs(normalizedNumber);
 	const persianWords = convertNumberToWords(absoluteNumber);
 
-	// Apply negative prefix if needed
+	// Apply a negative prefix if needed
 	const finalWords = normalizedNumber < 0 ? addNegativePrefix(persianWords) : persianWords;
 
 	// Apply ordinal suffix if requested
 	return isOrdinal ? addOrdinalSuffix(finalWords) : finalWords;
-};
+}
 
 /**
  * Validates and normalizes the input number
@@ -59,14 +56,14 @@ export const numberToWords: NumberToWordsType = (numberValue, options) => {
  * @param input - Raw input value (number or string)
  * @returns Normalized number or TypeError if invalid
  */
-function normalizeInput(input: number | string): number | TypeError {
+function normalizeInput(input: number | string): number | PersianToolsTypeError {
 	// Check for valid input types
-	if (typeof input !== "string" && typeof input !== "number") {
+	if (!isString(input) && !isNumber(input)) {
 		return createValidationError("Input must be a number or string");
 	}
 
 	// Handle string inputs (remove commas first)
-	if (typeof input === "string") {
+	if (isString(input)) {
 		const cleanedInput = removeCommas(input);
 		const parsedNumber = Number(cleanedInput);
 
@@ -86,14 +83,8 @@ function normalizeInput(input: number | string): number | TypeError {
 	return input;
 }
 
-/**
- * Creates a standardized validation error
- *
- * @param message - Error message to include
- * @returns TypeError with prefixed message
- */
-function createValidationError(message: string): TypeError {
-	return new TypeError(`PersianTools: numberToWords - ${message}`);
+function createValidationError(message: string): PersianToolsTypeError {
+	return new PersianToolsTypeError("numberToWords", message);
 }
 
 /**
@@ -103,7 +94,7 @@ function createValidationError(message: string): TypeError {
  * @returns Persian word representation
  */
 function convertNumberToWords(num: number): string {
-	// Handle numbers up to 999 with simple transformation
+	// Handle numbers up to 999 with a simple transformation
 	if (num <= 999) {
 		return transformSimpleNumber(num);
 	}
@@ -183,7 +174,7 @@ function transformLargeNumber(num: number): string {
 		.filter((group) => group.length > 0); // Remove empty groups
 
 	// Join all groups with Persian "and" conjunction
-	return wordGroups.join(" و ").trim();
+	return wordGroups.join(JOINERS[1]).trim();
 }
 
 /**
@@ -194,7 +185,7 @@ function transformLargeNumber(num: number): string {
  */
 function getWordFromList(num: number): string {
 	// Use nullish coalescing to provide fallback for missing entries
-	return numbersWordList[num] ?? "";
+	return PERSIAN_NUMBERS_IN_WORD_MAPPINGS.get(num) || "";
 }
 
 /**
@@ -228,5 +219,5 @@ function getScaleUnit(numberOfZeros: number): string {
  * @returns Words with "منفی" prefix
  */
 function addNegativePrefix(words: string): string {
-	return `منفی ${words}`;
+	return `${PREFIXES[0]} ${words}`;
 }
