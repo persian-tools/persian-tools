@@ -97,8 +97,8 @@ export class Bill {
 		const $barcode = (barcode || this.barcode) as string;
 
 		return {
-			billId: Number($barcode.substr(0, 13)),
-			paymentId: Number($barcode.substr(16, 10)),
+			billId: Number($barcode.slice(0, 13)),
+			paymentId: Number($barcode.slice(16, 26)),
 		};
 	}
 
@@ -112,7 +112,7 @@ export class Bill {
 		}
 		const firstControlBit = paymentId.charAt(paymentId.length - 2) + "";
 		const secondControlBit = paymentId.charAt(paymentId.length - 1) + "";
-		paymentId = paymentId.substr(0, paymentId.length - 2);
+		paymentId = paymentId.slice(0, paymentId.length - 2);
 		result =
 			this.CalTheBit(paymentId) === Number(firstControlBit) &&
 			this.CalTheBit(billId + paymentId + firstControlBit) === Number(secondControlBit);
@@ -127,8 +127,8 @@ export class Bill {
 		if (!newBillId || newBillId.length < 6) {
 			return false;
 		}
-		const controlBit = newBillId.substr(newBillId.length - 1);
-		newBillId = newBillId.substr(0, newBillId.length - 1);
+		const controlBit = newBillId.slice(-1);
+		newBillId = newBillId.slice(0, newBillId.length - 1);
 
 		const $result = this.CalTheBit(newBillId);
 		result = $result === Number(controlBit);
