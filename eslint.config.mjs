@@ -12,7 +12,9 @@ export default [
 		ignores: [
 			"node_modules",
 			"dist",
-			"eslint.config.js",
+			"eslint.config.mjs",
+			".prettierrc.js",
+			"website",
 			".idea",
 			".vscode",
 			".git",
@@ -38,8 +40,10 @@ export default [
 	importPlugin.flatConfigs.typescript,
 	{
 		rules: {
-			"import/no-dynamic-require": "warn",
-			"import/no-nodejs-modules": "warn",
+			"no-useless-escape": "off",
+			"import/no-dynamic-require": "off",
+			"import/no-unresolved": "off",
+			"import/no-nodejs-modules": "off",
 			"import/first": "error",
 			"import/no-amd": "error",
 			"@typescript-eslint/camelcase": "off",

@@ -1,6 +1,6 @@
 module.exports = {
 	printWidth: 120,
-	tabWidth: 4,
+	tabWidth: 2,
 	useTabs: true,
 	semi: true,
 	trailingComma: "all",
@@ -8,7 +8,7 @@ module.exports = {
 	overrides: [
 		{
 			files: [".prettierrc", ".json"],
-			options: { parser: "json", useTabs: false, tabWidth: 2 },
+			options: { parser: "json", useTabs: false },
 		},
 		{
 			files: ["*.md", "*.mdx"],
@@ -16,7 +16,7 @@ module.exports = {
 		},
 		{
 			files: ["*.yaml", "*.yml"],
-			options: { parser: "yaml", useTabs: true, tabWidth: 2 },
+			options: { parser: "yaml" },
 		},
 	],
 };
