@@ -531,6 +531,12 @@ pnpm lint:fix     # Fix linting issues
 <table>
 	<tr>
 		<td align="center">
+			<a href="https://maani.app">
+				<img src="./images/showcases/maani.jpeg" width="100px;" alt="Maani"/><br />
+				<sub><b>Maani</b></sub>
+			</a>
+		</td>
+		<td align="center">
 			<a href="https://pooleno.ir">
 				<img src="https://pooleno.ir/static/images/pooleno-logo.svg" width="100px;" alt="Pooleno"/><br />
 				<sub><b>Pooleno Exchange</b></sub>
@@ -639,8 +645,6 @@ We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md)
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
-
-*This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification.*
 
 ---
 

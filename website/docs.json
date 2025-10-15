@@ -15,7 +15,7 @@
 					},
 					{
 						"label": "NPM Package",
-						"href": "https://www.npmjs.com/package/persian-tools"
+						"href": "https://www.npmjs.com/package/@persian-tools/persian-tools"
 					}
 				]
 			},
@@ -85,11 +85,15 @@
 	"navbar": {
 		"links": [
 			{
+				"href": "/showcase",
+				"label": "Showcase"
+			},
+			{
 				"href": "https://github.com/persian-tools/persian-tools",
 				"label": "GitHub"
 			},
 			{
-				"href": "https://www.npmjs.com/package/persian-tools",
+				"href": "https://www.npmjs.com/package/@persian-tools/persian-tools",
 				"label": "NPM"
 			},
 			{
@@ -127,7 +131,13 @@
 			{
 				"group": "Getting Started",
 				"icon": "rocket",
-				"pages": ["introduction", "getting-started/installation", "getting-started/usage", "getting-started/examples"]
+				"pages": [
+					"introduction",
+					"getting-started/installation",
+					"getting-started/usage",
+					"getting-started/examples",
+					"showcase"
+				]
 			},
 			{
 				"group": "Number Utilities",
