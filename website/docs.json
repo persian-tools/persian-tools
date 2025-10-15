@@ -135,7 +135,7 @@
 		"groups": [
 			{
 				"group": "Introduction",
-				"icon": "home",
+				"icon": "book-open",
 				"pages": ["introduction"]
 			},
 			{
