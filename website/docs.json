@@ -85,7 +85,7 @@
 	"navbar": {
 		"links": [
 			{
-				"href": "/showcase",
+				"href": "https://persian-tools.usestrict.dev/showcase",
 				"label": "Showcase"
 			},
 			{
@@ -129,15 +129,19 @@
 	"navigation": {
 		"groups": [
 			{
+				"group": "Introduction",
+				"icon": "home",
+				"pages": ["introduction"]
+			},
+			{
+				"group": "Showcase",
+				"icon": "star",
+				"pages": ["showcase"]
+			},
+			{
 				"group": "Getting Started",
 				"icon": "rocket",
-				"pages": [
-					"introduction",
-					"getting-started/installation",
-					"getting-started/usage",
-					"getting-started/examples",
-					"showcase"
-				]
+				"pages": ["getting-started/installation", "getting-started/usage", "getting-started/examples"]
 			},
 			{
 				"group": "Number Utilities",
