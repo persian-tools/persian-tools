@@ -1,9 +1,8 @@
 import { describe, it, expect } from "vitest";
 import { halfSpace } from "../src";
+import { ZWNJ } from "../src/modules/halfSpace/costants";
 
 describe("halfSpace", () => {
-	const ZWNJ = "\u200C";
-
 	it("should return empty string for empty input", () => {
 		expect(halfSpace("")).toBe("");
 	});
@@ -36,12 +35,12 @@ describe("halfSpace", () => {
 		expect(halfSpace("خانه ها")).toBe(`خانه${ZWNJ}ها`);
 	});
 
-	it('should insert ZWNJ before suffix "تر"', () => {
-		expect(halfSpace("بزرگ تر")).toBe(`بزرگ${ZWNJ}تر`);
+	it('should join comparative "تر" without ZWNJ', () => {
+		expect(halfSpace("بزرگ تر")).toBe("بزرگتر");
 	});
 
-	it('should insert ZWNJ before suffix "ترین"', () => {
-		expect(halfSpace("بزرگ ترین")).toBe(`بزرگ${ZWNJ}ترین`);
+	it('should join superlative "ترین" without ZWNJ', () => {
+		expect(halfSpace("بزرگ ترین")).toBe("بزرگترین");
 	});
 
 	it("should handle multiple prefix rules in one sentence", () => {
@@ -49,7 +48,7 @@ describe("halfSpace", () => {
 	});
 
 	it("should handle multiple suffix rules in one sentence", () => {
-		expect(halfSpace("خانه ها بزرگ تر شدند")).toBe(`خانه${ZWNJ}ها بزرگ${ZWNJ}تر شدند`);
+		expect(halfSpace("خانه ها بزرگ تر شدند")).toBe(`خانه${ZWNJ}ها بزرگتر شدند`);
 	});
 
 	it("should not add ZWNJ where not applicable", () => {
@@ -69,13 +68,11 @@ describe("halfSpace", () => {
 	});
 
 	it("should handle multiple known compounds in a sentence", () => {
-		expect(halfSpace("به هر حال خانه ها بزرگ تر شدند")).toBe(`به${ZWNJ}هر حال خانه${ZWNJ}ها بزرگ${ZWNJ}تر شدند`);
+		expect(halfSpace("به هر حال خانه ها بزرگ تر شدند")).toBe(`به${ZWNJ}هر حال خانه${ZWNJ}ها بزرگتر شدند`);
 	});
 
 	it("should handle compound with prefixes and suffixes together", () => {
-		expect(halfSpace("می تواند به هر حال کوچک تر بماند")).toBe(
-			`می${ZWNJ}تواند به${ZWNJ}هر حال کوچک${ZWNJ}تر بماند`,
-		);
+		expect(halfSpace("می تواند به هر حال کوچک تر بماند")).toBe(`می${ZWNJ}تواند به${ZWNJ}هر حال کوچکتر بماند`);
 	});
 
 	it("should reduce multiple spaces between words", () => {
@@ -83,7 +80,7 @@ describe("halfSpace", () => {
 	});
 
 	it("should handle punctuation: before and after rules", () => {
-		expect(halfSpace("خانه ها ، بزرگ تر هستند.")).toBe(`خانه${ZWNJ}ها، بزرگ${ZWNJ}تر هستند.`);
+		expect(halfSpace("خانه ها ، بزرگ تر هستند.")).toBe(`خانه${ZWNJ}ها، بزرگتر هستند.`);
 	});
 
 	it("should not alter English words", () => {
@@ -117,18 +114,18 @@ describe("halfSpace", () => {
 	it("should handle multiple known compounds and prefixes in one go", () => {
 		// Tests a complex scenario combining multiple rules
 		const input = "نمی دانم به هر حال بزرگ تر خواهد شد";
-		const output = `نمی${ZWNJ}دانم به${ZWNJ}هر حال بزرگ${ZWNJ}تر خواهد شد`;
+		const output = `نمی${ZWNJ}دانم به${ZWNJ}هر حال بزرگتر خواهد شد`;
 		expect(halfSpace(input)).toBe(output);
 	});
 
 	it("should handle words that appear like suffixes but not at the end", () => {
-		// "ها" inside a longer word should not trigger suffix rule unless spaced
+		// "ها" inside a longer word should not trigger a suffix rule unless spaced
 		expect(halfSpace("هادی")).toBe("هادی");
 	});
 
 	it("should handle multiple ZWNJ insertions in a long sentence", () => {
 		const input = "می رود و نمی خواهد خانه ها را به هر شکل بزرگ تر از این جا کند";
-		const output = `می${ZWNJ}رود و نمی${ZWNJ}خواهد خانه${ZWNJ}ها را به${ZWNJ}هر شکل بزرگ${ZWNJ}تر از این${ZWNJ}جا کند`;
+		const output = `می${ZWNJ}رود و نمی${ZWNJ}خواهد خانه${ZWNJ}ها را به${ZWNJ}هر شکل بزرگتر از این${ZWNJ}جا کند`;
 		expect(halfSpace(input)).toBe(output);
 	});
 
@@ -143,5 +140,17 @@ describe("halfSpace", () => {
 		const once = halfSpace(input);
 		const twice = halfSpace(once);
 		expect(twice).toBe(`می${ZWNJ}رود`);
+	});
+
+	it("should handle suffix before punctuation without space", () => {
+		expect(halfSpace("خانه ها، آپارتمان ها")).toBe(`خانه${ZWNJ}ها، آپارتمان${ZWNJ}ها`);
+	});
+
+	it("should handle comparative in parentheses without ZWNJ", () => {
+		expect(halfSpace("(آبی تر)")).toBe("(آبیتر)");
+	});
+
+	it("should handle end-of-string plural suffix", () => {
+		expect(halfSpace("درخت ها")).toBe(`درخت${ZWNJ}ها`);
 	});
 });
