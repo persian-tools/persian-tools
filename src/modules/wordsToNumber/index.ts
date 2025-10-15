@@ -1,14 +1,12 @@
 // <Reference path='https://fa.wikipedia.org/wiki/الگو:عدد_به_حروف/توضیحات' />
 // https://fa.wikipedia.org/wiki/۱۰۰۰۰۰۰۰۰۰_(عدد)
-
 import { fuzzy } from "./fuzzy";
 import { addCommas } from "../commas";
-import { replaceArray } from "../../helpers";
 import { autoArabicToPersian } from "../isPersian";
 import { removeOrdinalSuffix } from "../removeOrdinalSuffix";
 import { autoConvertDigitsToEN, digitsEnToAr, digitsEnToFa } from "../digits";
 // Constants
-import { UNITS, TEN, MAGNITUDE, TYPO_LIST, JOINERS, PREFIXES } from "./constants";
+import { UNITS, TEN, MAGNITUDE, TYPO_LIST, JOINERS, PREFIXES, TYPO_PATTERN } from "./constants";
 
 /**
  * **Tokenize** the provided `words` string into Persian number parts.
@@ -23,7 +21,7 @@ import { UNITS, TEN, MAGNITUDE, TYPO_LIST, JOINERS, PREFIXES } from "./constants
  */
 function tokenize(words: string): string[] {
 	// **Apply** typo replacements (e.g., `("سیصت", "سیصد")`).
-	const replaced: string = replaceArray(words, TYPO_LIST);
+	const replaced: string = replaceArray(words);
 
 	// **Split** on space, filter out empty or joiner tokens (e.g., "و").
 	const splitWords: string[] = replaced.split(" ");
@@ -76,19 +74,19 @@ function compute(tokens: string[]): number {
 			continue;
 		}
 
-		// **Check** if token is in the UNITS dictionary.
+		// **Check** if the token is in the UNITS dictionary.
 		if (UNITS.has(token)) {
 			group += UNITS.get(token)!;
 			continue;
 		}
 
-		// **Check** if token is in the TEN dictionary (e.g., "بیست", "سی", etc.).
+		// **Check** if the token is in the TEN dictionaries (e.g., "بیست", "سی", etc.).
 		if (TEN.has(token)) {
 			group += TEN.get(token)!;
 			continue;
 		}
 
-		// **Check** if token is a direct numeric string.
+		// **Check** if the token is a direct numeric string.
 		if (!Number.isNaN(Number(token))) {
 			group += parseInt(token, 10);
 			continue;
@@ -186,6 +184,17 @@ export function wordsToNumber<TResult extends string | number>(
 
 	// **Return** the final output cast to `TResult`, ensuring compliance with the function signature
 	return finalOutput as TResult;
+}
+
+function replaceArray(input: string): string {
+	// **Replace** each matched token with the mapped value (case-insensitive).
+	return input.replace(TYPO_PATTERN, (matched) => {
+		// Convert the matched token to lowercase for map lookup (assuming map keys are lowercase).
+		const lowerMatched = matched.toLowerCase();
+		// If the map contains this key, return its value; else fallback to the original match.
+		const replacement = TYPO_LIST.get(lowerMatched);
+		return replacement != null ? replacement : matched;
+	});
 }
 
 /**

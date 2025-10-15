@@ -1,5 +1,7 @@
-import { ALL_WORDS, JOINERS } from "./constants";
+import { isString } from "../../helpers";
 import { closest } from "fastest-levenshtein";
+// Constants
+import { ALL_WORDS, JOINERS } from "./constants";
 
 /**
  * **Fuzzy** takes a Persian string and attempts to correct typos by matching
@@ -13,7 +15,7 @@ import { closest } from "fastest-levenshtein";
  */
 export const fuzzy = (words: string, dataset?: Array<string>): string | undefined => {
 	// **Early return** if input is falsy or not a string
-	if (!words || typeof words !== "string") return;
+	if (!words || !isString(words)) return;
 
 	// **Base** dataset for matching
 	const base = (dataset?.length ?? 0) > 0 ? dataset : ALL_WORDS;
