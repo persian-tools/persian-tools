@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { isShebaValid, getShebaInfo, shebaIso7064Mod97 } from "../src/modules/sheba";
+import { isShebaValid, getShebaInfo } from "../src/modules/sheba";
+import { shebaIso7064Mod97 } from "../src/modules/sheba/helpers";
 
 describe("Sheba", () => {
 	it("isShebaValid Should return true", () => {

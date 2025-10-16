@@ -1,5 +1,7 @@
-import { shebaMapCodes } from "./codes.skip";
-import { type ShebaResult } from "./codes.skip";
+import { shebaIso7064Mod97 } from "./helpers";
+import { shebaMapCodesMap } from "./codes.skip";
+// Types
+import type { ShebaResultWithAccountNumber, ShebaResultWithoutAccountNumber } from "./types";
 
 /**
  * @public
@@ -13,47 +15,47 @@ export const shebaPattern: RegExp = /IR[0-9]{24}/;
 export const shebaPatternCode: RegExp = /IR[0-9]{2}([0-9]{3})[0-9]{19}/;
 
 /**
+ * Get detailed information about a Sheba (IBAN) code
  * @public
  * @since 1.7.1
+ * @param shebaCode - The Sheba/IBAN code to validate and extract information from
+ * @returns Detailed bank information including account number if available, or null if invalid
  */
-export function getShebaInfo(shebaCode: string): ShebaResult | null {
+export function getShebaInfo(shebaCode: string): ShebaResultWithAccountNumber | ShebaResultWithoutAccountNumber | null {
 	if (!isShebaValid(shebaCode)) {
 		return null;
 	}
 
 	const res = shebaPatternCode.exec(shebaCode);
 	const codeAsString = res?.[1] ?? "";
-	const code = parseInt(codeAsString, 10);
-	const bank = {
-		...(shebaMapCodes[code] || {}),
-	};
+	const bank = shebaMapCodesMap.get(codeAsString);
 
-	if (bank.accountNumberAvailable) {
-		const data = bank.process?.(shebaCode);
-
-		bank.accountNumber = data?.normal;
-		bank.formattedAccountNumber = data?.formatted;
+	if (!bank) {
+		return null;
 	}
 
-	delete bank.process;
+	// If the process property exists, means we can extract the account number
+	if ("process" in bank) {
+		const data = bank.process(shebaCode);
 
-	return bank;
-}
-
-/**
- * @private
- * @since 1.7.1
- */
-export function shebaIso7064Mod97(iban: string): number {
-	let remainder = iban,
-		block;
-
-	while (remainder.length > 2) {
-		block = remainder.slice(0, 9);
-		remainder = (parseInt(block, 10) % 97) + remainder.slice(block.length);
+		return {
+			name: bank.name,
+			nickname: bank.nickname,
+			persianName: bank.persianName,
+			code: codeAsString,
+			accountNumberAvailable: true,
+			accountNumber: data.normal,
+			formattedAccountNumber: data.formatted,
+		} as ShebaResultWithAccountNumber;
 	}
 
-	return parseInt(remainder, 10) % 97;
+	return {
+		name: bank.name,
+		nickname: bank.nickname,
+		persianName: bank.persianName,
+		code: codeAsString,
+		accountNumberAvailable: false,
+	} as ShebaResultWithoutAccountNumber;
 }
 
 /**
@@ -84,4 +86,4 @@ export function isShebaValid(shebaCode: string): boolean {
 	return remainder === 1;
 }
 
-export * from "./codes.skip";
+export type { ShebaResultWithAccountNumber, ShebaResultWithoutAccountNumber } from "./types";
