@@ -73,7 +73,7 @@ yarn add @persian-tools/persian-tools
 # pnpm
 pnpm add @persian-tools/persian-tools
 
-# bun
+# bun (recommended)
 bun add @persian-tools/persian-tools
 ```
 
@@ -95,7 +95,7 @@ const { numberToWords } = require('@persian-tools/persian-tools');
 
 **Browser CDN**
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@persian-tools/persian-tools/build/persian-tools.cjs"></script>
+<script src="https://cdn.jsdelivr.net/npm/@persian-tools/persian-tools/build/index.js"></script>
 <script>
   console.log(PersianTools.numberToWords(1234));
 </script>
@@ -499,23 +499,23 @@ cleanText("سَلامٌ   123   دنیا"); // "سلام ۱۲۳ دنیا"
 ## 🏗️ Development
 
 ### Prerequisites
-- **Node.js** ≥ 14
-- **pnpm** ≥ 9 (recommended package manager)
+- **Bun** ≥ 1.3 (as runtime and package manager)
 
 ### Setup
 ```bash
 git clone https://github.com/persian-tools/persian-tools.git
 cd persian-tools
-pnpm install
+bun install
 ```
 
 ### Scripts
 ```bash
-pnpm build        # Build the library
-pnpm test         # Run tests
-pnpm test:watch   # Watch mode testing
-pnpm lint         # Lint code
-pnpm lint:fix     # Fix linting issues
+bun run build        # Build the library
+bun run test         # Run tests
+bun run test:watch   # Watch mode testing
+bun run lint         # Lint code
+bun run format       # Format code
+bun run lint:fix     # Fix linting issues
 ```
 
 ### Architecture
@@ -580,12 +580,13 @@ Your code lives on, and you will always be remembered in our community. ❤️
 We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md) for details.
 
 ### Quick Contribution Steps:
-1. **Fork & Clone** the repository
-2. **Create** a feature branch: `git checkout -b my-feature`
-3. **Make** your changes with tests
-4. **Run** `pnpm test` and `pnpm lint`
-5. **Commit** with conventional commits
-6. **Submit** a pull request
+1. **Install** Bun (from https://bun.sh)
+2. **Fork & Clone** the repository
+3. **Create** a feature branch: `git checkout -b my-feature`
+4. **Make** your changes with tests
+5. **Run** `bun run test` and `bun run lint` and `bun run format` to ensure everything passes
+6. **Commit** with conventional commits (e.g. `feat: add new utility function`)
+7. **Submit** a pull request
 
 ---
 

@@ -3,17 +3,20 @@
 	"description": "A comprehensive, high-performance TypeScript toolkit for Persian (Farsi) text, numbers, validation, and locale utilities — works in Node.js, Bun, and the browser.",
 	"version": "4.0.4",
 	"files": [
-		"CONTRIBUTORS.md",
-		"./build/cjs",
-		"./build/esm"
+		"./build"
 	],
-	"module": "./build/esm/index.mjs",
-	"types": "./build/esm/index.d.mts",
+	"module": "./build/index.mjs",
+	"main": "./build/index.js",
+	"types": "./build/index.d.ts",
 	"exports": {
 		".": {
 			"import": {
-				"types": "./build/esm/index.d.mts",
-				"default": "./build/esm/index.mjs"
+				"types": "./build/index.d.mts",
+				"default": "./build/index.mjs"
+			},
+			"require": {
+				"types": "./build/index.d.ts",
+				"default": "./build/index.js"
 			}
 		},
 		"./package.json": "./package.json"
