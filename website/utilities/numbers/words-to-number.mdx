@@ -1,0 +1,306 @@
+---
+title: "Words to Number"
+description: "Convert Persian words to numeric values with fuzzy matching support"
+icon: "spell-check"
+---
+
+# Words to Number Conversion
+
+The `wordsToNumber` utility converts Persian word representations of numbers back to their numeric equivalents, with support for fuzzy matching and various input formats.
+
+## Basic Usage
+
+<CodeGroup>
+```typescript Import
+import { wordsToNumber } from '@persian-tools/persian-tools';
+```
+
+```javascript CommonJS
+const { wordsToNumber } = require("persian-tools");
+```
+
+</CodeGroup>
+
+### Simple Conversion
+
+```typescript
+wordsToNumber("یک هزار و دویست و سی و چهار");
+// Output: 1234
+
+wordsToNumber("صفر");
+// Output: 0
+
+wordsToNumber("یک میلیون");
+// Output: 1000000
+```
+
+## Advanced Options
+
+The function accepts an optional configuration object:
+
+```typescript
+interface WordsToNumberOptions {
+	fuzzy?: boolean;
+	digits?: "persian" | "english" | "both";
+	addCommas?: boolean;
+}
+```
+
+### Fuzzy Matching
+
+Enable fuzzy matching to handle variations in spacing and formatting:
+
+```typescript
+// Exact matching (default)
+wordsToNumber("یک هزار و دویست"); // 1200
+
+// Fuzzy matching
+wordsToNumber("یکهزار دویست", { fuzzy: true }); // 1200
+wordsToNumber("یک هزاردویست", { fuzzy: true }); // 1200
+wordsToNumber("یک‌هزار و دویست", { fuzzy: true }); // 1200
+```
+
+### Mixed Digit Support
+
+Handle input containing both Persian words and digits:
+
+```typescript
+wordsToNumber("۱۲ هزار", { digits: "persian" }); // 12000
+wordsToNumber("12 هزار", { digits: "english" }); // 12000
+wordsToNumber("۱۲ هزار و 34", { digits: "both" }); // 12034
+```
+
+### Comma Formatting
+
+Return results with comma separators:
+
+```typescript
+wordsToNumber("یک میلیون", { addCommas: true });
+// Output: "1,000,000"
+
+wordsToNumber("دو میلیارد", { addCommas: true });
+// Output: "2,000,000,000"
+```
+
+## Supported Word Patterns
+
+### Basic Numbers
+
+```typescript
+wordsToNumber("یک"); // 1
+wordsToNumber("ده"); // 10
+wordsToNumber("یکصد"); // 100
+wordsToNumber("هزار"); // 1000
+```
+
+### Compound Numbers
+
+```typescript
+wordsToNumber("بیست و یک"); // 21
+wordsToNumber("سیصد و چهل و پنج"); // 345
+wordsToNumber("یک هزار و نهصد"); // 1900
+```
+
+### Large Numbers
+
+```typescript
+wordsToNumber("یک میلیون"); // 1000000
+wordsToNumber("دو میلیارد و پانصد میلیون"); // 2500000000
+wordsToNumber("یک تریلیون"); // 1000000000000
+```
+
+## Ordinal Numbers
+
+Handle ordinal number words:
+
+```typescript
+wordsToNumber("اول"); // 1
+wordsToNumber("دوم"); // 2
+wordsToNumber("سوم"); // 3
+wordsToNumber("بیستم"); // 20
+wordsToNumber("یکصدم"); // 100
+```
+
+## Edge Cases and Error Handling
+
+### Invalid Input
+
+```typescript
+wordsToNumber("نامعلوم"); // null
+wordsToNumber(""); // null
+wordsToNumber(null); // null
+wordsToNumber(undefined); // null
+```
+
+### Partial Matches
+
+```typescript
+// With fuzzy matching
+wordsToNumber("یک هزار ناقص", { fuzzy: true }); // 1000 (ignores "ناقص")
+
+// Without fuzzy matching
+wordsToNumber("یک هزار ناقص"); // null (exact match required)
+```
+
+### Mixed Content
+
+```typescript
+// Numbers mixed with text
+wordsToNumber("حدود یک هزار", { fuzzy: true }); // 1000
+wordsToNumber("تقریباً دو میلیون", { fuzzy: true }); // 2000000
+```
+
+## Complex Examples
+
+### Real-world Input Variations
+
+```typescript
+// Different spacing patterns
+wordsToNumber("یک هزار و دویست", { fuzzy: true }); // 1200
+wordsToNumber("یک‌هزار و دویست", { fuzzy: true }); // 1200
+wordsToNumber("یکهزاردویست", { fuzzy: true }); // 1200
+
+// Mixed digits and words
+wordsToNumber("۱۵ هزار و ۲۰۰", {
+	fuzzy: true,
+	digits: "persian",
+}); // 15200
+
+// Currency context
+wordsToNumber("یک میلیون تومان", { fuzzy: true }); // 1000000
+```
+
+### Batch Processing
+
+```typescript
+const persianNumbers = ["یک هزار", "دو هزار و پانصد", "سه میلیون", "چهار میلیارد"];
+
+const converted = persianNumbers.map((text) => ({
+	original: text,
+	numeric: wordsToNumber(text),
+	formatted: wordsToNumber(text, { addCommas: true }),
+}));
+```
+
+## Performance Considerations
+
+<AccordionGroup>
+  <Accordion title="🚀 Optimization Tips" icon="bolt">
+    - Use exact matching when input format is consistent
+    - Enable fuzzy matching only when needed (it's slower)
+    - Cache results for frequently converted phrases
+  </Accordion>
+
+  <Accordion title="📊 Performance Metrics" icon="chart-bar">
+    - **Exact matching**: ~0.2ms average
+    - **Fuzzy matching**: ~1-3ms average
+    - **Mixed digits**: ~0.5ms average
+  </Accordion>
+</AccordionGroup>
+
+## TypeScript Support
+
+Full TypeScript definitions are provided:
+
+```typescript
+import { wordsToNumber, WordsToNumberOptions } from "persian-tools";
+
+const options: WordsToNumberOptions = {
+	fuzzy: true,
+	digits: "both",
+	addCommas: false,
+};
+
+const result: number | null = wordsToNumber("یک هزار", options);
+
+if (result !== null) {
+	console.log(`Converted: ${result}`);
+}
+```
+
+## Common Use Cases
+
+### Form Input Processing
+
+```typescript
+function processNumericInput(userInput: string): number | null {
+	// Try exact match first (faster)
+	let result = wordsToNumber(userInput);
+
+	// Fall back to fuzzy matching
+	if (result === null) {
+		result = wordsToNumber(userInput, {
+			fuzzy: true,
+			digits: "both",
+		});
+	}
+
+	return result;
+}
+```
+
+### Invoice Processing
+
+```typescript
+function parseInvoiceAmount(text: string) {
+	const amount = wordsToNumber(text, {
+		fuzzy: true,
+		digits: "both",
+	});
+
+	return {
+		original: text,
+		parsed: amount,
+		formatted: amount ? addCommas(amount) : null,
+		isValid: amount !== null,
+	};
+}
+```
+
+### Voice Input Processing
+
+```typescript
+function processVoiceInput(spokenText: string) {
+	// Voice input often has spacing variations
+	return wordsToNumber(spokenText, {
+		fuzzy: true,
+		digits: "both",
+	});
+}
+```
+
+## Error Handling Best Practices
+
+```typescript
+function safeWordsToNumber(input: string): number {
+	const result = wordsToNumber(input, { fuzzy: true });
+
+	if (result === null) {
+		throw new Error(`Cannot convert "${input}" to number`);
+	}
+
+	return result;
+}
+
+// Or with default value
+function wordsToNumberWithDefault(input: string, defaultValue = 0): number {
+	return wordsToNumber(input, { fuzzy: true }) ?? defaultValue;
+}
+```
+
+## Related Utilities
+
+<CardGroup cols={2}>
+	<Card title="Number to Words" icon="spell-check" href="/utilities/numbers/number-to-words">
+		Convert numbers to Persian words
+	</Card>
+	<Card title="Digit Conversion" icon="language" href="/utilities/numbers/digits">
+		Convert between digit systems
+	</Card>
+	<Card title="Add Commas" icon="comma" href="/utilities/numbers/commas">
+		Format numbers with separators
+	</Card>
+	<Card title="Text Analyzer" icon="magnifying-glass" href="/utilities/text/text-analyzer">
+		Analyze Persian text content
+	</Card>
+</CardGroup>

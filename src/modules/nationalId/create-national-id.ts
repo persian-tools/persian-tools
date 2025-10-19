@@ -31,9 +31,9 @@ export interface NationalIdGenerationResult {
  *
  * Iranian National IDs are 10-digit numbers where:
  * - First 9 digits can be any combination
- * - 10th digit is a check digit calculated using a weighted sum algorithm
+ * - the 10th digit is a check digit calculated using a weighted sum algorithm
  * - The validation formula: sum(digit[i] * weight[i]) % 11
- * - If remainder < 2, check digit = remainder; otherwise check digit = 11 - remainder
+ * - If remainder < 2, a check digit = remainder; otherwise a check digit = 11 - remainder
  *
  * @param options - Configuration options for generation
  * @returns A valid 10-digit Iranian National ID string
@@ -67,9 +67,9 @@ export function createIranianNationalId(options: NationalIdGenerationOptions = {
  *   maxRetries: 10
  * });
  *
- * console.log(result.nationalId);      // "1234567890"
- * console.log(result.checkDigit);      // 0
- * console.log(result.attempts);        // 1
+ * console.log(result.nationalId); // "1234567890"
+ * console.log(result.checkDigit); // 0
+ * console.log(result.attempts); // 1
  * console.log(result.hasRepeatedDigits); // false
  */
 export function createIranianNationalIdDetailed(options: NationalIdGenerationOptions = {}): NationalIdGenerationResult {
@@ -145,7 +145,7 @@ function generateNationalIdDigits(randomGenerator: () => number): {
 		const digit = Math.floor(randomGenerator() * 10);
 		digits.push(digit);
 
-		// Add to weighted sum for check digit calculation
+		// Add to a weighted sum for check digit calculation
 		weightedSum += digit * weight;
 	}
 
@@ -156,9 +156,9 @@ function generateNationalIdDigits(randomGenerator: () => number): {
  * Calculates the check digit for Iranian National ID validation
  *
  * The algorithm:
- * 1. Calculate remainder of weighted sum divided by 11
+ * 1. Calculate the remainder of a weighted sum divided by 11
  * 2. If remainder < 2, check digit = remainder
- * 3. Otherwise, check digit = 11 - remainder
+ * 3. Otherwise, check a digit = 11 - remainder
  *
  * @param weightedSum - Sum of first 9 digits multiplied by their weights
  * @returns The calculated check digit (0-9)
@@ -204,7 +204,7 @@ export function validateNationalIdChecksum(nationalId: string): boolean {
 	const digits = nationalId.split("").map(Number);
 	const checkDigit = digits[9];
 
-	// Calculate weighted sum of first 9 digits
+	// Calculate a weighted sum of the first 9 digits
 	let weightedSum = 0;
 	for (let i = 0; i < 9; i++) {
 		weightedSum += digits[i] * (10 - i);

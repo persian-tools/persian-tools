@@ -17,7 +17,7 @@ import { isPhoneNumberValid } from "./validator";
  * phoneNumberNormalizer("09022002580", "+98"); //+989022002580
  * phoneNumberNormalizer("09802002580", "0"); // Error : this is not valid phone number
  */
-export function phoneNumberNormalizer(phoneNumber: string, token: "0" | "+98") {
+export function phoneNumberNormalizer(phoneNumber: string, token: "0" | "+98"): string {
 	if (!isPhoneNumberValid(phoneNumber)) {
 		throw new Error("phone number is not valid");
 	}

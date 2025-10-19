@@ -1,0 +1,123 @@
+---
+title: "Remaining Time"
+description: "Calculate remaining time until a future date in Persian"
+icon: "hourglass-half"
+---
+
+# Remaining Time
+
+Calculate and format the remaining time until a future date with Persian output.
+
+## Basic Usage
+
+```typescript
+import { remainingTime } from "@persian-tools/persian-tools";
+
+const futureDate = new Date("2024-12-31T23:59:59");
+const remaining = remainingTime(futureDate);
+
+console.log(remaining);
+// Output: { days: 78, hours: 13, minutes: 59, seconds: 59 }
+```
+
+## API Reference
+
+<ParamField path="date" type="Date | number" required>
+	Future date or timestamp
+</ParamField>
+
+<ResponseField name="result" type="object">
+  Object containing time components
+
+  <Expandable title="properties">
+    <ResponseField name="days" type="number">
+      Remaining days
+    </ResponseField>
+
+    <ResponseField name="hours" type="number">
+      Remaining hours (0-23)
+    </ResponseField>
+
+    <ResponseField name="minutes" type="number">
+      Remaining minutes (0-59)
+    </ResponseField>
+
+    <ResponseField name="seconds" type="number">
+      Remaining seconds (0-59)
+    </ResponseField>
+
+  </Expandable>
+</ResponseField>
+
+## Examples
+
+### Countdown Timer
+
+```typescript
+import { remainingTime, digitsEnToFa } from "@persian-tools/persian-tools";
+
+const displayCountdown = (targetDate: Date): string => {
+	const time = remainingTime(targetDate);
+
+	const days = digitsEnToFa(time.days.toString());
+	const hours = digitsEnToFa(time.hours.toString());
+	const minutes = digitsEnToFa(time.minutes.toString());
+
+	return `${days} روز و ${hours} ساعت و ${minutes} دقیقه`;
+};
+
+const eventDate = new Date("2024-12-31T23:59:59");
+console.log(displayCountdown(eventDate));
+// "۷۸ روز و ۱۳ ساعت و ۵۹ دقیقه"
+```
+
+### Event Countdown
+
+```typescript
+import { remainingTime } from "@persian-tools/persian-tools";
+
+const showEventCountdown = (eventDate: Date) => {
+	const time = remainingTime(eventDate);
+
+	if (time.days > 0) {
+		return `${time.days} روز مانده`;
+	} else if (time.hours > 0) {
+		return `${time.hours} ساعت مانده`;
+	} else {
+		return `${time.minutes} دقیقه مانده`;
+	}
+};
+```
+
+## Use Cases
+
+<AccordionGroup>
+  <Accordion title="E-commerce Sales" icon="tag">
+    Show countdown for flash sales:
+    ```typescript
+    const saleEnds = new Date('2024-10-20T23:59:59');
+    const countdown = remainingTime(saleEnds);
+    ```
+  </Accordion>
+
+  <Accordion title="Event Registration" icon="calendar">
+    Display time until event registration closes:
+    ```typescript
+    const registrationDeadline = new Date('2024-11-01');
+    const remaining = remainingTime(registrationDeadline);
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Type Definition
+
+```typescript
+interface RemainingTime {
+	days: number;
+	hours: number;
+	minutes: number;
+	seconds: number;
+}
+
+function remainingTime(date: Date | number): RemainingTime;
+```

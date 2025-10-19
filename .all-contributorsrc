@@ -1,295 +1,311 @@
 {
-  "files": [
-    "README.md"
-  ],
-  "imageSize": 100,
-  "commit": false,
-  "contributors": [
-    {
-      "login": "ali-master",
-      "name": "Ali Torki",
-      "avatar_url": "https://avatars1.githubusercontent.com/u/9049092?v=4",
-      "profile": "https://www.linkedin.com/in/alitorki/",
-      "contributions": [
-        "infra",
-        "test",
-        "code"
-      ]
-    },
-    {
-      "login": "mssoheil",
-      "name": "mssoheil",
-      "avatar_url": "https://avatars3.githubusercontent.com/u/16543635?v=4",
-      "profile": "https://github.com/mssoheil",
-      "contributions": [
-        "test",
-        "code"
-      ]
-    },
-    {
-      "login": "moh3n9595",
-      "name": "Mohsen",
-      "avatar_url": "https://avatars1.githubusercontent.com/u/20948388?v=4",
-      "profile": "https://github.com/moh3n9595",
-      "contributions": [
-        "test",
-        "code"
-      ]
-    },
-    {
-      "login": "Hesamp",
-      "name": "Hesam pourghazian",
-      "avatar_url": "https://avatars1.githubusercontent.com/u/1300289?v=4",
-      "profile": "http://titles.ir",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
-      "login": "amirqasemi74",
-      "name": "Amir Hossien Qasemi Moqaddam",
-      "avatar_url": "https://avatars3.githubusercontent.com/u/20992734?v=4",
-      "profile": "https://github.com/amirqasemi74",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
-      "login": "SeyyedKhandon",
-      "name": "SeyyedKhandon",
-      "avatar_url": "https://avatars.githubusercontent.com/u/59599950?v=4",
-      "profile": "https://github.com/SeyyedKhandon",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
-      "login": "masoudDaliriyan",
-      "name": "msdDaliriyan",
-      "avatar_url": "https://avatars.githubusercontent.com/u/25932831?v=4",
-      "profile": "https://github.com/masoudDaliriyan",
-      "contributions": [
-        "code",
-        "test"
-      ]
-    },
-    {
-      "login": "mahdi-momeni",
-      "name": "Mahdi",
-      "avatar_url": "https://avatars.githubusercontent.com/u/32864532?v=4",
-      "profile": "https://mahdi-momeni.github.io/",
-      "contributions": [
-        "code",
-        "test",
-        "doc"
-      ]
-    },
-    {
-      "login": "psparsa",
-      "name": "PS-PARSA",
-      "avatar_url": "https://avatars.githubusercontent.com/u/57572461?v=4",
-      "profile": "https://dev.to/psparsa",
-      "contributions": [
-        "test",
-        "code",
-        "ideas"
-      ]
-    },
-    {
-      "login": "amirzenoozi",
-      "name": "Amirhossein Douzandeh Zenoozi",
-      "avatar_url": "https://avatars.githubusercontent.com/u/16349391?v=4",
-      "profile": "http://amirduzandeh.ir/",
-      "contributions": [
-        "code",
-        "test",
-        "ideas"
-      ]
-    },
-    {
-      "login": "M0rteza-M",
-      "name": "M0rteza-M",
-      "avatar_url": "https://avatars.githubusercontent.com/u/79398146?v=4",
-      "profile": "https://github.com/M0rteza-M",
-      "contributions": [
-        "code",
-        "test"
-      ]
-    },
-    {
-      "login": "mediv0",
-      "name": "mediv0",
-      "avatar_url": "https://avatars.githubusercontent.com/u/36822136?v=4",
-      "profile": "https://www.mahdi.wtf/",
-      "contributions": [
-        "code",
-        "test",
-        "ideas"
-      ]
-    },
-    {
-      "login": "pshaddel",
-      "name": "Poorshad Shaddel",
-      "avatar_url": "https://avatars.githubusercontent.com/u/43247296?v=4",
-      "profile": "https://www.linkedin.com/in/poorshad/",
-      "contributions": [
-        "code",
-        "test",
-        "ideas"
-      ]
-    },
-    {
-      "login": "theMasix",
-      "name": "Seyed Masih Sajadi",
-      "avatar_url": "https://avatars.githubusercontent.com/u/22872117?v=4",
-      "profile": "http://t.me/theMasix",
-      "contributions": [
-        "code",
-        "test"
-      ]
-    },
-    {
-      "login": "ghonchesefidi",
-      "name": "Mohammad Ghonchesefidi",
-      "avatar_url": "https://avatars.githubusercontent.com/u/30124243?v=4",
-      "profile": "https://www.samasarin.com",
-      "contributions": [
-        "code",
-        "test"
-      ]
-    },
-    {
-      "login": "realsaeedhassani",
-      "name": "Saeed Hasani Borzadaran",
-      "avatar_url": "https://avatars.githubusercontent.com/u/20496196?v=4",
-      "profile": "https://www.linkedin.com/in/realsaeedhassani/",
-      "contributions": [
-        "code",
-        "test"
-      ]
-    },
-    {
-      "login": "mrunderline",
-      "name": "Ali Madihi",
-      "avatar_url": "https://avatars.githubusercontent.com/u/23085360?v=4",
-      "profile": "https://github.com/mrunderline",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
-      "login": "Amir-Alipour",
-      "name": "Amir",
-      "avatar_url": "https://avatars.githubusercontent.com/u/73488911?v=4",
-      "profile": "https://github.com/Amir-Alipour",
-      "contributions": [
-        "doc"
-      ]
-    },
-    {
-      "login": "KavehKarami",
-      "name": "Kaveh Karami",
-      "avatar_url": "https://avatars.githubusercontent.com/u/48356643?v=4",
-      "profile": "http://codewars.com/users/KavehKarami",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
-      "login": "shahabbasian",
-      "name": "Mehdi Shah abbasian",
-      "avatar_url": "https://avatars.githubusercontent.com/u/64106883?v=4",
-      "profile": "https://damoon.pro",
-      "contributions": [
-        "doc"
-      ]
-    },
-    {
-      "login": "Amirali-Yavari",
-      "name": "amirali yavari",
-      "avatar_url": "https://avatars.githubusercontent.com/u/97870997?v=4",
-      "profile": "https://github.com/Amirali-Yavari",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
-      "login": "TahaNamdar",
-      "name": "Taha Namdar",
-      "avatar_url": "https://avatars.githubusercontent.com/u/42145229?v=4",
-      "profile": "https://github.com/TahaNamdar",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
-      "login": "alirezasariri78",
-      "name": "Alireza Sariri",
-      "avatar_url": "https://avatars.githubusercontent.com/u/131848129?v=4",
-      "profile": "https://github.com/alirezasariri78",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
-      "login": "geek-sajjad",
-      "name": "Sajad Sohrabi",
-      "avatar_url": "https://avatars.githubusercontent.com/u/30924359?v=4",
-      "profile": "https://github.com/geek-sajjad",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
-      "login": "pooooriya",
-      "name": "Pouriya Babaali",
-      "avatar_url": "https://avatars.githubusercontent.com/u/65160744?v=4",
-      "profile": "https://github.com/pooooriya",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
-      "login": "norouzex",
-      "name": "Mohammad norouzi",
-      "avatar_url": "https://avatars.githubusercontent.com/u/62938584?v=4",
-      "profile": "https://github.com/norouzex",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
-      "login": "thevilx",
-      "name": "Mohamad Amin Mirzaei",
-      "avatar_url": "https://avatars.githubusercontent.com/u/80054917?v=4",
-      "profile": "https://github.com/thevilx",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
-      "login": "Moeinmn",
-      "name": "Moein Moeinnia",
-      "avatar_url": "https://avatars.githubusercontent.com/u/69215813?v=4",
-      "profile": "https://github.com/Moeinmn",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
-      "login": "ahangarha",
-      "name": "Mostafa Ahangarha",
-      "avatar_url": "https://avatars.githubusercontent.com/u/11241315?v=4",
-      "profile": "https://github.com/ahangarha",
-      "contributions": [
-        "code"
-      ]
-    }
-  ],
-  "contributorsPerLine": 7,
-  "projectName": "persian-tools",
-  "projectOwner": "persian-tools",
-  "repoType": "github",
-  "repoHost": "https://github.com",
-  "skipCi": true
+	"contributorsPerLine": 5,
+	"projectName": "persian-tools",
+	"projectOwner": "persian-tools",
+	"repoType": "github",
+	"repoHost": "https://github.com",
+	"skipCi": true,
+	"files": [
+		"README.md",
+		"CONTRIBUTORS.md"
+	],
+	"commitType": "docs",
+	"commitConvention": "angular",
+	"imageSize": 100,
+	"commit": false,
+	"contributors": [
+		{
+			"login": "ali-master",
+			"name": "Ali Torki",
+			"avatar_url": "https://avatars1.githubusercontent.com/u/9049092?v=4",
+			"profile": "https://www.linkedin.com/in/alitorki/",
+			"contributions": [
+				"infra",
+				"test",
+				"code",
+				"bug",
+				"content",
+				"doc"
+			]
+		},
+		{
+			"login": "mssoheil",
+			"name": "mssoheil",
+			"avatar_url": "https://avatars3.githubusercontent.com/u/16543635?v=4",
+			"profile": "https://github.com/mssoheil",
+			"contributions": [
+				"test",
+				"code"
+			]
+		},
+		{
+			"login": "moh3n9595",
+			"name": "Mohsen",
+			"avatar_url": "https://avatars1.githubusercontent.com/u/20948388?v=4",
+			"profile": "https://github.com/moh3n9595",
+			"contributions": [
+				"test",
+				"code"
+			]
+		},
+		{
+			"login": "Hesamp",
+			"name": "Hesam pourghazian",
+			"avatar_url": "https://avatars1.githubusercontent.com/u/1300289?v=4",
+			"profile": "http://titles.ir",
+			"contributions": [
+				"code"
+			]
+		},
+		{
+			"login": "amirqasemi74",
+			"name": "Amir Hossien Qasemi Moqaddam",
+			"avatar_url": "https://avatars3.githubusercontent.com/u/20992734?v=4",
+			"profile": "https://github.com/amirqasemi74",
+			"contributions": [
+				"code"
+			]
+		},
+		{
+			"login": "SeyyedKhandon",
+			"name": "SeyyedKhandon",
+			"avatar_url": "https://avatars.githubusercontent.com/u/59599950?v=4",
+			"profile": "https://github.com/SeyyedKhandon",
+			"contributions": [
+				"code"
+			]
+		},
+		{
+			"login": "masoudDaliriyan",
+			"name": "msdDaliriyan",
+			"avatar_url": "https://avatars.githubusercontent.com/u/25932831?v=4",
+			"profile": "https://github.com/masoudDaliriyan",
+			"contributions": [
+				"code",
+				"test"
+			]
+		},
+		{
+			"login": "mahdi-momeni",
+			"name": "Mahdi",
+			"avatar_url": "https://avatars.githubusercontent.com/u/32864532?v=4",
+			"profile": "https://mahdi-momeni.github.io/",
+			"contributions": [
+				"code",
+				"test",
+				"doc"
+			]
+		},
+		{
+			"login": "psparsa",
+			"name": "PS-PARSA",
+			"avatar_url": "https://avatars.githubusercontent.com/u/57572461?v=4",
+			"profile": "https://dev.to/psparsa",
+			"contributions": [
+				"test",
+				"code",
+				"ideas"
+			]
+		},
+		{
+			"login": "amirzenoozi",
+			"name": "Amirhossein Douzandeh Zenoozi",
+			"avatar_url": "https://avatars.githubusercontent.com/u/16349391?v=4",
+			"profile": "http://amirduzandeh.ir/",
+			"contributions": [
+				"code",
+				"test",
+				"ideas"
+			]
+		},
+		{
+			"login": "M0rteza-M",
+			"name": "M0rteza-M",
+			"avatar_url": "https://avatars.githubusercontent.com/u/79398146?v=4",
+			"profile": "https://github.com/M0rteza-M",
+			"contributions": [
+				"code",
+				"test"
+			]
+		},
+		{
+			"login": "mediv0",
+			"name": "mediv0",
+			"avatar_url": "https://avatars.githubusercontent.com/u/36822136?v=4",
+			"profile": "https://www.mahdi.wtf/",
+			"contributions": [
+				"code",
+				"test",
+				"ideas"
+			]
+		},
+		{
+			"login": "pshaddel",
+			"name": "Poorshad Shaddel",
+			"avatar_url": "https://avatars.githubusercontent.com/u/43247296?v=4",
+			"profile": "https://www.linkedin.com/in/poorshad/",
+			"contributions": [
+				"code",
+				"test",
+				"ideas"
+			]
+		},
+		{
+			"login": "theMasix",
+			"name": "Seyed Masih Sajadi",
+			"avatar_url": "https://avatars.githubusercontent.com/u/22872117?v=4",
+			"profile": "http://t.me/theMasix",
+			"contributions": [
+				"code",
+				"test"
+			]
+		},
+		{
+			"login": "ghonchesefidi",
+			"name": "Mohammad Ghonchesefidi",
+			"avatar_url": "https://avatars.githubusercontent.com/u/30124243?v=4",
+			"profile": "https://www.samasarin.com",
+			"contributions": [
+				"code",
+				"test"
+			]
+		},
+		{
+			"login": "realsaeedhassani",
+			"name": "Saeed Hasani Borzadaran",
+			"avatar_url": "https://avatars.githubusercontent.com/u/20496196?v=4",
+			"profile": "https://www.linkedin.com/in/realsaeedhassani/",
+			"contributions": [
+				"code",
+				"test"
+			]
+		},
+		{
+			"login": "mrunderline",
+			"name": "Ali Madihi",
+			"avatar_url": "https://avatars.githubusercontent.com/u/23085360?v=4",
+			"profile": "https://github.com/mrunderline",
+			"contributions": [
+				"code"
+			]
+		},
+		{
+			"login": "Amir-Alipour",
+			"name": "Amir",
+			"avatar_url": "https://avatars.githubusercontent.com/u/73488911?v=4",
+			"profile": "https://github.com/Amir-Alipour",
+			"contributions": [
+				"doc"
+			]
+		},
+		{
+			"login": "KavehKarami",
+			"name": "Kaveh Karami",
+			"avatar_url": "https://avatars.githubusercontent.com/u/48356643?v=4",
+			"profile": "http://codewars.com/users/KavehKarami",
+			"contributions": [
+				"code"
+			]
+		},
+		{
+			"login": "shahabbasian",
+			"name": "Mehdi Shah abbasian",
+			"avatar_url": "https://avatars.githubusercontent.com/u/64106883?v=4",
+			"profile": "https://damoon.pro",
+			"contributions": [
+				"doc"
+			]
+		},
+		{
+			"login": "Amirali-Yavari",
+			"name": "amirali yavari",
+			"avatar_url": "https://avatars.githubusercontent.com/u/97870997?v=4",
+			"profile": "https://github.com/Amirali-Yavari",
+			"contributions": [
+				"code"
+			]
+		},
+		{
+			"login": "TahaNamdar",
+			"name": "Taha Namdar",
+			"avatar_url": "https://avatars.githubusercontent.com/u/42145229?v=4",
+			"profile": "https://github.com/TahaNamdar",
+			"contributions": [
+				"code"
+			]
+		},
+		{
+			"login": "alirezasariri78",
+			"name": "Alireza Sariri",
+			"avatar_url": "https://avatars.githubusercontent.com/u/131848129?v=4",
+			"profile": "https://github.com/alirezasariri78",
+			"contributions": [
+				"code"
+			]
+		},
+		{
+			"login": "geek-sajjad",
+			"name": "Sajad Sohrabi",
+			"avatar_url": "https://avatars.githubusercontent.com/u/30924359?v=4",
+			"profile": "https://github.com/geek-sajjad",
+			"contributions": [
+				"code"
+			]
+		},
+		{
+			"login": "pooooriya",
+			"name": "Pouriya Babaali",
+			"avatar_url": "https://avatars.githubusercontent.com/u/65160744?v=4",
+			"profile": "https://github.com/pooooriya",
+			"contributions": [
+				"code"
+			]
+		},
+		{
+			"login": "norouzex",
+			"name": "Mohammad norouzi",
+			"avatar_url": "https://avatars.githubusercontent.com/u/62938584?v=4",
+			"profile": "https://github.com/norouzex",
+			"contributions": [
+				"code"
+			]
+		},
+		{
+			"login": "thevilx",
+			"name": "Mohamad Amin Mirzaei",
+			"avatar_url": "https://avatars.githubusercontent.com/u/80054917?v=4",
+			"profile": "https://github.com/thevilx",
+			"contributions": [
+				"code"
+			]
+		},
+		{
+			"login": "Moeinmn",
+			"name": "Moein Moeinnia",
+			"avatar_url": "https://avatars.githubusercontent.com/u/69215813?v=4",
+			"profile": "https://github.com/Moeinmn",
+			"contributions": [
+				"code"
+			]
+		},
+		{
+			"login": "ahangarha",
+			"name": "Mostafa Ahangarha",
+			"avatar_url": "https://avatars.githubusercontent.com/u/11241315?v=4",
+			"profile": "https://github.com/ahangarha",
+			"contributions": [
+				"code"
+			]
+		},
+		{
+			"login": "hamidne",
+			"name": "Hamid Nasr",
+			"avatar_url": "https://avatars.githubusercontent.com/u/53326634?v=4",
+			"profile": "https://hamidne.ir",
+			"contributions": [
+				"code",
+				"content"
+			]
+		}
+	]
 }

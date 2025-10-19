@@ -1,0 +1,206 @@
+{
+	"$schema": "https://www.mintlify.com/docs.json",
+	"footer": {
+		"socials": {
+			"github": "https://github.com/persian-tools/persian-tools",
+			"linkedin": "https://www.linkedin.com/company/persian-tools"
+		},
+		"links": [
+			{
+				"header": "Resources",
+				"items": [
+					{
+						"label": "GitHub",
+						"href": "https://github.com/persian-tools/persian-tools"
+					},
+					{
+						"label": "NPM Package",
+						"href": "https://www.npmjs.com/package/@persian-tools/persian-tools"
+					}
+				]
+			},
+			{
+				"header": "Community",
+				"items": [
+					{
+						"label": "Issues",
+						"href": "https://github.com/persian-tools/persian-tools/issues"
+					},
+					{
+						"label": "Contributing",
+						"href": "https://github.com/persian-tools/persian-tools/blob/master/CONTRIBUTING.md"
+					}
+				]
+			}
+		]
+	},
+	"api": {
+		"playground": {
+			"display": "interactive"
+		}
+	},
+	"background": {
+		"color": {
+			"light": "#fafafa",
+			"dark": "#0a0a0a"
+		},
+		"decoration": "gradient"
+	},
+	"icons": {
+		"library": "lucide"
+	},
+	"theme": "mint",
+	"name": "Persian Tools",
+	"description": "A comprehensive, high-performance TypeScript toolkit for Persian (Farsi) text, numbers, validation, and locale utilities — works in Node.js, Bun, and the browser.",
+	"seo": {
+		"metatags": {
+			"title": "Persian Tools",
+			"description": "A comprehensive, high-performance TypeScript toolkit for Persian (Farsi) text, numbers, validation, and locale utilities — works in Node.js, Bun, and the browser.",
+			"image": "https://raw.githubusercontent.com/persian-tools/persian-tools/master/images/logo.png",
+			"twitter:card": "summary_large_image",
+			"twitter:site": "@persian_tools",
+			"twitter:creator": "@persian_tools",
+			"twitter:title": "Persian Tools",
+			"twitter:description": "A comprehensive, high-performance TypeScript toolkit for Persian (Farsi) text, numbers, validation, and locale utilities — works in Node.js, Bun, and the browser.",
+			"twitter:image": "https://raw.githubusercontent.com/persian-tools/persian-tools/master/images/logo.png",
+			"og:title": "Persian Tools",
+			"og:description": "A comprehensive, high-performance TypeScript toolkit for Persian (Farsi) text, numbers, validation, and locale utilities — works in Node.js, Bun, and the browser.",
+			"og:image": "https://raw.githubusercontent.com/persian-tools/persian-tools/master/images/logo.png",
+			"og:url": "https://persian-tools.usestrict.dev/persian-tools",
+			"og:type": "website",
+			"og:site_name": "Persian Tools",
+			"og:locale": "en_US",
+			"og:locale:alternate": "fa_IR",
+			"article:author": "https://persian-tools.usestrict.dev",
+			"article:published_time": "2017-09-01T00:00:00+00:00",
+			"article:modified_time": "2025-10-01T00:00:00+00:00",
+			"article:section": "Tools",
+			"article:tag": "Persian, Language, Tools, Javascript, Typescript, persian tools, number to persian words, persian words to number, Arabic numbers to Persian, Arabic numbers to English, English numbers to Persian, Persian numbers to English, verify iranian national id, verify iranian card-number, half-space, digits convertor"
+		},
+		"indexing": "all"
+	},
+	"search": {
+		"prompt": "Search for any Persian Tools topic..."
+	},
+	"navbar": {
+		"links": [
+			{
+				"href": "https://persian-tools.usestrict.dev/showcase",
+				"label": "Showcase",
+				"icon": "star"
+			},
+			{
+				"href": "https://github.com/persian-tools/persian-tools",
+				"label": "GitHub",
+				"icon": "github"
+			},
+			{
+				"href": "https://www.npmjs.com/package/@persian-tools/persian-tools",
+				"label": "NPM",
+				"icon": "npm"
+			},
+			{
+				"href": "https://github.com/orgs/persian-tools",
+				"label": "Persian Tools Org",
+				"icon": "organization"
+			},
+			{
+				"href": "https://github.com/persian-tools/persian-tools/blob/master/CONTRIBUTING.md",
+				"label": "Contribute",
+				"icon": "handshake"
+			}
+		]
+	},
+	"interaction": {
+		"drilldown": true
+	},
+	"logo": {
+		"href": "https://persian-tools.usestrict.dev",
+		"dark": "https://raw.githubusercontent.com/persian-tools/persian-tools/master/images/logo.png",
+		"light": "https://raw.githubusercontent.com/persian-tools/persian-tools/master/images/logo.png"
+	},
+	"errors": {
+		"404": {
+			"title": "Page Not Found",
+			"description": "The page you are looking for does not exist."
+		}
+	},
+	"favicon": "https://raw.githubusercontent.com/persian-tools/persian-tools/master/images/logo.png",
+	"colors": {
+		"primary": "#3b82f6",
+		"light": "#60a5fa",
+		"dark": "#1e40af"
+	},
+	"navigation": {
+		"groups": [
+			{
+				"group": "Introduction",
+				"icon": "book-open",
+				"pages": ["introduction"]
+			},
+			{
+				"group": "Showcase",
+				"icon": "star",
+				"pages": ["showcase"]
+			},
+			{
+				"group": "Getting Started",
+				"icon": "rocket",
+				"pages": ["getting-started/installation", "getting-started/usage", "getting-started/examples"]
+			},
+			{
+				"group": "Number Utilities",
+				"icon": "calculator",
+				"pages": [
+					"utilities/numbers/number-to-words",
+					"utilities/numbers/words-to-number",
+					"utilities/numbers/digits",
+					"utilities/numbers/commas",
+					"utilities/numbers/ordinal-suffix"
+				]
+			},
+			{
+				"group": "Validation",
+				"icon": "shield-check",
+				"pages": [
+					"utilities/validation/national-id",
+					"utilities/validation/place-by-national-id",
+					"utilities/validation/legal-id",
+					"utilities/validation/card-number",
+					"utilities/validation/phone-number"
+				]
+			},
+			{
+				"group": "Text Processing",
+				"icon": "text",
+				"pages": [
+					"utilities/text/persian-chars",
+					"utilities/text/half-space",
+					"utilities/text/slugify",
+					"utilities/text/url-fix",
+					"utilities/text/text-analyzer"
+				]
+			},
+			{
+				"group": "Banking",
+				"icon": "building-columns",
+				"pages": ["utilities/banking/sheba", "utilities/banking/bill"]
+			},
+			{
+				"group": "Geographic",
+				"icon": "map-location-dot",
+				"pages": ["utilities/geographic/capital-by-province", "utilities/geographic/province-from-coordinate"]
+			},
+			{
+				"group": "Time Utilities",
+				"icon": "clock",
+				"pages": ["utilities/time/time-ago", "utilities/time/remaining-time"]
+			},
+			{
+				"group": "Vehicle",
+				"icon": "car",
+				"pages": ["utilities/vehicle/numberplate"]
+			}
+		]
+	}
+}

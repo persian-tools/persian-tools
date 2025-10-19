@@ -1,16 +1,20 @@
 import { convertToTimeStamp } from "./timestamp";
 import { checkFormatDateTime, getTimeNow, standardizeFaDateTime } from "./helpers";
+import { isString } from "../../helpers";
+// Constants
+import * as constants from "./constants";
 
 /**
  * **Converts Jalali date-time** ("yyyy/mm/dd hh:mm:ss") into a human-readable "time ago".
  *
  * @category timeAgo
  * @param datetime e.g. "1402/06/15 13:05:20" (Jalali)
+ * @param timeZone e.g. "Asia/Tehran"
  * @returns e.g. "حدود 1 سال قبل" or "اکنون"
  */
-export function timeAgo(datetime: string = ""): string {
+export function timeAgo(datetime: string = "", timeZone = "Asia/Tehran"): string {
 	// 1) Input must be string
-	if (typeof datetime !== "string") {
+	if (!isString(datetime)) {
 		throw new TypeError("PersianTools: timeAgo - The input must be a string");
 	}
 
@@ -29,43 +33,40 @@ export function timeAgo(datetime: string = ""): string {
 	}
 
 	// 4) Calculate "now" vs. this date
-	const tsTimeNow = getTimeNow();
+	const tsTimeNow = getTimeNow(timeZone);
 	const tsDateTime = convertToTimeStamp(normalized);
 
-	// 5) Determine difference
+	// 5) Determine the difference
 	let elapsed = tsTimeNow - tsDateTime;
 
-	// ±10 seconds => "چند ثانیه قبل"
-	const ignoreSec = 10_000;
-	if (Math.abs(elapsed) <= ignoreSec) {
-		return elapsed > 0 ? "چند ثانیه قبل" : elapsed === 0 ? "اکنون" : "چند ثانیه بعد";
+	// Near now handling
+	// <1s => "اکنون"; <=10s => "چند ثانیه قبل/بعد"
+
+	if (Math.abs(elapsed) < constants.aroundNowMs) {
+		return "اکنون";
+	}
+	if (Math.abs(elapsed) <= constants.shortSecWindow) {
+		return elapsed > 0 ? "چند ثانیه قبل" : "چند ثانیه بعد";
 	}
 
 	// "قبل" vs. "بعد"
 	const prevOrNext: string = elapsed > 0 ? "قبل" : "بعد";
 	elapsed = Math.abs(elapsed);
 
-	const minute = 60_000;
-	const hour = 3_600_000;
-	const day = 86_400_000;
-	const week = day * 7;
-	const month = day * 30;
-	const year = day * 365;
-
-	if (elapsed < minute) {
+	if (elapsed < constants.minute) {
 		return `${Math.round(elapsed / 1000)} ثانیه ${prevOrNext}`;
-	} else if (elapsed < hour) {
-		return `${Math.round(elapsed / minute)} دقیقه ${prevOrNext}`;
-	} else if (elapsed < day) {
-		return `${Math.round(elapsed / hour)} ساعت ${prevOrNext}`;
-	} else if (elapsed < week) {
-		return `حدود ${Math.round(elapsed / day)} روز ${prevOrNext}`;
-	} else if (elapsed < month) {
-		return `حدود ${Math.round(elapsed / week)} هفته ${prevOrNext}`;
-	} else if (elapsed < year) {
-		return `حدود ${Math.round(elapsed / month)} ماه ${prevOrNext}`;
+	} else if (elapsed < constants.hour) {
+		return `${Math.round(elapsed / constants.minute)} دقیقه ${prevOrNext}`;
+	} else if (elapsed < constants.day) {
+		return `${Math.round(elapsed / constants.hour)} ساعت ${prevOrNext}`;
+	} else if (elapsed < constants.week) {
+		return `حدود ${Math.round(elapsed / constants.day)} روز ${prevOrNext}`;
+	} else if (elapsed < constants.month) {
+		return `حدود ${Math.round(elapsed / constants.week)} هفته ${prevOrNext}`;
+	} else if (elapsed < constants.year) {
+		return `حدود ${Math.round(elapsed / constants.month)} ماه ${prevOrNext}`;
 	} else {
-		return `حدود ${Math.round(elapsed / year)} سال ${prevOrNext}`;
+		return `حدود ${Math.round(elapsed / constants.year)} سال ${prevOrNext}`;
 	}
 }
 

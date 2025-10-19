@@ -1,0 +1,75 @@
+---
+title: "Find Capital by Province"
+description: "Get the capital city of Iranian provinces"
+icon: "landmark"
+---
+
+# Find Capital by Province
+
+Get the capital city for any Iranian province.
+
+## Basic Usage
+
+```typescript
+import { findCapitalByProvince } from "@persian-tools/persian-tools";
+
+console.log(findCapitalByProvince("خراسان رضوی"));
+// Output: "مشهد"
+
+console.log(findCapitalByProvince("فارس"));
+// Output: "شیراز"
+```
+
+## API Reference
+
+<ParamField path="province" type="string" required>
+	Province name in Persian
+</ParamField>
+
+<ResponseField name="result" type="string | undefined">
+	Capital city name in Persian, or `undefined` if province not found
+</ResponseField>
+
+## Examples
+
+### Location Display
+
+```typescript
+import { findCapitalByProvince } from "@persian-tools/persian-tools";
+
+const displayProvinceInfo = (province: string) => {
+	const capital = findCapitalByProvince(province);
+	return capital ? `پایتخت ${province}: ${capital}` : "استان یافت نشد";
+};
+
+console.log(displayProvinceInfo("تهران"));
+// "پایتخت تهران: تهران"
+```
+
+### Shipping Calculator
+
+```typescript
+import { findCapitalByProvince } from "@persian-tools/persian-tools";
+
+const calculateShippingHub = (province: string) => {
+	const capital = findCapitalByProvince(province);
+	return capital || "تهران"; // Default to Tehran
+};
+```
+
+## Supported Provinces
+
+All 31 Iranian provinces are supported:
+
+- تهران → تهران
+- اصفهان → اصفهان
+- خراسان رضوی → مشهد
+- فارس → شیراز
+- آذربایجان شرقی → تبریز
+- And 26 more...
+
+## Type Definition
+
+```typescript
+function findCapitalByProvince(province: string): string | undefined;
+```

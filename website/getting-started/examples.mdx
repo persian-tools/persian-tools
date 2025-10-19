@@ -1,0 +1,392 @@
+---
+title: "Examples"
+description: "Practical examples and common use cases for Persian Tools"
+icon: "lightbulb"
+---
+
+# Examples & Use Cases
+
+This page demonstrates practical applications of Persian Tools in real-world scenarios. Each example includes complete code samples and explanations.
+
+## Form Validation
+
+### User Registration Form
+
+```typescript
+import { verifyIranianNationalId, verifyCardNumber, isPersian, toPersianChars } from "persian-tools";
+
+interface UserRegistration {
+	name: string;
+	nationalId: string;
+	cardNumber?: string;
+}
+
+function validateRegistration(data: UserRegistration) {
+	const errors: string[] = [];
+
+	// Validate Persian name
+	const normalizedName = toPersianChars(data.name.trim());
+	if (!isPersian(normalizedName)) {
+		errors.push("نام باید به فارسی باشد");
+	}
+
+	// Validate National ID
+	if (!verifyIranianNationalId(data.nationalId)) {
+		errors.push("کد ملی معتبر نیست");
+	}
+
+	// Validate card number (if provided)
+	if (data.cardNumber && !verifyCardNumber(data.cardNumber)) {
+		errors.push("شماره کارت معتبر نیست");
+	}
+
+	return {
+		isValid: errors.length === 0,
+		errors,
+		normalizedData: {
+			...data,
+			name: normalizedName,
+		},
+	};
+}
+
+// Usage
+const result = validateRegistration({
+	name: "علي احمدي",
+	nationalId: "0499370899",
+	cardNumber: "6274129005473742",
+});
+```
+
+## E-commerce Applications
+
+### Price Display Component
+
+```typescript
+import { numberToWords, addCommas, digitsEnToFa } from "persian-tools";
+
+interface PriceDisplayProps {
+	amount: number;
+	currency?: string;
+	showWords?: boolean;
+	locale?: "fa" | "en";
+}
+
+function formatPrice({ amount, currency = "تومان", showWords = false, locale = "fa" }: PriceDisplayProps) {
+	// Format number with commas
+	const formattedNumber = addCommas(amount);
+
+	// Convert digits based on locale
+	const displayNumber = locale === "fa" ? digitsEnToFa(formattedNumber) : formattedNumber;
+
+	// Generate price in words if requested
+	const priceInWords = showWords ? numberToWords(amount) + " " + currency : null;
+
+	return {
+		formatted: `${displayNumber} ${currency}`,
+		words: priceInWords,
+	};
+}
+
+// Usage
+const price = formatPrice({
+	amount: 1250000,
+	showWords: true,
+});
+
+console.log(price.formatted); // "۱,۲۵۰,۰۰۰ تومان"
+console.log(price.words); // "یک میلیون و دویست و پنجاه هزار تومان"
+```
+
+## Content Management
+
+### Blog URL Slugification
+
+```typescript
+import { slugify, toPersianChars, halfSpace } from "persian-tools";
+
+interface BlogPost {
+	title: string;
+	content: string;
+	tags: string[];
+}
+
+function processBlogPost(post: BlogPost) {
+	// Normalize Persian characters
+	const normalizedTitle = toPersianChars(post.title);
+	const normalizedContent = toPersianChars(post.content);
+
+	// Fix half-spaces in content
+	const processedContent = halfSpace(normalizedContent);
+
+	// Create URL-friendly slug
+	const slug = slugify(normalizedTitle, {
+		separator: "-",
+		lowercase: true,
+		trim: true,
+	});
+
+	// Process tags
+	const processedTags = post.tags.map((tag) => halfSpace(toPersianChars(tag.trim())));
+
+	return {
+		...post,
+		title: normalizedTitle,
+		content: processedContent,
+		tags: processedTags,
+		slug,
+	};
+}
+
+// Usage
+const blogPost = processBlogPost({
+	title: "راهنماي كاربرد ابزارهاي فارسي",
+	content: "در این مقاله می خواهیم...",
+	tags: ["برنامه نويسي", "فارسي سازي"],
+});
+```
+
+## Banking & Finance
+
+### Payment Processing
+
+```typescript
+import {
+	verifyCardNumber,
+	getBankNameFromCardNumber,
+	verifyIranianNationalId,
+	getPlaceByIranNationalId,
+} from "persian-tools";
+
+interface PaymentRequest {
+	cardNumber: string;
+	nationalId: string;
+	amount: number;
+}
+
+async function processPayment(request: PaymentRequest) {
+	// Validate card number
+	if (!verifyCardNumber(request.cardNumber)) {
+		throw new Error("شماره کارت معتبر نیست");
+	}
+
+	// Get bank information
+	const bankName = getBankNameFromCardNumber(request.cardNumber);
+
+	// Validate national ID
+	if (!verifyIranianNationalId(request.nationalId)) {
+		throw new Error("کد ملی معتبر نیست");
+	}
+
+	// Get user location info
+	const location = getPlaceByIranNationalId(request.nationalId);
+
+	// Process payment logic here...
+
+	return {
+		success: true,
+		bankName,
+		userLocation: location,
+		transactionId: generateTransactionId(),
+	};
+}
+
+function generateTransactionId(): string {
+	return Date.now().toString();
+}
+```
+
+## Text Analysis
+
+### Content Quality Checker
+
+```typescript
+import { textAnalyzer, isPersian, isArabic, halfSpace, toPersianChars } from "persian-tools";
+
+interface ContentAnalysis {
+	originalText: string;
+	processedText: string;
+	statistics: {
+		wordCount: number;
+		characterCount: number;
+		persianPercentage: number;
+	};
+	suggestions: string[];
+}
+
+function analyzeContent(text: string): ContentAnalysis {
+	const suggestions: string[] = [];
+
+	// Normalize text
+	let processedText = toPersianChars(text);
+
+	// Fix half-spaces
+	processedText = halfSpace(processedText);
+
+	// Analyze text
+	const stats = textAnalyzer(processedText);
+
+	// Calculate Persian content percentage
+	const words = processedText.split(/\s+/);
+	const persianWords = words.filter((word) => isPersian(word));
+	const persianPercentage = (persianWords.length / words.length) * 100;
+
+	// Generate suggestions
+	if (persianPercentage < 70) {
+		suggestions.push("محتوا شامل کلمات غیرفارسی زیادی است");
+	}
+
+	if (text !== processedText) {
+		suggestions.push("نویسه‌ها و فاصله‌ها اصلاح شدند");
+	}
+
+	if (stats.word < 100) {
+		suggestions.push("محتوا کوتاه است، توصیه می‌شود حداقل ۱۰۰ کلمه باشد");
+	}
+
+	return {
+		originalText: text,
+		processedText,
+		statistics: {
+			wordCount: stats.word,
+			characterCount: stats.character,
+			persianPercentage: Math.round(persianPercentage),
+		},
+		suggestions,
+	};
+}
+```
+
+## Time & Date Processing
+
+### Relative Time Display
+
+```typescript
+import { timeAgo, remainingTime } from "persian-tools";
+
+interface TimeDisplayProps {
+	timestamp: number;
+	locale?: "fa" | "en";
+}
+
+function formatRelativeTime({ timestamp, locale = "fa" }: TimeDisplayProps) {
+	const now = Date.now();
+
+	if (timestamp < now) {
+		// Past time
+		return timeAgo(timestamp);
+	} else {
+		// Future time
+		return remainingTime(timestamp);
+	}
+}
+
+// Usage examples
+const pastTime = formatRelativeTime({
+	timestamp: Date.now() - 2 * 60 * 60 * 1000, // 2 hours ago
+});
+
+const futureTime = formatRelativeTime({
+	timestamp: Date.now() + 3 * 24 * 60 * 60 * 1000, // 3 days from now
+});
+
+console.log(pastTime); // "۲ ساعت پیش"
+console.log(futureTime); // "۳ روز باقی مانده"
+```
+
+## Geographic Data
+
+### Location Services
+
+```typescript
+import { findCapitalByProvince, findProvinceFromCoordinate, getPlaceByIranNationalId } from "persian-tools";
+
+interface LocationService {
+	getProvinceCapital(province: string): string | null;
+	getLocationFromCoordinates(lat: number, lng: number): string | null;
+	getUserLocationFromNationalId(nationalId: string): any;
+}
+
+class IranLocationService implements LocationService {
+	getProvinceCapital(province: string): string | null {
+		return findCapitalByProvince(province);
+	}
+
+	getLocationFromCoordinates(lat: number, lng: number): string | null {
+		return findProvinceFromCoordinate({ lat, lng });
+	}
+
+	getUserLocationFromNationalId(nationalId: string) {
+		if (!verifyIranianNationalId(nationalId)) {
+			return null;
+		}
+		return getPlaceByIranNationalId(nationalId);
+	}
+}
+
+// Usage
+const locationService = new IranLocationService();
+
+const capital = locationService.getProvinceCapital("تهران");
+console.log(capital); // "تهران"
+
+const province = locationService.getLocationFromCoordinates(35.6892, 51.389);
+console.log(province); // "تهران"
+```
+
+## React Integration
+
+### Custom Hook Example
+
+```typescript
+import { useState, useEffect } from 'react';
+import { numberToWords, addCommas, digitsEnToFa } from '@persian-tools/persian-tools';
+
+interface UsePersianNumberReturn {
+  formatted: string;
+  words: string;
+  persian: string;
+}
+
+function usePersianNumber(value: number): UsePersianNumberReturn {
+  const [result, setResult] = useState<UsePersianNumberReturn>({
+    formatted: '',
+    words: '',
+    persian: ''
+  });
+
+  useEffect(() => {
+    const formatted = addCommas(value);
+    const words = numberToWords(value);
+    const persian = digitsEnToFa(formatted);
+
+    setResult({ formatted, words, persian });
+  }, [value]);
+
+  return result;
+}
+
+// Usage in component
+function PriceComponent({ price }: { price: number }) {
+  const { formatted, words, persian } = usePersianNumber(price);
+
+  return (
+    <div>
+      <div>English: {formatted}</div>
+      <div>Persian: {persian}</div>
+      <div>Words: {words}</div>
+    </div>
+  );
+}
+```
+
+## Next Steps
+
+<CardGroup cols={2}>
+	<Card title="API Reference" icon="book" href="/utilities/numbers/number-to-words">
+		Explore detailed documentation for each utility
+	</Card>
+	<Card title="GitHub Repository" icon="github" href="https://github.com/persian-tools/persian-tools">
+		Browse source code and contribute
+	</Card>
+</CardGroup>

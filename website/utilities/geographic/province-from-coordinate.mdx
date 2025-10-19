@@ -1,0 +1,81 @@
+---
+title: "Find Province from Coordinates"
+description: "Determine the Iranian province from GPS coordinates"
+icon: "map-location-dot"
+---
+
+# Find Province from Coordinates
+
+Find which Iranian province a set of GPS coordinates belongs to.
+
+## Basic Usage
+
+```typescript
+import { findProvinceFromCoordinate } from "@persian-tools/persian-tools";
+
+const province = findProvinceFromCoordinate({ latitude: 35.6892, longitude: 51.389 });
+console.log(province);
+// Output: "تهران"
+```
+
+## API Reference
+
+<ParamField path="coordinates" type="object" required>
+  <Expandable title="properties">
+    <ParamField path="latitude" type="number" required>
+      Latitude coordinate
+    </ParamField>
+
+    <ParamField path="longitude" type="number" required>
+      Longitude coordinate
+    </ParamField>
+
+  </Expandable>
+</ParamField>
+
+<ResponseField name="result" type="string | undefined">
+	Province name in Persian, or `undefined` if location is outside Iran
+</ResponseField>
+
+## Examples
+
+### Location Services
+
+```typescript
+import { findProvinceFromCoordinate } from "@persian-tools/persian-tools";
+
+const getUserProvince = (coords: GeolocationCoordinates) => {
+	const province = findProvinceFromCoordinate({
+		latitude: coords.latitude,
+		longitude: coords.longitude,
+	});
+
+	return province || "نامشخص";
+};
+```
+
+### Store Locator
+
+```typescript
+import { findProvinceFromCoordinate } from "@persian-tools/persian-tools";
+
+const findNearestStore = (userLat: number, userLng: number, stores: any[]) => {
+	const userProvince = findProvinceFromCoordinate({
+		latitude: userLat,
+		longitude: userLng,
+	});
+
+	return stores.filter((store) => store.province === userProvince);
+};
+```
+
+## Type Definition
+
+```typescript
+interface Coordinates {
+	latitude: number;
+	longitude: number;
+}
+
+function findProvinceFromCoordinate(coordinates: Coordinates): string | undefined;
+```

@@ -1,0 +1,14 @@
+default: true
+
+# Exclusions for deliberate/widespread violations
+MD002: false     # First header should be a h1 header
+MD013: false     # Line length
+MD024: false     # Multiple headers with the same content
+MD026: false     # Trailing punctuation in the header
+MD028: false     # Blank line inside a blockquote (docusaurus is treating them as separate blockquotes)
+MD033: false     # Allow inline HTML
+MD041: false     # First line in file should be a top-level header
+MD010: false     # Hard tabs
+MD025: false     # Multiple top-level headings in the same document
+MD040: false     # fenced-code-language Fenced code blocks should have a language specified
+MD036: false     # Emphasis used instead of a heading

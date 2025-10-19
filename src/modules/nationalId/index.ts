@@ -1,4 +1,6 @@
-export const validNationalIdPrefixes = new Set([
+import { isTruthy } from "../../helpers";
+
+export const validNationalIdPrefixes: Set<string> = new Set([
 	"001",
 	"002",
 	"003",
@@ -628,7 +630,7 @@ export const validNationalIdPrefixes = new Set([
 ]);
 
 // **Predefined dictionary** of disallowed repeated-digit sequences.
-export const invalidNationalIdSequences = new Set([
+export const invalidNationalIdSequences: Set<string> = new Set([
 	"0000000000",
 	"1111111111",
 	"2222222222",
@@ -647,13 +649,13 @@ export const invalidNationalIdSequences = new Set([
  * **Logic**:
  * 1. **Check length**: If it's fewer than 8 digits, reject.
  * 2. **Check if parseInt(code) is 0**: If the entire code is "0..." (e.g., "00000000"), reject.
- * 3. **Zero-pad** the code to length 10 using four leading zeros and substring:
- *    - `code = ('0000' + code).substr(length + 4 - 10)`
+ * 3. **Zero-pad** the code to length 10 using four leading zeros and slice:
+ *    - `code = ('0000' + code).slice(length + 4 - 10)`
  *    - This ensures the final string is exactly 10 characters, padded on the left.
  * 4. **Check the 6 middle digits** (index 3..8):
- *    - If `parseInt(code.substr(3, 6))` is `0`, reject.
+ *    - If `parseInt(code.slice(3, 9))` is `0`, reject.
  * 5. **Compute the checksum**:
- *    - Extract the last digit (`c = parseInt(code.substr(9, 1))`).
+ *    - Extract the last digit (`c = parseInt(code.slice(9, 10))`).
  *    - Multiply each of the first 9 digits by descending weights (10 down to 2).
  *    - Take the sum modulo 11.
  *    - Compare the result to the check digit (`c`).
@@ -668,7 +670,7 @@ export function verifyIranianNationalId(
 	nationalId: string | number,
 	options: VerifyIranianNationalIdOptions = { checkPrefix: true },
 ): boolean {
-	if (typeof nationalId === "undefined" || nationalId === null || !nationalId) {
+	if (!isTruthy(nationalId)) {
 		return false;
 	}
 
@@ -686,14 +688,14 @@ export function verifyIranianNationalId(
 	}
 
 	// **Zero-pad** the code to length 10 using the same substring approach:
-	//    - "0000" + code  => ensures at least 4 zeros, then take .substr(length+4-10).
+	//    - "0000" + code => ensures at least 4 zeros, then take .slice(length+4-10).
 	//    - If code is length 8, for example, length+4-10 = 2, so we skip 2 chars from the left
 	//      of "0000" + code => resulting in a 10-digit string.
-	const paddedId = ("0000" + idString).substr(lengthOfId + 4 - 10);
+	const paddedId = ("0000" + idString).slice(lengthOfId + 4 - 10);
 
 	// **Check the 6 middle digits**: parseInt of substring [3..8] => if 0, **return false**.
 	//    - Example: if those 6 digits are "000000", parseInt => 0 => invalid.
-	if (parseInt(paddedId.substr(3, 6), 10) === 0) {
+	if (parseInt(paddedId.slice(3, 9), 10) === 0) {
 		return false;
 	}
 
@@ -707,13 +709,13 @@ export function verifyIranianNationalId(
 	}
 
 	// **Extract the check digit**: the last character in the 10-digit string.
-	const checkDigit = parseInt(paddedId.substr(9, 1), 10);
+	const checkDigit = parseInt(paddedId.slice(9, 10), 10);
 
 	// **Compute the weighted sum** of the first 9 digits.
 	//    - The i-th digit is multiplied by (10 - i).
 	let sum = 0;
 	for (let i = 0; i < 9; i++) {
-		const digit = parseInt(paddedId.substr(i, 1), 10);
+		const digit = parseInt(paddedId.slice(i, i + 1), 10);
 
 		// **Multiply** the digit by the weight (10 - i) and **add** to the sum.
 		sum += digit * (10 - i);
@@ -723,8 +725,8 @@ export function verifyIranianNationalId(
 	sum = sum % 11;
 
 	// **Return** whether the check digit matches:
-	//    - If sum < 2, check digit must be sum.
-	//    - Otherwise, check digit must be 11 - sum.
+	//    - If sum < 2, a check digit must be sum.
+	//    - Otherwise, a check digit must be 11 - sum.
 	return (sum < 2 && checkDigit === sum) || (sum >= 2 && checkDigit === 11 - sum);
 }
 

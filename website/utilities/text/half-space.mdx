@@ -1,0 +1,128 @@
+---
+title: "Half-Space"
+description: "Add proper Persian half-space (ZWNJ) characters for correct typography"
+icon: "grip-lines-vertical"
+---
+
+# Half-Space
+
+Add Persian half-space (Zero-Width Non-Joiner - ZWNJ) characters to text for proper typography.
+
+## Available Functions
+
+- `addHalfSpaceChar` - Add half-spaces to Persian text
+- `removeHalfSpaceChar` - Remove half-spaces from text
+
+## Basic Usage
+
+```typescript
+import { addHalfSpaceChar, removeHalfSpaceChar } from "@persian-tools/persian-tools";
+
+// Add half-spaces
+console.log(addHalfSpaceChar("میخواهم به شما کمک کنم"));
+// Output: "می‌خواهم به شما کمک کنم"
+
+// Remove half-spaces
+console.log(removeHalfSpaceChar("می‌خواهم"));
+// Output: "میخواهم"
+```
+
+## API Reference
+
+<ParamField path="text" type="string" required>
+	Persian text to process
+</ParamField>
+
+<ResponseField name="result" type="string">
+	Text with proper half-spaces added or removed
+</ResponseField>
+
+## Examples
+
+### Content Publishing
+
+```typescript
+import { addHalfSpaceChar } from "@persian-tools/persian-tools";
+
+const prepareForPublish = (content: string): string => {
+	return addHalfSpaceChar(content);
+};
+
+const text = "این کتاب میتواند برای شما مفید باشد";
+console.log(prepareForPublish(text));
+// "این کتاب می‌تواند برای شما مفید باشد"
+```
+
+### Form Data Processing
+
+```typescript
+import { addHalfSpaceChar } from "@persian-tools/persian-tools";
+
+const processArticle = (article: { title: string; content: string }) => {
+	return {
+		title: addHalfSpaceChar(article.title),
+		content: addHalfSpaceChar(article.content),
+	};
+};
+```
+
+## Common Half-Space Patterns
+
+The function automatically adds half-spaces before:
+
+- می (present tense prefix)
+- نمی (negative present prefix)
+- بی (without)
+- تر / ترین (comparative/superlative)
+- ها (plural suffix)
+- های (possessive plural)
+
+```typescript
+addHalfSpaceChar("میرود"); // "می‌رود"
+addHalfSpaceChar("نمیتوانم"); // "نمی‌توانم"
+addHalfSpaceChar("بیحساب"); // "بی‌حساب"
+addHalfSpaceChar("بزرگتر"); // "بزرگ‌تر"
+addHalfSpaceChar("کتابها"); // "کتاب‌ها"
+```
+
+## Use Cases
+
+<AccordionGroup>
+  <Accordion title="Blog Publishing" icon="blog">
+    Ensure correct typography:
+    ```typescript
+    const post = {
+      title: addHalfSpaceChar(rawTitle),
+      body: addHalfSpaceChar(rawBody)
+    };
+    ```
+  </Accordion>
+
+  <Accordion title="E-book Generation" icon="book">
+    Format e-books with proper spacing:
+    ```typescript
+    const chapters = rawChapters.map(chapter => ({
+      ...chapter,
+      content: addHalfSpaceChar(chapter.content)
+    }));
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Related Functions
+
+<CardGroup cols={2}>
+	<Card title="Persian Characters" icon="language" href="/utilities/text/persian-chars">
+		Validate and convert Persian text
+	</Card>
+	<Card title="Slugify" icon="link" href="/utilities/text/slugify">
+		Create URL-safe slugs
+	</Card>
+</CardGroup>
+
+## Type Definition
+
+```typescript
+function addHalfSpaceChar(text: string): string;
+function removeHalfSpaceChar(text: string): string;
+```

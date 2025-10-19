@@ -1,4 +1,6 @@
 import { GeoJSONData } from "./irGeoJSON";
+// Errors
+import { PersianToolsError } from "../../helpers";
 
 interface Point {
 	longitude: number;
@@ -17,8 +19,6 @@ interface Province {
 	fa: string;
 	en: string;
 }
-
-const provinces = GeoJSONData;
 
 function pointInPolygon(polygon: number[][], point: Point): boolean {
 	let isInside = false;
@@ -41,19 +41,19 @@ function pointInPolygon(polygon: number[][], point: Point): boolean {
  * Find the province from a given coordinate point.
  * @param pointToCheck The coordinate point to check.
  * @returns The province information.
- * @throws {Error} If the province cannot be found based on the provided coordinates.
+ * @throws {PersianToolsError} If the province cannot be found based on the provided coordinates.
  * @example
  * const point: Point = { latitude: 35.6892, longitude: 51.3890 };
  * const province = findProvinceFromCoordinate(point);
  * console.log(province.fa); // "تهران"
  * console.log(province.en); // "Tehran"
  * @example
- * const {fa , en} = findProvinceFromCoordinate(point);
+ * const {fa, en} = findProvinceFromCoordinate(point);
  */
 export const findProvinceFromCoordinate = (pointToCheck: Point): Province => {
 	let foundProvince: GeoJSONFeature | undefined;
-	for (let index = 0; index < provinces.features.length; index++) {
-		const province = provinces.features[index];
+	for (let index = 0; index < GeoJSONData.features.length; index++) {
+		const province = GeoJSONData.features[index];
 		const provinceGeometryCoords = province.geometry.coordinates[0][0];
 		const isInsideProvince = pointInPolygon(provinceGeometryCoords, pointToCheck);
 		if (isInsideProvince) {
@@ -62,12 +62,11 @@ export const findProvinceFromCoordinate = (pointToCheck: Point): Province => {
 		}
 	}
 	if (foundProvince) {
-		const normalizedProvinceObject: Province = {
+		return {
 			fa: foundProvince.properties.name || "",
 			en: foundProvince.properties["name:en"] || "",
 		};
-		return normalizedProvinceObject;
 	} else {
-		throw new Error("Could not find province based on provided coordinates !");
+		throw new PersianToolsError("findProvinceFromCoordinate", "Could not find province based on provided coordinates!");
 	}
 };

@@ -1,0 +1,124 @@
+---
+title: "Slugify"
+description: "Generate URL-safe slugs from Persian text"
+icon: "link"
+---
+
+# Slugify
+
+Generate URL-safe, SEO-friendly slugs from Persian text.
+
+## Basic Usage
+
+```typescript
+import { slugify } from "@persian-tools/persian-tools";
+
+console.log(slugify("معرفی محصولات جدید"));
+// Output: "معرفی-محصولات-جدید"
+
+console.log(slugify("راهنمای خرید سریع!"));
+// Output: "راهنمای-خرید-سریع"
+```
+
+## API Reference
+
+<ParamField path="text" type="string" required>
+	Persian text to convert to slug
+</ParamField>
+
+<ResponseField name="result" type="string">
+	URL-safe slug with hyphens separating words
+</ResponseField>
+
+## Examples
+
+### Blog Post URLs
+
+```typescript
+import { slugify } from "@persian-tools/persian-tools";
+
+const createBlogUrl = (title: string, id: number): string => {
+	const slug = slugify(title);
+	return `/blog/${id}/${slug}`;
+};
+
+console.log(createBlogUrl("آموزش برنامه نویسی", 123));
+// "/blog/123/آموزش-برنامه-نویسی"
+```
+
+### Product URLs
+
+```typescript
+import { slugify } from "@persian-tools/persian-tools";
+
+interface Product {
+	id: number;
+	name: string;
+	category: string;
+}
+
+const generateProductUrl = (product: Product): string => {
+	const categorySlug = slugify(product.category);
+	const nameSlug = slugify(product.name);
+	return `/products/${categorySlug}/${nameSlug}-${product.id}`;
+};
+
+const product = {
+	id: 456,
+	name: "گوشی هوشمند",
+	category: "الکترونیک",
+};
+
+console.log(generateProductUrl(product));
+// "/products/الکترونیک/گوشی-هوشمند-456"
+```
+
+### Clean Special Characters
+
+```typescript
+import { slugify } from "@persian-tools/persian-tools";
+
+console.log(slugify("نقد و بررسی: بهترین لپ‌تاپ‌ها!"));
+// "نقد-و-بررسی-بهترین-لپ-تاپ-ها"
+
+console.log(slugify("قیمت (ویژه) محصول"));
+// "قیمت-ویژه-محصول"
+```
+
+## Use Cases
+
+<AccordionGroup>
+  <Accordion title="Content Management" icon="file-lines">
+    Generate SEO-friendly URLs:
+    ```typescript
+    const post = {
+      title: 'معرفی فناوری جدید',
+      slug: slugify('معرفی فناوری جدید')
+    };
+    ```
+  </Accordion>
+
+  <Accordion title="E-commerce" icon="cart-shopping">
+    Create product URLs:
+    ```typescript
+    const productUrl = `/shop/${slugify(category)}/${slugify(productName)}`;
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Related Functions
+
+<CardGroup cols={2}>
+	<Card title="Persian Characters" icon="language" href="/utilities/text/persian-chars">
+		Validate Persian text
+	</Card>
+	<Card title="URL Fix" icon="globe" href="/utilities/text/url-fix">
+		Decode Persian URLs
+	</Card>
+</CardGroup>
+
+## Type Definition
+
+```typescript
+function slugify(text: string): string;
+```

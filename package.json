@@ -1,45 +1,64 @@
 {
 	"name": "@persian-tools/persian-tools",
+	"description": "A comprehensive, high-performance TypeScript toolkit for Persian (Farsi) text, numbers, validation, and locale utilities — works in Node.js, Bun, and the browser.",
 	"version": "4.0.4",
-	"description": "An anthology of a variety of tools for Persian language in javascript",
+	"files": [
+		"./build"
+	],
+	"module": "./build/index.mjs",
+	"main": "./build/index.js",
+	"types": "./build/index.d.ts",
 	"exports": {
 		".": {
 			"import": {
-				"types": "./build/persian-tools.d.mts",
-				"default": "./build/persian-tools.mjs"
+				"types": "./build/index.d.mts",
+				"default": "./build/index.mjs"
 			},
 			"require": {
-				"types": "./build/persian-tools.d.cts",
-				"default": "./build/persian-tools.cjs"
+				"types": "./build/index.d.ts",
+				"default": "./build/index.js"
 			}
-		}
+		},
+		"./package.json": "./package.json"
 	},
-	"files": [
-		"build"
-	],
-	"sideEffect": false,
+	"sideEffects": false,
 	"scripts": {
-		"build": "unbuild",
-		"build:watch": "unbuild --watch",
-		"test": "vitest run",
-		"test:watch": "vitest watch",
-		"test:ui": "pnpm run test:watch --ui",
-		"coverage": "vitest run --coverage",
-		"coverage:ui": "vitest watch --coverage --ui",
+		"prepack": "bun run build",
+		"prebuild": "bun run clean",
+		"build": "bunup",
+		"postbuild": "bun run test:size",
+		"dev": "bun --watch --hot src/index.ts",
+		"dev:debug": "bun --debug --watch --hot --inspect --inspect-brk src/index.ts",
+		"clean": "bunx rimraf build",
+		"clean:all": "bunx rimraf build node_modules",
+		"test": "CI=true vitest",
+		"test:types": "tsc --noEmit",
+		"test:size": "size-limit",
+		"test:junit": "bun run test --reporter=junit --outputFile=test-report.junit.xml",
+		"test:watch": "bun run test --watch",
+		"test:ui": "bun run test --ui --coverage.enabled=true",
+		"test:bench": "cross-env CI=true vitest bench",
+		"test:coverage": "bun run test run --coverage",
+		"test:debug": "vitest --inspect-brk --pool forks --poolOptions.forks.singleFork",
+		"test:debug:watch": "bun run test:debug --watch --poolOptions.threads.isolate false",
 		"lint": "eslint ./src",
-		"lint:fix": "pnpm run lint --fix",
-		"prerelease": "pnpm run test && pnpm run build",
-		"release": "standard-version && pnpm run generate:docs",
-		"postrelease": "git push --follow-tags origin master && npm publish",
-		"release:beta": "pnpm run build",
+		"lint:fix": "bun run lint --fix",
+		"lint:markdown": "markdownlint ./website/**/*.{md,mdx} --ignore node_modules",
+		"lint:markdown:fix": "markdownlint ./website/**/*.{md,mdx} --ignore node_modules --fix",
+		"format": "prettier --write '{src,website,.github}/**/*.{ts,json,js,mdx,yaml,yml}'",
+		"format:check": "prettier --check '{src,website,.github}/**/*.{ts,json,js,mdx,yaml,yml}'",
+		"format:ci": "prettier --list-different '{src,website,.github}/**/*.{ts,json,js,mdx,yaml,yml}'",
+		"prerelease": "bun run test && bun run build",
+		"release": "standard-version",
+		"postrelease": "git push --follow-tags origin master && bun run publish",
+		"release:beta": "bun run build",
 		"postrelease:beta": "standard-version --prerelease beta",
-		"prettier": "prettier --write 'src/**/*.{ts,json,js}' --config .prettierrc.js",
-		"prettier:ci": "prettier --list-different 'src/**/*.{ts,json,js}' --config .prettierrc.js",
 		"generate:docs": "make publish-docs",
-		"prepare": "pnpm dlx is-ci || husky || true"
-	},
-	"directories": {
-		"test": "tests"
+		"prepare": "bunx is-ci || husky || true",
+		"contributors:add": "all-contributors add",
+		"contributors:check": "all-contributors check",
+		"contributors:generate": "all-contributors generate",
+		"deps-upgrade": "bun update -i --latest"
 	},
 	"repository": {
 		"type": "git",
@@ -60,19 +79,28 @@
 		"Persian half-space",
 		"Persian digits convertor"
 	],
-	"author": "Ali Torki <ali_4286@live.com>",
+	"author": {
+		"name": "Ali Torki",
+		"email": "ali_4286@live.com",
+		"url": "https://github.com/ali-master"
+	},
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/persian-tools/persian-tools/issues"
+		"url": "https://github.com/persian-tools/persian-tools/issues",
+		"email": "ali_4286@live.com"
 	},
-	"homepage": "https://persian-tools.github.io/persian-tools",
+	"homepage": "https://persian-tools.usestrict.dev",
 	"devDependencies": {
 		"@commitlint/cli": "^20.1.0",
 		"@commitlint/config-conventional": "^20.0.0",
-		"@eslint/js": "^9.36.0",
+		"@eslint/js": "^9.37.0",
+		"@size-limit/file": "^11.2.0",
+		"@types/bun": "^1.3.0",
 		"@vitest/coverage-v8": "^3.2.4",
 		"@vitest/ui": "^3.2.4",
-		"eslint": "^9.36.0",
+		"all-contributors-cli": "^6.26.1",
+		"bunup": "^0.14.20",
+		"eslint": "^9.37.0",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-import-resolver-typescript": "^4.4.4",
 		"eslint-plugin-import": "^2.32.0",
@@ -81,14 +109,15 @@
 		"eslint-plugin-security": "^3.0.1",
 		"globals": "^16.4.0",
 		"husky": "^9.1.7",
+		"markdownlint-cli": "^0.45.0",
 		"prettier": "^3.6.2",
 		"prettier-eslint": "^16.4.2",
+		"size-limit": "^11.2.0",
 		"standard-version": "^9.5.0",
-		"typedoc": "^0.28.13",
-		"typescript": "^5.9.2",
-		"typescript-eslint": "^8.45.0",
-		"unbuild": "^3.6.1",
-		"vite": "^7.1.7",
+		"typedoc": "^0.28.14",
+		"typescript": "^5.9.3",
+		"typescript-eslint": "^8.46.1",
+		"vite": "^7.1.10",
 		"vitest": "^3.2.4"
 	},
 	"dependencies": {
@@ -101,9 +130,9 @@
 	"engines": {
 		"node": ">=14",
 		"npm": ">=7.0.0",
-		"pnpm": ">=9.0.0"
+		"bun": ">=1.0.0"
 	},
-	"packageManager": "pnpm@10.17.1",
+	"packageManager": "bun@1.3.0",
 	"publishConfig": {
 		"access": "public"
 	}

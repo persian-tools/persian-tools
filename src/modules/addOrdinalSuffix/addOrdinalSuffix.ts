@@ -1,3 +1,5 @@
+import { isString } from "../../helpers";
+
 /**
  * Add Ordinal suffix to numbers
  * @method addOrdinalSuffix
@@ -5,7 +7,7 @@
  * @return A string of ordinated number
  */
 export const addOrdinalSuffix = (number?: string): string => {
-	if (typeof number !== "string") {
+	if (!isString(number)) {
 		throw new TypeError("PersianTools: addOrdinalSuffix - The input must be string");
 	}
 

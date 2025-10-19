@@ -1,6 +1,8 @@
 import { isPersian } from "../isPersian";
-import { toPersianChars } from "../toPersianChars";
 import { digitsEnToFa } from "../digits";
+import { isString } from "../../helpers";
+import { toPersianChars } from "../toPersianChars";
+// Constants
 import {
 	PERSIAN_PUNCTUATION,
 	ARABIC_PUNCTUATION,
@@ -9,7 +11,7 @@ import {
 	PERSIAN_CONSONANTS,
 	DIACRITICS,
 	ARABIC_SPECIFIC_CHARS,
-	STOPWORDS,
+	PERSIAN_STOP_WORDS,
 	FORMAL_INDICATORS,
 	INFORMAL_INDICATORS,
 	TECHNICAL_INDICATORS,
@@ -129,7 +131,7 @@ export interface TextAnalyzerOptions {
 }
 
 export function analyzeText(text: string, options: TextAnalyzerOptions = {}): TextAnalysisResult {
-	if (!text || typeof text !== "string") {
+	if (!text || !isString(text)) {
 		throw new Error("textAnalyzer: Input must be a non-empty string");
 	}
 
@@ -148,16 +150,14 @@ export function analyzeText(text: string, options: TextAnalyzerOptions = {}): Te
 
 	const statistics = calculateStatistics(cleanedText);
 	const ratios = calculateRatios(statistics);
-	const readability = includeReadability
-		? calculateReadability(cleanedText, statistics, wordsPerMinute)
-		: getDefaultReadability();
+	const readability =
+		includeReadability ? calculateReadability(cleanedText, statistics, wordsPerMinute) : getDefaultReadability();
 	const language = detectLanguage(cleanedText, statistics);
 	const sentiment = includeSentiment ? analyzeSentiment(cleanedText) : getDefaultSentiment();
 	const keywords = includeKeywords ? analyzeKeywords(cleanedText, keywordLimit) : getDefaultKeywords();
 	const style = includeStyle ? analyzeStyle(cleanedText, statistics) : getDefaultStyle();
-	const suggestions = includeSuggestions
-		? generateSuggestions(cleanedText, language, statistics, sentiment, style)
-		: [];
+	const suggestions =
+		includeSuggestions ? generateSuggestions(cleanedText, language, statistics, sentiment, style) : [];
 	const quality = assessQuality(statistics, readability, language);
 
 	return {
@@ -193,16 +193,16 @@ function calculateStatistics(text: string): TextStatistics {
 			spaces++;
 		} else if (/[0-9۰-۹]/.test(char)) {
 			numbers++;
-		} else if (DIACRITICS.includes(char)) {
+		} else if (DIACRITICS.has(char)) {
 			diacritics++;
 		} else if (PERSIAN_VOWELS.includes(char)) {
 			vowels++;
 			persianChars++;
-		} else if (PERSIAN_CONSONANTS.includes(char)) {
+		} else if (PERSIAN_CONSONANTS.has(char)) {
 			consonants++;
 			persianChars++;
 		} else if (/[\u0600-\u06FF]/.test(char)) {
-			if (ARABIC_SPECIFIC_CHARS.includes(char)) {
+			if (ARABIC_SPECIFIC_CHARS.has(char)) {
 				arabicChars++;
 			} else {
 				persianChars++;
@@ -363,10 +363,10 @@ function analyzeSentiment(text: string): SentimentAnalysis {
 	};
 
 	for (const word of words) {
-		if (SENTIMENT_POSITIVE.includes(word)) {
+		if (SENTIMENT_POSITIVE.has(word)) {
 			positiveScore++;
 		}
-		if (SENTIMENT_NEGATIVE.includes(word)) {
+		if (SENTIMENT_NEGATIVE.has(word)) {
 			negativeScore++;
 		}
 
@@ -413,7 +413,7 @@ function analyzeKeywords(text: string, limit: number): KeywordAnalysis {
 
 	// Count word frequencies
 	for (const word of words) {
-		if (!STOPWORDS.includes(word)) {
+		if (!PERSIAN_STOP_WORDS.has(word)) {
 			wordFreq[word] = (wordFreq[word] || 0) + 1;
 		}
 	}
@@ -425,7 +425,7 @@ function analyzeKeywords(text: string, limit: number): KeywordAnalysis {
 
 	const keywords = mostFrequentWords.map((item) => item.word);
 
-	const technicalTerms = words.filter((word) => TECHNICAL_INDICATORS.includes(word));
+	const technicalTerms = words.filter((word) => TECHNICAL_INDICATORS.has(word));
 
 	// Simple entity extraction (proper nouns - words starting with capital letters)
 	const entities = text
@@ -452,13 +452,13 @@ function analyzeStyle(text: string, stats: TextStatistics): StyleAnalysis {
 	let informalScore = 0;
 
 	for (const word of words) {
-		if (FORMAL_INDICATORS.includes(word)) {
+		if (FORMAL_INDICATORS.has(word)) {
 			formalScore++;
 		}
-		if (TECHNICAL_INDICATORS.includes(word)) {
+		if (TECHNICAL_INDICATORS.has(word)) {
 			technicalScore++;
 		}
-		if (INFORMAL_INDICATORS.includes(word)) {
+		if (INFORMAL_INDICATORS.has(word)) {
 			informalScore++;
 		}
 	}
@@ -640,8 +640,8 @@ function calculateFormalityLevel(text: string): "رسمی" | "غیررسمی" | 
 	let informalCount = 0;
 
 	for (const word of words) {
-		if (FORMAL_INDICATORS.includes(word)) formalCount++;
-		if (INFORMAL_INDICATORS.includes(word)) informalCount++;
+		if (FORMAL_INDICATORS.has(word)) formalCount++;
+		if (INFORMAL_INDICATORS.has(word)) informalCount++;
 	}
 
 	if (formalCount > informalCount) return "رسمی";

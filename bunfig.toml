@@ -1,0 +1,13 @@
+smol = true
+telemetry = false
+
+[install]
+saveTextLockfile = true
+auto = "auto"
+# Only install package versions published at least 3 days ago
+minimumReleaseAge = 259200
+# These packages will bypass the 3-day minimum age requirement
+minimumReleaseAgeExcludes = ["@types/bun", "typescript"]
+
+[install.lockfile]
+save = true

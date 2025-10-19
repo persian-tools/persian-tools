@@ -83,6 +83,12 @@ export const TYPO_LIST = new Map<string, string>([
 ]);
 
 /**
+ * **Create** a pattern by joining all map keys with "|", then use case-insensitive match.
+ * @since 5.0.0
+ */
+export const TYPO_PATTERN = new RegExp(Array.from(TYPO_LIST.keys()).join("|"), "gi");
+
+/**
  * **UNIT_KEYS**, **TEN_KEYS**, and **MAGNITUDE_KEYS**:
  * Array forms of each Map's keys.
  */

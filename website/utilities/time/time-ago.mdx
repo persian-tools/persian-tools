@@ -1,0 +1,80 @@
+---
+title: "Time Ago"
+description: "Convert timestamps to Persian relative time strings"
+icon: "clock-rotate-left"
+---
+
+# Time Ago
+
+Convert timestamps to human-readable Persian relative time strings (e.g., "5 دقیقه پیش").
+
+## Basic Usage
+
+```typescript
+import { timeAgo } from "@persian-tools/persian-tools";
+
+const date = new Date("2024-10-14T10:00:00");
+console.log(timeAgo(date));
+// Output: "5 ساعت پیش" (example output)
+```
+
+## API Reference
+
+<ParamField path="date" type="Date | number" required>
+	Date object or timestamp to convert
+</ParamField>
+
+<ResponseField name="result" type="string">
+	Relative time string in Persian
+</ResponseField>
+
+## Examples
+
+### Social Media Posts
+
+```typescript
+import { timeAgo, digitsEnToFa } from "@persian-tools/persian-tools";
+
+const formatPostTime = (postDate: Date): string => {
+	const relative = timeAgo(postDate);
+	return digitsEnToFa(relative);
+};
+
+const post = { createdAt: new Date("2024-10-14T09:00:00") };
+console.log(formatPostTime(post.createdAt));
+// "۱ ساعت پیش"
+```
+
+### Comment Timestamps
+
+```typescript
+import { timeAgo } from "@persian-tools/persian-tools";
+
+interface Comment {
+	text: string;
+	timestamp: Date;
+}
+
+const displayComment = (comment: Comment) => ({
+	text: comment.text,
+	time: timeAgo(comment.timestamp),
+});
+```
+
+## Time Ranges
+
+The function returns appropriate Persian phrases for:
+
+- Seconds: "چند لحظه پیش"
+- Minutes: "X دقیقه پیش"
+- Hours: "X ساعت پیش"
+- Days: "X روز پیش"
+- Weeks: "X هفته پیش"
+- Months: "X ماه پیش"
+- Years: "X سال پیش"
+
+## Type Definition
+
+```typescript
+function timeAgo(date: Date | number): string;
+```

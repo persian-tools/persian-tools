@@ -1,0 +1,454 @@
+name: CI/CD Pipeline
+
+on:
+  pull_request:
+    branches: [master, develop, "release/**"]
+    types: [opened, synchronize, reopened, ready_for_review]
+  push:
+    branches: [master, develop]
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      debug_enabled:
+        type: boolean
+        description: "Enable debug logging"
+        required: false
+        default: false
+  schedule:
+    - cron: "0 2 * * 1" # Weekly dependency check
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/master' }}
+
+env:
+  NODE_ENV: ci
+  FORCE_COLOR: 3
+  BUN_VERSION: "latest"
+  NODE_VERSION: "20"
+  PNPM_VERSION: "8"
+
+permissions:
+  contents: read
+  checks: write
+  pull-requests: write
+  security-events: write
+  issues: write
+  packages: write
+
+jobs:
+  # ========================================
+  # CHANGE DETECTION
+  # ========================================
+  changes:
+    name: 🔍 Detect Changes
+    runs-on: ubuntu-latest
+    outputs:
+      src: ${{ steps.changes.outputs.src }}
+      tests: ${{ steps.changes.outputs.tests }}
+      deps: ${{ steps.changes.outputs.deps }}
+      docs: ${{ steps.changes.outputs.docs }}
+      ci: ${{ steps.changes.outputs.ci }}
+      config: ${{ steps.changes.outputs.config }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 2
+
+      - uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          base: ${{ github.ref }}
+          filters: |
+            src:
+              - 'src/**'
+              - '*.ts'
+              - '*.js'
+            tests:
+              - 'test/**'
+              - '**/*.test.ts'
+              - '**/*.spec.ts'
+              - 'vitest.config.ts'
+            deps:
+              - 'package.json'
+              - 'bun.lockb'
+              - 'pnpm-lock.yaml'
+              - 'package-lock.json'
+              - 'yarn.lock'
+            docs:
+              - '**.md'
+              - 'website/**'
+              - 'images/**'
+            ci:
+              - '.github/**'
+            config:
+              - 'tsconfig.json'
+              - 'bunfig.toml'
+              - '.bun-version'
+              - '.nvmrc'
+              - '.prettierrc*'
+              - '.eslintrc*'
+
+  # ========================================
+  # SECURITY & COMPLIANCE
+  # ========================================
+  security:
+    name: 🔒 Security Audit
+    runs-on: ubuntu-latest
+    if: github.event_name != 'schedule' || github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+
+      - name: 🔧 Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: 📦 Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.bun/install/cache
+            ~/.npm
+            ~/.cache
+          key: ${{ runner.os }}-deps-${{ hashFiles('**/bun.lockb', '**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-deps-
+
+      - name: 🔍 Audit Bun dependencies
+        run: |
+          if [ -f "bun.lockb" ]; then
+            bun audit || true
+          fi
+        continue-on-error: true
+
+      - name: 🔍 Audit npm dependencies
+        run: |
+          if [ -f "package-lock.json" ]; then
+            npm audit --audit-level=moderate || true
+          fi
+        continue-on-error: true
+
+      - name: 🛡️ Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: "fs"
+          scan-ref: "."
+          format: "sarif"
+          output: "trivy-results.sarif"
+          severity: "CRITICAL,HIGH"
+
+      - name: 📋 Upload Trivy results to GitHub Security
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: "trivy-results.sarif"
+
+      - name: 📋 Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: typescript, javascript
+          queries: security-and-quality
+
+      - name: 🏗️ Auto build
+        uses: github/codeql-action/autobuild@v3
+
+      - name: 🔬 Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:typescript"
+
+      - name: 🔐 Check for secrets
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
+          head: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+          extra_args: --debug --only-verified --fail
+        continue-on-error: true
+
+      - name: 🔐 Fallback filesystem scan for secrets
+        if: failure() || github.event_name == 'push'
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          extra_args: --debug --only-verified --fail --no-verification
+        continue-on-error: true
+
+  # ========================================
+  # CODE QUALITY & LINTING
+  # ========================================
+  lint:
+    name: 🎨 Code Quality
+    runs-on: ubuntu-latest
+    needs: changes
+    if: |
+      needs.changes.outputs.src == 'true' ||
+      needs.changes.outputs.tests == 'true' ||
+      needs.changes.outputs.config == 'true' ||
+      needs.changes.outputs.docs == 'true' ||
+      github.event_name == 'workflow_dispatch'
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: 🔧 Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: 📦 Restore dependency cache
+        uses: actions/cache@v4
+        id: cache
+        with:
+          path: |
+            ~/.bun/install/cache
+            node_modules
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}-
+            ${{ runner.os }}-bun-
+
+      - name: 📦 Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: bun install --frozen-lockfile
+
+      - name: 🔍 Run ESLint
+        if: hashFiles('.eslintrc*') != ''
+        run: |
+          if command -v eslint &> /dev/null; then
+            bun run lint
+          fi
+        continue-on-error: true
+
+      - name: 🎨 Check code formatting
+        run: |
+          if [ -f ".prettierrc" ] || [ -f ".prettierrc.json" ] || [ -f ".prettierrc.js" ]; then
+            bun run format:check || true
+          fi
+
+      - name: 📝 Lint Markdown files
+        if: needs.changes.outputs.docs == 'true' || github.event_name == 'workflow_dispatch'
+        run: |
+          if command -v markdownlint &> /dev/null || [ -f "node_modules/.bin/markdownlint" ]; then
+            bun run lint:markdown
+          else
+            echo "⚠️ markdownlint not found, skipping markdown linting"
+          fi
+        continue-on-error: true
+
+      - name: 💪 Type checking
+        run: |
+          if [ -f "tsconfig.json" ]; then
+            bun run test:types || bun tsc --noEmit
+          fi
+
+      - name: 🛠️ Build project
+        run: bun run build
+        env:
+          NODE_ENV: production
+
+      - name: 📊 Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-${{ github.sha }}
+          path: |
+            build/
+          retention-days: 7
+          compression-level: 9
+
+      - name: 📈 SonarCloud Scan
+        if: github.event_name == 'pull_request' && github.actor != 'dependabot[bot]'
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        continue-on-error: true
+
+  # ========================================
+  # TESTING
+  # ========================================
+  test:
+    name: 🧪 Test (${{ matrix.os }}, ${{ matrix.runtime }}-${{ matrix.version }})
+    runs-on: ${{ matrix.os }}
+    needs: [changes, lint]
+    if: |
+      needs.changes.outputs.src == 'true' ||
+      needs.changes.outputs.tests == 'true' ||
+      github.event_name == 'workflow_dispatch'
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        runtime: [bun, node]
+        version: ["latest", "lts"]
+        exclude:
+          - runtime: bun
+            version: lts
+          - os: windows-latest
+            runtime: bun
+        include:
+          - os: ubuntu-latest
+            runtime: node
+            version: "18"
+            coverage: true
+
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: 🔧 Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ matrix.version }}
+
+      - name: 🔧 Setup Node.js
+        if: matrix.runtime == 'node'
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.version == 'latest' && '21' || matrix.version == 'lts' && '20' || matrix.version }}
+
+      - name: 📦 Get package manager
+        id: pm
+        run: |
+          if [ "${{ matrix.runtime }}" == "bun" ]; then
+            echo "cmd=bun" >> $GITHUB_OUTPUT
+            echo "cache=~/.bun/install/cache" >> $GITHUB_OUTPUT
+          else
+            echo "cmd=npm" >> $GITHUB_OUTPUT
+            echo "cache=~/.npm" >> $GITHUB_OUTPUT
+          fi
+        shell: bash
+
+      - name: 📦 Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ steps.pm.outputs.cache }}
+            node_modules
+          key: ${{ runner.os }}-${{ matrix.runtime }}-${{ matrix.version }}-${{ hashFiles('**/package.json', '**/bun.lockb', '**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.runtime }}-${{ matrix.version }}-
+            ${{ runner.os }}-${{ matrix.runtime }}-
+
+      - name: 📦 Install dependencies
+        run: |
+          if [ "${{ matrix.runtime }}" == "bun" ]; then
+            bun install --frozen-lockfile
+          else
+            npm ci || npm install
+          fi
+        shell: bash
+
+      - name: 🛠️ Build project
+        run: ${{ steps.pm.outputs.cmd }} run build
+
+      - name: 🧪 Run unit tests
+        run: ${{ steps.pm.outputs.cmd }} test
+        env:
+          CI: true
+          NODE_ENV: test
+
+      - name: 🧪 Run unit tests with coverage
+        if: matrix.coverage
+        run: ${{ steps.pm.outputs.cmd }} run test:coverage
+        env:
+          CI: true
+
+      - name: 📊 Generate test report
+        if: always()
+        run: |
+          if [ -f "package.json" ] && grep -q "test:junit" package.json; then
+            ${{ steps.pm.outputs.cmd }} run test:junit || true
+          fi
+        shell: bash
+        continue-on-error: true
+
+      - name: 📈 Upload test results
+        if: always() && matrix.coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ matrix.os }}-${{ matrix.runtime }}-${{ matrix.version }}
+          path: |
+            coverage/
+            test-results/
+            *.xml
+          retention-days: 7
+
+      - name: 🟩 Upload coverage to Codecov
+        if: matrix.coverage && !cancelled()
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/lcov.info,./coverage/coverage-final.json
+          flags: unittests
+          name: codecov-${{ matrix.os }}-${{ matrix.runtime }}
+          fail_ci_if_error: false
+          verbose: true
+          slug: persian-tools/persian-tools
+
+  # ========================================
+  # SUMMARY & NOTIFICATIONS
+  # ========================================
+  summary:
+    name: 📊 Pipeline Summary
+    runs-on: ubuntu-latest
+    needs: [lint, test, security]
+    if: always()
+
+    steps:
+      - name: 📊 Generate summary
+        run: |
+          echo "## 🚀 CI/CD Pipeline Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # Status badges
+          echo "### Status" >> $GITHUB_STEP_SUMMARY
+          echo "| Job | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| 🎨 Lint | ${{ needs.lint.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🧪 Tests | ${{ needs.test.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🔒 Security | ${{ needs.security.result }} |" >> $GITHUB_STEP_SUMMARY
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Details" >> $GITHUB_STEP_SUMMARY
+          echo "- **Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Runner**: ${{ runner.os }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Triggered by**: ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Event**: ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
+
+      - name: 💬 Comment on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const summary = `
+            ## 🚀 CI/CD Pipeline Results
+
+            | Check | Status |
+            |-------|--------|
+            | 🎨 Code Quality | ${{ needs.lint.result }} |
+            | 🧪 Tests | ${{ needs.test.result }} |
+            | 🔒 Security | ${{ needs.security.result }} |
+
+            [View full details](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            `;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: summary
+            });

@@ -1,9 +1,9 @@
 prepare-release:
-	pnpm install
-	pnpm lint
-	pnpm prettier:ci
-	pnpm test
-	pnpm build
+	bun install
+	bun run lint
+	bun run format:ci
+	bun run test
+	bun run build
 .PHONY: prepare-release
 
 build-docs:
