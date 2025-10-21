@@ -43,9 +43,9 @@ console.log(result); // Unexpected output
 
 <!-- Please complete the following information -->
 
-- **Persian Tools Version**: [e.g., 4.0.4] (run `npm list @persian-tools/persian-tools`)
+- **Persian Tools Version**: [e.g., 4.0.4] (run `bun list @persian-tools/persian-tools`)
 - **Node.js Version**: [e.g., 20.10.0] (run `node --version`)
-- **Package Manager**: [e.g., npm, yarn, pnpm, bun]
+- **Package Manager**: [e.g., bun, npm, yarn, pnpm]
 - **Operating System**: [e.g., Windows 10, macOS 14, Ubuntu 22.04]
 - **Runtime Environment**: [e.g., Node.js, Browser, Bun]
 - **TypeScript Version** (if applicable): [e.g., 5.3.3]

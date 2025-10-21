@@ -43,11 +43,11 @@ function newFunction(input: string, options?: Options): Result;
 
 // Types
 interface Options {
-	// Optional parameters
+  // Optional parameters
 }
 
 interface Result {
-	// Return type
+  // Return type
 }
 ```
 

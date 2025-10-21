@@ -18,12 +18,13 @@ Before asking for help, please check our comprehensive documentation:
 If you encounter problems installing Persian Tools:
 
 ```bash
-# Clear npm cache
+# Clear bun cache
+bun pm cache rm
+bun install @persian-tools/persian-tools
+
+# Or fallback to npm if needed
 npm cache clean --force
 npm install @persian-tools/persian-tools
-
-# Or with Bun
-bun install @persian-tools/persian-tools
 ```
 
 ### TypeScript Issues
@@ -31,7 +32,7 @@ bun install @persian-tools/persian-tools
 Ensure you have TypeScript >= 4.0 installed:
 
 ```bash
-npm install -D typescript@latest
+bun add -d typescript@latest
 ```
 
 ### Build Issues
@@ -40,9 +41,9 @@ If the build fails:
 
 ```bash
 # Clean and reinstall
-rm -rf node_modules package-lock.json
-npm install
-npm run build
+rm -rf node_modules bun.lockb
+bun install
+bun run build
 ```
 
 ## 💬 Getting Help
@@ -98,13 +99,14 @@ For general questions, please use GitHub Discussions or Stack Overflow.
 
 When reporting bugs, include:
 
-1. **Persian Tools version**: Check with `npm list @persian-tools/persian-tools`
+1. **Persian Tools version**: Check with `bun list @persian-tools/persian-tools`
 2. **Node.js version**: Run `node --version`
 3. **Operating System**: Your OS and version
-4. **Minimal reproduction**: A simple code example that demonstrates the bug
-5. **Expected behavior**: What you expected to happen
-6. **Actual behavior**: What actually happened
-7. **Error messages**: Full error messages and stack traces
+4. **Package Manager**: bun, npm, yarn, etc.
+5. **Minimal reproduction**: A simple code example that demonstrates the bug
+6. **Expected behavior**: What you expected to happen
+7. **Actual behavior**: What actually happened
+8. **Error messages**: Full error messages and stack traces
 
 Use our [bug report template](.github/ISSUE_TEMPLATE/bug_report.md).
 
@@ -126,7 +128,7 @@ Want to contribute? We'd love your help!
 
 See our [Contributing Guide](CONTRIBUTING.md) for:
 - Code style guidelines
-- Development setup
+- Development setup (using bun)
 - Pull request process
 - Testing requirements
 
@@ -186,5 +188,9 @@ This project is maintained by volunteers in their free time. While we strive to 
 Thank you for your patience and understanding! 🙏
 
 ---
+
+
+**Package Manager**: This project uses [Bun](https://bun.sh/) for fast, reliable package management and development.
+
 
 **Made with ❤️ by the Persian developer community**
