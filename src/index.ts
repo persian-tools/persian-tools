@@ -25,3 +25,4 @@ export * from "./modules/findCapitalByProvince";
 export * from "./modules/findProvinceFromCoordinate";
 export * from "./modules/slugify";
 export * from "./modules/textAnalyzer";
+export * from "./moneyWordsToNumber";
