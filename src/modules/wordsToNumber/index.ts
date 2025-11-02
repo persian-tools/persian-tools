@@ -95,10 +95,10 @@ function compute(tokens: string[]): number {
 		// **Otherwise**, assume it's a magnitude (e.g., "هزار" => 1000, "میلیون" => 1000000).
 		const magnitudeValue: number | undefined = MAGNITUDE.get(token);
 		if (magnitudeValue !== undefined) {
-			// If group == 0, treat it as 1. E.g., "هزار" => 1*1000 => 1000
+			// If the group == 0, treat it as 1. E.g., "هزار" => 1*1000 => 1000
 			group = (group === 0 ? 1 : group) * magnitudeValue;
 
-			// Add the group's chunk to total sum, reset group
+			// Add the group's chunk to a total sum, reset the group
 			sum += group;
 			group = 0;
 		}
@@ -138,13 +138,23 @@ function compute(tokens: string[]): number {
  *   // => "١,٥٠٠,٠٠٠"
  * ```
  */
-export function wordsToNumber<TResult extends string | number>(
+
+// **Overload**: When addCommas is true, the return type is always string
+export function wordsToNumber(words: string, config: WordsToNumberOptions & { addCommas: true }): string;
+
+// **Overload**: When digits are "fa" or "ar", the return type is always string
+export function wordsToNumber(words: string, config: WordsToNumberOptions & { digits: "fa" | "ar" }): string;
+
+// **Overload**: When digits are "en" (or undefined) and addCommas is false (or undefined), the return type is number
+export function wordsToNumber(
 	words: string,
-	config: WordsToNumberOptions = {},
-): TResult {
+	config?: WordsToNumberOptions & { digits?: "en"; addCommas?: false },
+): number;
+
+export function wordsToNumber(words: string, config: WordsToNumberOptions = {}): string | number {
 	// **Early return** if no input is provided
 	if (!words) {
-		return "" as TResult;
+		return "";
 	}
 
 	// **Optionally** convert Arabic and Persian digits to English
@@ -182,8 +192,7 @@ export function wordsToNumber<TResult extends string | number>(
 		finalOutput = withCommas;
 	}
 
-	// **Return** the final output cast to `TResult`, ensuring compliance with the function signature
-	return finalOutput as TResult;
+	return finalOutput;
 }
 
 function replaceArray(input: string): string {
@@ -193,6 +202,7 @@ function replaceArray(input: string): string {
 		const lowerMatched = matched.toLowerCase();
 		// If the map contains this key, return its value; else fallback to the original match.
 		const replacement = TYPO_LIST.get(lowerMatched);
+
 		return replacement != null ? replacement : matched;
 	});
 }

@@ -327,12 +327,12 @@
 		"card_regex": "^504706\\d{10}$",
 		"iban_regex": "^IR\\d{2}055\\d{19}$"
 	},
-  {
-    "card_no": 581874,
-    "bank_name": "iran_venezuela",
-    "bank_title": "بانک ایران و ونزوئلا",
-    "iban": "078",
-    "card_regex": "^581874\\d{10}$",
-    "iban_regex": "^IR\\d{2}078\\d{19}$"
-  }
+	{
+		"card_no": 581874,
+		"bank_name": "iran_venezuela",
+		"bank_title": "بانک ایران و ونزوئلا",
+		"iban": "078",
+		"card_regex": "^581874\\d{10}$",
+		"iban_regex": "^IR\\d{2}078\\d{19}$"
+	}
 ]
