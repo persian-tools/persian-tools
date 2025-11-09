@@ -15,19 +15,19 @@ describe("WordsToNumber", () => {
 	 */
 	it("Should convert truly", () => {
 		// **Negative small number** => `منفی سه هزار` => -3000
-		expect(wordsToNumber<number>("منفی سه هزار")).toEqual(-3000);
+		expect(wordsToNumber("منفی سه هزار")).toEqual(-3000);
 
 		// **A mix** => `سه هزار دویست و دوازده` => 3212
-		expect(wordsToNumber<number>("سه هزار دویست و دوازده")).toEqual(3212);
+		expect(wordsToNumber("سه هزار دویست و دوازده")).toEqual(3212);
 
 		// **Partial phrase** => `دوازده هزار بیست دو` => 12022
-		expect(wordsToNumber<number>("دوازده هزار بیست دو")).toEqual(12022);
+		expect(wordsToNumber("دوازده هزار بیست دو")).toEqual(12022);
 
 		// **String output with commas** => "12,022"
-		expect(wordsToNumber<string>("دوازده هزار بیست دو", { addCommas: true })).toEqual("12,022");
+		expect(wordsToNumber("دوازده هزار بیست دو", { addCommas: true })).toEqual("12,022");
 
 		// **With an extra "و"** => `دوازده هزار و بیست و دو` => "12,022" with commas
-		expect(wordsToNumber<string>("دوازده هزار و بیست و دو", { addCommas: true })).toEqual("12,022");
+		expect(wordsToNumber("دوازده هزار و بیست و دو", { addCommas: true })).toEqual("12,022");
 	});
 
 	/**
@@ -35,25 +35,25 @@ describe("WordsToNumber", () => {
 	 */
 	it("Should convert truly and convert to Arabic digits", () => {
 		// **Arabic digits** for negative number => "-٣٠٠٠"
-		expect(wordsToNumber<string>("منفی سه هزار", { digits: "ar" })).toEqual("-٣٠٠٠");
+		expect(wordsToNumber("منفی سه هزار", { digits: "ar" })).toEqual("-٣٠٠٠");
 
 		// **Arabic digits** => "٣٢١٢"
-		expect(wordsToNumber<string>("سه هزار دویست و دوازده", { digits: "ar" })).toEqual("٣٢١٢");
+		expect(wordsToNumber("سه هزار دویست و دوازده", { digits: "ar" })).toEqual("٣٢١٢");
 
 		// **Arabic digits** for partial phrase => "١٢٠٢٢"
-		expect(wordsToNumber<string>("دوازده هزار بیست دو", { digits: "ar" })).toEqual("١٢٠٢٢");
+		expect(wordsToNumber("دوازده هزار بیست دو", { digits: "ar" })).toEqual("١٢٠٢٢");
 
 		// **Arabic digits + commas** => "١٢,٠٢٢"
-		expect(wordsToNumber<string>("دوازده هزار بیست دو", { digits: "ar", addCommas: true })).toEqual("١٢,٠٢٢");
+		expect(wordsToNumber("دوازده هزار بیست دو", { digits: "ar", addCommas: true })).toEqual("١٢,٠٢٢");
 
 		// **Arabic digits** with extra "و" => "١٢,٠٢٢"
-		expect(wordsToNumber<string>("دوازده هزار و بیست و دو", { digits: "ar", addCommas: true })).toEqual("١٢,٠٢٢");
+		expect(wordsToNumber("دوازده هزار و بیست و دو", { digits: "ar", addCommas: true })).toEqual("١٢,٠٢٢");
 
 		// **Arabic digits** => "٤٥٠,٠٠٠"
-		expect(wordsToNumber<string>("چهارصد پنجاه هزار", { digits: "ar", addCommas: true })).toEqual("٤٥٠,٠٠٠");
+		expect(wordsToNumber("چهارصد پنجاه هزار", { digits: "ar", addCommas: true })).toEqual("٤٥٠,٠٠٠");
 
 		// **Arabic digits** without commas => "٤٥٠٠٠٠"
-		expect(wordsToNumber<string>("چهارصد پنجاه هزار", { digits: "ar" })).toEqual("٤٥٠٠٠٠");
+		expect(wordsToNumber("چهارصد پنجاه هزار", { digits: "ar" })).toEqual("٤٥٠٠٠٠");
 	});
 
 	/**
@@ -61,31 +61,31 @@ describe("WordsToNumber", () => {
 	 */
 	it("Should convert with ordinal words", () => {
 		// **Negative + Persian digits + commas** => "-۳,۰۰۰"
-		expect(wordsToNumber<string>("منفی ۳ هزار", { digits: "fa", addCommas: true })).toEqual("-۳,۰۰۰");
+		expect(wordsToNumber("منفی ۳ هزار", { digits: "fa", addCommas: true })).toEqual("-۳,۰۰۰");
 
 		// **Mix** of numeric and text => "-۳,۲۰۰"
-		expect(wordsToNumber<string>("منفی 3 هزار و 200", { digits: "fa", addCommas: true })).toEqual("-۳,۲۰۰");
+		expect(wordsToNumber("منفی 3 هزار و 200", { digits: "fa", addCommas: true })).toEqual("-۳,۲۰۰");
 
 		// **Ordinal** => `منفی سه هزارمین` => "-۳,۰۰۰"
-		expect(wordsToNumber<string>("منفی سه هزارمین", { digits: "fa", addCommas: true })).toEqual("-۳,۰۰۰");
+		expect(wordsToNumber("منفی سه هزارمین", { digits: "fa", addCommas: true })).toEqual("-۳,۰۰۰");
 
 		// **Ordinal** without commas => "-۳۰۰۰"
-		expect(wordsToNumber<string>("منفی سه هزارمین", { digits: "fa" })).toEqual("-۳۰۰۰");
+		expect(wordsToNumber("منفی سه هزارمین", { digits: "fa" })).toEqual("-۳۰۰۰");
 
 		// **Ordinal** => numeric return => -3000
-		expect(wordsToNumber<number>("منفی سه هزارمین")).toEqual(-3000);
+		expect(wordsToNumber("منفی سه هزارمین")).toEqual(-3000);
 
 		// **Another suffix** => -3000
-		expect(wordsToNumber<number>("منفی سه هزارم")).toEqual(-3000);
+		expect(wordsToNumber("منفی سه هزارم")).toEqual(-3000);
 
 		// **Ensure** string mismatch => "منفی سه هزارمین" => not "-3000"
-		expect(wordsToNumber<string>("منفی سه هزارمین")).not.toEqual("-3000");
+		expect(wordsToNumber("منفی سه هزارمین")).not.toEqual("-3000");
 
 		// **Length** check => numeric => "منفی سه هزارمین" => `"-3000"` => length 5
-		expect(String(wordsToNumber<number>("منفی سه هزارمین"))).toHaveLength(5);
+		expect(String(wordsToNumber("منفی سه هزارمین"))).toHaveLength(5);
 
 		// **Ordinal** => "منفی سی اُم" => -30
-		expect(wordsToNumber<number>("منفی سی اُم")).toEqual(-30);
+		expect(wordsToNumber("منفی سی اُم")).toEqual(-30);
 	});
 
 	/**
@@ -93,7 +93,7 @@ describe("WordsToNumber", () => {
 	 */
 	it("Should return empty string on empty input or undefined input", () => {
 		// **Empty string** => ""
-		expect(wordsToNumber<string>("", { digits: "fa", addCommas: true })).toEqual("");
+		expect(wordsToNumber("", { digits: "fa", addCommas: true })).toEqual("");
 
 		// **Undefined** input => ""
 		// @ts-expect-error - intentionally ignoring to test no-arg scenario
@@ -107,7 +107,7 @@ describe("WordsToNumber", () => {
 		Array.from(UNITS.entries()).forEach(([key, value]) => {
 			// Each test ensures that the word => expected numeric value
 			it(`Unit "${key}" => ${value}`, () => {
-				expect(wordsToNumber<number>(key)).toEqual(value);
+				expect(wordsToNumber(key)).toEqual(value);
 			});
 		});
 	});
@@ -119,7 +119,7 @@ describe("WordsToNumber", () => {
 		Array.from(TEN.entries()).forEach(([key, value]) => {
 			// Each test ensures that the word => expected numeric value
 			it(`Ten "${key}" => ${value}`, () => {
-				expect(wordsToNumber<number>(key)).toEqual(value);
+				expect(wordsToNumber(key)).toEqual(value);
 			});
 		});
 	});
@@ -131,7 +131,7 @@ describe("WordsToNumber", () => {
 		Array.from(MAGNITUDE.entries()).forEach(([key, value]) => {
 			// Each test ensures that the magnitude word => expected numeric multiplier
 			it(`Magnitude "${key}" => ${value}`, () => {
-				expect(wordsToNumber<number>(key)).toEqual(value);
+				expect(wordsToNumber(key)).toEqual(value);
 			});
 		});
 	});
@@ -147,14 +147,14 @@ describe("WordsToNumber", () => {
 		 * **Expect**: 1,030,000
 		 */
 		it("1) Large spelled => 1,030,000", () => {
-			expect(wordsToNumber<number>("یک میلیون و سی هزار")).toEqual(1030000);
+			expect(wordsToNumber("یک میلیون و سی هزار")).toEqual(1030000);
 		});
 
 		/**
 		 * **Test 2**: Negative large spelled => "-1,030,000"
 		 */
 		it("2) Negative large spelled => -1,030,000", () => {
-			expect(wordsToNumber<number>("منفی یک میلیون و سی هزار")).toEqual(-1030000);
+			expect(wordsToNumber("منفی یک میلیون و سی هزار")).toEqual(-1030000);
 		});
 
 		/**
@@ -162,35 +162,35 @@ describe("WordsToNumber", () => {
 		 * => -600
 		 */
 		it("3) Mixed text + numeric => -600", () => {
-			expect(wordsToNumber<number>("منفی چهارصد 200")).toEqual(-600);
+			expect(wordsToNumber("منفی چهارصد 200")).toEqual(-600);
 		});
 
 		/**
 		 * **Test 4**: Zero alone => "0" => 0
 		 */
 		it("4) Zero alone => 0", () => {
-			expect(wordsToNumber<number>("0")).toEqual(0);
+			expect(wordsToNumber("0")).toEqual(0);
 		});
 
 		/**
 		 * **Test 5**: Negative zero => "منفی صفر" => 0
 		 */
 		it("5) Negative zero => 0", () => {
-			expect(wordsToNumber<number>("منفی صفر")).toEqual(0);
+			expect(wordsToNumber("منفی صفر")).toEqual(0);
 		});
 
 		/**
 		 * **Test 6**: Already negative numeric => "-999" => -999
 		 */
 		it("6) Already negative numeric => -999", () => {
-			expect(wordsToNumber<number>("-999")).toEqual(-999);
+			expect(wordsToNumber("-999")).toEqual(-999);
 		});
 
 		/**
 		 * **Test 7**: Large numeric
 		 */
 		it("7) Large numeric => 999,999", () => {
-			expect(wordsToNumber<number>("نهصد نود نه هزار نهصد نود نه")).toEqual(999999);
+			expect(wordsToNumber("نهصد نود نه هزار نهصد نود نه")).toEqual(999999);
 		});
 
 		/**
@@ -198,21 +198,21 @@ describe("WordsToNumber", () => {
 		 * Likely => "دهم" => 10, "هزار" => 1000 => 10*1000 => 10000
 		 */
 		it("8) 'دهم هزار' => 10,000", () => {
-			expect(wordsToNumber<number>("دهم هزار", {})).toEqual(10000);
+			expect(wordsToNumber("دهم هزار", {})).toEqual(10000);
 		});
 
 		/**
 		 * **Test 9**: Non-numeric random text => "سلام دنیا" => 0
 		 */
 		it("9) Random text => 0", () => {
-			expect(wordsToNumber<number>("سلام دنیا")).toEqual(0);
+			expect(wordsToNumber("سلام دنیا")).toEqual(0);
 		});
 
 		/**
 		 * **Test 10**: Negative random text => "منفی سلام دنیا" => 0
 		 */
 		it("10) Negative random text => 0", () => {
-			expect(wordsToNumber<number>("منفی سلام دنیا")).toEqual(0);
+			expect(wordsToNumber("منفی سلام دنیا")).toEqual(0);
 		});
 	});
 });
@@ -237,7 +237,7 @@ describe("wordsToNumber (Auto Converter Options)", () => {
 		 */
 		it("1) Arabic digits => 4567 when autoConvertDigitsToEn=true", () => {
 			expect(
-				wordsToNumber<number>("٤٥٦٧", {
+				wordsToNumber("٤٥٦٧", {
 					autoConvertDigitsToEn: true,
 				}),
 			).toEqual(4567);
@@ -248,7 +248,7 @@ describe("wordsToNumber (Auto Converter Options)", () => {
 		 */
 		it("2) Persian digits => 123 when autoConvertDigitsToEn=true", () => {
 			expect(
-				wordsToNumber<number>("۱۲۳", {
+				wordsToNumber("۱۲۳", {
 					autoConvertDigitsToEn: true,
 				}),
 			).toEqual(123);
@@ -259,7 +259,7 @@ describe("wordsToNumber (Auto Converter Options)", () => {
 		 */
 		it("3) Mixed Persian+Arabic digits => 1234", () => {
 			expect(
-				wordsToNumber<number>("۱۲٣٤", {
+				wordsToNumber("۱۲٣٤", {
 					autoConvertDigitsToEn: true,
 				}),
 			).toEqual(1234);
@@ -270,7 +270,7 @@ describe("wordsToNumber (Auto Converter Options)", () => {
 		 */
 		it("4) Negative Arabic => -500", () => {
 			expect(
-				wordsToNumber<number>("منفی ٥٠٠", {
+				wordsToNumber("منفی ٥٠٠", {
 					autoConvertDigitsToEn: true,
 				}),
 			).toEqual(-500);
@@ -281,7 +281,7 @@ describe("wordsToNumber (Auto Converter Options)", () => {
 		 */
 		it("5) Already English digits => 123", () => {
 			expect(
-				wordsToNumber<number>("123", {
+				wordsToNumber("123", {
 					autoConvertDigitsToEn: true,
 				}),
 			).toEqual(123);
@@ -293,7 +293,7 @@ describe("wordsToNumber (Auto Converter Options)", () => {
 		 */
 		it("6) Persian digits in spelled phrase => -120,000", () => {
 			expect(
-				wordsToNumber<number>("منفی ۱۲۰ هزار", {
+				wordsToNumber("منفی ۱۲۰ هزار", {
 					autoConvertDigitsToEn: true,
 				}),
 			).toEqual(-120000);
@@ -306,7 +306,7 @@ describe("wordsToNumber (Auto Converter Options)", () => {
 		 */
 		it("7) Ordinal with Persian digits => 31", () => {
 			expect(
-				wordsToNumber<number>("دهمین ۲۱", {
+				wordsToNumber("دهمین ۲۱", {
 					autoConvertDigitsToEn: true,
 				}),
 			).toEqual(31);
@@ -317,7 +317,7 @@ describe("wordsToNumber (Auto Converter Options)", () => {
 		 */
 		it("8) Commas + Arabic digits => 45,678 => 45678", () => {
 			expect(
-				wordsToNumber<number>("٤٥,٦٧٨", {
+				wordsToNumber("٤٥,٦٧٨", {
 					autoConvertDigitsToEn: true,
 				}),
 			).toEqual(45678);
@@ -328,7 +328,7 @@ describe("wordsToNumber (Auto Converter Options)", () => {
 		 */
 		it("9) Arabic zero => 0", () => {
 			expect(
-				wordsToNumber<number>("منفی ٠", {
+				wordsToNumber("منفی ٠", {
 					autoConvertDigitsToEn: true,
 				}),
 			).toEqual(0);
@@ -340,7 +340,7 @@ describe("wordsToNumber (Auto Converter Options)", () => {
 		 */
 		it("10) Partial spelled + Arabic => 450", () => {
 			expect(
-				wordsToNumber<number>("چهارصد و ٥٠", {
+				wordsToNumber("چهارصد و ٥٠", {
 					autoConvertDigitsToEn: true,
 				}),
 			).toEqual(450);
@@ -357,7 +357,7 @@ describe("wordsToNumber (Auto Converter Options)", () => {
 		 */
 		it("1) 'ك','ي' => 'ک','ی' => parse -3", () => {
 			expect(
-				wordsToNumber<number>("منفی سه كيلومتر", {
+				wordsToNumber("منفی سه كيلومتر", {
 					autoConvertArabicCharsToPersian: true,
 				}),
 			).toEqual(-3);
@@ -371,7 +371,7 @@ describe("wordsToNumber (Auto Converter Options)", () => {
 		 */
 		it("2) Mixed Arabic char => 1000", () => {
 			expect(
-				wordsToNumber<number>("صك هزار", {
+				wordsToNumber("صك هزار", {
 					autoConvertArabicCharsToPersian: true,
 				}),
 			).toEqual(1000);
@@ -384,7 +384,7 @@ describe("wordsToNumber (Auto Converter Options)", () => {
 		 */
 		it("3) 'بيست ك' => 20", () => {
 			expect(
-				wordsToNumber<number>("بيست ك", {
+				wordsToNumber("بيست ك", {
 					autoConvertArabicCharsToPersian: true,
 				}),
 			).toEqual(20);
@@ -396,7 +396,7 @@ describe("wordsToNumber (Auto Converter Options)", () => {
 		 */
 		it("4) 'كى' => 0", () => {
 			expect(
-				wordsToNumber<number>("كى", {
+				wordsToNumber("كى", {
 					autoConvertArabicCharsToPersian: true,
 				}),
 			).toEqual(0);
@@ -408,7 +408,7 @@ describe("wordsToNumber (Auto Converter Options)", () => {
 		 */
 		it("5) Negative with Arabic chars => 0", () => {
 			expect(
-				wordsToNumber<number>("مَنفی كَباب", {
+				wordsToNumber("مَنفی كَباب", {
 					autoConvertArabicCharsToPersian: true,
 				}),
 			).toEqual(0);
@@ -421,7 +421,7 @@ describe("wordsToNumber (Auto Converter Options)", () => {
 		 */
 		it("6) 'سه هزار ك دویست' => 3200", () => {
 			expect(
-				wordsToNumber<number>("سه هزار ك دویست", {
+				wordsToNumber("سه هزار ك دویست", {
 					autoConvertArabicCharsToPersian: true,
 				}),
 			).toEqual(3200);
@@ -433,7 +433,7 @@ describe("wordsToNumber (Auto Converter Options)", () => {
 		 */
 		it("7) 'كیك میلیون' => 1,000,000", () => {
 			expect(
-				wordsToNumber<number>("كیك میلیون", {
+				wordsToNumber("كیك میلیون", {
 					autoConvertArabicCharsToPersian: true,
 				}),
 			).toEqual(1000000);
@@ -445,7 +445,7 @@ describe("wordsToNumber (Auto Converter Options)", () => {
 		 */
 		it("8) 'منفی چارصد یك' => -401", () => {
 			expect(
-				wordsToNumber<number>("منفی چارصد یك", {
+				wordsToNumber("منفی چارصد یك", {
 					autoConvertArabicCharsToPersian: true,
 				}),
 			).toEqual(-401);
@@ -457,7 +457,7 @@ describe("wordsToNumber (Auto Converter Options)", () => {
 		 */
 		it("9) Negative ordinal => -1000", () => {
 			expect(
-				wordsToNumber<number>("منفی هزارمين", {
+				wordsToNumber("منفی هزارمين", {
 					autoConvertArabicCharsToPersian: true,
 				}),
 			).toEqual(-1000);
@@ -469,7 +469,7 @@ describe("wordsToNumber (Auto Converter Options)", () => {
 		 */
 		it("10) 'كل چهارصد' => 400", () => {
 			expect(
-				wordsToNumber<number>("كل چهارصد", {
+				wordsToNumber("كل چهارصد", {
 					autoConvertArabicCharsToPersian: true,
 				}),
 			).toEqual(400);
@@ -487,7 +487,7 @@ describe("wordsToNumber (Auto Converter Options)", () => {
 		 */
 		it("1) Arabic digits + Arabic char => 444", () => {
 			expect(
-				wordsToNumber<number>("٤٤٤ ك", {
+				wordsToNumber("٤٤٤ ك", {
 					autoConvertDigitsToEn: true,
 					autoConvertArabicCharsToPersian: true,
 				}),
@@ -499,7 +499,7 @@ describe("wordsToNumber (Auto Converter Options)", () => {
 		 */
 		it("2) Negative => -200", () => {
 			expect(
-				wordsToNumber<number>("منفی ٢٠٠ ك", {
+				wordsToNumber("منفی ٢٠٠ ك", {
 					autoConvertDigitsToEn: true,
 					autoConvertArabicCharsToPersian: true,
 				}),
@@ -511,7 +511,7 @@ describe("wordsToNumber (Auto Converter Options)", () => {
 		 */
 		it("3) Ordinal + Arabic => 22", () => {
 			expect(
-				wordsToNumber<number>("دهمین ١٢ ك", {
+				wordsToNumber("دهمین ١٢ ك", {
 					autoConvertDigitsToEn: true,
 					autoConvertArabicCharsToPersian: true,
 				}),
