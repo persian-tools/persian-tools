@@ -94,7 +94,7 @@ src/modules/moduleName/
 ├── types.ts          # Type definitions (if complex)
 ├── constants.ts      # Constants and data
 ├── helpers.ts        # Internal helper functions
-└── data.skip.ts      # Large data files
+└── data.skip.json      # Large data files
 ```
 
 ### Export Patterns

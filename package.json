@@ -91,16 +91,16 @@
 	},
 	"homepage": "https://persian-tools.usestrict.dev",
 	"devDependencies": {
-		"@commitlint/cli": "^20.1.0",
-		"@commitlint/config-conventional": "^20.0.0",
-		"@eslint/js": "^9.38.0",
-		"@size-limit/file": "^11.2.0",
-		"@types/bun": "^1.3.1",
-		"@vitest/coverage-v8": "^4.0.5",
-		"@vitest/ui": "^4.0.5",
+		"@commitlint/cli": "^20.2.0",
+		"@commitlint/config-conventional": "^20.2.0",
+		"@eslint/js": "^9.39.1",
+		"@size-limit/file": "^12.0.0",
+		"@types/bun": "^1.3.3",
+		"@vitest/coverage-v8": "^4.0.15",
+		"@vitest/ui": "^4.0.15",
 		"all-contributors-cli": "^6.26.1",
-		"bunup": "^0.15.12",
-		"eslint": "^9.38.0",
+		"bunup": "^0.16.10",
+		"eslint": "^9.39.1",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-import-resolver-typescript": "^4.4.4",
 		"eslint-plugin-import": "^2.32.0",
@@ -109,16 +109,16 @@
 		"eslint-plugin-security": "^3.0.1",
 		"globals": "^16.5.0",
 		"husky": "^9.1.7",
-		"markdownlint-cli": "^0.45.0",
-		"prettier": "^3.6.2",
+		"markdownlint-cli": "^0.46.0",
+		"prettier": "^3.7.4",
 		"prettier-eslint": "^16.4.2",
-		"size-limit": "^11.2.0",
+		"size-limit": "^12.0.0",
 		"standard-version": "^9.5.0",
-		"typedoc": "^0.28.14",
+		"typedoc": "^0.28.15",
 		"typescript": "^5.9.3",
-		"typescript-eslint": "^8.46.2",
-		"vite": "^7.1.12",
-		"vitest": "^4.0.5"
+		"typescript-eslint": "^8.48.1",
+		"vite": "^7.2.6",
+		"vitest": "^4.0.15"
 	},
 	"dependencies": {
 		"fastest-levenshtein": "^1.0.16"
@@ -132,7 +132,7 @@
 		"npm": ">=7.0.0",
 		"bun": ">=1.0.0"
 	},
-	"packageManager": "bun@1.3.1",
+	"packageManager": "bun@1.3.4",
 	"publishConfig": {
 		"access": "public"
 	}
