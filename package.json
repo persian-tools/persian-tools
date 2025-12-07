@@ -1,7 +1,7 @@
 {
 	"name": "@persian-tools/persian-tools",
 	"description": "A comprehensive, high-performance TypeScript toolkit for Persian (Farsi) text, numbers, validation, and locale utilities — works in Node.js, Bun, and the browser.",
-	"version": "4.0.4",
+	"version": "5.0.0-beta.0",
 	"files": [
 		"./build"
 	],
