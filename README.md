@@ -639,6 +639,9 @@ We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md)
       <td align="center" valign="top" width="20%"><a href="https://github.com/ahangarha"><img src="https://avatars.githubusercontent.com/u/11241315?v=4?s=100" width="100px;" alt="Mostafa Ahangarha"/><br /><sub><b>Mostafa Ahangarha</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=ahangarha" title="Code">💻</a></td>
       <td align="center" valign="top" width="20%"><a href="https://hamidne.ir"><img src="https://avatars.githubusercontent.com/u/53326634?v=4?s=100" width="100px;" alt="Hamid Nasr"/><br /><sub><b>Hamid Nasr</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=hamidne" title="Code">💻</a> <a href="#content-hamidne" title="Content">🖋</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="20%"><a href="https://portfolio-sina-byn.vercel.app/"><img src="https://avatars.githubusercontent.com/u/96991718?v=4?s=100" width="100px;" alt="Sina Bayandorian"/><br /><sub><b>Sina Bayandorian</b></sub></a><br /><a href="https://github.com/persian-tools/persian-tools/commits?author=sina-byn" title="Code">💻</a></td>
+    </tr>
   </tbody>
 </table>
 
