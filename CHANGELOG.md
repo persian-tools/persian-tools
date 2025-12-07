@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0-beta.0](https://github.com/persian-tools/persian-tools/compare/v4.0.4...v5.0.0-beta.0) (2025-12-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* replace deprecated `substr` with `slice`, improve type safety, and enhance code readability
+* remove unbuild and use bunup and bun as package manager
+
+### Features
+
+* add comprehensive instructions for AI agents and enhance documentation ([#431](https://github.com/persian-tools/persian-tools/issues/431)) ([6e7901a](https://github.com/persian-tools/persian-tools/commit/6e7901a3ee2af0fb0c18c1404c8b5a185136e6d8))
+* add mediv0 memorial ([#425](https://github.com/persian-tools/persian-tools/issues/425)) ([9e5783a](https://github.com/persian-tools/persian-tools/commit/9e5783a5527e6d00561ff35b94f7bc0e1889888e))
+* **banksRegex:** add banks data and implement regex-based banking utilities ([1b686ce](https://github.com/persian-tools/persian-tools/commit/1b686ce605b0e9c99582d4b4654e89b3b07e6f2a))
+* **docs:** add section for extractCardNumbers and update installation methods with bun support ([8b50e52](https://github.com/persian-tools/persian-tools/commit/8b50e52b803e4093b412525bc3ad84a656fd5b1a))
+* **extractCardNumbers:** add robust extraction with type-safe overloads, context support, bank detection, validation, and performance optimizations ([7b2e75e](https://github.com/persian-tools/persian-tools/commit/7b2e75e33cf48befcc2f6888b63c9bf4a627519f))
+* **halfSpace:** refactor and modularize prefix, suffix, and compound rules into utility functions, improve handling of ZWNJ edges, and enhance test coverage ([05fb6cb](https://github.com/persian-tools/persian-tools/commit/05fb6cbade8993f88afd4bae1a7b7d37969d36bd))
+* **modules:** add moneyWordsToNumber utility ([50777c9](https://github.com/persian-tools/persian-tools/commit/50777c95736a98e783350ed677eefb09cc44c68a))
+* remove unbuild and use bunup and bun as package manager ([7801232](https://github.com/persian-tools/persian-tools/commit/7801232f6fef39afff627be2b1a38acdc6e6be0f))
+* **verifyCardNumber:** add constants for Iranian bank prefixes and test cards, improve validation logic and tests ([f4f96d0](https://github.com/persian-tools/persian-tools/commit/f4f96d08f9def47d3ed43fc232495b5ba74e89fe))
+* **wordsToNumber:** modularize typo handling with `replaceArray`, add `TYPO_PATTERN`, and improve type safety ([628e2b8](https://github.com/persian-tools/persian-tools/commit/628e2b88b2b49b9bf8ca808776686a9dea7b0027))
+
+
+* replace deprecated `substr` with `slice`, improve type safety, and enhance code readability ([c50a954](https://github.com/persian-tools/persian-tools/commit/c50a9548a416e720df1936de5a799572fbe7ac93))
+
 ### [4.0.4](https://github.com/persian-tools/persian-tools/compare/v4.0.3...v4.0.4) (2025-09-30)
 
 ### [4.0.3](https://github.com/persian-tools/persian-tools/compare/v4.0.2...v4.0.3) (2025-09-08)

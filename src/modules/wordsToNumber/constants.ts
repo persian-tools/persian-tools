@@ -68,6 +68,7 @@ export const MAGNITUDE = new Map<string, number>([
  */
 export const TYPO_LIST = new Map<string, string>([
 	["شیش صد", "ششصد"],
+	["یه", "یک"],
 	["شش صد", "ششصد"],
 	["هفت صد", "هفتصد"],
 	["هشت صد", "هشتصد"],
@@ -76,6 +77,7 @@ export const TYPO_LIST = new Map<string, string>([
 	["شیش‌صد", "ششصد"],
 	["شش‌ضد", "ششصد"],
 	["هفت‌صد", "هفتصد"],
+	["هف ‌صد", "هفتصد"],
 	["هشت‌صد", "هشتصد"],
 	["نه‌صد", "نهصد"],
 	["یک‌صد", "یکصد"],

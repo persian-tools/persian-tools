@@ -1,0 +1,338 @@
+[
+	{
+		"card_no": 627381,
+		"bank_name": "ansar",
+		"bank_title": "بانک انصار",
+		"iban": "015",
+		"card_regex": "^627381\\d{10}$",
+		"iban_regex": "^IR\\d{2}015\\d{19}$"
+	},
+	{
+		"card_no": 636214,
+		"bank_name": "ayandeh",
+		"bank_title": "بانک آینده",
+		"iban": "062",
+		"card_regex": "^636214\\d{10}$",
+		"iban_regex": "^IR\\d{2}062\\d{19}$"
+	},
+	{
+		"card_no": 62198619,
+		"bank_name": "blubank",
+		"bank_title": "بلوبانک",
+		"iban": "056",
+		"card_regex": "^62198619\\d{8}$",
+		"iban_regex": "^IR\\d{2}056\\d{19}$"
+	},
+	{
+		"card_no": 502938,
+		"bank_name": "dey",
+		"bank_title": "بانک دی",
+		"iban": "017",
+		"card_regex": "^502938\\d{10}$",
+		"iban_regex": "^IR\\d{2}017\\d{19}$"
+	},
+	{
+		"card_no": 627412,
+		"bank_name": "eghtesad_novin",
+		"bank_title": "بانک اقتصادنوین",
+		"iban": "055",
+		"card_regex": "^627412\\d{10}$",
+		"iban_regex": "^IR\\d{2}055\\d{19}$"
+	},
+	{
+		"card_no": 505416,
+		"bank_name": "gardeshgari",
+		"bank_title": "بانک گردشگری",
+		"iban": "064",
+		"card_regex": "^505416\\d{10}$",
+		"iban_regex": "^IR\\d{2}064\\d{19}$"
+	},
+	{
+		"card_no": 639599,
+		"bank_name": "ghavvamin",
+		"bank_title": "بانک قوامین",
+		"iban": "052",
+		"card_regex": "^639599\\d{10}$",
+		"iban_regex": "^IR\\d{2}052\\d{19}$"
+	},
+	{
+		"card_no": 627488,
+		"bank_name": "kar_afarin",
+		"bank_title": "بانک کارآفرین",
+		"iban": "053",
+		"card_regex": "^627488\\d{10}$",
+		"iban_regex": "^IR\\d{2}053\\d{19}$"
+	},
+	{
+		"card_no": 502910,
+		"bank_name": "kar_afarin",
+		"bank_title": "بانک کارآفرین",
+		"iban": "053",
+		"card_regex": "^502910\\d{10}$",
+		"iban_regex": "^IR\\d{2}053\\d{19}$"
+	},
+	{
+		"card_no": 603770,
+		"bank_name": "keshavarzi",
+		"bank_title": "بانک کشاورزی",
+		"iban": "016",
+		"card_regex": "^603770\\d{10}$",
+		"iban_regex": "^IR\\d{2}016\\d{19}$"
+	},
+	{
+		"card_no": 639217,
+		"bank_name": "keshavarzi",
+		"bank_title": "بانک کشاورزی",
+		"iban": "016",
+		"card_regex": "^639217\\d{10}$",
+		"iban_regex": "^IR\\d{2}016\\d{19}$"
+	},
+	{
+		"card_no": 628023,
+		"bank_name": "maskan",
+		"bank_title": "بانک مسکن",
+		"iban": "014",
+		"card_regex": "^628023\\d{10}$",
+		"iban_regex": "^IR\\d{2}014\\d{19}$"
+	},
+	{
+		"card_no": 639370,
+		"bank_name": "mehr_e_eghtesad",
+		"bank_title": "بانک مهر اقتصاد",
+		"iban": "055",
+		"card_regex": "^639370\\d{10}$",
+		"iban_regex": "^IR\\d{2}055\\d{19}$"
+	},
+	{
+		"card_no": 606373,
+		"bank_name": "mehr_e_iranian",
+		"bank_title": "بانک قرض الحسنه مهر ایرانیان",
+		"iban": "060",
+		"card_regex": "^606373\\d{10}$",
+		"iban_regex": "^IR\\d{2}060\\d{19}$"
+	},
+	{
+		"card_no": 606256,
+		"bank_name": "meli",
+		"bank_title": "موسسه اعتباری ملل",
+		"iban": "075",
+		"card_regex": "^606256\\d{10}$",
+		"iban_regex": "^IR\\d{2}075\\d{19}$"
+	},
+	{
+		"card_no": 603799,
+		"bank_name": "meli",
+		"bank_title": "بانک ملی ایران",
+		"iban": "017",
+		"card_regex": "^603799\\d{10}$",
+		"iban_regex": "^IR\\d{2}017\\d{19}$"
+	},
+	{
+		"card_no": 610433,
+		"bank_name": "mellat",
+		"bank_title": "بانک ملت",
+		"iban": "012",
+		"card_regex": "^610433\\d{10}$",
+		"iban_regex": "^IR\\d{2}012\\d{19}$"
+	},
+	{
+		"card_no": 991975,
+		"bank_name": "mellat",
+		"bank_title": "بانک ملت",
+		"iban": "012",
+		"card_regex": "^991975\\d{10}$",
+		"iban_regex": "^IR\\d{2}012\\d{19}$"
+	},
+	{
+		"card_no": 622106,
+		"bank_name": "parsian",
+		"bank_title": "بانک پارسیان",
+		"iban": "054",
+		"card_regex": "^622106\\d{10}$",
+		"iban_regex": "^IR\\d{2}054\\d{19}$"
+	},
+	{
+		"card_no": 502229,
+		"bank_name": "pasargad",
+		"bank_title": "بانک پاسارگاد",
+		"iban": "057",
+		"card_regex": "^502229\\d{10}$",
+		"iban_regex": "^IR\\d{2}057\\d{19}$"
+	},
+	{
+		"card_no": 639347,
+		"bank_name": "pasargad",
+		"bank_title": "بانک پاسارگاد",
+		"iban": "057",
+		"card_regex": "^639347\\d{10}$",
+		"iban_regex": "^IR\\d{2}057\\d{19}$"
+	},
+	{
+		"card_no": 627760,
+		"bank_name": "post_bank",
+		"bank_title": "پست بانک ایران",
+		"iban": "021",
+		"card_regex": "^627760\\d{10}$",
+		"iban_regex": "^IR\\d{2}021\\d{19}$"
+	},
+	{
+		"card_no": 589463,
+		"bank_name": "refah",
+		"bank_title": "بانک رفاه",
+		"iban": "013",
+		"card_regex": "^589463\\d{10}$",
+		"iban_regex": "^IR\\d{2}013\\d{19}$"
+	},
+	{
+		"card_no": 627961,
+		"bank_name": "saanat_va_maadan",
+		"bank_title": "بانک صنعت و معدن",
+		"iban": "011",
+		"card_regex": "^627961\\d{10}$",
+		"iban_regex": "^IR\\d{2}011\\d{19}$"
+	},
+	{
+		"card_no": 603769,
+		"bank_name": "saderat",
+		"bank_title": "بانک صادرات",
+		"iban": "019",
+		"card_regex": "^603769\\d{10}$",
+		"iban_regex": "^IR\\d{2}019\\d{19}$"
+	},
+	{
+		"card_no": 621986,
+		"bank_name": "saman",
+		"bank_title": "بانک سامان",
+		"iban": "056",
+		"card_regex": "^621986(?!19)\\d{10}$",
+		"iban_regex": "^IR\\d{2}056\\d{19}$"
+	},
+	{
+		"card_no": 639607,
+		"bank_name": "sarmayeh",
+		"bank_title": "بانک سرمایه",
+		"iban": "058",
+		"card_regex": "^639607\\d{10}$",
+		"iban_regex": "^IR\\d{2}058\\d{19}$"
+	},
+	{
+		"card_no": 589210,
+		"bank_name": "sepah",
+		"bank_title": "بانک سپه",
+		"iban": "015",
+		"card_regex": "^589210\\d{10}$",
+		"iban_regex": "^IR\\d{2}015\\d{19}$"
+	},
+	{
+		"card_no": 504706,
+		"bank_name": "shahr",
+		"bank_title": "بانک شهر",
+		"iban": "061",
+		"card_regex": "^504706\\d{10}$",
+		"iban_regex": "^IR\\d{2}061\\d{19}$"
+	},
+	{
+		"card_no": 502806,
+		"bank_name": "shahr",
+		"bank_title": "بانک شهر",
+		"iban": "061",
+		"card_regex": "^502806\\d{10}$",
+		"iban_regex": "^IR\\d{2}061\\d{19}$"
+	},
+	{
+		"card_no": 639346,
+		"bank_name": "sina",
+		"bank_title": "بانک سینا",
+		"iban": "059",
+		"card_regex": "^639346\\d{10}$",
+		"iban_regex": "^IR\\d{2}059\\d{19}$"
+	},
+	{
+		"card_no": 627353,
+		"bank_name": "tejarat",
+		"bank_title": "بانک تجارت",
+		"iban": "018",
+		"card_regex": "^627353\\d{10}$",
+		"iban_regex": "^IR\\d{2}018\\d{19}$"
+	},
+	{
+		"card_no": 585983,
+		"bank_name": "tejarat",
+		"bank_title": "بانک تجارت",
+		"iban": "018",
+		"card_regex": "^585983\\d{10}$",
+		"iban_regex": "^IR\\d{2}018\\d{19}$"
+	},
+	{
+		"card_no": 636949,
+		"bank_name": "hekmat",
+		"bank_title": "بانک حکمت",
+		"iban": "065",
+		"card_regex": "^636949\\d{10}$",
+		"iban_regex": "^IR\\d{2}065\\d{19}$"
+	},
+	{
+		"card_no": 627648,
+		"bank_name": "tosee_saderat",
+		"bank_title": "بانک توسعه صادرات",
+		"iban": "020",
+		"card_regex": "^627648\\d{10}$",
+		"iban_regex": "^IR\\d{2}020\\d{19}$"
+	},
+	{
+		"card_no": 502908,
+		"bank_name": "tosee_taavon",
+		"bank_title": "بانک توسعه تعاون",
+		"iban": "051",
+		"card_regex": "^502908\\d{10}$",
+		"iban_regex": "^IR\\d{2}051\\d{19}$"
+	},
+	{
+		"card_no": 505785,
+		"bank_name": "iranzamin",
+		"bank_title": "بانک ایران زمین",
+		"iban": "069",
+		"card_regex": "^505785\\d{10}$",
+		"iban_regex": "^IR\\d{2}069\\d{19}$"
+	},
+	{
+		"card_no": 505809,
+		"bank_name": "khavarmianeh",
+		"bank_title": "بانک خاورمیانه",
+		"iban": "078",
+		"card_regex": "^505809\\d{10}$",
+		"iban_regex": "^IR\\d{2}078\\d{19}$"
+	},
+	{
+		"card_no": 636214,
+		"bank_name": "tat",
+		"bank_title": "بانک تات",
+		"iban": "090",
+		"card_regex": "^636214\\d{10}$",
+		"iban_regex": "^IR\\d{2}090\\d{19}$"
+	},
+	{
+		"card_no": 504172,
+		"bank_name": "resalat",
+		"bank_title": "بانک قرض‌ الحسنه رسالت",
+		"iban": "060",
+		"card_regex": "^504172\\d{10}$",
+		"iban_regex": "^IR\\d{2}060\\d{19}$"
+	},
+	{
+		"card_no": 504706,
+		"bank_name": "hekmat_iranian",
+		"bank_title": "مؤسسه اعتباری حکمت ایرانیان",
+		"iban": "055",
+		"card_regex": "^504706\\d{10}$",
+		"iban_regex": "^IR\\d{2}055\\d{19}$"
+	},
+	{
+		"card_no": 581874,
+		"bank_name": "iran_venezuela",
+		"bank_title": "بانک ایران و ونزوئلا",
+		"iban": "078",
+		"card_regex": "^581874\\d{10}$",
+		"iban_regex": "^IR\\d{2}078\\d{19}$"
+	}
+]
