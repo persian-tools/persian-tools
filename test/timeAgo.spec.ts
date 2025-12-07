@@ -74,8 +74,8 @@ describe("timeAgo", () => {
 			expect(timeAgo(getTime(-14 * 30 * 24 * 60 * 60 * 1000))).toEqual("حدود 1 سال قبل");
 		});
 
-		it("should handle an overriden now", () => {
-			expect(timeAgo(getTime(-3 * 60 * 1000), new Date(Date.now() + (-2 * 60 * 1_000)))).toEqual("1 دقیقه قبل");
+		it("should handle calculate from since", () => {
+			expect(timeAgo(getTime(-3 * 60 * 1000), new Date(Date.now() + -2 * 60 * 1_000))).toEqual("1 دقیقه قبل");
 		});
 
 		/**
