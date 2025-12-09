@@ -71,9 +71,8 @@ export function checkFormatDateTime(datetime: string): boolean {
  * - **Standardizing** it (removing hidden chars, zero-padding, etc.)
  * - Converting to a real JS timestamp
  */
-export function getTimeNow(timeZone = "Asia/Tehran"): number {
-	const now = new Date();
-	const faLocaleString = now.toLocaleString("fa-IR", {
+export function getTimeNow(timeZone = "Asia/Tehran", override: Date = new Date()): number {
+	const faLocaleString = override.toLocaleString("fa-IR", {
 		year: "numeric",
 		month: "2-digit",
 		day: "2-digit",
