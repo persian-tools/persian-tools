@@ -123,6 +123,7 @@ export class Bill {
 	public verificationBillId(): boolean {
 		let newBillId = `${this.billId}`;
 
+		// eslint-disable-next-line no-useless-assignment
 		let result = false;
 		if (!newBillId || newBillId.length < 6) {
 			return false;

@@ -1,124 +1,71 @@
 ---
 title: "Slugify"
-description: "Generate URL-safe slugs from Persian text"
+description: "Generate URL-safe slugs from Persian text, with options for separator, max length, custom replacements, and Persian-digit handling."
 icon: "link"
 ---
 
-# Slugify
+`slugify` turns a Persian string into a URL-safe slug. Companion helpers (`createSlug`, `slugifyWithNumbers`, `slugifySimple`) are thin wrappers around the same engine.
 
-Generate URL-safe, SEO-friendly slugs from Persian text.
+## Functions
 
-## Basic Usage
+### `slugify(text, options?)`
 
-```typescript
+```ts
 import { slugify } from "@persian-tools/persian-tools";
 
-console.log(slugify("معرفی محصولات جدید"));
-// Output: "معرفی-محصولات-جدید"
-
-console.log(slugify("راهنمای خرید سریع!"));
-// Output: "راهنمای-خرید-سریع"
+slugify("سلام دنیا"); // "سلام-دنیا"
+slugify("چگونه برنامه‌نویسی یاد بگیریم؟"); // "چگونه-برنامه-نویسی-یاد-بگیریم"
+slugify("Hello سلام 2024"); // "hello-سلام-2024"
 ```
 
-## API Reference
-
-<ParamField path="text" type="string" required>
-	Persian text to convert to slug
-</ParamField>
-
-<ResponseField name="result" type="string">
-	URL-safe slug with hyphens separating words
-</ResponseField>
-
-## Examples
-
-### Blog Post URLs
-
-```typescript
-import { slugify } from "@persian-tools/persian-tools";
-
-const createBlogUrl = (title: string, id: number): string => {
-	const slug = slugify(title);
-	return `/blog/${id}/${slug}`;
-};
-
-console.log(createBlogUrl("آموزش برنامه نویسی", 123));
-// "/blog/123/آموزش-برنامه-نویسی"
-```
-
-### Product URLs
-
-```typescript
-import { slugify } from "@persian-tools/persian-tools";
-
-interface Product {
-	id: number;
-	name: string;
-	category: string;
+```ts
+interface SlugifyOptions {
+	separator?: string; // default "-"
+	lowercase?: boolean; // default true (Latin only)
+	removeRepeatedSeparators?: boolean; // default true
+	maxLength?: number; // truncate after slug build
+	preserveNumbers?: boolean; // default true
+	customReplacements?: Record<string, string>;
 }
-
-const generateProductUrl = (product: Product): string => {
-	const categorySlug = slugify(product.category);
-	const nameSlug = slugify(product.name);
-	return `/products/${categorySlug}/${nameSlug}-${product.id}`;
-};
-
-const product = {
-	id: 456,
-	name: "گوشی هوشمند",
-	category: "الکترونیک",
-};
-
-console.log(generateProductUrl(product));
-// "/products/الکترونیک/گوشی-هوشمند-456"
 ```
 
-### Clean Special Characters
+### With options
 
-```typescript
-import { slugify } from "@persian-tools/persian-tools";
-
-console.log(slugify("نقد و بررسی: بهترین لپ‌تاپ‌ها!"));
-// "نقد-و-بررسی-بهترین-لپ-تاپ-ها"
-
-console.log(slugify("قیمت (ویژه) محصول"));
-// "قیمت-ویژه-محصول"
+```ts
+slugify("سلام دنیا", { separator: "_" }); // "سلام_دنیا"
+slugify("سلام دنیا", { maxLength: 8 }); // "سلام-دن"
+slugify("سلام دنیا", { lowercase: false }); // doesn't lowercase Latin
+slugify("سال ۱۴۰۰", { preserveNumbers: true }); // "سال-۱۴۰۰"
 ```
 
-## Use Cases
+### Convenience exports
 
-<AccordionGroup>
-  <Accordion title="Content Management" icon="file-lines">
-    Generate SEO-friendly URLs:
-    ```typescript
-    const post = {
-      title: 'معرفی فناوری جدید',
-      slug: slugify('معرفی فناوری جدید')
-    };
-    ```
-  </Accordion>
+```ts
+import { createSlug, slugifyWithNumbers, slugifySimple } from "@persian-tools/persian-tools";
 
-  <Accordion title="E-commerce" icon="cart-shopping">
-    Create product URLs:
-    ```typescript
-    const productUrl = `/shop/${slugify(category)}/${slugify(productName)}`;
-    ```
-  </Accordion>
-</AccordionGroup>
-
-## Related Functions
-
-<CardGroup cols={2}>
-	<Card title="Persian Characters" icon="language" href="/utilities/text/persian-chars">
-		Validate Persian text
-	</Card>
-	<Card title="URL Fix" icon="globe" href="/utilities/text/url-fix">
-		Decode Persian URLs
-	</Card>
-</CardGroup>
-
-## Type Definition
-
-```typescript
-function slugify(text: string): string;
+createSlug("مقاله جدید"); // "مقاله-جدید"
+createSlug("مقاله جدید", "_"); // "مقاله_جدید"
+slugifyWithNumbers("سال ۱۴۰۰"); // keeps digits
+slugifySimple("تست ساده"); // bare-bones, no options
 ```
+
+## What `slugify` does internally
+
+1. Validate input is a non-empty string (otherwise throws).
+2. Normalize Arabic-script characters → Persian via `toPersianChars`.
+3. Apply `SLUG_REPLACEMENTS` (e.g. `آ → ا`, `ة → ه`, strip Arabic diacritics).
+4. Apply `PUNCTUATION_REPLACEMENTS` (strip `؟ ، « »` etc.; convert Arabic-Indic digits to English).
+5. Apply any `customReplacements`.
+6. Collapse whitespace to `separator`, optionally dedupe consecutive separators, optionally truncate to `maxLength`.
+
+## Pitfalls
+
+- **Throws on empty string.** Pre-check `text.trim().length > 0`.
+- **`lowercase: true` affects only Latin** — Persian has no case.
+- **`preserveNumbers: true` keeps Persian digits**, which browsers handle but some legacy servers may reject. For pure-ASCII URLs, set `preserveNumbers: false` AND `digitsFaToEn` upstream.
+- **`maxLength` truncates after slug building**, possibly leaving a trailing separator — trim it yourself if it matters.
+- **Custom replacements run after defaults** and can override punctuation handling.
+
+## Source
+
+`src/modules/slugify/index.ts` · Tests: `test/slugify.spec.ts`

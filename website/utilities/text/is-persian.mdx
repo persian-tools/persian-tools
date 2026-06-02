@@ -1,0 +1,89 @@
+---
+title: "Persian Detection"
+description: "Check whether a string is Persian (Farsi), contains Persian characters, or normalize Arabic-typed text into Persian."
+icon: "check"
+---
+
+Detect Persian script in user input and normalize Arabic-keyboarded characters (`ي`, `ك`) to their Persian counterparts (`ی`, `ک`). These are the foundational checks used by most other Persian Tools modules.
+
+## Functions
+
+### `isPersian(str, isComplex?, trimPattern?)`
+
+Returns `true` when **all** characters of `str` (after trimming) are Persian.
+
+```ts
+import { isPersian } from "@persian-tools/persian-tools";
+
+isPersian("سلام دنیا"); // true
+isPersian("Hello سلام"); // false
+isPersian("سلام؟ ۱۲۳"); // false (default rejects digits + extended punctuation)
+isPersian("سلام؟ ۱۲۳", true); // true  (complex mode accepts them)
+```
+
+#### Parameters
+
+| Name          | Type      | Default           | Description                                           |
+| ------------- | --------- | ----------------- | ----------------------------------------------------- |
+| `str`         | `string`  | —                 | text to test                                          |
+| `isComplex`   | `boolean` | `false`           | `true` to allow Persian digits + extended punctuation |
+| `trimPattern` | `RegExp`  | `/["'-+()؟\s.]/g` | characters stripped before the script test            |
+
+### `isFarsi(...)`
+
+Alias of `isPersian` — same signature.
+
+### `hasPersian(str, isComplex?)`
+
+Returns `true` when `str` contains **at least one** Persian character.
+
+```ts
+hasPersian("This is سلام"); // true
+hasPersian("This is Latin"); // false
+```
+
+### `hasFarsi(...)`
+
+Alias of `hasPersian`.
+
+### `autoArabicToPersian(value)`
+
+Normalize Arabic-script characters to Persian. Specifically:
+
+- `ي` (U+064A, Arabic ya) → `ی` (U+06CC, Persian ya)
+- `ك` (U+0643, Arabic kaf) → `ک` (U+06A9, Persian kaf)
+
+```ts
+import { autoArabicToPersian } from "@persian-tools/persian-tools";
+
+autoArabicToPersian("علي بن أبي طالب"); // "علی بن أبی طالب"
+autoArabicToPersian("كتاب"); // "کتاب"
+autoArabicToPersian("علی"); // "علی"   (idempotent)
+```
+
+## When to use which
+
+- **`isPersian`** — gate validation: "the user's name field must be Persian".
+- **`hasPersian`** — content routing: "this comment contains Persian, send it to the fa-IR moderator".
+- **`autoArabicToPersian`** — input sanitisation: run this on any user-supplied Persian string before storing, comparing, or indexing it.
+
+## The Persian–Arabic trap
+
+Several letters in the Persian alphabet share their visual form with Arabic but have **different code points**. Strings typed on Arabic keyboards include the Arabic versions:
+
+| Persian      | Arabic       |
+| ------------ | ------------ |
+| `ی` (U+06CC) | `ي` (U+064A) |
+| `ک` (U+06A9) | `ك` (U+0643) |
+
+Equality checks, regex matches, and Map/Set lookups against Persian strings will silently miss the Arabic variants. Always run user input through `autoArabicToPersian` first.
+
+## Pitfalls
+
+- `isPersian("")` returns `false` — empty string has nothing to match.
+- `isPersian("علي")` returns `false` — the `ي` is an Arabic code point. Normalize first if you want to accept either form.
+- `isPersian` and `isArabic` are **not** mutually exclusive — Persian text falls inside the Arabic Unicode block, so a pure Persian string also passes `isArabic`. See the [Arabic Detection](./is-arabic) page for the distinction.
+
+## Source
+
+`src/modules/isPersian/index.ts` · Tests: `test/isPersian.spec.ts`

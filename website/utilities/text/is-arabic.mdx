@@ -1,0 +1,74 @@
+---
+title: "Arabic Detection"
+description: "Check whether a string is in the Arabic script or contains Arabic characters."
+icon: "check"
+---
+
+Detect Arabic script in input. Useful for routing multilingual content to the right NLP pipeline or separating Arabic from Persian (Farsi) input.
+
+## Functions
+
+### `isArabic(str, trimPattern?)`
+
+Returns `true` when **all** characters of `str` (after trimming) are in the Arabic Unicode block **and** match contextual Arabic letterforms.
+
+```ts
+import { isArabic } from "@persian-tools/persian-tools";
+
+isArabic("السلام عليكم"); // true
+isArabic("Hello مرحبا"); // false
+isArabic(""); // false
+```
+
+#### Parameters
+
+| Name          | Type     | Default          | Description                                |
+| ------------- | -------- | ---------------- | ------------------------------------------ |
+| `str`         | `string` | —                | text to test                               |
+| `trimPattern` | `RegExp` | `/["'-+()\s.]/g` | characters stripped before the script test |
+
+### `hasArabic(str)`
+
+Returns `true` when `str` contains **at least one** Arabic character.
+
+```ts
+hasArabic("Hello مرحبا"); // true
+hasArabic("Hello"); // false
+```
+
+## Persian vs. Arabic
+
+Persian uses the Arabic script **plus** `پ چ ژ گ` **plus** different code points for ya/kaf. Two practical consequences:
+
+1. A pure Persian string typed on a Persian keyboard **also passes `isArabic`** — the characters all fall in U+0600–U+06FF.
+2. A pure Arabic string **fails `isPersian`** (default mode) only because of trim/punctuation rules; in complex mode the verdict can flip.
+
+If you need "Arabic but **not** Persian", combine the checks:
+
+```ts
+import { isArabic, hasPersian } from "@persian-tools/persian-tools";
+
+const isPureArabic = (s: string) => isArabic(s) && !hasPersian(s);
+
+isPureArabic("السلام"); // true
+isPureArabic("علی"); // false — Persian-specific ya present
+```
+
+## Edge cases
+
+| Input              | `isArabic(...)` | Why                                             |
+| ------------------ | --------------- | ----------------------------------------------- |
+| `""`               | `false`         | Nothing to match                                |
+| `"السلام"`         | `true`          | All chars in U+0600–U+06FF                      |
+| `"عليكم 123"`      | `false`         | Latin digits are not in the Arabic block        |
+| `"عليكم ١٢٣"`      | `true`          | Arabic-Indic digits **are** in the Arabic block |
+| `"سلام"` (Persian) | `true`          | Persian letters live in the same block          |
+
+## Pitfalls
+
+- `isArabic` is **not** the negation of `isPersian`. Use the combined check shown above when you need a clean partition.
+- Arabic-Indic digits (`٠-٩`) pass; Persian digits (`۰-۹`) pass too. For digit-level distinction, use `arDigitsRegex` and `faDigitsRegex` from the [Digits](../numbers/digits) module.
+
+## Source
+
+`src/modules/isArabic/index.ts` · Tests: `test/isArabic.spec.ts`

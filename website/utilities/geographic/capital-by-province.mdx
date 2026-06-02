@@ -1,75 +1,49 @@
 ---
-title: "Find Capital by Province"
-description: "Get the capital city of Iranian provinces"
+title: "Capital by Province"
+description: "Look up the capital city of an Iranian province by its Persian name."
 icon: "landmark"
 ---
 
-# Find Capital by Province
+`findCapitalByProvince` returns the capital city of an Iranian province given its Persian name.
 
-Get the capital city for any Iranian province.
+## Function
 
-## Basic Usage
+```ts
+findCapitalByProvince(state: string): string
+```
 
-```typescript
+```ts
 import { findCapitalByProvince } from "@persian-tools/persian-tools";
 
-console.log(findCapitalByProvince("خراسان رضوی"));
-// Output: "مشهد"
-
-console.log(findCapitalByProvince("فارس"));
-// Output: "شیراز"
+findCapitalByProvince("خراسان رضوی"); // "مشهد"
+findCapitalByProvince("تهران"); // "تهران"
+findCapitalByProvince("اصفهان"); // "اصفهان"
 ```
 
-## API Reference
+## Behaviour
 
-<ParamField path="province" type="string" required>
-	Province name in Persian
-</ParamField>
+1. Normalize the input via `toPersianChars` — Arabic-keyboard `ك`/`ي` are tolerated.
+2. Look up in `IRAN_STATES` (a `Map<string, string>`).
+3. Return the capital, or **throw** `PersianToolsError("findCapitalByProvince", "no province found")` if unknown.
 
-<ResponseField name="result" type="string | undefined">
-	Capital city name in Persian, or `undefined` if province not found
-</ResponseField>
+> Return type is `string`. The function **throws** on unknown input; it does not return `undefined`. Wrap calls in `try/catch` or pre-validate against the keys.
 
-## Examples
+## Pitfalls
 
-### Location Display
+- **Throws** on unknown province.
+- **Input must be Persian.** Latin transliterations like `"Tehran"` won't match.
+- **Equality is exact after `toPersianChars`** — extra whitespace, ZWNJ, or diacritics will miss. Normalize upstream if input is user-typed.
+- **To list all provinces** for autocomplete, iterate `Array.from(IRAN_STATES.keys())`.
 
-```typescript
-import { findCapitalByProvince } from "@persian-tools/persian-tools";
+## Composition
 
-const displayProvinceInfo = (province: string) => {
-	const capital = findCapitalByProvince(province);
-	return capital ? `پایتخت ${province}: ${capital}` : "استان یافت نشد";
-};
+```ts
+import { findProvinceFromCoordinate, findCapitalByProvince } from "@persian-tools/persian-tools";
 
-console.log(displayProvinceInfo("تهران"));
-// "پایتخت تهران: تهران"
+const province = findProvinceFromCoordinate({ longitude: 51.4, latitude: 35.7 });
+const capital = findCapitalByProvince(province.fa);
 ```
 
-### Shipping Calculator
+## Source
 
-```typescript
-import { findCapitalByProvince } from "@persian-tools/persian-tools";
-
-const calculateShippingHub = (province: string) => {
-	const capital = findCapitalByProvince(province);
-	return capital || "تهران"; // Default to Tehran
-};
-```
-
-## Supported Provinces
-
-All 31 Iranian provinces are supported:
-
-- تهران → تهران
-- اصفهان → اصفهان
-- خراسان رضوی → مشهد
-- فارس → شیراز
-- آذربایجان شرقی → تبریز
-- And 26 more...
-
-## Type Definition
-
-```typescript
-function findCapitalByProvince(province: string): string | undefined;
-```
+`src/modules/findCapitalByProvince/index.ts`, `states.ts` · Tests: `test/findCapitalByProvince.spec.ts`

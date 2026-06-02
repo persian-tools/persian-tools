@@ -154,6 +154,7 @@
 				"pages": [
 					"utilities/numbers/number-to-words",
 					"utilities/numbers/words-to-number",
+					"utilities/numbers/money-words-to-number",
 					"utilities/numbers/digits",
 					"utilities/numbers/commas",
 					"utilities/numbers/ordinal-suffix"
@@ -174,6 +175,8 @@
 				"group": "Text Processing",
 				"icon": "text",
 				"pages": [
+					"utilities/text/is-persian",
+					"utilities/text/is-arabic",
 					"utilities/text/persian-chars",
 					"utilities/text/half-space",
 					"utilities/text/slugify",
@@ -184,7 +187,12 @@
 			{
 				"group": "Banking",
 				"icon": "building-columns",
-				"pages": ["utilities/banking/sheba", "utilities/banking/bill"]
+				"pages": [
+					"utilities/banking/sheba",
+					"utilities/banking/bill",
+					"utilities/banking/bank-name",
+					"utilities/banking/extract-card-numbers"
+				]
 			},
 			{
 				"group": "Geographic",

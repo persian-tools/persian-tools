@@ -1,261 +1,135 @@
 ---
 title: "Extract Card Numbers"
-description: "Iranian bank card number extraction with performance optimizations, type safety, and comprehensive validation"
+description: "Extract Iranian card numbers from free-form text — Persian/Arabic digits, separators, fuzzy matching, optional validation and bank detection, large-text optimization."
+icon: "credit-card"
 ---
 
-# Extract Card Numbers
+`extractCardNumber` (singular) finds Iranian card numbers inside free-form text — chat logs, OCR output, payment confirmations — with eight type-narrowing overloads based on option combinations.
 
-Extract Iranian bank card numbers from text with advanced features including performance optimizations, fuzzy matching, and comprehensive validation.
+> The exported function is **`extractCardNumber`** (singular). There is no `extractCardNumbers` plural export, and no `extractCardNumberWithMetrics`.
 
-## Features
+## Basic usage
 
-- **TypeScript Function Overloads**: Type-safe extraction based on options
-- **Performance Optimized**: Handles small to large texts (1MB+) efficiently
-- **Multi-Format Support**: Persian, Arabic digits and various separators
-- **Fuzzy Matching**: Partially masked card numbers like `6037-****-8909-5443`
-- **Context Extraction**: Surrounding text analysis
-- **Position Tracking**: Exact location of matches in text
-- **Duplicate Removal**: Automatic deduplication
-- **Iranian Bank Validation**: Integration with Iranian bank validation
-
-## Installation
-
-```bash
-npm install @persian-tools/persian-tools
-```
-
-## Basic Usage
-
-```typescript
+```ts
 import { extractCardNumber } from "@persian-tools/persian-tools";
 
-const text = "My card number is 6037701689095443 for payment";
-
-// Basic extraction with validation
+const text = "Cards: 6037701689095443 and 6219-8610-3452-9007";
 const cards = extractCardNumber(text, {
 	checkValidation: true,
 	detectBankNumber: true,
 });
 
-console.log(cards[0]);
-// {
-//   index: 1,
-//   base: "6037701689095443",
-//   pure: "6037701689095443",
-//   startIndex: 17,
-//   endIndex: 35,
-//   isValid: true,
-//   bankName: "بانک کشاورزی"
-// }
+// [
+//   { index: 1, base: "6037701689095443", pure: "6037701689095443",
+//     startIndex: 7, endIndex: 23, isValid: true, bankName: "بانک کشاورزی" },
+//   { index: 2, base: "6219-8610-3452-9007", pure: "6219861034529007",
+//     startIndex: 28, endIndex: 47, isValid: true, bankName: "بانک سامان" },
+// ]
 ```
 
-## TypeScript Function Overloads
+## Result shape
 
-The function provides type-safe overloads based on your options:
+Every match has at minimum:
 
-```typescript
-// Returns ExtractCardNumberComplete[] (with validation + bank)
-const fullResults = extractCardNumber(text, {
-	checkValidation: true,
-	detectBankNumber: true,
-});
-
-// Returns ExtractCardNumberWithValidation[] (validation only)
-const validatedResults = extractCardNumber(text, {
-	checkValidation: true,
-	detectBankNumber: false,
-});
-
-// Returns ExtractCardNumberWithBank[] (bank detection only)
-const bankResults = extractCardNumber(text, {
-	checkValidation: false,
-	detectBankNumber: true,
-});
-
-// Returns ExtractCardNumberBase[] (basic extraction)
-const basicResults = extractCardNumber(text, {
-	checkValidation: false,
-	detectBankNumber: false,
-});
+```ts
+{
+	index: number; // 1-based ordinal in this run
+	base: string; // raw matched text (may contain separators)
+	pure: string; // normalized digits-only form
+	startIndex: number; // byte offset in source
+	endIndex: number;
+}
 ```
 
-## Advanced Options
+Options add fields:
 
-### Performance Optimization
+- `checkValidation: true` → `isValid: boolean`
+- `detectBankNumber: true` → `bankName: string | null`
+- `includeContext: true` → `context: { before, after }`
 
-```typescript
-// Large document processing (1MB+)
-const hugeDocument = "..."; // Very large text
-const results = extractCardNumber(hugeDocument, {
-	optimizeForLargeText: true,
-	maxResults: 10,
-	filterValidCardNumbers: true,
-});
+## Multi-format input
+
+Persian (`۰-۹`) and Arabic-Indic (`٠-٩`) digits, plus dashes / underscores / spaces, are recognized and normalized into `pure`:
+
+```ts
+extractCardNumber("کارت: ۶۰۳۷۷۰۱۶۸۹۰۹۵۴۴۳"); // pure: "6037701689095443"
+extractCardNumber("6037_7016_8909_5443"); // pure: "6037701689095443"
 ```
 
-### Fuzzy Matching
+## Fuzzy matching for masked cards
 
-```typescript
-// Extract partially masked card numbers
-const maskedText = "Card: 6037-****-8909-5443";
-const fuzzyResults = extractCardNumber(maskedText, {
+```ts
+extractCardNumber("My card: 6037-****-8909-5443", {
 	enableFuzzyMatching: true,
 	checkValidation: false,
 });
 ```
 
-### Context Extraction
+Uses `fuzzyCardNumberRegex` to tolerate `*`, `?`, and similar masking. Slower; gate by `shouldUseFuzzyMatching(text, config)` on large inputs.
 
-```typescript
-// Include surrounding text context
-const contextResults = extractCardNumber(text, {
-	includeContext: true,
-	contextLength: 20,
-});
+## Large-text optimization
 
-console.log(contextResults[0].context);
-// {
-//   before: "My card number is ",
-//   after: " for payment",
-//   full: "My card number is 6037701689095443 for payment"
-// }
-```
-
-## Multi-Format Support
-
-The function automatically handles various formats:
-
-```typescript
-const multiFormatText = `
-  Formatted: 6037-7016-8909-5443
-  Spaced: 6037 7016 8909 5443
-  Persian: ۶۰۳۷۷۰۱۶۸۹۰۹۵۴۴۳
-  Arabic: ٦٠٣٧٧٠١٦٨٩٠٩٥٤٤٣
-  Dots: 6037.7016.8909.5443
-  Underscores: 6037_7016_8909_5443
-`;
-
-const results = extractCardNumber(multiFormatText);
-// All formats are normalized to: "6037701689095443"
-```
-
-## Options Reference
-
-| Option                   | Type      | Default     | Description                                      |
-| ------------------------ | --------- | ----------- | ------------------------------------------------ |
-| `checkValidation`        | `boolean` | `true`      | Enable Luhn algorithm validation                 |
-| `detectBankNumber`       | `boolean` | `false`     | Detect Iranian bank names                        |
-| `filterValidCardNumbers` | `boolean` | `true`      | Filter out invalid cards when validation enabled |
-| `maxResults`             | `number`  | unlimited   | Maximum number of cards to extract               |
-| `optimizeForLargeText`   | `boolean` | auto-detect | Enable performance optimizations                 |
-| `enableFuzzyMatching`    | `boolean` | `false`     | Support partially masked card numbers            |
-| `includeContext`         | `boolean` | `false`     | Include surrounding text context                 |
-| `contextLength`          | `number`  | `20`        | Number of characters for context                 |
-
-## Result Types
-
-### ExtractCardNumberBase
-
-```typescript
-interface ExtractCardNumberBase {
-	index: number; // 1-based position in results
-	base: string; // Original matched text
-	pure: string; // Normalized card number
-	startIndex: number; // Start position in text
-	endIndex: number; // End position in text
-}
-```
-
-### ExtractCardNumberWithValidation
-
-```typescript
-interface ExtractCardNumberWithValidation extends ExtractCardNumberBase {
-	isValid: boolean; // Luhn validation result
-}
-```
-
-### ExtractCardNumberWithBank
-
-```typescript
-interface ExtractCardNumberWithBank extends ExtractCardNumberBase {
-	bankName: string | null; // Iranian bank name
-}
-```
-
-### ExtractCardNumberComplete
-
-```typescript
-interface ExtractCardNumberComplete extends ExtractCardNumberWithValidation, ExtractCardNumberWithBank {}
-```
-
-## Performance Characteristics
-
-- **Small texts (< 1KB)**: < 1ms processing time
-- **Medium texts (1KB-10KB)**: < 10ms processing time
-- **Large texts (10KB-100KB)**: < 50ms with optimization
-- **Huge texts (> 100KB)**: < 200ms with chunking strategy
-
-## Iranian Bank Integration
-
-Automatically detects Iranian banks:
-
-```typescript
-const cards = extractCardNumber("Card: 6037701689095443", {
-	detectBankNumber: true,
-});
-
-console.log(cards[0].bankName); // "بانک کشاورزی"
-```
-
-Supported Iranian banks include:
-
-- بانک ملی (Bank Melli)
-- بانک کشاورزی (Bank Keshavarzi)
-- بانک تجارت (Bank Tejarat)
-- بانک سپه (Bank Sepah)
-- بانک ملت (Bank Mellat)
-- And 30+ other Iranian banks
-
-## Error Handling
-
-The function handles various edge cases gracefully:
-
-```typescript
-// Empty or invalid input
-extractCardNumber(""); // Returns []
-extractCardNumber(null); // Returns []
-
-// No card numbers found
-extractCardNumber("No cards here"); // Returns []
-
-// Malformed card numbers are filtered out
-extractCardNumber("Invalid: 123456789"); // Returns []
-```
-
-## Migration from v1.x
-
-The v2.0 enhancement maintains 100% backward compatibility:
-
-```typescript
-// v1.x usage continues to work unchanged
-const legacyResults = extractCardNumber(text, {
-	checkValidation: true,
-	detectBankNumber: false,
-	filterValidCardNumbers: true,
+```ts
+extractCardNumber(hugeDocument, {
+	optimizeForLargeText: true,
+	maxResults: 10,
 });
 ```
 
-## Browser Support
+Internally chunks the text via `splitTextIntoChunks` (with chunk size from `getOptimalChunkConfig`) to avoid regex backtracking across the whole document.
 
-Works in all modern browsers and Node.js environments:
+## Context capture
 
-- Chrome 60+
-- Firefox 55+
-- Safari 12+
-- Edge 79+
-- Node.js 14+
+```ts
+extractCardNumber(text, { includeContext: true, contextLength: 20 });
+// each match: { ..., context: { before, after } }
+```
 
-## Related Functions
+Useful for UI snippets ("...در پیامک از ۶۰۳۷۷۰۱۶۸۹۰۹۵۴۴۳ خرید شد...").
 
-- [`verifyCardNumber`](/utilities/banking/verify-card-number) - Validate individual card numbers
-- [`getBankNameFromCardNumber`](/utilities/banking/get-bank-name) - Get bank name from card number
+## Type narrowing overloads
+
+The function exposes 8 overloads:
+
+```ts
+extractCardNumber(s, { checkValidation: true, detectBankNumber: true });
+// → ExtractCardNumberComplete[]   (isValid + bankName)
+
+extractCardNumber(s, { checkValidation: true, detectBankNumber: false });
+// → ExtractCardNumberWithValidation[]
+
+extractCardNumber(s);
+// → ExtractCardNumber[]   (base shape)
+```
+
+All option/result interfaces are exported (`ExtractCardNumberOptions`, `ExtractCardNumberComplete`, `ExtractCardNumberWithBank`, etc.).
+
+## Re-exported helpers and constants
+
+```ts
+import {
+	cleanCardNumber,
+	extractContext,
+	splitTextIntoChunks,
+	quickCardNumberCheck,
+	getOptimalChunkConfig,
+	shouldUseFuzzyMatching,
+	isValidCardNumberFormat,
+	sortCardNumbersByPosition,
+	removeDuplicateCardNumbers,
+	cardNumberRegex,
+	fuzzyCardNumberRegex,
+	defaultFuzzyConfig,
+	performanceThresholds,
+} from "@persian-tools/persian-tools";
+```
+
+## Pitfalls
+
+- **No metrics function exists.** Time the call yourself if you need throughput data.
+- **`null` is not in the TS signature**, though the runtime guard returns `[]` for falsy. Pass a string.
+- **Use `pure` (not `base`)** when piping into `verifyCardNumber` / `getBankNameFromCardNumber`.
+
+## Source
+
+`src/modules/extractCardNumbers/index.ts`, `types.ts`, `utils.ts`, `constants.ts` · Tests: `test/extractCardNumber.spec.ts`

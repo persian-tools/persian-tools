@@ -1,81 +1,53 @@
 ---
-title: "Find Province from Coordinates"
-description: "Determine the Iranian province from GPS coordinates"
-icon: "map-location-dot"
+title: "Province from Coordinates"
+description: "Resolve a (longitude, latitude) pair to the Iranian province it falls inside, with Persian and English names."
+icon: "map"
 ---
 
-# Find Province from Coordinates
+`findProvinceFromCoordinate` runs point-in-polygon containment against Iran's province boundaries (from a GeoJSON dataset) and returns the matching province's Persian and English names.
 
-Find which Iranian province a set of GPS coordinates belongs to.
+## Function
 
-## Basic Usage
+```ts
+findProvinceFromCoordinate(pointToCheck: {
+  longitude: number;
+  latitude: number;
+}): { fa: string; en: string }
+```
 
-```typescript
+```ts
 import { findProvinceFromCoordinate } from "@persian-tools/persian-tools";
 
-const province = findProvinceFromCoordinate({ latitude: 35.6892, longitude: 51.389 });
-console.log(province);
-// Output: "تهران"
+findProvinceFromCoordinate({ longitude: 51.42, latitude: 35.69 });
+// { fa: "تهران", en: "Tehran" }
 ```
 
-## API Reference
+## Behaviour
 
-<ParamField path="coordinates" type="object" required>
-  <Expandable title="properties">
-    <ParamField path="latitude" type="number" required>
-      Latitude coordinate
-    </ParamField>
+1. Iterate the polygons (one per province, from `irGeoJSON.ts`).
+2. Run a horizontal ray-cast point-in-polygon test.
+3. Return `{ fa, en }` for the first match.
+4. If no polygon contains the point, **throw** `PersianToolsError("findProvinceFromCoordinate", "no province found")`.
 
-    <ParamField path="longitude" type="number" required>
-      Longitude coordinate
-    </ParamField>
+> Return type is the **object** `{ fa, en }` — not a string. Wrap in `try/catch` for graceful fallback when the coordinate is outside Iran.
 
-  </Expandable>
-</ParamField>
+## Pitfalls
 
-<ResponseField name="result" type="string | undefined">
-	Province name in Persian, or `undefined` if location is outside Iran
-</ResponseField>
+- **Throws** on out-of-Iran coordinates.
+- **Coordinate order is `{ longitude, latitude }`** (object form), not the GeoJSON `[lng, lat]` array.
+- **The dataset is approximate.** Near administrative borders, expect occasional misclassification.
+- **Don't expect a bare string** — index into `.fa` or `.en`.
 
-## Examples
+## Composition
 
-### Location Services
+```ts
+import { findProvinceFromCoordinate, findCapitalByProvince } from "@persian-tools/persian-tools";
 
-```typescript
-import { findProvinceFromCoordinate } from "@persian-tools/persian-tools";
-
-const getUserProvince = (coords: GeolocationCoordinates) => {
-	const province = findProvinceFromCoordinate({
-		latitude: coords.latitude,
-		longitude: coords.longitude,
-	});
-
-	return province || "نامشخص";
-};
+const point = { longitude: 51.42, latitude: 35.69 };
+const province = findProvinceFromCoordinate(point);
+const capital = findCapitalByProvince(province.fa);
 ```
 
-### Store Locator
+## Source
 
-```typescript
-import { findProvinceFromCoordinate } from "@persian-tools/persian-tools";
-
-const findNearestStore = (userLat: number, userLng: number, stores: any[]) => {
-	const userProvince = findProvinceFromCoordinate({
-		latitude: userLat,
-		longitude: userLng,
-	});
-
-	return stores.filter((store) => store.province === userProvince);
-};
-```
-
-## Type Definition
-
-```typescript
-interface Coordinates {
-	latitude: number;
-	longitude: number;
-}
-
-function findProvinceFromCoordinate(coordinates: Coordinates): string | undefined;
-```
+`src/modules/findProvinceFromCoordinate/index.ts`, `irGeoJSON.ts` · Tests: `test/findProvinceFromCoordinate.spec.ts`

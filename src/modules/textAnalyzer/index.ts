@@ -468,7 +468,9 @@ function analyzeStyle(text: string, stats: TextStatistics): StyleAnalysis {
 	const technicalScoreNorm = technicalScore / totalWords;
 	const informalityScore = informalScore / totalWords;
 
+	// eslint-disable-next-line no-useless-assignment
 	let writingStyle: "علمی" | "ادبی" | "روزنامه‌نگاری" | "غیررسمی" | "تکنیکال" = "غیررسمی";
+	// eslint-disable-next-line no-useless-assignment
 	let toneOfVoice: "رسمی" | "دوستانه" | "حرفه‌ای" | "عاطفی" | "خشک" = "دوستانه";
 
 	if (technicalScoreNorm > 0.05) {
