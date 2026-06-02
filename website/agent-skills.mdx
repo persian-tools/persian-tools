@@ -1,0 +1,223 @@
+---
+title: "AI Agent Skills"
+description: "Per-module Agent Skill cards so Claude Code, Cursor, Copilot, and other AI agents answer Persian Tools questions with real signatures, real edge cases, and real source citations — not hallucinated APIs."
+icon: "robot"
+---
+
+# AI Agent Skills
+
+Persian Tools ships a set of **28 Agent Skill cards** — one per public utility — under [`/skills`](https://github.com/persian-tools/persian-tools/tree/master/skills) in the repository. When you load them into an AI coding assistant (Claude Code, Cursor, Copilot, etc.), the retriever pulls the relevant `SKILL.md` on demand so the agent answers with the **real** function names, types, edge cases, and pitfalls — not invented APIs.
+
+<Note>
+	If you've ever asked an AI agent for `extractCardNumbers(...)` and gotten back a confidently wrong signature for a
+	function that's actually named `extractCardNumber` (singular), this is the fix.
+</Note>
+
+## Why Skills?
+
+<CardGroup cols={2}>
+	<Card title="Real signatures" icon="signature">
+		Each SKILL.md is generated from the actual `src/modules/<name>/` exports. No hallucinated parameters or
+		non-existent helpers.
+	</Card>
+	<Card title="Edge cases documented" icon="triangle-alert">
+		Empty input, mixed Persian/Arabic digits, ZWNJ handling, return-type unions — captured per skill so the agent
+		doesn't have to guess.
+	</Card>
+	<Card title="Composition recipes" icon="link">
+		Cross-references between skills (e.g. `extractCardNumbers` → `verifyCardNumber` → `digits`) so the agent
+		assembles working pipelines.
+	</Card>
+	<Card title="Tree-shake friendly" icon="tree">
+		Each skill names its single import (`import { Bill } from "@persian-tools/persian-tools"`) so the agent
+		produces tree-shakable code by default.
+	</Card>
+</CardGroup>
+
+## Install into your agent
+
+<CodeGroup>
+
+```bash Bun
+bunx skills add @persian-tools/persian-tools
+```
+
+```bash npm
+npx skills add @persian-tools/persian-tools
+```
+
+```bash pnpm
+pnpm dlx skills add @persian-tools/persian-tools
+```
+
+</CodeGroup>
+
+<Tip>
+	While the public `skills` registry CLI is being finalised, copy the [`skills/`
+	folder](https://github.com/persian-tools/persian-tools/tree/master/skills) into your project's `.claude/skills/` (or
+	your agent's equivalent) directly — the on-disk format is final.
+</Tip>
+
+## What every SKILL.md contains
+
+Each card follows the [Claude Code Skills](https://docs.claude.com/en/docs/claude-code/skills) front-matter spec:
+
+```yaml
+---
+name: <kebab-case-name>
+description: <when to load — used by the retriever>
+license: MIT
+metadata:
+  author: Ali Torki
+  homepage: https://github.com/persian-tools/persian-tools
+  version: "1.0.0"
+---
+```
+
+The body always includes:
+
+1. **Import signature** — exact `import { … } from "@persian-tools/persian-tools"` plus the CommonJS equivalent.
+2. **Public exports** — function/class signatures pulled directly from `src/modules/<name>/`.
+3. **Behaviour rules** — input shapes, return-type unions, what triggers throws.
+4. **Edge cases** — empty input, mixed-digit, Arabic-keyboard, ZWNJ-laden inputs.
+5. **Common pitfalls** — drift between popular community docs and current code; "this function doesn't exist" warnings.
+6. **Composition recipes** — typical pipelines combining 2–3 utilities.
+7. **References** — tests and related skills.
+
+## The 28 skills, grouped by domain
+
+### 🔢 Numbers & digits
+
+| Skill                                                                                                                   | What it covers                                                                          |
+| ----------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| [`digits`](https://github.com/persian-tools/persian-tools/blob/master/skills/digits/SKILL.md)                           | Persian (۰-۹) ↔ Arabic-Indic (٠-٩) ↔ English digit conversion + `autoConvertDigitsToEN` |
+| [`commas`](https://github.com/persian-tools/persian-tools/blob/master/skills/commas/SKILL.md)                           | Thousands-separator add/remove (`addCommas`, `removeCommas`)                            |
+| [`numberToWords`](https://github.com/persian-tools/persian-tools/blob/master/skills/numberToWords/SKILL.md)             | Number → Persian words, with ordinal mode                                               |
+| [`wordsToNumber`](https://github.com/persian-tools/persian-tools/blob/master/skills/wordsToNumber/SKILL.md)             | Persian words → number, fuzzy mode, digit-system output                                 |
+| [`moneyWordsToNumber`](https://github.com/persian-tools/persian-tools/blob/master/skills/moneyWordsToNumber/SKILL.md)   | Money phrase → number with toman/rial detection, formal vs colloquial                   |
+| [`addOrdinalSuffix`](https://github.com/persian-tools/persian-tools/blob/master/skills/addOrdinalSuffix/SKILL.md)       | Append Persian ordinal suffix (`سه` → `سوم`)                                            |
+| [`removeOrdinalSuffix`](https://github.com/persian-tools/persian-tools/blob/master/skills/removeOrdinalSuffix/SKILL.md) | Strip Persian ordinal suffix (`سوم` → `سه`)                                             |
+
+### 📝 Text processing
+
+| Skill                                                                                                         | What it covers                                                                                    |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| [`isPersian`](https://github.com/persian-tools/persian-tools/blob/master/skills/isPersian/SKILL.md)           | Persian-script detection + `autoArabicToPersian`                                                  |
+| [`isArabic`](https://github.com/persian-tools/persian-tools/blob/master/skills/isArabic/SKILL.md)             | Arabic-script detection and Persian-vs-Arabic distinction                                         |
+| [`toPersianChars`](https://github.com/persian-tools/persian-tools/blob/master/skills/toPersianChars/SKILL.md) | Normalize Arabic-script chars (`ي`/`ك`) to Persian (`ی`/`ک`) with template preservation           |
+| [`halfSpace`](https://github.com/persian-tools/persian-tools/blob/master/skills/halfSpace/SKILL.md)           | Insert ZWNJ (نیم‌فاصله) between Persian prefixes/suffixes/compounds                               |
+| [`URLfix`](https://github.com/persian-tools/persian-tools/blob/master/skills/URLfix/SKILL.md)                 | Decode percent-encoded Persian URLs (function is `urlFix`, note camelCase)                        |
+| [`slugify`](https://github.com/persian-tools/persian-tools/blob/master/skills/slugify/SKILL.md)               | URL-safe slugs from Persian text (`slugify`, `createSlug`, `slugifyWithNumbers`, `slugifySimple`) |
+| [`textAnalyzer`](https://github.com/persian-tools/persian-tools/blob/master/skills/textAnalyzer/SKILL.md)     | Full Persian text analysis — function is `analyzeText` (NOT `textAnalyzer`) + helpers             |
+
+### 🏛️ Iranian identifier validation
+
+| Skill                                                                                                                             | What it covers                                                     |
+| --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| [`nationalId`](https://github.com/persian-tools/persian-tools/blob/master/skills/nationalId/SKILL.md)                             | National ID (کد ملی) verify + generate + city-prefix lookup        |
+| [`getPlaceByIranNationalId`](https://github.com/persian-tools/persian-tools/blob/master/skills/getPlaceByIranNationalId/SKILL.md) | City/province lookup from the leading 3 digits of a National ID    |
+| [`legalId`](https://github.com/persian-tools/persian-tools/blob/master/skills/legalId/SKILL.md)                                   | Legal ID (شناسه ملی, 11-digit company ID) validation               |
+| [`phoneNumber`](https://github.com/persian-tools/persian-tools/blob/master/skills/phoneNumber/SKILL.md)                           | Mobile number validate / normalize (`+98` ↔ `0`) / operator detail |
+
+### 💳 Banking
+
+| Skill                                                                                                                               | What it covers                                                                     |
+| ----------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| [`verifyCardNumber`](https://github.com/persian-tools/persian-tools/blob/master/skills/verifyCardNumber/SKILL.md)                   | Iranian card-number validation (Luhn + BIN whitelist)                              |
+| [`getBankNameFromCardNumber`](https://github.com/persian-tools/persian-tools/blob/master/skills/getBankNameFromCardNumber/SKILL.md) | Issuing bank from card BIN                                                         |
+| [`extractCardNumbers`](https://github.com/persian-tools/persian-tools/blob/master/skills/extractCardNumbers/SKILL.md)               | Pull card numbers from free-text — function is `extractCardNumber` (singular)      |
+| [`sheba`](https://github.com/persian-tools/persian-tools/blob/master/skills/sheba/SKILL.md)                                         | Sheba/IBAN validation + bank info — function is `isShebaValid` (not `verifySheba`) |
+| [`bill`](https://github.com/persian-tools/persian-tools/blob/master/skills/bill/SKILL.md)                                           | Utility-bill `Bill` class — parse bill ID + payment ID + barcode                   |
+
+### 🌍 Geography & vehicles
+
+| Skill                                                                                                                                 | What it covers                                                               |
+| ------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| [`findCapitalByProvince`](https://github.com/persian-tools/persian-tools/blob/master/skills/findCapitalByProvince/SKILL.md)           | Province name → capital city                                                 |
+| [`findProvinceFromCoordinate`](https://github.com/persian-tools/persian-tools/blob/master/skills/findProvinceFromCoordinate/SKILL.md) | (longitude, latitude) → `{ fa, en }` province                                |
+| [`numberplate`](https://github.com/persian-tools/persian-tools/blob/master/skills/numberplate/SKILL.md)                               | Iranian license plate parser (cars + motorcycles) — use `getNumberPlateInfo` |
+
+### ⏱️ Time
+
+| Skill                                                                                                       | What it covers                                                 |
+| ----------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| [`timeAgo`](https://github.com/persian-tools/persian-tools/blob/master/skills/timeAgo/SKILL.md)             | Jalali date string → "X قبل/بعد" Persian phrase                |
+| [`remainingTime`](https://github.com/persian-tools/persian-tools/blob/master/skills/remainingTime/SKILL.md) | Gregorian target → structured countdown + Persian `toString()` |
+
+## How retrieval composes
+
+The skills are intentionally **narrow** — one per utility — and cross-reference each other rather than duplicate domain knowledge:
+
+```
+isPersian, isArabic, toPersianChars, halfSpace, digits
+   ↓
+Used by every higher-level skill (validators, parsers, formatters)
+   ↓
+nationalId, sheba, phoneNumber, moneyWordsToNumber, …
+```
+
+A typical agent retrieval flow:
+
+1. User says: _"validate this card number from a chat message"_
+2. Retriever picks: `extractCardNumbers` (primary) + `verifyCardNumber` + `digits` (digit normalization)
+3. Agent reads the three SKILL.md files and produces a correct pipeline — for example:
+
+```ts
+import {
+	autoConvertDigitsToEN,
+	extractCardNumber,
+	verifyCardNumber,
+	getBankNameFromCardNumber,
+} from "@persian-tools/persian-tools";
+
+const text = autoConvertDigitsToEN(userMessage);
+const candidates = extractCardNumber(text, { checkValidation: true });
+const valid = candidates
+	.filter((c) => c.isValid)
+	.map((c) => ({
+		number: c.pure,
+		bank: getBankNameFromCardNumber(c.pure),
+	}));
+```
+
+## Maintainer-side skills
+
+The 28 skills above are **user-facing** — one per public utility. For _contributor-facing_ skills that guide adding new modules, writing tests, keeping the bundle small, or cutting a release, see the [`.agents/`](https://github.com/persian-tools/persian-tools/tree/master/.agents) directory:
+
+| Skill                       | Purpose                              |
+| --------------------------- | ------------------------------------ |
+| `persian-module-author`     | New-module checklist                 |
+| `persian-text-expert`       | Persian language domain reference    |
+| `iranian-validation-expert` | Checksum algorithm reference         |
+| `persian-test-author`       | Vitest house style                   |
+| `bundle-size-guardian`      | Tree-shaking + `.skip.ts` convention |
+| `persian-tools-release`     | Release flow                         |
+
+## Adding or editing a skill
+
+1. Each skill lives in [`skills/<module-name>/SKILL.md`](https://github.com/persian-tools/persian-tools/tree/master/skills) with valid YAML front-matter.
+2. The `description` field is what the retriever matches on — include literal triggers (function names, Persian terms, common synonyms).
+3. The import signature must match the real `src/modules/<name>/` exports. If the source changes, the skill should change with it.
+4. Cross-reference other skills by name (`see the X skill`) — don't duplicate their content.
+5. Update the [skills README table](https://github.com/persian-tools/persian-tools/blob/master/skills/README.md).
+
+## External references
+
+<CardGroup cols={2}>
+	<Card title="Claude Code Skills spec" icon="book" href="https://docs.claude.com/en/docs/claude-code/skills">
+		The official front-matter format and retrieval semantics
+	</Card>
+	<Card
+		title="skills/ on GitHub"
+		icon="github"
+		href="https://github.com/persian-tools/persian-tools/tree/master/skills"
+	>
+		Browse all 28 SKILL.md files
+	</Card>
+	<Card title="Source code" icon="code" href="https://github.com/persian-tools/persian-tools/tree/master/src/modules">
+		The `src/modules/` directory each skill documents
+	</Card>
+	<Card title="npm package" icon="npm" href="https://www.npmjs.com/package/@persian-tools/persian-tools">
+		`@persian-tools/persian-tools`
+	</Card>
+</CardGroup>

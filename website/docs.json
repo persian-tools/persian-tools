@@ -144,6 +144,11 @@
 				"pages": ["showcase"]
 			},
 			{
+				"group": "AI Agent Skills",
+				"icon": "robot",
+				"pages": ["agent-skills"]
+			},
+			{
 				"group": "Getting Started",
 				"icon": "rocket",
 				"pages": ["getting-started/installation", "getting-started/usage", "getting-started/examples"]
