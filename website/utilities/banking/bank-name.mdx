@@ -1,0 +1,66 @@
+---
+title: "Bank Name from Card Number"
+description: "Look up the issuing Iranian bank's Persian name from a card number's 6-digit BIN prefix."
+icon: "building-columns"
+---
+
+`getBankNameFromCardNumber` returns the Persian name of the bank that issued an Iranian card, by inspecting the leading 6-digit BIN.
+
+## Function
+
+```ts
+getBankNameFromCardNumber(digits?: number | string): string | null | undefined
+```
+
+```ts
+import { getBankNameFromCardNumber } from "@persian-tools/persian-tools";
+
+getBankNameFromCardNumber("6219861034529007"); // "بانک سامان"
+getBankNameFromCardNumber("603799"); // "بانک ملی ایران" — BIN-only works
+getBankNameFromCardNumber("9999999999999999"); // null — BIN not in the table
+getBankNameFromCardNumber("123"); // null — too short
+getBankNameFromCardNumber(undefined); // undefined
+```
+
+## Return type — three states
+
+| Return      | Meaning                                               |
+| ----------- | ----------------------------------------------------- |
+| `string`    | Issuing bank's Persian name                           |
+| `null`      | Length out of `[6, 16]`, or BIN not in the data table |
+| `undefined` | Falsy input — function did not attempt the lookup     |
+
+Use `=== "string"` rather than a truthy check.
+
+## Behaviour
+
+1. Falsy input → `undefined`.
+2. Stringified length must be in `[6, 16]`. Otherwise → `null`.
+3. Take the leading 6 characters as the BIN.
+4. Look up in the `cardBank` data table (`src/modules/getBankNameFromCardNumber/banksCode.skip.ts`).
+5. Return the Persian bank name or `null`.
+
+## Pitfalls
+
+- This is a **lookup, not a validator**. A nonsense tail (e.g. `"603799 garbage"`) doesn't matter as long as the BIN matches AND total length is in range. For checksum validation, use `verifyCardNumber`.
+- **Persian/Arabic digit input is not normalized.** Pre-convert with `digitsFaToEn` / `autoConvertDigitsToEN` if input may contain them.
+- The data table is curated; new banks may not appear until added.
+
+## Composition with `verifyCardNumber`
+
+```ts
+import { autoConvertDigitsToEN, verifyCardNumber, getBankNameFromCardNumber } from "@persian-tools/persian-tools";
+
+function inspect(raw: string) {
+	const norm = autoConvertDigitsToEN(raw.trim());
+	const valid = verifyCardNumber(norm) === true;
+	return {
+		valid,
+		bank: valid ? getBankNameFromCardNumber(norm) : null,
+	};
+}
+```
+
+## Source
+
+`src/modules/getBankNameFromCardNumber/index.ts` · Tests: `test/getBankNameFromCardNumber.spec.ts`

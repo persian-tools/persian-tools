@@ -1,147 +1,122 @@
 ---
-title: "Vehicle Plate Recognition"
-description: "Parse and validate Iranian vehicle license plates"
+title: "Vehicle Plate"
+description: "Parse and classify Iranian license plates — cars and motorcycles — into structured info with province, category, and validation."
 icon: "car"
 ---
 
-# Vehicle Plate Recognition
+Parse Iranian license plates into structured info: type (car/motorcycle), category (شخصی, دولتی, دیپلمات, …), province, and a formatted template string. Validation is included in the same call.
 
-Parse and validate Iranian vehicle license plates (پلاک خودرو).
+> The library exports plain **functions**. There is no `Numberplate` class.
 
-## Basic Usage
+## Functions
 
-```typescript
-import { Numberplate } from "@persian-tools/persian-tools";
+### `getNumberPlateInfo(plate)`
 
-const plate = new Numberplate("12ع34567");
-console.log(plate.isValid);
-// Output: true
+Main API. Accepts either a compact string or an object.
 
-const info = plate.getInfo();
-console.log(info);
-// Output: { province: 'تهران', type: 'شخصی', ... }
+```ts
+import { getNumberPlateInfo } from "@persian-tools/persian-tools";
+
+// Car — string form
+const car = getNumberPlateInfo("12D45147");
+// car.info: {
+//   template: "12 D 451 ایران 47",
+//   province: "مرکزی",
+//   type: "Car",
+//   category: "دیپلمات",
+//   details: { firstTwoDigits: "12", plateCharacter: "D", nextThreeDigits: "451", provinceCode: "47" },
+// }
+// car.isValid: true
+
+// Car — object form (when the letter is separated)
+getNumberPlateInfo({ number: "1245147", char: "ج" });
+
+// Motorcycle — 8-digit numeric
+const moto = getNumberPlateInfo(12345678);
+// moto.info: { template: "123-45678", province: "مرکز تهران", type: "Motorcycle", details: { digits: "12345678", ... } }
 ```
 
-## API Reference
+### Lower-level pieces
 
-### Constructor
+```ts
+import {
+	getPlateInfo,
+	isPlateValid,
+	getPlateHandler,
+	carHandler,
+	motorcycleHandler,
+} from "@persian-tools/persian-tools";
 
-<ParamField path="plateNumber" type="string" required>
-	Vehicle plate number string
-</ParamField>
-
-### Properties
-
-<ResponseField name="isValid" type="boolean">
-	Whether the plate number is valid
-</ResponseField>
-
-### Methods
-
-#### getInfo()
-
-Get detailed information about the plate.
-
-<ResponseField name="result" type="object">
-  <Expandable title="properties">
-    <ResponseField name="province" type="string">
-      Province where plate was issued
-    </ResponseField>
-
-    <ResponseField name="type" type="string">
-      Vehicle type (شخصی, عمومی, دولتی, etc.)
-    </ResponseField>
-
-    <ResponseField name="category" type="string">
-      Vehicle category
-    </ResponseField>
-
-  </Expandable>
-</ResponseField>
-
-## Examples
-
-### Parking System
-
-```typescript
-import { Numberplate } from "@persian-tools/persian-tools";
-
-const validateParkingEntry = (plateNumber: string) => {
-	const plate = new Numberplate(plateNumber);
-
-	if (!plate.isValid) {
-		throw new Error("شماره پلاک نامعتبر است");
-	}
-
-	const info = plate.getInfo();
-
-	return {
-		plate: plateNumber,
-		province: info.province,
-		vehicleType: info.type,
-		timestamp: new Date(),
-	};
-};
+const info = getPlateInfo(normalizedPlate);
+const valid = isPlateValid(info, normalizedPlate.numbers);
 ```
 
-### Traffic Violation System
+`getNumberPlateInfo` is the composition of `getPlateInfo` + `isPlateValid` over a normalized plate.
 
-```typescript
-import { Numberplate } from "@persian-tools/persian-tools";
+## Result shape
 
-const recordViolation = (plateNumber: string, violation: string) => {
-	const plate = new Numberplate(plateNumber);
-
-	if (!plate.isValid) {
-		return { error: "Invalid plate number" };
-	}
-
-	return {
-		plate: plateNumber,
-		violation,
-		info: plate.getInfo(),
-	};
-};
-```
-
-## Use Cases
-
-<AccordionGroup>
-  <Accordion title="Parking Management" icon="square-parking">
-    Track vehicle entries and exits:
-    ```typescript
-    const logEntry = (plateNumber: string) => {
-      const plate = new Numberplate(plateNumber);
-      if (plate.isValid) {
-        // Log entry
-      }
-    };
-    ```
-  </Accordion>
-
-  <Accordion title="Access Control" icon="shield">
-    Validate authorized vehicles:
-    ```typescript
-    const checkAuthorization = (plateNumber: string) => {
-      const plate = new Numberplate(plateNumber);
-      return plate.isValid && authorizedPlates.includes(plateNumber);
-    };
-    ```
-  </Accordion>
-</AccordionGroup>
-
-## Type Definition
-
-```typescript
-interface PlateInfo {
-	province: string;
-	type: string;
-	category: string;
-}
-
-class Numberplate {
-	constructor(plateNumber: string);
+```ts
+interface PlateResult {
+	info: PlateResultApi; // type, template, province, category, details, ...
 	isValid: boolean;
-	getInfo(): PlateInfo;
 }
 ```
+
+- `info.type` is the **string** `"Car"` or `"Motorcycle"` — not a Persian category.
+- `info.category` (cars only) is the Persian category (`"شخصی"`, `"دولتی"`, `"دیپلمات"`, …).
+- `info.template` is a presentation-ready string.
+- `info.details` is the parsed sub-fields (see types below).
+
+## Input shapes
+
+```ts
+type PlateOptions = string | { number: string; char?: string };
+```
+
+- **String** for compact plates: `"12D45147"` (car) or `"12345678"` (motorcycle).
+- **Object** when the Persian letter is separated: `{ number: "1245147", char: "ج" }`.
+
+## Types
+
+```ts
+enum PlateTypes {
+	Car = 1,
+	Motorcycle = 2,
+}
+
+type PlateResultApiTypeString = "Car" | "Motorcycle";
+
+interface PlateResultDetailModel {
+	firstTwoDigits: string;
+	plateCharacter: string | null;
+	nextThreeDigits: string;
+	provinceCode: string;
+}
+
+interface PlateResultMotorcycleDetailModel {
+	digits: string;
+	// ...
+}
+```
+
+## Validation rules
+
+For cars, `isPlateValid` requires:
+
+- The plate digits must be `[1-9]` only (no `0`).
+- The category from `info.category` must be resolved (i.e., the letter + province code combination is known).
+
+For motorcycles:
+
+- 8-digit numeric input.
+
+## Pitfalls
+
+- **No `Numberplate` class.** Don't `new Numberplate(...)`. Call the plain functions.
+- **`info.type` is English** (`"Car"` / `"Motorcycle"`). Persian categorization lives in `info.category`.
+- **Province codes are data-driven** — see `src/modules/numberplate/codes.skip.ts`.
+- **Plates containing `0` are rejected** by `isPlateNumberValid` — matches real-world rules.
+
+## Source
+
+`src/modules/numberplate/index.ts`, `helpers.ts`, `codes.skip.ts`, `types.skip.ts` · Tests: `test/numberplate.spec.ts`

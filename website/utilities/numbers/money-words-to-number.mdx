@@ -1,0 +1,104 @@
+---
+title: "Money Words to Number"
+description: "Parse Persian money phrases (تومان, تومن, ریال) into a numeric value with optional currency conversion and colloquial multiplier handling."
+icon: "coins"
+---
+
+`moneyWordsToNumber` parses Persian money expressions — formal (`"یک میلیون تومان"`) and colloquial (`"سه تومن"`, with implicit ×1000 multiplier) — into a `number`. It auto-detects toman/rial, can convert between them, and tolerates Persian/Arabic digits plus Arabic-keyboard characters.
+
+## Functions
+
+### `moneyWordsToNumber(moneyWords, options?)`
+
+Main entry point.
+
+```ts
+import { moneyWordsToNumber } from "@persian-tools/persian-tools";
+
+moneyWordsToNumber("یک میلیون تومان"); // 1_000_000
+moneyWordsToNumber("دو هزار ریال"); // 2000
+moneyWordsToNumber("سه تومن"); // 3000  (colloquial multiplier)
+moneyWordsToNumber("سه تومن", { formal: true }); // 3     (literal)
+```
+
+### `rialsWordsToNumber(text, options?)`
+
+Convenience wrapper: hard-codes `from: "rial"`.
+
+```ts
+import { rialsWordsToNumber } from "@persian-tools/persian-tools";
+rialsWordsToNumber("یک میلیون ریال"); // 1_000_000
+```
+
+### `tomansWordsToNumber(text, options?)`
+
+Convenience wrapper: hard-codes `from: "toman"`.
+
+```ts
+import { tomansWordsToNumber } from "@persian-tools/persian-tools";
+tomansWordsToNumber("یک میلیون تومان"); // 1_000_000
+```
+
+## Options
+
+```ts
+interface MoneyWordsToNumberOptions {
+	formal?: boolean; // default false
+	from?: "toman" | "rial"; // default: auto-detect
+	to?: "toman" | "rial"; // default: same as `from`
+	fuzzy?: boolean; // default false
+	autoConvertDigitsToEn?: boolean; // default true
+	autoConvertArabicCharsToPersian?: boolean; // default true
+}
+```
+
+### `formal` — colloquial vs. formal
+
+Iranian colloquial speech routinely uses `تومن` with an implicit ×1000 multiplier when the leading number is small (< 1000).
+
+| Phrase           | `formal: false` (default) | `formal: true` |
+| ---------------- | ------------------------- | -------------- |
+| `"یک تومان"`     | `1`                       | `1`            |
+| `"یک تومن"`      | **`1000`**                | `1`            |
+| `"دویست تومن"`   | **`200000`**              | `200`          |
+| `"دو هزار تومن"` | `2000`                    | `2000`         |
+
+Use `formal: true` for invoice text or legal contexts. Default suits voice transcripts and chat input.
+
+### Cross-currency conversion
+
+```ts
+// 1 toman = 10 rials
+moneyWordsToNumber("صد تومان", { from: "toman", to: "rial" }); // 1000
+moneyWordsToNumber("ده هزار ریال", { from: "rial", to: "toman" }); // 1000
+```
+
+### Auto-normalization (on by default)
+
+- `autoConvertDigitsToEn: true` → input may use `"یک هزار ۲۰۰ تومان"`, `"یک هزار ٢٠٠ تومان"`, etc.
+- `autoConvertArabicCharsToPersian: true` → Arabic-keyboard `ك`/`ي` are corrected to Persian `ک`/`ی` before word lookup.
+
+### `fuzzy`
+
+When `true`, common Persian typos are corrected via the underlying `wordsToNumber` fuzzy mode. Slower and less deterministic — use for voice/OCR input.
+
+## Returns
+
+`number`. No formatted-string options here — pipe through `addCommas` for display:
+
+```ts
+import { moneyWordsToNumber, addCommas } from "@persian-tools/persian-tools";
+
+const formatted = addCommas(moneyWordsToNumber("دو میلیون تومان")); // "2,000,000"
+```
+
+## Pitfalls
+
+- **Default mode is colloquial** (`formal: false`). For invoices/contracts, set `formal: true`.
+- **Numbers ≥ 1000 are not multiplied** in colloquial mode (`"دو هزار تومن"` is `2000`, not `2,000,000`).
+- **Mixed-unit phrases** like `"یک تومان و ده ریال"` are not supported.
+- **Currency keywords are stripped before parsing** — the remaining words are passed to `wordsToNumber`.
+
+## Source
+
+`src/modules/moneyWordsToNumber/index.ts` · Tests: `test/moneyWordsToNumber.spec.ts`

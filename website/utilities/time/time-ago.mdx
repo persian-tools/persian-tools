@@ -1,80 +1,69 @@
 ---
 title: "Time Ago"
-description: "Convert timestamps to Persian relative time strings"
-icon: "clock-rotate-left"
+description: "Convert a Jalali date-time string into a Persian relative-time phrase (e.g. 'حدود 1 سال قبل')."
+icon: "clock"
 ---
 
-# Time Ago
+`timeAgo` accepts a **Jalali** date-time **string** (e.g. `"1402/06/15 13:05:20"`) and returns a Persian relative-time phrase. For Gregorian countdowns to a future date, use [Remaining Time](./remaining-time).
 
-Convert timestamps to human-readable Persian relative time strings (e.g., "5 دقیقه پیش").
+## Function
 
-## Basic Usage
+```ts
+timeAgo(
+  datetime?: string,
+  since?: Date,
+  timeZone?: string,
+): string
+```
 
-```typescript
+| Parameter  | Type     | Default         | Description                                 |
+| ---------- | -------- | --------------- | ------------------------------------------- |
+| `datetime` | `string` | `""`            | Jalali date-time in `"yyyy/mm/dd hh:mm:ss"` |
+| `since`    | `Date`   | `new Date()`    | reference "now"                             |
+| `timeZone` | `string` | `"Asia/Tehran"` | IANA TZ                                     |
+
+```ts
 import { timeAgo } from "@persian-tools/persian-tools";
 
-const date = new Date("2024-10-14T10:00:00");
-console.log(timeAgo(date));
-// Output: "5 ساعت پیش" (example output)
+timeAgo("1400/03/17 17:55:00"); // e.g. "حدود 4 سال قبل"
+timeAgo(); // "اکنون"
+timeAgo("1402/06/15 13:05:20", new Date("2023-09-06")); // with explicit reference
 ```
 
-## API Reference
+## Input requirements
 
-<ParamField path="date" type="Date | number" required>
-	Date object or timestamp to convert
-</ParamField>
+The `datetime` is **a string**, in Jalali calendar, in `"yyyy/mm/dd hh:mm:ss"` format. The library normalizes by zero-padding via `standardizeFaDateTime`, so `"1402/6/5 1:5:0"` is also accepted.
 
-<ResponseField name="result" type="string">
-	Relative time string in Persian
-</ResponseField>
+- Passing a `Date` (or `number`) as the first argument throws `TypeError("PersianTools: timeAgo - The input must be a string")`.
+- A format that can't be normalized throws `TypeError("PersianTools: timeAgo - The input format must be yyyy/mm/dd hh:mm:ss")`.
 
-## Examples
+## Output vocabulary
 
-### Social Media Posts
+Persian phrases using **قبل** / **بعد** (not پیش):
 
-```typescript
-import { timeAgo, digitsEnToFa } from "@persian-tools/persian-tools";
+| Span                                  | Output                                               |
+| ------------------------------------- | ---------------------------------------------------- |
+| ~1 second                             | `"اکنون"`                                            |
+| up to a few seconds                   | `"چند ثانیه قبل"` / `"چند ثانیه بعد"`                |
+| minutes                               | `"X دقیقه قبل"` / `"X دقیقه بعد"`                    |
+| hours / days / weeks / months / years | `"X ساعت قبل"`, `"X روز قبل"`, …, `"حدود X سال قبل"` |
 
-const formatPostTime = (postDate: Date): string => {
-	const relative = timeAgo(postDate);
-	return digitsEnToFa(relative);
-};
+Future dates produce `"... بعد"` phrases — the function is bidirectional.
 
-const post = { createdAt: new Date("2024-10-14T09:00:00") };
-console.log(formatPostTime(post.createdAt));
-// "۱ ساعت پیش"
+## Re-exported helpers
+
+```ts
+import { checkFormatDateTime, getTimeNow, standardizeFaDateTime } from "@persian-tools/persian-tools";
 ```
 
-### Comment Timestamps
+These are the same helpers used internally; use them when implementing custom flows on top of Jalali date strings.
 
-```typescript
-import { timeAgo } from "@persian-tools/persian-tools";
+## Pitfalls
 
-interface Comment {
-	text: string;
-	timestamp: Date;
-}
+- **Input is a Jalali STRING**, not a JS `Date` or number. Pass `new Date(...)` and it throws.
+- **Output uses قبل/بعد**, not پیش.
+- **No Gregorian → Jalali conversion** is built in. If you have a Gregorian `Date`, convert with `date-fns-jalali` or `moment-jalaali` first.
 
-const displayComment = (comment: Comment) => ({
-	text: comment.text,
-	time: timeAgo(comment.timestamp),
-});
-```
+## Source
 
-## Time Ranges
-
-The function returns appropriate Persian phrases for:
-
-- Seconds: "چند لحظه پیش"
-- Minutes: "X دقیقه پیش"
-- Hours: "X ساعت پیش"
-- Days: "X روز پیش"
-- Weeks: "X هفته پیش"
-- Months: "X ماه پیش"
-- Years: "X سال پیش"
-
-## Type Definition
-
-```typescript
-function timeAgo(date: Date | number): string;
-```
+`src/modules/timeAgo/index.ts`, `helpers.ts`, `timestamp.ts`, `constants.ts` · Tests: `test/timeAgo.spec.ts`

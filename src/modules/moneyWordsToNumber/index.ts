@@ -1,7 +1,7 @@
-import { isString } from "../helpers";
-import { wordsToNumber } from "../modules/wordsToNumber";
-import { autoArabicToPersian } from "../modules/isPersian";
-import { autoConvertDigitsToEN } from "../modules/digits";
+import { isString } from "../../helpers";
+import { wordsToNumber } from "../wordsToNumber";
+import { autoArabicToPersian } from "../isPersian";
+import { autoConvertDigitsToEN } from "../digits";
 import { CURRENCY_UNITS, CURRENCY_MULTIPLIERS, COLLOQUIAL_MULTIPLIERS, CURRENCY_PATTERN } from "./constants";
 
 /**
