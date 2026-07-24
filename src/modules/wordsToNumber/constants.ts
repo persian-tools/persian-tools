@@ -37,7 +37,6 @@ export const UNITS = new Map<string, number>([
  * **TEN**: Multiples of 100 up to 900
  */
 export const TEN = new Map<string, number>([
-	["صد", 100],
 	["یکصد", 100],
 	["یک‌صد", 100],
 	["دویست", 200],
@@ -54,6 +53,7 @@ export const TEN = new Map<string, number>([
  * **MAGNITUDE**: Larger scales (thousands, millions, etc.)
  */
 export const MAGNITUDE = new Map<string, number>([
+	["صد", 100],
 	["هزار", 1000],
 	["میلیون", 1000000],
 	["بیلیون", 1000000000],
