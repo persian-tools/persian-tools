@@ -44,19 +44,46 @@ export function convertToTimeStamp(datetime: string): number {
 }
 
 /**
- * **Stub** for converting Jalali date to Gregorian date.
- * Replace with your actual logic or library function.
+ * Converts a Jalali (Persian) date to Gregorian.
+ * Uses the standard jalaali algorithm (github.com/jalaali/jalaali-js) — no external dependency.
  *
+ * @returns [gregorianYear, gregorianMonth (1-12), gregorianDay]
  * @example
  *  jalaliToGregorian(1402, 6, 15) => [2023, 9, 6]
  */
 function jalaliToGregorian(jYear: number, jMonth: number, jDay: number): [number, number, number] {
-	// This is just an example. You must provide your real conversion.
-	// See e.g.  https://github.com/jalaali/jalaali-js
-	// For demonstration, assume a simplistic offset (~621.57 years).
-	const gregorianYear = jYear + 621; // approximate
-	// You'd need to handle the month, day offset carefully. Using a real library is best.
+	const div = (a: number, b: number): number => Math.floor(a / b);
 
-	// For a real conversion, see official algorithms or a library like jalaali-js
-	return [gregorianYear, jMonth, jDay];
+	const jy = jYear + 1595;
+	let days =
+		-355668 +
+		365 * jy +
+		div(jy, 33) * 8 +
+		div((jy % 33) + 3, 4) +
+		jDay +
+		(jMonth < 7 ? (jMonth - 1) * 31 : (jMonth - 7) * 30 + 186);
+
+	let gy = 400 * div(days, 146097);
+	days %= 146097;
+	if (days > 36524) {
+		gy += 100 * div(--days, 36524);
+		days %= 36524;
+		if (days >= 365) days++;
+	}
+	gy += 4 * div(days, 1461);
+	days %= 1461;
+	if (days > 365) {
+		gy += div(days - 1, 365);
+		days = (days - 1) % 365;
+	}
+	let gd = days + 1;
+
+	const isLeap = (gy % 4 === 0 && gy % 100 !== 0) || gy % 400 === 0;
+	const monthLengths = [0, 31, isLeap ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+	let gm = 0;
+	for (; gm < 13 && gd > monthLengths[gm]; gm++) {
+		gd -= monthLengths[gm];
+	}
+
+	return [gy, gm, gd];
 }

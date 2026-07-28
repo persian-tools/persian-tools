@@ -25,6 +25,20 @@ describe("Iranian Phone Number Utilities", () => {
 					type: ["permanent", "credit"],
 				}),
 			);
+			expect(phoneNumberDetail("09340880440")).toEqual(
+				expect.objectContaining({
+					base: "کشوری",
+					operator: "کیش",
+					type: ["credit"],
+				}),
+			);
+			expect(phoneNumberDetail("09310880440")).toEqual(
+				expect.objectContaining({
+					base: "کشوری",
+					operator: "اسپادان",
+					type: ["credit"],
+				}),
+			);
 			expect(phoneNumberDetail("09022002580")?.province.length).toEqual(0);
 		});
 
