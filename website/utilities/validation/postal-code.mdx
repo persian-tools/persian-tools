@@ -1,0 +1,55 @@
+---
+title: "Postal Code Location"
+description: "Look up the state and city for an Iranian 10-digit postal code."
+icon: "mailbox"
+---
+
+`getLocationFromPostalCode` resolves a 10-digit Iranian postal code to its state and city.
+
+## Function
+
+```ts
+getLocationFromPostalCode(postalCode: string): LocationInfo | null
+```
+
+```ts
+import { getLocationFromPostalCode } from "@persian-tools/persian-tools";
+
+getLocationFromPostalCode("5715000000");
+// { state: "آذربایجان غربی", city: "ارومیه" }
+
+getLocationFromPostalCode("4513869999");
+// { state: "زنجان", city: "زنجان" }
+
+getLocationFromPostalCode("1234567890"); // null — prefix not in any range
+getLocationFromPostalCode("0000000000"); // null — repeating digits rejected
+```
+
+## Return type
+
+```ts
+interface LocationInfo {
+	state: string;
+	city: string;
+}
+```
+
+Two-state return: `LocationInfo` on a match, `null` for anything invalid or unmatched. Unlike `getPlaceByIranNationalId`, it never returns `undefined`.
+
+## Behaviour
+
+1. Validate the code: must be **exactly 10 digits**, numeric only, and not all-repeating (e.g. `"1111111111"` is rejected).
+2. Take the first **5 digits** as the prefix.
+3. Scan the internal range table and return the `state`/`city` of the **first range** whose `[start, end]` contains the prefix.
+4. Return `null` if validation fails or the prefix matches no range.
+
+## Pitfalls
+
+- **Overlapping ranges resolve by table order, not by "closest match."** Prefix ranges for different cities in the same state can overlap, so the function returns whichever range appears first in the table. Always check the actual return value for a prefix rather than eyeballing the ranges — e.g. `"45138xxxxx"` falls inside both the زنجان-city range (`45131–45541`) and the ابهر range (`45511–45741`), but since the زنجان range is listed first, that's what you get back.
+- **No Persian/Arabic digit normalization.** Persian-digit input won't match — pre-convert with `autoConvertDigitsToEN` first, same as `getPlaceByIranNationalId`.
+- **Can't distinguish "malformed input" from "well-formed but unknown location"** — both return `null`. The internal validator isn't exported separately.
+- **Repeating-digit codes are always rejected**, even if the prefix would otherwise fall inside a valid range.
+
+## Source
+
+`src/modules/getLocationFromPostalCode/index.ts`, `validator.ts`, `postalCodeRanges.skip.ts` · Tests: `test/getLocationFromPostalCode.spec.ts`
