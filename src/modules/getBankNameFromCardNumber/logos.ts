@@ -6,6 +6,7 @@ import EghtesadNovin from "./logos/Eghtesad_Novin.svg";
 import Gardeshgari from "./logos/Gardeshgari.svg";
 import Ghavamin from "./logos/Ghavamin.svg";
 import Hekmat from "./logos/Hekmat.svg";
+import IranVenezuela from "./logos/Iran_Venezuela.svg";
 import IranZamin from "./logos/Iran_Zamin.svg";
 import Karafarin from "./logos/Karafarin.svg";
 import Keshavarzi from "./logos/Keshavarzi.svg";
@@ -44,6 +45,7 @@ export const bankLogos = {
 	Gardeshgari,
 	Ghavamin,
 	Hekmat,
+	IranVenezuela,
 	IranZamin,
 	Karafarin,
 	Keshavarzi,
