@@ -33,7 +33,7 @@ Persian Tools provides **27+ utilities** for Persian language processing:
 - [**National ID**](#ex-national-id): Validate & generate Iranian national codes (کد ملی)
 - [**Legal ID**](#ex-validation): Validate Iranian legal entity IDs (شناسه حقوقی)  
 - [**Phone Numbers**](#ex-phone-number): Validate & extract operator info
-- [**Bank Cards**](#ex-bank-card): Validate & identify bank names
+- [**Bank Cards**](#ex-bank-card): Validate cards and identify Iranian bank names and logos
 - [**Extract Card Numbers**](#ex-extract-cards): Advanced card extraction with fuzzy matching & performance optimization
 - [**IBAN/Sheba**](#ex-iban): Validate Iranian bank account numbers
 
@@ -45,7 +45,7 @@ Persian Tools provides **27+ utilities** for Persian language processing:
 
 ### 💰 Financial & Utilities
 - [**Bill Calculator**](#ex-banking): Parse Iranian utility bills
-- [**Bank Detection**](#ex-bank-card): Identify banks from card numbers
+- [**Bank Detection**](#ex-bank-card): Resolve bank names and SVG logos from card numbers
 - [**IBAN Tools**](#ex-iban): Complete Iranian banking support
 
 ### 📝 Text Processing
@@ -258,17 +258,35 @@ phoneNumberDetail("09123456789");
 
 <a id="ex-bank-card"></a>
 <details>
-<summary><strong>Bank Card Validation</strong> - Validate and identify Iranian bank cards</summary>
+<summary><strong>Bank Card Validation & Identification</strong> - Validate cards and find Iranian bank names and logos</summary>
+
+Use `verifyCardNumber` to validate a 16-digit Iranian card number. Use the first six digits (BIN) to find either the issuing bank's name with `getBankNameFromCardNumber`, or its name and SVG logo with `getBankLogoWithCardNumber`.
 
 ```typescript
-import { verifyCardNumber, getBankNameFromCardNumber } from '@persian-tools/persian-tools';
+import { verifyCardNumber, getBankNameFromCardNumber, getBankLogoWithCardNumber } from '@persian-tools/persian-tools';
 
 // Card validation
 verifyCardNumber("6037701689095443"); // true
 
-// Bank identification  
+// Find the issuing bank's Persian name
 getBankNameFromCardNumber("6219861034529007"); // "بانک سامان"
+
+// Find the issuing bank's Persian name and SVG logo
+getBankLogoWithCardNumber("6219861034529007");
+// { name: "بانک سامان", logo: "data:image/svg+xml,..." }
 ```
+
+The `logo` property contains an SVG data URI and can be used directly as an image source:
+
+```tsx
+const bank = getBankLogoWithCardNumber("6219861034529007");
+
+if (bank) {
+	return <img src={bank.logo} alt={bank.name} />;
+}
+```
+
+Bank lookup is based on the 6-digit BIN and is separate from card-number validation. Unknown or incomplete BINs return `null` from `getBankLogoWithCardNumber`.
 </details>
 
 <a id="ex-extract-cards"></a>
