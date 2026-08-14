@@ -1,6 +1,6 @@
 ---
 name: getBankNameFromCardNumber
-description: Resolve the issuing Iranian bank's Persian name from a card number by looking up its 6-digit BIN prefix. Use when displaying "Card from بانک سامان" next to a captured card number. Triggers on mentions of getBankNameFromCardNumber, bank from card, BIN lookup, نام بانک از شماره کارت.
+description: Resolve an Iranian bank's Persian name or its name and packaged SVG logo from a card number's 6-digit BIN prefix. Use when displaying bank identity next to a captured card number. Triggers on mentions of getBankNameFromCardNumber, getBankLogoWithCardNumber, bank from card, BIN lookup, bank logo, نام بانک از شماره کارت.
 license: MIT
 metadata:
   author: Ali Torki
@@ -20,10 +20,16 @@ const { getBankNameFromCardNumber } = require("@persian-tools/persian-tools");
 
 ```ts
 getBankNameFromCardNumber(digits?: number | string): string | null | undefined
+getBankLogoWithCardNumber(cardNumber: string): CardBankInfo | null
 
 interface IBank {
   code: string;
   name: string;
+}
+
+interface CardBankInfo {
+  name: string;
+  logo: string; // packaged SVG asset data URI
 }
 ```
 
@@ -32,11 +38,14 @@ interface IBank {
 ```ts
 import { getBankNameFromCardNumber } from "@persian-tools/persian-tools";
 
-getBankNameFromCardNumber("6219861034529007");   // "بانک سامان"
-getBankNameFromCardNumber("603799");              // "بانک ملی ایران" — accepts BIN-only (≥ 6 digits)
-getBankNameFromCardNumber("123");                 // null — too short
-getBankNameFromCardNumber("9999999999999999");    // null — BIN not in cardBank table
-getBankNameFromCardNumber(undefined);             // undefined
+getBankNameFromCardNumber("6219861034529007"); // "بانک سامان"
+getBankNameFromCardNumber("603799"); // "بانک ملی ایران" — accepts BIN-only (≥ 6 digits)
+getBankNameFromCardNumber("123"); // null — too short
+getBankNameFromCardNumber("9999999999999999"); // null — BIN not in cardBank table
+getBankNameFromCardNumber(undefined); // undefined
+
+getBankLogoWithCardNumber("6219861034529007");
+// { name: "بانک سامان", logo: "data:image/svg+xml,..." }
 ```
 
 ## Algorithm

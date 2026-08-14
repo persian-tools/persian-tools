@@ -1,7 +1,7 @@
----
 title: "Usage Guide"
 description: "Learn how to use Persian Tools utilities in your applications"
 icon: "play"
+
 ---
 
 # Usage Guide
@@ -127,13 +127,17 @@ getPlaceByIranNationalId('0499370899'); // { city: 'خمین', province: 'مرک
 ````
 
 ```typescript Card Numbers
-import { verifyCardNumber, getBankNameFromCardNumber } from '@persian-tools/persian-tools';
+import { verifyCardNumber, getBankLogoWithCardNumber, getBankNameFromCardNumber } from '@persian-tools/persian-tools';
 
 // Verify card number
 verifyCardNumber('6274129005473742'); // true
 
 // Get bank name
 getBankNameFromCardNumber('6274129005473742'); // 'بانک پارسیان'
+
+// Get the bank's Persian name and packaged SVG logo
+getBankLogoWithCardNumber('6219861034529007');
+// { name: 'بانک سامان', logo: 'data:image/svg+xml,...' }
 ````
 
 </CodeGroup>

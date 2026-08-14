@@ -26,6 +26,9 @@ const config = defineConfig([
 		entry: ["src/index.ts"],
 		format: ["esm", "cjs"],
 		outDir: "./build",
+		loader: {
+			".svg": "file",
+		},
 		banner: `
 /*!
  * ╔═══════════════════════════════════════════════════════════════════════════════════════╗

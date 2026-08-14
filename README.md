@@ -24,31 +24,36 @@
 Persian Tools provides **27+ utilities** for Persian language processing:
 
 ### 🔢 Numbers & Text
+
 - [**Number Conversion**](#ex-number-conversion): Persian words ↔ numbers with fuzzy matching
 - [**Digit Conversion**](#ex-digit-conversion): Persian ↔ Arabic ↔ English digits
 - [**Comma Formatting**](#ex-number-conversion): Add/remove thousands of separators
 - [**Ordinal Numbers**](#ex-number-conversion): Convert to/from ordinal forms
 
-### 🏛️ Validation & Verification  
+### 🏛️ Validation & Verification
+
 - [**National ID**](#ex-national-id): Validate & generate Iranian national codes (کد ملی)
-- [**Legal ID**](#ex-validation): Validate Iranian legal entity IDs (شناسه حقوقی)  
+- [**Legal ID**](#ex-validation): Validate Iranian legal entity IDs (شناسه حقوقی)
 - [**Phone Numbers**](#ex-phone-number): Validate & extract operator info
-- [**Bank Cards**](#ex-bank-card): Validate & identify bank names
+- [**Bank Cards**](#ex-bank-card): Validate cards and identify Iranian bank names and logos
 - [**Extract Card Numbers**](#ex-extract-cards): Advanced card extraction with fuzzy matching & performance optimization
-- [**IBAN/Sheba**](#ex-iban): Validate Iranian bank account numbers
+- [**IBAN/Sheba**](#ex-iban): Validate Iranian bank accounts and find bank names and logos
 
 ### 🌍 Geographic & Location
+
 - [**Place Lookup**](#ex-national-id): Find city/province by national ID
 - [**Capital Cities**](#ex-geographic-utilities): Get province capitals
 - [**Coordinates**](#ex-geographic-utilities): Find province from GPS coordinates
 - [**Vehicle Plates**](#ex-vehicle-plates): Parse Iranian license plates
 
 ### 💰 Financial & Utilities
+
 - [**Bill Calculator**](#ex-banking): Parse Iranian utility bills
-- [**Bank Detection**](#ex-bank-card): Identify banks from card numbers
-- [**IBAN Tools**](#ex-iban): Complete Iranian banking support
+- [**Bank Detection**](#ex-bank-card): Resolve bank names and SVG logos from card numbers
+- [**IBAN Tools**](#ex-iban): Validate Sheba codes and resolve bank details and SVG logos
 
 ### 📝 Text Processing
+
 - [**Persian Validation**](#ex-persian-text): Detect pure Persian text
 - [**Character Cleanup**](#ex-persian-text): Remove Arabic chars from Persian
 - [**URL Fixing**](#ex-text-processing): Decode Persian URLs
@@ -67,7 +72,7 @@ Persian Tools provides **27+ utilities** for Persian language processing:
 # npm
 npm install @persian-tools/persian-tools
 
-# yarn  
+# yarn
 yarn add @persian-tools/persian-tools
 
 # pnpm
@@ -80,8 +85,9 @@ bun add @persian-tools/persian-tools
 ### 💻 Usage
 
 **ES Modules (Recommended)**
+
 ```typescript
-import { numberToWords, digitsEnToFa, verifyIranianNationalId } from '@persian-tools/persian-tools';
+import { numberToWords, digitsEnToFa, verifyIranianNationalId } from "@persian-tools/persian-tools";
 
 numberToWords(1234); // "یک هزار و دویست و سی و چهار"
 digitsEnToFa("123"); // "۱۲۳"
@@ -89,15 +95,17 @@ verifyIranianNationalId("0499370899"); // true
 ```
 
 **CommonJS**
+
 ```javascript
-const { numberToWords } = require('@persian-tools/persian-tools');
+const { numberToWords } = require("@persian-tools/persian-tools");
 ```
 
 **Browser CDN**
+
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@persian-tools/persian-tools/build/index.js"></script>
 <script>
-  console.log(PersianTools.numberToWords(1234));
+	console.log(PersianTools.numberToWords(1234));
 </script>
 ```
 
@@ -105,7 +113,7 @@ const { numberToWords } = require('@persian-tools/persian-tools');
 
 ## 🧠 AI Agent Skills
 
-Persian Tools ships **first-class Agent Skills** — focused, retrievable instruction files that let Claude Code, Cursor, Copilot, and other AI coding assistants understand the library's modules, conventions, and Persian-language nuances *without* you having to paste context every time.
+Persian Tools ships **first-class Agent Skills** — focused, retrievable instruction files that let Claude Code, Cursor, Copilot, and other AI coding assistants understand the library's modules, conventions, and Persian-language nuances _without_ you having to paste context every time.
 
 ### Install the skills into your editor
 
@@ -133,7 +141,7 @@ Each command pulls the [`skills/`](./skills) directory into your project's local
 <summary><strong>numberToWords</strong> - Convert numbers to Persian words</summary>
 
 ```typescript
-import { numberToWords } from '@persian-tools/persian-tools';
+import { numberToWords } from "@persian-tools/persian-tools";
 
 // Basic usage
 numberToWords(1234); // "یک هزار و دویست و سی و چهار"
@@ -146,27 +154,29 @@ numberToWords(21, { ordinal: true }); // "بیست و یکم"
 // Supports up to MAX_SAFE_INTEGER (2^53 - 1)
 numberToWords(9007199254740991); // Works perfectly!
 ```
+
 </details>
 
 <details>
 <summary><strong>wordsToNumber</strong> - Convert Persian words to numbers</summary>
 
 ```typescript
-import { wordsToNumber } from '@persian-tools/persian-tools';
+import { wordsToNumber } from "@persian-tools/persian-tools";
 
 // Basic conversion
 wordsToNumber("سه هزار دویست و دوازده"); // 3212
 wordsToNumber("منفی یک میلیون"); // -1000000
 
 // Advanced options
-wordsToNumber("دوازده هزار", { 
-  digits: "fa",      // Return Persian digits: "۱۲۰۰۰"
-  addCommas: true    // Add commas: "12,000"
+wordsToNumber("دوازده هزار", {
+	digits: "fa", // Return Persian digits: "۱۲۰۰۰"
+	addCommas: true, // Add commas: "12,000"
 });
 
 // Fuzzy matching (fixes typos)
 wordsToNumber("یگصد و بنجاه هزار", { fuzzy: true }); // 150000
 ```
+
 </details>
 
 <a id="ex-validation"></a>
@@ -177,20 +187,25 @@ wordsToNumber("یگصد و بنجاه هزار", { fuzzy: true }); // 150000
 <summary><strong>National ID Validation</strong> - Validate Iranian national codes</summary>
 
 ```typescript
-import { verifyIranianNationalId, getPlaceByIranNationalId, createIranianNationalId } from '@persian-tools/persian-tools';
+import {
+	verifyIranianNationalId,
+	getPlaceByIranNationalId,
+	createIranianNationalId,
+} from "@persian-tools/persian-tools";
 
 // Validation
 verifyIranianNationalId("0499370899"); // true
 verifyIranianNationalId("1234567890"); // false
 
 // Location lookup
-getPlaceByIranNationalId("0084575948"); 
+getPlaceByIranNationalId("0084575948");
 // { city: "تهران مرکزی", province: "تهران" }
 
 // Generation
 createIranianNationalId(); // "0499370899"
 createIranianNationalId({ preventRepeatedDigits: true }); // "1234567890"
 ```
+
 </details>
 
 <a id="ex-national-id-generation"></a>
@@ -198,11 +213,11 @@ createIranianNationalId({ preventRepeatedDigits: true }); // "1234567890"
 <summary><strong>National ID Generation</strong> - Generate valid Iranian national codes</summary>
 
 ```typescript
-import { 
-  createIranianNationalId, 
-  createIranianNationalIdDetailed,
-  validateNationalIdChecksum 
-} from '@persian-tools/persian-tools';
+import {
+	createIranianNationalId,
+	createIranianNationalIdDetailed,
+	validateNationalIdChecksum,
+} from "@persian-tools/persian-tools";
 
 // Basic generation
 createIranianNationalId(); // "0499370899"
@@ -212,24 +227,25 @@ createIranianNationalId({ preventRepeatedDigits: true }); // "1234567890"
 
 // Detailed generation with metadata
 const result = createIranianNationalIdDetailed({
-  preventRepeatedDigits: true,
-  maxRetries: 50
+	preventRepeatedDigits: true,
+	maxRetries: 50,
 });
 
-console.log(result.nationalId);         // "1234567890"  
-console.log(result.checkDigit);         // 0
-console.log(result.attempts);           // 1
-console.log(result.hasRepeatedDigits);  // false
-console.log(result.digits);             // [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+console.log(result.nationalId); // "1234567890"
+console.log(result.checkDigit); // 0
+console.log(result.attempts); // 1
+console.log(result.hasRepeatedDigits); // false
+console.log(result.digits); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
 
 // Validate generated IDs
 validateNationalIdChecksum(result.nationalId); // true
 
 // Custom random generator (for testing)
 createIranianNationalId({
-  randomGenerator: () => 0.5 // Always returns 0.5
+	randomGenerator: () => 0.5, // Always returns 0.5
 });
 ```
+
 </details>
 
 <a id="ex-phone-number"></a>
@@ -237,7 +253,7 @@ createIranianNationalId({
 <summary><strong>Phone Number Validation</strong> - Iranian mobile numbers</summary>
 
 ```typescript
-import { isPhoneNumberValid, phoneNumberDetail } from '@persian-tools/persian-tools';
+import { isPhoneNumberValid, phoneNumberDetail } from "@persian-tools/persian-tools";
 
 // Validation
 isPhoneNumberValid("09123456789"); // true
@@ -251,6 +267,7 @@ phoneNumberDetail("09123456789");
 //   type: ["permanent"]
 // }
 ```
+
 </details>
 
 <a id="ex-banking"></a>
@@ -258,17 +275,36 @@ phoneNumberDetail("09123456789");
 
 <a id="ex-bank-card"></a>
 <details>
-<summary><strong>Bank Card Validation</strong> - Validate and identify Iranian bank cards</summary>
+<summary><strong>Bank Card Validation & Identification</strong> - Validate cards and find Iranian bank names and logos</summary>
+
+Use `verifyCardNumber` to validate a 16-digit Iranian card number. Use the first six digits (BIN) to find either the issuing bank's name with `getBankNameFromCardNumber`, or its name and SVG logo with `getBankLogoWithCardNumber`.
 
 ```typescript
-import { verifyCardNumber, getBankNameFromCardNumber } from '@persian-tools/persian-tools';
+import { verifyCardNumber, getBankNameFromCardNumber, getBankLogoWithCardNumber } from "@persian-tools/persian-tools";
 
 // Card validation
 verifyCardNumber("6037701689095443"); // true
 
-// Bank identification  
+// Find the issuing bank's Persian name
 getBankNameFromCardNumber("6219861034529007"); // "بانک سامان"
+
+// Find the issuing bank's Persian name and SVG logo
+getBankLogoWithCardNumber("6219861034529007");
+// { name: "بانک سامان", logo: "data:image/svg+xml,..." }
 ```
+
+The `logo` property contains an SVG data URI and can be used directly as an image source:
+
+```tsx
+const bank = getBankLogoWithCardNumber("6219861034529007");
+
+if (bank) {
+	return <img src={bank.logo} alt={bank.name} />;
+}
+```
+
+Bank lookup is based on the 6-digit BIN and is separate from card-number validation. Unknown or incomplete BINs return `null` from `getBankLogoWithCardNumber`.
+
 </details>
 
 <a id="ex-extract-cards"></a>
@@ -276,13 +312,13 @@ getBankNameFromCardNumber("6219861034529007"); // "بانک سامان"
 <summary><strong>Extract Card Numbers</strong> - Advanced card extraction with performance optimization</summary>
 
 ```typescript
-import { extractCardNumber, extractCardNumberWithMetrics } from '@persian-tools/persian-tools';
+import { extractCardNumber, extractCardNumberWithMetrics } from "@persian-tools/persian-tools";
 
 // Basic extraction with validation
 const text = "Payment cards: 6037701689095443 and 6219-8610-3452-9007";
 const cards = extractCardNumber(text, {
-  checkValidation: true,
-  detectBankNumber: true
+	checkValidation: true,
+	detectBankNumber: true,
 });
 
 console.log(cards);
@@ -298,7 +334,7 @@ console.log(cards);
 //   },
 //   {
 //     index: 2,
-//     base: "6219-8610-3452-9007", 
+//     base: "6219-8610-3452-9007",
 //     pure: "6219861034529007",
 //     startIndex: 36,
 //     endIndex: 55,
@@ -309,8 +345,8 @@ console.log(cards);
 
 // TypeScript function overloads for type safety
 const validatedCards = extractCardNumber(text, {
-  checkValidation: true,
-  detectBankNumber: false
+	checkValidation: true,
+	detectBankNumber: false,
 }); // Returns ExtractCardNumberWithValidation[]
 
 // Multi-format support (Persian, Arabic, separators)
@@ -321,35 +357,38 @@ const results = extractCardNumber(multiFormat);
 // Fuzzy matching for masked cards
 const maskedText = "My card: 6037-****-8909-5443";
 const fuzzyResults = extractCardNumber(maskedText, {
-  enableFuzzyMatching: true,
-  checkValidation: false
+	enableFuzzyMatching: true,
+	checkValidation: false,
 });
 
 // Large document optimization (1MB+ texts)
 const hugeDocument = "Large document content...".repeat(10000);
 const optimizedResults = extractCardNumber(hugeDocument, {
-  optimizeForLargeText: true,
-  maxResults: 10
+	optimizeForLargeText: true,
+	maxResults: 10,
 });
 
 // Performance monitoring with metrics
 const { cardNumbers, metrics } = extractCardNumberWithMetrics(text, {
-  includeContext: true,
-  contextLength: 20
+	includeContext: true,
+	contextLength: 20,
 });
 
 console.log(`Processed ${metrics.textLength} chars in ${metrics.processingTime}ms`);
 console.log(`Found ${metrics.validCardNumbers} valid cards`);
 console.log(cardNumbers[0].context?.before); // "Payment cards: "
 ```
+
 </details>
 
 <a id="ex-iban"></a>
 <details>
-<summary><strong>IBAN/Sheba Validation</strong> - Iranian bank account validation</summary>
+<summary><strong>IBAN/Sheba Validation & Identification</strong> - Validate Iranian accounts and find bank details and logos</summary>
+
+Use `isShebaValid` to validate an Iranian IBAN, `getShebaInfo` to extract bank and account details, and `getBankLogoWithIban` to include the bank's SVG logo.
 
 ```typescript
-import { isShebaValid, getShebaInfo } from '@persian-tools/persian-tools';
+import { isShebaValid, getShebaInfo, getBankLogoWithIban } from "@persian-tools/persian-tools";
 
 // IBAN validation
 isShebaValid("IR820540102680020817909002"); // true
@@ -358,11 +397,31 @@ isShebaValid("IR820540102680020817909002"); // true
 getShebaInfo("IR820540102680020817909002");
 // {
 //   nickname: "parsian",
-//   name: "Parsian Bank", 
+//   name: "Parsian Bank",
 //   persianName: "بانک پارسیان",
 //   accountNumber: "020817909002"
 // }
+
+// Bank details and SVG logo
+getBankLogoWithIban("IR820540102680020817909002");
+// {
+//   code: "054",
+//   persianName: "بانک پارسیان",
+//   logo: "data:image/svg+xml,...",
+//   ...
+// }
 ```
+
+The returned `logo` can be used directly as an image source:
+
+```tsx
+const bank = getBankLogoWithIban("IR820540102680020817909002");
+
+if (bank) {
+	return <img src={bank.logo} alt={bank.persianName} />;
+}
+```
+
 </details>
 
 <a id="ex-text-processing"></a>
@@ -373,7 +432,7 @@ getShebaInfo("IR820540102680020817909002");
 <summary><strong>Persian Text Validation</strong> - Validate and clean Persian text</summary>
 
 ```typescript
-import { isPersian, hasPersian, toPersianChars } from '@persian-tools/persian-tools';
+import { isPersian, hasPersian, toPersianChars } from "@persian-tools/persian-tools";
 
 // Persian detection
 isPersian("سلام دنیا"); // true
@@ -383,6 +442,7 @@ hasPersian("This has فارسی text"); // true
 // Character cleanup
 toPersianChars("علي"); // "علی" (fixes Arabic chars)
 ```
+
 </details>
 
 <a id="ex-digit-conversion"></a>
@@ -390,17 +450,18 @@ toPersianChars("علي"); // "علی" (fixes Arabic chars)
 <summary><strong>Digit Conversion</strong> - Convert between number systems</summary>
 
 ```typescript
-import { digitsEnToFa, digitsFaToEn, digitsArToFa } from '@persian-tools/persian-tools';
+import { digitsEnToFa, digitsFaToEn, digitsArToFa } from "@persian-tools/persian-tools";
 
 // English to Persian
 digitsEnToFa("123456"); // "۱۲۳۴۵۶"
 
-// Persian to English  
+// Persian to English
 digitsFaToEn("۱۲۳۴۵۶"); // "123456"
 
 // Arabic to Persian
 digitsArToFa("٧٨٩"); // "۷۸۹"
 ```
+
 </details>
 
 <a id="ex-geographic-utilities"></a>
@@ -411,18 +472,18 @@ digitsArToFa("٧٨٩"); // "۷۸۹"
 <summary><strong>Vehicle Plates</strong> - Parse Iranian license plates</summary>
 
 ```typescript
-import { getNumberPlateInfo } from '@persian-tools/persian-tools';
+import { getNumberPlateInfo } from "@persian-tools/persian-tools";
 
 // Car plates
 getNumberPlateInfo("12D45147").info;
 // {
 //   template: "12 D 451 ایران 47",
-//   province: "مرکزی", 
+//   province: "مرکزی",
 //   type: "Car",
 //   category: "دیپلمات"
 // }
 
-// Motorcycle plates  
+// Motorcycle plates
 getNumberPlateInfo(12345678).info;
 // {
 //   template: "123-45678",
@@ -430,6 +491,7 @@ getNumberPlateInfo(12345678).info;
 //   type: "Motorcycle"
 // }
 ```
+
 </details>
 
 <a id="ex-time-utilities"></a>
@@ -437,15 +499,16 @@ getNumberPlateInfo(12345678).info;
 <summary><strong>Time Utilities</strong> - Persian time formatting</summary>
 
 ```typescript
-import { timeAgo, remainingTime } from '@persian-tools/persian-tools';
+import { timeAgo, remainingTime } from "@persian-tools/persian-tools";
 
 // Time ago (Jalali calendar)
 timeAgo("1400/03/17 17:55:00"); // "5 دقیقه قبل"
 
 // Remaining time
-remainingTime("2025-12-31T23:59:59Z").toString(); 
+remainingTime("2025-12-31T23:59:59Z").toString();
 // "۱ سال و ۲ ماه و ۱۵ روز"
 ```
+
 </details>
 
 <a id="ex-slugify"></a>
@@ -453,7 +516,7 @@ remainingTime("2025-12-31T23:59:59Z").toString();
 <summary><strong>Slugify</strong> - Generate URL-safe slugs from Persian text</summary>
 
 ```typescript
-import { slugify, createSlug, slugifySimple } from '@persian-tools/persian-tools';
+import { slugify, createSlug, slugifySimple } from "@persian-tools/persian-tools";
 
 // Basic usage
 slugify("سلام دنیا"); // "سلام-دنیا"
@@ -461,9 +524,9 @@ slugify("چگونه برنامه‌نویسی یاد بگیریم؟"); // "چگ�
 
 // Custom options
 slugify("سلام دنیا", {
-  separator: "_",     // Use underscore instead of dash
-  maxLength: 20,      // Limit length
-  lowercase: false    // Don't convert to lowercase
+	separator: "_", // Use underscore instead of dash
+	maxLength: 20, // Limit length
+	lowercase: false, // Don't convert to lowercase
 }); // "سلام_دنیا"
 
 // Preserve numbers
@@ -473,6 +536,7 @@ slugify("سال ۱۴۰۰", { preserveNumbers: true }); // "سال-۱۴۰۰"
 createSlug("مقاله جدید"); // "مقاله-جدید"
 slugifySimple("تست ساده"); // "تست-ساده"
 ```
+
 </details>
 
 <a id="ex-text-analysis"></a>
@@ -480,7 +544,7 @@ slugifySimple("تست ساده"); // "تست-ساده"
 <summary><strong>Text Analysis</strong> - Comprehensive Persian text analysis</summary>
 
 ```typescript
-import { analyzeText, getTextSummary, getTextComplexity, cleanText } from '@persian-tools/persian-tools';
+import { analyzeText, getTextSummary, getTextComplexity, cleanText } from "@persian-tools/persian-tools";
 
 // Full analysis
 const analysis = analyzeText("این یک متن فارسی است.");
@@ -505,7 +569,7 @@ const analysis = analyzeText("این یک متن فارسی است.");
 // }
 
 // Quick helpers
-getTextSummary("سلام دنیا"); 
+getTextSummary("سلام دنیا");
 // "متن شامل 2 کلمه در 1 جمله است. زبان اصلی: فارسی (100% اطمینان). زمان مطالعه تقریبی: 1 دقیقه."
 
 getTextComplexity("این جمله ساده است"); // "ساده"
@@ -513,6 +577,7 @@ getTextComplexity("این جمله ساده است"); // "ساده"
 // Text cleaning
 cleanText("سَلامٌ   123   دنیا"); // "سلام ۱۲۳ دنیا"
 ```
+
 </details>
 
 ---
@@ -520,9 +585,11 @@ cleanText("سَلامٌ   123   دنیا"); // "سلام ۱۲۳ دنیا"
 ## 🏗️ Development
 
 ### Prerequisites
+
 - **Bun** ≥ 1.3 (as runtime and package manager)
 
 ### Setup
+
 ```bash
 git clone https://github.com/persian-tools/persian-tools.git
 cd persian-tools
@@ -530,6 +597,7 @@ bun install
 ```
 
 ### Scripts
+
 ```bash
 bun run build        # Build the library
 bun run test         # Run tests
@@ -540,8 +608,9 @@ bun run lint:fix     # Fix linting issues
 ```
 
 ### Architecture
+
 - **TypeScript**: Full type safety with strict mode
-- **Build**: Unbuild (dual ESM/CJS output) 
+- **Build**: Unbuild (dual ESM/CJS output)
 - **Testing**: Vitest with comprehensive coverage
 - **Quality**: ESLint + Prettier + Husky hooks
 
@@ -553,38 +622,53 @@ bun run lint:fix     # Fix linting issues
 	<tr>
 		<td align="center">
 			<a href="https://maani.app">
-				<img src="./images/showcases/maani.png" width="100px;" alt="Maani"/><br />
-				<sub><b>Maani</b></sub>
+				<img src="./images/showcases/maani.png" width="100px;" alt="Maani" />
+				<br />
+				<sub>
+					<b>Maani</b>
+				</sub>
 			</a>
 		</td>
 		<td align="center">
 			<a href="https://pooleno.ir">
-				<img src="https://pooleno.ir/static/images/pooleno-logo.svg" width="100px;" alt="Pooleno"/><br />
-				<sub><b>Pooleno Exchange</b></sub>
+				<img src="https://pooleno.ir/static/images/pooleno-logo.svg" width="100px;" alt="Pooleno" />
+				<br />
+				<sub>
+					<b>Pooleno Exchange</b>
+				</sub>
 			</a>
 		</td>
 		<td align="center">
 			<a href="https://pwa.bank-maskan.ir">
-				<img src="./images/showcases/bank-maskan.png" width="100px;" alt="Bank Maskan"/><br />
-				<sub><b>Bank Maskan PWA</b></sub>
+				<img src="./images/showcases/bank-maskan.png" width="100px;" alt="Bank Maskan" />
+				<br />
+				<sub>
+					<b>Bank Maskan PWA</b>
+				</sub>
 			</a>
 		</td>
 		<td align="center">
 			<a href="https://mydong.ir">
-				<img src="./images/showcases/mydong.png" width="100px;" alt="MyDong"/><br />
-				<sub><b>MyDong</b></sub>
+				<img src="./images/showcases/mydong.png" width="100px;" alt="MyDong" />
+				<br />
+				<sub>
+					<b>MyDong</b>
+				</sub>
 			</a>
 		</td>
 		<td align="center">
 			<a href="https://melkba.ir">
-				<img src="./images/showcases/melkba.png" width="100px;" alt="Melkba"/><br />
-				<sub><b>Melkba</b></sub>
+				<img src="./images/showcases/melkba.png" width="100px;" alt="Melkba" />
+				<br />
+				<sub>
+					<b>Melkba</b>
+				</sub>
 			</a>
 		</td>
 	</tr>
 </table>
 
-*Using Persian Tools in your project? [Add it here!](https://github.com/persian-tools/persian-tools/edit/master/README.md)*
+_Using Persian Tools in your project? [Add it here!](https://github.com/persian-tools/persian-tools/edit/master/README.md)_
 
 ---
 
@@ -601,6 +685,7 @@ Your code lives on, and you will always be remembered in our community. ❤️
 We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md) for details.
 
 ### Quick Contribution Steps:
+
 1. **Install** Bun (from https://bun.sh)
 2. **Fork & Clone** the repository
 3. **Create** a feature branch: `git checkout -b my-feature`
@@ -680,11 +765,26 @@ We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md)
 ---
 
 <div align="center">
-  <p>Made with ❤️ by the Persian developer community</p>
-  <p>
-    <a href="https://persian-tools.usestrict.dev" rel="noreferrer noopener" target="_blank">📚 Documentation</a> •
-    <a href="https://github.com/persian-tools/persian-tools" rel="noreferrer noopener" target="_blank">⭐ Star us on GitHub</a> •
-    <a href="https://twitter.com/intent/tweet?text=Check%20out%20Persian%20Tools%20-%20A%20modern%20TypeScript%20utility%20for%20Persian%20language%20features!&url=https://github.com/persian-tools/persian-tools" rel="noreferrer noopener" target="_blank">🐦 Share on Twitter</a> • 
-    <a href="https://www.npmjs.com/package/@persian-tools/persian-tools" rel="noreferrer noopener" target="_blank">📦 View on NPM</a>
-  </p>
+	<p>Made with ❤️ by the Persian developer community</p>
+	<p>
+		<a href="https://persian-tools.usestrict.dev" rel="noreferrer noopener" target="_blank">
+			📚 Documentation
+		</a>{" "}
+		•
+		<a href="https://github.com/persian-tools/persian-tools" rel="noreferrer noopener" target="_blank">
+			⭐ Star us on GitHub
+		</a>{" "}
+		•
+		<a
+			href="https://twitter.com/intent/tweet?text=Check%20out%20Persian%20Tools%20-%20A%20modern%20TypeScript%20utility%20for%20Persian%20language%20features!&url=https://github.com/persian-tools/persian-tools"
+			rel="noreferrer noopener"
+			target="_blank"
+		>
+			🐦 Share on Twitter
+		</a>{" "}
+		•
+		<a href="https://www.npmjs.com/package/@persian-tools/persian-tools" rel="noreferrer noopener" target="_blank">
+			📦 View on NPM
+		</a>
+	</p>
 </div>
