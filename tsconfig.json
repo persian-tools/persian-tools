@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
+    "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "lib": ["ES2020"],
     "target": "ESNext",
+
     "module": "ESNext",
     "moduleDetection": "force",
     "jsx": "react-jsx",
