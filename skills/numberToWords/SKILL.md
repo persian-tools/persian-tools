@@ -25,7 +25,8 @@ numberToWords(
 ): string | PersianToolsTypeError
 
 interface NumberToWordsOptions {
-  ordinal?: boolean;   // append ordinal suffix via addOrdinalSuffix(...)
+  ordinal?: boolean;     // append ordinal suffix via addOrdinalSuffix(...)
+  includeZero?: boolean; // include "صفر و" for numbers between -1 and 1 (default: false)
 }
 ```
 
@@ -42,16 +43,27 @@ numberToWords(1_000_000);               // "یک میلیون"
 numberToWords("12,345");                // "دوازده هزار و سیصد و چهل و پنج"
 numberToWords(-100);                    // "منفی صد"
 
+// Float and decimal numbers
+numberToWords(5.3);                     // "پنج و سه دهم"
+numberToWords("12.75");                 // "دوازده و هفتاد و پنج صدم"
+numberToWords(0.5);                     // "پنج دهم"
+numberToWords(0.5, { includeZero: true }); // "صفر و پنج دهم"
+numberToWords(0.005);                   // "پنج هزارم"
+numberToWords("۵٫۳");                   // "پنج و سه دهم" (supports Persian digits and ٫)
+
 // Ordinal
 numberToWords(3, { ordinal: true });    // "سوم"
 numberToWords(21, { ordinal: true });   // appends ordinal suffix via addOrdinalSuffix
+numberToWords(5.3, { ordinal: true });  // "پنج و سه دهمین"
 ```
 
 ## Input rules
 
 - Accepts `number | string`.
-- Strings are first run through `removeCommas(...)` (so `"12,345"` → `12345`).
-- The numeric value **must be a safe integer** (`Number.isSafeInteger(...)`). Otherwise the function **returns** (not throws) a `PersianToolsTypeError` instance.
+- Both integer and decimal (floating point) numbers are supported.
+- Strings are first stripped of commas (`"12,345.50"` → `"12345.50"`).
+- Persian and Arabic digits and Persian decimal separators (`٫`) are automatically normalized.
+- The numeric value must be a safe integer (for whole numbers) or a valid decimal with up to 15 decimal places. Otherwise the function **returns** (not throws) a `PersianToolsTypeError` instance.
 - This means the return type is `string | PersianToolsTypeError`. Treat it as a tagged union:
 
 ```ts
@@ -69,8 +81,8 @@ if (result instanceof PersianToolsTypeError) {
 ## Range
 
 - Maximum: `Number.MAX_SAFE_INTEGER` (= `2^53 - 1` ≈ 9.007e15). Larger numbers lose precision in JS itself and are rejected with a `PersianToolsTypeError`.
-- Minimum: `-Number.MAX_SAFE_INTEGER`. Negative integers are accepted; the result is prefixed with `منفی`.
-- Decimals (e.g. `1.5`) are rejected — the safe-integer guard catches them.
+- Minimum: `-Number.MAX_SAFE_INTEGER`. Negative numbers are accepted; the result is prefixed with `منفی`.
+- Decimals (e.g. `5.3`, `12.75`, `0.05`) are decomposed into integer and fractional parts with appropriate scale words (`دهم`, `صدم`, `هزارم`, `ده هزارم`, etc.).
 
 ## Ordinal mode
 
@@ -78,6 +90,7 @@ if (result instanceof PersianToolsTypeError) {
 
 - Words ending in `سه` → strip last 2 chars, append `سوم` (`سه` → `سوم`, `سی و سه` → `سی و سوم`).
 - Words ending in `ی` → append ` اُم` (with a leading space).
+- Decimal words ending in `م` (like `دهم`, `صدم`) → append `ین` (`دهمین`, `صدمین`).
 - Anything else → append `م`.
 
 This produces *machine-correct* ordinals but not all idiomatic forms — e.g. `1 → "یک"` becomes `"یک اُم"`, which is grammatically valid but uncommon (`"یکم"` is colloquial). Confirm against your locale style guide before using ordinal mode in user-facing copy.
@@ -85,8 +98,6 @@ This produces *machine-correct* ordinals but not all idiomatic forms — e.g. `1
 ## Common pitfalls
 
 - **Return type isn't pure `string`.** Don't blindly assign to a `string` variable without checking. Several existing call sites in this codebase wrap `numberToWords` in a type guard against `PersianToolsTypeError`.
-- **Persian-digit string inputs (`"۱۲۳"`) are NOT auto-normalized.** `removeCommas` only handles commas. Pass the digit-normalized number first or call `autoConvertDigitsToEN` upstream.
-- **Floats** silently get rejected, not rounded. If you intend to round, do it before calling.
 - **The result has no commas or other separators** — it's Persian words separated by `و` (and). For an invoice line that needs both numeric and word forms, combine with `addCommas` separately.
 
 ## Composition with addCommas

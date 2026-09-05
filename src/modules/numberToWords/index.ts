@@ -1,18 +1,36 @@
 import { removeCommas } from "../commas";
 import { addOrdinalSuffix } from "../addOrdinalSuffix/addOrdinalSuffix";
 import { isNumber, isString } from "../../helpers/type-guards";
+import { digitsFaToEn } from "../digits/converters/fa";
+import { digitsArToEn } from "../digits/converters/ar";
 // Errors
 import { PersianToolsTypeError } from "../../helpers/errors";
 // Constants
-import { PERSIAN_NUMBERS_IN_WORD_MAPPINGS } from "./constants";
+import { PERSIAN_NUMBERS_IN_WORD_MAPPINGS, PERSIAN_DECIMAL_SCALE_MAPPINGS } from "./constants";
 import { JOINERS, PREFIXES } from "../wordsToNumber/constants";
 // Types
 import type { NumberToWordsOptions } from "./types";
 
+interface NormalizedDecimal {
+	isDecimal: true;
+	isNegative: boolean;
+	integerPart: number;
+	fractionalValue: number;
+	scaleExponent: number;
+}
+
+interface NormalizedInteger {
+	isDecimal: false;
+	isNegative: boolean;
+	integerPart: number;
+}
+
+type NormalizedResult = NormalizedDecimal | NormalizedInteger | PersianToolsTypeError;
+
 /**
  * Converts a numeric value to its Persian word representation
  *
- * @param numberValue - The number to convert (can be number or string with commas)
+ * @param numberValue - The number to convert (can be integer, float, or string with commas/decimals)
  * @param options - Configuration options for the conversion
  * @returns Persian word representation of the number or TypeError if invalid
  *
@@ -20,68 +38,193 @@ import type { NumberToWordsOptions } from "./types";
  * numberToWords(123) // "صد و بیست و سه"
  * numberToWords("1,000") // "یک هزار"
  * numberToWords(3, { ordinal: true }) // "سوم"
+ * numberToWords(5.3) // "پنج و سه دهم"
+ * numberToWords("12.75") // "دوازده و هفتاد و پنج صدم"
+ * numberToWords(0.5) // "پنج دهم"
  */
 export function numberToWords(
 	numberValue: number | string,
 	options?: NumberToWordsOptions,
 ): string | PersianToolsTypeError {
 	// Input validation and normalization
-	const normalizedNumber = normalizeInput(numberValue);
-	if (normalizedNumber instanceof PersianToolsTypeError) {
-		return normalizedNumber;
+	const normalized = normalizeInput(numberValue);
+	if (normalized instanceof PersianToolsTypeError) {
+		return normalized;
 	}
 
 	// Extract options with defaults
 	const isOrdinal = options?.ordinal ?? false;
 
-	// Handle special case of zero
-	if (normalizedNumber === 0) {
+	// Handle special case of integer zero
+	if (!normalized.isDecimal && normalized.integerPart === 0) {
 		return "صفر";
 	}
 
-	// Process the number and apply transformations
-	const absoluteNumber = Math.abs(normalizedNumber);
-	const persianWords = convertNumberToWords(absoluteNumber);
+	let persianWords: string;
+
+	if (normalized.isDecimal) {
+		persianWords = convertDecimalToWords(normalized, options);
+	} else {
+		persianWords = convertNumberToWords(normalized.integerPart);
+	}
 
 	// Apply a negative prefix if needed
-	const finalWords = normalizedNumber < 0 ? addNegativePrefix(persianWords) : persianWords;
+	const finalWords = normalized.isNegative ? addNegativePrefix(persianWords) : persianWords;
 
 	// Apply ordinal suffix if requested
-	return isOrdinal ? addOrdinalSuffix(finalWords) : finalWords;
+	if (!isOrdinal) {
+		return finalWords;
+	}
+
+	if (normalized.isDecimal && finalWords.endsWith("م")) {
+		return `${finalWords}ین`;
+	}
+
+	return addOrdinalSuffix(finalWords);
 }
 
 /**
- * Validates and normalizes the input number
+ * Validates and normalizes the input number or string (supporting decimals)
  *
  * @param input - Raw input value (number or string)
- * @returns Normalized number or TypeError if invalid
+ * @returns Normalized representation or TypeError if invalid
  */
-function normalizeInput(input: number | string): number | PersianToolsTypeError {
+function normalizeInput(input: number | string): NormalizedResult {
 	// Check for valid input types
 	if (!isString(input) && !isNumber(input)) {
 		return createValidationError("Input must be a number or string");
 	}
 
-	// Handle string inputs (remove commas first)
-	if (isString(input)) {
-		const cleanedInput = removeCommas(input);
-		const parsedNumber = Number(cleanedInput);
-
-		// Validate the parsed number
-		if (!Number.isSafeInteger(parsedNumber)) {
-			return createValidationError("String input must represent a safe integer");
+	// Handle numeric inputs
+	if (isNumber(input)) {
+		if (Number.isNaN(input) || !Number.isFinite(input)) {
+			return createValidationError("Number input must be a valid finite number");
 		}
 
-		return parsedNumber;
+		if (Number.isSafeInteger(input)) {
+			return {
+				isDecimal: false,
+				isNegative: input < 0,
+				integerPart: Math.abs(input),
+			};
+		}
+
+		return parseDecimalString(String(input));
 	}
 
-	// Handle numeric inputs
-	if (!Number.isSafeInteger(input)) {
-		return createValidationError("Number input must be a safe integer");
+	// Handle string inputs (remove commas first)
+	let cleanedInput = input.replace(/,\s?/g, "").trim();
+	if (!cleanedInput) {
+		return createValidationError("String input cannot be empty");
 	}
 
-	return input;
+	// Normalize Persian and Arabic digits to English digits
+	cleanedInput = digitsFaToEn(cleanedInput);
+	cleanedInput = digitsArToEn(cleanedInput);
+
+	// Normalize Arabic decimal separator \u066B (٫) to dot (.)
+	cleanedInput = cleanedInput.replace(/\u066B/g, ".");
+
+	// If a single slash is used as decimal separator between digits (e.g. "5/3")
+	if (/^-?\d+\/\d+$/.test(cleanedInput)) {
+		cleanedInput = cleanedInput.replace("/", ".");
+	}
+
+	// Handle decimal string
+	if (cleanedInput.includes(".")) {
+		return parseDecimalString(cleanedInput);
+	}
+
+	const parsedNumber = Number(cleanedInput);
+
+	// Validate integer string
+	if (!Number.isSafeInteger(parsedNumber)) {
+		return createValidationError("String input must represent a safe integer");
+	}
+
+	return {
+		isDecimal: false,
+		isNegative: parsedNumber < 0,
+		integerPart: Math.abs(parsedNumber),
+	};
 }
+
+/**
+ * Parses a decimal string (e.g. "5.3", "-0.05") into a NormalizedResult
+ */
+function parseDecimalString(str: string): NormalizedResult {
+	let isNegative = false;
+	let s = str.trim();
+
+	if (s.startsWith("-")) {
+		isNegative = true;
+		s = s.slice(1).trim();
+	} else if (s.startsWith("+")) {
+		s = s.slice(1).trim();
+	}
+
+	const parts = s.split(".");
+	if (parts.length !== 2) {
+		return createValidationError("String input must represent a valid number");
+	}
+
+	const [intPartStr, fracPartStr] = parts;
+	if (!/^\d*$/.test(intPartStr) || !/^\d+$/.test(fracPartStr)) {
+		return createValidationError("String input must represent a valid number");
+	}
+
+	const intVal = intPartStr === "" ? 0 : Number(intPartStr);
+	if (!Number.isSafeInteger(intVal)) {
+		return createValidationError("Integer part must be a safe integer");
+	}
+
+	// If fractional part is all zeros (e.g. "5.0", "5.00")
+	const fracVal = parseInt(fracPartStr, 10);
+	if (fracVal === 0) {
+		return {
+			isDecimal: false,
+			isNegative,
+			integerPart: intVal,
+		};
+	}
+
+	const scaleExponent = fracPartStr.length;
+	if (scaleExponent > 15) {
+		return createValidationError("Decimal precision cannot exceed 15 places");
+	}
+
+	return {
+		isDecimal: true,
+		isNegative,
+		integerPart: intVal,
+		fractionalValue: fracVal,
+		scaleExponent,
+	};
+}
+
+/**
+ * Converts a decimal representation to Persian words
+ */
+function convertDecimalToWords(
+	decimal: NormalizedDecimal,
+	options?: NumberToWordsOptions,
+): string {
+	const scaleUnit = PERSIAN_DECIMAL_SCALE_MAPPINGS.get(decimal.scaleExponent) || "";
+	const fractionWords = convertNumberToWords(decimal.fractionalValue);
+	const fractionWithScale = scaleUnit ? `${fractionWords} ${scaleUnit}` : fractionWords;
+
+	// When integer part is 0 (e.g. 0.5 -> "پنج دهم" or "صفر و پنج دهم")
+	if (decimal.integerPart === 0) {
+		if (options?.includeZero) {
+			return `صفر و ${fractionWithScale}`;
+		}
+		return fractionWithScale;
+	}
+
+	const integerWords = convertNumberToWords(decimal.integerPart);
+	return `${integerWords} و ${fractionWithScale}`;
+}
+
 
 function createValidationError(message: string): PersianToolsTypeError {
 	return new PersianToolsTypeError("numberToWords", message);

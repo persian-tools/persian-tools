@@ -28,3 +28,49 @@ it("numberToWords", () => {
 	expect(numberToWords(1000)).toEqual("یک هزار");
 	expect(numberToWords(12345)).toEqual("دوازده هزار و سیصد و چهل و پنج");
 });
+
+it("numberToWords - float and decimal numbers (Issue #297)", () => {
+	// Standard decimal values
+	expect(numberToWords(5.3)).toEqual("پنج و سه دهم");
+	expect(numberToWords("5.3")).toEqual("پنج و سه دهم");
+	expect(numberToWords(12.75)).toEqual("دوازده و هفتاد و پنج صدم");
+	expect(numberToWords("12.75")).toEqual("دوازده و هفتاد و پنج صدم");
+	expect(numberToWords(3.14)).toEqual("سه و چهارده صدم");
+
+	// Numbers between 0 and 1 with leading zero
+	expect(numberToWords(0.5)).toEqual("پنج دهم");
+	expect(numberToWords("0.5")).toEqual("پنج دهم");
+	expect(numberToWords(0.05)).toEqual("پنج صدم");
+	expect(numberToWords("0.05")).toEqual("پنج صدم");
+	expect(numberToWords(0.005)).toEqual("پنج هزارم");
+	expect(numberToWords("0.005")).toEqual("پنج هزارم");
+	expect(numberToWords("0.0025")).toEqual("بیست و پنج ده هزارم");
+
+	// includeZero option
+	expect(numberToWords(0.5, { includeZero: true })).toEqual("صفر و پنج دهم");
+	expect(numberToWords(0.05, { includeZero: true })).toEqual("صفر و پنج صدم");
+
+	// Negative decimals
+	expect(numberToWords(-5.3)).toEqual("منفی پنج و سه دهم");
+	expect(numberToWords("-5.3")).toEqual("منفی پنج و سه دهم");
+	expect(numberToWords(-0.5)).toEqual("منفی پنج دهم");
+	expect(numberToWords(-0.5, { includeZero: true })).toEqual("منفی صفر و پنج دهم");
+
+	// Persian digits and Persian decimal separator (٫)
+	expect(numberToWords("۵٫۳")).toEqual("پنج و سه دهم");
+	expect(numberToWords("۱۲٫۷۵")).toEqual("دوازده و هفتاد و پنج صدم");
+	expect(numberToWords("۰٫۵")).toEqual("پنج دهم");
+
+	// Comma-separated integer with decimals
+	expect(numberToWords("1,000.25")).toEqual("یک هزار و بیست و پنج صدم");
+	expect(numberToWords("1.001")).toEqual("یک و یک هزارم");
+
+	// Decimal strings with all-zero fractional parts
+	expect(numberToWords("5.0")).toEqual("پنج");
+	expect(numberToWords("0.0")).toEqual("صفر");
+
+	// Ordinal decimals
+	expect(numberToWords(5.3, { ordinal: true })).toEqual("پنج و سه دهمین");
+	expect(numberToWords(0.05, { ordinal: true })).toEqual("پنج صدمین");
+});
+

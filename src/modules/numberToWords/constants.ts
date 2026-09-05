@@ -41,3 +41,26 @@ export const PERSIAN_NUMBERS_IN_WORD_MAPPINGS: Map<number, string> = new Map<num
 	[1000000000000, "تریلیون"],
 	[1000000000000000, "کوآدریلیون"],
 ]);
+
+/**
+ * Persian word mappings for decimal fractions (powers of 10 denominator)
+ * The map key represents the number of decimal places (1 for tenths, 2 for hundredths, etc.)
+ */
+export const PERSIAN_DECIMAL_SCALE_MAPPINGS: Map<number, string> = new Map<number, string>([
+	[1, "دهم"],
+	[2, "صدم"],
+	[3, "هزارم"],
+	[4, "ده هزارم"],
+	[5, "صد هزارم"],
+	[6, "میلیونیم"],
+	[7, "ده میلیونیم"],
+	[8, "صد میلیونیم"],
+	[9, "میلیاردم"],
+	[10, "ده میلیاردم"],
+	[11, "صد میلیاردم"],
+	[12, "تریلیونیم"],
+	[13, "ده تریلیونیم"],
+	[14, "صد تریلیونیم"],
+	[15, "کوآدریلیونیم"],
+]);
+
