@@ -13,4 +13,3 @@ export interface NumberToWordsOptions {
 	 */
 	includeZero?: boolean;
 }
-

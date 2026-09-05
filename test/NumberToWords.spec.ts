@@ -8,9 +8,7 @@ it("numberToWords", () => {
 	expect(numberToWords("500,443")).toEqual("پانصد هزار و چهار صد و چهل و سه");
 	expect(numberToWords(500)).toHaveLength(5);
 	expect(numberToWords(30000000000)).toEqual("سی میلیارد");
-	expect(numberToWords(987654321)).toEqual(
-		"نه صد و هشتاد و هفت میلیون و شش صد و پنجاه و چهار هزار و سیصد و بیست و یک",
-	);
+	expect(numberToWords(987654321)).toEqual("نه صد و هشتاد و هفت میلیون و شش صد و پنجاه و چهار هزار و سیصد و بیست و یک");
 	expect(numberToWords("500,443", { ordinal: true })).toEqual("پانصد هزار و چهار صد و چهل و سوم");
 	expect(numberToWords(-30, { ordinal: true })).toEqual("منفی سی اُم");
 	expect(numberToWords(-123, { ordinal: true })).toEqual("منفی صد و بیست و سوم");
@@ -73,4 +71,3 @@ it("numberToWords - float and decimal numbers (Issue #297)", () => {
 	expect(numberToWords(5.3, { ordinal: true })).toEqual("پنج و سه دهمین");
 	expect(numberToWords(0.05, { ordinal: true })).toEqual("پنج صدمین");
 });
-

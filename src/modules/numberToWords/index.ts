@@ -1,6 +1,6 @@
-import { removeCommas } from "../commas";
 import { addOrdinalSuffix } from "../addOrdinalSuffix/addOrdinalSuffix";
 import { isNumber, isString } from "../../helpers/type-guards";
+
 import { digitsFaToEn } from "../digits/converters/fa";
 import { digitsArToEn } from "../digits/converters/ar";
 // Errors
@@ -205,10 +205,7 @@ function parseDecimalString(str: string): NormalizedResult {
 /**
  * Converts a decimal representation to Persian words
  */
-function convertDecimalToWords(
-	decimal: NormalizedDecimal,
-	options?: NumberToWordsOptions,
-): string {
+function convertDecimalToWords(decimal: NormalizedDecimal, options?: NumberToWordsOptions): string {
 	const scaleUnit = PERSIAN_DECIMAL_SCALE_MAPPINGS.get(decimal.scaleExponent) || "";
 	const fractionWords = convertNumberToWords(decimal.fractionalValue);
 	const fractionWithScale = scaleUnit ? `${fractionWords} ${scaleUnit}` : fractionWords;
@@ -224,7 +221,6 @@ function convertDecimalToWords(
 	const integerWords = convertNumberToWords(decimal.integerPart);
 	return `${integerWords} و ${fractionWithScale}`;
 }
-
 
 function createValidationError(message: string): PersianToolsTypeError {
 	return new PersianToolsTypeError("numberToWords", message);

@@ -63,4 +63,3 @@ export const PERSIAN_DECIMAL_SCALE_MAPPINGS: Map<number, string> = new Map<numbe
 	[14, "صد تریلیونیم"],
 	[15, "کوآدریلیونیم"],
 ]);
-
