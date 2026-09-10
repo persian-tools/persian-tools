@@ -102,6 +102,16 @@ describe("verifyIranianNationalId Function Tests", () => {
 			// Test for issue #413: This national ID should be valid
 			expect(verifyIranianNationalId("2540201288")).toBe(true);
 		});
+
+		it("21b) should return true for '7400076205' - issue #439 regression test", () => {
+			// Checksum-valid ID rejected because its newer prefix is missing
+			// from the hardcoded list; prefix check is opt-in since v5.
+			expect(verifyIranianNationalId("7400076205")).toBe(true);
+		});
+
+		it("21c) should return true for '7340416501' - issue #439 regression test", () => {
+			expect(verifyIranianNationalId("7340416501")).toBe(true);
+		});
 	});
 
 	/**

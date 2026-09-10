@@ -663,12 +663,12 @@ export const invalidNationalIdSequences: Set<string> = new Set([
  *
  * @param nationalId - The national ID as a string or number.
  * @param options - An optional configuration object.
- * @param options.checkPrefix - Whether to check the first 3 digits against a predefined list of valid city codes. Default is `true`.
+ * @param options.checkPrefix - Whether to check the first 3 digits against a predefined list of valid city codes. Default is `false`, since the registry keeps issuing new codes and the hardcoded list cannot stay complete; pass `{ checkPrefix: true }` for strict prefix checking.
  * @returns A boolean indicating whether the ID is valid.
  */
 export function verifyIranianNationalId(
 	nationalId: string | number,
-	options: VerifyIranianNationalIdOptions = { checkPrefix: true },
+	options: VerifyIranianNationalIdOptions = { checkPrefix: false },
 ): boolean {
 	if (!isTruthy(nationalId)) {
 		return false;
@@ -734,7 +734,7 @@ export interface VerifyIranianNationalIdOptions {
 	/**
 	 * **Check the first 3 digits** of the national ID against a **predefined list** of valid city codes.
 	 *
-	 * @default true
+	 * @default false
 	 */
 	checkPrefix?: boolean;
 }
