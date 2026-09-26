@@ -647,7 +647,7 @@ export const invalidNationalIdSequences: Set<string> = new Set([
  * **Validates Iranian National ID** (Code Melli) using the official checksum algorithm.
  *
  * **Logic**:
- * 1. **Check length**: If it's fewer than 8 digits, reject.
+ * 1. **Check length**: If it is shorter than 8 digits or longer than 10, reject.
  * 2. **Check if parseInt(code) is 0**: If the entire code is "0..." (e.g., "00000000"), reject.
  * 3. **Zero-pad** the code to length 10 using four leading zeros and slice:
  *    - `code = ('0000' + code).slice(length + 4 - 10)`
@@ -682,8 +682,8 @@ export function verifyIranianNationalId(
 		return false;
 	}
 
-	// **If length < 8** or the parsed integer is zero, **return false**.
-	if (lengthOfId < 8 || parseInt(idString, 10) === 0) {
+	// **If length is outside 8 through 10**, or the parsed integer is zero, **return false**.
+	if (lengthOfId < 8 || lengthOfId > 10 || parseInt(idString, 10) === 0) {
 		return false;
 	}
 
