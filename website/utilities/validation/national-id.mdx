@@ -17,22 +17,31 @@ verifyIranianNationalId("0499370899"); // true
 verifyIranianNationalId("1234567890"); // false (checksum fails)
 verifyIranianNationalId(undefined); // undefined (falsy input)
 
-// Skip the city-prefix check (still verifies the checksum)
-verifyIranianNationalId("9999970899", { checkPrefix: false });
+// Opt in to the extra city-prefix check
+verifyIranianNationalId("0499370899", { checkPrefix: true });
 ```
 
 ```ts
 interface VerifyIranianNationalIdOptions {
-	checkPrefix?: boolean; // default true
+	checkPrefix: boolean; // required once you pass an options object
 }
 ```
+
+Omit the second argument entirely to get the default, which leaves the prefix check off. There is no partial
+options object: `verifyIranianNationalId(id, {})` is a type error.
+
+<Warning>
+	The prefix check is off by default as of v5 — it used to be on. The mod-11 check digit is the standard and always
+	runs; the 3-digit city-code list is community-maintained data that lags behind the codes سازمان ثبت احوال actually
+	issues, so enabling it will reject genuine IDs carrying a newer prefix.
+</Warning>
 
 #### Algorithm
 
 1. Falsy → `undefined`.
 2. Length must be ≥ 8; shorter inputs are zero-padded to 10 (so `499370899` is accepted as `0499370899`).
 3. Reject all-same-digit sequences (`0000000000`, `1111111111`, …) via the exported `invalidNationalIdSequences` set.
-4. If `checkPrefix !== false`, the leading 3 digits must be in `validNationalIdPrefixes`.
+4. If `checkPrefix === true`, the leading 3 digits must be in `validNationalIdPrefixes`.
 5. Standard check-digit computation: `sum = Σ digit[i] * (10 - i)` for i = 0..8, then `digit[9]` must equal `sum % 11` (or `11 - sum%11` if `sum%11 ≥ 2`).
 
 ## Look up the place

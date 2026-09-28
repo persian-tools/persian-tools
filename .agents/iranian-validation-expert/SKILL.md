@@ -27,7 +27,7 @@ The standard 10-digit code with a check digit. The implementation lives at `src/
 ### Algorithm
 1. Reject if length ≠ 10 or non-numeric.
 2. Reject if all digits are identical (e.g. `1111111111`) — covered by `invalidNationalIdSequences`.
-3. Optionally reject if the 3-digit prefix is not in `validNationalIdPrefixes` (a city-code prefix list). This is *strict mode*; the default in `verifyIranianNationalId` exposes an option for it.
+3. Optionally reject if the 3-digit prefix is not in `validNationalIdPrefixes` (a city-code prefix list). This is *strict mode*, opt-in via `{ checkPrefix: true }` and **off by default**.
 4. Compute the check digit:
    ```
    sum = Σ digits[i] * (10 - i)  for i in 0..8

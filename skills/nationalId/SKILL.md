@@ -36,7 +36,7 @@ verifyIranianNationalId(
 ): boolean | undefined
 
 interface VerifyIranianNationalIdOptions {
-  checkPrefix?: boolean;   // default true — also validate 3-digit city prefix
+  checkPrefix: boolean;   // required if you pass options; omit the arg entirely for the default (off)
 }
 
 // Data
@@ -71,10 +71,11 @@ import { verifyIranianNationalId } from "@persian-tools/persian-tools";
 
 verifyIranianNationalId("0499370899");    // true
 verifyIranianNationalId("1234567890");    // false (checksum fails)
+verifyIranianNationalId("7400076205");    // true — valid checksum, prefix '740' is unlisted
 verifyIranianNationalId(undefined);        // undefined (falsy input → undefined return)
 
-// Skip the city-prefix check
-verifyIranianNationalId("9999970899", { checkPrefix: false });   // boolean based on checksum only
+// Opt in to the extra city-prefix check
+verifyIranianNationalId("7400076205", { checkPrefix: true });   // false — '740' not in the list
 ```
 
 ### Algorithm
@@ -82,7 +83,7 @@ verifyIranianNationalId("9999970899", { checkPrefix: false });   // boolean base
 1. Reject `undefined`/falsy → returns `undefined`.
 2. Length must be ≥ 8; shorter inputs are zero-padded to 10 (so `499370899` is accepted as `0499370899`).
 3. Reject if the digits are in `invalidNationalIdSequences` (e.g. `0000000000`, `1111111111`).
-4. If `checkPrefix !== false`, the leading 3 digits must be in `validNationalIdPrefixes`.
+4. If `checkPrefix === true`, the leading 3 digits must be in `validNationalIdPrefixes`.
 5. Check digit:
    ```
    sum   = Σ digit[i] * (10 - i)  for i in 0..8
@@ -92,6 +93,7 @@ verifyIranianNationalId("9999970899", { checkPrefix: false });   // boolean base
 
 ### Important quirks
 
+- **The prefix check is off by default (changed in v5; it used to be on).** The mod-11 check digit is the standard and always runs. `validNationalIdPrefixes` is community-maintained data that trails real allocations, so `{ checkPrefix: true }` rejects genuine IDs carrying a newer prefix.
 - **Persian/Arabic digit input is NOT auto-normalized.** `verifyIranianNationalId("۰۴۹۹۳۷۰۸۹۹")` returns `false` because `parseInt` of Persian digits is `NaN`. Run `autoConvertDigitsToEN` first if input may contain them.
 - **Return type is `boolean | undefined`** — `undefined` for empty/falsy input, `boolean` after the checksum runs. Don't truthy-check; use `=== true`.
 
@@ -133,7 +135,7 @@ createIranianNationalId({ randomGenerator: () => 0.5 });
 
 - **Don't commit real National IDs as test fixtures.** Use `createIranianNationalId` to generate synthetic ones with valid checksums.
 - **`getPlaceByIranNationalId` is a separate module** for city/province lookup. It does NOT validate the checksum — it only slices the first 3 digits and looks them up. See the `getPlaceByIranNationalId` skill.
-- **City-prefix list is data, not law.** New prefixes get assigned over time. When extending the library, update `validNationalIdPrefixes` (and the place-lookup tables) together.
+- **City-prefix list is data, not law.** New prefixes get assigned over time, which is why it is no longer consulted by default. When extending the library, update `validNationalIdPrefixes` (and the place-lookup tables) together.
 
 ## References
 
