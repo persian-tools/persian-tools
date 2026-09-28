@@ -1,6 +1,8 @@
 import { describe, it, expect } from "vitest";
-import { isShebaValid, getShebaInfo } from "../src/modules/sheba";
+import { getBankLogoWithIban, getShebaInfo, isShebaValid } from "../src/modules/sheba";
 import { shebaIso7064Mod97 } from "../src/modules/sheba/helpers";
+import { ibanBankLogo } from "../src/modules/sheba/ibanBankLogos.skip";
+import { shebaMapCodesMap } from "../src/modules/sheba/codes.skip";
 
 describe("Sheba", () => {
 	it("isShebaValid Should return true", () => {
@@ -55,5 +57,39 @@ describe("Sheba", () => {
 	it("getShebaInfo should return null", () => {
 		expect(getShebaInfo("IR012345678901234567890123")).toBeFalsy();
 		expect(getShebaInfo("IR012345678A01234567890123")).toBeFalsy();
+	});
+
+	describe("getBankLogoWithIban", () => {
+		it("returns validated bank details and its SVG logo", () => {
+			expect(getBankLogoWithIban("IR820540102680020817909002")).toEqual(
+				expect.objectContaining({
+					code: "054",
+					name: "Parsian Bank",
+					persianName: "بانک پارسیان",
+					logo: expect.stringMatching(/^(?:data:image\/svg\+xml,.*|.*Parsian[^/]*\.svg)$/),
+				}),
+			);
+		});
+
+		it("accepts a lowercase IBAN without the IR prefix", () => {
+			expect(getBankLogoWithIban("550570022080013447370101")).toEqual(
+				expect.objectContaining({
+					code: "057",
+					persianName: "بانک پاسارگاد",
+					logo: expect.stringMatching(/^(?:data:image\/svg\+xml,.*|.*Pasargad[^/]*\.svg)$/),
+				}),
+			);
+		});
+
+		it("returns null for invalid or unknown IBANs", () => {
+			expect(getBankLogoWithIban("IR012345678901234567890123")).toBeNull();
+			expect(getBankLogoWithIban("IR012345678A01234567890123")).toBeNull();
+		});
+
+		it("provides a logo for every supported IBAN bank code", () => {
+			for (const code of shebaMapCodesMap.keys()) {
+				expect(ibanBankLogo.get(code)).toEqual(expect.any(String));
+			}
+		});
 	});
 });

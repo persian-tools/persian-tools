@@ -1,7 +1,8 @@
 import { shebaIso7064Mod97 } from "./helpers";
 import { shebaMapCodesMap } from "./codes.skip";
+import { ibanBankLogo } from "./ibanBankLogos.skip";
 // Types
-import type { ShebaResultWithAccountNumber, ShebaResultWithoutAccountNumber } from "./types";
+import type { IbanInfoWithLogo, ShebaResultWithAccountNumber, ShebaResultWithoutAccountNumber } from "./types";
 
 /**
  * @public
@@ -59,6 +60,28 @@ export function getShebaInfo(shebaCode: string): ShebaResultWithAccountNumber | 
 }
 
 /**
+ * Validate an Iranian IBAN and find its bank details and packaged SVG logo.
+ *
+ * The input may include or omit the `IR` country prefix and is normalized to uppercase.
+ *
+ * @category Bank account
+ * @param iban - Iranian IBAN
+ * @returns Detailed bank information with its SVG logo, or `null` when invalid or unknown
+ */
+export function getBankLogoWithIban(iban: string): IbanInfoWithLogo | null {
+	const normalizedIban = iban.toUpperCase();
+	const ibanWithCountryCode = normalizedIban.startsWith("IR") ? normalizedIban : `IR${normalizedIban}`;
+	const info = getShebaInfo(ibanWithCountryCode);
+
+	if (!info) return null;
+
+	const logo = ibanBankLogo.get(info.code);
+	if (!logo) return null;
+
+	return { ...info, logo };
+}
+
+/**
  * @public
  * @since 1.7.1
  */
@@ -86,4 +109,4 @@ export function isShebaValid(shebaCode: string): boolean {
 	return remainder === 1;
 }
 
-export type { ShebaResultWithAccountNumber, ShebaResultWithoutAccountNumber } from "./types";
+export type { IbanInfoWithLogo, ShebaResultWithAccountNumber, ShebaResultWithoutAccountNumber } from "./types";

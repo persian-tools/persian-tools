@@ -84,7 +84,7 @@ The body always includes:
 | [`verifyCardNumber`](./verifyCardNumber/SKILL.md) | Iranian card-number validation (Luhn + BIN whitelist) |
 | [`getBankNameFromCardNumber`](./getBankNameFromCardNumber/SKILL.md) | Issuing bank from card BIN |
 | [`extractCardNumbers`](./extractCardNumbers/SKILL.md) | Pull card numbers from free-text (the function is `extractCardNumber`, singular) |
-| [`sheba`](./sheba/SKILL.md) | Sheba/IBAN validation + bank info (the function is `isShebaValid`, not `verifySheba`) |
+| [`sheba`](./sheba/SKILL.md) | Sheba/IBAN validation + bank info, account details, and SVG logo lookup |
 | [`bill`](./bill/SKILL.md) | Utility-bill `Bill` class — parse bill ID + payment ID + barcode |
 
 ### 🌍 Geography & vehicles

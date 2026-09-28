@@ -1,4 +1,4 @@
-import banks from "./data.skip.json" assert { type: "json" };
+import banks from "./data.skip.json" with { type: "json" };
 
 export function getBanksRegex() {
 	return banks;

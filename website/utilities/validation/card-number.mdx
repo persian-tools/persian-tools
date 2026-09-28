@@ -4,7 +4,7 @@ description: "Validate Iranian bank card numbers (Luhn + BIN whitelist) and look
 icon: "credit-card"
 ---
 
-Two complementary functions for working with Iranian card numbers: `verifyCardNumber` (validation) and `getBankNameFromCardNumber` (BIN-based bank lookup). For extracting card numbers from free text, see the [Extract Card Numbers](../banking/extract-card-numbers) page.
+Three complementary functions work with Iranian card numbers: `verifyCardNumber` validates, `getBankNameFromCardNumber` performs a name-only BIN lookup, and `getBankLogoWithCardNumber` returns the bank name and packaged SVG logo. For extracting card numbers from free text, see the [Extract Card Numbers](../banking/extract-card-numbers) page.
 
 ## Functions
 
@@ -42,6 +42,17 @@ getBankNameFromCardNumber(undefined); // undefined
 ```
 
 Return type: `string | null | undefined` — see [Bank Name from Card Number](../banking/bank-name) for the dedicated page.
+
+### `getBankLogoWithCardNumber(cardNumber)`
+
+```ts
+import { getBankLogoWithCardNumber } from "@persian-tools/persian-tools";
+
+getBankLogoWithCardNumber("6219861034529007");
+// { name: "بانک سامان", logo: "data:image/svg+xml,..." }
+```
+
+Return type: `CardBankInfo | null`. This function performs a BIN lookup and does not validate the checksum.
 
 ## Composition
 

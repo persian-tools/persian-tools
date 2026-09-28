@@ -1,15 +1,19 @@
 ---
-title: "Bank Name from Card Number"
-description: "Look up the issuing Iranian bank's Persian name from a card number's 6-digit BIN prefix."
+title: "Bank Info from Card Number"
+description: "Look up an Iranian bank's Persian name and packaged SVG logo from a card number's 6-digit BIN prefix."
 icon: "building-columns"
 ---
 
-`getBankNameFromCardNumber` returns the Persian name of the bank that issued an Iranian card, by inspecting the leading 6-digit BIN.
+Persian Tools provides two BIN-based lookups for Iranian cards:
+
+- `getBankNameFromCardNumber` returns only the issuing bank's Persian name.
+- `getBankLogoWithCardNumber` returns the name and URL of its packaged SVG logo.
 
 ## Function
 
 ```ts
 getBankNameFromCardNumber(digits?: number | string): string | null | undefined
+getBankLogoWithCardNumber(cardNumber: string): CardBankInfo | null
 ```
 
 ```ts
@@ -20,6 +24,36 @@ getBankNameFromCardNumber("603799"); // "بانک ملی ایران" — BIN-onl
 getBankNameFromCardNumber("9999999999999999"); // null — BIN not in the table
 getBankNameFromCardNumber("123"); // null — too short
 getBankNameFromCardNumber(undefined); // undefined
+```
+
+### Bank name and logo
+
+```ts
+import { getBankLogoWithCardNumber } from "@persian-tools/persian-tools";
+
+getBankLogoWithCardNumber("6219861034529007");
+// {
+//   name: "بانک سامان",
+//   logo: "data:image/svg+xml,..."
+// }
+
+getBankLogoWithCardNumber("603769"); // BIN-only works
+getBankLogoWithCardNumber("9999999999999999"); // null
+```
+
+```ts
+interface CardBankInfo {
+	name: string;
+	logo: string;
+}
+```
+
+The logo is shipped with the package as an SVG asset. Depending on the consuming bundler it may be represented as an emitted asset URL or an SVG data URI. Both forms can be used directly as an image source:
+
+```tsx
+const bank = getBankLogoWithCardNumber(cardNumber);
+
+return bank ? <img src={bank.logo} alt={bank.name} /> : null;
 ```
 
 ## Return type — three states
@@ -43,6 +77,7 @@ Use `=== "string"` rather than a truthy check.
 ## Pitfalls
 
 - This is a **lookup, not a validator**. A nonsense tail (e.g. `"603799 garbage"`) doesn't matter as long as the BIN matches AND total length is in range. For checksum validation, use `verifyCardNumber`.
+- `getBankLogoWithCardNumber` inspects only the first 6 characters and returns `null` for an unknown or incomplete BIN.
 - **Persian/Arabic digit input is not normalized.** Pre-convert with `digitsFaToEn` / `autoConvertDigitsToEN` if input may contain them.
 - The data table is curated; new banks may not appear until added.
 
@@ -63,4 +98,4 @@ function inspect(raw: string) {
 
 ## Source
 
-`src/modules/getBankNameFromCardNumber/index.ts` · Tests: `test/getBankNameFromCardNumber.spec.ts`
+`src/modules/getBankNameFromCardNumber/index.ts` · Native logo data: `src/modules/getBankNameFromCardNumber/logos.ts` · Tests: `test/getBankNameFromCardNumber.spec.ts`

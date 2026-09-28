@@ -1,6 +1,6 @@
 ---
 name: sheba
-description: Validate and parse Iranian Sheba codes (IBAN — "IR" + 24 digits) and resolve them to bank info plus, for many banks, the underlying account number. Use when validating IBAN entry in wire-transfer forms, displaying bank name from an IBAN, or extracting account number for legacy systems. Triggers on mentions of sheba, شبا, IBAN, isShebaValid, getShebaInfo, Iranian IBAN, bank from IBAN.
+description: Validate and parse Iranian Sheba codes (IBAN — "IR" + 24 digits), resolve bank and account details, and retrieve packaged SVG bank logos. Use for IBAN forms, bank identification, logo display, or account-number extraction. Triggers on sheba, شبا, IBAN, isShebaValid, getShebaInfo, getBankLogoWithIban, Iranian IBAN, bank from IBAN, bank logo.
 license: MIT
 metadata:
   author: Ali Torki
@@ -11,9 +11,9 @@ metadata:
 # sheba — Iranian IBAN (Sheba) validation & info lookup
 
 ```ts
-import { isShebaValid, getShebaInfo } from "@persian-tools/persian-tools";
+import { isShebaValid, getShebaInfo, getBankLogoWithIban } from "@persian-tools/persian-tools";
 // CommonJS
-const { isShebaValid, getShebaInfo } = require("@persian-tools/persian-tools");
+const { isShebaValid, getShebaInfo, getBankLogoWithIban } = require("@persian-tools/persian-tools");
 ```
 
 ## Public exports
@@ -21,6 +21,7 @@ const { isShebaValid, getShebaInfo } = require("@persian-tools/persian-tools");
 ```ts
 isShebaValid(shebaCode: string): boolean
 getShebaInfo(shebaCode: string): ShebaResultWithAccountNumber | ShebaResultWithoutAccountNumber | null
+getBankLogoWithIban(iban: string): IbanInfoWithLogo | null
 
 const shebaPattern: RegExp;       // /IR[0-9]{24}/
 const shebaPatternCode: RegExp;   // /IR[0-9]{2}([0-9]{3})[0-9]{19}/
@@ -41,6 +42,9 @@ type ShebaResultWithoutAccountNumber = {
   code: string;
   accountNumberAvailable: false;
 };
+type IbanInfoWithLogo = (ShebaResultWithAccountNumber | ShebaResultWithoutAccountNumber) & {
+  logo: string;
+};
 ```
 
 > The valid function is **`isShebaValid`**, not `verifySheba`. The latter does not exist.
@@ -50,8 +54,8 @@ type ShebaResultWithoutAccountNumber = {
 ```ts
 import { isShebaValid, getShebaInfo } from "@persian-tools/persian-tools";
 
-isShebaValid("IR820540102680020817909002");   // true
-isShebaValid("IR82054010268002081790900X");   // false (non-digit)
+isShebaValid("IR820540102680020817909002"); // true
+isShebaValid("IR82054010268002081790900X"); // false (non-digit)
 
 getShebaInfo("IR820540102680020817909002");
 // {
@@ -64,7 +68,15 @@ getShebaInfo("IR820540102680020817909002");
 //   formattedAccountNumber: "020-8179-090-02",
 // }
 
-getShebaInfo("IR000000000000000000000000");   // null (invalid)
+getShebaInfo("IR000000000000000000000000"); // null (invalid)
+
+getBankLogoWithIban("IR820540102680020817909002");
+// {
+//   code: "054",
+//   persianName: "بانک پارسیان",
+//   logo: "data:image/svg+xml,...",
+//   ...
+// }
 ```
 
 ## Validation algorithm (ISO 7064 mod-97)
@@ -90,22 +102,25 @@ After validation, the 3-digit bank code (positions 4–6, after `IR` + 2 check d
 
 Some bank entries include a `process(iban: string)` function that extracts the account number. When present, the result type is `ShebaResultWithAccountNumber` with `accountNumberAvailable: true`; otherwise `ShebaResultWithoutAccountNumber` with `accountNumberAvailable: false`.
 
+`getBankLogoWithIban` first normalizes and validates the input, then combines the `getShebaInfo` result with the SVG logo mapped by the 3-digit bank code. It accepts the `IR` prefix optionally and returns `null` for invalid or unknown inputs.
+
 Discriminate via the flag:
 
 ```ts
 const info = getShebaInfo(input);
 if (!info) return notify("invalid IBAN");
 if (info.accountNumberAvailable) {
-  use(info.accountNumber);    // typed string
+  use(info.accountNumber); // typed string
 } else {
-  use(info.persianName);      // bank name only
+  use(info.persianName); // bank name only
 }
 ```
 
 ## Common pitfalls
 
 - **`verifySheba` does NOT exist.** The exported validator is `isShebaValid`.
-- **`getShebaInfo` returns the bank's *Persian* name as `persianName`**, not `bankName`. There is no `bankName` field. Older docs are wrong.
+- **`getShebaInfo` returns the bank's _Persian_ name as `persianName`**, not `bankName`. There is no `bankName` field. Older docs are wrong.
+- **Use `getBankLogoWithIban` for logos.** Its `logo` property is directly usable as an image source.
 - **No automatic whitespace stripping.** `isShebaValid("IR82 0540 ...")` returns `false`. Strip spaces in the caller, or use a small wrapper:
   ```ts
   const clean = (s: string) => s.replace(/\s/g, "").toUpperCase();

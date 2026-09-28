@@ -20,6 +20,11 @@ export type ShebaResultWithoutAccountNumber = ShebaBaseResult & {
 	accountNumberAvailable: false;
 };
 
+/** Detailed Iranian IBAN bank information with its packaged SVG logo. */
+export type IbanInfoWithLogo = (ShebaResultWithAccountNumber | ShebaResultWithoutAccountNumber) & {
+	logo: string;
+};
+
 export type ShebaMapValue =
 	| {
 			nickname: string;
