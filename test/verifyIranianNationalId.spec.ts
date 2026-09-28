@@ -73,6 +73,10 @@ describe("verifyIranianNationalId Function Tests", () => {
 			expect(verifyIranianNationalId("0499370899")).toBe(true);
 		});
 
+		it("14b) should return false for an 11-digit string that starts with an extra digit", () => {
+			expect(verifyIranianNationalId("10499370899")).toBe(false);
+		});
+
 		it("15) should return true for '0790419904'", () => {
 			expect(verifyIranianNationalId("0790419904")).toBe(true);
 		});
