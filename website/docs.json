@@ -171,6 +171,7 @@
 				"pages": [
 					"utilities/validation/national-id",
 					"utilities/validation/place-by-national-id",
+					"utilities/validation/postal-code",
 					"utilities/validation/legal-id",
 					"utilities/validation/card-number",
 					"utilities/validation/phone-number"
