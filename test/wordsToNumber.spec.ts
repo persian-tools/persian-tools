@@ -214,6 +214,28 @@ describe("WordsToNumber", () => {
 		it("10) Negative random text => 0", () => {
 			expect(wordsToNumber("منفی سلام دنیا")).toEqual(0);
 		});
+
+		/**
+		 * **Test 11**: Spaced hundreds => "چهار صد" => 400 (issue #436)
+		 */
+		it("11) Spaced hundreds parse like fused ones", () => {
+			expect(wordsToNumber("چهار صد")).toEqual(400);
+			expect(wordsToNumber("چهار صد و یک")).toEqual(401);
+			expect(wordsToNumber("چهار صد و ده")).toEqual(410);
+			expect(wordsToNumber("یک صد")).toEqual(100);
+			expect(wordsToNumber("دو صد")).toEqual(200);
+			expect(wordsToNumber("سه صد و پنجاه")).toEqual(350);
+		});
+
+		/**
+		 * **Test 12**: Bare "صد" still composes with larger magnitudes
+		 */
+		it("12) 'صد هزار' => 100,000", () => {
+			expect(wordsToNumber("صد")).toEqual(100);
+			expect(wordsToNumber("صد و یک")).toEqual(101);
+			expect(wordsToNumber("صد هزار")).toEqual(100000);
+			expect(wordsToNumber("یک صد هزار")).toEqual(100000);
+		});
 	});
 });
 /**
