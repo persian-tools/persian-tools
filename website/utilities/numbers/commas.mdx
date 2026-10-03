@@ -1,313 +1,73 @@
 ---
-title: "Comma Formatting"
-description: "Add or remove thousands separators in numbers"
+title: "Commas"
+description: "Add thousands-separator commas to numbers, or strip them back to a number."
 icon: "comma"
 ---
 
-# Comma Formatting
+Two complementary helpers for thousand-separator formatting.
 
-The comma formatting utilities help you add or remove thousands separators in numeric values for better readability.
+## Functions
 
-## Available Functions
+### `addCommas(input)`
 
-<CardGroup cols={2}>
-	<Card title="Add Commas" icon="plus">
-		`addCommas()` - Add thousands separators
-	</Card>
-	<Card title="Remove Commas" icon="minus">
-		`removeCommas()` - Remove thousands separators
-	</Card>
-</CardGroup>
+```ts
+import { addCommas } from "@persian-tools/persian-tools";
 
-## Basic Usage
-
-<CodeGroup>
-```typescript Import
-import { addCommas, removeCommas } from '@persian-tools/persian-tools';
+addCommas(30000); // "30,000"
+addCommas("1234567.89"); // "1,234,567.89"
+addCommas(-2500); // "-2,500"
+addCommas("۱۲۳۴۵"); // "12,345"   (Persian digits auto-converted)
 ```
 
-```javascript CommonJS
-const { addCommas, removeCommas } = require("persian-tools");
+```ts
+addCommas(input: number | string): string
 ```
 
-</CodeGroup>
+**Behaviour**
 
-## Adding Commas
+- Accepts `number | string`. Anything else returns `""`.
+- Strings have existing commas stripped first.
+- If `isPersian(...)` recognises the input as Persian, `digitsFaToEn` is applied first.
+- The cleaned string must match `/^-?\d+(\.\d+)?$/`. Otherwise returns `""`.
 
-Format numbers with thousands separators for improved readability:
+### `removeCommas(value)`
 
-```typescript
-addCommas(1234); // "1,234"
-addCommas(1234567); // "1,234,567"
-addCommas(1234567890); // "1,234,567,890"
-```
+```ts
+import { removeCommas } from "@persian-tools/persian-tools";
 
-### With Decimal Places
-
-```typescript
-addCommas(1234.56); // "1,234.56"
-addCommas(9876543.21); // "9,876,543.21"
-addCommas(1000.0); // "1,000"
-```
-
-### String Input
-
-```typescript
-addCommas("1234567"); // "1,234,567"
-addCommas("9876.543"); // "9,876.543"
-```
-
-## Removing Commas
-
-Remove existing thousands separators from formatted numbers:
-
-```typescript
 removeCommas("1,234,567"); // 1234567
-removeCommas("9,876,543.21"); // 9876543.21
-removeCommas("1,000"); // 1000
+removeCommas("30,000.5"); // 30000.5
+removeCommas("-2,500"); // -2500
 ```
 
-### String Output Option
-
-```typescript
-removeCommas("1,234,567", { returnString: true }); // "1234567"
-removeCommas("9,876.54", { returnString: true }); // "9876.54"
+```ts
+removeCommas(value: string): number
 ```
 
-## Advanced Examples
+**Behaviour**
 
-### Form Input Processing
+- Input must be a string; otherwise throws `TypeError("PersianTools: removeCommas - The input must be string")`.
+- Strips commas (and optional whitespace after each comma) then `Number(...)`.
+- Empty string returns `0` (because `Number("") === 0`).
+- Non-numeric content returns `NaN` — check with `Number.isNaN(...)`.
 
-```typescript
-function processNumberInput(input: string) {
-	// Remove existing commas for calculation
-	const numericValue = removeCommas(input);
+## Pitfalls
 
-	// Add commas for display
-	const displayValue = addCommas(numericValue);
+- **`addCommas` returns `""` for unrecognised input** — silently, no throw.
+- **Arabic-Indic digits (`٠-٩`) are NOT handled.** `isPersian("٧٨")` is false, so they fall through and fail the final regex → `""`. Normalize with `digitsArToEn` or `autoConvertDigitsToEN` first.
+- **`removeCommas` returns a `number`**, not a string. For round-tripping, recompose with `addCommas`.
+- **`removeCommas` does not convert Persian/Arabic digits.** Pre-normalize.
 
-	return {
-		numeric: numericValue,
-		formatted: displayValue,
-		isValid: !isNaN(numericValue),
-	};
-}
+## Composition
 
-processNumberInput("1,234,567");
-// { numeric: 1234567, formatted: "1,234,567", isValid: true }
+```ts
+import { addCommas, autoConvertDigitsToEN } from "@persian-tools/persian-tools";
+
+const formatPrice = (raw: string) => addCommas(autoConvertDigitsToEN(raw));
+formatPrice("۱۲۳۴۵"); // "12,345"
+formatPrice("٧٨٩"); // "789"
 ```
 
-### Currency Formatting
+## Source
 
-```typescript
-function formatCurrency(amount: number, currency = "تومان") {
-	const formatted = addCommas(amount);
-	const persian = digitsEnToFa(formatted);
-	return `${persian} ${currency}`;
-}
-
-formatCurrency(1250000); // "۱,۲۵۰,۰۰۰ تومان"
-formatCurrency(999999, "ریال"); // "۹۹۹,۹۹۹ ریال"
-```
-
-### Batch Processing
-
-```typescript
-const numbers = [1234, 56789, 123456789];
-
-const formatted = numbers.map((num) => ({
-	original: num,
-	withCommas: addCommas(num),
-	persian: digitsEnToFa(addCommas(num)),
-}));
-
-// Results:
-// [
-//   { original: 1234, withCommas: "1,234", persian: "۱,۲۳۴" },
-//   { original: 56789, withCommas: "56,789", persian: "۵۶,۷۸۹" },
-//   { original: 123456789, withCommas: "123,456,789", persian: "۱۲۳,۴۵۶,۷۸۹" }
-// ]
-```
-
-## Edge Cases
-
-### Invalid Input Handling
-
-```typescript
-addCommas(null); // ""
-addCommas(undefined); // ""
-addCommas(NaN); // ""
-addCommas("invalid"); // ""
-
-removeCommas(""); // 0
-removeCommas("abc"); // NaN
-removeCommas(null); // 0
-```
-
-### Already Formatted Numbers
-
-```typescript
-addCommas("1,234,567"); // "1,234,567" (no change)
-removeCommas(1234567); // 1234567 (no change)
-```
-
-### Negative Numbers
-
-```typescript
-addCommas(-1234567); // "-1,234,567"
-removeCommas("-1,234,567"); // -1234567
-```
-
-### Very Large Numbers
-
-```typescript
-addCommas(123456789012345); // "123,456,789,012,345"
-addCommas(1e15); // "1,000,000,000,000,000"
-```
-
-## TypeScript Support
-
-```typescript
-import { addCommas, removeCommas } from "persian-tools";
-
-// Type-safe usage
-const formatted: string = addCommas(1234567);
-const numeric: number = removeCommas("1,234,567");
-
-// With options
-interface RemoveCommasOptions {
-	returnString?: boolean;
-}
-
-const result: string = removeCommas("1,234", { returnString: true });
-```
-
-## Performance Considerations
-
-<AccordionGroup>
-  <Accordion title="🚀 Performance Metrics" icon="bolt">
-    - **Small numbers (< 1M)**: ~0.1ms
-    - **Large numbers (> 1B)**: ~0.2ms
-    - **String processing**: ~0.15ms average
-    - **Batch operations**: Linear scaling
-  </Accordion>
-
-  <Accordion title="📦 Optimization Tips" icon="lightbulb">
-    - Cache results for frequently used values
-    - Use number input when possible (faster than string)
-    - Consider memoization for repeated operations
-  </Accordion>
-</AccordionGroup>
-
-## Real-world Use Cases
-
-### Invoice Generation
-
-```typescript
-interface InvoiceItem {
-	description: string;
-	quantity: number;
-	unitPrice: number;
-	total: number;
-}
-
-function formatInvoiceItem(item: InvoiceItem) {
-	return {
-		...item,
-		formattedUnitPrice: addCommas(item.unitPrice),
-		formattedTotal: addCommas(item.total),
-		persianTotal: digitsEnToFa(addCommas(item.total)),
-	};
-}
-```
-
-### Financial Dashboard
-
-```typescript
-function createFinancialSummary(data: number[]) {
-	const total = data.reduce((sum, val) => sum + removeCommas(val.toString()), 0);
-
-	return {
-		rawTotal: total,
-		formattedTotal: addCommas(total),
-		persianTotal: digitsEnToFa(addCommas(total)),
-		items: data.map((val) => addCommas(val)),
-	};
-}
-```
-
-### Form Validation
-
-```typescript
-function validateNumberInput(input: string) {
-	const cleaned = removeCommas(input);
-
-	return {
-		isValid: !isNaN(cleaned) && cleaned > 0,
-		numericValue: cleaned,
-		formattedValue: addCommas(cleaned),
-		errorMessage: isNaN(cleaned) ? "عدد معتبر وارد کنید" : null,
-	};
-}
-```
-
-## Integration Patterns
-
-### React Component
-
-```typescript
-function NumberInput({ value, onChange }: { value: number; onChange: (val: number) => void }) {
-  const [displayValue, setDisplayValue] = useState(addCommas(value));
-
-  const handleChange = (input: string) => {
-    const numeric = removeCommas(input);
-    if (!isNaN(numeric)) {
-      onChange(numeric);
-      setDisplayValue(addCommas(numeric));
-    }
-  };
-
-  return (
-    <input
-      value={displayValue}
-      onChange={e => handleChange(e.target.value)}
-      placeholder="مبلغ را وارد کنید"
-    />
-  );
-}
-```
-
-### Data Processing Pipeline
-
-```typescript
-const numberProcessor = {
-	parse: (input: string) => removeCommas(input),
-	format: (num: number) => addCommas(num),
-	localize: (num: number) => digitsEnToFa(addCommas(num)),
-
-	pipeline: (input: string) => {
-		const parsed = numberProcessor.parse(input);
-		const formatted = numberProcessor.format(parsed);
-		const localized = numberProcessor.localize(parsed);
-
-		return { parsed, formatted, localized };
-	},
-};
-```
-
-## Related Utilities
-
-<CardGroup cols={2}>
-	<Card title="Digit Conversion" icon="language" href="/utilities/numbers/digits">
-		Convert between Persian, Arabic, and English digits
-	</Card>
-	<Card title="Number to Words" icon="spell-check" href="/utilities/numbers/number-to-words">
-		Convert numbers to Persian words
-	</Card>
-	<Card title="Words to Number" icon="hashtag" href="/utilities/numbers/words-to-number">
-		Convert Persian words to numbers
-	</Card>
-	<Card title="Text Analyzer" icon="magnifying-glass" href="/utilities/text/text-analyzer">
-		Analyze text and number content
-	</Card>
-</CardGroup>
+`src/modules/commas/add.ts`, `src/modules/commas/remove.ts` · Tests: `test/addCommas.spec.ts`, `test/removeCommas.spec.ts`

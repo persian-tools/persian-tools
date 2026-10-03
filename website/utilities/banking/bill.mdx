@@ -1,175 +1,110 @@
 ---
-title: "Bill Validation"
-description: "Parse and validate Iranian utility bills"
-icon: "file-invoice"
+title: "Bill"
+description: "Parse and validate Iranian utility bills (water, electricity, gas, telecom, municipal, tax, traffic fines) from a bill ID + payment ID pair or a combined barcode."
+icon: "receipt"
 ---
 
-# Bill Validation
+The `Bill` class wraps the official Iranian bill verification algorithm. Given a `billId + paymentId` (or a combined 26-digit `barcode`), it can validate both check digits, classify the bill type (water, electricity, …), and compute the amount in toman or rial.
 
-Parse and validate Iranian utility bills (قبض) including electricity, water, gas, and telecommunication bills.
+## Construction
 
-## Basic Usage
-
-```typescript
+```ts
 import { Bill } from "@persian-tools/persian-tools";
 
-const bill = new Bill({
-	billId: "1234567890123",
-	paymentId: "1234567890123",
-});
+// From bill ID + payment ID (currency defaults to "toman")
+const b = new Bill({ billId: 1117753200, paymentId: 1234567890 });
 
-const result = bill.getResult();
-console.log(result);
-// {
-//   isValid: true,
-//   billType: 'برق',
-//   amount: 50000,
-//   ...
-// }
+// With explicit currency
+const b2 = new Bill({ billId: 1117753200, paymentId: 1234567890, currency: "rial" });
+
+// From a combined barcode
+const b3 = new Bill({ barcode: "1117753200000123456789..." });
 ```
 
-## API Reference
-
-### Constructor
-
-<ParamField path="options" type="object" required>
-  <Expandable title="properties">
-    <ParamField path="billId" type="string" required>
-      Bill identifier (شناسه قبض)
-    </ParamField>
-
-    <ParamField path="paymentId" type="string" required>
-      Payment identifier (شناسه پرداخت)
-    </ParamField>
-
-  </Expandable>
-</ParamField>
-
-### Methods
-
-#### getResult()
-
-Get parsed bill information.
-
-<ResponseField name="result" type="object">
-  <Expandable title="properties">
-    <ResponseField name="isValid" type="boolean">
-      Whether the bill is valid
-    </ResponseField>
-
-    <ResponseField name="billType" type="string">
-      Type of bill (برق, آب, گاز, تلفن)
-    </ResponseField>
-
-    <ResponseField name="amount" type="number">
-      Bill amount in Rials
-    </ResponseField>
-
-  </Expandable>
-</ResponseField>
-
-#### getBarcode()
-
-Get the barcode representation of the bill.
-
-<ResponseField name="result" type="string">
-	Barcode string
-</ResponseField>
-
-## Examples
-
-### Bill Payment Processing
-
-```typescript
-import { Bill } from "@persian-tools/persian-tools";
-
-const processBillPayment = (billId: string, paymentId: string) => {
-	const bill = new Bill({ billId, paymentId });
-	const result = bill.getResult();
-
-	if (!result.isValid) {
-		throw new Error("اطلاعات قبض نامعتبر است");
-	}
-
-	return {
-		type: result.billType,
-		amount: result.amount,
-		barcode: bill.getBarcode(),
-	};
-};
-```
-
-### Bill Validator
-
-```typescript
-import { Bill } from "@persian-tools/persian-tools";
-
-const validateBill = (billData: { billId: string; paymentId: string }) => {
-	try {
-		const bill = new Bill(billData);
-		const result = bill.getResult();
-
-		return {
-			isValid: result.isValid,
-			info:
-				result.isValid ?
-					{
-						type: result.billType,
-						amount: result.amount,
-					}
-				:	null,
-		};
-	} catch (error) {
-		return { isValid: false, error: "خطا در پردازش قبض" };
-	}
-};
-```
-
-## Use Cases
-
-<AccordionGroup>
-  <Accordion title="Payment Gateway" icon="credit-card">
-    Process utility bill payments:
-    ```typescript
-    const payBill = (billId: string, paymentId: string) => {
-      const bill = new Bill({ billId, paymentId });
-      const result = bill.getResult();
-      if (result.isValid) {
-        // Process payment
-      }
-    };
-    ```
-  </Accordion>
-
-  <Accordion title="Bill Scanner App" icon="barcode">
-    Scan and validate bills:
-    ```typescript
-    const scanBill = (barcode: string) => {
-      // Parse barcode to get billId and paymentId
-      const bill = new Bill({ billId, paymentId });
-      return bill.getResult();
-    };
-    ```
-  </Accordion>
-</AccordionGroup>
-
-## Type Definition
-
-```typescript
-interface BillConstructor {
-	billId: string;
-	paymentId: string;
+```ts
+interface BillParams {
+	billId?: number;
+	paymentId?: number;
+	currency?: "toman" | "rial"; // default "toman"
+	barcode?: string;
 }
+```
 
+All parameters are optional, but most methods require either `billId + paymentId` or `barcode` to do real work.
+
+## Public methods
+
+```ts
+b.getAmount(): number               // amount in chosen currency
+b.getBillType(): BillTypes          // service category
+b.getBarcode(): string              // billId + "000" + paymentId
+b.findByBarcode(barcode?: string): { billId: number; paymentId: number }
+b.verificationBillId(): boolean     // check digit on the bill ID
+b.verificationBillPayment(): boolean // check digit on the payment ID
+b.verificationBill(): boolean       // both must pass
+b.getResult(): BillResult           // everything in one object
+```
+
+## `getResult()` shape
+
+```ts
 interface BillResult {
+	amount: number;
+	type: string; // field name is `type`, NOT `billType`
+	barcode: string;
 	isValid: boolean;
-	billType?: string;
-	amount?: number;
-}
-
-class Bill {
-	constructor(options: BillConstructor);
-	getResult(): BillResult;
-	getBarcode(): string;
+	isValidBillId: boolean;
+	isValidBillPayment: boolean;
 }
 ```
+
+```ts
+const r = b.getResult();
+r.amount; // number
+r.type; // "برق" | "آب" | ... | "unknown"   ← note: `type`, not `billType`
+r.isValid; // r.isValidBillId && r.isValidBillPayment
+```
+
+## Bill type encoding
+
+The penultimate digit of the bill ID encodes the service:
+
+| Digit | `BillTypes` value                                                  |
+| ----- | ------------------------------------------------------------------ |
+| 1     | `"آب"` (water)                                                     |
+| 2     | `"برق"` (electricity)                                              |
+| 3     | `"گاز"` (gas)                                                      |
+| 4     | `"تلفن ثابت"` (landline)                                           |
+| 5     | `"تلفن همراه"` (mobile)                                            |
+| 6     | `"عوارض شهرداری"` (municipal)                                      |
+| 8     | `"سازمان مالیات"` (tax authority)                                  |
+| 9     | `"جرایم راهنمایی و رانندگی"` (traffic fines)                       |
+| other | `"unknown"` (also causes `verificationBillId()` to return `false`) |
+
+The full `BillTypes` union and the `billTypes` lookup map are exported.
+
+## Amount calculation
+
+```
+amount = parseInt(paymentId.slice(0, -5)) * (currency === "rial" ? 1000 : 100)
+```
+
+The last 5 digits of `paymentId` are control + scaling; the rest are the amount in 100s of toman or 1000s of rial. **Picking the wrong `currency` is a 10× error** — match it to your downstream domain.
+
+## Type exports
+
+```ts
+import { Bill, billTypes } from "@persian-tools/persian-tools";
+import type { BillTypes, Currency, BillParams, BillResult } from "@persian-tools/persian-tools";
+```
+
+## Pitfalls
+
+- **Result field is `type`, not `billType`.** Older docs use `billType` — those accesses return `undefined`.
+- **All constructor params are optional**, but calling `getResult()` on an empty `Bill` returns garbage (NaN amount, "unknown" type, etc.). Guard upstream.
+- **`unknown` bill type forces `verificationBillId()` to return `false`** even if math checks out — intentional.
+- **No Persian/Arabic digit normalization on the barcode** — convert first if input may contain them.
+
+## Source
+
+`src/modules/bill/index.ts` · Tests: `test/bill.spec.ts`

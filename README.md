@@ -103,6 +103,27 @@ const { numberToWords } = require('@persian-tools/persian-tools');
 
 ---
 
+## 🧠 AI Agent Skills
+
+Persian Tools ships **first-class Agent Skills** — focused, retrievable instruction files that let Claude Code, Cursor, Copilot, and other AI coding assistants understand the library's modules, conventions, and Persian-language nuances *without* you having to paste context every time.
+
+### Install the skills into your editor
+
+```bash
+# Bun
+bunx skills add @persian-tools/persian-tools
+
+# npm
+npx skills add @persian-tools/persian-tools
+
+# pnpm
+pnpm dlx skills add @persian-tools/persian-tools
+```
+
+Each command pulls the [`skills/`](./skills) directory into your project's local skills folder so your AI agent retrieves them automatically when you ask about a Persian Tools utility.
+
+---
+
 ## 📖 API Reference
 
 <a id="ex-number-conversion"></a>

@@ -1,60 +1,50 @@
 ---
 title: "URL Fix"
-description: "Decode and fix Persian URLs that are percent-encoded"
-icon: "globe"
+description: "Decode percent-encoded URLs into human-readable form, with an optional separator for spaces."
+icon: "link"
 ---
 
-# URL Fix
+`urlFix` runs `decodeURIComponent` on a URL and (optionally) replaces the first space with a chosen separator. Use it to render Persian Wikipedia / blog URLs in UI without the noisy `%xx` escapes.
 
-Decode Persian URLs that have been percent-encoded, making them readable.
+> The exported function is `urlFix` (lowercase `u`). The name is **not** `URLfix`.
 
-## Basic Usage
+## Function
 
-```typescript
-import { URLfix } from "@persian-tools/persian-tools";
-
-const encoded = "https://example.com/search?q=%D8%AA%D8%B3%D8%AA";
-console.log(URLfix(encoded));
-// Output: "https://example.com/search?q=تست"
+```ts
+urlFix(url?: string, separator?: string): string | undefined
 ```
 
-## API Reference
+```ts
+import { urlFix } from "@persian-tools/persian-tools";
 
-<ParamField path="url" type="string" required>
-	Percent-encoded URL containing Persian characters
-</ParamField>
+urlFix(
+	"https://fa.wikipedia.org/wiki/%D9%85%DA%A9%D8%A7%D9%86%DB%8C%DA%A9%20%DA%A9%D9%88%D8%A7%D9%86%D8%AA%D9%88%D9%85%DB%8C",
+);
+// "https://fa.wikipedia.org/wiki/مکانیک کوانتومی"
 
-<ResponseField name="result" type="string">
-	Decoded URL with readable Persian characters
-</ResponseField>
+urlFix(
+	"https://fa.wikipedia.org/wiki/%D9%85%DA%A9%D8%A7%D9%86%DB%8C%DA%A9%20%DA%A9%D9%88%D8%A7%D9%86%D8%AA%D9%88%D9%85%DB%8C",
+	"_",
+);
+// "https://fa.wikipedia.org/wiki/مکانیک_کوانتومی"
 
-## Examples
-
-### Display Readable URLs
-
-```typescript
-import { URLfix } from "@persian-tools/persian-tools";
-
-const shareUrl = "%D8%B3%D9%84%D8%A7%D9%85";
-console.log(URLfix(shareUrl));
-// "سلام"
+urlFix(undefined); // undefined
+urlFix(""); // undefined
 ```
 
-### Link Processing
+## Behaviour
 
-```typescript
-import { URLfix } from "@persian-tools/persian-tools";
+1. Falsy input → `undefined`.
+2. `decodeURIComponent(url)` — expands all `%xx` escapes, including UTF-8 multi-byte sequences for Persian and other non-ASCII characters.
+3. If `separator` is provided, the **first** space in the decoded URL is replaced with `separator` (single `String.replace`, not global).
 
-const processLinks = (html: string): string => {
-	const urlPattern = /href="([^"]*)"/g;
-	return html.replace(urlPattern, (match, url) => {
-		return `href="${URLfix(url)}"`;
-	});
-};
-```
+## Pitfalls
 
-## Type Definition
+- **Separator replacement is single-shot.** Only the first space is replaced. Subsequent spaces stay literal.
+- **The result is NOT re-encoded.** It's human-readable but no longer a valid `fetch` target. Use it for display, logs, or slug input — keep the encoded form for HTTP requests.
+- **`decodeURIComponent` throws** on malformed percent-encoding (e.g. lone `%`, invalid UTF-8 bytes). Wrap in `try/catch` for untrusted input.
+- **Returns `undefined`** (not `""`) on falsy input. Type the call site accordingly: `const pretty = urlFix(raw) ?? raw`.
 
-```typescript
-function URLfix(url: string): string;
-```
+## Source
+
+`src/modules/URLfix/index.ts` · Tests: `test/URLfix.spec.ts`

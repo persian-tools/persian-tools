@@ -1,355 +1,71 @@
 ---
-title: "Persian Character Conversion"
-description: "Convert Arabic and English characters to proper Persian equivalents"
-icon: "language"
+title: "Persian Character Normalization"
+description: "Normalize Arabic-script characters (ي, ى, ك) and diacritics to their Persian equivalents, while preserving template segments inside {{...}}."
+icon: "wand-sparkles"
 ---
 
-# Persian Character Conversion
+`toPersianChars` replaces Arabic letterforms that look identical to Persian with the Persian code points, plus normalizes Arabic diacritics. Content inside `{{...}}` template segments is preserved verbatim.
 
-The `toPersianChars` utility converts Arabic and English characters to their proper Persian equivalents, ensuring consistent Persian text rendering and processing.
+## Function
 
-## Basic Usage
-
-<CodeGroup>
-```typescript Import
-import { toPersianChars } from '@persian-tools/persian-tools';
+```ts
+toPersianChars(str: string): string
 ```
 
-```javascript CommonJS
-const { toPersianChars } = require("persian-tools");
+```ts
+import { toPersianChars } from "@persian-tools/persian-tools";
+
+toPersianChars("علي"); // "علی"
+toPersianChars("كتاب"); // "کتاب"
+toPersianChars("عبدالله بن عبدالعزیز"); // "عبدالله بن عبدالعزیز" (no change — already Persian)
+
+toPersianChars(""); // ""
+toPersianChars(null as any); // ""
+toPersianChars(undefined as any); // ""
 ```
 
-</CodeGroup>
+## What it normalizes
 
-### Simple Conversion
+| Input | Output | Codepoint shift |
+| ----- | ------ | --------------- |
+| `ي`   | `ی`    | U+064A → U+06CC |
+| `ى`   | `ی`    | U+0649 → U+06CC |
+| `ك`   | `ک`    | U+0643 → U+06A9 |
 
-```typescript
-toPersianChars("علي احمد"); // 'علی احمد' (Arabic ي to Persian ی)
-toPersianChars("كتاب"); // 'کتاب' (Arabic ك to Persian ک)
-toPersianChars("ي ك"); // 'ی ک' (multiple conversions)
+Plus diacritics (`ً ٌ ٍ َ ُ ِ ّ ْ`) and Arabic punctuation (`٫`, `٬`) — see `src/modules/toPersianChars/index.ts` for the full table.
+
+## What it does NOT do
+
+- **No Latin → Persian.** It does **not** convert `y` → `ی`, `k` → `ک`, or `%` → `٪`.
+- **No digit conversion.** It does not touch `٠١٢` (Arabic-Indic) or `123` (Latin). Use the [Digits](../numbers/digits) module for that.
+- **No whitespace / ZWNJ normalization.** Use the [Half-Space](./half-space) module for ZWNJ insertion.
+
+For a full normalization pipeline:
+
+```ts
+import { toPersianChars, autoConvertDigitsToEN, autoArabicToPersian } from "@persian-tools/persian-tools";
+
+const normalize = (s: string) => toPersianChars(autoArabicToPersian(autoConvertDigitsToEN(s))).trim();
 ```
 
-## Character Mappings
+## Template preservation
 
-<Tabs>
-  <Tab title="Arabic to Persian">
-    | Arabic | Persian | Description |
-    |--------|---------|-------------|
-    | ي | ی | Ya (Arabic to Persian) |
-    | ك | ک | Kaf (Arabic to Persian) |
-    | ٪ | ٪ | Percent sign |
-    | ء | ء | Hamza |
-  </Tab>
+Anything between `{{` and `}}` is preserved verbatim:
 
-  <Tab title="English to Persian">
-    | English | Persian | Description |
-    |---------|---------|-------------|
-    | y | ی | Latin y to Persian ya |
-    | k | ک | Latin k to Persian kaf |
-    | % | ٪ | Percent to Persian percent |
-  </Tab>
-</Tabs>
-
-## Advanced Examples
-
-### Text Normalization
-
-```typescript
-function normalizePersianeText(text: string): string {
-	// Convert characters to Persian
-	let normalized = toPersianChars(text);
-
-	// Apply half-space corrections
-	normalized = halfSpace(normalized);
-
-	// Convert digits to Persian
-	normalized = digitsEnToFa(normalized);
-
-	return normalized.trim();
-}
-
-normalizePersianeText("علي در كتابخانه مي خواند");
-// Output: 'علی در کتابخانه می‌خواند'
+```ts
+toPersianChars("كشتى ىيكى {{ARABIC|كلمه}}");
+// "کشتی یکی {{ARABIC|كلمه}}"
+// Notice: standalone words got normalized; the `كلمه` inside {{ }} kept its Arabic ك
 ```
 
-### Form Input Processing
+The implementation extracts `{{...}}` segments into placeholders, transforms the rest, then restores the segments.
 
-```typescript
-interface UserInput {
-	name: string;
-	description: string;
-	tags: string[];
-}
+## Pitfalls
 
-function processUserInput(input: UserInput): UserInput {
-	return {
-		name: toPersianChars(input.name),
-		description: toPersianChars(input.description),
-		tags: input.tags.map((tag) => toPersianChars(tag)),
-	};
-}
+- **Latin and digits are untouched** — older docs claim Latin → Persian conversion. They are wrong.
+- **Running on text with intentional Arabic content** will silently change it. Wrap Arabic sections in `{{...}}` or skip the call.
+- For very large documents, each replacement rule runs O(n). Consider per-field application rather than whole-document.
 
-const processed = processUserInput({
-	name: "علي محمدي",
-	description: "كتاب جديد در مورد برنامه نويسي",
-	tags: ["برنامه نويسي", "كتاب", "آموزش"],
-});
-```
+## Source
 
-### Content Management System
-
-```typescript
-class ContentProcessor {
-	static processArticle(article: { title: string; content: string; author: string }) {
-		return {
-			title: toPersianChars(article.title),
-			content: this.processContent(article.content),
-			author: toPersianChars(article.author),
-			slug: slugify(toPersianChars(article.title)),
-		};
-	}
-
-	private static processContent(content: string): string {
-		// Convert characters
-		let processed = toPersianChars(content);
-
-		// Fix spacing issues
-		processed = halfSpace(processed);
-
-		// Ensure proper Persian formatting
-		return processed;
-	}
-}
-```
-
-## Text Validation Integration
-
-### Combined with Persian Text Validation
-
-```typescript
-function validateAndNormalizePersianText(text: string): {
-	original: string;
-	normalized: string;
-	isPersian: boolean;
-	corrections: string[];
-} {
-	const corrections: string[] = [];
-	let normalized = text;
-
-	// Convert characters to Persian
-	const converted = toPersianChars(text);
-	if (converted !== text) {
-		corrections.push("نویسه‌های عربی به فارسی تبدیل شدند");
-		normalized = converted;
-	}
-
-	// Check if result is Persian
-	const isPersianText = isPersian(normalized);
-
-	return {
-		original: text,
-		normalized,
-		isPersian: isPersianText,
-		corrections,
-	};
-}
-```
-
-### Search Optimization
-
-```typescript
-function createSearchableText(text: string): string {
-	// Normalize characters for consistent searching
-	let searchable = toPersianChars(text);
-
-	// Convert to lowercase equivalent (where applicable)
-	searchable = searchable.toLowerCase();
-
-	// Remove extra whitespace
-	searchable = searchable.replace(/\s+/g, " ").trim();
-
-	return searchable;
-}
-
-// Usage in search function
-function searchContent(query: string, content: string[]): string[] {
-	const normalizedQuery = createSearchableText(query);
-
-	return content.filter((item) => createSearchableText(item).includes(normalizedQuery));
-}
-```
-
-## Database Considerations
-
-### Storage Strategy
-
-```typescript
-interface DatabaseRecord {
-	id: string;
-	originalText: string; // Keep original for audit
-	normalizedText: string; // Normalized for consistency
-	searchableText: string; // Optimized for search
-}
-
-function createDatabaseRecord(text: string): Omit<DatabaseRecord, "id"> {
-	const normalized = toPersianChars(text);
-	const searchable = createSearchableText(normalized);
-
-	return {
-		originalText: text,
-		normalizedText: normalized,
-		searchableText: searchable,
-	};
-}
-```
-
-### Migration Script
-
-```typescript
-async function migratePersianTexts(records: Array<{ id: string; text: string }>) {
-	const migrated = records.map((record) => ({
-		...record,
-		text: toPersianChars(record.text),
-		updatedAt: new Date(),
-	}));
-
-	// Log changes
-	const changedRecords = migrated.filter((record, index) => record.text !== records[index].text);
-
-	console.log(`Updated ${changedRecords.length} records with Persian character conversion`);
-
-	return migrated;
-}
-```
-
-## Performance Optimization
-
-<AccordionGroup>
-  <Accordion title="🚀 Performance Metrics" icon="bolt">
-    - **Small text (< 100 chars)**: ~0.1ms
-    - **Medium text (< 1000 chars)**: ~0.5ms
-    - **Large text (< 10000 chars)**: ~2ms
-    - **Memory usage**: Minimal overhead
-  </Accordion>
-
-  <Accordion title="📦 Optimization Strategies" icon="lightbulb">
-    - Cache results for frequently converted text
-    - Process in chunks for very large texts
-    - Combine with other text processing for efficiency
-    - Use with debouncing for real-time input processing
-  </Accordion>
-</AccordionGroup>
-
-## Real-time Input Processing
-
-### React Input Component
-
-```typescript
-import { useState, useCallback } from 'react';
-import { debounce } from 'lodash';
-
-function PersianTextInput({ onChange }: { onChange: (text: string) => void }) {
-  const [value, setValue] = useState('');
-
-  const debouncedProcess = useCallback(
-    debounce((text: string) => {
-      const processed = toPersianChars(text);
-      onChange(processed);
-    }, 300),
-    [onChange]
-  );
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    setValue(inputValue);
-    debouncedProcess(inputValue);
-  };
-
-  return (
-    <input
-      type="text"
-      value={value}
-      onChange={handleChange}
-      placeholder="متن فارسی خود را وارد کنید"
-      dir="rtl"
-    />
-  );
-}
-```
-
-### Vue.js Directive
-
-```typescript
-// Vue directive for automatic Persian character conversion
-app.directive("persian-chars", {
-	mounted(el: HTMLInputElement) {
-		el.addEventListener("input", (e) => {
-			const target = e.target as HTMLInputElement;
-			const converted = toPersianChars(target.value);
-			if (converted !== target.value) {
-				target.value = converted;
-				target.dispatchEvent(new Event("input"));
-			}
-		});
-	},
-});
-```
-
-## Edge Cases
-
-### Mixed Content
-
-```typescript
-toPersianChars("Hello علي"); // 'Hello علی' (only Persian chars converted)
-toPersianChars("123 ك 456"); // '123 ک 456' (numbers unchanged)
-toPersianChars("email@domain.com ي"); // 'email@domain.com ی'
-```
-
-### Already Converted Text
-
-```typescript
-toPersianChars("علی کتاب"); // 'علی کتاب' (no change needed)
-toPersianChars(""); // '' (empty string)
-toPersianChars(null); // '' (graceful handling)
-```
-
-### Special Characters
-
-```typescript
-toPersianChars("نرخ %5 است"); // 'نرخ ٪۵ است' (with digit conversion)
-toPersianChars("كلمه‌ي مهم"); // 'کلمه‌ی مهم' (preserves half-space)
-```
-
-## TypeScript Support
-
-```typescript
-import { toPersianChars } from "persian-tools";
-
-// Type-safe usage
-const converted: string = toPersianChars("علي");
-
-// Generic text processor
-function processText<T extends { text: string }>(obj: T): T {
-	return {
-		...obj,
-		text: toPersianChars(obj.text),
-	};
-}
-```
-
-## Related Utilities
-
-<CardGroup cols={2}>
-	<Card title="Half Space" icon="space-evenly" href="/utilities/text/half-space">
-		Fix Persian text spacing issues
-	</Card>
-	<Card title="Is Persian" icon="check-circle" href="/utilities/text/persian-chars">
-		Validate Persian text content
-	</Card>
-	<Card title="Digit Conversion" icon="language" href="/utilities/numbers/digits">
-		Convert between Persian, Arabic, and English digits
-	</Card>
-	<Card title="Slugify" icon="link" href="/utilities/text/slugify">
-		Create URL-friendly slugs from Persian text
-	</Card>
-</CardGroup>
+`src/modules/toPersianChars/index.ts` · Tests: `test/toPersianChars.spec.ts`

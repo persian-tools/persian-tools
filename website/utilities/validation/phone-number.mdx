@@ -1,197 +1,124 @@
 ---
-title: "Phone Number Validation"
-description: "Validate Iranian mobile and landline phone numbers"
+title: "Phone Number"
+description: "Validate Iranian mobile numbers, normalize between `0...` and `+98...` formats, and look up operator + province coverage."
 icon: "phone"
 ---
 
-# Phone Number Validation
+Validate Iranian mobile numbers, switch between `0` and `+98` formats, and detect the carrier (همراه اول, ایرانسل, …) plus province coverage from the 3-digit operator prefix.
 
-Validate Iranian mobile and landline phone numbers and extract operator information.
+> This module validates **mobile** numbers only. Landline validation is not supported.
 
-## Available Functions
+## Functions
 
-- `validatePhoneNumber` - Validate any Iranian phone number
-- `getPhoneOperator` - Get mobile operator name
+### `isPhoneNumberValid(mobile)`
 
-## Basic Usage
+```ts
+import { isPhoneNumberValid } from "@persian-tools/persian-tools";
 
-```typescript
-import { validatePhoneNumber, getPhoneOperator } from "@persian-tools/persian-tools";
-
-// Validate mobile number
-console.log(validatePhoneNumber("09123456789"));
-// Output: true
-
-// Get operator
-console.log(getPhoneOperator("09123456789"));
-// Output: "همراه اول"
+isPhoneNumberValid("09123456789"); // true
+isPhoneNumberValid("+989123456789"); // true
+isPhoneNumberValid("989123456789"); // true
+isPhoneNumberValid("00989123456789"); // true
+isPhoneNumberValid("9123456789"); // true (bare)
+isPhoneNumberValid("0212345678"); // false (landline, not mobile)
+isPhoneNumberValid("09000000000"); // false (unassigned prefix)
 ```
 
-## API Reference
+Internally checks `/^(\+98|98|0098|0)?9(\d{2})\d{7}$/` **and** confirms the 3-digit operator prefix is in the known list.
 
-### validatePhoneNumber
+> The exported name is `isPhoneNumberValid`. There is no `validatePhoneNumber`.
 
-Validate Iranian mobile and landline numbers.
+### `phoneNumberNormalizer(phoneNumber, token)`
 
-<ParamField path="phoneNumber" type="string" required>
-	Phone number to validate (with or without country code)
-</ParamField>
+Convert between `0` and `+98` representations. **Throws** on invalid input.
 
-<ResponseField name="result" type="boolean">
-	`true` if valid, `false` otherwise
-</ResponseField>
+```ts
+import { phoneNumberNormalizer } from "@persian-tools/persian-tools";
 
-```typescript
-validatePhoneNumber("09123456789"); // true (mobile)
-validatePhoneNumber("02188776655"); // true (landline)
-validatePhoneNumber("1234567890"); // false (invalid)
+phoneNumberNormalizer("+989022002580", "0"); // "09022002580"
+phoneNumberNormalizer("09022002580", "+98"); // "+989022002580"
+phoneNumberNormalizer("989022002580", "0"); // "09022002580"
+
+phoneNumberNormalizer("invalid", "0"); // throws Error("phone number is not valid")
 ```
 
-### getPhoneOperator
+`token` is exactly `"0" | "+98"` — no other formats.
 
-Get the mobile operator name from a mobile number.
+### `phoneNumberDetail(mobile)`
 
-<ParamField path="mobileNumber" type="string" required>
-	Mobile number (starting with 09)
-</ParamField>
+Look up operator + province coverage by the 3-digit operator prefix.
 
-<ResponseField name="result" type="string">
-	Operator name in Persian, or empty string if not found
-</ResponseField>
+```ts
+import { phoneNumberDetail } from "@persian-tools/persian-tools";
 
-```typescript
-getPhoneOperator("09123456789"); // "همراه اول"
-getPhoneOperator("09353456789"); // "ایرانسل"
-getPhoneOperator("09213456789"); // "رایتل"
-```
-
-## Examples
-
-### Form Validation
-
-```typescript
-import { validatePhoneNumber, getPhoneOperator } from "@persian-tools/persian-tools";
-
-interface PhoneValidation {
-	isValid: boolean;
-	type?: "mobile" | "landline";
-	operator?: string;
-	error?: string;
-}
-
-const validatePhone = (phone: string): PhoneValidation => {
-	if (!validatePhoneNumber(phone)) {
-		return {
-			isValid: false,
-			error: "شماره تلفن نامعتبر است",
-		};
-	}
-
-	const isMobile = phone.startsWith("09");
-
-	return {
-		isValid: true,
-		type: isMobile ? "mobile" : "landline",
-		operator: isMobile ? getPhoneOperator(phone) : undefined,
-	};
-};
-
-console.log(validatePhone("09123456789"));
+phoneNumberDetail("09123456789");
 // {
-//   isValid: true,
-//   type: 'mobile',
-//   operator: 'همراه اول'
+//   province: ["البرز", "تهران", ...],
+//   base: "تهران",
+//   type: ["permanent"],
+//   operator: { id: 1, name: "همراه اول", ... },
 // }
+
+phoneNumberDetail("09000000000"); // null  (prefix not assigned)
 ```
 
-### SMS Service Integration
+Returns `OperatorModel | null`. The operator name is `result.operator.name` — the function does not return a bare string.
 
-```typescript
-import { validatePhoneNumber, getPhoneOperator } from "@persian-tools/persian-tools";
+> There is no `getPhoneOperator` function. Use `phoneNumberDetail(...)?.operator?.name` if you want just the name.
 
-const sendSMS = (phone: string, message: string) => {
-	if (!validatePhoneNumber(phone)) {
-		throw new Error("Invalid phone number");
-	}
+### `getPhoneNumberPrefix(mobile)`
 
-	const operator = getPhoneOperator(phone);
+Returns the 4-digit prefix (including the leading `9`):
 
-	// Route SMS based on operator for better rates
+```ts
+import { getPhoneNumberPrefix } from "@persian-tools/persian-tools";
+
+getPhoneNumberPrefix("09123456789"); // "0912"
+```
+
+Useful for grouping numbers in reports.
+
+## Types
+
+```ts
+interface OperatorModel {
+	province: string[];
+	base: string;
+	type: ("permanent" | "credit")[];
+	operator: { id: number; name: string /* ... */ };
+	model?: string;
+}
+```
+
+## Recommended pipeline
+
+```ts
+import {
+	autoConvertDigitsToEN,
+	isPhoneNumberValid,
+	phoneNumberNormalizer,
+	phoneNumberDetail,
+} from "@persian-tools/persian-tools";
+
+function processPhone(raw: string) {
+	const norm = autoConvertDigitsToEN(raw.trim());
+	if (!isPhoneNumberValid(norm)) return { ok: false as const };
 	return {
-		recipient: phone,
-		operator,
-		message,
+		ok: true as const,
+		e164: phoneNumberNormalizer(norm, "+98"),
+		local: phoneNumberNormalizer(norm, "0"),
+		detail: phoneNumberDetail(norm),
 	};
-};
+}
 ```
 
-### Multi-Phone Support
+## Pitfalls
 
-```typescript
-import { validatePhoneNumber } from "@persian-tools/persian-tools";
+- **Mobile only.** Landlines (`021...`, `031...`, …) all fail validation.
+- **`phoneNumberDetail` returns an object**, not a string. Older docs claim otherwise.
+- **`phoneNumberNormalizer` throws** on invalid input — wrap in `try/catch` or `isPhoneNumberValid` first.
+- **Persian/Arabic digit input is not normalized.** Pre-convert with `autoConvertDigitsToEN`.
 
-const addPhoneToProfile = (phones: string[], newPhone: string): string[] => {
-	if (!validatePhoneNumber(newPhone)) {
-		throw new Error("شماره تلفن نامعتبر است");
-	}
+## Source
 
-	if (phones.includes(newPhone)) {
-		throw new Error("این شماره قبلا ثبت شده است");
-	}
-
-	return [...phones, newPhone];
-};
-```
-
-## Supported Operators
-
-### Mobile Operators
-
-- **همراه اول** (091x)
-- **ایرانسل** (093x, 090x)
-- **رایتل** (092x)
-- And other Iranian operators
-
-### Landline Codes
-
-All Iranian city area codes are supported (021 for Tehran, 031 for Isfahan, etc.)
-
-## Use Cases
-
-<AccordionGroup>
-  <Accordion title="User Authentication" icon="lock">
-    Validate phone numbers for OTP:
-    ```typescript
-    const sendOTP = (phone: string) => {
-      if (!validatePhoneNumber(phone)) {
-        throw new Error('شماره تلفن نامعتبر است');
-      }
-      // Send OTP
-    };
-    ```
-  </Accordion>
-
-<Accordion title="Contact Management" icon="address-book">
-	Store and validate contacts: ```typescript const contacts = userContacts.filter(contact =>
-	validatePhoneNumber(contact.phone) ); ```
-</Accordion>
-
-  <Accordion title="Operator-Based Routing" icon="route">
-    Route calls/SMS based on operator:
-    ```typescript
-    const routeSMS = (phone: string) => {
-      const operator = getPhoneOperator(phone);
-      return selectGateway(operator);
-    };
-    ```
-  </Accordion>
-</AccordionGroup>
-
-## Type Definition
-
-```typescript
-function validatePhoneNumber(phoneNumber: string): boolean;
-function getPhoneOperator(mobileNumber: string): string;
-```
-
-<Tip>Always validate phone numbers before sending SMS or making calls.</Tip>
+`src/modules/phoneNumber/` (`validator.ts`, `detail.ts`, `normalizer.ts`, `utils.ts`) · Tests: `test/phoneNumber.spec.ts`

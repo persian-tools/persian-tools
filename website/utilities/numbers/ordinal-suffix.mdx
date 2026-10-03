@@ -1,339 +1,80 @@
 ---
 title: "Ordinal Suffix"
-description: "Add or remove Persian ordinal suffixes from numbers"
-icon: "list-ol"
+description: "Add Persian ordinal suffix to a Persian word, or strip it back to the cardinal form."
+icon: "list-ordered"
 ---
 
-# Ordinal Suffix Management
+Two complementary helpers for Persian ordinals — `addOrdinalSuffix` (cardinal → ordinal) and `removeOrdinalSuffix` (ordinal → cardinal). Both operate on already-Persian word forms; for numeric → words conversion, use [Number to Words](./number-to-words) which can apply the ordinal automatically.
 
-The ordinal suffix utilities help you add or remove Persian ordinal suffixes (ام، م، ین) from numbers to create ordinal numbers like "اول"، "دوم"، "سوم".
+## Functions
 
-## Available Functions
+### `addOrdinalSuffix(number)`
 
-<CardGroup cols={2}>
-	<Card title="Add Ordinal" icon="plus">
-		`addOrdinalSuffix()` - Add ordinal suffixes
-	</Card>
-	<Card title="Remove Ordinal" icon="minus">
-		`removeOrdinalSuffix()` - Remove ordinal suffixes
-	</Card>
-</CardGroup>
-
-## Basic Usage
-
-<CodeGroup>
-```typescript Import
-import { addOrdinalSuffix, removeOrdinalSuffix } from '@persian-tools/persian-tools';
+```ts
+addOrdinalSuffix(number?: string): string
 ```
 
-```javascript CommonJS
-const { addOrdinalSuffix, removeOrdinalSuffix } = require("persian-tools");
+```ts
+import { addOrdinalSuffix } from "@persian-tools/persian-tools";
+
+addOrdinalSuffix("سه"); // "سوم"
+addOrdinalSuffix("دو"); // "دوم"
+addOrdinalSuffix("پنج"); // "پنجم"
+addOrdinalSuffix("سی و سه"); // "سی و سوم"
+addOrdinalSuffix("یکصد"); // "یکصدم"
 ```
 
-</CodeGroup>
+#### Rules (applied in order)
 
-## Adding Ordinal Suffixes
+1. Ends with `ی` → append ` اُم` (leading space + standalone `اُم`).
+2. Ends with `سه` → strip last 2 chars, append `سوم`.
+3. Otherwise → append `م`.
 
-Convert cardinal numbers to ordinal numbers in Persian:
+#### Input
 
-```typescript
-addOrdinalSuffix("یک"); // 'اول'
-addOrdinalSuffix("دو"); // 'دوم'
-addOrdinalSuffix("سه"); // 'سوم'
-addOrdinalSuffix("چهار"); // 'چهارم'
-addOrdinalSuffix("بیست"); // 'بیستم'
+- Must be a **string**. Anything else throws `TypeError("PersianTools: addOrdinalSuffix - The input must be string")`.
+- `""` does NOT throw — it falls through rule 3 and returns `"م"`. Validate non-emptiness upstream if needed.
+
+### `removeOrdinalSuffix(word)`
+
+```ts
+removeOrdinalSuffix(word: string): string
 ```
 
-### Numbers with Complex Forms
+```ts
+import { removeOrdinalSuffix } from "@persian-tools/persian-tools";
 
-```typescript
-addOrdinalSuffix("دوازده"); // 'دوازدهم'
-addOrdinalSuffix("سی"); // 'سی‌ام'
-addOrdinalSuffix("یکصد"); // 'یکصدم'
-addOrdinalSuffix("هزار"); // 'هزارم'
+removeOrdinalSuffix("سوم"); // "سه"
+removeOrdinalSuffix("یازدهم"); // "یازده"
+removeOrdinalSuffix("بیستم"); // "بیست"
+removeOrdinalSuffix("سیزدهمین"); // "سیزده"
+removeOrdinalSuffix("سه هزارم"); // "سه هزار"
+removeOrdinalSuffix("چهاردهمین"); // "چهارده"
 ```
 
-### Compound Numbers
+#### Behaviour
 
-```typescript
-addOrdinalSuffix("بیست و یک"); // 'بیست و یکم'
-addOrdinalSuffix("سی و سه"); // 'سی و سوم'
-addOrdinalSuffix("یکصد و پنج"); // 'یکصد و پنجم'
+1. Falsy input is **returned as-is** (no throw, no `""` coercion).
+2. Generic suffixes are removed: `مین`, `ام`, ` اُم`.
+3. A table of irregular forms is applied (longest matches first) — e.g. `سوم → سه`, `یازدهم → یازده`, `دوازدهم → دوازده`.
+
+## Pitfalls
+
+- **`addOrdinalSuffix("")` returns `"م"`** (a single character), not `""`. Validate upstream.
+- **`addOrdinalSuffix(null)` throws TypeError**, doesn't return `""`.
+- **`removeOrdinalSuffix(null)` returns `null` unchanged** (falsy input passes through).
+- **`اول` is not handled** by `removeOrdinalSuffix` — it returns `"اول"` unchanged (no built-in mapping to `یک`).
+- **Rule coverage is conservative.** `addOrdinalSuffix("یک")` returns `"یک اُم"` (rule 1: ends with `ی`), which is grammatical but uncommon; the colloquial `"یکم"` is not produced. Confirm against your style guide.
+
+## Composition with Number to Words
+
+```ts
+import { numberToWords } from "@persian-tools/persian-tools";
+
+numberToWords(5, { ordinal: true }); // "پنجم"
+// equivalent to addOrdinalSuffix(numberToWords(5))
 ```
 
-## Removing Ordinal Suffixes
+## Source
 
-Convert ordinal numbers back to cardinal numbers:
-
-```typescript
-removeOrdinalSuffix("اول"); // 'یک'
-removeOrdinalSuffix("دوم"); // 'دو'
-removeOrdinalSuffix("سوم"); // 'سه'
-removeOrdinalSuffix("چهارم"); // 'چهار'
-removeOrdinalSuffix("بیستم"); // 'بیست'
-```
-
-### Complex Ordinals
-
-```typescript
-removeOrdinalSuffix("دوازدهم"); // 'دوازده'
-removeOrdinalSuffix("سی‌ام"); // 'سی'
-removeOrdinalSuffix("یکصدم"); // 'یکصد'
-removeOrdinalSuffix("بیست و یکم"); // 'بیست و یک'
-```
-
-## Special Cases and Rules
-
-### Irregular Forms
-
-```typescript
-// Special transformations
-addOrdinalSuffix("یک"); // 'اول' (not 'یکم')
-addOrdinalSuffix("دو"); // 'دوم' (special form)
-addOrdinalSuffix("سه"); // 'سوم' (special form)
-
-removeOrdinalSuffix("اول"); // 'یک'
-removeOrdinalSuffix("دوم"); // 'دو'
-removeOrdinalSuffix("سوم"); // 'سه'
-```
-
-### Half-Space Handling
-
-```typescript
-// Handles half-spaces correctly
-addOrdinalSuffix("سی"); // 'سی‌ام'
-addOrdinalSuffix("چهل"); // 'چهلم'
-removeOrdinalSuffix("سی‌ام"); // 'سی'
-removeOrdinalSuffix("چهلم"); // 'چهل'
-```
-
-## Advanced Examples
-
-### Date Processing
-
-```typescript
-function formatOrdinalDate(day: string, month: string, year: string) {
-	const ordinalDay = addOrdinalSuffix(day);
-	return `${ordinalDay} ${month} ${year}`;
-}
-
-formatOrdinalDate("یک", "فروردین", "۱۴۰۳"); // 'اول فروردین ۱۴۰۳'
-formatOrdinalDate("بیست و یک", "مهر", "۱۴۰۲"); // 'بیست و یکم مهر ۱۴۰۲'
-```
-
-### List Generation
-
-```typescript
-function createOrderedList(items: string[]) {
-	return items.map((item, index) => {
-		const number = numberToWords(index + 1);
-		const ordinal = addOrdinalSuffix(number);
-		return `${ordinal}: ${item}`;
-	});
-}
-
-const list = createOrderedList(["آیتم اول", "آیتم دوم", "آیتم سوم"]);
-// ['اول: آیتم اول', 'دوم: آیتم دوم', 'سوم: آیتم سوم']
-```
-
-### Text Processing
-
-```typescript
-function processOrdinalText(text: string, direction: "add" | "remove") {
-	const words = text.split(" ");
-
-	return words
-		.map((word) => {
-			if (direction === "add") {
-				// Try to add ordinal suffix
-				const ordinal = addOrdinalSuffix(word);
-				return ordinal !== word ? ordinal : word;
-			} else {
-				// Try to remove ordinal suffix
-				const cardinal = removeOrdinalSuffix(word);
-				return cardinal !== word ? cardinal : word;
-			}
-		})
-		.join(" ");
-}
-```
-
-## Edge Cases
-
-### Invalid Input
-
-```typescript
-addOrdinalSuffix(""); // ''
-addOrdinalSuffix("نامعلوم"); // 'نامعلوم' (unchanged)
-addOrdinalSuffix(null); // ''
-
-removeOrdinalSuffix(""); // ''
-removeOrdinalSuffix("یک"); // 'یک' (unchanged, not ordinal)
-removeOrdinalSuffix(null); // ''
-```
-
-### Already Processed
-
-```typescript
-// Adding ordinal to already ordinal number
-addOrdinalSuffix("اول"); // 'اول' (no change)
-addOrdinalSuffix("دوم"); // 'دوم' (no change)
-
-// Removing from cardinal number
-removeOrdinalSuffix("یک"); // 'یک' (no change)
-removeOrdinalSuffix("دو"); // 'دو' (no change)
-```
-
-## Complete Ordinal Reference
-
-<Tabs>
-  <Tab title="1-20">
-    | Cardinal | Ordinal |
-    |----------|---------|
-    | یک | اول |
-    | دو | دوم |
-    | سه | سوم |
-    | چهار | چهارم |
-    | پنج | پنجم |
-    | شش | ششم |
-    | هفت | هفتم |
-    | هشت | هشتم |
-    | نه | نهم |
-    | ده | دهم |
-    | یازده | یازدهم |
-    | دوازده | دوازدهم |
-    | سیزده | سیزدهم |
-    | چهارده | چهاردهم |
-    | پانزده | پانزدهم |
-    | شانزده | شانزدهم |
-    | هفده | هفدهم |
-    | هجده | هجدهم |
-    | نوزده | نوزدهم |
-    | بیست | بیستم |
-  </Tab>
-
-<Tab title="Tens">
-	| Cardinal | Ordinal | |----------|---------| | بیست | بیستم | | سی | سی‌ام | | چهل | چهلم | | پنجاه | پنجاهم | | شصت
-	| شصتم | | هفتاد | هفتادم | | هشتاد | هشتادم | | نود | نودم |
-</Tab>
-
-  <Tab title="Hundreds & Thousands">
-    | Cardinal | Ordinal |
-    |----------|---------|
-    | یکصد | یکصدم |
-    | دویست | دویستم |
-    | سیصد | سیصدم |
-    | هزار | هزارم |
-    | دو هزار | دو هزارم |
-    | میلیون | میلیونم |
-  </Tab>
-</Tabs>
-
-## TypeScript Support
-
-```typescript
-import { addOrdinalSuffix, removeOrdinalSuffix } from "persian-tools";
-
-// Type-safe usage
-const ordinal: string = addOrdinalSuffix("یک"); // 'اول'
-const cardinal: string = removeOrdinalSuffix("اول"); // 'یک'
-
-// Function typing
-type OrdinalConverter = (input: string) => string;
-
-const toOrdinal: OrdinalConverter = addOrdinalSuffix;
-const toCardinal: OrdinalConverter = removeOrdinalSuffix;
-```
-
-## Performance Considerations
-
-<AccordionGroup>
-  <Accordion title="🚀 Performance Metrics" icon="bolt">
-    - **Simple words**: ~0.1ms
-    - **Compound numbers**: ~0.2ms
-    - **Batch processing**: Linear scaling
-    - **Memory usage**: Minimal overhead
-  </Accordion>
-
-  <Accordion title="📦 Optimization Tips" icon="lightbulb">
-    - Cache results for frequently used numbers
-    - Process in batches for large datasets
-    - Use with number-to-words for complete pipeline
-  </Accordion>
-</AccordionGroup>
-
-## Integration Examples
-
-### Form Processing
-
-```typescript
-interface DateForm {
-	day: string;
-	month: string;
-	year: string;
-}
-
-function formatFormDate(form: DateForm): string {
-	const dayNumber = wordsToNumber(form.day);
-	const dayWords = numberToWords(dayNumber);
-	const ordinalDay = addOrdinalSuffix(dayWords);
-
-	return `${ordinalDay} ${form.month} ${form.year}`;
-}
-```
-
-### Content Generation
-
-```typescript
-function generateRankingList(items: Array<{ name: string; score: number }>) {
-	const sorted = items.sort((a, b) => b.score - a.score);
-
-	return sorted.map((item, index) => {
-		const position = numberToWords(index + 1);
-		const ordinalPosition = addOrdinalSuffix(position);
-
-		return `${ordinalPosition}: ${item.name} (${item.score} امتیاز)`;
-	});
-}
-```
-
-### Text Analysis
-
-```typescript
-function analyzeOrdinalUsage(text: string) {
-	const words = text.split(/\s+/);
-	const ordinals: string[] = [];
-	const cardinals: string[] = [];
-
-	words.forEach((word) => {
-		const asCardinal = removeOrdinalSuffix(word);
-		if (asCardinal !== word) {
-			ordinals.push(word);
-		} else {
-			const asOrdinal = addOrdinalSuffix(word);
-			if (asOrdinal !== word) {
-				cardinals.push(word);
-			}
-		}
-	});
-
-	return { ordinals, cardinals };
-}
-```
-
-## Related Utilities
-
-<CardGroup cols={2}>
-	<Card title="Number to Words" icon="spell-check" href="/utilities/numbers/number-to-words">
-		Convert numbers to Persian words with ordinal support
-	</Card>
-	<Card title="Words to Number" icon="hashtag" href="/utilities/numbers/words-to-number">
-		Convert Persian words to numbers
-	</Card>
-	<Card title="Half Space" icon="space-evenly" href="/utilities/text/half-space">
-		Fix Persian text spacing issues
-	</Card>
-	<Card title="Text Analyzer" icon="magnifying-glass" href="/utilities/text/text-analyzer">
-		Analyze Persian text content
-	</Card>
-</CardGroup>
+`src/modules/addOrdinalSuffix/addOrdinalSuffix.ts`, `src/modules/removeOrdinalSuffix/index.ts` · Tests: `test/addOrdinalSuffix.spec.ts`, `test/removeOrdinalSuffix.spec.ts`

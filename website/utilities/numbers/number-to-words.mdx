@@ -1,235 +1,89 @@
 ---
 title: "Number to Words"
-description: "Convert numeric values to Persian words with full customization options"
-icon: "spell-check"
+description: "Convert a number (integer up to Number.MAX_SAFE_INTEGER) to its Persian-words representation, with optional ordinal suffix."
+icon: "calculator"
 ---
 
-# Number to Words Conversion
+`numberToWords` converts numeric values into Persian word form (`123` → `"صد و بیست و سه"`).
 
-The `numberToWords` utility converts numeric values into their Persian word equivalents with comprehensive support for ordinals, currency formatting, and various number scales.
+## Function
 
-## Basic Usage
+```ts
+numberToWords(
+  numberValue: number | string,
+  options?: NumberToWordsOptions,
+): string | PersianToolsTypeError
 
-<CodeGroup>
-```typescript Import
-import { numberToWords } from '@persian-tools/persian-tools';
-```
-
-```javascript CommonJS
-const { numberToWords } = require("persian-tools");
-```
-
-</CodeGroup>
-
-### Simple Conversion
-
-```typescript
-numberToWords(1234);
-// Output: "یک هزار و دویست و سی و چهار"
-
-numberToWords(0);
-// Output: "صفر"
-
-numberToWords(1000000);
-// Output: "یک میلیون"
-```
-
-## Advanced Options
-
-The function accepts an optional configuration object for customized behavior:
-
-```typescript
 interface NumberToWordsOptions {
-	ordinal?: boolean;
-	currency?: boolean;
-	scale?: "short" | "long";
+  ordinal?: boolean;   // append Persian ordinal suffix
 }
 ```
 
-### Ordinal Numbers
+```ts
+import { numberToWords } from "@persian-tools/persian-tools";
 
-Generate ordinal numbers (first, second, third, etc.) in Persian:
-
-```typescript
-numberToWords(1, { ordinal: true });
-// Output: "یکم"
-
-numberToWords(21, { ordinal: true });
-// Output: "بیست و یکم"
-
-numberToWords(100, { ordinal: true });
-// Output: "یکصدم"
-```
-
-### Currency Formatting
-
-Format numbers as currency amounts:
-
-```typescript
-numberToWords(1500, { currency: true });
-// Output: "یک هزار و پانصد تومان"
-
-numberToWords(25000, { currency: true });
-// Output: "بیست و پنج هزار تومان"
-```
-
-### Number Scales
-
-Choose between short and long scale representations:
-
-<CodeGroup>
-```typescript Short Scale (Default)
-numberToWords(1000000000, { scale: 'short' });
-// Output: "یک میلیارد"
-```
-
-```typescript Long Scale
-numberToWords(1000000000, { scale: "long" });
-// Output: "یک هزار میلیون"
-```
-
-</CodeGroup>
-
-## Supported Number Ranges
-
-<Card title="Range Support" icon="ruler">
-	- **Minimum**: 0 - **Maximum**: 999,999,999,999,999 (15 digits) - **Decimals**: Not supported (integers only) -
-	**Negative**: Not supported (returns empty string)
-</Card>
-
-## Examples by Scale
-
-### Thousands
-
-```typescript
-numberToWords(1000); // "یک هزار"
-numberToWords(15000); // "پانزده هزار"
-numberToWords(100000); // "یکصد هزار"
-numberToWords(999000); // "نهصد و نود و نه هزار"
-```
-
-### Millions
-
-```typescript
-numberToWords(1000000); // "یک میلیون"
-numberToWords(2500000); // "دو میلیون و پانصد هزار"
-numberToWords(50000000); // "پنجاه میلیون"
-```
-
-### Billions and Beyond
-
-```typescript
-numberToWords(1000000000); // "یک میلیارد"
-numberToWords(1000000000000); // "یک تریلیون"
-numberToWords(1000000000000000); // "یک کوادریلیون"
-```
-
-## Edge Cases
-
-### Zero and Invalid Input
-
-```typescript
 numberToWords(0); // "صفر"
-numberToWords(null); // ""
-numberToWords(undefined); // ""
-numberToWords(-100); // "" (negative numbers not supported)
-numberToWords(1.5); // "" (decimals not supported)
+numberToWords(7); // "هفت"
+numberToWords(123); // "صد و بیست و سه"
+numberToWords(1234); // "یک هزار و دویست و سی و چهار"
+numberToWords(1_000_000); // "یک میلیون"
+numberToWords("12,345"); // "دوازده هزار و سیصد و چهل و پنج"
+numberToWords(-100); // "منفی صد"
+
+numberToWords(3, { ordinal: true }); // "سوم"
 ```
 
-### Very Large Numbers
+## Input rules
 
-```typescript
-// Maximum supported number
-numberToWords(999999999999999);
-// "نهصد و نود و نه کوادریلیون و نهصد و نود و نه تریلیون و نهصد و نود و نه میلیارد و نهصد و نود و نه میلیون و نهصد و نود و نه هزار و نهصد و نود و نه"
+- Accepts `number | string`. Strings are first run through `removeCommas`.
+- The numeric value **must be a safe integer** (`Number.isSafeInteger`).
+- Non-safe-integer input (floats, values above `Number.MAX_SAFE_INTEGER`) returns a `PersianToolsTypeError` **instance** (the function returns the error; it does not throw).
+- Negative integers work — output is prefixed with `منفی`.
 
-// Beyond maximum (returns empty string)
-numberToWords(1000000000000000); // ""
-```
+## Return type — union with the error
 
-## TypeScript Support
+```ts
+import { numberToWords, PersianToolsTypeError } from "@persian-tools/persian-tools";
 
-The utility provides full TypeScript support with proper type definitions:
-
-```typescript
-import { numberToWords, NumberToWordsOptions } from "persian-tools";
-
-const options: NumberToWordsOptions = {
-	ordinal: true,
-	currency: false,
-	scale: "short",
-};
-
-const result: string = numberToWords(1234, options);
-```
-
-## Performance Considerations
-
-<AccordionGroup>
-  <Accordion title="🚀 Optimization Tips" icon="bolt">
-    - Cache results for frequently used numbers
-    - Use tree-shaking to include only this utility
-    - Consider batch processing for large datasets
-  </Accordion>
-
-  <Accordion title="📊 Benchmarks" icon="chart-bar">
-    - **Small numbers (1-999)**: ~0.1ms
-    - **Medium numbers (1K-999K)**: ~0.2ms
-    - **Large numbers (1M+)**: ~0.5ms
-  </Accordion>
-</AccordionGroup>
-
-## Common Use Cases
-
-### Invoice Generation
-
-```typescript
-function generateInvoice(amount: number) {
-	return {
-		numericAmount: addCommas(amount),
-		writtenAmount: numberToWords(amount, { currency: true }),
-		persianDigits: digitsEnToFa(addCommas(amount)),
-	};
+const result = numberToWords(userInput);
+if (result instanceof PersianToolsTypeError) {
+	console.error(result.message);
+} else {
+	console.log(result);
 }
 ```
 
-### Educational Applications
+The return type is `string | PersianToolsTypeError`. Don't assume it's a plain string.
 
-```typescript
-function createNumberQuiz(number: number) {
-	return {
-		question: `عدد ${digitsEnToFa(number.toString())} را به حروف بنویسید:`,
-		answer: numberToWords(number),
-		ordinalAnswer: numberToWords(number, { ordinal: true }),
-	};
-}
+## Range
+
+- Min: `-Number.MAX_SAFE_INTEGER`
+- Max: `Number.MAX_SAFE_INTEGER` (≈ 9.007e15)
+- Floats: rejected.
+
+## Ordinal mode
+
+`{ ordinal: true }` runs the result through `addOrdinalSuffix`. Suffix rules:
+
+- Ends with `ی` → append ` اُم` (with leading space).
+- Ends with `سه` → strip last 2 chars, append `سوم`.
+- Otherwise → append `م`.
+
+## Pitfalls
+
+- **No `currency` or `scale` options.** Older docs reference them — they do not exist.
+- **No locale switching.** Output is always Persian words separated by `و`.
+- **Return is `string | PersianToolsTypeError`** — guard accordingly.
+- **Persian-digit string input is not auto-normalized** — `removeCommas` only handles commas. Run `autoConvertDigitsToEN` upstream if needed.
+
+## Composition
+
+```ts
+import { numberToWords, addCommas } from "@persian-tools/persian-tools";
+
+const formatInvoice = (n: number) => `${addCommas(n)} ریال (${numberToWords(n)})`;
 ```
 
-## Error Handling
+## Source
 
-The utility handles invalid input gracefully:
-
-```typescript
-// Always returns a string (empty for invalid input)
-const result = numberToWords(invalidInput);
-if (result === "") {
-	console.log("Invalid input provided");
-}
-```
-
-## Related Utilities
-
-<CardGroup cols={2}>
-	<Card title="Words to Number" icon="arrow-right" href="/utilities/numbers/words-to-number">
-		Convert Persian words back to numbers
-	</Card>
-	<Card title="Add Commas" icon="comma" href="/utilities/numbers/commas">
-		Format numbers with thousands separators
-	</Card>
-	<Card title="Digit Conversion" icon="language" href="/utilities/numbers/digits">
-		Convert between Persian, Arabic, and English digits
-	</Card>
-	<Card title="Ordinal Suffix" icon="list-ol" href="/utilities/numbers/ordinal-suffix">
-		Add or remove ordinal suffixes
-	</Card>
-</CardGroup>
+`src/modules/numberToWords/index.ts`, `constants.ts`, `types.ts` · Tests: `test/NumberToWords.spec.ts`

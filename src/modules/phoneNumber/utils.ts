@@ -19,6 +19,8 @@ export const operatorsMap = {
 	Taliya: "تالیا",
 	RightTel: "رایتل",
 	Aptel: "آپتل",
+	Kish: "کیش",
+	Espadan: "اسپادان",
 };
 
 export const MCI: Record<string, OperatorModel> = {
@@ -160,6 +162,12 @@ export const RightTel: Record<string, OperatorModel> = {
 		type: ["credit"],
 		operator: operatorsMap.RightTel,
 	},
+	"924": {
+		province: [],
+		base: "کشوری",
+		type: ["credit"],
+		operator: operatorsMap.RightTel,
+	},
 };
 
 const IrancellModel = {
@@ -216,6 +224,24 @@ export const Aptel: Record<string, OperatorModel> = {
 	},
 };
 
+export const Kish: Record<string, OperatorModel> = {
+	"934": {
+		province: [],
+		base: "کشوری",
+		type: ["credit"],
+		operator: operatorsMap.Kish,
+	},
+};
+
+export const Espadan: Record<string, OperatorModel> = {
+	"931": {
+		province: [],
+		base: "کشوری",
+		type: ["credit"],
+		operator: operatorsMap.Espadan,
+	},
+};
+
 export const prefixes: string[] = [
 	...Object.keys(MCI),
 	...Object.keys(Taliya),
@@ -223,6 +249,8 @@ export const prefixes: string[] = [
 	...Object.keys(Irancell),
 	...Object.keys(ShatelMobile),
 	...Object.keys(Aptel),
+	...Object.keys(Kish),
+	...Object.keys(Espadan),
 ];
 
 export const operators: Record<string, OperatorModel> = {
@@ -232,6 +260,8 @@ export const operators: Record<string, OperatorModel> = {
 	...ShatelMobile,
 	...RightTel,
 	...Aptel,
+	...Kish,
+	...Espadan,
 };
 
 /**

@@ -1,123 +1,72 @@
 ---
 title: "Remaining Time"
-description: "Calculate remaining time until a future date in Persian"
-icon: "hourglass-half"
+description: "Calculate the structured (years/months/days/hours/minutes/seconds) breakdown of time remaining until a target Gregorian date."
+icon: "hourglass"
 ---
 
-# Remaining Time
+`remainingTime` accepts a Gregorian target date (string, number, or `Date`) and returns a structured countdown plus a Persian-digit `toString()` and an `isFinished` flag.
 
-Calculate and format the remaining time until a future date with Persian output.
+## Function
 
-## Basic Usage
-
-```typescript
-import { remainingTime } from "@persian-tools/persian-tools";
-
-const futureDate = new Date("2024-12-31T23:59:59");
-const remaining = remainingTime(futureDate);
-
-console.log(remaining);
-// Output: { days: 78, hours: 13, minutes: 59, seconds: 59 }
-```
-
-## API Reference
-
-<ParamField path="date" type="Date | number" required>
-	Future date or timestamp
-</ParamField>
-
-<ResponseField name="result" type="object">
-  Object containing time components
-
-  <Expandable title="properties">
-    <ResponseField name="days" type="number">
-      Remaining days
-    </ResponseField>
-
-    <ResponseField name="hours" type="number">
-      Remaining hours (0-23)
-    </ResponseField>
-
-    <ResponseField name="minutes" type="number">
-      Remaining minutes (0-59)
-    </ResponseField>
-
-    <ResponseField name="seconds" type="number">
-      Remaining seconds (0-59)
-    </ResponseField>
-
-  </Expandable>
-</ResponseField>
-
-## Examples
-
-### Countdown Timer
-
-```typescript
-import { remainingTime, digitsEnToFa } from "@persian-tools/persian-tools";
-
-const displayCountdown = (targetDate: Date): string => {
-	const time = remainingTime(targetDate);
-
-	const days = digitsEnToFa(time.days.toString());
-	const hours = digitsEnToFa(time.hours.toString());
-	const minutes = digitsEnToFa(time.minutes.toString());
-
-	return `${days} روز و ${hours} ساعت و ${minutes} دقیقه`;
-};
-
-const eventDate = new Date("2024-12-31T23:59:59");
-console.log(displayCountdown(eventDate));
-// "۷۸ روز و ۱۳ ساعت و ۵۹ دقیقه"
-```
-
-### Event Countdown
-
-```typescript
-import { remainingTime } from "@persian-tools/persian-tools";
-
-const showEventCountdown = (eventDate: Date) => {
-	const time = remainingTime(eventDate);
-
-	if (time.days > 0) {
-		return `${time.days} روز مانده`;
-	} else if (time.hours > 0) {
-		return `${time.hours} ساعت مانده`;
-	} else {
-		return `${time.minutes} دقیقه مانده`;
-	}
-};
-```
-
-## Use Cases
-
-<AccordionGroup>
-  <Accordion title="E-commerce Sales" icon="tag">
-    Show countdown for flash sales:
-    ```typescript
-    const saleEnds = new Date('2024-10-20T23:59:59');
-    const countdown = remainingTime(saleEnds);
-    ```
-  </Accordion>
-
-  <Accordion title="Event Registration" icon="calendar">
-    Display time until event registration closes:
-    ```typescript
-    const registrationDeadline = new Date('2024-11-01');
-    const remaining = remainingTime(registrationDeadline);
-    ```
-  </Accordion>
-</AccordionGroup>
-
-## Type Definition
-
-```typescript
-interface RemainingTime {
-	days: number;
-	hours: number;
-	minutes: number;
-	seconds: number;
+```ts
+remainingTime(date: string | number | Date): {
+  years: number;
+  months: number;
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+  toString(): string;
+  isFinished: boolean;
 }
-
-function remainingTime(date: Date | number): RemainingTime;
 ```
+
+```ts
+import { remainingTime } from "@persian-tools/persian-tools";
+
+const r = remainingTime("2025-12-31T23:59:59Z");
+r.years; // e.g. 0
+r.months; // e.g. 7
+r.days; // ...
+r.isFinished; // false
+r.toString(); // "۱ سال و ۲ ماه و ۱۵ روز" (Persian digits; only non-zero parts)
+```
+
+## When the target has passed
+
+```ts
+const past = remainingTime(new Date("2000-01-01"));
+past.isFinished; // true
+past.toString(); // ""
+past.years; // 0
+// (all numeric fields are 0)
+```
+
+## Calendar-naive math
+
+Months are 30 days, years are 365 days. This is an approximation — leap years and varying month lengths are ignored. For legal/financial deadlines requiring calendar precision, use a calendar-aware library.
+
+## Input handling
+
+- Accepts anything `new Date(date)` accepts.
+- Invalid dates (`"not-a-date"`) throw `TypeError("PersianTools: remainingTime - The input must be a valid date")`.
+
+## `toString()` — Persian digit output
+
+The string method converts component values to Persian digits via `digitsEnToFa`, then joins non-zero parts with `و`:
+
+```ts
+r.toString(); // "۱ سال و ۲ ماه و ۱۵ روز و ۳ ساعت و ۲۰ دقیقه و ۵ ثانیه"
+```
+
+If you need English digits, build the string yourself from the numeric fields.
+
+## Pitfalls
+
+- **`toString()` returns `""` when finished** — check `isFinished` to render a "Finished" label.
+- **Calendar-naive.** Not suitable for "exactly N months from today".
+- **No Jalali support here.** Convert Jalali targets to Gregorian first if you have one.
+
+## Source
+
+`src/modules/remainingTime/index.ts`, `getCurrentDateTime.ts` · Tests: `test/remainingTime.spec.ts`

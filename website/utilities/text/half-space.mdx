@@ -1,128 +1,67 @@
 ---
 title: "Half-Space"
-description: "Add proper Persian half-space (ZWNJ) characters for correct typography"
-icon: "grip-lines-vertical"
+description: "Insert Persian half-space (ZWNJ, U+200C) between Persian prefixes/suffixes and their stems."
+icon: "minus"
 ---
 
-# Half-Space
+`halfSpace` inserts the Zero-Width Non-Joiner (`‌`, U+200C, نیم‌فاصله) between Persian words and their attached prefixes/suffixes — turning `می خواهم` into the typographically correct `می‌خواهم`.
 
-Add Persian half-space (Zero-Width Non-Joiner - ZWNJ) characters to text for proper typography.
+## Function
 
-## Available Functions
-
-- `addHalfSpaceChar` - Add half-spaces to Persian text
-- `removeHalfSpaceChar` - Remove half-spaces from text
-
-## Basic Usage
-
-```typescript
-import { addHalfSpaceChar, removeHalfSpaceChar } from "@persian-tools/persian-tools";
-
-// Add half-spaces
-console.log(addHalfSpaceChar("میخواهم به شما کمک کنم"));
-// Output: "می‌خواهم به شما کمک کنم"
-
-// Remove half-spaces
-console.log(removeHalfSpaceChar("می‌خواهم"));
-// Output: "میخواهم"
+```ts
+halfSpace(persianText: string): string
 ```
 
-## API Reference
+```ts
+import { halfSpace } from "@persian-tools/persian-tools";
 
-<ParamField path="text" type="string" required>
-	Persian text to process
-</ParamField>
-
-<ResponseField name="result" type="string">
-	Text with proper half-spaces added or removed
-</ResponseField>
-
-## Examples
-
-### Content Publishing
-
-```typescript
-import { addHalfSpaceChar } from "@persian-tools/persian-tools";
-
-const prepareForPublish = (content: string): string => {
-	return addHalfSpaceChar(content);
-};
-
-const text = "این کتاب میتواند برای شما مفید باشد";
-console.log(prepareForPublish(text));
-// "این کتاب می‌تواند برای شما مفید باشد"
+halfSpace("می خواهم بروم"); // "می‌خواهم بروم"
+halfSpace("کتاب ها"); // "کتاب‌ها"
+halfSpace("بزرگ ترین"); // "بزرگ‌ترین"
+halfSpace("نمی توانم"); // "نمی‌توانم"
 ```
 
-### Form Data Processing
+> The library exports only `halfSpace`. There is no `addHalfSpaceChar` or `removeHalfSpaceChar`.
 
-```typescript
-import { addHalfSpaceChar } from "@persian-tools/persian-tools";
+## What it does
 
-const processArticle = (article: { title: string; content: string }) => {
-	return {
-		title: addHalfSpaceChar(article.title),
-		content: addHalfSpaceChar(article.content),
-	};
-};
+The input is tokenised by whitespace; consecutive spaces are first collapsed. For each pair of adjacent tokens, three rule families are tried (in priority order):
+
+1. **Compound rules** — comparative/superlative formation (`بزرگ تر` → `بزرگ‌تر`, `بزرگ ترین` → `بزرگ‌ترین`).
+2. **Suffix rules** — common plural / possessive endings (`کتاب ها` → `کتاب‌ها`, `خانه ام` → `خانه‌ام`).
+3. **Prefix rules** — modal/verbal prefixes (`می خواهم` → `می‌خواهم`, `نمی توانم` → `نمی‌توانم`).
+
+If no rule fires for a pair, the space stays as-is.
+
+## What it does NOT do
+
+- **Remove** existing ZWNJ — `halfSpace` only inserts. To strip ZWNJ, do `s.replace(/‌/g, " ")` in your own code.
+- **Validate** Persian-ness — non-Persian tokens pass through unchanged.
+- **Fix Arabic-keyboard input** — run `toPersianChars` or `autoArabicToPersian` first so the rule tables (which key off Persian code points) actually match.
+- **Operate inside a single word with no space** — only space-separated tokens are processed.
+
+## Recommended pipeline
+
+```ts
+import { halfSpace, autoArabicToPersian, autoConvertDigitsToEN } from "@persian-tools/persian-tools";
+
+const polish = (s: string) => halfSpace(autoArabicToPersian(autoConvertDigitsToEN(s)));
 ```
 
-## Common Half-Space Patterns
+## Why ZWNJ matters
 
-The function automatically adds half-spaces before:
+| Form                    | Issue                                           |
+| ----------------------- | ----------------------------------------------- |
+| `می خواهم` (full space) | reads as two separate words                     |
+| `میخواهم` (no space)    | glyphs join visually, unreadable                |
+| `می‌خواهم` (ZWNJ)       | correct: visually separate, treated as one word |
 
-- می (present tense prefix)
-- نمی (negative present prefix)
-- بی (without)
-- تر / ترین (comparative/superlative)
-- ها (plural suffix)
-- های (possessive plural)
+## Pitfalls
 
-```typescript
-addHalfSpaceChar("میرود"); // "می‌رود"
-addHalfSpaceChar("نمیتوانم"); // "نمی‌توانم"
-addHalfSpaceChar("بیحساب"); // "بی‌حساب"
-addHalfSpaceChar("بزرگتر"); // "بزرگ‌تر"
-addHalfSpaceChar("کتابها"); // "کتاب‌ها"
-```
+- The rules are **conservative** — they don't try to repair pre-existing wrong ZWNJ usage.
+- Stripping whitespace with `replace(/\s/g, "")` may or may not consume ZWNJ depending on the JS engine — be explicit with `‌`.
+- For multi-MB documents, chunk the input by paragraph; tokenisation is O(n) per chunk.
 
-## Use Cases
+## Source
 
-<AccordionGroup>
-  <Accordion title="Blog Publishing" icon="blog">
-    Ensure correct typography:
-    ```typescript
-    const post = {
-      title: addHalfSpaceChar(rawTitle),
-      body: addHalfSpaceChar(rawBody)
-    };
-    ```
-  </Accordion>
-
-  <Accordion title="E-book Generation" icon="book">
-    Format e-books with proper spacing:
-    ```typescript
-    const chapters = rawChapters.map(chapter => ({
-      ...chapter,
-      content: addHalfSpaceChar(chapter.content)
-    }));
-    ```
-  </Accordion>
-</AccordionGroup>
-
-## Related Functions
-
-<CardGroup cols={2}>
-	<Card title="Persian Characters" icon="language" href="/utilities/text/persian-chars">
-		Validate and convert Persian text
-	</Card>
-	<Card title="Slugify" icon="link" href="/utilities/text/slugify">
-		Create URL-safe slugs
-	</Card>
-</CardGroup>
-
-## Type Definition
-
-```typescript
-function addHalfSpaceChar(text: string): string;
-function removeHalfSpaceChar(text: string): string;
-```
+`src/modules/halfSpace/index.ts`, `src/modules/halfSpace/utils.ts` · Tests: `test/halfSpace.spec.ts`
