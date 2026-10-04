@@ -225,6 +225,7 @@ describe("WordsToNumber", () => {
 			expect(wordsToNumber("یک صد")).toEqual(100);
 			expect(wordsToNumber("دو صد")).toEqual(200);
 			expect(wordsToNumber("سه صد و پنجاه")).toEqual(350);
+			expect(wordsToNumber("یه صد")).toEqual(100);
 		});
 
 		/**
@@ -244,6 +245,10 @@ describe("WordsToNumber", () => {
  * **Overview**:
  *  - Verifies that digits from other locales (Persian/Arabic) are converted to English digits
  *    if `autoConvertDigitsToEn` is true.
+ *  - Verifies that Arabic characters (e.g., "ك", "ي") become Persian "ک", "ی" if
+ *    `autoConvertArabicCharsToPersian` is true **before** parsing.
+ *  - Ensures the rest of wordsToNumber logic (negative signs, ordinal suffix removal,
+ *    magnitude checks, etc.) still works correctly with these new options.
  *  - Verifies that Arabic characters (e.g., "ك", "ي") become Persian "ک", "ی" if
  *    `autoConvertArabicCharsToPersian` is true **before** parsing.
  *  - Ensures the rest of wordsToNumber logic (negative signs, ordinal suffix removal,
